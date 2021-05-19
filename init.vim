@@ -24,6 +24,7 @@ set expandtab
 set autoindent 
 set exrc
 set relativenumber
+set encoding=UTF-8
 set nu
 set hlsearch
 set noerrorbells
@@ -169,18 +170,6 @@ let g:lightline = {
       \ }
       \ }
 
-
-
-" set background=light " uncomment to use light mode
-
-
-echo "(>^.^<)"
-
-
-
-
-set encoding=UTF-8
-
 " ___________              __    ________ ___.        __               __
 " \__    ___/___ ___  ____/  |_  \_____  \\_ |__     |__| ____   _____/  |_  ______
 "   |    |_/ __ \\  \/  /\   __\  /   |   \| __ \    |  |/ __ \_/ ___\   __\/  ___/
@@ -243,6 +232,7 @@ highlight NonText ctermbg=none
 highlight Normal ctermbg=red guibg=red
 colorscheme gruvbox
 set background=dark " use dark mode
+" set background=light " uncomment to use light mode
 highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
 
 
