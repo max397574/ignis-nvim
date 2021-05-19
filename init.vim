@@ -147,18 +147,8 @@ Plug 'autozimu/LanguageClient-neovim', {
 call plug#end()
 
 
-
-
-
-
-
-
-
-
-
+"activate Plugins
 let g:rainbow_active = 1
-
-
 let g:ale_completion_enabled = 1
 
 " Start NERDTree and leave the cursor in it.
