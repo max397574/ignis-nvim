@@ -1,8 +1,9 @@
 These are my configurations for nvim
-TODO:
-
--fix some formatting
-
--try use seperate files
-
--Add own plugins in future??
+####TODO:
+*remove the stuff to change
+ *lsp
+ *autocomplete
+*add new stuff
+ *tree-sitter
+ *lsp-trouble
+*change formatting
