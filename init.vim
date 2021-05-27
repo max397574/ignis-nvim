@@ -114,15 +114,10 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'frazrepo/vim-rainbow'
 Plug 'Yilin-Yang/vim-markbar'
-Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'conornewton/vim-latex-preview'
 Plug 'preservim/nerdcommenter'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'neovim/nvim-lspconfig'
-Plug 'glepnir/lspsaga.nvim'
 Plug 'preservim/nerdtree'
 Plug 'lervag/vimtex'
 Plug 'machakann/vim-highlightedyank'
@@ -142,8 +137,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'preservim/tagbar'
 Plug 'zchee/deoplete-jedi'
-Plug 'dense-analysis/ale'
-Plug 'davidhalter/jedi-vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'mattn/webapi-vim'
@@ -151,10 +144,6 @@ Plug 'christoomey/vim-quicklink'
 Plug 'zirrostig/vim-schlepp'
 Plug 'folke/lsp-colors.nvim'
 Plug 'folke/lsp-trouble.nvim'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
 call plug#end()
 
 
