@@ -43,42 +43,11 @@ set belloff=all
 set cursorline
 
 set splitbelow
+set laststatus=2
+if !has('gui_running')
+  set t_Co=256
+endif
 
-" Create default mappings
-let g:NERDCreateDefaultMappings = 1
-
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-" Set a language to use its alternate delimiters by default
-let g:NERDAltDelims_java = 1
-
-" Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
-let g:NERDToggleCheckAllLines = 1
-
-let g:livepreview_engine = 'skim'
-let g:livepreview_previewer = 'evince'
-
-" disable autocompletion, because we use deoplete for completion
-let g:jedi#completions_enabled = 0
-
-" open the go-to function in split, not another buffer
-let g:jedi#use_splits_not_buffers = "right"
 
 
 set tags+=$HOME
@@ -93,9 +62,15 @@ endif
 let g:deoplete#enable_at_startup = 1
 
 
+
+"   _____ ___.  ___.                      .__        __  .__                      
+"  /  _  \\_ |__\_ |_________   _______  _|__|____ _/  |_|__| ____   ____   ______
+" /  /_\  \| __ \| __ \_  __ \_/ __ \  \/ /  \__  \\   __\  |/  _ \ /    \ /  ___/
+"/    |    \ \_\ \ \_\ \  | \/\  ___/\   /|  |/ __ \|  | |  (  <_> )   |  \\___ \ 
+"\____|__  /___  /___  /__|    \___  >\_/ |__(____  /__| |__|\____/|___|  /____  >
+"        \/    \/    \/            \/             \/                    \/     \/
+
 ab lenght length
-
-
 
 
 
@@ -146,8 +121,43 @@ Plug 'folke/lsp-colors.nvim'
 Plug 'folke/lsp-trouble.nvim'
 call plug#end()
 
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
 
-"activate Plugins
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+
+let g:livepreview_engine = 'skim'
+let g:livepreview_previewer = 'evince'
+
+" disable autocompletion, because we use deoplete for completion
+let g:jedi#completions_enabled = 0
+
+" open the go-to function in split, not another buffer
+let g:jedi#use_splits_not_buffers = "right"
+
+
 let g:rainbow_active = 1
 let g:ale_completion_enabled = 1
 
@@ -159,10 +169,22 @@ let g:ale_completion_enabled = 1
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
     \ quit | endif
 
-set laststatus=2
-if !has('gui_running')
-  set t_Co=256
-endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 let g:lightline = {
       \ 'active': {
@@ -236,9 +258,6 @@ colorscheme gruvbox
 set background=dark " use dark mode
 " set background=light " uncomment to use light mode
 highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
-
-
-
 
 
 
@@ -325,7 +344,6 @@ nnoremap <Leader>yy "+y
 
 "edit vimrc
 nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim<cr>
-
 
 let g:UltiSnipsExpandTrigger="<tab>"
 " list all snippets for current filetype
