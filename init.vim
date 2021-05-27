@@ -24,7 +24,6 @@ set expandtab
 set autoindent 
 set exrc
 set relativenumber
-set encoding=UTF-8
 set nu
 set hlsearch
 set noerrorbells
@@ -93,6 +92,14 @@ endif
 
 let g:deoplete#enable_at_startup = 1
 
+
+ab lenght length
+
+
+
+
+
+
 "__________.__               .__               
 "\______   \  |  __ __  ____ |__| ____   ______
 " |     ___/  | |  |  \/ ___\|  |/    \ /  ___/
@@ -122,6 +129,8 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'folke/tokyonight.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'preservim/nerdcommenter'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround' 
 Plug 'pseewald/vim-anyfold'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -137,6 +146,8 @@ Plug 'dense-analysis/ale'
 Plug 'davidhalter/jedi-vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'mattn/webapi-vim'
+Plug 'christoomey/vim-quicklink'
 Plug 'zirrostig/vim-schlepp'
 Plug 'folke/lsp-colors.nvim'
 Plug 'folke/lsp-trouble.nvim'
@@ -170,6 +181,8 @@ let g:lightline = {
       \ }
       \ }
 
+set encoding=UTF-8
+
 " ___________              __    ________ ___.        __               __
 " \__    ___/___ ___  ____/  |_  \_____  \\_ |__     |__| ____   _____/  |_  ______
 "   |    |_/ __ \\  \/  /\   __\  /   |   \| __ \    |  |/ __ \_/ ___\   __\/  ___/
@@ -197,7 +210,7 @@ augroup ActivatePlugins
     "Toggle Rainbowbrackets
 augroup END
 
-augroup FileHeaders
+augroup filetypes 
     autocmd!
     "Auto beginning depending on file type
     "
@@ -205,8 +218,8 @@ augroup FileHeaders
     "For .java
     "class with filename and class main
     autocmd BufNewFile *.java
-      \ exe "normal Opublic class " . expand('%:t:r') . "{\n\tpublic static void main(String[] args) {\n\n}\n}\<Esc>3G"
-    
+      \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>2G"
+
     "For .c
     "include main librarys and create main function
 
@@ -322,4 +335,9 @@ let g:VM_maps['Find Under']         = '<Leader>fu'
 nnoremap <Leader>yy "+y
 
 "edit vimrc
-:nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim<cr>
+nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim<cr>
+
+
+let g:UltiSnipsExpandTrigger="<tab>"
+" list all snippets for current filetype
+nnoremap <leader>sp :Snippets<cr>
