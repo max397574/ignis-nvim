@@ -1,6 +1,6 @@
 These are my configurations for nvim
 ####TODO:
-*remove the stuff to change
+*~remove the stuff to change~
  *lsp
  *autocomplete
 *add new stuff
