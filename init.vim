@@ -85,6 +85,10 @@ ab lenght length
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'neovim/nvim-lspconfig'
+
+
+
 Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'frazrepo/vim-rainbow'
@@ -111,7 +115,6 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'preservim/tagbar'
-Plug 'zchee/deoplete-jedi'
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'mattn/webapi-vim'
@@ -120,6 +123,37 @@ Plug 'zirrostig/vim-schlepp'
 Plug 'folke/lsp-colors.nvim'
 Plug 'folke/lsp-trouble.nvim'
 call plug#end()
+
+
+lua << EOF
+require'lspconfig'.pyright.setup{}
+EOF
+
+
+lua << EOF
+  require("trouble").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 " Create default mappings
 let g:NERDCreateDefaultMappings = 1
@@ -269,6 +303,10 @@ highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
 "        \/     \/|__|   |__|           \//_____/     \/ 
 
 let mapleader= " "
+
+
+"<leader>xx to toggle LspTrouble
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
 
 "espace insert mode with jj
 inoremap jj <ESC>
