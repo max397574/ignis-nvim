@@ -479,3 +479,13 @@ nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim<cr>
 let g:UltiSnipsExpandTrigger="<tab>"
 " list all snippets for current filetype
 nnoremap <leader>sp :Snippets<cr>
+
+
+
+
+
+
+
+
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
