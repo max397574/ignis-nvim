@@ -176,7 +176,7 @@ lua << EOF
 require'compe'.setup {
   enabled = true;
   autocomplete = true;
-  debug = false;
+  debug = true;
   min_length = 1;
   preselect = 'enable';
   throttle_time = 80;
@@ -198,6 +198,7 @@ require'compe'.setup {
     tags = true;
     snippets_nvim = true;
     treesitter = true;
+    zsh = true;
   };
 }
 
@@ -239,7 +240,6 @@ vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 EOF
-
 
 
 
