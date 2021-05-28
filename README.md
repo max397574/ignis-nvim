@@ -1,9 +1,10 @@
 These are my configurations for nvim
-####TODO:
+
+#### TODO:
 * ~remove the stuff to change~
-  ~* lsp~
-  * autocomplete
+  * ~lsp~
+  * ~complete~
 * add new stuff
   * tree-sitter
-  ~* lsp-trouble~
+  * ~lsp-trouble~
 * change formatting
