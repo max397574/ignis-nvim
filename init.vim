@@ -120,8 +120,8 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'mattn/webapi-vim'
 Plug 'christoomey/vim-quicklink'
 Plug 'zirrostig/vim-schlepp'
+Plug 'folke/trouble.nvim'
 Plug 'folke/lsp-colors.nvim'
-Plug 'folke/lsp-trouble.nvim'
 call plug#end()
 
 
@@ -137,6 +137,7 @@ lua << EOF
     -- refer to the configuration section below
   }
 EOF
+
 
 
 
