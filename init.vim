@@ -147,9 +147,9 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 "..........................................................Lspconfig
 
 lua << EOF
-require'lspconfig'.pyright.setup{}
-require'lspconfig'.pyls.setup{}
-require'lspconfig'.jedi_language_server.setup{}
+    require'lspconfig'.pyright.setup{}
+    require'lspconfig'.pyls.setup{}
+    require'lspconfig'.jedi_language_server.setup{}
 EOF
 
 
@@ -165,12 +165,12 @@ EOF
 
 "..........................................................lspinstall
 lua << EOF
-require'lspinstall'.setup() -- important
+    require'lspinstall'.setup() -- important
 
-local servers = require'lspinstall'.installed_servers()
-for _, server in pairs(servers) do
-  require'lspconfig'[server].setup{}
-end
+    local servers = require'lspinstall'.installed_servers()
+    for _, server in pairs(servers) do
+      require'lspconfig'[server].setup{}
+    end
 EOF
 
 
