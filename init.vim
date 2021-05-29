@@ -10,6 +10,7 @@
 " |___________|/  |______|/|_____|/ |___________|/               \|___||___|    \|_____|/    |___________|/ |________|/     \|________|
 
 
+
 set nocompatible
 filetype plugin on
 syntax on
@@ -116,6 +117,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
+Plug 'mbbill/undotree'
 Plug 'nvim-lua/popup.nvim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'nvim-lua/plenary.nvim'
@@ -515,3 +517,6 @@ nnoremap <leader>il :IndentLinesToggle<cr>
 
 "use <leader>nt to toggle nerdtree
 nnoremap <leader>nt :NERDTreeToggle<cr>
+
+"use <leader>ut to toggle undotree
+nnoremap <leader>ut :UndotreeToggle<cr>
