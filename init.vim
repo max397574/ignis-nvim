@@ -108,8 +108,10 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround' 
 Plug 'pseewald/vim-anyfold'
+Plug 'davidhalter/jedi'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
@@ -119,7 +121,9 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'preservim/tagbar'
 Plug 'ryanoasis/vim-devicons'
+Plug 'ThePrimeagen/vim-apm'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'mattn/webapi-vim'
 Plug 'christoomey/vim-quicklink'
 Plug 'zirrostig/vim-schlepp'
@@ -142,6 +146,12 @@ lua << EOF
     -- refer to the configuration section below
   }
 EOF
+
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+
+
 
 let g:compe = {}
 let g:compe.enabled = v:true
@@ -241,13 +251,6 @@ vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 EOF
 
-
-
-
-
-
-
-
 " Create default mappings
 let g:NERDCreateDefaultMappings = 1
 
@@ -295,19 +298,6 @@ let g:ale_completion_enabled = 1
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
     \ quit | endif
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -479,13 +469,3 @@ nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim<cr>
 let g:UltiSnipsExpandTrigger="<tab>"
 " list all snippets for current filetype
 nnoremap <leader>sp :Snippets<cr>
-
-
-
-
-
-
-
-
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
