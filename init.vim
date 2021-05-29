@@ -127,6 +127,7 @@ Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'mattn/webapi-vim'
 Plug 'christoomey/vim-quicklink'
 Plug 'zirrostig/vim-schlepp'
+Plug 'kabouzeid/nvim-lspinstall'
 Plug 'folke/trouble.nvim'
 Plug 'hrsh7th/nvim-compe'
 Plug 'folke/lsp-colors.nvim'
@@ -136,6 +137,7 @@ call plug#end()
 lua << EOF
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.pyls.setup{}
+require'lspconfig'.java_language_server.setup{}
 require'lspconfig'.jedi_language_server.setup{}
 EOF
 
@@ -147,6 +149,14 @@ lua << EOF
   }
 EOF
 
+lua << EOF
+require'lspinstall'.setup() -- important
+
+local servers = require'lspinstall'.installed_servers()
+for _, server in pairs(servers) do
+  require'lspconfig'[server].setup{}
+end
+EOF
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
