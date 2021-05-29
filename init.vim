@@ -99,13 +99,13 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'preservim/nerdcommenter'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'preservim/nerdtree'
 Plug 'lervag/vimtex'
 Plug 'machakann/vim-highlightedyank'
 Plug 'folke/tokyonight.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'preservim/nerdcommenter'
 Plug 'SirVer/ultisnips'
+Plug 'ap/vim-templates'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround' 
 Plug 'pseewald/vim-anyfold'
@@ -132,8 +132,30 @@ Plug 'zirrostig/vim-schlepp'
 Plug 'kabouzeid/nvim-lspinstall'
 Plug 'folke/trouble.nvim'
 Plug 'hrsh7th/nvim-compe'
+Plug 'preservim/nerdtree' |
+            \ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'folke/lsp-colors.nvim'
 call plug#end()
+
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+
+"
+
+
+
+
+
 
 
 lua << EOF
@@ -488,4 +510,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 nnoremap <leader>sp :Snippets<cr>
 
 "use <leader>il to toggle indenlines
-nnoremap <leader>il :IndentLinesToggle
+nnoremap <leader>il :IndentLinesToggle<cr>
+
+"use <leader>nt to toggle nerdtree
+nnoremap <leader>nt :NERDTreeToggle<cr>
