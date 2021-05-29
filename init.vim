@@ -31,6 +31,7 @@ set nowrap
 set noswapfile
 set nobackup
 set undodir=~/.vim/undodir
+set timeoutlen=300
 set undofile
 set incsearch
 set completeopt=menuone,noselect
