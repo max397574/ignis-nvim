@@ -51,10 +51,7 @@ if !has('gui_running')
   set t_Co=256
 endif
 
-
-
 set tags+=$HOME
-
 
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -63,7 +60,6 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 let g:deoplete#enable_at_startup = 1
-
 
 
 "   _____ ___.  ___.                      .__        __  .__                      
@@ -75,23 +71,15 @@ let g:deoplete#enable_at_startup = 1
 
 ab lenght length
 
-
-
-
 "__________.__               .__               
 "\______   \  |  __ __  ____ |__| ____   ______
 " |     ___/  | |  |  \/ ___\|  |/    \ /  ___/
 " |    |   |  |_|  |  / /_/  >  |   |  \\___ \ 
 " |____|   |____/____/\___  /|__|___|  /____  >
 "                    /_____/         \/     \/ 
-
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'neovim/nvim-lspconfig'
-
-
-
 Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'frazrepo/vim-rainbow'
@@ -152,15 +140,6 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ 'Clean'     :'✔︎',
                 \ 'Unknown'   :'?',
                 \ }
-
-"
-
-
-
-
-
-
-
 lua << EOF
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.pyls.setup{}
@@ -187,8 +166,6 @@ EOF
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 
-
-
 let g:compe = {}
 let g:compe.enabled = v:true
 let g:compe.autocomplete = v:true
@@ -213,9 +190,6 @@ let g:compe.source.vsnip = v:true
 let g:compe.source.ultisnips = v:true
 
 highlight link CompeDocumentation NormalFloat
-
-
-
 
 lua << EOF
 -- Compe setup
@@ -290,54 +264,20 @@ EOF
 " Create default mappings
 let g:NERDCreateDefaultMappings = 1
 
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-" Set a language to use its alternate delimiters by default
-let g:NERDAltDelims_java = 1
-
-" Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
 
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
-let g:NERDToggleCheckAllLines = 1
-
-let g:livepreview_engine = 'skim'
-let g:livepreview_previewer = 'evince'
-
-" disable autocompletion, because we use deoplete for completion
 let g:jedi#completions_enabled = 0
 
 " open the go-to function in split, not another buffer
 let g:jedi#use_splits_not_buffers = "right"
-
-
 let g:rainbow_active = 1
-let g:ale_completion_enabled = 1
-
-
 
 " Start NERDTree and leave the cursor in it.
 "autocmd VimEnter * NERDTree
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
     \ quit | endif
-
-
-
-
 
 let g:lightline = {
       \ 'active': {
@@ -346,7 +286,6 @@ let g:lightline = {
       \ }
 
 set encoding=UTF-8
-
 
 let g:indentLine_setColors = 0
 let g:indentLine_char = '┆'
@@ -418,8 +357,6 @@ set background=dark " use dark mode
 " set background=light " uncomment to use light mode
 highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
 
-
-
 "   _____                       .__                      
 "  /     \ _____  ______ ______ |__| ____    ____  ______
 " /  \ /  \\__  \ \____ \\____ \|  |/    \  / ___\/  ___/
@@ -428,7 +365,6 @@ highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
 "        \/     \/|__|   |__|           \//_____/     \/ 
 
 let mapleader= " "
-
 
 "<leader>xx to toggle LspTrouble
 nnoremap <leader>xx <cmd>TroubleToggle<cr>
