@@ -137,7 +137,6 @@ call plug#end()
 lua << EOF
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.pyls.setup{}
-require'lspconfig'.java_language_server.setup{}
 require'lspconfig'.jedi_language_server.setup{}
 EOF
 
