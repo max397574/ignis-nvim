@@ -119,6 +119,7 @@ Plug 'nvim-treesitter/playground'
 Plug 'nvim-lua/popup.nvim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'Yggdroot/indentLine'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'preservim/tagbar'
 Plug 'ryanoasis/vim-devicons'
@@ -321,6 +322,12 @@ let g:lightline = {
 
 set encoding=UTF-8
 
+
+let g:indentLine_setColors = 0
+let g:indentLine_char = '┆'
+
+
+
 " ___________              __    ________ ___.        __               __
 " \__    ___/___ ___  ____/  |_  \_____  \\_ |__     |__| ____   _____/  |_  ______
 "   |    |_/ __ \\  \/  /\   __\  /   |   \| __ \    |  |/ __ \_/ ___\   __\/  ___/
@@ -479,3 +486,6 @@ nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim<cr>
 let g:UltiSnipsExpandTrigger="<tab>"
 " list all snippets for current filetype
 nnoremap <leader>sp :Snippets<cr>
+
+"use <leader>il to toggle indenlines
+nnoremap <leader>il :IndentLinesToggle
