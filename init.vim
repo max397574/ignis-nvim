@@ -144,12 +144,34 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ 'Unknown'   :'?',
                 \ }
 
+
+"..........................................................lspinstall
+lua << EOF
+    require'lspinstall'.setup() -- important
+
+    local servers = require'lspinstall'.installed_servers()
+    for _, server in pairs(servers) do
+      require'lspconfig'[server].setup{}
+    end
+EOF
+
+
+
 "..........................................................Lspconfig
 
 lua << EOF
     require'lspconfig'.pyright.setup{}
     require'lspconfig'.pyls.setup{}
+    require'lspconfig'.html.setup{}
     require'lspconfig'.jedi_language_server.setup{}
+    require'lspconfig'.tsserver.setup{}
+    require'lspconfig'.cssls.setup {
+         capabilities = capabilities,
+        }
+    require'lspconfig'.html.setup {
+         capabilities = capabilities,
+        }
+    require'lspconfig'.html.setup{}
 EOF
 
 
@@ -163,15 +185,6 @@ lua << EOF
 EOF
 
 
-"..........................................................lspinstall
-lua << EOF
-    require'lspinstall'.setup() -- important
-
-    local servers = require'lspinstall'.installed_servers()
-    for _, server in pairs(servers) do
-      require'lspconfig'[server].setup{}
-    end
-EOF
 
 
 " Use deoplete.
