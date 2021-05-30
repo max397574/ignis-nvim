@@ -385,7 +385,7 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>tb :TagbarToggle<CR>
 
 "help file for quick command reference
-nnoremap <leader>hp :vsplit ~/vimhelp.txt<cr>
+nnoremap <leader>hp :vsplit ~/.config/nvim/vimhelp.txt<cr>
 
 "Quickly insert an empty new line without entering insert mode
 nnoremap <Leader>o o<Esc>
