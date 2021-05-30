@@ -8,5 +8,6 @@ These are my configurations for nvim
   * tree-sitter
   * ~~lsp-trouble~~
 * change formatting
-* -> init.lua in the future?
+* init.vim -> init.lua in the future?
+
 [Website](https://max397574.github.io/Vim_Config/root/)
