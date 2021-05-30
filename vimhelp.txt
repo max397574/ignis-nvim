@@ -1,6 +1,9 @@
 Toggle Marbar:
 <leader>mb
 
+Distractionfree:
+:Goyo
+
 FZF:
 fzf
 
