@@ -1,10 +1,11 @@
 These are my configurations for nvim
 
 #### TODO:
-* ~remove the stuff to change~
-  * ~lsp~
-  * ~complete~
+* ~~remove the stuff to change~~
+  * ~~lsp~~
+  * ~~complete~~
 * add new stuff
   * tree-sitter
-  * ~lsp-trouble~
+  * ~~lsp-trouble~~
 * change formatting
+* -> init.lua in the future?
