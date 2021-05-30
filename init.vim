@@ -436,3 +436,6 @@ nnoremap <leader>nt :NERDTreeToggle<cr>
 
 "use <leader>ut to toggle undotree
 nnoremap <leader>ut :UndotreeToggle<cr>
+
+"use fzf for fzf
+nnoremap fzf :Files<cr>
