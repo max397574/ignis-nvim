@@ -15,38 +15,103 @@ set nocompatible
 filetype plugin on
 syntax on
 filetype plugin indent on
+
+"backspace behaves like exspected (goes over eol etc.)
 set backspace=start,indent,eol
+
 set hidden
+
+
 let $RC="/Users/andri/.vimrc"
+
+
 let $RTP=split(&runtimepath, ',')[0]
+
+
 set shiftwidth=4 
+
+
 set tabstop=4 softtabstop=4 
+
+
 set expandtab 
+
+
 set autoindent 
+
+
 set exrc
+
+"use relative line numbers for easier use of repeating commands (eg d10j)
 set relativenumber
+
+
 set nu
+
+
 set hlsearch
+
+"turn of the error bell
 set noerrorbells
+
+
 set nowrap
+
+
 set noswapfile
+
+
 set nobackup
+
+
 set undodir=~/.vim/undodir
+
+"set timoutlen (time for commands consisting of multiple keystrokes) to 300ms
 set timeoutlen=300
+
+"allow virtualedit (go over end of line) in virtual block mode
+set virtualedit = block
+
+
 set undofile
+
+
 set incsearch
+
+
 set completeopt=menuone,noselect
+
+
 set wildmenu
+
+
 set termguicolors
+
+"start scrolling when cursor is 8 lines above the bottom
 set scrolloff=8
+
+
 set signcolumn=yes
+
+"the space for commands is 2 lines high
 set cmdheight=2
+
+
 set scl=yes
+
+
 set belloff=all
+
+"set a line, where the cursor is
 set cursorline
 
+
 set splitbelow
+
+
 set laststatus=2
+
+
 if !has('gui_running')
   set t_Co=256
 endif
@@ -79,52 +144,135 @@ ab lenght length
 "                    /_____/         \/     \/ 
 call plug#begin('~/.vim/plugged')
 
+"easier configuration of built in lsp
 Plug 'neovim/nvim-lspconfig'
+
+"a colorscheme
 Plug 'gruvbox-community/gruvbox'
+
+"statusline plugin
 Plug 'itchyny/lightline.vim'
+
+"automatically color nested brackets
 Plug 'frazrepo/vim-rainbow'
+
+"show lokations of all marks <leader>mb
 Plug 'Yilin-Yang/vim-markbar'
+
+"automatically add second one of (, [ etc.
 Plug 'jiangmiao/auto-pairs'
+
+"use multiple cursors <leader>cd <leader>cu <leader>fu
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+"comment out lines <leader>cc
 Plug 'preservim/nerdcommenter'
-Plug 'kyazdani42/nvim-web-devicons'
+
+"plugin for better latex coding in vim
 Plug 'lervag/vimtex'
+
+"highlight the text that was janked for a short time
 Plug 'machakann/vim-highlightedyank'
+
+"a colorscheme
 Plug 'folke/tokyonight.nvim'
+
+"<leader>t to toggle a floating terminal
 Plug 'voldikss/vim-floaterm'
-Plug 'preservim/nerdcommenter'
+
+"snippets, view with <leader>sp
 Plug 'SirVer/ultisnips'
+
+
 Plug 'ap/vim-templates'
+
+
 Plug 'honza/vim-snippets'
+
+"plugin for add and change surroundings <leader>ys<text-object><surrounding to add>
+"<leader>cs<old surrounding><new surrounding>
 Plug 'tpope/vim-surround' 
+
+"easily fold stuff
 Plug 'pseewald/vim-anyfold'
+
+"syntax checking for python
 Plug 'davidhalter/jedi'
+
+"file finder activate with 'fzf'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
+"better fzf for vim
 Plug 'junegunn/fzf.vim'
+
+"completition plugin
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+
 Plug 'akinsho/nvim-bufferline.lua'
+
+
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+
 Plug 'nvim-treesitter/playground'
+
+"show tree with latest changes and diff in buffer <leader>ut 
 Plug 'mbbill/undotree'
+
+
 Plug 'nvim-lua/popup.nvim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'nvim-lua/plenary.nvim'
+
+"show vertical lines where indents are
 Plug 'Yggdroot/indentLine'
+
+":goyo for disctraction free writing
 Plug 'junegunn/goyo.vim'
+
+"file finder <leader>ff
 Plug 'nvim-telescope/telescope.nvim'
+
+"tagbar with functions variables etc <leader>tb
 Plug 'preservim/tagbar'
+
+"more icons
 Plug 'ryanoasis/vim-devicons'
+
+
 Plug 'ThePrimeagen/vim-apm'
+
+"more icons
 Plug 'kyazdani42/nvim-web-devicons'
+
+"deoplete completition with jedi as source
 Plug 'deoplete-plugins/deoplete-jedi'
+
+
 Plug 'mattn/webapi-vim'
+
+
 Plug 'christoomey/vim-quicklink'
+
+"pull visual selected blocks around with arrows
 Plug 'zirrostig/vim-schlepp'
+
+"easily install new lsp servers
 Plug 'kabouzeid/nvim-lspinstall'
+
+"visually show lsp errors <leader>tt for list 
 Plug 'folke/trouble.nvim'
+
+"auto completitioin for nvim
 Plug 'hrsh7th/nvim-compe'
+
+"file explorer
 Plug 'preservim/nerdtree' |
+"show git status of files in nerdtree
             \ Plug 'Xuyuanp/nerdtree-git-plugin'
+
+"better colors for lsp
 Plug 'folke/lsp-colors.nvim'
 call plug#end()
 
@@ -430,3 +578,6 @@ nnoremap <leader>ut :UndotreeToggle<cr>
 
 "use fzf for fzf
 nnoremap fzf :Files<cr>
+
+"user <leader>tt to toggle trouble.nvim
+nnoremap <leader>tt :TroubleToggle<cr>
