@@ -175,6 +175,9 @@ Plug 'machakann/vim-highlightedyank'
 "a colorscheme
 Plug 'folke/tokyonight.nvim'
 
+"automatically change closing html tag when changning opening tag
+Plug 'AndrewRadev/tagalong.vim'
+
 "<leader>t to toggle a floating terminal
 Plug 'voldikss/vim-floaterm'
 
