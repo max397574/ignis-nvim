@@ -70,7 +70,7 @@ set undodir=~/.vim/undodir
 set timeoutlen=300
 
 "allow virtualedit (go over end of line) in virtual block mode
-set virtualedit = block
+set virtualedit=block
 
 
 set undofile
