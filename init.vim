@@ -45,16 +45,16 @@ set exrc
 "use relative line numbers for easier use of repeating commands (eg d10j)
 set relativenumber
 
-
+"use line numbers
 set nu
 
-
+"highlight search results
 set hlsearch
 
 "turn of the error bell
 set noerrorbells
 
-
+"no wrap at end
 set nowrap
 
 
@@ -75,7 +75,7 @@ set virtualedit=block
 
 set undofile
 
-
+"show where matches are while searching
 set incsearch
 
 
@@ -99,7 +99,7 @@ set cmdheight=2
 
 set scl=yes
 
-
+"turn bell off
 set belloff=all
 
 "set a line, where the cursor is
@@ -123,8 +123,6 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
-let g:deoplete#enable_at_startup = 1
 
 
 "   _____ ___.  ___.                      .__        __  .__                      
@@ -326,9 +324,6 @@ EOF
 "..........................................................trouble.nvim
 lua << EOF
   require("trouble").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
   }
 EOF
 
@@ -390,6 +385,7 @@ let g:jedi#completions_enabled = 0
 
 " open the go-to function in split, not another buffer
 let g:jedi#use_splits_not_buffers = "right"
+
 let g:rainbow_active = 1
 
 " Start NERDTree and leave the cursor in it.
@@ -464,16 +460,34 @@ augroup END
 "       \/   /_____/      \/       /_____/      \/          \/ 
 
 
+"line number where cursor is has different color
 highlight CursorLineNr term=bold ctermfg=11 gui=bold guifg=Yellow 
-highlight ColorColumn ctermbg=red ctermfg=red guibg=red guifg=red
+
+
 highlight Normal guibg=none
+
+
 highlight NonText guibg=none
+
+
 highlight Normal ctermbg=none
+
+
 highlight NonText ctermbg=none
+
+
 highlight Normal ctermbg=red guibg=red
+
+
 colorscheme gruvbox
+
+
 set background=dark " use dark mode
+
+
 " set background=light " uncomment to use light mode
+"
+"
 highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
 
 "   _____                       .__                      
