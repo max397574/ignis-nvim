@@ -269,8 +269,8 @@ Plug 'folke/trouble.nvim'
 Plug 'hrsh7th/nvim-compe'
 
 "file explorer
-Plug 'preservim/nerdtree' |
 "show git status of files in nerdtree
+Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 "better colors for lsp
