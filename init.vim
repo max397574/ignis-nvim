@@ -304,8 +304,6 @@ lua << EOF
     end
 EOF
 
-
-
 "..........................................................Lspconfig
 
 lua << EOF
@@ -439,20 +437,10 @@ augroup END
 
 augroup filetypes 
     autocmd!
-    "Auto beginning depending on file type
-    "
-    "
-    "For .java
     "class with filename and class main
     autocmd BufNewFile *.java
       \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>2G"
 
-    "For .c
-    "include main librarys and create main function
-
-
-    "for .tex
-    "write document start and end
 augroup END
 
 "  ___ ___ .__       .__    .__  .__       .__     __          
@@ -489,9 +477,10 @@ set background=dark " use dark mode
 
 
 " set background=light " uncomment to use light mode
-"
-"
+
+"comments are important :)
 highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
+
 
 "   _____                       .__                      
 "  /     \ _____  ______ ______ |__| ____    ____  ______
