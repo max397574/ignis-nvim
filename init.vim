@@ -85,6 +85,9 @@ set completeopt=menuone,noselect
 set wildmenu
 
 
+set updatetime=100
+
+
 set termguicolors
 
 "start scrolling when cursor is 8 lines above the bottom
@@ -278,6 +281,10 @@ Plug 'folke/lsp-colors.nvim'
 
 "some stuff for Tree-Sitter
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
+
+"show diff in sign column
+Plug 'mhinz/vim-signify'
+
 call plug#end()
 
 "----------------------------------------------------------Plugin Settings
