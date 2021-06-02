@@ -437,6 +437,7 @@ augroup END
 
 augroup filetypes 
     autocmd!
+    autocmd BufNewFile,BufRead,BufWinEnter *.html syntax on
     "class with filename and class main
     autocmd BufNewFile *.java
       \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>2G"
