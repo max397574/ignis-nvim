@@ -275,6 +275,9 @@ Plug 'preservim/nerdtree' |
 
 "better colors for lsp
 Plug 'folke/lsp-colors.nvim'
+
+"some stuff for Tree-Sitter
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
 call plug#end()
 
 "----------------------------------------------------------Plugin Settings
@@ -328,7 +331,32 @@ lua << EOF
   }
 EOF
 
-
+"..........................................................TreeSitter
+lua <<EOF
+--https://github.com/nvim-treesitter/nvim-treesitter-refactor
+    require'nvim-treesitter.configs'.setup {
+        refactor = {
+            highlight_definitions = { enable = true },
+            highlight_current_scope = { enable = false },
+            smart_rename = {
+                enable = false,
+                keymaps = {
+                    smart_rename = "grr",
+            },
+        },
+            navigation = {
+                enable = false,
+                    keymaps = {
+                        goto_definition = "gnd",
+                        list_definitions = "gnD",
+                        list_definitions_toc = "gO",
+                        goto_next_usage = "<a-*>",
+                        goto_previous_usage = "<a-#>",
+      },
+    },
+    },
+}
+EOF
 
 
 " Use deoplete.
