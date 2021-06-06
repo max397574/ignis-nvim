@@ -329,6 +329,7 @@ lua << EOF
          capabilities = capabilities,
         }
     require'lspconfig'.html.setup{}
+    require'lspconfig'.clangd.setup{}
 EOF
 
 
