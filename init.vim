@@ -18,13 +18,28 @@ filetype plugin indent on
 
 "backspace behaves like exspected (goes over eol etc.)
 set backspace=start,indent,eol
+
 set hidden
+
+
 let $RC="/Users/andri/.vimrc"
+
+
 let $RTP=split(&runtimepath, ',')[0]
+
+
 set shiftwidth=4 
+
+
 set tabstop=4 softtabstop=4 
+
+
 set expandtab 
+
+
 set autoindent 
+
+
 set exrc
 
 "use relative line numbers for easier use of repeating commands (eg d10j)
@@ -42,8 +57,13 @@ set noerrorbells
 "no wrap at end
 set nowrap
 
+
 set noswapfile
+
+
 set nobackup
+
+
 set undodir=~/.vim/undodir
 
 "set timoutlen (time for commands consisting of multiple keystrokes) to 300ms
@@ -52,26 +72,33 @@ set timeoutlen=300
 "allow virtualedit (go over end of line) in virtual block mode
 set virtualedit=block
 
+
 set undofile
 
 "show where matches are while searching
 set incsearch
 
+
 set completeopt=menuone,noselect
+
+
 set wildmenu
 
-"Set time between keystrokes of one command
+
 set updatetime=100
+
 
 set termguicolors
 
 "start scrolling when cursor is 8 lines above the bottom
 set scrolloff=8
 
+
 set signcolumn=yes
 
 "the space for commands is 2 lines high
 set cmdheight=2
+
 
 set scl=yes
 
@@ -81,7 +108,10 @@ set belloff=all
 "set a line, where the cursor is
 set cursorline
 
+
 set splitbelow
+
+
 set laststatus=2
 
 
