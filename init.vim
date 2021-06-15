@@ -1,36 +1,43 @@
+"============================================================== Sets
+
+let mapleader = ' '
 filetype plugin indent on
 filetype plugin on
 set termguicolors
 set expandtab
-set foldmethod=indent
 set tabstop=8
 set cmdheight=2
 "highlight characters in the 80th column
 au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>80v', -1)
+"don't wrap lines when they are longer than screenwidth
 set nowrap
 set softtabstop=4
 set shiftwidth=4
 set hidden
+"time between characters of commands (ms)
 set timeoutlen=300
+"indent new line (<CR>) when current line is indented
 set autoindent
+"highlight search results
 set incsearch
-set nohlsearch
-set hlsearch
 highlight clear Search
-
+"live preview of s command
 set inccommand=nosplit
-
+"line numbers
 set number
 set signcolumn=yes
+"color line where cursor is
 set cursorline
+"relative line numbers make it easier to repeat commands
 set relativenumber
-
 set undodir=~/.vim/undodir
 set undofile
-
+"start scrolling when cursor is 8 lines from top/bottom
 set scrolloff=8
 
-
+". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .Folding
+"fold when there is indented text
+set foldmethod=indent
 function! MyFoldText()
     let line = getline(v:foldstart)
     let folded_line_num = v:foldend - v:foldstart
@@ -40,38 +47,49 @@ function! MyFoldText()
 endfunction
 set foldtext=MyFoldText()
 
+"============================================================== Plugins
 call plug#begin('~/.vim/plugged')
+"a colorscheme
 Plug 'morhetz/gruvbox'
-
+"automatically add pairs for (['"{ etc.
 Plug 'jiangmiao/auto-pairs'
-
+"move around visual blocks
 Plug 'zirrostig/vim-schlepp'
-
+"multiple cursors
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-
+"a floating terminal
 Plug 'voldikss/vim-floaterm'
-
+"vertical lines at indents
 Plug 'Yggdroot/indentLine'
-
+"easier configuration for nvim-lsp
 "Plug 'neovim/nvim-lspconfig'
+"easy add new LS for nvim-lsp
 "Plug 'kabouzeid/nvim-lspinstall'
-
 Plug 'sirver/UltiSnips'
+"easily add and change surrondings
 Plug 'tpope/vim-surround'
+"snippets for ultisnips
 Plug 'honza/vim-snippets'
+"sql support for nvim
 Plug 'tami5/sql.nvim'
+"highlight word under cursor everywhere
 Plug 'yamatsum/nvim-cursorline'
+"easily comment out code
 Plug 'preservim/nerdcommenter'
+"Easily test code
 Plug 'vim-test/vim-test'
 Plug 'preservim/tagbar'
 Plug 'ThePrimeagen/vim-be-good'
+"show last changes in list and last change in signcolumn
 Plug 'mbbill/undotree'
+"Show git symbols in signcolumn
 Plug 'mhinz/vim-signify'
+"Visual File Explorer
 Plug 'nvim-telescope/telescope-media-files.nvim'
+"A File Explorer
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin' |
             \ Plug 'ryanoasis/vim-devicons'
-
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
 Plug 'junegunn/fzf.vim'
@@ -90,7 +108,9 @@ Plug 'folke/trouble.nvim'
 
 call plug#end()
 
+
 ".............................................................. LSPConfig
+
 "lua << EOF
 "require'lspconfig'.pyright.setup{}
 "require'lspconfig'.pyls.setup{}
@@ -102,7 +122,9 @@ call plug#end()
 "end
 "EOF
 
-"".............................................................. Trouble.nvim
+
+".............................................................. Trouble.nvim
+
 "lua << EOF
   "require("trouble").setup {
   "position = "bottom", -- position of the list can be: bottom, top, left, right
@@ -151,10 +173,9 @@ call plug#end()
 "EOF
 
 
-
 ".............................................................. Telescope
-lua << EOF
 
+lua << EOF
 require('telescope').setup{
   defaults = {
     vimgrep_arguments = {
@@ -206,14 +227,17 @@ require('telescope').setup{
 }
 EOF
 
+"<leader>ff to use Telescope to Find Files
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
 
 
 ".............................................................. NERDTree
-" Exit Vim if NERDTree is the only window left.
+
+"Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
     \ quit | endif
 
-" Start NERDTree when Vim starts with a directory argument.
+"Start NERDTree when Vim starts with a directory argument.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
     \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
@@ -234,23 +258,95 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 let g:NERDTreeGitStatusUseNerdFonts = 1
 
 
-" Start NERDTree when Vim is started without file arguments.
+"Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
 
 ".............................................................. Ultest
+
 let test#python#pytest#options = "--color=yes"
 let g:ultest_icons=1
 
 let test#javascript#jest#options = "--color=always"
 let g:ultest_use_pty = 1
 
+
 ".............................................................. SnipRun
+
 nnoremap <leader>sr :SnipRun<CR>
 nnoremap <leader>sc :SnipClose<CR>
 vmap r <Plug>SnipRun
 
+
+".............................................................. VisualMulti
+
+let g:VM_maps = {}
+let g:VM_maps["Add Cursor Down"]    = '<Leader>cd'   " new cursor down
+let g:VM_maps["Add Cursor Up"]      = '<Leader>cu'   " new cursor up
+let g:VM_maps['Find Under']         = '<Leader>fu'
+
+
+".............................................................. Floaterm
+
+"toggle floating Terminal
+nnoremap <silent> <Leader>t   :FloatermToggle<CR>
+"toggle floating Terminal in terminal-mode
+tnoremap <silent> <Leader>t   <C-\><C-n>:FloatermToggle<CR>
+
+
+".............................................................. Schlepp
+
+"Move visual selected blocks with arrow keys
+xmap <up>    <Plug>SchleppUp
+xmap <down>  <Plug>SchleppDown
+xmap <left>  <Plug>SchleppLeft
+xmap <right> <Plug>SchleppRight
+"use D to move a copy of a visual selected block
+xmap D       <Plug>SchleppDupLeft
+
+
+".............................................................. NERDCommenter
+
+"Create default mappings
+let g:NERDCreateDefaultMappings = 1
+
+"Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 0
+
+"Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+"Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+"Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+"Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+"Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+"Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+"Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+
+"use same mapping in insert mode 
+imap <leader>cc <ESC><leader>cc
+
+
+".............................................................. IndentLine
+
+let g:indentLine_setColors = 0
+let g:indentLine_char = '┆'
+
+
+
+"============================================================== Autocommands
 
 augroup filetypes
     autocmd!
@@ -261,28 +357,87 @@ augroup filetypes
 
 augroup END
 
-let g:rainbow_active = 1
+
+augroup Activate
+    autocmd!
+    au VimEnter * inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    au VimEnter * RainbowToggle
+augroup END
+
+
+augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
+augroup END
+
+
+"============================================================== Mappings
+
+nnoremap nh :nohlsearch<CR>
+inoremap jj <ESC>
+nnoremap S  :%s///g<LEFT><LEFT><LEFT>
+"Swap commands for visual and visual block mode
+nnoremap v <C-V>
+nnoremap <C-V> v
+xnoremap v <C-V>
+xnoremap <C-V> v
+"use delete to delete visual selected text
+xnoremap <BS> x
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+nnoremap <Leader>ut :UndotreeToggle<CR>
+"paste over the current line with <C-P> in normal mode
+nnoremap  <C-P> 0d$"*p
+
+"paste over the visual selected block with <C-P> in visual mode
+xnoremap  <C-P> "*pgv
+
+"use <leader>yy with a text object to copy to system clipboard
+nnoremap <Leader>yy "+y
+"use fzf to search files with fuzzy finder
+nnoremap fzf :Files<CR>
+
+"Shift-Tab in visual mode to number lines (numbered list)
+xnoremap <S-TAB> :s/\%V/0<C-V><TAB>/<CR>gvg<C-A>gv:retab<ESC>gvI<C-G>u<ESC>gv/ <CR>:s/\%V /./<CR>
+"use leader with o/O to insert empty lines below/above
+"remove potential command indicators
+nnoremap <leader>o o<ESC>xk
+nnoremap <leader>O O<ESC>xj
+nmap <leader>s ys
+
+
+"============================================================== Highlights
+
+colorscheme Gruvbox
+
+"transparent background
+highlight  Normal   guibg=none
+highlight  Normal   ctermbg=none
+highlight NonText   ctermbg=none
+highlight NonText   guibg=none
+
+
+"line number where cursor is has different color
+highlight CursorLineNr term=bold ctermfg=11 gui=bold guifg=Yellow
+
+
+". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .Search
 
 "the search results
 highlight       Search    ctermfg=White  ctermbg=Black  cterm=bold
 "the first search result
 highlight    IncSearch    ctermfg=White  ctermbg=grey   cterm=bold
 
-nnoremap nh :nohlsearch<CR>
-
-"Square up visual selections...
-set virtualedit=block
 
 
-augroup Activate
-    autocmd!
-    au VimEnter * inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-augroup END
 
-augroup highlight_yank
-    autocmd!
-    au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
-augroup END
+
+set background=dark
+
+"comments are important :)
+highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
+
+"============================================================== Spelling
 
 
 ab    retrun  return
@@ -296,58 +451,9 @@ ab      moer  more
 ab  previosu  previous
 ab    lenght  length
 
-let g:NERDCreateDefaultMappings = 1
-
-let mapleader = ' '
-inoremap jj <ESC>
-nnoremap S  :%s//g<LEFT><LEFT>
-xnoremap S  :s//g<LEFT><LEFT>
-"Visual Block mode is far more useful that Visual mode (so swap the commands)...
-nnoremap v <C-V>
-nnoremap <C-V> v
-xnoremap v <C-V>
-xnoremap <C-V> v
-xnoremap <BS> x
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-
-nnoremap <Leader>ut :UndotreeToggle<CR>
-
-xmap <up>    <Plug>SchleppUp
-xmap <down>  <Plug>SchleppDown
-xmap <left>  <Plug>SchleppLeft
-xmap <right> <Plug>SchleppRight
-xmap D       <Plug>SchleppDupLeft
-xmap <C-D>   <Plug>SchleppDupLeft
-
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-" Change an option
-
-" When in Normal mode, paste over the current line...
-nnoremap  <C-P> 0d$"*p
-
-" When in Visual mode, paste over the selected region...
-xnoremap  <C-P> "*pgv
 
 
-"use <leader>yy to copy to system clipboard
-nnoremap <Leader>yy "+y
 
-nnoremap fzf :Files<CR>
-
-
-" Shift-Tab in visual mode to number lines...
-xnoremap <S-TAB> :s/\%V/0<C-V><TAB>/<CR>gvg<C-A>gv:retab<ESC>gvI<C-G>u<ESC>gv/ <CR>:s/\%V /./<CR>
-
-let g:VM_maps = {}
-let g:VM_maps["Add Cursor Down"]    = '<Leader>cd'   " new cursor down
-let g:VM_maps["Add Cursor Up"]      = '<Leader>cu'   " new cursor up
-let g:VM_maps['Find Under']         = '<Leader>fu'
-
-"toggle floating Terminal
-nnoremap <silent> <Leader>t   :FloatermToggle<CR>
-"toggle floating Terminal in terminal-mode
-tnoremap <silent> <Leader>t   <C-\><C-n>:FloatermToggle<CR>
 
 nnoremap <Leader>tb :TagbarToggle<CR>
 
@@ -355,41 +461,14 @@ nnoremap <Leader>nt :NERDTreeToggle<CR>
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
-colorscheme Gruvbox
-
-highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
-
-
-"line number where cursor is has different color
-highlight CursorLineNr term=bold ctermfg=11 gui=bold guifg=Yellow
-
-
-highlight Normal guibg=none
-
-
-highlight NonText guibg=none
-
-
-highlight Normal ctermbg=none
-
-
-highlight NonText ctermbg=none
-
-highlight Normal guibg=NONE ctermbg=NONE
 
 
 
-set background=dark
 
-"comments are important :)
-highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
-
-hi Normal guibg=NONE ctermbg=NONE
-
-let g:indentLine_setColors = 0
-let g:indentLine_char = '┆'
 
 
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+"Square up visual selections...
+set virtualedit=block
