@@ -51,9 +51,129 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'voldikss/vim-floaterm'
 
 Plug 'Yggdroot/indentLine'
+
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'kabouzeid/nvim-lspinstall'
+
+Plug 'sirver/UltiSnips'
+Plug 'tpope/vim-surround'
+Plug 'honza/vim-snippets'
+Plug 'tami5/sql.nvim'
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/tagbar'
+Plug 'mbbill/undotree'
+Plug 'mhinz/vim-signify'
+Plug 'nvim-telescope/telescope-media-files.nvim'
+Plug 'preservim/nerdtree' |
+            \ Plug 'Xuyuanp/nerdtree-git-plugin' |
+            \ Plug 'ryanoasis/vim-devicons'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'sharkdp/bat'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 call plug#end()
 
+".............................................................. LSPConfig
+lua << EOF
+--require'lspconfig'.pyright.setup{}
+--require'lspconfig'.pyls.setup{}
+--require'lspinstall'.setup() -- important
 
+--local servers = require'lspinstall'.installed_servers()
+--for _, server in pairs(servers) do
+--  require'lspconfig'[server].setup{}
+--end
+EOF
+
+".............................................................. Telescope
+lua << EOF
+
+require('telescope').setup{
+  defaults = {
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case'
+    },
+    prompt_position = "bottom",
+    prompt_prefix = "> ",
+    selection_caret = "> ",
+    entry_prefix = "  ",
+    initial_mode = "insert",
+    selection_strategy = "reset",
+    sorting_strategy = "descending",
+    layout_strategy = "vertical",
+    layout_defaults = {
+      horizontal = {
+        mirror = false,
+      },
+      vertical = {
+        mirror = false,
+      },
+    },
+    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+    file_ignore_patterns = {},
+    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    shorten_path = true,
+    winblend = 0,
+    width = 0.75,
+    preview_cutoff = 120,
+    results_height = 1,
+    results_width = 0.8,
+    border = {},
+    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    color_devicons = true,
+    use_less = true,
+    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+
+    -- Developer configurations: Not meant for general override
+    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+  }
+}
+EOF
+
+
+
+".............................................................. NERDTree
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif
+
+" Start NERDTree when Vim starts with a directory argument.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+
+let g:NERDTreeGitStatusUseNerdFonts = 1
+
+
+" Start NERDTree when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
 
 
@@ -83,6 +203,7 @@ ab      moer  more
 ab  previosu  previous
 ab    lenght  length
 
+let g:NERDCreateDefaultMappings = 1
 
 let mapleader = ' '
 inoremap jj <ESC>
@@ -95,6 +216,9 @@ xnoremap v <C-V>
 xnoremap <C-V> v
 xnoremap <BS> x
 
+
+nnoremap <Leader>ut :UndotreeToggle<CR>
+
 xmap <up>    <Plug>SchleppUp
 xmap <down>  <Plug>SchleppDown
 xmap <left>  <Plug>SchleppLeft
@@ -102,6 +226,8 @@ xmap <right> <Plug>SchleppRight
 xmap D       <Plug>SchleppDupLeft
 xmap <C-D>   <Plug>SchleppDupLeft
 
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" Change an option
 
 " When in Normal mode, paste over the current line...
 nnoremap  <C-P> 0d$"*p
@@ -112,6 +238,8 @@ xnoremap  <C-P> "*pgv
 
 "use <leader>yy to copy to system clipboard
 nnoremap <Leader>yy "+y
+
+nnoremap fzf :Files<CR>
 
 
 " Shift-Tab in visual mode to number lines...
@@ -126,6 +254,10 @@ let g:VM_maps['Find Under']         = '<Leader>fu'
 nnoremap <silent> <Leader>t   :FloatermToggle<CR>
 "toggle floating Terminal in terminal-mode
 tnoremap <silent> <Leader>t   <C-\><C-n>:FloatermToggle<CR>
+
+nnoremap <Leader>tb :TagbarToggle<CR>
+
+nnoremap <Leader>nt :NERDTreeToggle<CR>
 
 colorscheme Gruvbox
 
