@@ -5,6 +5,7 @@ set expandtab
 set foldmethod=indent
 set tabstop=8
 set cmdheight=2
+"highlight characters in the 80th column
 au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>80v', -1)
 set nowrap
 set softtabstop=4
@@ -59,8 +60,11 @@ Plug 'sirver/UltiSnips'
 Plug 'tpope/vim-surround'
 Plug 'honza/vim-snippets'
 Plug 'tami5/sql.nvim'
+Plug 'yamatsum/nvim-cursorline'
 Plug 'preservim/nerdcommenter'
+Plug 'vim-test/vim-test'
 Plug 'preservim/tagbar'
+Plug 'ThePrimeagen/vim-be-good'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'nvim-telescope/telescope-media-files.nvim'
@@ -69,25 +73,84 @@ Plug 'preservim/nerdtree' |
             \ Plug 'ryanoasis/vim-devicons'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
 Plug 'junegunn/fzf.vim'
 Plug 'sharkdp/bat'
 Plug 'nvim-lua/popup.nvim'
+Plug 'luochen1990/rainbow'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-sources'
+Plug 'ryanoasis/vim-devicons'
+Plug 'folke/lsp-colors.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
+Plug 'folke/trouble.nvim'
 
 call plug#end()
 
 ".............................................................. LSPConfig
-lua << EOF
---require'lspconfig'.pyright.setup{}
---require'lspconfig'.pyls.setup{}
---require'lspinstall'.setup() -- important
+"lua << EOF
+"require'lspconfig'.pyright.setup{}
+"require'lspconfig'.pyls.setup{}
+"require'lspinstall'.setup() -- important
 
---local servers = require'lspinstall'.installed_servers()
---for _, server in pairs(servers) do
---  require'lspconfig'[server].setup{}
---end
-EOF
+"local servers = require'lspinstall'.installed_servers()
+"for _, server in pairs(servers) do
+  "require'lspconfig'[server].setup{}
+"end
+"EOF
+
+"".............................................................. Trouble.nvim
+"lua << EOF
+  "require("trouble").setup {
+  "position = "bottom", -- position of the list can be: bottom, top, left, right
+    "height = 10, -- height of the trouble list when position is top or bottom
+    "width = 50, -- width of the list when position is left or right
+    "icons = true, -- use devicons for filenames
+    "mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
+    "fold_open = "", -- icon used for open folds
+    "fold_closed = "", -- icon used for closed folds
+    "action_keys = { -- key mappings for actions in the trouble list
+        "-- map to {} to remove a mapping, for example:
+        "-- close = {},
+        "close = "q", -- close the list
+        "cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
+        "refresh = "r", -- manually refresh
+        "jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
+        "open_split = { "<c-x>" }, -- open buffer in new split
+        "open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
+        "open_tab = { "<c-t>" }, -- open buffer in new tab
+        "jump_close = {"o"}, -- jump to the diagnostic and close the list
+        "toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
+        "toggle_preview = "P", -- toggle auto_preview
+        "hover = "K", -- opens a small poup with the full multiline message
+        "preview = "p", -- preview the diagnostic location
+        "close_folds = {"zM", "zm"}, -- close all folds
+        "open_folds = {"zR", "zr"}, -- open all folds
+        "toggle_fold = {"zA", "za"}, -- toggle fold of current file
+        "previous = "k", -- preview item
+        "next = "j" -- next item
+    "},
+    "indent_lines = true, -- add an indent guide below the fold icons
+    "auto_open = false, -- automatically open the list when you have diagnostics
+    "auto_close = false, -- automatically close the list when you have no diagnostics
+    "auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
+    "auto_fold = false, -- automatically fold a file trouble list at creation
+    "signs = {
+        "-- icons / text used for a diagnostic
+        "error = "",
+        "warning = "",
+        "hint = "",
+        "information = "",
+        "other = "﫠"
+    "},
+    "use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+  "}
+"EOF
+
+
 
 ".............................................................. Telescope
 lua << EOF
@@ -176,15 +239,45 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
 
+".............................................................. Ultest
+let test#python#pytest#options = "--color=yes"
+let g:ultest_icons=1
+
+let test#javascript#jest#options = "--color=always"
+let g:ultest_use_pty = 1
+
+".............................................................. SnipRun
+nnoremap <leader>sr :SnipRun<CR>
+nnoremap <leader>sc :SnipClose<CR>
+vmap r <Plug>SnipRun
+
+
+augroup filetypes
+    autocmd!
+    autocmd BufNewFile,BufRead,BufWinEnter *.html syntax on
+    "class with filename and class main
+    autocmd BufNewFile *.java
+      \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>2G"
+
+augroup END
+
+let g:rainbow_active = 1
 
 "the search results
 highlight       Search    ctermfg=White  ctermbg=Black  cterm=bold
 "the first search result
 highlight    IncSearch    ctermfg=White  ctermbg=grey   cterm=bold
 
+nnoremap nh :nohlsearch<CR>
 
 "Square up visual selections...
 set virtualedit=block
+
+
+augroup Activate
+    autocmd!
+    au VimEnter * inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+augroup END
 
 augroup highlight_yank
     autocmd!
@@ -216,6 +309,7 @@ xnoremap v <C-V>
 xnoremap <C-V> v
 xnoremap <BS> x
 
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
 nnoremap <Leader>ut :UndotreeToggle<CR>
 
@@ -259,6 +353,8 @@ nnoremap <Leader>tb :TagbarToggle<CR>
 
 nnoremap <Leader>nt :NERDTreeToggle<CR>
 
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+
 colorscheme Gruvbox
 
 highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
@@ -292,3 +388,8 @@ hi Normal guibg=NONE ctermbg=NONE
 
 let g:indentLine_setColors = 0
 let g:indentLine_char = '┆'
+
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
