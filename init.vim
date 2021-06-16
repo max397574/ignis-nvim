@@ -306,6 +306,13 @@ xmap <right> <Plug>SchleppRight
 xmap D       <Plug>SchleppDupLeft
 
 
+".............................................................. CoC.nvim
+
+"Use <CR> to confirm selection
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+
 ".............................................................. NERDCommenter
 
 "Create default mappings
@@ -360,6 +367,7 @@ augroup END
 
 augroup Activate
     autocmd!
+    "use <Tab> to go through list of completitions
     au VimEnter * inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
     au VimEnter * RainbowToggle
 augroup END
@@ -460,15 +468,5 @@ nnoremap <Leader>tb :TagbarToggle<CR>
 nnoremap <Leader>nt :NERDTreeToggle<CR>
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-
-
-
-
-
-
-
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
 "Square up visual selections...
 set virtualedit=block
