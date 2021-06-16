@@ -84,26 +84,39 @@ Plug 'ThePrimeagen/vim-be-good'
 Plug 'mbbill/undotree'
 "Show git symbols in signcolumn
 Plug 'mhinz/vim-signify'
-"Visual File Explorer
-Plug 'nvim-telescope/telescope-media-files.nvim'
 "A File Explorer
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin' |
             \ Plug 'ryanoasis/vim-devicons'
+"a file explorer
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
+"fzf vim integration
 Plug 'junegunn/fzf.vim'
+Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
 Plug 'sharkdp/bat'
+"expand html 'snippets'
+Plug 'mattn/emmet-vim'
+"telescope dependency
 Plug 'nvim-lua/popup.nvim'
+"color nested brackets in different colors
 Plug 'luochen1990/rainbow'
+"telescope dependency
 Plug 'nvim-lua/plenary.nvim'
+"a file explorer
 Plug 'nvim-telescope/telescope.nvim'
+"completition
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"more sources for the coc completition
 Plug 'neoclide/coc-sources'
+"more icons
 Plug 'ryanoasis/vim-devicons'
-Plug 'folke/lsp-colors.nvim'
+"better colors for lsp
+"Plug 'folke/lsp-colors.nvim'
+"even more icons
 Plug 'kyazdani42/nvim-web-devicons'
+"test code from inside nvim
 Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
+"list and display lsp diagnostic
 Plug 'folke/trouble.nvim'
 
 call plug#end()
@@ -277,6 +290,11 @@ let g:ultest_use_pty = 1
 nnoremap <leader>sr :SnipRun<CR>
 nnoremap <leader>sc :SnipClose<CR>
 vmap r <Plug>SnipRun
+
+
+".............................................................. Emmet
+
+let g:user_emmet_leader_key='<leader>e'
 
 
 ".............................................................. VisualMulti
