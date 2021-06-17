@@ -2,6 +2,7 @@ echom "(>^.^<)"
 "============================================================== Sets
 
 
+
 let mapleader = ' '
 filetype plugin on
 filetype plugin indent on
@@ -450,7 +451,11 @@ xnoremap <S-TAB> :s/\%V/0<C-V><TAB>/<CR>gvg<C-A>gv:retab<ESC>gvI<C-G>u<ESC>gv/ <
 "remove potential command indicators
 nnoremap <leader>o o<ESC>xk
 nnoremap <leader>O O<ESC>xj
+"mapping to add surrounding with vim-surround
 nmap <leader>s ys
+"convert current word to uppercase
+inoremap <c-u> <esc>viwU<esc>i
+nnoremap <c-u> viwU<esc>
 
 
 "============================================================== Highlights
