@@ -1,5 +1,8 @@
 "============================================================== Sets
 
+source ~/.config/nvim/spelling.vim
+
+
 let mapleader = ' '
 filetype plugin indent on
 filetype plugin on
@@ -13,6 +16,7 @@ au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>80v', -1)
 set nowrap
 set softtabstop=4
 set shiftwidth=4
+set updatetime=2000
 set hidden
 "time between characters of commands (ms)
 set timeoutlen=300
@@ -25,11 +29,13 @@ highlight clear Search
 set inccommand=nosplit
 "line numbers
 set number
+"signcolumn is always activated
 set signcolumn=yes
 "color line where cursor is
 set cursorline
 "relative line numbers make it easier to repeat commands
 set relativenumber
+"undofiles are stored here
 set undodir=~/.vim/undodir
 set undofile
 "start scrolling when cursor is 8 lines from top/bottom
@@ -38,6 +44,7 @@ set scrolloff=8
 ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .Folding
 "fold when there is indented text
 set foldmethod=indent
+"function for custom fold text
 function! MyFoldText()
     let line = getline(v:foldstart)
     let folded_line_num = v:foldend - v:foldstart
@@ -45,6 +52,7 @@ function! MyFoldText()
     let fillcharcount = &textwidth - len(line_text) - len(folded_line_num)
     return '+'. repeat('-', 4) . line_text . repeat('.', fillcharcount) . ' (' . folded_line_num . ' L)'
 endfunction
+"use the text of the function above
 set foldtext=MyFoldText()
 
 "============================================================== Plugins
@@ -78,13 +86,17 @@ Plug 'yamatsum/nvim-cursorline'
 Plug 'preservim/nerdcommenter'
 "Easily test code
 Plug 'vim-test/vim-test'
+"display structure of file (variables,functions etc)
 Plug 'preservim/tagbar'
+"game to practice movements
 Plug 'ThePrimeagen/vim-be-good'
 "show last changes in list and last change in signcolumn
 Plug 'mbbill/undotree'
 "Show git symbols in signcolumn
 Plug 'mhinz/vim-signify'
 "A File Explorer
+"Show git status of files in nerdtree
+"the icons for nerdtree
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin' |
             \ Plug 'ryanoasis/vim-devicons'
@@ -462,21 +474,6 @@ set background=dark
 
 "comments are important :)
 highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
-
-"============================================================== Spelling
-
-
-ab    retrun  return
-ab     pritn  print
-ab       teh  the
-ab      liek  like
-ab  liekwise  likewise
-ab      Pelr  Perl
-ab      pelr  perl
-ab      moer  more
-ab  previosu  previous
-ab    lenght  length
-
 
 
 
