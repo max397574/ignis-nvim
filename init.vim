@@ -4,12 +4,12 @@ echom "(>^.^<)"
 
 
 let mapleader = ' '
-filetype plugin indent on
 filetype plugin on
-set termguicolors
+filetype plugin indent on
 set expandtab
 set tabstop=8
 set cmdheight=2
+set termguicolors
 "highlight characters in the 80th column
 au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>80v', -1)
 "don't wrap lines when they are longer than screenwidth
@@ -427,6 +427,8 @@ xnoremap <BS> x
 
 "move line one line down
 nnoremap <leader>d ddp
+"move line one line up
+nnoremap <leader>u ddkP
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 nnoremap <Leader>ut :UndotreeToggle<CR>
