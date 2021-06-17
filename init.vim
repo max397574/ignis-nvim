@@ -1,6 +1,6 @@
+echom "(>^.^<)"
 "============================================================== Sets
 
-source ~/.config/nvim/spelling.vim
 
 
 let mapleader = ' '
@@ -54,6 +54,9 @@ function! MyFoldText()
 endfunction
 "use the text of the function above
 set foldtext=MyFoldText()
+
+"============================================================== Source
+source ~/.config/nvim/spelling.vim
 
 "============================================================== Plugins
 call plug#begin('~/.vim/plugged')
@@ -421,6 +424,9 @@ xnoremap v <C-V>
 xnoremap <C-V> v
 "use delete to delete visual selected text
 xnoremap <BS> x
+
+"move line one line down
+nnoremap <leader>d ddp
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 nnoremap <Leader>ut :UndotreeToggle<CR>
