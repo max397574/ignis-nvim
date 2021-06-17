@@ -2,7 +2,6 @@ echom "(>^.^<)"
 "============================================================== Sets
 
 
-
 let mapleader = ' '
 filetype plugin on
 filetype plugin indent on
@@ -429,6 +428,8 @@ xnoremap <BS> x
 nnoremap <leader>d ddp
 "move line one line up
 nnoremap <leader>u ddkP
+"delete line in insert mode
+inoremap <leader>dd <ESC>ddi
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 nnoremap <Leader>ut :UndotreeToggle<CR>
