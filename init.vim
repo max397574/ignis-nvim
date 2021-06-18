@@ -69,6 +69,8 @@ call plug#begin('~/.vim/plugged')
 "a colorscheme
 Plug 'morhetz/gruvbox'
 "a colorscheme
+Plug 'eddyekofo94/gruvbox-flat.nvim'
+"a colorscheme
 Plug 'folke/tokyonight.nvim'
 "automatically add pairs for (['"{ etc.
 Plug 'jiangmiao/auto-pairs'
@@ -544,7 +546,6 @@ augroup Activate
     autocmd!
     "use <Tab> to go through list of completitions
     au VimEnter * inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-    au VimEnter * RainbowToggle
 augroup END
 
 
@@ -617,7 +618,7 @@ nnoremap <left> <nop>
 
 "============================================================== Highlights
 
-colorscheme Gruvbox
+colorscheme gruvbox
 
 
 
