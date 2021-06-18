@@ -137,6 +137,8 @@ Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 "list and display lsp diagnostic
 Plug 'folke/trouble.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 call plug#end()
 
@@ -207,9 +209,50 @@ call plug#end()
 
 ".............................................................. TreeSitter
 
-lua << EOF
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  refactor = {
+    highlight_definitions = { enable = false },
+    highlight_current_scope = { enable = false },
+    smart_rename = {
+      enable = false,
+      keymaps = {
+        smart_rename = "grr",
+      },
+    },
+    navigation = {
+      enable = false,
+      keymaps = {
+        goto_definition = "gnd",
+        list_definitions = "gnD",
+        list_definitions_toc = "gO",
+        goto_next_usage = "<a-*>",
+        goto_previous_usage = "<a-#>",
+      },
+    },
+  },
+  textobjects = {
+    select = {
+      enable = false,
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
 
+        -- Or you can define your own textobjects like this
+        --["iF"] = {
+          --python = "(function_definition) @function",
+          --cpp = "(function_definition) @function",
+          --c = "(function_definition) @function",
+          --java = "(method_declaration) @function",
+        },
+      },
+    },
+}
 EOF
+
 
 ".............................................................. Telescope
 
