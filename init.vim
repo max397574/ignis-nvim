@@ -39,6 +39,7 @@ set undofile
 "start scrolling when cursor is 8 lines from top/bottom
 set scrolloff=8
 
+
 ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .Folding
 
 "use TreeSitter for folding
@@ -56,13 +57,19 @@ endfunction
 "use the text of the function above
 set foldtext=MyFoldText()
 
+
 "============================================================== Source
+
 source ~/.config/nvim/spelling.vim
 
+
 "============================================================== Plugins
+
 call plug#begin('~/.vim/plugged')
 "a colorscheme
 Plug 'morhetz/gruvbox'
+"a colorscheme
+Plug 'folke/tokyonight.nvim'
 "automatically add pairs for (['"{ etc.
 Plug 'jiangmiao/auto-pairs'
 "move around visual blocks
