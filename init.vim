@@ -618,22 +618,9 @@ nnoremap <left> <nop>
 
 "============================================================== Highlights
 
-colorscheme gruvbox
-
-
-
-"transparent background
-highlight  Normal   guibg=none
-highlight  Normal   ctermbg=none
-highlight NonText   ctermbg=none
-highlight NonText   guibg=none
-
 
 "line number where cursor is has different color
 highlight CursorLineNr term=bold ctermfg=11 gui=bold guifg=Yellow
-
-
-". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .Search
 
 "the search results
 highlight       Search    ctermfg=White  ctermbg=Black  cterm=bold
@@ -641,8 +628,18 @@ highlight       Search    ctermfg=White  ctermbg=Black  cterm=bold
 highlight    IncSearch    ctermfg=White  ctermbg=grey   cterm=bold
 
 set background=dark
+
+colorscheme gruvbox
+
+"transparent background
+highlight  Normal   guibg=none
+highlight  Normal   ctermbg=none
+highlight NonText   ctermbg=none
+highlight NonText   guibg=none
+
 "comments are important :)
 highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
+
 
 "============================================================== Misc
 
