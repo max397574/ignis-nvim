@@ -233,19 +233,19 @@ require'nvim-treesitter.configs'.setup {
         highlight_definitions = { enable = true },
         highlight_current_scope = { enable = false },
         smart_rename = {
-            enable = false,
+            enable = true,
             keymaps = {
                 smart_rename = "grr",
             },
         },
         navigation = {
-            enable = false,
+            enable = true,
             keymaps = {
                 goto_definition = "gnd",
                 list_definitions = "gnD",
                 list_definitions_toc = "gO",
-                goto_next_usage = "<a-*>",
-                goto_previous_usage = "<a-#>",
+                goto_next_usage = "<leader>n",
+                goto_previous_usage = "<leader>p",
             },
         },
     },
@@ -268,7 +268,7 @@ require'nvim-treesitter.configs'.setup {
             },
         },
         swap = {
-            enable = false,
+            enable = true,
             swap_next = {
                 ["<leader>a"] = "@parameter.inner",
             },
@@ -639,6 +639,7 @@ highlight NonText   guibg=none
 
 "comments are important :)
 highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
+
 
 
 "============================================================== Misc
