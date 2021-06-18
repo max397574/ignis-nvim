@@ -42,8 +42,11 @@ set undofile
 set scrolloff=8
 
 ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .Folding
-"fold when there is indented text
-set foldmethod=indent
+
+"use TreeSitter for folding
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
 "function for custom fold text
 function! MyFoldText()
     let line = getline(v:foldstart)
@@ -133,6 +136,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 "list and display lsp diagnostic
 Plug 'folke/trouble.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
@@ -200,6 +204,12 @@ call plug#end()
   "}
 "EOF
 
+
+".............................................................. TreeSitter
+
+lua << EOF
+
+EOF
 
 ".............................................................. Telescope
 
@@ -398,6 +408,7 @@ nmap <leader>sw ysiw
 augroup filetypes
     autocmd!
     autocmd BufNewFile,BufRead,BufWinEnter *.html syntax on
+    autocmd BufNewFile,BufRead,BufWinEnter *.vim set foldmethod=indent
     "class with filename and class main
     autocmd BufNewFile *.java
       \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>2G"
