@@ -1,7 +1,6 @@
 "============================================================== Sets
 
 
-
 let mapleader = ' '
 filetype plugin on
 filetype plugin indent on
@@ -212,6 +211,7 @@ call plug#end()
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
+    ensure_installed = 'maintained',
     highlight = {
         enable = true,
         --disable = { "c", "rust" },  -- list of language that will be disabled
@@ -596,6 +596,17 @@ nnoremap <Leader>tb :TagbarToggle<CR>
 nnoremap <Leader>nt :NERDTreeToggle<CR>
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+
+". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Force to use mappings
+inoremap <up> <nop>
+inoremap <right> <nop>
+inoremap <left> <nop>
+inoremap <down> <nop>
+inoremap <esc> <nop>
+
+nnoremap <right> <nop>
+nnoremap <left> <nop>
+
 
 "============================================================== Highlights
 
