@@ -1,7 +1,6 @@
 "============================================================== Sets
 
 
-
 let mapleader = ' '
 filetype plugin on
 filetype plugin indent on
@@ -214,14 +213,15 @@ lua <<EOF
 require'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true,
-        custom_captures = {
+        --disable = { "c", "rust" },  -- list of language that will be disabled
+        --custom_captures = {
         -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
         --["foo.bar"] = "Identifier",
-        },
+        --},
     },
     refactor = {
-        highlight_definitions = { enable = false },
-        highlight_current_scope = { enable = false },
+        highlight_definitions = { enable = true },
+        highlight_current_scope = { enable = true },
         smart_rename = {
             enable = false,
             keymaps = {
