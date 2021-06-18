@@ -1,4 +1,3 @@
-echom "(>^.^<)"
 "============================================================== Sets
 
 
@@ -214,10 +213,10 @@ call plug#end()
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
     highlight = {
-        enable = false,
+        enable = true,
         custom_captures = {
         -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-        ["foo.bar"] = "Identifier",
+        --["foo.bar"] = "Identifier",
         },
     },
     refactor = {
@@ -308,8 +307,8 @@ require'nvim-treesitter.configs'.setup {
         },
     }
     query_linter = {
-        enable = true,
-        use_virtual_text = true,
+        enable = false,
+        use_virtual_text = false,
         lint_events = {"BufWrite", "CursorHold"},
     },
     incremental_selection = {
