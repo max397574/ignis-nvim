@@ -317,8 +317,8 @@ require'nvim-treesitter.configs'.setup {
         },
     },
     query_linter = {
-        enable = false,
-        use_virtual_text = false,
+        enable = true,
+        use_virtual_text = true,
         lint_events = {"BufWrite", "CursorHold"},
     },
     incremental_selection = {
@@ -331,7 +331,7 @@ require'nvim-treesitter.configs'.setup {
         },
     },
     indent = {
-        enable = false
+        enable = true
     }
 }
 EOF
