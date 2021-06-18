@@ -1,6 +1,7 @@
 "============================================================== Sets
 
 
+
 let mapleader = ' '
 filetype plugin on
 filetype plugin indent on
@@ -221,7 +222,7 @@ require'nvim-treesitter.configs'.setup {
     },
     refactor = {
         highlight_definitions = { enable = true },
-        highlight_current_scope = { enable = true },
+        highlight_current_scope = { enable = false },
         smart_rename = {
             enable = false,
             keymaps = {
@@ -305,7 +306,7 @@ require'nvim-treesitter.configs'.setup {
             goto_node = '<cr>',
             show_help = '?',
         },
-    }
+    },
     query_linter = {
         enable = false,
         use_virtual_text = false,
