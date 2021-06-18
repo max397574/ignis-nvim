@@ -304,7 +304,7 @@ let g:ultest_use_pty = 1
 
 nnoremap <leader>sr :SnipRun<CR>
 nnoremap <leader>sc :SnipClose<CR>
-vmap r <Plug>SnipRun
+vmap <leader>sr <Plug>SnipRun
 
 
 ".............................................................. Emmet
