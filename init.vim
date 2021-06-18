@@ -384,6 +384,13 @@ imap <leader>cc <ESC><leader>cc
 let g:indentLine_setColors = 0
 let g:indentLine_char = '┆'
 
+".............................................................. Vim-Sourround
+
+"mapping to add surrounding with vim-surround
+"around inner W
+nmap <leader>sW ysiW
+"around inner w
+nmap <leader>sw ysiw
 
 
 "============================================================== Autocommands
@@ -431,36 +438,42 @@ nnoremap <leader>d ddp
 nnoremap <leader>u ddkP
 "delete line in insert mode
 inoremap <leader>dd <ESC>ddi
-
+"surround inner word with double quotes
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 nnoremap <Leader>ut :UndotreeToggle<CR>
 "paste over the current line with <C-P> in normal mode
 nnoremap  <C-P> 0d$"*p
-
 "paste over the visual selected block with <C-P> in visual mode
 xnoremap  <C-P> "*pgv
-
 "use <leader>yy with a text object to copy to system clipboard
 nnoremap <Leader>yy "+y
 "use fzf to search files with fuzzy finder
 nnoremap fzf :Files<CR>
-
+"edit init.vim in split
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 "Shift-Tab in visual mode to number lines (numbered list)
 xnoremap <S-TAB> :s/\%V/0<C-V><TAB>/<CR>gvg<C-A>gv:retab<ESC>gvI<C-G>u<ESC>gv/ <CR>:s/\%V /./<CR>
 "use leader with o/O to insert empty lines below/above
 "remove potential command indicators
 nnoremap <leader>o o<ESC>xk
 nnoremap <leader>O O<ESC>xj
-"mapping to add surrounding with vim-surround
-nmap <leader>s ys
 "convert current word to uppercase
 inoremap <c-u> <esc>viwU<esc>i
 nnoremap <c-u> viwU<esc>
+"source init.vim
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <Leader>tb :TagbarToggle<CR>
 
+nnoremap <Leader>nt :NERDTreeToggle<CR>
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
 "============================================================== Highlights
 
 colorscheme Gruvbox
+
+
 
 "transparent background
 highlight  Normal   guibg=none
@@ -480,22 +493,11 @@ highlight       Search    ctermfg=White  ctermbg=Black  cterm=bold
 "the first search result
 highlight    IncSearch    ctermfg=White  ctermbg=grey   cterm=bold
 
-
-
-
-
 set background=dark
-
 "comments are important :)
 highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
 
+"============================================================== Misc
 
-
-
-nnoremap <Leader>tb :TagbarToggle<CR>
-
-nnoremap <Leader>nt :NERDTreeToggle<CR>
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 "Square up visual selections...
 set virtualedit=block
