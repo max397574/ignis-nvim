@@ -557,8 +557,10 @@ augroup END
 
 "============================================================== Mappings
 
+"remove highlights after a search
 nnoremap nh :nohlsearch<CR>
 inoremap jj <ESC>
+"shortcut for a often used command
 nnoremap S  :%s///g<LEFT><LEFT><LEFT>
 "Swap commands for visual and visual block mode
 nnoremap v <C-V>
@@ -577,6 +579,7 @@ inoremap <leader>dd <ESC>ddi
 "surround inner word with double quotes
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"toggle the undotree
 nnoremap <Leader>ut :UndotreeToggle<CR>
 "paste over the current line with <C-P> in normal mode
 nnoremap  <C-P> 0d$"*p
@@ -599,19 +602,20 @@ inoremap <c-u> <esc>viwU<esc>i
 nnoremap <c-u> viwU<esc>
 "source init.vim
 nnoremap <leader>sv :source $MYVIMRC<cr>
+"toggle the tagbar
 nnoremap <Leader>tb :TagbarToggle<CR>
-
+"toggle the nerdtree
 nnoremap <Leader>nt :NERDTreeToggle<CR>
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
 ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Force to use mappings
+
 inoremap <up> <nop>
 inoremap <right> <nop>
 inoremap <left> <nop>
 inoremap <down> <nop>
 inoremap <esc> <nop>
-
 nnoremap <right> <nop>
 nnoremap <left> <nop>
 
@@ -636,6 +640,7 @@ highlight  Normal   guibg=none
 highlight  Normal   ctermbg=none
 highlight NonText   ctermbg=none
 highlight NonText   guibg=none
+hi! EndOfBuffer ctermbg=none ctermfg=none guibg=none guifg=none
 
 "comments are important :)
 highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
