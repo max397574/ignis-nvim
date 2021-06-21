@@ -4,8 +4,6 @@
 let mapleader = ' '
 filetype plugin on
 filetype plugin indent on
-set expandtab
-set tabstop=8
 set cmdheight=2
 set termguicolors
 "highlight characters in the 80th column
@@ -38,6 +36,8 @@ set undodir=~/.vim/undodir
 set undofile
 "start scrolling when cursor is 8 lines from top/bottom
 set scrolloff=8
+set list
+set listchars+=tab:>-,lead:.,trail:.
 
 
 ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .Folding
