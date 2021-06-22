@@ -3,7 +3,7 @@ MAPPINGS
 Normal Mode
 
 | Key         | Action                       | Description                 |
-| ---------   | --------------------------   | -------------------------   |
+| ----------- | ---------------------------- | --------------------------- |
 | ----------- | ---------------------------- | --------------------------- |
 | <leader>sr  | :SnipRun                     | Runs current line           |
 | ----------- | ---------------------------- | --------------------------- |
@@ -13,8 +13,9 @@ Normal Mode
 | ----------- | ---------------------------- | --------------------------- |
 | <leader>cu  | add cursor one line above    |                             |
 | ----------- | ---------------------------- | --------------------------- |
-| <leader>fu  | Find Under                   | Adds cursor at every occu-  |
-|             |                              | rence of word under cursor  |
+| <leader>fu  | Find Under                   | searches for occurences of  |
+|             |                              | word under cursor           |
+|             |                              | use n to add cursors        |
 | ----------- | ---------------------------- | --------------------------- |
 | <leader>t   | :FloatermToggle              | Toggle a floating Terminal  |
 | ----------- | ---------------------------- | --------------------------- |
