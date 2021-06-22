@@ -3,20 +3,16 @@
      ________  ++    ________    max397574 ~ git version 2.24.3 (Apple Git-128)
     /VVVVVVVV\++++  /VVVVVVVV\   ----------------------------------------------
     \VVVVVVVV/++++++\VVVVVVVV/   Project: Vim_Config (3 branches)
-     |VVVVVV|++++++++/VVVVV/'    HEAD: 2f09875 (master, origin/master)
-     |VVVVVV|++++++/VVVVV/'      Created: 3 weeks ago
-    +|VVVVVV|++++/VVVVV/'+       Languages: VimScript (92.4 %) HTML (3.9 %)
-  +++|VVVVVV|++/VVVVV/'+++++                CSS (3.7 %)
-+++++|VVVVVV|/VVV___++++++++++   Authors: 95% max397574 88
-  +++|VVVVVVVVVV/##/ +_+_+_+_             4% max397574 4
-    +|VVVVVVVVV___ +/#_#,#_#,\   Last change: 14 seconds ago
-     |VVVVVVV//##/+/#/+/#/'/#/   Repo: https://github.com/max397574/Vim_Config.git
-     |VVVVV/'+/#/+/#/+/#/ /#/    Commits: 92
-     |VVV/'++/#/+/#/ /#/ /#/     Lines of code: 381
-     'V/'  /##//##//##//###/     Size: 360.93 KiB (12 files)
+     |VVVVVV|++++++++/VVVVV/'    HEAD: a441efc (master, origin/master)
+     |VVVVVV|++++++/VVVVV/'      Created: a month ago
+    +|VVVVVV|++++/VVVVV/'+       Language: VimScript (100.0 %)
+  +++|VVVVVV|++/VVVVV/'+++++     Authors: 96% max397574 126
++++++|VVVVVV|/VVV___++++++++++            3% max397574 5
+  +++|VVVVVVVVVV/##/ +_+_+_+_    Last change: 3 minutes ago
+    +|VVVVVVVVV___ +/#_#,#_#,\   Repo: https://github.com/max397574/Vim_Config.git
+     |VVVVVVV//##/+/#/+/#/'/#/   Commits: 131
+     |VVVVV/'+/#/+/#/+/#/ /#/    Lines of code: 705
+     |VVV/'++/#/+/#/ /#/ /#/     Size: 35.11 KiB (9 files)
+     'V/'  /##//##//##//###/
               ++
 ```
-
-
-
-[Website](https://max397574.github.io/Vim_Config/root/)
