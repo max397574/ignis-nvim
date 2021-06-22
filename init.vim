@@ -143,6 +143,8 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 "list and display lsp diagnostic
 Plug 'folke/trouble.nvim'
+"easily display help files
+Plug 'lvim-tech/lvim-helper'
 ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  TreeSitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
@@ -337,6 +339,47 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 
+".............................................................. lvim-helper
+
+
+lua <<EOF
+local home = os.getenv('HOME')
+require('lvim-helper').setup({
+    files = {
+	home .. "/.config/nvim/vimhelp/treesitter.md",
+	home .. "/.config/nvim/vimhelp/vim_cheat_sheet_cursor_movement.md",
+	home .. "/.config/nvim/vimhelp/personal_mappings.md",
+
+    },
+    width = 80,
+    side = 'right',
+    current_file = 1,
+    winopts = {
+        relativenumber = false,
+        number = false,
+        list = false,
+        winfixwidth = true,
+        winfixheight = true,
+        foldenable = false,
+        spell = false,
+        signcolumn = 'no',
+        foldmethod = 'manual',
+        foldcolumn = '0',
+        cursorcolumn = false,
+        colorcolumn = '0',
+        wrap = false,
+        winhl = table.concat({'Normal:LvimHelperNormal'}, ',')
+    },
+    bufopts = {
+        swapfile = false,
+        buftype = 'nofile',
+        modifiable = false,
+        filetype = 'LvimHelper',
+        bufhidden = 'hide'
+    }
+})
+EOF
+
 ".............................................................. Telescope
 
 lua << EOF
@@ -518,7 +561,7 @@ imap <leader>cc <ESC><leader>cc
 ".............................................................. IndentLine
 
 let g:indentLine_setColors = 0
-let g:indentLine_char = '┆'
+let g:indentLine_char = '⎸'
 
 ".............................................................. Vim-Sourround
 
@@ -534,6 +577,7 @@ nmap <leader>sw ysiw
 augroup filetypes
     autocmd!
     autocmd BufNewFile,BufRead,BufWinEnter *.html syntax on
+    autocmd BufNewFile,BufRead,BufWinEnter *.txt set wrap
     autocmd BufNewFile,BufRead,BufWinEnter *.vim set foldmethod=indent
     "class with filename and class main
     autocmd BufNewFile *.java
@@ -569,6 +613,8 @@ xnoremap v <C-V>
 xnoremap <C-V> v
 "use delete to delete visual selected text
 xnoremap <BS> x
+"open help files
+nnoremap <leader>hp :LvimHelper<CR>
 
 "move line one line down
 nnoremap <leader>d ddp
@@ -608,6 +654,8 @@ nnoremap <Leader>tb :TagbarToggle<CR>
 nnoremap <Leader>nt :NERDTreeToggle<CR>
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+
+
 
 ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Force to use mappings
 
