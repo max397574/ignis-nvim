@@ -499,7 +499,6 @@ EOF
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 "}}}
 
-
 "{{{.............................................................. NERDTree
 
 "Exit Vim if NERDTree is the only window left.
@@ -721,7 +720,6 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 nnoremap <leader>df :Goyo<CR>
 "}}}
 
-
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Force to use mappings
 
 inoremap <up> <nop>
@@ -747,6 +745,8 @@ highlight    IncSearch    ctermfg=White  ctermbg=grey   cterm=bold
 set background=dark
 
 colorscheme gruvbox
+
+highlight Folded term=bold cterm=italic ctermfg=white gui=italic guifg=white
 
 "transparent background
 highlight  Normal   guibg=none
