@@ -1,4 +1,4 @@
-"============================================================== Sets
+"{{{============================================================== Sets
 
 
 let mapleader = ' '
@@ -56,14 +56,14 @@ function! MyFoldText()
 endfunction
 "use the text of the function above
 set foldtext=MyFoldText()
+"}}}
 
-
-"============================================================== Source
+"{{{============================================================== Source
 
 source ~/.config/nvim/spelling.vim
+"}}}
 
-
-"============================================================== Plugins
+"{{{============================================================== Plugins
 
 call plug#begin('~/.vim/plugged')
 "a colorscheme
@@ -155,9 +155,9 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/playground'
 
 call plug#end()
+"}}}
 
-
-".............................................................. LSPConfig
+"{{{.............................................................. LSPConfig
 
 "lua << EOF
 "require'lspconfig'.pyright.setup{}
@@ -169,9 +169,9 @@ call plug#end()
   "require'lspconfig'[server].setup{}
 "end
 "EOF
+"}}}
 
-
-".............................................................. Trouble.nvim
+"{{{.............................................................. Trouble.nvim
 
 "lua << EOF
   "require("trouble").setup {
@@ -219,9 +219,9 @@ call plug#end()
     "use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
   "}
 "EOF
+"}}}
 
-
-".............................................................. Limelight
+"{{{.............................................................. Limelight
 
 " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 'gray'
@@ -246,9 +246,9 @@ let g:limelight_eop = '\ze\n^\s'
 " Highlighting priority (default: 10)
 "   Set it to -1 not to overrule hlsearch
 let g:limelight_priority = -1
+"}}}
 
-
-".............................................................. Goyo
+"{{{.............................................................. Goyo
 
 function! s:goyo_enter()
   if executable('tmux') && strlen($TMUX)
@@ -276,9 +276,9 @@ endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
+"}}}
 
-
-".............................................................. TreeSitter
+"{{{.............................................................. TreeSitter
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -397,9 +397,9 @@ require'nvim-treesitter.configs'.setup {
     }
 }
 EOF
+"}}}
 
-
-".............................................................. lvim-helper
+"{{{.............................................................. lvim-helper
 
 
 lua <<EOF
@@ -439,8 +439,9 @@ require('lvim-helper').setup({
     }
 })
 EOF
+"}}}
 
-".............................................................. Telescope
+"{{{.............................................................. Telescope
 
 lua << EOF
 require('telescope').setup{
@@ -496,9 +497,10 @@ EOF
 
 "<leader>ff to use Telescope to Find Files
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
+"}}}
 
 
-".............................................................. NERDTree
+"{{{.............................................................. NERDTree
 
 "Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
@@ -528,46 +530,46 @@ let g:NERDTreeGitStatusUseNerdFonts = 1
 "Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+"}}}
 
-
-".............................................................. Ultest
+"{{{.............................................................. Ultest
 
 let test#python#pytest#options = "--color=yes"
 let g:ultest_icons=1
 
 let test#javascript#jest#options = "--color=always"
 let g:ultest_use_pty = 1
+"}}}
 
-
-".............................................................. SnipRun
+"{{{.............................................................. SnipRun
 
 nnoremap <leader>sr :SnipRun<CR>
 nnoremap <leader>sc :SnipClose<CR>
 vmap <leader>sr <Plug>SnipRun
+"}}}
 
-
-".............................................................. Emmet
+"{{{.............................................................. Emmet
 
 let g:user_emmet_leader_key='<leader>e'
+"}}}
 
-
-".............................................................. VisualMulti
+"{{{.............................................................. VisualMulti
 
 let g:VM_maps = {}
 let g:VM_maps["Add Cursor Down"]    = '<Leader>cd'   " new cursor down
 let g:VM_maps["Add Cursor Up"]      = '<Leader>cu'   " new cursor up
 let g:VM_maps['Find Under']         = '<Leader>fu'
+"}}}
 
-
-".............................................................. Floaterm
+"{{{.............................................................. Floaterm
 
 "toggle floating Terminal
 nnoremap <silent> <Leader>t   :FloatermToggle<CR>
 "toggle floating Terminal in terminal-mode
 tnoremap <silent> <Leader>t   <C-\><C-n>:FloatermToggle<CR>
+"}}}
 
-
-".............................................................. Schlepp
+"{{{.............................................................. Schlepp
 
 "Move visual selected blocks with arrow keys
 xmap <up>    <Plug>SchleppUp
@@ -576,16 +578,16 @@ xmap <left>  <Plug>SchleppLeft
 xmap <right> <Plug>SchleppRight
 "use D to move a copy of a visual selected block
 xmap D       <Plug>SchleppDupLeft
+"}}}
 
-
-".............................................................. CoC.nvim
+"{{{.............................................................. CoC.nvim
 
 "Use <CR> to confirm selection
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"}}}
 
-
-".............................................................. NERDCommenter
+"{{{.............................................................. NERDCommenter
 
 "Create default mappings
 let g:NERDCreateDefaultMappings = 1
@@ -616,29 +618,30 @@ let g:NERDToggleCheckAllLines = 1
 
 "use same mapping in insert mode 
 imap <leader>cc <ESC><leader>cc
+"}}}
 
-
-".............................................................. IndentLine
+"{{{.............................................................. IndentLine
 
 let g:indentLine_setColors = 0
 let g:indentLine_char = '⎸'
+"}}}
 
-".............................................................. Vim-Sourround
+"{{{.............................................................. Vim-Sourround
 
 "mapping to add surrounding with vim-surround
 "around inner W
 nmap <leader>sW ysiW
 "around inner w
 nmap <leader>sw ysiw
+"}}}
 
-
-"============================================================== Autocommands
+"{{{============================================================== Autocommands
 
 augroup filetypes
     autocmd!
     autocmd BufNewFile,BufRead,BufWinEnter *.html syntax on
     autocmd BufNewFile,BufRead,BufWinEnter *.txt set wrap
-    autocmd BufNewFile,BufRead,BufWinEnter *.vim set foldmethod=indent
+    autocmd BufNewFile,BufRead,BufWinEnter *.vim set foldmethod=marker
     "class with filename and class main
     autocmd BufNewFile *.java
       \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>2G"
@@ -657,9 +660,9 @@ augroup highlight_yank
     autocmd!
     au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
 augroup END
+"}}}
 
-
-"============================================================== Mappings
+"{{{============================================================== Mappings
 
 "remove highlights after a search
 nnoremap nh :nohlsearch<CR>
@@ -716,10 +719,10 @@ nnoremap <Leader>nt :NERDTreeToggle<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 "DistractionFree writing
 nnoremap <leader>df :Goyo<CR>
+"}}}
 
 
-
-". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Force to use mappings
+"{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Force to use mappings
 
 inoremap <up> <nop>
 inoremap <right> <nop>
@@ -728,9 +731,9 @@ inoremap <down> <nop>
 inoremap <esc> <nop>
 nnoremap <right> <nop>
 nnoremap <left> <nop>
+"}}}
 
-
-"============================================================== Highlights
+"{{{============================================================== Highlights
 
 
 "line number where cursor is has different color
@@ -754,10 +757,10 @@ hi! EndOfBuffer ctermbg=none ctermfg=none guibg=none guifg=none
 
 "comments are important :)
 highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
+"}}}
 
-
-
-"============================================================== Misc
+"{{{============================================================== Misc
 
 "Square up visual selections...
 set virtualedit=block
+"}}}
