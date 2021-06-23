@@ -50,7 +50,7 @@ set list
 set listchars+=tab:>-,lead:.,trail:.
 
 
-". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .Folding
+"{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .Folding
 
 "use TreeSitter for folding
 set foldmethod=expr
@@ -61,11 +61,12 @@ function! MyFoldText()
     let line = getline(v:foldstart)
     let folded_line_num = v:foldend - v:foldstart
     let line_text = substitute(line, '^"{\+', '', 'g')
-    let fillcharcount = &textwidth - len(line_text) - len(folded_line_num)
-    return '+'. repeat('-', 4) . line_text . repeat('.', fillcharcount) . ' (' . folded_line_num . ' L)'
+    let fillcharcount = &textwidth - len(line_text) + 2
+    return '+'. line_text . repeat('.', fillcharcount) . ' (' . folded_line_num . ' L)'
 endfunction
 "use the text of the function above
 set foldtext=MyFoldText()
+"2}}}
 "}}}
 
 "{{{============================================================== Source
@@ -294,6 +295,7 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
     ensure_installed = 'maintained',
+--{{{Highlighting
     highlight = {
         enable = true,
         --disable = { "c", "rust" },  -- list of language that will be disabled
@@ -302,15 +304,20 @@ require'nvim-treesitter.configs'.setup {
         --["foo.bar"] = "Identifier",
         --},
     },
+--3}}}
+--{{{Refactor
     refactor = {
         highlight_definitions = { enable = true },
         highlight_current_scope = { enable = false },
+--{{{Smart Rename
         smart_rename = {
             enable = true,
             keymaps = {
                 smart_rename = "grr",
             },
         },
+--4}}}
+--{{{Navigation
         navigation = {
             enable = true,
             keymaps = {
@@ -322,7 +329,11 @@ require'nvim-treesitter.configs'.setup {
             },
         },
     },
+--4}}}
+--3}}}
+--{{{Textobjects
     textobjects = {
+--{{{Select
         select = {
             enable = false,
             keymaps = {
@@ -340,6 +351,8 @@ require'nvim-treesitter.configs'.setup {
                 --java = "(method_declaration) @function",
             },
         },
+--4}}}
+--{{{Swap
         swap = {
             enable = true,
             swap_next = {
@@ -349,6 +362,8 @@ require'nvim-treesitter.configs'.setup {
                 ["<leader>A"] = "@parameter.inner",
             },
         },
+--4}}}
+--{{{Move
         move = {
             enable = false,
             set_jumps = true, -- whether to set jumps in the jumplist
@@ -369,8 +384,10 @@ require'nvim-treesitter.configs'.setup {
                 ["[]"] = "@class.outer",
             },
         },
+--4}}}
     },
-  
+--3}}}
+--{{{Playground
     playground = {
         enable = true,
         disable = {},
@@ -389,11 +406,15 @@ require'nvim-treesitter.configs'.setup {
             show_help = '?',
         },
     },
+--3}}}
+--{{{Query Linter
     query_linter = {
         enable = true,
         use_virtual_text = true,
         lint_events = {"BufWrite", "CursorHold"},
     },
+--3}}}
+--{{{Incremental Selection
     incremental_selection = {
         enable = false,
         keymaps = {
@@ -403,9 +424,12 @@ require'nvim-treesitter.configs'.setup {
             node_decremental = "grm",
         },
     },
+--3}}}
+--{{{Indent
     indent = {
         enable = true
     }
+--3}}}
 }
 EOF
 "2}}}
