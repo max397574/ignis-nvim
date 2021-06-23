@@ -1,3 +1,13 @@
+
+" /$$           /$$   /$$                /$$
+"|__/          |__/  | $$               |__/
+" /$$ /$$$$$$$  /$$ /$$$$$$   /$$    /$$ /$$ /$$$$$$/$$$$
+"| $$| $$__  $$| $$|_  $$_/  |  $$  /$$/| $$| $$_  $$_  $$
+"| $$| $$  \ $$| $$  | $$     \  $$/$$/ | $$| $$ \ $$ \ $$
+"| $$| $$  | $$| $$  | $$ /$$  \  $$$/  | $$| $$ | $$ | $$
+"| $$| $$  | $$| $$  |  $$$$//$$\  $/   | $$| $$ | $$ | $$
+"|__/|__/  |__/|__/   \___/ |__/ \_/    |__/|__/ |__/ |__/
+
 "{{{============================================================== Sets
 
 
@@ -157,6 +167,7 @@ Plug 'nvim-treesitter/playground'
 call plug#end()
 "}}}
 
+"{{{============================================================== Plugin Settings
 "{{{.............................................................. LSPConfig
 
 "lua << EOF
@@ -169,7 +180,7 @@ call plug#end()
   "require'lspconfig'[server].setup{}
 "end
 "EOF
-"}}}
+"2}}}
 
 "{{{.............................................................. Trouble.nvim
 
@@ -219,7 +230,7 @@ call plug#end()
     "use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
   "}
 "EOF
-"}}}
+"2}}}
 
 "{{{.............................................................. Limelight
 
@@ -246,7 +257,7 @@ let g:limelight_eop = '\ze\n^\s'
 " Highlighting priority (default: 10)
 "   Set it to -1 not to overrule hlsearch
 let g:limelight_priority = -1
-"}}}
+"2}}}
 
 "{{{.............................................................. Goyo
 
@@ -276,7 +287,7 @@ endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
-"}}}
+"2}}}
 
 "{{{.............................................................. TreeSitter
 
@@ -397,7 +408,7 @@ require'nvim-treesitter.configs'.setup {
     }
 }
 EOF
-"}}}
+"2}}}
 
 "{{{.............................................................. lvim-helper
 
@@ -439,7 +450,7 @@ require('lvim-helper').setup({
     }
 })
 EOF
-"}}}
+"2}}}
 
 "{{{.............................................................. Telescope
 
@@ -497,7 +508,7 @@ EOF
 
 "<leader>ff to use Telescope to Find Files
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
-"}}}
+"2}}}
 
 "{{{.............................................................. NERDTree
 
@@ -529,7 +540,7 @@ let g:NERDTreeGitStatusUseNerdFonts = 1
 "Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
-"}}}
+"2}}}
 
 "{{{.............................................................. Ultest
 
@@ -538,19 +549,19 @@ let g:ultest_icons=1
 
 let test#javascript#jest#options = "--color=always"
 let g:ultest_use_pty = 1
-"}}}
+"2}}}
 
 "{{{.............................................................. SnipRun
 
 nnoremap <leader>sr :SnipRun<CR>
 nnoremap <leader>sc :SnipClose<CR>
 vmap <leader>sr <Plug>SnipRun
-"}}}
+"2}}}
 
 "{{{.............................................................. Emmet
 
 let g:user_emmet_leader_key='<leader>e'
-"}}}
+"2}}}
 
 "{{{.............................................................. VisualMulti
 
@@ -558,7 +569,7 @@ let g:VM_maps = {}
 let g:VM_maps["Add Cursor Down"]    = '<Leader>cd'   " new cursor down
 let g:VM_maps["Add Cursor Up"]      = '<Leader>cu'   " new cursor up
 let g:VM_maps['Find Under']         = '<Leader>fu'
-"}}}
+"2}}}
 
 "{{{.............................................................. Floaterm
 
@@ -566,7 +577,7 @@ let g:VM_maps['Find Under']         = '<Leader>fu'
 nnoremap <silent> <Leader>t   :FloatermToggle<CR>
 "toggle floating Terminal in terminal-mode
 tnoremap <silent> <Leader>t   <C-\><C-n>:FloatermToggle<CR>
-"}}}
+"2}}}
 
 "{{{.............................................................. Schlepp
 
@@ -577,14 +588,14 @@ xmap <left>  <Plug>SchleppLeft
 xmap <right> <Plug>SchleppRight
 "use D to move a copy of a visual selected block
 xmap D       <Plug>SchleppDupLeft
-"}}}
+"2}}}
 
 "{{{.............................................................. CoC.nvim
 
 "Use <CR> to confirm selection
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-"}}}
+"2}}}
 
 "{{{.............................................................. NERDCommenter
 
@@ -617,13 +628,13 @@ let g:NERDToggleCheckAllLines = 1
 
 "use same mapping in insert mode 
 imap <leader>cc <ESC><leader>cc
-"}}}
+"2}}}
 
 "{{{.............................................................. IndentLine
 
 let g:indentLine_setColors = 0
 let g:indentLine_char = '⎸'
-"}}}
+"2}}}
 
 "{{{.............................................................. Vim-Sourround
 
@@ -632,7 +643,8 @@ let g:indentLine_char = '⎸'
 nmap <leader>sW ysiW
 "around inner w
 nmap <leader>sw ysiw
-"}}}
+"2}}}
+"1}}}
 
 "{{{============================================================== Autocommands
 
@@ -662,7 +674,7 @@ augroup END
 "}}}
 
 "{{{============================================================== Mappings
-
+"{{{
 "remove highlights after a search
 nnoremap nh :nohlsearch<CR>
 inoremap jj <ESC>
@@ -729,6 +741,7 @@ inoremap <down> <nop>
 inoremap <esc> <nop>
 nnoremap <right> <nop>
 nnoremap <left> <nop>
+"2}}}
 "}}}
 
 "{{{============================================================== Highlights
