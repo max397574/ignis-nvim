@@ -55,3 +55,4 @@ Normal Mode
 | ----------- | ---------------------------- | --------------------------- |
 | xx          | VMATH_YankAndAnalyse()       | calculate sum average etc   |
 | ----------- | ---------------------------- | --------------------------- |
+| <leader>tm  | :TableModeToggle             | Toggle TableMode            |
