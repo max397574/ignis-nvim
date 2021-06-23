@@ -100,6 +100,8 @@ Plug 'Yggdroot/indentLine'
 "Plug 'neovim/nvim-lspconfig'
 "easy add new LS for nvim-lsp
 "Plug 'kabouzeid/nvim-lspinstall'
+"A startup screen
+Plug 'glepnir/dashboard-nvim'
 Plug 'sirver/UltiSnips'
 "easily add and change surrondings
 Plug 'tpope/vim-surround'
@@ -107,6 +109,8 @@ Plug 'tpope/vim-surround'
 Plug 'honza/vim-snippets'
 "sql support for nvim
 Plug 'tami5/sql.nvim'
+"Calculate average sum etc
+Plug 'drxcc/vim-vmath'
 "highlight word under cursor everywhere
 Plug 'yamatsum/nvim-cursorline'
 "easily comment out code
@@ -251,6 +255,20 @@ EOF
   "require'lspconfig'[server].setup{}
 "end
 "EOF
+"2}}}
+
+"{{{.............................................................. Dashboard
+
+let g:dashboard_default_executive ='telescope'
+let g:dashboard_custom_shortcut={
+\ 'last_session'       : 'SPC s l',
+\ 'find_history'       : 'SPC f h',
+\ 'find_file'          : 'SPC f f',
+\ 'new_file'           : 'SPC c n',
+\ 'change_colorscheme' : 'SPC t c',
+\ 'find_word'          : 'SPC f a',
+\ 'book_marks'         : 'SPC f b',
+\ }
 "2}}}
 
 "{{{.............................................................. Trouble.nvim
@@ -745,7 +763,7 @@ nmap <leader>sw ysiw
 augroup filetypes
     autocmd!
     autocmd BufNewFile,BufRead,BufWinEnter *.html syntax on
-    autocmd BufNewFile,BufRead,BufWinEnter *.txt set wrap
+    autocmd BufNewFile,BufRead,BufWinEnter *.txt setlocal wrap
     autocmd BufNewFile,BufRead,BufWinEnter *.vim set foldmethod=marker
     "class with filename and class main
     autocmd BufNewFile *.java
@@ -824,6 +842,9 @@ nnoremap <Leader>nt :NERDTreeToggle<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 "DistractionFree writing
 nnoremap <leader>df :Goyo<CR>
+"use vmath
+vmap <expr>  ++  VMATH_YankAndAnalyse()
+nmap         ++  vip++
 "}}}
 
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Force to use mappings
