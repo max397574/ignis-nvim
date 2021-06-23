@@ -72,6 +72,7 @@ set foldtext=MyFoldText()
 "{{{============================================================== Source
 
 source ~/.config/nvim/spelling.vim
+source ~/.config/nvim/autoswap_mac.vim
 "}}}
 
 "{{{============================================================== Plugins
