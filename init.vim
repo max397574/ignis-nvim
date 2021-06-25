@@ -820,15 +820,15 @@ augroup END
 "}}}
 
 "{{{============================================================== Mappings
-"{{{
+"{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Mappings
 "use function to mark next search result
 nnoremap <silent> n   n:call HLNext(0.4)<cr>
 nnoremap <silent> N   N:call HLNext(0.4)<cr>
 "better digraphs
 inoremap <expr>  <C-K>   BDG_GetDigraph()
 "toggle lists (comma separated, bullet)
-nmap <leader>tl  :call ListTrans_toggle_format()<CR>          ##
-vmap <leader>tl  :call ListTrans_toggle_format('visual')<CR>  ##
+nmap <leader>tl  :call ListTrans_toggle_format()<CR>nh
+vmap <leader>tl  :call ListTrans_toggle_format('visual')<CR>nh
 "remove highlights after a search
 nnoremap nh :nohlsearch<CR>
 inoremap jj <ESC>
