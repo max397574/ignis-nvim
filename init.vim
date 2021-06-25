@@ -791,7 +791,7 @@ nmap <leader>sw ysiw
 augroup filetypes
     autocmd!
     autocmd BufNewFile,BufRead,BufWinEnter *.html syntax on
-    autocmd BufNewFile,BufRead,BufWinEnter *.txt set spell
+    autocmd BufNewFile,BufRead,BufWinEnter *.{txt,html} set spell
     autocmd BufNewFile,BufRead,BufWinEnter *.vim set foldmethod=marker
     "class with filename and class main
     autocmd BufNewFile *.java
