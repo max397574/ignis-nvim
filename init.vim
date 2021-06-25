@@ -10,7 +10,6 @@
 
 "{{{============================================================== Sets
 
-
 let mapleader = ' '
 filetype plugin on
 filetype plugin indent on
@@ -72,8 +71,6 @@ set foldtext=MyFoldText()
 "{{{============================================================== Source
 
 source ~/.config/nvim/spelling.vim
-source ~/.config/nvim/autoswap_mac.vim
-
 let s:prefix = '~/.config/nvim/plugins'
 
 for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
@@ -810,10 +807,21 @@ augroup Activate
 augroup END
 "2}}}
 
-"{{{..............................................................HighlightYank
+"{{{.............................................................. HighlightYank
 augroup highlight_yank
     autocmd!
     au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
+augroup END
+"2}}}
+
+"{{{.............................................................. NoSimultaneousEdits
+augroup NoSimultaneousEdits
+    autocmd!
+    autocmd SwapExists * let v:swapchoice = 'o'
+    autocmd SwapExists * echomsg ErrorMsg
+    autocmd SwapExists * echo 'Duplicate edit session (readonly)'
+    autocmd SwapExists * echohl None
+    autocmd SwapExists * sleep 2
 augroup END
 "2}}}
 
