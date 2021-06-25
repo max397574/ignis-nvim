@@ -73,6 +73,9 @@ set foldtext=MyFoldText()
 
 source ~/.config/nvim/spelling.vim
 source ~/.config/nvim/autoswap_mac.vim
+for f in split(glob('~/.config/nvim/plugins/*.vim'), '\n')
+    exe 'source' f
+endfor
 "}}}
 
 "{{{============================================================== Plugins
@@ -807,6 +810,9 @@ augroup END
 
 "{{{============================================================== Mappings
 "{{{
+"toggle lists (comma separated, bullet)
+nmap <leader>tl  :call ListTrans_toggle_format()<CR>          ##
+vmap <leader>tl  :call ListTrans_toggle_format('visual')<CR>  ##
 "remove highlights after a search
 nnoremap nh :nohlsearch<CR>
 inoremap jj <ESC>
