@@ -787,29 +787,34 @@ nmap <leader>sw ysiw
 
 "{{{============================================================== Autocommands
 
+"{{{.............................................................. Filetypes
 augroup filetypes
     autocmd!
     autocmd BufNewFile,BufRead,BufWinEnter *.html syntax on
-    autocmd BufNewFile,BufRead,BufWinEnter *.txt setlocal wrap
+    autocmd BufNewFile,BufRead,BufWinEnter *.txt set spell
     autocmd BufNewFile,BufRead,BufWinEnter *.vim set foldmethod=marker
     "class with filename and class main
     autocmd BufNewFile *.java
       \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>2G"
 
 augroup END
+"2}}}
 
-
+"{{{.............................................................. Activate
 augroup Activate
     autocmd!
     "use <Tab> to go through list of completitions
     au VimEnter * inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 augroup END
+"2}}}
 
-
+"{{{..............................................................HighlightYank
 augroup highlight_yank
     autocmd!
     au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
 augroup END
+"2}}}
+
 "}}}
 
 "{{{============================================================== Mappings
@@ -919,6 +924,7 @@ highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
 
 "{{{============================================================== Misc
 
+set nowrap
 "Square up visual selections...
 set virtualedit=block
 "}}}
