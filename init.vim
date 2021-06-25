@@ -821,6 +821,9 @@ augroup END
 
 "{{{============================================================== Mappings
 "{{{
+"use function to mark next search result
+nnoremap <silent> n   n:call HLNext(0.4)<cr>
+nnoremap <silent> N   N:call HLNext(0.4)<cr>
 "better digraphs
 inoremap <expr>  <C-K>   BDG_GetDigraph()
 "toggle lists (comma separated, bullet)
@@ -924,6 +927,18 @@ hi! EndOfBuffer ctermbg=none ctermfg=none guibg=none guifg=none
 
 "comments are important :)
 highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
+highlight WhiteOnRed ctermbg=red guibg=red ctermfg=white guifg=white
+
+function! HLNext (blinktime)
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#\%('.@/.'\)'
+    let ring = matchadd('WhiteOnRed', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
 "}}}
 
 "{{{============================================================== Misc
