@@ -91,6 +91,8 @@ Plug 'morhetz/gruvbox'
 Plug 'eddyekofo94/gruvbox-flat.nvim'
 "a colorscheme
 Plug 'folke/tokyonight.nvim'
+"better visual mode
+Plug 'vim-scripts/vis'
 "easily create tables
 Plug 'dhruvasagar/vim-table-mode'
 "Displays suggestions for key bindings
