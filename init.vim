@@ -830,8 +830,6 @@ let ErrorMsg='Duplicate edit session (readonly)'
 
 "{{{============================================================== Mappings
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Mappings
-"Correct Spelling of previous misspelled word
-nnoremap <leader>sp :normal! mm[s1z=`m<CR>
 "use function to mark next search result
 nnoremap <silent> n   n:call HLNext(0.4)<CR>
 nnoremap <silent> N   N:call HLNext(0.4)<CR>
