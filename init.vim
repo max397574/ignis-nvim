@@ -830,6 +830,8 @@ let ErrorMsg='Duplicate edit session (readonly)'
 
 "{{{============================================================== Mappings
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Mappings
+"fix last spelling error
+nnoremap <silent> <leader>sp :call FixLastSpellingError()<CR>
 "use function to mark next search result
 nnoremap <silent> n   n:call HLNext(0.4)<CR>
 nnoremap <silent> N   N:call HLNext(0.4)<CR>
