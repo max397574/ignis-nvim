@@ -73,9 +73,13 @@ set foldtext=MyFoldText()
 
 source ~/.config/nvim/spelling.vim
 source ~/.config/nvim/autoswap_mac.vim
-for f in split(glob('~/.config/nvim/plugins/*.vim'), '\n')
-    exe 'source' f
+
+let s:prefix = '~/.config/nvim/plugins'
+
+for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
+    execute 'source' s:fname
 endfor
+
 "}}}
 
 "{{{============================================================== Plugins
