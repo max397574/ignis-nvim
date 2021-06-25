@@ -815,14 +815,15 @@ augroup END
 "2}}}
 
 "{{{.............................................................. NoSimultaneousEdits
-augroup NoSimultaneousEdits
-    autocmd!
-    autocmd SwapExists * let v:swapchoice = 'o'
-    autocmd SwapExists * echomsg ErrorMsg
-    autocmd SwapExists * echo 'Duplicate edit session (readonly)'
-    autocmd SwapExists * echohl None
-    autocmd SwapExists * sleep 2
-augroup END
+let ErrorMsg='Duplicate edit session (readonly)'
+"augroup NoSimultaneousEdits
+"    autocmd!
+"    autocmd SwapExists * let v:swapchoice = 'o'
+"    autocmd SwapExists * echomsg ErrorMsg
+"    autocmd SwapExists * echo 'Duplicate edit session (readonly)'
+"    autocmd SwapExists * echohl None
+"    autocmd SwapExists * sleep 2
+"augroup END
 "2}}}
 
 "}}}
