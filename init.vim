@@ -819,6 +819,8 @@ augroup END
 
 "{{{============================================================== Mappings
 "{{{
+"better digraphs
+inoremap <expr>  <C-K>   BDG_GetDigraph()
 "toggle lists (comma separated, bullet)
 nmap <leader>tl  :call ListTrans_toggle_format()<CR>          ##
 vmap <leader>tl  :call ListTrans_toggle_format('visual')<CR>  ##
