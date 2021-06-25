@@ -214,7 +214,7 @@ lua << EOF
         -- override the label used to display some keys. It doesn't effect WK in any other way.
         -- For example:
         -- ["<space>"] = "SPC",
-        -- ["<cr>"] = "RET",
+        -- ["<CR>"] = "RET",
         -- ["<tab>"] = "TAB",
       },
       icons = {
@@ -291,10 +291,10 @@ endfunction
 
 inoreabbrev <expr> <bar><bar>
           \ <SID>isAtStartOfLine('\|\|') ?
-          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+          \ '<c-o>:TableModeEnable<CR><bar><space><bar><left><left>' : '<bar><bar>'
 inoreabbrev <expr> __
           \ <SID>isAtStartOfLine('__') ?
-          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
+          \ '<c-o>:silent! TableModeDisable<CR>' : '__'
 "2}}}
 
 "{{{.............................................................. Trouble.nvim
@@ -314,7 +314,7 @@ inoreabbrev <expr> __
         "close = "q", -- close the list
         "cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
         "refresh = "r", -- manually refresh
-        "jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
+        "jump = {"<CR>", "<tab>"}, -- jump to the diagnostic or open / close folds
         "open_split = { "<c-x>" }, -- open buffer in new split
         "open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
         "open_tab = { "<c-t>" }, -- open buffer in new tab
@@ -516,7 +516,7 @@ require'nvim-treesitter.configs'.setup {
             focus_language = 'f',
             unfocus_language = 'F',
             update = 'R',
-            goto_node = '<cr>',
+            goto_node = '<CR>',
             show_help = '?',
         },
     },
@@ -645,7 +645,7 @@ require('telescope').setup{
 EOF
 
 "<leader>ff to use Telescope to Find Files
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>ff <cmd>Telescope find_files<CR>
 "2}}}
 
 "{{{.............................................................. NERDTree
@@ -731,7 +731,7 @@ xmap D       <Plug>SchleppDupLeft
 "{{{.............................................................. CoC.nvim
 
 "Use <CR> to confirm selection
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 "2}}}
 
@@ -830,9 +830,11 @@ let ErrorMsg='Duplicate edit session (readonly)'
 
 "{{{============================================================== Mappings
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Mappings
+"Correct Spelling of previous misspelled word
+nnoremap <leader>sp :normal! mm[s1z=`m<CR>
 "use function to mark next search result
-nnoremap <silent> n   n:call HLNext(0.4)<cr>
-nnoremap <silent> N   N:call HLNext(0.4)<cr>
+nnoremap <silent> n   n:call HLNext(0.4)<CR>
+nnoremap <silent> N   N:call HLNext(0.4)<CR>
 "better digraphs
 inoremap <expr>  <C-K>   BDG_GetDigraph()
 "toggle lists (comma separated, bullet)
@@ -873,7 +875,7 @@ nnoremap <Leader>yy "+y
 "use fzf to search files with fuzzy finder
 nnoremap fzf :Files<CR>
 "edit init.vim in split
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 "Shift-Tab in visual mode to number lines (numbered list)
 xnoremap <S-TAB> :s/\%V/0<C-V><TAB>/<CR>gvg<C-A>gv:retab<ESC>gvI<C-G>u<ESC>gv/ <CR>:s/\%V /./<CR>
 "use leader with o/O to insert empty lines below/above
@@ -884,7 +886,7 @@ nnoremap <leader>O O<ESC>xj
 inoremap <c-u> <esc>viwU<esc>i
 nnoremap <c-u> viwU<esc>
 "source init.vim
-nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 "toggle the tagbar
 nnoremap <Leader>tb :TagbarToggle<CR>
 "toggle the nerdtree
