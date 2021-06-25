@@ -535,7 +535,7 @@ require'nvim-treesitter.configs'.setup {
 --3}}}
 --{{{Indent
     indent = {
-        enable = true
+        enable = false
     }
 --3}}}
 }
