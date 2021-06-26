@@ -830,10 +830,12 @@ let ErrorMsg='Duplicate edit session (readonly)'
 
 "{{{============================================================== Mappings
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Mappings
+"move line to top of a list
+nnoremap <silent> <leader>mt :call MoveLineToTopOfList()<CR>
 "fix last spelling error
 nnoremap <silent> <leader>sp :call FixLastSpellingError()<CR>
 "show list with fixes for spelling
-nnoremap <leader>spl :call ShowSpellingList()<CR>
+nnoremap <leader>spl [sz=
 "use function to mark next search result
 nnoremap <silent> n   n:call HLNext(0.4)<CR>
 nnoremap <silent> N   N:call HLNext(0.4)<CR>
