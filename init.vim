@@ -107,9 +107,9 @@ Plug 'voldikss/vim-floaterm'
 "vertical lines at indents
 Plug 'Yggdroot/indentLine'
 "easier configuration for nvim-lsp
-Plug 'neovim/nvim-lspconfig'
+"Plug 'neovim/nvim-lspconfig'
 "easy add new LS for nvim-lsp
-Plug 'kabouzeid/nvim-lspinstall'
+"Plug 'kabouzeid/nvim-lspinstall'
 "A startup screen
 Plug 'glepnir/dashboard-nvim'
 Plug 'sirver/UltiSnips'
@@ -164,13 +164,13 @@ Plug 'neoclide/coc-sources'
 "more icons
 Plug 'ryanoasis/vim-devicons'
 "better colors for lsp
-Plug 'folke/lsp-colors.nvim'
+"Plug 'folke/lsp-colors.nvim'
 "even more icons
 Plug 'kyazdani42/nvim-web-devicons'
 "test code from inside nvim
 Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 "list and display lsp diagnostic
-Plug 'folke/trouble.nvim'
+"Plug 'folke/trouble.nvim'
 "easily display help files
 Plug 'lvim-tech/lvim-helper'
 "distraction free writing
@@ -261,15 +261,15 @@ let vim_markdown_preview_github=0
 
 "{{{.............................................................. LSPConfig
 
-lua << EOF
-require'lspconfig'.pyright.setup{}
-require'lspinstall'.setup() -- important
+"lua << EOF
+"require'lspconfig'.pyright.setup{}
+"require'lspinstall'.setup() -- important
 
-local servers = require'lspinstall'.installed_servers()
-for _, server in pairs(servers) do
-  require'lspconfig'[server].setup{}
-end
-EOF
+"local servers = require'lspinstall'.installed_servers()
+"for _, server in pairs(servers) do
+  "require'lspconfig'[server].setup{}
+"end
+"EOF
 "2}}}
 
 "{{{.............................................................. Dashboard
@@ -306,10 +306,10 @@ inoreabbrev <expr> __
 
 "{{{.............................................................. Trouble.nvim
 
-lua << EOF
-  require("trouble").setup {
-  }
-EOF
+"lua << EOF
+  "require("trouble").setup {
+  "}
+"EOF
 "2}}}
 
 "{{{.............................................................. Limelight
