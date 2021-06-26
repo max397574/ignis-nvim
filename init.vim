@@ -16,7 +16,6 @@ filetype plugin indent on
 set cmdheight=2
 set termguicolors
 "highlight characters in the 80th column
-au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>80v', -1)
 "don't wrap lines when they are longer than screenwidth
 set nowrap
 set softtabstop=4
@@ -785,6 +784,9 @@ nmap <leader>sw ysiw
 "1}}}
 
 "{{{============================================================== Autocommands
+
+au BufWinEnter *.{py,java,html,c,cpp,cs,vim} 
+  \let w:m1=matchadd('Search', '\%<81v.\%>80v', -1)
 
 "{{{.............................................................. Filetypes
 augroup filetypes
