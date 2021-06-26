@@ -699,8 +699,8 @@ let g:ultest_use_pty = 1
 
 "{{{.............................................................. SnipRun
 
-nnoremap <leader>sr :SnipRun<CR>
-nnoremap <leader>sc :SnipClose<CR>
+nnoremap <silent> <leader>sr :SnipRun<CR>
+nnoremap <silent> <leader>sc :SnipClose<CR>
 vmap <leader>sr <Plug>SnipRun
 "2}}}
 
@@ -865,7 +865,7 @@ inoremap <expr>  <C-K>   BDG_GetDigraph()
 nmap <leader>tl  :call ListTrans_toggle_format()<CR>nh
 vmap <leader>tl  :call ListTrans_toggle_format('visual')<CR>nh
 "remove highlights after a search
-nnoremap nh :nohlsearch<CR>
+nnoremap <silent> nh :nohlsearch<CR>
 inoremap jj <ESC>
 "shortcut for a often used command
 nnoremap S  :%s///g<LEFT><LEFT><LEFT>
