@@ -77,3 +77,5 @@ Normal Mode
 | <leader>mdh1 |                               | convert current line to md  |
 | -mdh3        |                               | heading (level 1-3)         |
 |--------------|-------------------------------|-----------------------------|
+| <leader>mp   |                               | preview markdown in browser |
+|--------------|-------------------------------|-----------------------------|
