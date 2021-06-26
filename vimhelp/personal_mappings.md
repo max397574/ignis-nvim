@@ -73,3 +73,6 @@ Normal Mode
 | m1-m9        |                               | move line to 1st-9nth           |
 |              |                               | position below empty line above |
 |--------------|-------------------------------|---------------------------------|
+| <leader>mdh1 |                               | convert current line to md      |
+| -mdh3        |                               | heading (level 1-3)             |
+|--------------|-------------------------------|---------------------------------|
