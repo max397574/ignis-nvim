@@ -13,6 +13,7 @@
 let mapleader = ' '
 filetype plugin on
 filetype plugin indent on
+set conceallevel=0
 set cmdheight=2
 set termguicolors
 "highlight characters in the 80th column
@@ -802,6 +803,7 @@ augroup filetypes
     autocmd BufNewFile,BufRead,BufWinEnter *.html syntax on
     autocmd BufNewFile,BufRead,BufWinEnter *.{md,txt,html} set spell
     autocmd BufNewFile,BufRead,BufWinEnter *.vim set foldmethod=marker
+    autocmd BufNewFile,BufRead,BufWinEnter *.md set conceallevel=0
     "class with filename and class main
     autocmd BufNewFile *.java
       \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>2G"
@@ -844,7 +846,8 @@ let ErrorMsg='Duplicate edit session (readonly)'
 nnoremap <silent> <leader>mdh1 :call MdHeading1()<CR>
 nnoremap <silent> <leader>mdh2 :call MdHeading2()<CR>
 nnoremap <silent> <leader>mdh3 :call MdHeading3()<CR>
-
+"make visual selection italic in markdown
+vnoremap <leader>mdit :call VisualItalic()<CR>
 "move line to top of a list
 nnoremap <silent> <leader>mt :call MoveLineToTopOfList()<CR>
 "fix last spelling error
