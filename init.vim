@@ -107,9 +107,9 @@ Plug 'voldikss/vim-floaterm'
 "vertical lines at indents
 Plug 'Yggdroot/indentLine'
 "easier configuration for nvim-lsp
-"Plug 'neovim/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig'
 "easy add new LS for nvim-lsp
-"Plug 'kabouzeid/nvim-lspinstall'
+Plug 'kabouzeid/nvim-lspinstall'
 "A startup screen
 Plug 'glepnir/dashboard-nvim'
 Plug 'sirver/UltiSnips'
@@ -164,7 +164,7 @@ Plug 'neoclide/coc-sources'
 "more icons
 Plug 'ryanoasis/vim-devicons'
 "better colors for lsp
-"Plug 'folke/lsp-colors.nvim'
+Plug 'folke/lsp-colors.nvim'
 "even more icons
 Plug 'kyazdani42/nvim-web-devicons'
 "test code from inside nvim
@@ -261,16 +261,15 @@ let vim_markdown_preview_github=0
 
 "{{{.............................................................. LSPConfig
 
-"lua << EOF
-"require'lspconfig'.pyright.setup{}
-"require'lspconfig'.pyls.setup{}
-"require'lspinstall'.setup() -- important
+lua << EOF
+require'lspconfig'.pyright.setup{}
+require'lspinstall'.setup() -- important
 
-"local servers = require'lspinstall'.installed_servers()
-"for _, server in pairs(servers) do
-  "require'lspconfig'[server].setup{}
-"end
-"EOF
+local servers = require'lspinstall'.installed_servers()
+for _, server in pairs(servers) do
+  require'lspconfig'[server].setup{}
+end
+EOF
 "2}}}
 
 "{{{.............................................................. Dashboard
@@ -307,52 +306,52 @@ inoreabbrev <expr> __
 
 "{{{.............................................................. Trouble.nvim
 
-"lua << EOF
-  "require("trouble").setup {
-  "position = "bottom", -- position of the list can be: bottom, top, left, right
-    "height = 10, -- height of the trouble list when position is top or bottom
-    "width = 50, -- width of the list when position is left or right
-    "icons = true, -- use devicons for filenames
-    "mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
-    "fold_open = "", -- icon used for open folds
-    "fold_closed = "", -- icon used for closed folds
-    "action_keys = { -- key mappings for actions in the trouble list
-        "-- map to {} to remove a mapping, for example:
-        "-- close = {},
-        "close = "q", -- close the list
-        "cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-        "refresh = "r", -- manually refresh
-        "jump = {"<CR>", "<tab>"}, -- jump to the diagnostic or open / close folds
-        "open_split = { "<c-x>" }, -- open buffer in new split
-        "open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-        "open_tab = { "<c-t>" }, -- open buffer in new tab
-        "jump_close = {"o"}, -- jump to the diagnostic and close the list
-        "toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-        "toggle_preview = "P", -- toggle auto_preview
-        "hover = "K", -- opens a small poup with the full multiline message
-        "preview = "p", -- preview the diagnostic location
-        "close_folds = {"zM", "zm"}, -- close all folds
-        "open_folds = {"zR", "zr"}, -- open all folds
-        "toggle_fold = {"zA", "za"}, -- toggle fold of current file
-        "previous = "k", -- preview item
-        "next = "j" -- next item
-    "},
-    "indent_lines = true, -- add an indent guide below the fold icons
-    "auto_open = false, -- automatically open the list when you have diagnostics
-    "auto_close = false, -- automatically close the list when you have no diagnostics
-    "auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
-    "auto_fold = false, -- automatically fold a file trouble list at creation
-    "signs = {
-        "-- icons / text used for a diagnostic
-        "error = "",
-        "warning = "",
-        "hint = "",
-        "information = "",
-        "other = "﫠"
-    "},
-    "use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
-  "}
-"EOF
+lua << EOF
+  require("trouble").setup {
+  position = "bottom", -- position of the list can be: bottom, top, left, right
+    height = 10, -- height of the trouble list when position is top or bottom
+    width = 50, -- width of the list when position is left or right
+    icons = true, -- use devicons for filenames
+    mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
+    fold_open = "", -- icon used for open folds
+    fold_closed = "", -- icon used for closed folds
+    action_keys = { -- key mappings for actions in the trouble list
+        -- map to {} to remove a mapping, for example:
+        -- close = {},
+        close = "q", -- close the list
+        cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
+        refresh = "r", -- manually refresh
+        jump = {"<CR>", "<tab>"}, -- jump to the diagnostic or open / close folds
+        open_split = { "<c-x>" }, -- open buffer in new split
+        open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
+        open_tab = { "<c-t>" }, -- open buffer in new tab
+        jump_close = {"o"}, -- jump to the diagnostic and close the list
+        toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
+        toggle_preview = "P", -- toggle auto_preview
+        hover = "K", -- opens a small poup with the full multiline message
+        preview = "p", -- preview the diagnostic location
+        close_folds = {"zM", "zm"}, -- close all folds
+        open_folds = {"zR", "zr"}, -- open all folds
+        toggle_fold = {"zA", "za"}, -- toggle fold of current file
+        previous = "k", -- preview item
+        next = "j" -- next item
+    },
+    indent_lines = true, -- add an indent guide below the fold icons
+    auto_open = false, -- automatically open the list when you have diagnostics
+    auto_close = false, -- automatically close the list when you have no diagnostics
+    auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
+    auto_fold = false, -- automatically fold a file trouble list at creation
+    signs = {
+        -- icons / text used for a diagnostic
+        error = "",
+        warning = "",
+        hint = "",
+        information = "",
+        other = "﫠"
+    },
+    use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+  }
+EOF
 "2}}}
 
 "{{{.............................................................. Limelight
