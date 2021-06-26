@@ -87,6 +87,8 @@ Plug 'morhetz/gruvbox'
 Plug 'eddyekofo94/gruvbox-flat.nvim'
 "a colorscheme
 Plug 'folke/tokyonight.nvim'
+"preview markdown in browser
+Plug 'JamshedVesuna/vim-markdown-preview'
 "better visual mode
 Plug 'vim-scripts/vis'
 "easily create tables
@@ -248,6 +250,12 @@ lua << EOF
     }
   }
 EOF
+"2}}}
+
+"{{{.............................................................. MarkdownPreview
+let vim_markdown_preview_toggle=1
+let vim_markdown_preview_hotkey='<leader>mp'
+let vim_markdown_preview_github=0
 "2}}}
 
 "{{{.............................................................. LSPConfig
