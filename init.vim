@@ -832,6 +832,11 @@ let ErrorMsg='Duplicate edit session (readonly)'
 
 "{{{============================================================== Mappings
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Mappings
+"make markdown headings out of current line
+nnoremap <silent> <leader>mdh1 :call MdHeading1()<CR>
+nnoremap <silent> <leader>mdh2 :call MdHeading2()<CR>
+nnoremap <silent> <leader>mdh3 :call MdHeading3()<CR>
+
 "move line to top of a list
 nnoremap <silent> <leader>mt :call MoveLineToTopOfList()<CR>
 "fix last spelling error
