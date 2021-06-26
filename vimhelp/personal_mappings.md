@@ -82,3 +82,6 @@ Normal Mode
 | <leader>mdit | :call VisualItalic()          | surround visual selection   |
 |              |                               | with * for italic in md     |
 |--------------|-------------------------------|-----------------------------|
+| <leader>mdbd | :call VisualBold()            | surround visual selection   |
+|              |                               | with ** for bold in md      |
+|--------------|-------------------------------|-----------------------------|
