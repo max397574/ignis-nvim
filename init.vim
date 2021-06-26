@@ -848,6 +848,8 @@ nnoremap <silent> <leader>mdh2 :call MdHeading2()<CR>
 nnoremap <silent> <leader>mdh3 :call MdHeading3()<CR>
 "make visual selection italic in markdown
 vnoremap <leader>mdit :call VisualItalic()<CR>
+"make visual selection bold in markdown
+vnoremap <leader>mdbd :call VisualBold()<CR>
 "move line to top of a list
 nnoremap <silent> <leader>mt :call MoveLineToTopOfList()<CR>
 "fix last spelling error
