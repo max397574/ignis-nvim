@@ -88,6 +88,8 @@ Plug 'morhetz/gruvbox'
 Plug 'eddyekofo94/gruvbox-flat.nvim'
 "a colorscheme
 Plug 'folke/tokyonight.nvim'
+"motion like f and t but with 2 letters
+Plug 'justinmk/vim-sneak'
 "preview markdown in browser
 Plug 'JamshedVesuna/vim-markdown-preview'
 "better visual mode
