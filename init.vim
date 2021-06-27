@@ -186,6 +186,7 @@ call plug#end()
 "}}}
 
 "{{{============================================================== Plugin Settings
+
 "{{{.............................................................. Which Key
 lua << EOF
   require("which-key").setup {
@@ -843,7 +844,7 @@ nnoremap <leader>u ddkP
 "delete line in insert mode
 inoremap <leader>dd <ESC>ddi
 "surround inner word with double quotes
-nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>" :call Surrondiwquotes()<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 "toggle the undotree
 nnoremap <Leader>ut :UndotreeToggle<CR>
