@@ -112,6 +112,7 @@ Plug 'Yggdroot/indentLine'
 "Plug 'kabouzeid/nvim-lspinstall'
 "A startup screen
 Plug 'glepnir/dashboard-nvim'
+"snippets
 Plug 'sirver/UltiSnips'
 "easily add and change surrondings
 Plug 'tpope/vim-surround'
@@ -145,14 +146,15 @@ Plug 'preservim/nerdtree' |
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "fzf vim integration
 Plug 'junegunn/fzf.vim'
+"run a selected part of code
 Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
 Plug 'sharkdp/bat'
 "expand html 'snippets'
 Plug 'mattn/emmet-vim'
-"telescope dependency
-Plug 'nvim-lua/popup.nvim'
 "color nested brackets in different colors
 Plug 'luochen1990/rainbow'
+"telescope dependency
+Plug 'nvim-lua/popup.nvim'
 "telescope dependency
 Plug 'nvim-lua/plenary.nvim'
 "a file explorer
