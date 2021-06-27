@@ -883,10 +883,6 @@ nmap         ++  vip++
 
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Force to use mappings
 
-inoremap <up> <nop>
-inoremap <right> <nop>
-inoremap <left> <nop>
-inoremap <down> <nop>
 inoremap <esc> <nop>
 nnoremap <right> <nop>
 nnoremap <left> <nop>
