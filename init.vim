@@ -838,9 +838,9 @@ xnoremap <BS> x
 nnoremap <leader>hp :LvimHelper<CR>
 
 "move line one line down
-nnoremap <leader>d ddp
+nnoremap <leader>d :call MoveLineDown()<CR>
 "move line one line up
-nnoremap <leader>u ddkP
+nnoremap <leader>u :call MoveLineUp()<CR>
 "delete line in insert mode
 inoremap <leader>dd <ESC>ddi
 "surround inner word with double quotes
@@ -862,11 +862,11 @@ nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 xnoremap <S-TAB> :s/\%V/0<C-V><TAB>/<CR>gvg<C-A>gv:retab<ESC>gvI<C-G>u<ESC>gv/ <CR>:s/\%V /./<CR>
 "use leader with o/O to insert empty lines below/above
 "remove potential command indicators
-nnoremap <leader>o o<ESC>xk
-nnoremap <leader>O O<ESC>xj
+nnoremap <leader>O :call AddLineAbove()<CR>
+nnoremap <leader>o :call AddLineBelow()<CR>
 "convert current word to uppercase
-inoremap <c-u> <esc>viwU<esc>i
-nnoremap <c-u> viwU<esc>
+inoremap <c-u> <ESC> :call ConvertWordUppercase()<CR>i
+nnoremap <c-u> :call ConvertWordUppercase()<CR>
 "source init.vim
 nnoremap <leader>sv :source $MYVIMRC<CR>
 "toggle the tagbar
