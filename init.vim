@@ -83,6 +83,8 @@ endfor
 
 call plug#begin('~/.vim/plugged')
 "a colorscheme
+Plug 'savq/melange'
+"a colorscheme
 Plug 'morhetz/gruvbox'
 "a colorscheme
 Plug 'eddyekofo94/gruvbox-flat.nvim'
