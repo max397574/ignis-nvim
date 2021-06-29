@@ -804,6 +804,8 @@ let ErrorMsg='Duplicate edit session (readonly)'
 
 "{{{============================================================== Mappings
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Mappings
+"write file
+nnoremap <leader>w :w<CR>
 "make markdown headings out of current line
 nnoremap <silent> <leader>mdh1 :call MdHeading1()<CR>
 nnoremap <silent> <leader>mdh2 :call MdHeading2()<CR>
