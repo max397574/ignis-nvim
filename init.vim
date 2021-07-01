@@ -770,7 +770,7 @@ augroup filetypes
     autocmd BufNewFile,BufRead,BufWinEnter *.md set conceallevel=0
     "class with filename and class main
     autocmd BufNewFile *.java
-      \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>2G"
+      \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>"
 
 augroup END
 "2}}}
