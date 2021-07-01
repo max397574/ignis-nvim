@@ -843,6 +843,9 @@ xnoremap <C-V> v
 "swap , and ; because , is used much more often
 nnoremap , ;
 nnoremap ; ,
+xnoremap , ;
+xnoremap ; ,
+
 "use delete to delete visual selected text
 xnoremap <BS> x
 "open help files
