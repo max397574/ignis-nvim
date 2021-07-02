@@ -262,7 +262,7 @@ EOF
 
 "{{{.............................................................. MarkdownPreview
 let vim_markdown_preview_toggle=1
-let vim_markdown_preview_hotkey='<leader>mp'
+let vim_markdown_preview_hotkey='<leader>mdpw'
 let vim_markdown_preview_github=0
 "2}}}
 
@@ -377,7 +377,10 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 "2}}}
 
 "{{{.............................................................. TreeSitter
-
+"{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  LocalParser
+lua <<EOF
+EOF
+"3}}}
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
     ensure_installed = 'maintained',
