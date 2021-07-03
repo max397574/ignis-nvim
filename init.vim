@@ -7,7 +7,7 @@
 "| $$| $$  | $$| $$  | $$ /$$  \  $$$/  | $$| $$ | $$ | $$
 "| $$| $$  | $$| $$  |  $$$$//$$\  $/   | $$| $$ | $$ | $$
 "|__/|__/  |__/|__/   \___/ |__/ \_/    |__/|__/ |__/ |__/
-"use :foldmethod=marker in vim
+"use :set foldmethod=marker in vim
 
 "{{{============================================================== Sets
 
@@ -204,8 +204,10 @@ call plug#end()
 "{{{============================================================== Plugin Settings
 
 "{{{.............................................................. Which Key
+
+"{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Settings
 lua << EOF
-  require("which-key").setup {
+require("which-key").setup {
     {
       plugins = {
         marks = true, -- shows a list of your marks on ' and `
@@ -268,6 +270,59 @@ lua << EOF
     }
   }
 EOF
+"3}}}
+
+"{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Key labels
+
+"{{{Normal Mode
+lua << EOF
+local wk = require("which-key")
+wk.register({
+--{{{Markdown
+  md = {
+    name = "markdown",
+    h = {
+      name = "headings",
+      ["1"] = { "Heading 1" },
+      ["2"] = { "Heading 2" },
+      ["3"] = { "Heading 3" },
+    },
+    pw = { "preview in browser" },
+  },
+--5}}}
+  hp = { "Help Files" },
+  d = { "Move Current line down" },
+  u = { "Move Current line up" },
+  tb = { "Toggle Tagbar" },
+  o = { "Add empty line below" },
+  O = { "Add empty line above" },
+  df = { "Write distraction free" },
+  w = { "Write current file" },
+  ['"'] = { "Surround inner word with quotes" },
+  t = { "Toggle floating terminal" },
+  ev = { "Edit init.vim in split" },
+  }, { prefix = "<leader>", mode = "n" })
+EOF
+"4}}}
+
+"{{{Visual Mode
+lua << EOF
+local wk = require("which-key")
+wk.register({
+--{{{Markdown
+  md = {
+    name = "markdown",
+    it = { "italic" },
+    bd = { "bold" },
+    },
+--5}}}
+
+}, { prefix = "<leader>", mode = "v" })
+EOF
+"4}}}
+
+"3}}}
+
 "2}}}
 
 "{{{.............................................................. MarkdownPreview
@@ -936,7 +991,7 @@ highlight    IncSearch    ctermfg=White  ctermbg=grey   cterm=bold
 
 set background=dark
 
-colorscheme gruvbox
+colorscheme gruvbox-flat
 
 highlight Folded term=bold cterm=italic ctermfg=white gui=italic guifg=white
 
