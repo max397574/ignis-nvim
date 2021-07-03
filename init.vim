@@ -47,8 +47,6 @@ set undodir=~/.vim/undodir
 set undofile
 "start scrolling when cursor is 8 lines from top/bottom
 set scrolloff=8
-set list
-set listchars+=tab:>-,lead:.,trail:.
 
 
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .Folding
@@ -457,10 +455,17 @@ require'nvim-treesitter.configs'.setup {
         custom_captures = {
         -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
         --["foo.bar"] = "Identifier",
-          --["variable"] = "function",
-	  --["keyword.operator"] ="conditional"
+          ["variable"] = "GruvboxYellow",
+          ["keyword.operator"] = "DevIconPdf",
+	  ["conditional"] = "DevIconPdf",
+          ["number"] = "DevIconJsx",
+          ["float"] = "DevIconJsx",
+          ["operator"] = "DevIconPy",
+          ["keyword"] = "ItalicRed",
+	  ["string"] = "DevIconXls"
         },
     },
+-- so $VIMRUNTIME/syntax/hitest.vim to see colors
 --3}}}
 --{{{Refactor
     refactor = {
@@ -982,6 +987,7 @@ nnoremap <left> <nop>
 
 "{{{============================================================== Highlights
 
+colorscheme gruvbox
 "line number where cursor is has different color
 highlight CursorLineNr term=bold ctermfg=11 gui=bold guifg=Yellow
 
@@ -992,8 +998,8 @@ highlight    IncSearch    ctermfg=White  ctermbg=grey   cterm=bold
 
 set background=dark
 
-colorscheme gruvbox
 
+highlight ItalicRed term=italic ctermfg=12 gui=italic guifg=#b30b00
 highlight Folded term=bold cterm=italic ctermfg=white gui=italic guifg=white
 
 "transparent background
