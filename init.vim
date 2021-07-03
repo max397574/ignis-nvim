@@ -7,6 +7,7 @@
 "| $$| $$  | $$| $$  | $$ /$$  \  $$$/  | $$| $$ | $$ | $$
 "| $$| $$  | $$| $$  |  $$$$//$$\  $/   | $$| $$ | $$ | $$
 "|__/|__/  |__/|__/   \___/ |__/ \_/    |__/|__/ |__/ |__/
+"use :foldmethod=marker in vim
 
 "{{{============================================================== Sets
 
@@ -82,6 +83,12 @@ endfor
 "{{{============================================================== Plugins
 
 call plug#begin('~/.vim/plugged')
+"a colorscheme
+Plug 'monsonjeremy/onedark.nvim'
+"generate colorschemes
+Plug 'tjdevries/colorbuddy.vim'
+"gruvbox for nvim
+Plug 'tjdevries/gruvbuddy.nvim'
 "a colorscheme
 Plug 'rktjmp/lush.nvim'
 Plug 'npxbr/gruvbox.nvim'
@@ -391,10 +398,12 @@ require'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true,
         --disable = { "c", "rust" },  -- list of language that will be disabled
-        --custom_captures = {
+        custom_captures = {
         -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
         --["foo.bar"] = "Identifier",
-        --},
+          --["variable"] = "function",
+	  --["keyword.operator"] ="conditional"
+        },
     },
 --3}}}
 --{{{Refactor
@@ -572,7 +581,7 @@ EOF
 
 lua << EOF
 require('telescope').setup{
-  defaults = {
+  config = {
     vimgrep_arguments = {
       'rg',
       '--color=never',
@@ -760,6 +769,11 @@ nmap <leader>sW ysiW
 "around inner w
 nmap <leader>sw ysiw
 "2}}}
+
+"{{{.............................................................. Tokyonight
+
+let tokyonight_style="storm"
+"2}}}
 "1}}}
 
 "{{{============================================================== Autocommands
@@ -911,7 +925,6 @@ nnoremap <left> <nop>
 "}}}
 
 "{{{============================================================== Highlights
-
 
 "line number where cursor is has different color
 highlight CursorLineNr term=bold ctermfg=11 gui=bold guifg=Yellow
