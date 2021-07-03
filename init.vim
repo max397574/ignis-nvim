@@ -66,6 +66,7 @@ endfunction
 "use the text of the function above
 set foldtext=MyFoldText()
 "2}}}
+
 "}}}
 
 "{{{============================================================== Source
@@ -835,6 +836,7 @@ nmap <leader>sw ysiw
 
 let tokyonight_style="storm"
 "2}}}
+
 "1}}}
 
 "{{{============================================================== Autocommands
