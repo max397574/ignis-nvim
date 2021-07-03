@@ -7,6 +7,7 @@
 "| $$| $$  | $$| $$  | $$ /$$  \  $$$/  | $$| $$ | $$ | $$
 "| $$| $$  | $$| $$  |  $$$$//$$\  $/   | $$| $$ | $$ | $$
 "|__/|__/  |__/|__/   \___/ |__/ \_/    |__/|__/ |__/ |__/
+
 "use :set foldmethod=marker in vim
 
 "{{{============================================================== Sets
@@ -991,7 +992,7 @@ highlight    IncSearch    ctermfg=White  ctermbg=grey   cterm=bold
 
 set background=dark
 
-colorscheme gruvbox-flat
+colorscheme gruvbox
 
 highlight Folded term=bold cterm=italic ctermfg=white gui=italic guifg=white
 
