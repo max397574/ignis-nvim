@@ -12,13 +12,15 @@
 
 "{{{============================================================== Sets
 
+"{{{.............................................................. General
+"use space as <leader> key
 let mapleader = ' '
 filetype plugin on
 filetype plugin indent on
 set conceallevel=0
+"height of the commandline
 set cmdheight=2
 set termguicolors
-"highlight characters in the 80th column
 "don't wrap lines when they are longer than screenwidth
 set nowrap
 set softtabstop=4
@@ -47,9 +49,9 @@ set undodir=~/.vim/undodir
 set undofile
 "start scrolling when cursor is 8 lines from top/bottom
 set scrolloff=8
+"2}}}
 
-
-"{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .Folding
+"{{{.............................................................. Folding
 
 "use TreeSitter for folding
 set foldmethod=expr
@@ -858,8 +860,8 @@ augroup filetypes
 augroup END
 "2}}}
 
-"{{{.............................................................. Activate
-augroup Activate
+"{{{.............................................................. TabCompletition
+augroup tab_completition
     autocmd!
     "use <Tab> to go through list of completitions
     au VimEnter * inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -888,6 +890,7 @@ augroup END
 "}}}
 
 "{{{============================================================== Mappings
+
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Mappings
 "write file
 nnoremap <leader>w :w<CR>
@@ -985,6 +988,7 @@ inoremap <esc> <nop>
 nnoremap <right> <nop>
 nnoremap <left> <nop>
 "2}}}
+
 "}}}
 
 "{{{============================================================== Highlights
