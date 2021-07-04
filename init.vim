@@ -78,6 +78,7 @@ source ~/.config/nvim/plugin_settings/which_key.vim
 source ~/.config/nvim/plugin_settings/markdown_preview.vim
 source ~/.config/nvim/plugin_settings/tablemode.vim
 source ~/.config/nvim/plugin_settings/goyo.vim
+source ~/.config/nvim/plugin_settings/lvim_helper.vim
 let s:prefix = '~/.config/nvim/plugins'
 
 for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
@@ -402,48 +403,6 @@ require'nvim-treesitter.configs'.setup {
     }
 --3}}}
 }
-EOF
-"2}}}
-
-"{{{.............................................................. lvim-helper
-
-
-lua <<EOF
-local home = os.getenv('HOME')
-require('lvim-helper').setup({
-    files = {
-	home .. "/.config/nvim/vimhelp/treesitter.md",
-	home .. "/.config/nvim/vimhelp/vim_cheat_sheet_cursor_movement.md",
-	home .. "/.config/nvim/vimhelp/personal_mappings.md",
-
-    },
-    width = 80,
-    side = 'right',
-    current_file = 1,
-    winopts = {
-        relativenumber = false,
-        number = false,
-        list = false,
-        winfixwidth = true,
-        winfixheight = true,
-        foldenable = false,
-        spell = false,
-        signcolumn = 'no',
-        foldmethod = 'manual',
-        foldcolumn = '0',
-        cursorcolumn = false,
-        colorcolumn = '0',
-        wrap = false,
-        winhl = table.concat({'Normal:LvimHelperNormal'}, ',')
-    },
-    bufopts = {
-        swapfile = false,
-        buftype = 'nofile',
-        modifiable = false,
-        filetype = 'LvimHelper',
-        bufhidden = 'hide'
-    }
-})
 EOF
 "2}}}
 
