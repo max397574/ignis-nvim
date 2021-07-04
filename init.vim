@@ -157,7 +157,6 @@ Plug 'mhinz/vim-signify'
 "the icons for nerdtree
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-            \ Plug 'ryanoasis/vim-devicons'
 "a file explorer
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "fzf vim integration
