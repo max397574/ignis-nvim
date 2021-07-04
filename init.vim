@@ -466,7 +466,6 @@ require'nvim-treesitter.configs'.setup {
           ["operator"] = "DevIconPy",
           ["keyword"] = "ItalicRed",
 	  ["string"] = "DevIconXls",
-	  ["boolean"] = "DevIconGvimrc"
         },
     },
 -- so $VIMRUNTIME/syntax/hitest.vim to see colors
