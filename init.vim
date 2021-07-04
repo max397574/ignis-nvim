@@ -76,6 +76,8 @@ set foldtext=MyFoldText()
 source ~/.config/nvim/spelling.vim
 source ~/.config/nvim/plugin_settings/which_key.vim
 source ~/.config/nvim/plugin_settings/markdown_preview.vim
+source ~/.config/nvim/plugin_settings/tablemode.vim
+source ~/.config/nvim/plugin_settings/goyo.vim
 let s:prefix = '~/.config/nvim/plugins'
 
 for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
@@ -206,19 +208,6 @@ call plug#end()
 
 "{{{============================================================== Plugin Settings
 
-"{{{.............................................................. LSPConfig
-
-"lua << EOF
-"require'lspconfig'.pyright.setup{}
-"require'lspinstall'.setup() -- important
-
-"local servers = require'lspinstall'.installed_servers()
-"for _, server in pairs(servers) do
-  "require'lspconfig'[server].setup{}
-"end
-"EOF
-"2}}}
-
 "{{{.............................................................. Dashboard
 
 let g:dashboard_default_executive ='telescope'
@@ -231,32 +220,6 @@ let g:dashboard_custom_shortcut={
 \ 'find_word'          : 'SPC f a',
 \ 'book_marks'         : 'SPC f b',
 \ }
-"2}}}
-
-"{{{.............................................................. TableMode
-let g:table_mode_corner='|'
-inoremap <leader>tm <ESC>:TableModeToggle<CR>i
-function! s:isAtStartOfLine(mapping)
-  let text_before_cursor = getline('.')[0 : col('.')-1]
-  let mapping_pattern = '\V' . escape(a:mapping, '\')
-  let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
-  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
-endfunction
-
-inoreabbrev <expr> <bar><bar>
-          \ <SID>isAtStartOfLine('\|\|') ?
-          \ '<c-o>:TableModeEnable<CR><bar><space><bar><left><left>' : '<bar><bar>'
-inoreabbrev <expr> __
-          \ <SID>isAtStartOfLine('__') ?
-          \ '<c-o>:silent! TableModeDisable<CR>' : '__'
-"2}}}
-
-"{{{.............................................................. Trouble.nvim
-
-"lua << EOF
-  "require("trouble").setup {
-  "}
-"EOF
 "2}}}
 
 "{{{.............................................................. Limelight
@@ -284,36 +247,6 @@ let g:limelight_eop = '\ze\n^\s'
 " Highlighting priority (default: 10)
 "   Set it to -1 not to overrule hlsearch
 let g:limelight_priority = -1
-"2}}}
-
-"{{{.............................................................. Goyo
-
-function! s:goyo_enter()
-  if executable('tmux') && strlen($TMUX)
-    silent !tmux set status off
-    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  endif
-  set noshowmode
-  set noshowcmd
-  set scrolloff=999
-  Limelight
-  " ...
-endfunction
-
-function! s:goyo_leave()
-  if executable('tmux') && strlen($TMUX)
-    silent !tmux set status on
-    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  endif
-  set showmode
-  set showcmd
-  set scrolloff=5
-  Limelight!
-  " ...
-endfunction
-
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
 "2}}}
 
 "{{{.............................................................. TreeSitter
@@ -841,7 +774,7 @@ nnoremap <leader>o :call AddLineBelow()<CR>
 inoremap <c-u> <ESC> :call ConvertWordUppercase()<CR>i
 nnoremap <c-u> :call ConvertWordUppercase()<CR>
 "source init.vim
-nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>sv :source ~/.config/nvim/init.vim<CR>
 "toggle the tagbar
 nnoremap <Leader>tb :TagbarToggle<CR>
 "toggle the nerdtree
