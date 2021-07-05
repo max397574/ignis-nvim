@@ -82,9 +82,9 @@ wk.register({
     pw = { "preview in browser" },
     a = { "add a link" },
     l = {
-	name = "list"
-	o = { "unordered list" },
-	u = { "ordered list" },
+	name = "list",
+	u = { "unordered list" },
+	o = { "ordered list" },
     },
   },
   hp = { "Help Files" },
