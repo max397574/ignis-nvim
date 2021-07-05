@@ -665,6 +665,8 @@ nnoremap <silent> <leader>mdh3 :call MdHeading3()<CR>
 nnoremap <silent> <leader>mda :call MdLink()<CR>
 nnoremap <silent> <leader>mdlu :call MdUnorderedList()<CR>
 nnoremap <silent> <leader>mdlo :call MdOrderedList()<CR>
+inoremap <silent> <leader>mdlu <ESC>:call MdUnorderedList()<CR>
+inoremap <silent> <leader>mdlo <ESC>:call MdOrderedList()<CR>
 "make visual selection italic in markdown
 vnoremap <leader>mdit :call VisualItalic()<CR>
 "make visual selection bold in markdown
