@@ -86,6 +86,7 @@ wk.register({
 	name = "list",
 	u = { "unordered list" },
 	o = { "ordered list" },
+	t = { "task list" },
     },
   },
   hp = { "Help Files" },

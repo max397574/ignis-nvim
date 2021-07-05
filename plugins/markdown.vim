@@ -45,6 +45,11 @@ function! MdOrderedList()
     normal! o3. List Item
 endfunction
 
+function! MdTaskList()
+    normal! 3o- [ ] Task
+    normal! 2k
+endfunction
+
 function! MdHorizontalRule()
     normal! o---
     normal! j
