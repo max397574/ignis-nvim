@@ -81,6 +81,7 @@ wk.register({
     },
     pw = { "preview in browser" },
     a = { "add a link" },
+    hr = { "add horizontal rule" },
     l = {
 	name = "list",
 	u = { "unordered list" },

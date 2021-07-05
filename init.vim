@@ -663,6 +663,8 @@ nnoremap <silent> <leader>mdh1 :call MdHeading1()<CR>
 nnoremap <silent> <leader>mdh2 :call MdHeading2()<CR>
 nnoremap <silent> <leader>mdh3 :call MdHeading3()<CR>
 nnoremap <silent> <leader>mda :call MdLink()<CR>
+nnoremap <silent> <leader>mdhr :call MdHorizontalRule()<CR>
+inoremap <silent> <leader>mdhr <ESC>:call MdHorizontalRule()<CR>
 nnoremap <silent> <leader>mdlu :call MdUnorderedList()<CR>
 nnoremap <silent> <leader>mdlo :call MdOrderedList()<CR>
 inoremap <silent> <leader>mdlu <ESC>:call MdUnorderedList()<CR>

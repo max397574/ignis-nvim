@@ -44,3 +44,8 @@ function! MdOrderedList()
     normal! o2. List Item
     normal! o3. List Item
 endfunction
+
+function! MdHorizontalRule()
+    normal! o---
+    normal! j
+endfunction
