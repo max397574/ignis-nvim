@@ -281,10 +281,12 @@ let g:limelight_priority = -1
 "2}}}
 
 "{{{.............................................................. TreeSitter
+
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  LocalParser
 lua <<EOF
 EOF
 "3}}}
+
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
     ensure_installed = 'maintained',
