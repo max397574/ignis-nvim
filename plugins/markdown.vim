@@ -27,3 +27,9 @@ function! VisualBold()
     normal! i**
     normal! `m
 endfunction
+
+function! Link()
+    normal! i[text](link)
+    normal! 7h
+    normal! viw
+endfunction
