@@ -197,6 +197,13 @@ Plug 'lvim-tech/lvim-helper'
 "distraction free writing
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
+
+"nvim lsp
+Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
+Plug 'folke/lsp-colors.nvim'
+Plug 'folke/trouble.nvim'
+
 ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  TreeSitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
@@ -205,6 +212,30 @@ Plug 'nvim-treesitter/playground'
 
 call plug#end()
 "}}}
+
+lua << EOF
+require("lsp-colors").setup({
+  Error = "#db4b4b",
+  Warning = "#e0af68",
+  Information = "#0db9d7",
+  Hint = "#10B981"
+})
+EOF
+lua << EOF
+require'lspconfig'.pyright.setup{
+  flags = {
+    debounce_text_changes = 500,
+  }
+}
+EOF
+lua << EOF
+require'lspinstall'.setup() -- important
+
+local servers = require'lspinstall'.installed_servers()
+for _, server in pairs(servers) do
+  require'lspconfig'[server].setup{}
+end
+EOF
 
 "{{{============================================================== Plugin Settings
 
@@ -658,6 +689,8 @@ augroup END
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Mappings
 "write file
 nnoremap <leader>w :w<CR>
+"toggle trouble for lsp diagnostics
+nnoremap <leader>xx :TroubleToggle<CR>
 "make markdown headings out of current line
 nnoremap <silent> <leader>mdh1 :call MdHeading1()<CR>
 nnoremap <silent> <leader>mdh2 :call MdHeading2()<CR>
