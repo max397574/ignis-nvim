@@ -80,6 +80,7 @@ wk.register({
       ["3"] = { "Heading 3" },
     },
     pw = { "preview in browser" },
+    ln = { "add a link" },
   },
   hp = { "Help Files" },
   d = { "Move Current line down" },
