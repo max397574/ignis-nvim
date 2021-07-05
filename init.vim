@@ -90,6 +90,8 @@ endfor
 "{{{============================================================== Plugins
 
 call plug#begin('~/.vim/plugged')
+
+"{{{Colorschemes
 "a colorscheme
 Plug 'monsonjeremy/onedark.nvim'
 "generate colorschemes
@@ -98,6 +100,7 @@ Plug 'tjdevries/colorbuddy.vim'
 Plug 'tjdevries/gruvbuddy.nvim'
 "a colorscheme
 Plug 'rktjmp/lush.nvim'
+"a colorscheme
 Plug 'npxbr/gruvbox.nvim'
 "a colorscheme
 Plug 'savq/melange'
@@ -107,6 +110,8 @@ Plug 'morhetz/gruvbox'
 Plug 'eddyekofo94/gruvbox-flat.nvim'
 "a colorscheme
 Plug 'folke/tokyonight.nvim'
+"2}}}
+
 "motion like f and t but with 2 letters
 Plug 'justinmk/vim-sneak'
 "preview markdown in browser
@@ -127,10 +132,6 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'voldikss/vim-floaterm'
 "vertical lines at indents
 Plug 'Yggdroot/indentLine'
-"easier configuration for nvim-lsp
-"Plug 'neovim/nvim-lspconfig'
-"easy add new LS for nvim-lsp
-"Plug 'kabouzeid/nvim-lspinstall'
 "A startup screen
 Plug 'glepnir/dashboard-nvim'
 "snippets
@@ -185,8 +186,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-sources'
 "more icons
 Plug 'ryanoasis/vim-devicons'
-"better colors for lsp
-"Plug 'folke/lsp-colors.nvim'
 "even more icons
 Plug 'kyazdani42/nvim-web-devicons'
 "test code from inside nvim
@@ -663,6 +662,9 @@ nnoremap <leader>w :w<CR>
 nnoremap <silent> <leader>mdh1 :call MdHeading1()<CR>
 nnoremap <silent> <leader>mdh2 :call MdHeading2()<CR>
 nnoremap <silent> <leader>mdh3 :call MdHeading3()<CR>
+nnoremap <silent> <leader>mda :call MdLink()<CR>
+nnoremap <silent> <leader>mdlu :call MdUnorderedList()<CR>
+nnoremap <silent> <leader>mdlo :call MdOrderedList()<CR>
 "make visual selection italic in markdown
 vnoremap <leader>mdit :call VisualItalic()<CR>
 "make visual selection bold in markdown
