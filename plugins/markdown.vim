@@ -41,6 +41,6 @@ endfunction
 
 function! MdOrderedList()
     normal! i1. List Item
-    normal! i2. List Item
-    normal! i3. List Item
+    normal! o2. List Item
+    normal! o3. List Item
 endfunction
