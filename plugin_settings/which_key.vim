@@ -80,7 +80,12 @@ wk.register({
       ["3"] = { "Heading 3" },
     },
     pw = { "preview in browser" },
-    ln = { "add a link" },
+    a = { "add a link" },
+    l = {
+	name = "list"
+	o = { "unordered list" },
+	u = { "ordered list" },
+    },
   },
   hp = { "Help Files" },
   d = { "Move Current line down" },
