@@ -35,7 +35,7 @@ function! MdLink()
 endfunction
 
 function! MdUnorderedList()
-    normal! 3oList Item
+    normal! 3o* List Item
     normal! 2k
 endfunction
 
