@@ -28,8 +28,19 @@ function! VisualBold()
     normal! `m
 endfunction
 
-function! Link()
+function! MdLink()
     normal! i[text](link)
     normal! 7h
     normal! viw
+endfunction
+
+function! MdUnorderedList()
+    normal! 3oList Item
+    normal! 2k
+endfunction
+
+function! MdOrderedList()
+    normal! i1. List Item
+    normal! i2. List Item
+    normal! i3. List Item
 endfunction
