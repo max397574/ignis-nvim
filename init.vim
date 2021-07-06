@@ -284,6 +284,13 @@ let g:limelight_priority = -1
 
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  LocalParser
 lua <<EOF
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.vim = {
+  install_info = {
+    url = "~/tree-sitter-viml", -- local path or git repo
+    files = {"src/parser.c", "src/scanner.c"}
+  },
+}
 EOF
 "3}}}
 
