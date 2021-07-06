@@ -677,7 +677,7 @@ augroup END
 "write file
 nnoremap <leader>w :w<CR>
 "toggle trouble for lsp diagnostics
-nnoremap <leader>xx :TroubleToggle<CR>
+nnoremap <silent> <leader>xx :TroubleToggle<CR>
 "make markdown headings out of current line
 nnoremap <silent> <leader>mdh1 :call MdHeading1()<CR>
 nnoremap <silent> <leader>mdh2 :call MdHeading2()<CR>
@@ -800,6 +800,7 @@ set background=dark
 
 highlight ItalicRed term=italic ctermfg=12 gui=italic guifg=#b30b00
 highlight Folded term=bold cterm=italic ctermfg=white gui=italic guifg=white
+highlight Folded guibg=none ctermbg=none
 
 "transparent background
 highlight  Normal   guibg=none
