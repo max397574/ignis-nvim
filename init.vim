@@ -51,6 +51,37 @@ set undofile
 set scrolloff=8
 "2}}}
 
+"{{{.............................................................. Statusline
+let g:currentmode={
+       \ 'n'  : 'NORMAL ',
+       \ 'v'  : 'VISUAL ',
+       \ 'V'  : 'V·Line ',
+       \ "\<C-V>" : 'V·Block ',
+       \ 'i'  : 'INSERT ',
+       \ 'R'  : 'R ',
+       \ 'Rv' : 'V·Replace ',
+       \ 'c'  : 'Command ',
+       \}
+
+set statusline=
+set statusline+=\ \ 
+set statusline+=%F
+set statusline+=\ -\ 
+set statusline+=%r
+set statusline+=%y
+set statusline+=\ -\ 
+set statusline+=%m
+set statusline+=%=
+set statusline+=%4l
+set statusline+=,
+set statusline+=%c
+set statusline+=\ -\ 
+set statusline+=%p
+set statusline+=%%
+set statusline+=\ \ \ \ 
+
+"2}}}
+
 "{{{.............................................................. Folding
 
 "use TreeSitter for folding
@@ -99,10 +130,6 @@ Plug 'tjdevries/colorbuddy.vim'
 "gruvbox for nvim
 Plug 'tjdevries/gruvbuddy.nvim'
 "a colorscheme
-Plug 'rktjmp/lush.nvim'
-"a colorscheme
-Plug 'npxbr/gruvbox.nvim'
-"a colorscheme
 Plug 'savq/melange'
 "a colorscheme
 Plug 'morhetz/gruvbox'
@@ -111,6 +138,8 @@ Plug 'eddyekofo94/gruvbox-flat.nvim'
 "a colorscheme
 Plug 'folke/tokyonight.nvim'
 "2}}}
+
+Plug 'tweekmonster/startuptime.vim'
 
 "motion like f and t but with 2 letters
 Plug 'justinmk/vim-sneak'
@@ -148,8 +177,6 @@ Plug 'drxcc/vim-vmath'
 Plug 'yamatsum/nvim-cursorline'
 "easily comment out code
 Plug 'preservim/nerdcommenter'
-"Easily test code
-Plug 'vim-test/vim-test'
 "display structure of file (variables,functions etc)
 Plug 'preservim/tagbar'
 "game to practice movements
