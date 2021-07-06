@@ -692,9 +692,9 @@ inoremap <silent> <leader>mdlo <ESC>:call MdOrderedList()<CR>
 nnoremap <silent> <leader>mdlt :call MdTaskList()<CR>
 inoremap <silent> <leader>mdlt <ESC>:call MdTaskList()<CR>
 "make visual selection italic in markdown
-vnoremap <leader>mdit :call VisualItalic()<CR>
+vnoremap <silent> <leader>mdit :call VisualItalic()<CR>
 "make visual selection bold in markdown
-vnoremap <leader>mdbd :call VisualBold()<CR>
+vnoremap <silent> <leader>mdbd :call VisualBold()<CR>
 "move line to top of a list
 nnoremap <silent> <leader>mt :call MoveLineToTopOfList()<CR>
 "fix last spelling error
@@ -707,8 +707,8 @@ nnoremap <silent> N   N:call HLNext(0.4)<CR>
 "better digraphs
 inoremap <expr>  <C-K>   BDG_GetDigraph()
 "toggle lists (comma separated, bullet)
-nmap <leader>tl  :call ListTrans_toggle_format()<CR>nh
-vmap <leader>tl  :call ListTrans_toggle_format('visual')<CR>nh
+nmap <silent> <leader>tl  :call ListTrans_toggle_format()<CR>nh
+vmap <silent> <leader>tl  :call ListTrans_toggle_format('visual')<CR>nh
 "remove highlights after a search
 nnoremap <silent> nh :nohlsearch<CR>
 inoremap jj <ESC>
@@ -728,19 +728,19 @@ xnoremap ; ,
 "use delete to delete visual selected text
 xnoremap <BS> x
 "open help files
-nnoremap <leader>hp :LvimHelper<CR>
+nnoremap <silent> <leader>hp :LvimHelper<CR>
 
 "move line one line down
-nnoremap <leader>d :call MoveLineDown()<CR>
+nnoremap <silent> <leader>d :call MoveLineDown()<CR>
 "move line one line up
-nnoremap <leader>u :call MoveLineUp()<CR>
+nnoremap <silent> <leader>u :call MoveLineUp()<CR>
 "delete line in insert mode
-inoremap <leader>dd <ESC>ddi
+inoremap <silent> <leader>dd <ESC>ddi
 "surround inner word with double quotes
-nnoremap <leader>" :call Surrondiwquotes()<CR>
+nnoremap <silent> <leader>" :call Surrondiwquotes()<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 "toggle the undotree
-nnoremap <Leader>ut :UndotreeToggle<CR>
+nnoremap <silent> <Leader>ut :UndotreeToggle<CR>
 "paste over the current line with <C-P> in normal mode
 nnoremap  <C-P> 0d$"*p
 "paste over the visual selected block with <C-P> in visual mode
@@ -755,11 +755,11 @@ nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 xnoremap <S-TAB> :s/\%V/0<C-V><TAB>/<CR>gvg<C-A>gv:retab<ESC>gvI<C-G>u<ESC>gv/ <CR>:s/\%V /./<CR>
 "use leader with o/O to insert empty lines below/above
 "remove potential command indicators
-nnoremap <leader>O :call AddLineAbove()<CR>
-nnoremap <leader>o :call AddLineBelow()<CR>
+nnoremap <silent> <leader>O :call AddLineAbove()<CR>
+nnoremap <silent> <leader>o :call AddLineBelow()<CR>
 "convert current word to uppercase
-inoremap <c-u> <ESC> :call ConvertWordUppercase()<CR>i
-nnoremap <c-u> :call ConvertWordUppercase()<CR>
+inoremap <silent> <c-u> <ESC> :call ConvertWordUppercase()<CR>i
+nnoremap <silent> <c-u> :call ConvertWordUppercase()<CR>
 "source init.vim
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<CR>
 "toggle the tagbar
@@ -769,7 +769,7 @@ nnoremap <Leader>nt :NERDTreeToggle<CR>
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 "DistractionFree writing
-nnoremap <leader>df :Goyo<CR>
+nnoremap <silent> <leader>df :Goyo<CR>
 "use vmath
 vmap <expr>  ++  VMATH_YankAndAnalyse()
 nmap         ++  vip++
