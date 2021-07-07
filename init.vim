@@ -279,7 +279,8 @@ local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.vim = {
   install_info = {
     url = "~/tree-sitter-viml", -- local path or git repo
-    files = {"src/parser.c", "src/scanner.c"}
+    files = {"src/parser.c", "src/scanner.c"},
+    filetype = "vim",
   },
 }
 EOF
@@ -302,7 +303,7 @@ require'nvim-treesitter.configs'.setup {
           ["float"] = "DevIconJsx",
           ["operator"] = "DevIconPy",
           ["keyword"] = "ItalicRed",
-	  ["string"] = "DevIconXls",
+          ["string"] = "DevIconXls",
         },
     },
 -- so $VIMRUNTIME/syntax/hitest.vim to see colors
