@@ -20,6 +20,8 @@ function! s:goyo_leave()
   set showcmd
   set scrolloff=5
   highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
+  highlight Folded term=bold cterm=italic ctermfg=white gui=italic guifg=white
+  highlight Folded guibg=none ctermbg=none
   Limelight!
   " ...
 endfunction
