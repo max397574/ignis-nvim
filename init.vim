@@ -82,6 +82,7 @@ source ~/.config/nvim/plugin_settings/lvim_helper.vim
 source ~/.config/nvim/plugin_settings/lsp.vim
 source ~/.config/nvim/plugin_settings/dashboard.vim
 source ~/.config/nvim/plugin_settings/limelight.vim
+source ~/.config/nvim/plugin_settings/indentline.vim
 let s:prefix = '~/.config/nvim/plugins'
 
 for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
@@ -540,12 +541,6 @@ let g:NERDToggleCheckAllLines = 1
 imap <leader>cc <ESC><leader>cc
 "2}}}
 
-"{{{.............................................................. IndentLine
-
-let g:indentLine_setColors = 0
-let g:indentLine_char = '⎸'
-"2}}}
-
 "{{{.............................................................. Vim-Sourround
 
 "mapping to add surrounding with vim-surround
@@ -553,11 +548,6 @@ let g:indentLine_char = '⎸'
 nmap <leader>sW ysiW
 "around inner w
 nmap <leader>sw ysiw
-"2}}}
-
-"{{{.............................................................. Tokyonight
-
-let tokyonight_style="storm"
 "2}}}
 
 "1}}}
