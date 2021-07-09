@@ -2,6 +2,8 @@
 call plug#begin('~/.vim/plugged')
 Plug 'folke/which-key.nvim'
 call plug#end()
+
+
 lua << EOF
 require("which-key").setup {
     {
@@ -65,10 +67,8 @@ require("which-key").setup {
       },
     }
   }
-EOF
 
 
-lua << EOF
 local wk = require("which-key")
 wk.register({
   md = {
@@ -101,8 +101,7 @@ wk.register({
   t = { "Toggle floating terminal" },
   ev = { "Edit init.vim in split" },
   }, { prefix = "<leader>", mode = "n" })
-EOF
-lua << EOF
+
 local wk = require("which-key")
 wk.register({
   md = {
