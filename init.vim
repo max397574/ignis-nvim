@@ -79,6 +79,7 @@ source ~/.config/nvim/plugin_settings/markdown_preview.vim
 source ~/.config/nvim/plugin_settings/tablemode.vim
 source ~/.config/nvim/plugin_settings/goyo.vim
 source ~/.config/nvim/plugin_settings/lvim_helper.vim
+source ~/.config/nvim/plugin_settings/lsp.vim
 let s:prefix = '~/.config/nvim/plugins'
 
 for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
@@ -205,30 +206,6 @@ Plug 'nvim-treesitter/playground'
 
 call plug#end()
 "}}}
-
-lua << EOF
-require("lsp-colors").setup({
-  Error = "#db4b4b",
-  Warning = "#e0af68",
-  Information = "#0db9d7",
-  Hint = "#10B981"
-})
-EOF
-lua << EOF
-require'lspconfig'.pyright.setup{
-  flags = {
-    debounce_text_changes = 500,
-  }
-}
-EOF
-lua << EOF
-require'lspinstall'.setup() -- important
-
-local servers = require'lspinstall'.installed_servers()
-for _, server in pairs(servers) do
-  require'lspconfig'[server].setup{}
-end
-EOF
 
 "{{{============================================================== Plugin Settings
 
