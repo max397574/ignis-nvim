@@ -110,6 +110,8 @@ Plug 'folke/tokyonight.nvim'
 
 Plug 'tweekmonster/startuptime.vim'
 
+"use f after f{char} to jump to next occurence
+Plug 'rhysd/clever-f.vim'
 "motion like f and t but with 2 letters
 Plug 'justinmk/vim-sneak'
 "preview markdown in browser
