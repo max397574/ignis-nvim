@@ -605,6 +605,8 @@ augroup END
 "{{{============================================================== Mappings
 
 "{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  Mappings
+"open window with fix from lsp
+nnoremap <leader>fix <CMD>lua vim.lsp.buf.code_action()<CR>
 "write file
 nnoremap <leader>w :w<CR>
 "toggle trouble for lsp diagnostics
