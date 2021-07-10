@@ -6,8 +6,9 @@ nnoremap <left> <nop>
 nnoremap <leader>fix <CMD>lua vim.lsp.buf.code_action()<CR>
 "write file
 nnoremap <leader>w :w<CR>
-"toggle trouble for lsp diagnostics
 nnoremap <silent> <leader>xx :TroubleToggle<CR>
+
+"{{{Markdown
 nnoremap <silent> <leader>mdh1 :call MdHeading1()<CR>
 nnoremap <silent> <leader>mdh2 :call MdHeading2()<CR>
 nnoremap <silent> <leader>mdh3 :call MdHeading3()<CR>
@@ -20,10 +21,10 @@ inoremap <silent> <leader>mdlu <ESC>:call MdUnorderedList()<CR>
 inoremap <silent> <leader>mdlo <ESC>:call MdOrderedList()<CR>
 nnoremap <silent> <leader>mdlt :call MdTaskList()<CR>
 inoremap <silent> <leader>mdlt <ESC>:call MdTaskList()<CR>
-"make visual selection italic in markdown
 vnoremap <silent> <leader>mdit :call VisualItalic()<CR>
-"make visual selection bold in markdown
 vnoremap <silent> <leader>mdbd :call VisualBold()<CR>
+"1}}}
+
 "move line to top of a list
 nnoremap <silent> <leader>mt :call MoveLineToTopOfList()<CR>
 "fix last spelling error
@@ -43,6 +44,7 @@ nnoremap <silent> nh :nohlsearch<CR>
 inoremap jj <ESC>
 "shortcut for a often used command
 nnoremap S  :%s///g<LEFT><LEFT><LEFT>
+"{{{Swap some keys
 "Swap commands for visual and visual block mode
 nnoremap v <C-V>
 nnoremap <C-V> v
@@ -53,6 +55,7 @@ nnoremap , ;
 nnoremap ; ,
 xnoremap , ;
 xnoremap ; ,
+"1}}}
 
 "use delete to delete visual selected text
 xnoremap <BS> x
