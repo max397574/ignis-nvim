@@ -1,10 +1,5 @@
-inoremap <esc> <nop>
-nnoremap <right> <nop>
-nnoremap <left> <nop>
-
 "open window with fix from lsp
 nnoremap <leader>fix <CMD>lua vim.lsp.buf.code_action()<CR>
-"write file
 nnoremap <leader>w :w<CR>
 nnoremap <silent> <leader>xx :TroubleToggle<CR>
 
@@ -39,11 +34,11 @@ inoremap <expr>  <C-K>   BDG_GetDigraph()
 "toggle lists (comma separated, bullet)
 nmap <silent> <leader>tl  :call ListTrans_toggle_format()<CR>nh
 vmap <silent> <leader>tl  :call ListTrans_toggle_format('visual')<CR>nh
-"remove highlights after a search
 nnoremap <silent> nh :nohlsearch<CR>
 inoremap jj <ESC>
 "shortcut for a often used command
 nnoremap S  :%s///g<LEFT><LEFT><LEFT>
+
 "{{{Swap some keys
 "Swap commands for visual and visual block mode
 nnoremap v <C-V>
@@ -57,21 +52,12 @@ xnoremap , ;
 xnoremap ; ,
 "1}}}
 
-"use delete to delete visual selected text
 xnoremap <BS> x
-"open help files
 nnoremap <silent> <leader>hp :LvimHelper<CR>
-
-"move line one line down
 nnoremap <silent> <leader>d :call MoveLineDown()<CR>
-"move line one line up
 nnoremap <silent> <leader>u :call MoveLineUp()<CR>
-"delete line in insert mode
-inoremap <silent> <leader>dd <ESC>ddi
-"surround inner word with double quotes
 nnoremap <silent> <leader>" :call Surrondiwquotes()<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-"toggle the undotree
 nnoremap <silent> <Leader>ut :UndotreeToggle<CR>
 "paste over the current line with <C-P> in normal mode
 nnoremap  <C-P> 0d$"*p
@@ -85,17 +71,15 @@ nnoremap fzf :Files<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 "Shift-Tab in visual mode to number lines (numbered list)
 xnoremap <S-TAB> :s/\%V/0<C-V><TAB>/<CR>gvg<C-A>gv:retab<ESC>gvI<C-G>u<ESC>gv/ <CR>:s/\%V /./<CR>
-"use leader with o/O to insert empty lines below/above
-"remove potential command indicators
 nnoremap <silent> <leader>O :call AddLineAbove()<CR>
 nnoremap <silent> <leader>o :call AddLineBelow()<CR>
 "convert current word to uppercase
 inoremap <silent> <c-u> <ESC> :call ConvertWordUppercase()<CR>i
 nnoremap <silent> <c-u> :call ConvertWordUppercase()<CR>
 "source init.vim
-nnoremap <leader>sv :source ~/.config/nvim/init.vim<CR>
+nnoremap <silent> <leader>sv :source ~/.config/nvim/init.vim<CR>
 "toggle the tagbar
-nnoremap <Leader>tb :TagbarToggle<CR>
+nnoremap <silent> <Leader>tb :TagbarToggle<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 "DistractionFree writing
 nnoremap <silent> <leader>df :Goyo<CR>

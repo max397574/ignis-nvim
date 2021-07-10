@@ -66,7 +66,7 @@ set foldtext=MyFoldText()
 
 "{{{============================================================== Source
 
-source ~/.config/nvim/mappings.vim
+source ~/.config/nvim/mapping.vim
 source ~/.config/nvim/spelling.vim
 source ~/.config/nvim/plugin_settings/which_key.vim
 source ~/.config/nvim/plugin_settings/markdown_preview.vim
