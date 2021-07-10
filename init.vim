@@ -453,15 +453,6 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 let g:NERDTreeGitStatusUseNerdFonts = 1
 "2}}}
 
-"{{{.............................................................. Ultest
-
-let test#python#pytest#options = "--color=yes"
-let g:ultest_icons=1
-
-let test#javascript#jest#options = "--color=always"
-let g:ultest_use_pty = 1
-"2}}}
-
 "{{{.............................................................. SnipRun
 
 nnoremap <silent> <leader>sr :SnipRun<CR>
@@ -471,7 +462,7 @@ vmap <leader>sr <Plug>SnipRun
 
 "{{{.............................................................. Emmet
 
-let g:user_emmet_leader_key='<leader>e'
+let g:user_emmet_leader_key='<leader>emmet'
 "2}}}
 
 "{{{.............................................................. VisualMulti
