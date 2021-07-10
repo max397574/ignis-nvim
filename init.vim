@@ -697,9 +697,6 @@ nnoremap <silent> <c-u> :call ConvertWordUppercase()<CR>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<CR>
 "toggle the tagbar
 nnoremap <Leader>tb :TagbarToggle<CR>
-"toggle the nerdtree
-nnoremap <Leader>nt :NERDTreeToggle<CR>
-
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 "DistractionFree writing
 nnoremap <silent> <leader>df :Goyo<CR>
