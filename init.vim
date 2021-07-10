@@ -50,7 +50,6 @@ set scrolloff=8
 "use TreeSitter for folding
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-
 "function for custom fold text
 function! MyFoldText()
     let line = getline(v:foldstart)
@@ -79,7 +78,6 @@ source ~/.config/nvim/plugin_settings/dashboard.vim
 source ~/.config/nvim/plugin_settings/limelight.vim
 source ~/.config/nvim/plugin_settings/indentline.vim
 let s:prefix = '~/.config/nvim/plugins'
-
 for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
     execute 'source' s:fname
 endfor
@@ -108,7 +106,6 @@ Plug 'folke/tokyonight.nvim'
 "2}}}
 
 Plug 'tweekmonster/startuptime.vim'
-
 "use f after f{char} to jump to next occurence
 Plug 'rhysd/clever-f.vim'
 "motion like f and t but with 2 letters
@@ -189,7 +186,6 @@ Plug 'lvim-tech/lvim-helper'
 "distraction free writing
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
-
 "nvim lsp
 Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
