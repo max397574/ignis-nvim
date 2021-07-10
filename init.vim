@@ -15,8 +15,6 @@
 "{{{.............................................................. General
 "use space as <leader> key
 let mapleader = ' '
-filetype plugin on
-filetype plugin indent on
 set conceallevel=0
 "height of the commandline
 set cmdheight=2
@@ -29,10 +27,6 @@ set updatetime=2000
 set hidden
 "time between characters of commands (ms)
 set timeoutlen=300
-"indent new line (<CR>) when current line is indented
-set autoindent
-"highlight search results
-set incsearch
 highlight clear Search
 "live preview of s command
 set inccommand=nosplit
