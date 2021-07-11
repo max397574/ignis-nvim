@@ -1,3 +1,6 @@
+nnoremap <leader>tsff <cmd>Telescope find_files<CR>
+nnoremap <leader>tsts <cmd>Telescope treesitter<CR>
+
 "open window with fix from lsp
 nnoremap <leader>fix <CMD>lua vim.lsp.buf.code_action()<CR>
 nnoremap <leader>w :w<CR>
