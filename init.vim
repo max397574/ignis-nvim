@@ -105,8 +105,6 @@ Plug 'eddyekofo94/gruvbox-flat.nvim'
 Plug 'folke/tokyonight.nvim'
 "2}}}
 
-"browse reddit from vim
-Plug 'joshhartigan/vim-reddit'
 Plug 'tweekmonster/startuptime.vim'
 "use f after f{char} to jump to next occurence
 Plug 'rhysd/clever-f.vim'
