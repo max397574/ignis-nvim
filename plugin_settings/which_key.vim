@@ -71,7 +71,7 @@ require("which-key").setup {
 
 local wk = require("which-key")
 wk.register({
-  ts {
+  ts = {
     name = "telescope",
     ff = { "Find Files" },
     ts = { "TreeSitter" },
