@@ -423,8 +423,6 @@ require('telescope').setup{
 }
 EOF
 
-"<leader>ff to use Telescope to Find Files
-nnoremap <leader>ff <cmd>Telescope find_files<CR>
 "2}}}
 
 "{{{.............................................................. NERDTree
