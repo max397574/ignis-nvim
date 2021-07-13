@@ -8,7 +8,7 @@ lua << EOF
       alpha = 0.25, -- amount of dimming
       color = { "Normal", "#ffffff" },
     },
-    context = 15, -- amount of lines we will try to show around the current line
+    context = 20, -- amount of lines we will try to show around the current line
     expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
       "function",
       "method",
