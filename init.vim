@@ -107,6 +107,8 @@ Plug 'folke/tokyonight.nvim'
 
 Plug 'tweekmonster/startuptime.vim'
 "use f after f{char} to jump to next occurence
+Plug 'folke/zen-mode.nvim'
+Plug 'folke/twilight.nvim'
 Plug 'rhysd/clever-f.vim'
 "motion like f and t but with 2 letters
 Plug 'justinmk/vim-sneak'
