@@ -1,3 +1,4 @@
+vnoremap <leader>s :s/\%V//g<LEFT><LEFT><LEFT>
 nnoremap <leader>tsff <cmd>Telescope find_files<CR>
 nnoremap <leader>tsts <cmd>Telescope treesitter<CR>
 
