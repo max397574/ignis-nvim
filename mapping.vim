@@ -68,8 +68,8 @@ nnoremap  <C-P> 0d$"*p
 "paste over the visual selected block with <C-P> in visual mode
 xnoremap  <C-P> "*pgv
 "use <leader>yy with a text object to copy to system clipboard
-nnoremap <Leader>yy "+y
-"use fzf to search files with fuzzy finder
+nnoremap <Leader>y "+y
+nnoremap <Leader>yy 0"+y$
 nnoremap fzf :Files<CR>
 "edit init.vim in split
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
