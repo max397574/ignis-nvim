@@ -85,7 +85,7 @@ nnoremap <silent> <leader>sv :source ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <Leader>tb :TagbarToggle<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 "DistractionFree writing
-nnoremap <silent> <leader>df :Goyo<CR>
+nnoremap <silent> <leader>df :ZenMode<CR>
 "use vmath
 vmap <expr>  ++  VMATH_YankAndAnalyse()
 nmap         ++  vip++
