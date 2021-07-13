@@ -7,7 +7,7 @@ function! s:goyo_enter()
   set noshowmode
   set noshowcmd
   set scrolloff=999
-  Limelight
+  Twilight
   " ...
 endfunction
 
@@ -22,7 +22,9 @@ function! s:goyo_leave()
   highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
   highlight Folded term=bold cterm=italic ctermfg=white gui=italic guifg=white
   highlight Folded guibg=none ctermbg=none
-  Limelight!
+  highlight  Normal   guibg=none
+  highlight  Normal   ctermbg=none
+  Twilight
   " ...
 endfunction
 
