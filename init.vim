@@ -77,6 +77,7 @@ source ~/.config/nvim/plugin_settings/lsp.vim
 source ~/.config/nvim/plugin_settings/dashboard.vim
 source ~/.config/nvim/plugin_settings/limelight.vim
 source ~/.config/nvim/plugin_settings/indentline.vim
+source ~/.config/nvim/plugin_settings/twilight.vim
 let s:prefix = '~/.config/nvim/plugins'
 for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
     execute 'source' s:fname
@@ -108,8 +109,8 @@ Plug 'folke/tokyonight.nvim'
 Plug 'tweekmonster/startuptime.vim'
 "use f after f{char} to jump to next occurence
 Plug 'folke/zen-mode.nvim'
-Plug 'folke/twilight.nvim'
 Plug 'rhysd/clever-f.vim'
+Plug 'folke/twilight.nvim'
 "motion like f and t but with 2 letters
 Plug 'justinmk/vim-sneak'
 "preview markdown in browser
