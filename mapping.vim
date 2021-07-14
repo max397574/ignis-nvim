@@ -89,3 +89,4 @@ nnoremap <silent> <leader>df :ZenMode<CR>
 "use vmath
 vmap <expr>  ++  VMATH_YankAndAnalyse()
 nmap         ++  vip++
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
