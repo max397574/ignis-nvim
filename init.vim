@@ -524,15 +524,6 @@ let g:NERDToggleCheckAllLines = 1
 imap <leader>cc <ESC><leader>cc
 "2}}}
 
-"{{{.............................................................. Vim-Sourround
-
-"mapping to add surrounding with vim-surround
-"around inner W
-nmap <leader>sW ysiW
-"around inner w
-nmap <leader>sw ysiw
-"2}}}
-
 "1}}}
 
 "{{{============================================================== Autocommands
