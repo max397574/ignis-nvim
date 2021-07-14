@@ -6,8 +6,6 @@ local home = os.getenv('HOME')
 require('lvim-helper').setup({
     files = {
 	home .. "/.config/nvim/vimhelp/treesitter.md",
-	home .. "/.config/nvim/vimhelp/vim_cheat_sheet_cursor_movement.md",
-	home .. "/.config/nvim/vimhelp/personal_mappings.md",
 
     },
     width = 80,
