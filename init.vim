@@ -107,6 +107,7 @@ Plug 'folke/tokyonight.nvim'
 "2}}}
 
 Plug 'tweekmonster/startuptime.vim'
+Plug 'max397574/nvim-whid'
 "use f after f{char} to jump to next occurence
 Plug 'folke/zen-mode.nvim'
 Plug 'rhysd/clever-f.vim'
@@ -523,6 +524,9 @@ imap <leader>cc <ESC><leader>cc
 "1}}}
 
 "{{{============================================================== Autocommands
+
+
+
 augroup random
     autocmd!
     au BufWinEnter *.{py,java,html,c,cpp,cs,vim} 
@@ -544,12 +548,6 @@ augroup END
 "2}}}
 
 "{{{.............................................................. TabCompletition
-augroup tab_completition
-    autocmd!
-    "use <Tab> to go through list of completitions
-    au VimEnter * inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-augroup END
-"2}}}
 
 "{{{.............................................................. HighlightYank
 augroup highlight_yank
