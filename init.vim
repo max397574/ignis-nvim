@@ -172,10 +172,6 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 "a file explorer
 Plug 'nvim-telescope/telescope.nvim'
-"completition
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"more sources for the coc completition
-Plug 'neoclide/coc-sources'
 "more icons
 Plug 'ryanoasis/vim-devicons'
 "even more icons
