@@ -1,3 +1,14 @@
+"TODO: change some of the settings
+"NOTE: this is a note
+"FIX: this needs fixing
+"WARNING: ???
+"PERF: perfect
+"HACK: this is a hack
+call plug#begin('~/.vim/plugged')
+Plug 'nvim-lua/plenary.nvim'
+Plug 'folke/todo-comments.nvim'
+call plug#end()
+
 lua << EOF
   require("todo-comments").setup {
         signs = true, -- show icons in the signs column
