@@ -489,9 +489,9 @@ let g:VM_maps['Find Under']         = '<Leader>fu'
 "{{{.............................................................. Floaterm
 
 "toggle floating Terminal
-nnoremap <silent> <Leader>t   :FloatermToggle<CR>
+nnoremap <silent> <Leader>ft   :FloatermToggle<CR>
 "toggle floating Terminal in terminal-mode
-tnoremap <silent> <Leader>t   <C-\><C-n>:FloatermToggle<CR>
+tnoremap <silent> <Leader>ft   <C-\><C-n>:FloatermToggle<CR>
 "2}}}
 
 "{{{.............................................................. Schlepp
