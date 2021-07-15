@@ -75,7 +75,6 @@ source ~/.config/nvim/plugin_settings/tablemode.vim
 source ~/.config/nvim/plugin_settings/goyo.vim
 source ~/.config/nvim/plugin_settings/lvim_helper.vim
 source ~/.config/nvim/plugin_settings/lsp.vim
-source ~/.config/nvim/plugin_settings/dashboard.vim
 source ~/.config/nvim/plugin_settings/limelight.vim
 source ~/.config/nvim/plugin_settings/indentline.vim
 source ~/.config/nvim/plugin_settings/twilight.vim
