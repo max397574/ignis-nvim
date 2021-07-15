@@ -473,13 +473,6 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 let g:NERDTreeGitStatusUseNerdFonts = 1
 "2}}}
 
-"{{{.............................................................. SnipRun
-
-nnoremap <silent> <leader>sr :SnipRun<CR>
-nnoremap <silent> <leader>sc :SnipClose<CR>
-vmap <leader>sr <Plug>SnipRun
-"2}}}
-
 "{{{.............................................................. Emmet
 
 let g:user_emmet_leader_key='<leader>emmet'
