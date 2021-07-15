@@ -107,8 +107,19 @@ wk.register({
   df = { "Write distraction free" },
   w = { "Write current file" },
   ['"'] = { "Surround inner word with quotes" },
-  t = { "Toggle floating terminal" },
   ev = { "Edit init.vim in split" },
+  t = {
+      r = {
+	  name = "Trouble",
+	  t = { "Toggle" },
+	  td = { "Todo" },
+	  l = {
+	      name = "Lsp",
+	      d = { "Diagnostics" },
+
+	      },
+	  },
+      },
   s = {
       name = "Substitue and Spelling",
       ["1"] = {"Substitue on current and next line"},
