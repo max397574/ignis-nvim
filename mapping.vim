@@ -59,16 +59,15 @@ xnoremap <BS> x
 nnoremap <silent> <leader>hp :LvimHelper<CR>
 nnoremap <silent> <leader>d :call MoveLineDown()<CR>
 nnoremap <silent> <leader>u :call MoveLineUp()<CR>
-nnoremap <silent> <leader>" :call Surrondiwquotes()<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-nnoremap <silent> <Leader>ut :UndotreeToggle<CR>
+nnoremap <silent> <leader>ut :UndotreeToggle<CR>
 "paste over the current line with <C-P> in normal mode
 nnoremap  <C-P> 0d$"*p
 "paste over the visual selected block with <C-P> in visual mode
 xnoremap  <C-P> "*pgv
 "use <leader>yy with a text object to copy to system clipboard
-nnoremap <Leader>y "+y
-nnoremap <Leader>yy 0"+y$
+nnoremap <leader>y "+y
+nnoremap <leader>yy 0"+y$
 nnoremap fzf :Files<CR>
 "edit init.vim in split
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
@@ -79,10 +78,8 @@ nnoremap <silent> <leader>o :call AddLineBelow()<CR>
 "convert current word to uppercase
 inoremap <silent> <c-u> <ESC> :call ConvertWordUppercase()<CR>i
 nnoremap <silent> <c-u> :call ConvertWordUppercase()<CR>
-"source init.vim
-nnoremap <silent> <leader>sv :source ~/.config/nvim/init.vim<CR>
 "toggle the tagbar
-nnoremap <silent> <Leader>tb :TagbarToggle<CR>
+nnoremap <silent> <leader>tb :TagbarToggle<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 "DistractionFree writing
 nnoremap <silent> <leader>df :ZenMode<CR>
