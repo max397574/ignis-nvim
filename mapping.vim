@@ -4,6 +4,7 @@ nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') 
 
 nnoremap <leader>tsff <cmd>Telescope find_files<CR>
 nnoremap <leader>tsts <cmd>Telescope treesitter<CR>
+nnoremap <leader>tsht <cmd>Telescope help_tags<CR>
 nnoremap <silent> <leader>rs :SnipRun<CR>
 nnoremap <silent> <leader>cs :SnipClose<CR>
 vmap <leader>rs <Plug>SnipRun

@@ -3,8 +3,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'folke/which-key.nvim'
 call plug#end()
 
-
 lua << EOF
+
+--{{{............................................................. Settings
 require("which-key").setup {
     {
       plugins = {
@@ -68,13 +69,16 @@ require("which-key").setup {
     }
   }
 
+--1}}}
 
+--{{{............................................................. Lables
 local wk = require("which-key")
 wk.register({
   ts = {
     name = "telescope",
     ff = { "Find Files" },
     ts = { "TreeSitter" },
+    ht = { "Help Tags" },
   },
   md = {
     name = "markdown",
@@ -130,4 +134,6 @@ wk.register({
     },
 
 }, { prefix = "<leader>", mode = "v" })
+--1}}}
+
 EOF
