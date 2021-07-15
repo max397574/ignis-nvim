@@ -78,6 +78,7 @@ source ~/.config/nvim/plugin_settings/lsp.vim
 source ~/.config/nvim/plugin_settings/limelight.vim
 source ~/.config/nvim/plugin_settings/indentline.vim
 source ~/.config/nvim/plugin_settings/twilight.vim
+source ~/.config/nvim/plugin_settings/todo-comments.vim
 let s:prefix = '~/.config/nvim/plugins'
 for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
     execute 'source' s:fname
@@ -155,6 +156,7 @@ Plug 'ThePrimeagen/vim-be-good'
 Plug 'mbbill/undotree'
 "Show git symbols in signcolumn
 Plug 'mhinz/vim-signify'
+Plug 'folke/todo-comments.nvim'
 "a file explorer
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "fzf vim integration
