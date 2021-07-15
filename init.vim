@@ -133,8 +133,6 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'voldikss/vim-floaterm'
 "vertical lines at indents
 Plug 'Yggdroot/indentLine'
-"A startup screen
-Plug 'glepnir/dashboard-nvim'
 "snippets
 Plug 'sirver/UltiSnips'
 "easily add and change surrondings
