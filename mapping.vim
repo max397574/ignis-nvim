@@ -1,3 +1,7 @@
+"add j and k with count to jumplist
+nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
+nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
+
 nnoremap <leader>tsff <cmd>Telescope find_files<CR>
 nnoremap <leader>tsts <cmd>Telescope treesitter<CR>
 nnoremap <silent> <leader>rs :SnipRun<CR>
