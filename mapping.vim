@@ -12,7 +12,9 @@ vmap <leader>rs <Plug>SnipRun
 "open window with fix from lsp
 nnoremap <leader>fix <CMD>lua vim.lsp.buf.code_action()<CR>
 nnoremap <leader>w :w<CR>
-nnoremap <silent> <leader>xx :TroubleToggle<CR>
+nnoremap <silent> <leader>trt :TroubleToggle<CR>
+nnoremap <silent> <leader>trtd :TodoTrouble<CR>
+nnoremap <silent> <leader>trld :Trouble lsp_workspace_diagnostics<CR>
 
 "{{{Markdown
 nnoremap <silent> <leader>mdh1 :call MdHeading1()<CR>
