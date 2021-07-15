@@ -1,5 +1,8 @@
+vnoremap <leader>s :s/\%V//g<LEFT><LEFT><LEFT>
+
 function! RangeSubstitue(range)
-    execute 'nnoremap <leader>s' . a:range . ' V' . a:range . ':s/\%V//g<LEFT><LEFT><LEFT>'
+    "select range visually and use visuall mapping from above
+    execute 'nmap <leader>s' . a:range . ' V' . a:range . ' s'
 endfunction
 
 for amount in range(1,10)
@@ -9,4 +12,3 @@ endfor
 
 call RangeSubstitue('G')
 
-vnoremap <leader>s :s/\%V//g<LEFT><LEFT><LEFT>
