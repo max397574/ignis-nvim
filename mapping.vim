@@ -1,5 +1,8 @@
 nnoremap <leader>tsff <cmd>Telescope find_files<CR>
 nnoremap <leader>tsts <cmd>Telescope treesitter<CR>
+nnoremap <silent> <leader>rs :SnipRun<CR>
+nnoremap <silent> <leader>cs :SnipClose<CR>
+vmap <leader>rs <Plug>SnipRun
 
 "open window with fix from lsp
 nnoremap <leader>fix <CMD>lua vim.lsp.buf.code_action()<CR>
