@@ -106,6 +106,7 @@ Plug 'eddyekofo94/gruvbox-flat.nvim'
 Plug 'folke/tokyonight.nvim'
 "2}}}
 
+Plug '~/jump-ray'
 Plug 'tweekmonster/startuptime.vim'
 Plug 'max397574/nvim-whid'
 "use f after f{char} to jump to next occurence
