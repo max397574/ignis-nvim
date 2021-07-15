@@ -105,6 +105,20 @@ wk.register({
   ['"'] = { "Surround inner word with quotes" },
   t = { "Toggle floating terminal" },
   ev = { "Edit init.vim in split" },
+  s = {
+      name = "Substitue and Spelling",
+      ["1"] = {"Substitue on current and next line"},
+      ["2"] = {"Substitue on current and next 2 lines"},
+      ["3"] = {"Substitue on current and next 3 lines"},
+      ["4"] = {"Substitue on current and next 4 lines"},
+      ["5"] = {"Substitue on current and next 5 lines"},
+      ["6"] = {"Substitue on current and next 6 lines"},
+      ["7"] = {"Substitue on current and next 7 lines"},
+      ["8"] = {"Substitue on current and next 8 lines"},
+      ["9"] = {"Substitue on current and next 9 lines"},
+      s = {"Substitue on current line"},
+      G = {"Substitue to the end of the file"},
+      },
   }, { prefix = "<leader>", mode = "n" })
 
 local wk = require("which-key")
