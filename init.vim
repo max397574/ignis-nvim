@@ -113,8 +113,9 @@ Plug 'tweekmonster/startuptime.vim'
 Plug 'max397574/nvim-whid'
 "use f after f{char} to jump to next occurence
 Plug 'folke/zen-mode.nvim'
-Plug 'rhysd/clever-f.vim'
+Plug 'folke/lua-dev.nvim'
 Plug 'folke/twilight.nvim'
+Plug 'rhysd/clever-f.vim'
 "motion like f and t but with 2 letters
 Plug 'justinmk/vim-sneak'
 "preview markdown in browser
@@ -369,6 +370,21 @@ require'nvim-treesitter.configs'.setup {
     }
 --3}}}
 }
+EOF
+"2}}}
+
+"{{{.............................................................. Lua Dev
+
+lua << EOF
+local luadev = require("lua-dev").setup({
+  -- add any options here, or leave empty to use the default settings
+  -- lspconfig = {
+  --   cmd = {"lua-language-server"}
+  -- },
+})
+
+local lspconfig = require('lspconfig')
+lspconfig.sumneko_lua.setup(luadev)
 EOF
 "2}}}
 
