@@ -108,6 +108,7 @@ Plug 'folke/tokyonight.nvim'
 "2}}}
 
 Plug '~/jump-ray'
+Plug '~/mark-ray'
 Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
 Plug 'tweekmonster/startuptime.vim'
 Plug 'max397574/nvim-whid'
