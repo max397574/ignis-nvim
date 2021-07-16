@@ -18,6 +18,7 @@ let mapleader = ' '
 set conceallevel=0
 "height of the commandline
 set cmdheight=2
+set mouse=a
 set termguicolors
 "don't wrap lines when they are longer than screenwidth
 set nowrap
