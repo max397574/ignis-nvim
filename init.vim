@@ -68,6 +68,7 @@ set foldtext=MyFoldText()
 
 "{{{============================================================== Source
 
+luafile ~/.config/nvim/plugin_settings/lsp.lua
 source ~/.config/nvim/mapping.vim
 source ~/.config/nvim/spelling.vim
 source ~/.config/nvim/plugin_settings/which_key.vim
@@ -75,7 +76,6 @@ source ~/.config/nvim/plugin_settings/markdown_preview.vim
 source ~/.config/nvim/plugin_settings/tablemode.vim
 source ~/.config/nvim/plugin_settings/goyo.vim
 source ~/.config/nvim/plugin_settings/lvim_helper.vim
-source ~/.config/nvim/plugin_settings/lsp.vim
 source ~/.config/nvim/plugin_settings/limelight.vim
 source ~/.config/nvim/plugin_settings/indentline.vim
 source ~/.config/nvim/plugin_settings/twilight.vim

@@ -5,8 +5,15 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
 Plug 'folke/lsp-colors.nvim'
 Plug 'folke/trouble.nvim'
+Plug 'folke/lua-dev.nvim'
 call plug#end()
-]]
+]],
+true)
+local luadev = require("lua-dev").setup({
+  --lspconfig = {
+    --cmd = {"lua-language-server"}
+  --},
+})
 require("lsp-colors").setup({
   Error = "#db4b4b",
   Warning = "#e0af68",
@@ -18,6 +25,7 @@ require'lspconfig'.pyright.setup{
     debounce_text_changes = 500,
   }
 }
+require'lspconfig'.sumneko_lua.setup(luadev)
 require'lspinstall'.setup() -- important
 
 local servers = require'lspinstall'.installed_servers()
