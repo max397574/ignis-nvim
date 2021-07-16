@@ -582,7 +582,7 @@ augroup filetypes
     autocmd BufNewFile,BufRead,BufWinEnter *.{md,txt,html} set spell
     autocmd BufNewFile,BufRead,BufWinEnter *.vim set foldmethod=marker
     autocmd BufNewFile,BufRead,BufWinEnter *.md set conceallevel=0
-    autocmd BufNewFile,BufRead,BufWinEnter *.lua set shiftwidht=2
+    autocmd BufNewFile,BufRead,BufWinEnter *.lua set shiftwidth=2
     "class with filename and class main
     autocmd BufNewFile *.java
       \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>"
