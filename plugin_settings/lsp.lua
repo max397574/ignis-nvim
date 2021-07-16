@@ -1,10 +1,12 @@
+vim.api.nvim_exec(
+[[
 call plug#begin('~/.vim/plugged')
 Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
 Plug 'folke/lsp-colors.nvim'
 Plug 'folke/trouble.nvim'
 call plug#end()
-lua << EOF
+]]
 require("lsp-colors").setup({
   Error = "#db4b4b",
   Warning = "#e0af68",
@@ -22,4 +24,3 @@ local servers = require'lspinstall'.installed_servers()
 for _, server in pairs(servers) do
   require'lspconfig'[server].setup{}
 end
-EOF
