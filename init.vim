@@ -108,6 +108,7 @@ Plug 'folke/tokyonight.nvim'
 "2}}}
 
 Plug '~/jump-ray'
+Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
 Plug 'tweekmonster/startuptime.vim'
 Plug 'max397574/nvim-whid'
 "use f after f{char} to jump to next occurence
@@ -389,10 +390,23 @@ let g:compe.max_menu_width = 100
 let g:compe.documentation = v:true
 
 let g:compe.source = {}
+
+let g:compe.source.tabnine = {}
+let g:compe.source.tabnine.max_line = 1000
+let g:compe.source.tabnine.max_num_results = 6
+let g:compe.source.tabnine.priority = 5000
+let g:compe.source.tabnine.sort = v:false
+let g:compe.source.tabnine.show_prediction_strength = v:true
+let g:compe.source.tabnine.ignore_pattern = ''
+
 let g:compe.source.path = v:true
 let g:compe.source.buffer = v:true
 let g:compe.source.calc = v:true
-let g:compe.source.nvim_lsp = v:true
+
+let g:compe.source.nvim_lsp = {}
+let g:compe.source.nvim_lsp.max_num_results = 5
+let g:compe.source.nvim_lsp.max_line = 100
+
 let g:compe.source.nvim_lua = v:true
 let g:compe.source.vsnip = v:true
 let g:compe.source.ultisnips = v:true
@@ -568,6 +582,7 @@ augroup filetypes
     autocmd BufNewFile,BufRead,BufWinEnter *.{md,txt,html} set spell
     autocmd BufNewFile,BufRead,BufWinEnter *.vim set foldmethod=marker
     autocmd BufNewFile,BufRead,BufWinEnter *.md set conceallevel=0
+    autocmd BufNewFile,BufRead,BufWinEnter *.lua set shiftwidht=2
     "class with filename and class main
     autocmd BufNewFile *.java
       \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>"
