@@ -1,8 +1,11 @@
+vim.api.nvim_exec(
+[[
 call plug#begin('~/.vim/plugged')
 Plug 'folke/twilight.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
-lua << EOF
+]],
+true)
   require("twilight").setup {
     dimming = {
       alpha = 0.25, -- amount of dimming
@@ -17,4 +20,3 @@ lua << EOF
     },
     exclude = {}, -- exclude these filetypes
   }
-EOF
