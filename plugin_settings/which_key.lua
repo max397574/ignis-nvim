@@ -6,8 +6,6 @@ call plug#end()
 ]],
 true)
 
-
---{{{............................................................. Settings
 require("which-key").setup {
     {
       plugins = {
@@ -71,9 +69,7 @@ require("which-key").setup {
     }
   }
 
---1}}}
 
---{{{............................................................. Lables
 local wk = require("which-key")
 wk.register({
   ts = {
@@ -147,5 +143,3 @@ wk.register({
     },
 
 }, { prefix = "<leader>", mode = "v" })
---1}}}
-
