@@ -73,6 +73,8 @@ luafile ~/.config/nvim/plugin_settings/twilight.lua
 luafile ~/.config/nvim/plugin_settings/which_key.lua
 luafile ~/.config/nvim/plugin_settings/todo-comments.lua
 luafile ~/.config/nvim/plugin_settings/lvim_helper.lua
+luafile ~/.config/nvim/plugin_settings/telescope.lua
+luafile ~/.config/nvim/plugin_settings/treesitter.lua
 source ~/.config/nvim/mapping.vim
 source ~/.config/nvim/spelling.vim
 source ~/.config/nvim/plugin_settings/markdown_preview.vim
@@ -207,172 +209,6 @@ call plug#end()
 
 "{{{============================================================== Plugin Settings
 
-"{{{.............................................................. TreeSitter
-
-"{{{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  LocalParser
-lua <<EOF
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.vim = {
-  install_info = {
-    url = "~/tree-sitter-viml", -- local path or git repo
-    files = {"src/parser.c", "src/scanner.c"},
-    filetype = "vim",
-  },
-}
-EOF
-"3}}}
-
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-    ensure_installed = 'maintained',
---{{{Highlighting
-    highlight = {
-        enable = true,
-        --disable = { "c", "rust" },  -- list of language that will be disabled
-        custom_captures = {
-        -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-        --["foo.bar"] = "Identifier",
-          ["variable"] = "GruvboxYellow",
-          ["keyword.operator"] = "DevIconPdf",
-	  ["conditional"] = "DevIconPdf",
-          ["number"] = "DevIconJsx",
-          ["float"] = "DevIconJsx",
-          ["operator"] = "DevIconPy",
-          ["keyword"] = "ItalicRed",
-          ["string"] = "DevIconXls",
-        },
-    },
--- so $VIMRUNTIME/syntax/hitest.vim to see colors
---3}}}
---{{{Refactor
-    refactor = {
-        highlight_definitions = { enable = true },
-        highlight_current_scope = { enable = false },
---{{{Smart Rename
-        smart_rename = {
-            enable = true,
-            keymaps = {
-                smart_rename = "grr",
-            },
-        },
---4}}}
---{{{Navigation
-        navigation = {
-            enable = true,
-            keymaps = {
-                goto_definition = "gnd",
-                list_definitions = "gnD",
-                list_definitions_toc = "gO",
-                goto_next_usage = "<leader>n",
-                goto_previous_usage = "<leader>p",
-            },
-        },
-    },
---4}}}
---3}}}
---{{{Textobjects
-    textobjects = {
---{{{Select
-        select = {
-            enable = false,
-            keymaps = {
-                -- You can use the capture groups defined in textobjects.scm
-                ["af"] = "@function.outer",
-                ["if"] = "@function.inner",
-                ["ac"] = "@class.outer",
-                ["ic"] = "@class.inner",
-
-                -- Or you can define your own textobjects like this
-                --["iF"] = {
-                --python = "(function_definition) @function",
-                --cpp = "(function_definition) @function",
-                --c = "(function_definition) @function",
-                --java = "(method_declaration) @function",
-            },
-        },
---4}}}
---{{{Swap
-        swap = {
-            enable = true,
-            swap_next = {
-                ["<leader>a"] = "@parameter.inner",
-            },
-            swap_previous = {
-                ["<leader>A"] = "@parameter.inner",
-            },
-        },
---4}}}
---{{{Move
-        move = {
-            enable = false,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = {
-                ["]m"] = "@function.outer",
-                ["]]"] = "@class.outer",
-            },
-            goto_next_end = {
-                ["]M"] = "@function.outer",
-                ["]["] = "@class.outer",
-            },
-            goto_previous_start = {
-                ["[m"] = "@function.outer",
-                ["[["] = "@class.outer",
-            },
-            goto_previous_end = {
-                ["[M"] = "@function.outer",
-                ["[]"] = "@class.outer",
-            },
-        },
---4}}}
-    },
---3}}}
---{{{Playground
-    playground = {
-        enable = true,
-        disable = {},
-        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-        persist_queries = false, -- Whether the query persists across vim sessions
-        keybindings = {
-            toggle_query_editor = 'o',
-            toggle_hl_groups = 'i',
-            toggle_injected_languages = 't',
-            toggle_anonymous_nodes = 'a',
-            toggle_language_display = 'I',
-            focus_language = 'f',
-            unfocus_language = 'F',
-            update = 'R',
-            goto_node = '<CR>',
-            show_help = '?',
-        },
-    },
---3}}}
---{{{Query Linter
-    query_linter = {
-        enable = true,
-        use_virtual_text = true,
-        lint_events = {"BufWrite", "CursorHold"},
-    },
---3}}}
---{{{Incremental Selection
-    incremental_selection = {
-        enable = false,
-        keymaps = {
-            init_selection = "gnn",
-            node_incremental = "grn",
-            scope_incremental = "grc",
-            node_decremental = "grm",
-        },
-    },
---3}}}
---{{{Indent
-    indent = {
-        enable = false
-    }
---3}}}
-}
-EOF
-"2}}}
-
 "{{{.............................................................. Lua Dev
 
 lua << EOF
@@ -428,62 +264,6 @@ let g:compe.source.vsnip = v:true
 let g:compe.source.ultisnips = v:true
 let g:compe.source.luasnip = v:true
 let g:compe.source.emoji = v:true
-"2}}}
-
-"{{{.............................................................. Telescope
-
-lua << EOF
-require('telescope').setup{
-  config = {
-    vimgrep_arguments = {
-      'rg',
-      '--color=never',
-      '--no-heading',
-      '--with-filename',
-      '--line-number',
-      '--column',
-      '--smart-case'
-    },
-    prompt_position = "bottom",
-    prompt_prefix = "> ",
-    selection_caret = "> ",
-    entry_prefix = "  ",
-    initial_mode = "insert",
-    selection_strategy = "reset",
-    sorting_strategy = "descending",
-    layout_strategy = "vertical",
-    layout_defaults = {
-      horizontal = {
-        mirror = false,
-      },
-      vertical = {
-        mirror = false,
-      },
-    },
-    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
-    file_ignore_patterns = {},
-    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
-    shorten_path = true,
-    winblend = 0,
-    width = 0.75,
-    preview_cutoff = 120,
-    results_height = 1,
-    results_width = 0.8,
-    border = {},
-    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-    color_devicons = true,
-    use_less = true,
-    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
-    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-
-    -- Developer configurations: Not meant for general override
-    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
-  }
-}
-EOF
-
 "2}}}
 
 "{{{.............................................................. NERDTree
@@ -606,7 +386,6 @@ augroup filetypes
 augroup END
 "2}}}
 
-"{{{.............................................................. TabCompletition
 
 "{{{.............................................................. HighlightYank
 augroup highlight_yank
@@ -627,7 +406,7 @@ augroup NoSimultaneousEdits
 augroup END
 "2}}}
 
-"}}}
+"1}}}
 
 "{{{============================================================== Highlights
 
@@ -642,6 +421,11 @@ highlight    IncSearch    ctermfg=White  ctermbg=grey   cterm=bold
 
 set background=dark
 
+highlight GreenString guifg=#207245
+highlight BlueOperator guifg=#3572A5
+highlight BlueNumber guifg=#519ABA
+highlight RedConditional guifg=#B30B00
+highlight YellowVariable ctermfg=214 guifg=#FABD2F
 
 highlight ItalicRed term=italic ctermfg=12 gui=italic guifg=#b30b00
 highlight Folded term=bold cterm=italic ctermfg=white gui=italic guifg=white
