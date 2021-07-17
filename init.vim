@@ -71,6 +71,7 @@ set foldtext=MyFoldText()
 luafile ~/.config/nvim/plugin_settings/lsp.lua
 luafile ~/.config/nvim/plugin_settings/twilight.lua
 luafile ~/.config/nvim/plugin_settings/which_key.lua
+luafile ~/.config/nvim/plugin_settings/todo-comments.lua
 source ~/.config/nvim/mapping.vim
 source ~/.config/nvim/spelling.vim
 source ~/.config/nvim/plugin_settings/markdown_preview.vim
@@ -79,7 +80,6 @@ source ~/.config/nvim/plugin_settings/goyo.vim
 source ~/.config/nvim/plugin_settings/lvim_helper.vim
 source ~/.config/nvim/plugin_settings/limelight.vim
 source ~/.config/nvim/plugin_settings/indentline.vim
-source ~/.config/nvim/plugin_settings/todo-comments.vim
 let s:prefix = '~/.config/nvim/plugins'
 for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
     execute 'source' s:fname

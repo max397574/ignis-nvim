@@ -1,15 +1,18 @@
-"TODO: change some of the settings
-"NOTE: this is a note
-"FIX: this needs fixing
-"WARNING: ???
-"PERF: perfect
-"HACK: this is a hack
+--TODO: change some of the settings
+--NOTE: this is a note
+--FIX: this needs fixing
+--WARNING: ???
+--PERF: perfect
+--HACK: this is a hack
+vim.api.nvim_exec(
+[[
 call plug#begin('~/.vim/plugged')
 Plug 'nvim-lua/plenary.nvim'
 Plug 'folke/todo-comments.nvim'
 call plug#end()
+]],
+true)
 
-lua << EOF
   require("todo-comments").setup {
         signs = true, -- show icons in the signs column
   sign_priority = 8, -- sign priority
@@ -65,4 +68,3 @@ lua << EOF
     -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
   },
   }
-EOF
