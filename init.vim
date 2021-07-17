@@ -76,7 +76,6 @@ source ~/.config/nvim/mapping.vim
 source ~/.config/nvim/spelling.vim
 source ~/.config/nvim/plugin_settings/markdown_preview.vim
 source ~/.config/nvim/plugin_settings/tablemode.vim
-source ~/.config/nvim/plugin_settings/goyo.vim
 source ~/.config/nvim/plugin_settings/lvim_helper.vim
 source ~/.config/nvim/plugin_settings/limelight.vim
 source ~/.config/nvim/plugin_settings/indentline.vim
@@ -190,7 +189,6 @@ Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 Plug 'lvim-tech/lvim-helper'
 "distraction free writing
 Plug 'junegunn/limelight.vim'
-Plug 'junegunn/goyo.vim'
 Plug 'hrsh7th/nvim-compe'
 "nvim lsp
 Plug 'neovim/nvim-lspconfig'
