@@ -1,9 +1,11 @@
-"settings for which-key plugin
+vim.api.nvim_exec(
+[[
 call plug#begin('~/.vim/plugged')
 Plug 'folke/which-key.nvim'
 call plug#end()
+]],
+true)
 
-lua << EOF
 
 --{{{............................................................. Settings
 require("which-key").setup {
@@ -147,4 +149,3 @@ wk.register({
 }, { prefix = "<leader>", mode = "v" })
 --1}}}
 
-EOF
