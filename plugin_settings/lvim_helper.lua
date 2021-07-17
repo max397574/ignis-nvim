@@ -1,7 +1,10 @@
+vim.api.nvim_exec(
+[[
 call plug#begin('~/.vim/plugged')
 Plug 'lvim-tech/lvim-helper'
 call plug#end()
-lua <<EOF
+]],
+true)
 local home = os.getenv('HOME')
 require('lvim-helper').setup({
     files = {
@@ -35,4 +38,3 @@ require('lvim-helper').setup({
         bufhidden = 'hide'
     }
 })
-EOF
