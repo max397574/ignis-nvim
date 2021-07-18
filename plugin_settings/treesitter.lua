@@ -28,7 +28,7 @@ require'nvim-treesitter.configs'.setup {
       ["keyword"] = "ItalicRed",
       ["keyword.return"] = "ItalicRed",
       ["string"] = "GreenString",
-      ["field"] = "YellowVariable",
+      ["field"] = "LightBlueConstant",
       ["boolean"] = "PurpleBoolean",
       ["constant"] = "LightBlueConstant",
       ["property"] = "LightBlueConstant",
