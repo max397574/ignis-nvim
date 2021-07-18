@@ -10,9 +10,15 @@ call plug#end()
 true)
 
 local luadev = require("lua-dev").setup({
-  --lspconfig = {
-    --cmd = {"lua-language-server"}
-  --},
+  lspconfig = {
+      settings = {
+	Lua = {
+	  diagnostic = {
+	    globals = { 'vim' },
+	  },
+	},
+      },
+    },
 })
 
 require'lspconfig'.pyright.setup{
@@ -29,14 +35,50 @@ require'lspconfig'.sumneko_lua.setup {
   settings = {
     Lua = {
       diagnostics = {
-        -- Get the language server to recognize the `vim` global
         globals = {'vim'},
       },
     },
   },
 }
 
-local servers = require'lspinstall'.installed_servers()
-for _, server in pairs(servers) do
-  require'lspconfig'[server].setup{}
+local lua_settings = {
+  Lua = {
+    diagnostics = {
+      globals = {'vim'},
+    },
+  }
+}
+
+local function make_config()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  return {
+    -- enable snippet support
+    capabilities = capabilities,
+    -- map buffer local keybindings when the language server attaches
+    on_attach = on_attach,
+  }
 end
+
+local function setup_servers()
+  require'lspinstall'.setup()
+
+  -- get all installed servers
+  local servers = require'lspinstall'.installed_servers()
+  -- ... and add manually installed servers
+  table.insert(servers, "clangd")
+  table.insert(servers, "sourcekit")
+
+  for _, server in pairs(servers) do
+    local config = make_config()
+
+    -- language specific config
+    if server == "lua" then
+      config.settings = lua_settings
+    end
+
+    require'lspconfig'[server].setup(config)
+  end
+end
+
+setup_servers()
