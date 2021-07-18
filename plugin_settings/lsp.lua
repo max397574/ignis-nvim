@@ -41,6 +41,7 @@ require'lspconfig'.sumneko_lua.setup {
   },
 }
 
+-- Refernce: https://github.com/kabouzeid/nvim-lspinstall/wiki
 local lua_settings = {
   Lua = {
     diagnostics = {
