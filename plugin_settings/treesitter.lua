@@ -26,6 +26,7 @@ require'nvim-treesitter.configs'.setup {
           ["operator"] = "BlueOperator",
           ["keyword"] = "ItalicRed",
           ["string"] = "GreenString",
+	  ["field"] = "YellowVariable",
         },
     },
     refactor = {
@@ -53,6 +54,7 @@ require'nvim-treesitter.configs'.setup {
             enable = false,
             keymaps = {
                 -- You can use the capture groups defined in textobjects.scm
+		-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects/blob/master/queries/python/textobjects.scm
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
                 ["ac"] = "@class.outer",
