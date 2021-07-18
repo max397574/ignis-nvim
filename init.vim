@@ -431,6 +431,8 @@ highlight YellowVariable ctermfg=214 guifg=#FABD2F
 highlight PurpleBoolean guifg=#6600CC
 highlight LightBlueConstant guifg=#009999
 highlight RedLoops guifg=#CC0000
+highlight GreenFunction guifg=#8ABB26 cterm=bold
+
 
 
 highlight LspDiagnosticsDefaultError ctermbg=none guibg=none ctermfg=167 guifg=#FB4934
