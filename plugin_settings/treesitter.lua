@@ -29,7 +29,8 @@ require'nvim-treesitter.configs'.setup {
       ["keyword.return"] = "ItalicRed",
       ["string"] = "GreenString",
       ["field"] = "YellowVariable",
-      ["boolean"] = "PurpleBoolean"
+      ["boolean"] = "PurpleBoolean",
+      ["constant"] = "LightBlueConstant",
     },
   },
   refactor = {
