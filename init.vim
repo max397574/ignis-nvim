@@ -427,6 +427,8 @@ highlight BlueOperator guifg=#3572A5
 highlight BlueNumber guifg=#519ABA
 highlight RedConditional guifg=#B30B00
 highlight YellowVariable ctermfg=214 guifg=#FABD2F
+highlight PurpleBoolean guifg=#6600CC
+
 
 highlight ItalicRed term=italic ctermfg=12 gui=italic guifg=#b30b00
 highlight Folded term=bold cterm=italic ctermfg=white gui=italic guifg=white
