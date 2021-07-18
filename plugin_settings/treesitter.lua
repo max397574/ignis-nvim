@@ -5,6 +5,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/playground'
+Plug 'romgrk/nvim-treesitter-context'
 call plug#end()
 ]],
 true)
@@ -141,4 +142,8 @@ require'nvim-treesitter.configs'.setup {
   indent = {
     enable = true
   }
+}
+
+require'treesitter-context.config'.setup{
+    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
 }
