@@ -428,7 +428,7 @@ highlight BlueNumber guifg=#519ABA
 highlight RedConditional guifg=#B30B00
 highlight YellowVariable ctermfg=214 guifg=#FABD2F
 highlight PurpleBoolean guifg=#6600CC
-highlight LightBlueConstant guifg=#66FFFF
+highlight LightBlueConstant guifg=#009999
 highlight RedLoops guifg=#CC0000
 
 
