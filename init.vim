@@ -432,6 +432,12 @@ highlight LightBlueConstant guifg=#009999
 highlight RedLoops guifg=#CC0000
 
 
+highlight LspDiagnosticsDefaultError ctermbg=none guibg=none ctermfg=167 guifg=#FB4934
+highlight LspDiagnosticsDefaultHint ctermbg=none guibg=none ctermfg=109 guifg=#83A598
+highlight LspDiagnosticsDefaultWarning ctermbg=none guibg=none ctermfg=208 guifg=#FE8019
+highlight LspDiagnosticsDefaultInformation ctermbg=none guibg=none ctermfg=214 guifg=#FABD2F
+
+
 highlight ItalicRed term=italic ctermfg=12 gui=italic guifg=#b30b00
 highlight Folded term=bold cterm=italic ctermfg=white gui=italic guifg=white
 highlight Folded guibg=none ctermbg=none
