@@ -190,8 +190,7 @@ Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 "Plug 'folke/trouble.nvim'
 "easily display help files
 Plug 'lvim-tech/lvim-helper'
-"distraction free writing
-Plug 'junegunn/limelight.vim'
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'hrsh7th/nvim-compe'
 "nvim lsp
 Plug 'neovim/nvim-lspconfig'
