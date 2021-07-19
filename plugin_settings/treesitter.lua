@@ -4,8 +4,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'RRethy/nvim-treesitter-textsubjects'
 Plug 'nvim-treesitter/playground'
 Plug 'romgrk/nvim-treesitter-context'
+Plug 'p00f/nvim-ts-rainbow'
 call plug#end()
 ]],
 true)
@@ -67,7 +69,7 @@ require'nvim-treesitter.configs'.setup {
       },
     },
     select = {
-      enable = false,
+      enable = true,
       keymaps = {
 	-- You can use the capture groups defined in textobjects.scm
 	-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects/blob/master/queries/python/textobjects.scm
@@ -135,10 +137,10 @@ require'nvim-treesitter.configs'.setup {
   query_linter = {
     enable = true,
     use_virtual_text = true,
-    lint_events = {"BufWrite", "CursorHold"},
+    lint_events = {"BufWrite", "CursorHold", "CursorMoved"},
   },
   incremental_selection = {
-    enable = false,
+    enable = true,
     keymaps = {
       init_selection = "gnn",
       node_incremental = "grn",
@@ -148,7 +150,21 @@ require'nvim-treesitter.configs'.setup {
   },
   indent = {
     enable = true
-  }
+  },
+  textsubjects = {
+        enable = true,
+        keymaps = {
+            ['.'] = 'textsubjects-smart',
+            [';'] = 'textsubjects-container-outer',
+        },
+    },
+  rainbow = {
+    enable = true,
+    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+    max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
+    colors = {}, -- table of hex strings
+    termcolors = {}, -- table of colour name strings
+  },
 }
 
 require'treesitter-context.config'.setup{
