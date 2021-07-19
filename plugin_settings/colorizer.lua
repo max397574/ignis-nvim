@@ -4,4 +4,6 @@ Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 ]],
 true)
-require'colorizer'.setup()
+require'colorizer'.setup({
+  '*';
+}, { mode = 'foreground' })
