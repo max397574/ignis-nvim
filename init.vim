@@ -437,7 +437,7 @@ highlight GreenFunction guifg=#8ABB26 cterm=bold
 
 
 highlight LspDiagnosticsDefaultError ctermbg=none guibg=none ctermfg=167 guifg=#FB4934
-highlight LspDiagnosticsDefaultHint ctermbg=none guibg=none ctermfg=109 guifg=#83A598
+highlight LspDiagnosticsDefaultHint ctermbg=none guibg=none ctermfg=109 guifg=#519ABA
 highlight LspDiagnosticsDefaultWarning ctermbg=none guibg=none ctermfg=208 guifg=#FE8019
 highlight LspDiagnosticsDefaultInformation ctermbg=none guibg=none ctermfg=214 guifg=#FABD2F
 
