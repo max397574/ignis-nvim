@@ -2,9 +2,9 @@
 nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
 nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
 
-nnoremap <leader>tsff <cmd>Telescope find_files<CR>
-nnoremap <leader>tsts <cmd>Telescope treesitter<CR>
-nnoremap <leader>tsht <cmd>Telescope help_tags<CR>
+nnoremap <leader>tcff <cmd>Telescope find_files<CR>
+nnoremap <leader>tcts <cmd>Telescope treesitter<CR>
+nnoremap <leader>tcht <cmd>Telescope help_tags<CR>
 nnoremap <silent> <leader>rs :SnipRun<CR>
 nnoremap <silent> <leader>cs :SnipClose<CR>
 vmap <leader>rs <Plug>SnipRun
