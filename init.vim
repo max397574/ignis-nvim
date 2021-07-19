@@ -76,6 +76,7 @@ luafile ~/.config/nvim/plugin_settings/lvim_helper.lua
 luafile ~/.config/nvim/plugin_settings/telescope.lua
 luafile ~/.config/nvim/plugin_settings/treesitter.lua
 luafile ~/.config/nvim/plugin_settings/trouble.lua
+luafile ~/.config/nvim/plugin_settings/colorizer.lua
 source ~/.config/nvim/mapping.vim
 source ~/.config/nvim/spelling.vim
 source ~/.config/nvim/plugin_settings/markdown_preview.vim
