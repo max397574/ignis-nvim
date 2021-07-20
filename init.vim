@@ -369,7 +369,6 @@ augroup END
 
 augroup random
     autocmd!
-    autocmd BufNewFile,BufRead,BufWinEnter * IndentBlanklineRefresh
     au BufWinEnter *.{py,java,html,c,cpp,cs,vim} 
       \let w:m1=matchadd('Search', '\%<81v.\%>80v', -1)
 augroup END
