@@ -18,7 +18,6 @@ let mapleader = ' '
 set conceallevel=0
 "height of the commandline
 set cmdheight=2
-set mouse=a
 set termguicolors
 "don't wrap lines when they are longer than screenwidth
 set nowrap
@@ -370,11 +369,11 @@ augroup END
 
 augroup random
     autocmd!
+    autocmd BufNewFile,BufRead,BufWinEnter * IndentBlanklineRefresh
     au BufWinEnter *.{py,java,html,c,cpp,cs,vim} 
       \let w:m1=matchadd('Search', '\%<81v.\%>80v', -1)
 augroup END
 
-"{{{.............................................................. Filetypes
 augroup filetypes
     autocmd!
     autocmd BufNewFile,BufRead,BufWinEnter *.html syntax on
@@ -383,22 +382,20 @@ augroup filetypes
     autocmd BufNewFile,BufRead,BufWinEnter *.md set conceallevel=0
     autocmd BufNewFile,BufRead,BufWinEnter *.lua set shiftwidth=2
     autocmd BufNewFile,BufRead,BufWinEnter *.lua set tabstop=2
+    autocmd BufNewFile,BufRead,BufWinEnter *.py set tabstop=4
+    autocmd BufNewFile,BufRead,BufWinEnter *.java set tabstop=4
     "class with filename and class main
     autocmd BufNewFile *.java
       \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>"
 
 augroup END
-"2}}}
 
 
-"{{{.............................................................. HighlightYank
 augroup highlight_yank
     autocmd!
     au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
 augroup END
-"2}}}
 
-"{{{.............................................................. NoSimultaneousEdits
 let ErrorMsg='Duplicate edit session (readonly)'
 augroup NoSimultaneousEdits
     autocmd!
@@ -408,7 +405,6 @@ augroup NoSimultaneousEdits
     autocmd SwapExists * echohl None
     autocmd SwapExists * sleep 2
 augroup END
-"2}}}
 
 "1}}}
 
