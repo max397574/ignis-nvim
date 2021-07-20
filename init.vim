@@ -24,6 +24,7 @@ set termguicolors
 set nowrap
 set softtabstop=4
 set shiftwidth=4
+set expandtab
 set updatetime=2000
 set hidden
 set completeopt=menuone,noselect
@@ -381,6 +382,7 @@ augroup filetypes
     autocmd BufNewFile,BufRead,BufWinEnter *.vim set foldmethod=marker
     autocmd BufNewFile,BufRead,BufWinEnter *.md set conceallevel=0
     autocmd BufNewFile,BufRead,BufWinEnter *.lua set shiftwidth=2
+    autocmd BufNewFile,BufRead,BufWinEnter *.lua set tabstop=2
     "class with filename and class main
     autocmd BufNewFile *.java
       \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>"
