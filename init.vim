@@ -26,7 +26,6 @@ source ~/.config/nvim/mapping.vim
 source ~/.config/nvim/spelling.vim
 source ~/.config/nvim/plugin_settings/markdown_preview.vim
 source ~/.config/nvim/plugin_settings/tablemode.vim
-source ~/.config/nvim/plugin_settings/indent_blankline.vim
 let s:prefix = '~/.config/nvim/plugins'
 for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
     execute 'source' s:fname
@@ -57,7 +56,6 @@ Plug 'folke/tokyonight.nvim'
 
 Plug '~/jump-ray'
 Plug '~/mark-ray'
-Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
 Plug 'tweekmonster/startuptime.vim'
 Plug 'max397574/nvim-whid'
