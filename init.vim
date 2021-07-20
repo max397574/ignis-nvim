@@ -10,9 +10,10 @@
 
 "use :set foldmethod=marker in vim
 
+let mapleader = ' '
 "{{{============================================================== Source
 
-source ~/.config/nvim/options.vim
+luafile ~/.config/nvim/options.lua
 luafile ~/.config/nvim/plugin_settings/lsp.lua
 luafile ~/.config/nvim/plugin_settings/twilight.lua
 luafile ~/.config/nvim/plugin_settings/which_key.lua
