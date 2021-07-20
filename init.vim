@@ -441,6 +441,13 @@ highlight LspDiagnosticsDefaultHint ctermbg=none guibg=none ctermfg=109 guifg=#5
 highlight LspDiagnosticsDefaultWarning ctermbg=none guibg=none ctermfg=208 guifg=#FE8019
 highlight LspDiagnosticsDefaultInformation ctermbg=none guibg=none ctermfg=214 guifg=#FABD2F
 
+highlight VimCommand ctermfg=12 guifg=#B30B00
+highlight VimVar guifg=#009999
+highlight VimString guifg=#207245
+highlight VimAttrib guifg=#207245
+highlight VimOption guifg=#9ABB26
+highlight VimIsCommand guifg=#FE8019
+highlight VimUsrCmd guifg=#FE8019
 
 highlight ItalicRed term=italic ctermfg=12 gui=italic guifg=#b30b00
 highlight Folded term=bold cterm=italic ctermfg=white gui=italic guifg=white
