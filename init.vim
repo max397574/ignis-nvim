@@ -27,7 +27,7 @@ luafile ~/.config/nvim/plugin_settings/trouble.lua
 luafile ~/.config/nvim/plugin_settings/colorizer.lua
 source ~/.config/nvim/mapping.vim
 source ~/.config/nvim/spelling.vim
-source ~/.config/nvim/plugin_settings/tablemode.vim
+luafile ~/.config/nvim/plugin_settings/tablemode.lua
 let s:prefix = '~/.config/nvim/plugins'
 for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
     execute 'source' s:fname
