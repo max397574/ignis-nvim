@@ -96,21 +96,6 @@ call plug#end()
 
 "{{{============================================================== Plugin Settings
 
-"{{{.............................................................. Lua Dev
-
-lua << EOF
-local luadev = require("lua-dev").setup({
-  -- add any options here, or leave empty to use the default settings
-  -- lspconfig = {
-  --   cmd = {"lua-language-server"}
-  -- },
-})
-
-local lspconfig = require('lspconfig')
-lspconfig.sumneko_lua.setup(luadev)
-EOF
-"2}}}
-
 "{{{.............................................................. Compe
 
 let g:compe = {}

@@ -4,30 +4,15 @@ call plug#begin('~/.vim/plugged')
 Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
 Plug 'folke/trouble.nvim'
-Plug 'folke/lua-dev.nvim'
 call plug#end()
 ]],
 true)
-
-local luadev = require("lua-dev").setup({
-  lspconfig = {
-      settings = {
-	Lua = {
-	  diagnostic = {
-	    globals = { 'vim' },
-	  },
-	},
-      },
-    },
-})
 
 require'lspconfig'.pyright.setup{
   flags = {
     debounce_text_changes = 500,
   }
 }
-
-require'lspconfig'.sumneko_lua.setup(luadev)
 
 require'lspinstall'.setup() -- important
 
