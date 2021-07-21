@@ -9,8 +9,10 @@
 "|__/|__/  |__/|__/   \___/ |__/ \_/    |__/|__/ |__/ |__/
 
 "use :set foldmethod=marker in vim
+"TODO: Add terrortylor/nvim-comment
 
 let mapleader = ' '
+
 "{{{============================================================== Source
 
 luafile ~/.config/nvim/options.lua
@@ -57,7 +59,6 @@ Plug 'folke/tokyonight.nvim'
 
 Plug '~/jump-ray'
 Plug '~/mark-ray'
-Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
 Plug 'tweekmonster/startuptime.vim'
 Plug 'max397574/nvim-whid'
 "use f after f{char} to jump to next occurence
@@ -189,13 +190,6 @@ let g:compe.documentation = v:true
 
 let g:compe.source = {}
 
-let g:compe.source.tabnine = {}
-let g:compe.source.tabnine.max_line = 1000
-let g:compe.source.tabnine.max_num_results = 6
-let g:compe.source.tabnine.priority = 5000
-let g:compe.source.tabnine.sort = v:false
-let g:compe.source.tabnine.show_prediction_strength = v:true
-let g:compe.source.tabnine.ignore_pattern = ''
 
 let g:compe.source.path = v:true
 let g:compe.source.buffer = v:true
@@ -313,6 +307,7 @@ augroup END
 
 augroup random
     autocmd!
+    "autocmd BufNewFile,BufRead,BufWinEnter * set formatoptions="cqrnj"
     au BufWinEnter *.{py,java,html,c,cpp,cs,vim} 
       \let w:m1=matchadd('Search', '\%<81v.\%>80v', -1)
 augroup END
