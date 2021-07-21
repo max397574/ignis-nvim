@@ -2,7 +2,6 @@
 nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
 nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
 
-nnoremap <leader>cc :CommentToggle<CR>
 nnoremap <leader>tcff <cmd>Telescope find_files<CR>
 nnoremap <leader>tcts <cmd>Telescope treesitter<CR>
 nnoremap <leader>tcht <cmd>Telescope help_tags<CR>
