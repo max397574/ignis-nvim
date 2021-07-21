@@ -7,30 +7,8 @@
 "| $$| $$  | $$| $$  | $$ /$$  \  $$$/  | $$| $$ | $$ | $$
 "| $$| $$  | $$| $$  |  $$$$//$$\  $/   | $$| $$ | $$ | $$
 "|__/|__/  |__/|__/   \___/ |__/ \_/    |__/|__/ |__/ |__/
-let mapleader = ' '
 luafile ~/.config/nvim/future_init.lua
-"{{{.............................................................. VisualMulti
 
-let g:VM_maps = {}
-let g:VM_maps["Add Cursor Down"]    = '<Leader>cd'   " new cursor down
-let g:VM_maps["Add Cursor Up"]      = '<Leader>cu'   " new cursor up
-let g:VM_maps['Find Under']         = '<Leader>fu'
-"2}}}
-
-"{{{.............................................................. Schlepp
-
-"Move visual selected blocks with arrow keys
-xmap <up>    <Plug>SchleppUp
-xmap <down>  <Plug>SchleppDown
-xmap <left>  <Plug>SchleppLeft
-xmap <right> <Plug>SchleppRight
-"use D to move a copy of a visual selected block
-xmap D       <Plug>SchleppDupLeft
-"2}}}
-
-"1}}}
-
-"{{{============================================================== Autocommands
 
 augroup SexNoArgs
     autocmd!

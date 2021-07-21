@@ -2,6 +2,13 @@
 nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
 nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
 
+
+let g:VM_maps = {}
+let g:VM_maps["Add Cursor Down"]    = '<Leader>cd'   " new cursor down
+let g:VM_maps["Add Cursor Up"]      = '<Leader>cu'   " new cursor up
+let g:VM_maps['Find Under']         = '<Leader>fu'
+
+
 nnoremap <leader>tcff <cmd>Telescope find_files<CR>
 nnoremap <leader>tcts <cmd>Telescope treesitter<CR>
 nnoremap <leader>tcht <cmd>Telescope help_tags<CR>
