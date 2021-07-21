@@ -58,3 +58,4 @@ for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
     execute 'source' s:fname
 endfor
 
+colorscheme gruvbox
