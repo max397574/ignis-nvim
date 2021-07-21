@@ -1,5 +1,3 @@
-local cmd = vim.cmd  -- to execute Vim commands e.g. cmd('pwd')
-local opt = vim.opt  -- to set options
 vim.g.mapleader = " "
 
 require("config_files.options")
