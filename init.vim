@@ -9,7 +9,6 @@
 "|__/|__/  |__/|__/   \___/ |__/ \_/    |__/|__/ |__/ |__/
 
 " use :set foldmethod=marker in vim
-" TODO: Add terrortylor/nvim-comment
 
 let mapleader = ' '
 
