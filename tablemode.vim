@@ -1,5 +1,3 @@
--- Settings for Table Mode
-vim.api.nvim_exec([[
 let g:table_mode_corner='|'
 inoremap <leader>tm <ESC>:TableModeToggle<CR>i
 function! s:isAtStartOfLine(mapping)
@@ -15,5 +13,3 @@ inoreabbrev <expr> <bar><bar>
 inoreabbrev <expr> __
           \ <SID>isAtStartOfLine('__') ?
           \ '<c-o>:silent! TableModeDisable<CR>' : '__'
-]],
-true)
