@@ -98,8 +98,6 @@ Plug 'drxcc/vim-vmath'
 Plug 'yamatsum/nvim-cursorline'
 "easily comment out code
 Plug 'preservim/nerdcommenter'
-"display structure of file (variables,functions etc)
-Plug 'preservim/tagbar'
 "game to practice movements
 Plug 'ThePrimeagen/vim-be-good'
 "show last changes in list and last change in signcolumn
@@ -114,8 +112,6 @@ Plug 'junegunn/fzf.vim'
 "run a selected part of code
 Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
 Plug 'sharkdp/bat'
-"expand html 'snippets'
-Plug 'mattn/emmet-vim'
 "color nested brackets in different colors
 Plug 'luochen1990/rainbow'
 "telescope dependency
@@ -221,11 +217,6 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ }
 
 let g:NERDTreeGitStatusUseNerdFonts = 1
-"2}}}
-
-"{{{.............................................................. Emmet
-
-let g:user_emmet_leader_key='<leader>emmet'
 "2}}}
 
 "{{{.............................................................. VisualMulti
