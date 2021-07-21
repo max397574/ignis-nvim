@@ -1,5 +1,6 @@
 local cmd = vim.cmd  -- to execute Vim commands e.g. cmd('pwd')
 local opt = vim.opt  -- to set options
+vim.g.mapleader = " "
 
 require("config_files.options")
 require("plugin_settings.colorizer")
@@ -13,8 +14,9 @@ require("plugin_settings.trouble")
 require("plugin_settings.twilight")
 require("plugin_settings.which_key")
 require("plugin_settings.compe")
-vim.cmd('source ~/.config/nvim/tablemode.vim')
 vim.cmd('source ~/.config/nvim/plugins.vim')
+vim.cmd('source ~/.config/nvim/tablemode.vim')
 vim.cmd('source ~/.config/nvim/spelling.vim')
 vim.cmd('source ~/.config/nvim/mapping.vim')
-vim.cmd('colorscheme gruvbox')
+vim.cmd('source ~/.config/nvim/autocmds.vim')
+vim.cmd('source ~/.config/nvim/highlights.vim')
