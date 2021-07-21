@@ -15,19 +15,8 @@ let mapleader = ' '
 "{{{============================================================== Source
 
 luafile ~/.config/nvim/future_init.lua
-luafile ~/.config/nvim/plugin_settings/lsp.lua
-luafile ~/.config/nvim/plugin_settings/comment.lua
-luafile ~/.config/nvim/plugin_settings/twilight.lua
-luafile ~/.config/nvim/plugin_settings/which_key.lua
-luafile ~/.config/nvim/plugin_settings/todo-comments.lua
-luafile ~/.config/nvim/plugin_settings/lvim_helper.lua
-luafile ~/.config/nvim/plugin_settings/telescope.lua
-luafile ~/.config/nvim/plugin_settings/treesitter.lua
-luafile ~/.config/nvim/plugin_settings/trouble.lua
-luafile ~/.config/nvim/plugin_settings/colorizer.lua
 source ~/.config/nvim/mapping.vim
 source ~/.config/nvim/spelling.vim
-luafile ~/.config/nvim/plugin_settings/tablemode.lua
 let s:prefix = '~/.config/nvim/plugins'
 for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
     execute 'source' s:fname
