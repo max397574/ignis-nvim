@@ -1,3 +1,9 @@
+vim.api.nvim_exec([[
+call plug#begin('~/.vim/plugged')
+Plug 'hrsh7th/nvim-compe'
+call plug#end()
+]],
+true)
 require'compe'.setup {
   enabled = true;
   autocomplete = true;
