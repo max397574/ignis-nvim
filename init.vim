@@ -14,7 +14,7 @@ let mapleader = ' '
 
 "{{{============================================================== Source
 
-luafile ~/.config/nvim/options.lua
+luafile ~/.config/nvim/future_init.lua
 luafile ~/.config/nvim/plugin_settings/lsp.lua
 luafile ~/.config/nvim/plugin_settings/comment.lua
 luafile ~/.config/nvim/plugin_settings/twilight.lua
@@ -280,12 +280,4 @@ function! HLNext (blinktime)
     call matchdelete(ring)
     redraw
 endfunction
-"}}}
-
-"{{{============================================================== Misc
-
-set nowrap
-"Square up visual selections...
-set virtualedit=block
-set formatoptions-=o
 "}}}

@@ -1,8 +1,8 @@
 local opt = vim.opt
 
 opt.pumblend = 18
-opt.cmdheight = 2
-opt.wrap = false
+opt.cmdheight = 1
+opt.virtualedit="block"
 opt.expandtab = true
 opt.softtabstop = 4
 opt.shiftwidth = 4
