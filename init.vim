@@ -40,80 +40,28 @@ endfor
 
 call plug#begin('~/.vim/plugged')
 
-"{{{Colorschemes
-"a colorscheme
-Plug 'monsonjeremy/onedark.nvim'
-"generate colorschemes
-Plug 'tjdevries/colorbuddy.vim'
-"gruvbox for nvim
-Plug 'tjdevries/gruvbuddy.nvim'
-"a colorscheme
-Plug 'savq/melange'
-"a colorscheme
 Plug 'morhetz/gruvbox'
-"a colorscheme
-Plug 'eddyekofo94/gruvbox-flat.nvim'
-"a colorscheme
-Plug 'folke/tokyonight.nvim'
-"2}}}
 
 Plug '~/jump-ray'
 Plug '~/mark-ray'
 Plug 'tweekmonster/startuptime.vim'
 Plug 'max397574/nvim-whid'
-"use f after f{char} to jump to next occurence
 Plug 'folke/zen-mode.nvim'
-Plug 'folke/lua-dev.nvim'
 Plug 'folke/twilight.nvim'
 Plug 'rhysd/clever-f.vim'
-"motion like f and t but with 2 letters
-Plug 'justinmk/vim-sneak'
-"preview markdown in browser
-Plug 'JamshedVesuna/vim-markdown-preview'
-"better visual mode
-Plug 'vim-scripts/vis'
-"easily create tables
 Plug 'dhruvasagar/vim-table-mode'
-"Displays suggestions for key bindings
 Plug 'folke/which-key.nvim'
-"automatically add pairs for (['"{ etc.
 Plug 'jiangmiao/auto-pairs'
-"move around visual blocks
-Plug 'zirrostig/vim-schlepp'
-"multiple cursors
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-"a floating terminal
-Plug 'voldikss/vim-floaterm'
-"snippets
-Plug 'sirver/UltiSnips'
-"easily add and change surrondings
 Plug 'tpope/vim-surround'
-"snippets for ultisnips
-Plug 'honza/vim-snippets'
-"sql support for nvim
-Plug 'tami5/sql.nvim'
 "Calculate average sum etc
 Plug 'drxcc/vim-vmath'
-"highlight word under cursor everywhere
-Plug 'yamatsum/nvim-cursorline'
-"easily comment out code
 Plug 'preservim/nerdcommenter'
-"game to practice movements
-Plug 'ThePrimeagen/vim-be-good'
-"show last changes in list and last change in signcolumn
 Plug 'mbbill/undotree'
-"Show git symbols in signcolumn
 Plug 'mhinz/vim-signify'
 Plug 'folke/todo-comments.nvim'
-"a file explorer
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"fzf vim integration
-Plug 'junegunn/fzf.vim'
-"run a selected part of code
 Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
 Plug 'sharkdp/bat'
-"color nested brackets in different colors
-Plug 'luochen1990/rainbow'
 "telescope dependency
 Plug 'nvim-lua/popup.nvim'
 "telescope dependency
@@ -124,10 +72,6 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'ryanoasis/vim-devicons'
 "even more icons
 Plug 'kyazdani42/nvim-web-devicons'
-"test code from inside nvim
-Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
-"list and display lsp diagnostic
-"Plug 'folke/trouble.nvim'
 "easily display help files
 Plug 'lvim-tech/lvim-helper'
 Plug 'norcalli/nvim-colorizer.lua'
