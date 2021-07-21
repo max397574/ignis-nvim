@@ -2,6 +2,7 @@
 nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
 nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
 
+nnoremap <leader>cc :CommentToggle<CR>
 nnoremap <leader>tcff <cmd>Telescope find_files<CR>
 nnoremap <leader>tcts <cmd>Telescope treesitter<CR>
 nnoremap <leader>tcht <cmd>Telescope help_tags<CR>
@@ -85,6 +86,9 @@ nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 xnoremap <S-TAB> :s/\%V/0<C-V><TAB>/<CR>gvg<C-A>gv:retab<ESC>gvI<C-G>u<ESC>gv/ <CR>:s/\%V /./<CR>
 nnoremap <silent> <leader>O :call AddLineAbove()<CR>
 nnoremap <silent> <leader>o :call AddLineBelow()<CR>
+nnoremap <leader>i i <ESC>l
+nnoremap <leader>a a <ESC>h
+
 "convert current word to uppercase
 inoremap <silent> <c-u> <ESC> :call ConvertWordUppercase()<CR>i
 nnoremap <silent> <c-u> :call ConvertWordUppercase()<CR>
