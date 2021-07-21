@@ -8,8 +8,8 @@
 "| $$| $$  | $$| $$  |  $$$$//$$\  $/   | $$| $$ | $$ | $$
 "|__/|__/  |__/|__/   \___/ |__/ \_/    |__/|__/ |__/ |__/
 
-"use :set foldmethod=marker in vim
-"TODO: Add terrortylor/nvim-comment
+" use :set foldmethod=marker in vim
+" TODO: Add terrortylor/nvim-comment
 
 let mapleader = ' '
 
@@ -17,6 +17,7 @@ let mapleader = ' '
 
 luafile ~/.config/nvim/options.lua
 luafile ~/.config/nvim/plugin_settings/lsp.lua
+luafile ~/.config/nvim/plugin_settings/comment.lua
 luafile ~/.config/nvim/plugin_settings/twilight.lua
 luafile ~/.config/nvim/plugin_settings/which_key.lua
 luafile ~/.config/nvim/plugin_settings/todo-comments.lua
@@ -44,6 +45,7 @@ Plug 'morhetz/gruvbox'
 
 Plug '~/jump-ray'
 Plug '~/mark-ray'
+Plug 'terrortylor/nvim-comment'
 Plug 'tweekmonster/startuptime.vim'
 Plug 'max397574/nvim-whid'
 Plug 'folke/zen-mode.nvim'
@@ -56,7 +58,6 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'tpope/vim-surround'
 "Calculate average sum etc
 Plug 'drxcc/vim-vmath'
-Plug 'preservim/nerdcommenter'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'folke/todo-comments.nvim'
@@ -131,23 +132,6 @@ let g:compe.source.luasnip = v:true
 let g:compe.source.emoji = v:true
 "2}}}
 
-"{{{.............................................................. NERDTree
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-                \ 'Modified'  :'✹',
-                \ 'Staged'    :'✚',
-                \ 'Untracked' :'✭',
-                \ 'Renamed'   :'➜',
-                \ 'Unmerged'  :'═',
-                \ 'Deleted'   :'✖',
-                \ 'Dirty'     :'✗',
-                \ 'Ignored'   :'☒',
-                \ 'Clean'     :'✔︎',
-                \ 'Unknown'   :'?',
-                \ }
-
-let g:NERDTreeGitStatusUseNerdFonts = 1
-"2}}}
-
 "{{{.............................................................. VisualMulti
 
 let g:VM_maps = {}
@@ -173,39 +157,6 @@ xmap <left>  <Plug>SchleppLeft
 xmap <right> <Plug>SchleppRight
 "use D to move a copy of a visual selected block
 xmap D       <Plug>SchleppDupLeft
-"2}}}
-
-"{{{.............................................................. NERDCommenter
-
-"Create default mappings
-let g:NERDCreateDefaultMappings = 1
-
-"Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 0
-
-"Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-"Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-"Set a language to use its alternate delimiters by default
-let g:NERDAltDelims_java = 1
-
-"Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-
-"Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-"Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
-"Enable NERDCommenterToggle to check all selected lines is commented or not 
-let g:NERDToggleCheckAllLines = 1
-
-"use same mapping in insert mode 
-imap <leader>cc <ESC><leader>cc
 "2}}}
 
 "1}}}
@@ -242,6 +193,7 @@ augroup filetypes
     autocmd BufNewFile,BufRead,BufWinEnter *.lua set tabstop=2
     autocmd BufNewFile,BufRead,BufWinEnter *.py set tabstop=4
     autocmd BufNewFile,BufRead,BufWinEnter *.java set tabstop=4
+    autocmd BufNewFile,BufRead,BufWinEnter * set formatoptions-=o
     "class with filename and class main
     autocmd BufNewFile *.java
       \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>"
@@ -336,4 +288,5 @@ endfunction
 set nowrap
 "Square up visual selections...
 set virtualedit=block
+set formatoptions-=o
 "}}}
