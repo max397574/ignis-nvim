@@ -15,13 +15,6 @@ let mapleader = ' '
 "{{{============================================================== Source
 
 luafile ~/.config/nvim/future_init.lua
-source ~/.config/nvim/mapping.vim
-source ~/.config/nvim/spelling.vim
-let s:prefix = '~/.config/nvim/plugins'
-for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
-    execute 'source' s:fname
-endfor
-
 "}}}
 
 "{{{.............................................................. Compe

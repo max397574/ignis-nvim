@@ -52,3 +52,9 @@ Plug 'nvim-treesitter/playground'
 Plug 'romgrk/nvim-treesitter-context'
 
 call plug#end()
+
+let s:prefix = '~/.config/nvim/plugins'
+for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
+    execute 'source' s:fname
+endfor
+
