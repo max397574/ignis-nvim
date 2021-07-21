@@ -1,14 +1,12 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'morhetz/gruvbox'
-
 Plug '~/jump-ray'
 Plug '~/mark-ray'
 Plug 'terrortylor/nvim-comment'
-Plug 'tweekmonster/startuptime.vim'
-Plug 'max397574/nvim-whid'
-Plug 'folke/zen-mode.nvim'
-Plug 'folke/twilight.nvim'
+Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
+Plug 'folke/zen-mode.nvim', { 'on': 'ZenMode' }
+Plug 'folke/twilight.nvim', { 'on': 'ZenMode' }
 Plug 'rhysd/clever-f.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'folke/which-key.nvim'
@@ -17,7 +15,7 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'tpope/vim-surround'
 "Calculate average sum etc
 Plug 'drxcc/vim-vmath'
-Plug 'mbbill/undotree'
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'mhinz/vim-signify'
 Plug 'folke/todo-comments.nvim'
 Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
