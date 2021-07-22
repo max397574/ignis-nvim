@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox'
+Plug 'max397574/gruvbox'
 Plug '~/jump-ray'
 Plug '~/mark-ray'
 Plug 'terrortylor/nvim-comment'
