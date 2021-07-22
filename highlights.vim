@@ -1,4 +1,3 @@
-set background=dark
 "line number where cursor is has different color
 highlight CursorLineNr term=bold ctermfg=214 gui=bold guifg=#FABD2F
 highlight CursorLine ctermbg=237 guibg=#3C3836

@@ -1,6 +1,7 @@
 local opt = vim.opt
 
 opt.pumblend = 18
+opt.background = "dark"
 opt.cmdheight = 1
 opt.virtualedit="block"
 opt.expandtab = true
