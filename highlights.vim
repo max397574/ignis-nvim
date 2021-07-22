@@ -11,6 +11,7 @@ highlight       Search    ctermfg=White  ctermbg=Black  cterm=bold
 "the first search result
 highlight    IncSearch    ctermfg=White  ctermbg=grey   cterm=bold
 
+highlight markdownItalic gui=italic
 
 highlight GreenString guifg=#207245
 highlight BlueOperator guifg=#3572A5
