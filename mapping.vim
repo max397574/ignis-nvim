@@ -26,7 +26,7 @@ nnoremap <silent> <leader>trld :Trouble lsp_workspace_diagnostics<CR>
 "{{{Markdown
 nnoremap <silent> <leader>mdh1 :MdHeading1<CR>
 nnoremap <silent> <leader>mdh2 :MdHeading2<CR>
-nnoremap <silent> <leader>mdh3 :call MdHeading3()<CR>
+nnoremap <silent> <leader>mdh3 :MdHeading3<CR>
 nnoremap <silent> <leader>mda :call MdLink()<CR>
 nnoremap <silent> <leader>mdhr :call MdHorizontalRule()<CR>
 inoremap <silent> <leader>mdhr <ESC>:call MdHorizontalRule()<CR>

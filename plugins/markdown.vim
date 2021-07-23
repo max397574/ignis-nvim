@@ -1,7 +1,3 @@
-function! MdHeading3()
-    normal! 0i### 
-endfunction
-
 function! VisualItalic()
     normal! `<mm
     normal! `>
