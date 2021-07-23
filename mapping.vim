@@ -30,12 +30,12 @@ nnoremap <silent> <leader>mdh3 :MdHeading3<CR>
 nnoremap <silent> <leader>mda :call MdLink()<CR>
 nnoremap <silent> <leader>mdhr :call MdHorizontalRule()<CR>
 inoremap <silent> <leader>mdhr <ESC>:call MdHorizontalRule()<CR>
-nnoremap <silent> <leader>mdlu :call MdUnorderedList()<CR>
-nnoremap <silent> <leader>mdlo :call MdOrderedList()<CR>
-inoremap <silent> <leader>mdlu <ESC>:call MdUnorderedList()<CR>
-inoremap <silent> <leader>mdlo <ESC>:call MdOrderedList()<CR>
-nnoremap <silent> <leader>mdlt :call MdTaskList()<CR>
-inoremap <silent> <leader>mdlt <ESC>:call MdTaskList()<CR>
+nnoremap <silent> <leader>mdlu :MdUnorderedList<CR>
+nnoremap <silent> <leader>mdlo :MdOrderedList<CR>
+inoremap <silent> <leader>mdlu <ESC>:MdUnorderedList<CR>
+inoremap <silent> <leader>mdlo <ESC>:MdOrderedList<CR>
+nnoremap <silent> <leader>mdlt :MdTaskList<CR>
+inoremap <silent> <leader>mdlt <ESC>:MdTaskList<CR>
 vnoremap <silent> <leader>mdit :call VisualItalic()<CR>
 vnoremap <silent> <leader>mdbd :call VisualBold()<CR>
 "1}}}
