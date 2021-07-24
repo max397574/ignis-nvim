@@ -17,7 +17,15 @@ TreeSitter
 |-----------|----------------------|--------------------------------------|
 | <leader>p | go to previous usage |                                      |
 |-----------|----------------------|--------------------------------------|
-| <leader>a | swap_next            | swap current parameter with next     |
+| gsp       | swap next            | swap current parameter with next     |
 |-----------|----------------------|--------------------------------------|
-| <leader>A | swap_previous        | swap current parameter with previous |
+| gsP       | swap previous        | swap current parameter with previous |
+|-----------|----------------------|--------------------------------------|
+| df        | peek definition      | function                             |
+|-----------|----------------------|--------------------------------------|
+| dF        | peek definition      | class                                |
+|-----------|----------------------|--------------------------------------|
+| gsf       | swap next            | swap current function with next      |
+|-----------|----------------------|--------------------------------------|
+| gsF       | swap previous        | swap current function with previous  |
 |-----------|----------------------|--------------------------------------|
