@@ -89,10 +89,12 @@ require'nvim-treesitter.configs'.setup {
     swap = {
       enable = true,
       swap_next = {
-	["<leader>a"] = "@parameter.inner",
+	["gsp"] = "@parameter.inner",
+	["gsf"] = "@function.outer",
       },
       swap_previous = {
-	["<leader>A"] = "@parameter.inner",
+	["gsP"] = "@parameter.inner",
+	["gsF"] = "@function.outer",
       },
     },
     move = {
