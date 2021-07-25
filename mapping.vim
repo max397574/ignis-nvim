@@ -2,6 +2,7 @@
 nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
 nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
 
+vnoremap <leader>vm <ESC>:Vmath<CR>
 
 let g:VM_maps = {}
 let g:VM_maps["Add Cursor Down"]    = '<Leader>cd'   " new cursor down
