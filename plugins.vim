@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'max397574/gruvbox'
 Plug '~/jump-ray'
 Plug '~/mark-ray'
+Plug '~/vmath.nvim'
 Plug '~/lua_markdown'
 Plug 'terrortylor/nvim-comment'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
