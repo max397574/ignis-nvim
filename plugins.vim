@@ -59,3 +59,16 @@ for s:fname in glob(s:prefix . '/**/*.vim', 1, 1)
 endfor
 
 colorscheme gruvbox
+
+lua << EOF
+require('vmath_nvim').setup{
+show_sum = false,
+show_average = true,
+show_count = false,
+show_lowest = true,
+show_highest = false,
+show_range = true,
+show_median = true,
+debug = true,
+}
+EOF
