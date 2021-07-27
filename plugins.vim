@@ -69,6 +69,7 @@ show_lowest = true,
 show_highest = true,
 show_range = true,
 show_median = true,
-debug = true,
+debug = false,
+registers = true,
 }
 EOF
