@@ -2,6 +2,14 @@
 nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
 nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
 
+nnoremap J mzJ`z
+inoremap , ,<c-g>u
+inoremap ! !<c-g>u
+inoremap . .<c-g>u
+inoremap ? ?<c-g>u
+
+
+
 vnoremap <leader>vm <ESC>:Vmath<CR>
 
 let g:VM_maps = {}
