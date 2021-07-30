@@ -99,11 +99,15 @@ nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 xnoremap <S-TAB> :s/\%V/0<C-V><TAB>/<CR>gvg<C-A>gv:retab<ESC>gvI<C-G>u<ESC>gv/ <CR>:s/\%V /./<CR>
 
 vnoremap J :m '>+1<CR>gv=gv
+nnoremap <Leader>q :let @t = 'let @q = "' . @q<CR>:<C-f>o<ESC>"tp$a"<Esc>
 vnoremap K :m '<-2<CR>gv=gv
 inoremap <C-j> <ESC>:m .+1<CR>==
 inoremap <C-k> <ESC>:m .-2<CR>==
 nnoremap <leader>j :m .+1<CR>==
 nnoremap <leader>k :m .-2<CR>==
+nnoremap Q @q
+
+nnoremap S ciw
 
 nnoremap <leader>o o<ESC>k
 nnoremap <leader>O O<ESC>j
