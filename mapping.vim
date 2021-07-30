@@ -3,6 +3,9 @@ inoremap jj <ESC>
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
 
+" substitute on visual selection
+vnoremap <leader>s :s///g<LEFT><LEFT><LEFT>
+
 "{{{better undo
 inoremap , ,<c-g>u
 inoremap ! !<c-g>u
