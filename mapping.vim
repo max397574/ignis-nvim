@@ -1,6 +1,6 @@
 "add j and k with count to jumplist
-nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
-nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
+nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
+nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
 
 nnoremap J mzJ`z
 inoremap , ,<c-g>u
@@ -83,8 +83,6 @@ xnoremap ; ,
 
 xnoremap <BS> x
 nnoremap <silent> <leader>hp :LvimHelper<CR>
-nnoremap <silent> <leader>d :call MoveLineDown()<CR>
-nnoremap <silent> <leader>u :call MoveLineUp()<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 nnoremap <silent> <leader>ut :UndotreeToggle<CR>
 "paste over the current line with <C-P> in normal mode
@@ -99,8 +97,16 @@ nnoremap fzf :Files<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 "Shift-Tab in visual mode to number lines (numbered list)
 xnoremap <S-TAB> :s/\%V/0<C-V><TAB>/<CR>gvg<C-A>gv:retab<ESC>gvI<C-G>u<ESC>gv/ <CR>:s/\%V /./<CR>
-nnoremap <silent> <leader>O :call AddLineAbove()<CR>
-nnoremap <silent> <leader>o :call AddLineBelow()<CR>
+
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+inoremap <C-j> <ESC>:m .+1<CR>==
+inoremap <C-k> <ESC>:m .-2<CR>==
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
+
+nnoremap <leader>o o<ESC>k
+nnoremap <leader>O O<ESC>j
 nnoremap <leader>i i <ESC>l
 nnoremap <leader>a a <ESC>h
 
