@@ -33,10 +33,8 @@ opt.conceallevel = 0
 vim.api.nvim_exec([[
   set undodir=~/.vim/undodir
   set undofile
-  "use TreeSitter for folding
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
-  "function for custom fold text
   function! MyFoldText()
       let line = getline(v:foldstart)
       let folded_line_num = v:foldend - v:foldstart
@@ -44,12 +42,9 @@ vim.api.nvim_exec([[
       let fillcharcount = &textwidth - len(line_text) + 2
       return '+'. line_text . repeat('.', fillcharcount) . ' (' . folded_line_num . ' L)'
   endfunction
-  "use the text of the function above
   set foldtext=MyFoldText()
 ]],
 true)
 
-
 opt.joinspaces = false
-
 opt.fillchars = { eob = "~" }
