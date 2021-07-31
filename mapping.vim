@@ -2,6 +2,7 @@
 nnoremap <leader>tcff <cmd>Telescope find_files<CR>
 nnoremap <leader>tcts <cmd>Telescope treesitter<CR>
 nnoremap <leader>tcht <cmd>Telescope help_tags<CR>
+nnoremap <leader>tclg <cmd>Telescope live_grep<CR>
 "1}}}
 
 "{{{ changes of some keybindings
