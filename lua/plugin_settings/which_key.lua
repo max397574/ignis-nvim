@@ -77,6 +77,7 @@ wk.register({
     ff = { "Find Files" },
     ts = { "TreeSitter" },
     ht = { "Help Tags" },
+    lg = { "Live Grep" },
   },
   md = {
     name = "markdown",
