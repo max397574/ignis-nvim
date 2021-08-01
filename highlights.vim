@@ -24,7 +24,7 @@ highlight RedLoops guifg=#CC0000
 highlight GreenFunction guifg=#8ABB26 cterm=bold
 "1}}}
 
-highlight SignColumn ctermbg=237 guibg=#3C3836
+highlight SignColumn ctermbg=none guibg=none
 
 "{{{ Signify
 highlight SignifyLineChange ctermfg=108 ctermbg=237 guifg=#8EC07C guibg=#3C3836
