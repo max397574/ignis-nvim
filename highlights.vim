@@ -1,5 +1,5 @@
 "line number where cursor is has different color
-highlight CursorLineNr term=bold ctermfg=214 gui=bold guifg=#FABD2F
+highlight CursorLineNr term=bold ctermfg=214 gui=bold guifg=#FABD2F guibg=none ctermbg=none
 highlight CursorLine ctermbg=237 guibg=#3C3836
 highlight LineNr ctermfg=243 guifg=#7C6F64
 
