@@ -78,6 +78,7 @@ nnoremap <leader>k :m .-2<CR>==
 "}}}
 
 "{{{ Plugins
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <leader>trt :TroubleToggle<CR>
 nnoremap <silent> <leader>trtd :TodoTrouble<CR>
 nnoremap <silent> <leader>trld :Trouble lsp_workspace_diagnostics<CR>
