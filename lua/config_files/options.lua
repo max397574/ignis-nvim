@@ -1,5 +1,7 @@
 local opt = vim.opt
 
+opt.runtimepath = opt.runtimepath + '~/.config/nvim/queries'
+
 opt.pumblend = 18
 opt.background = "dark"
 opt.cmdheight = 1
