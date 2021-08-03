@@ -104,7 +104,7 @@ nnoremap <silent> <leader>hp :LvimHelper<CR>
 nnoremap <silent> <leader>ut :UndotreeToggle<CR>
 "}}}
 
-"{{{ Inster empty space/lines
+"{{{ Insert empty space/lines
 " insert empty line below/above
 nnoremap <leader>o o<ESC>k
 nnoremap <leader>O O<ESC>j
