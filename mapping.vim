@@ -9,6 +9,8 @@ nnoremap <leader>tclg <cmd>Telescope live_grep<CR>
 inoremap jj <ESC>
 " easily write file
 nnoremap <leader>w :w<CR>
+" paste over selected text without overwriting yank register
+vnoremap <leader>p "_dP
 " execute macro q
 nnoremap Q @q
 " edit macro q
