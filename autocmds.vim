@@ -25,8 +25,7 @@ augroup filetypes
     autocmd BufNewFile,BufRead,BufWinEnter *.md set conceallevel=0
     autocmd BufNewFile,BufRead,BufWinEnter *.lua set shiftwidth=2
     autocmd BufNewFile,BufRead,BufWinEnter *.lua set tabstop=2
-    autocmd BufNewFile,BufRead,BufWinEnter *.py set tabstop=4
-    autocmd BufNewFile,BufRead,BufWinEnter *.java set tabstop=4
+    autocmd BufNewFile,BufRead,BufWinEnter *.{java,py} set tabstop=4
     autocmd BufNewFile,BufRead,BufWinEnter * set formatoptions-=o
     autocmd BufNewFile *.java
       \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>"
