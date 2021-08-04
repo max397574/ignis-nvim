@@ -1,25 +1,5 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'jiangmiao/auto-pairs'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'tpope/vim-surround'
-"Calculate average sum etc
-Plug 'drxcc/vim-vmath'
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'mhinz/vim-signify'
-Plug 'folke/todo-comments.nvim'
-Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
-Plug 'sharkdp/bat'
-"telescope dependency
-Plug 'nvim-lua/popup.nvim'
-"telescope dependency
-Plug 'nvim-lua/plenary.nvim'
-"a file explorer
-Plug 'nvim-telescope/telescope.nvim'
-"more icons
-Plug 'ryanoasis/vim-devicons'
-"even more icons
-Plug 'kyazdani42/nvim-web-devicons'
 "easily display help files
 Plug 'lvim-tech/lvim-helper'
 Plug 'norcalli/nvim-colorizer.lua'
