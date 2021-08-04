@@ -4,7 +4,7 @@ I recently switched to `init.lua`.
 At the moment there are still some files in vimscript.
 
 - [x] Switch to `init.lua`
-- [x] Change more files to lua
+- [ ] Change more files to lua
 - [x] Configure TreeSitter
 - [x] Create mappings for TreeSitter
 - [x] Switch to lua plugin manager
