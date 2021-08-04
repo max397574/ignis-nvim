@@ -672,4 +672,3 @@ return require("packer").startup(function(use)
 		registers = true,
 	})
 end)
-
