@@ -27,12 +27,12 @@ highlight GreenFunction guifg=#8ABB26 cterm=bold
 highlight SignColumn ctermbg=none guibg=none
 
 "{{{ Signify
-highlight SignifyLineChange ctermfg=108 ctermbg=237 guifg=#8EC07C guibg=#3C3836
-highlight SignifySignChange ctermfg=108 ctermbg=237 guifg=#8EC07C guibg=#3C3836
-highlight SignifyLineAdd ctermfg=142 ctermbg=237 guifg=#B8BB26 guibg=#3C3836
-highlight SignifySignAdd ctermfg=142 ctermbg=237 guifg=#B8BB26 guibg=#3C3836
-highlight SignifyLineDelete guifg=#D82B26 guibg=#3C3836
-highlight SignifySignDelete guifg=#D82B26 guibg=#3C3836
+highlight SignifyLineChange ctermfg=108 ctermbg=none guifg=#8EC07C guibg=none
+highlight SignifySignChange ctermfg=108 ctermbg=none guifg=#8EC07C guibg=none
+highlight SignifyLineAdd ctermfg=142 ctermbg=none guifg=#B8BB26 guibg=none
+highlight SignifySignAdd ctermfg=142 ctermbg=none guifg=#B8BB26 guibg=none
+highlight SignifyLineDelete guifg=#D82B26 guibg=none
+highlight SignifySignDelete guifg=#D82B26 guibg=none
 "1}}}
 
 "{{{ Lsp
