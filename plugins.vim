@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
 Plug '~/jump-ray'
 Plug '~/mark-ray'
 Plug '~/vmath.nvim'
