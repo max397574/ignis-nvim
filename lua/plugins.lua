@@ -1,16 +1,20 @@
 return require("packer").startup(function(use)
-	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
+  -- colorscheme
 	use("morhetz/gruvbox")
 	use("~/jump-ray")
 	use("~/mark-ray")
 	use("~/vmath.nvim")
+  -- some functions to help with markdown
 	use("~/lua_markdown")
+  -- easily comment out code
 	use("terrortylor/nvim-comment")
+  -- breakup of startup time
 	use({ "tweekmonster/startuptime.vim", cmd = { "StartupTime" } })
+  -- distraction free writing
 	use("folke/zen-mode.nvim")
-	use({
-		"folke/twilight.nvim",
+  -- dimm inactive parts of code
+	use({"folke/twilight.nvim",
 		config = function()
 			require("twilight").setup({
 				dimming = {
@@ -28,10 +32,12 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
+  -- easier use of f/F and t/T
 	use("rhysd/clever-f.vim")
+  -- easily create md tables
 	use("dhruvasagar/vim-table-mode")
-	use({
-		"folke/which-key.nvim",
+  -- display keybindings help
+	use({"folke/which-key.nvim",
 		config = function()
 			require("which-key").setup({
 				{
@@ -97,8 +103,8 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
-	use({
-		"folke/todo-comments.nvim",
+  -- highlight and search todo comments
+	use({"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		config = function()
 			require("todo-comments").setup({
@@ -158,24 +164,40 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
+  -- automatically match parantheses etc
 	use("jiangmiao/auto-pairs")
+  -- multiple cursors
 	use("mg979/vim-visual-multi")
+  -- change,add and delete surroundings
 	use("tpope/vim-surround")
+  -- display last undos
 	use("mbbill/undotree")
+  -- display some infos in signcolumn
 	use("mhinz/vim-signify")
+  -- run snippets of code
 	use("michaelb/sniprun")
 	use("sharkdp/bat")
+  -- more icons
 	use("ryanoasis/vim-devicons")
+  -- even more icons
 	use("kyazdani42/nvim-web-devicons")
-	use({ "nvim-telescope/telescope.nvim", requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } } })
+  -- a file explorer
+	use({ "nvim-telescope/telescope.nvim",
+    requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } } })
+  -- display helpfiles
 	use("lvim-tech/lvim-helper")
+  -- colorize color codes
 	use("norcalli/nvim-colorizer.lua")
+  -- completition
 	use("hrsh7th/nvim-compe")
+  -- easily configure lsp
 	use("neovim/nvim-lspconfig")
+  -- easy install for lsp servers
 	use("kabouzeid/nvim-lspinstall")
+  -- colors for lsp diagnostics
 	use("folke/lsp-colors.nvim")
-	use({
-		"folke/trouble.nvim",
+  -- list for lsp,quickfix,telescope etc
+	use({"folke/trouble.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = function()
 			require("trouble").setup({
@@ -224,12 +246,19 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
+  -- parsers for code
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+  -- refractor code with TS
 	use("nvim-treesitter/nvim-treesitter-refactor")
+  -- additional textobjects with TS
 	use("nvim-treesitter/nvim-treesitter-textobjects")
+  -- select code
 	use("RRethy/nvim-treesitter-textsubjects")
+  -- TS based colored parantheses
 	use("p00f/nvim-ts-rainbow")
+  -- explore syntax tree and test TS queries
 	use("nvim-treesitter/playground")
+  -- display context of current function
 	use("romgrk/nvim-treesitter-context")
 
 	require("telescope").setup({
@@ -276,6 +305,7 @@ return require("packer").startup(function(use)
 			buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
 		},
 	})
+
 	local home = os.getenv("HOME")
 	require("lvim-helper").setup({
 		files = {
