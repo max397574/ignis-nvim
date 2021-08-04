@@ -6,6 +6,7 @@ nnoremap <leader>tclg <cmd>Telescope live_grep<CR>
 "1}}}
 
 "{{{ changes of some keybindings
+vnoremap jk <ESC>
 inoremap jj <ESC>
 " easily write file
 nnoremap <leader>w :w<CR>
