@@ -1,17 +1,5 @@
 call plug#begin('~/.vim/plugged')
 
-" Plug 'morhetz/gruvbox'
-Plug '~/jump-ray'
-Plug '~/mark-ray'
-Plug '~/vmath.nvim'
-Plug '~/lua_markdown'
-Plug 'terrortylor/nvim-comment'
-Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
-Plug 'folke/zen-mode.nvim', { 'on': 'ZenMode' }
-Plug 'folke/twilight.nvim', { 'on': 'ZenMode' }
-Plug 'rhysd/clever-f.vim'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'folke/which-key.nvim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'tpope/vim-surround'
