@@ -300,9 +300,6 @@ return require("packer").startup(function(use)
 			file_previewer = require("telescope.previewers").vim_buffer_cat.new,
 			grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 			qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-
-			-- Developer configurations: Not meant for general override
-			buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
 		},
 	})
 
@@ -338,9 +335,11 @@ return require("packer").startup(function(use)
 			bufhidden = "hide",
 		},
 	})
+
 	require("colorizer").setup({
 		"*",
 	}, { mode = "foreground" })
+
 	require("compe").setup({
 		enabled = true,
 		autocomplete = true,
@@ -378,13 +377,14 @@ return require("packer").startup(function(use)
 			emoji = true,
 		},
 	})
+
 	require("lspconfig").pyright.setup({
 		flags = {
 			debounce_text_changes = 500,
 		},
 	})
 
-	require("lspinstall").setup() -- important
+	require("lspinstall").setup()
 
 	require("lspconfig").sumneko_lua.setup({
 		settings = {
@@ -701,4 +701,5 @@ return require("packer").startup(function(use)
 		debug = false,
 		registers = true,
 	})
+
 end)
