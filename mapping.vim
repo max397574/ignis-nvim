@@ -66,13 +66,8 @@ xnoremap  <C-P> "*pgv
 xnoremap <S-TAB> :s/\%V/0<C-V><TAB>/<CR>gvg<C-A>gv:retab<ESC>gvI<C-G>u<ESC>gv/ <CR>:s/\%V /./<CR>
 " move throught completitions with tab
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" remove highlighting from search
-nnoremap <silent> nh :nohlsearch<CR>
 " search and replace in whole file
 nnoremap S  :%s///g<LEFT><LEFT><LEFT>
-" move visual blocks up and down
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
 " move lines up and down in visual and normal mode
 inoremap <C-j> <ESC>:m .+1<CR>==i
 inoremap <C-k> <ESC>:m .-2<CR>==i
