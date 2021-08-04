@@ -102,6 +102,9 @@ return require("packer").startup(function(use)
   use({'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
 })
+  use("lvim-tech/lvim-helper")
+  use("norcalli/nvim-colorizer.lua")
+  use("hrsh7th/nvim-compe")
 
 require('telescope').setup{
   defaults = {
@@ -147,5 +150,80 @@ require('telescope').setup{
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
   }
 }
+local home = os.getenv('HOME')
+require('lvim-helper').setup({
+    files = {
+	home .. "/.config/nvim/vimhelp/treesitter.md",
+
+    },
+    width = 80,
+    side = 'right',
+    current_file = 1,
+    winopts = {
+        relativenumber = false,
+        number = false,
+        list = false,
+        winfixwidth = true,
+        winfixheight = true,
+        foldenable = false,
+        spell = false,
+        signcolumn = 'no',
+        foldmethod = 'manual',
+        foldcolumn = '0',
+        cursorcolumn = false,
+        colorcolumn = '0',
+        wrap = false,
+        winhl = table.concat({'Normal:LvimHelperNormal'}, ',')
+    },
+    bufopts = {
+        swapfile = false,
+        buftype = 'nofile',
+        modifiable = false,
+        filetype = 'LvimHelper',
+        bufhidden = 'hide'
+    }
+})
+require'colorizer'.setup({
+  '*';
+}, { mode = 'foreground' })
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  resolve_timeout = 800;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = {
+    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+    max_width = 120,
+    min_width = 60,
+    max_height = math.floor(vim.o.lines * 0.3),
+    min_height = 1,
+  };
+
+  source = {
+    path = true;
+    buffer = true;
+    calc = true;
+    nvim_lsp = {
+      max_num_results = 5;
+      max_line = 100;
+      };
+    nvim_lua = true;
+    vsnip = true;
+    ultisnips = true;
+    luasnip = true;
+    emoji = true;
+  };
+}
+
+
 
 end)

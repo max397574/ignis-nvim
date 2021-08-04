@@ -1,9 +1,5 @@
 call plug#begin('~/.vim/plugged')
 
-"easily display help files
-Plug 'lvim-tech/lvim-helper'
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'hrsh7th/nvim-compe'
 "nvim lsp
 Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
