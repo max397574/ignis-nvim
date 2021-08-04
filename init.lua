@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 
+require("plugins")
 require("config_files.options")
 require("plugin_settings.colorizer")
 require("plugin_settings.comment")
