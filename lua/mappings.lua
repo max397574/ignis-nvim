@@ -1,6 +1,7 @@
 local map = vim.api.nvim_set_keymap
 local nore_silent = { noremap = true, silent = true }
 local nore = { noremap = true }
+local silent = { silent = true }
 
 -- remove highlighting from search
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
@@ -15,8 +16,10 @@ map("n", "N", "Nzzzv:call HLNext(0.4)<CR>", nore_silent)
 -- move visual blocks up and down
 map("v", "J", ":m '>+1<CR>gv=gv", nore_silent)
 map("v", "K", ":m '<-2<CR>gv=gv", nore_silent)
+-- easier escape
 map("v", "jk", "<ESC>", nore)
 map("i", "jj", "<ESC>", nore)
+-- easy save
 map("n", "<leader>w", ":w<CR>", nore)
 -- paste over selected text without overwriting yank register
 map("v", "<leader>p", "_dP", nore)
@@ -53,6 +56,11 @@ map("i", ",", ",<c-g>u", nore)
 map("i", "!", "!<c-g>u", nore)
 map("i", ".", ".<c-g>u", nore)
 map("i", "?", "?<c-g>u", nore)
+-- move lines up and down in visual and normal mode
+map("i", "<C-j>", "<ESC>:m .+1<CR>==i", nore)
+map("i", "<C-k>", "<ESC>:m .-2<CR>==i", nore)
+map("n", "<leader>j", ":m .+1<CR>==", nore_silent)
+map("n", "<leader>k", ":m .-2<CR>==", nore_silent)
 -- Snip Run
 map("n", "<leader>sr", ":SnipRun<CR>", nore_silent)
 map("n", "<leader>sc", ":SnipClose<CR>", nore_silent)
