@@ -179,7 +179,6 @@ return require("packer").startup(function(use)
 	use("mhinz/vim-signify")
 	-- run snippets of code
 	use("michaelb/sniprun")
-	use("sharkdp/bat")
 	-- more icons
 	use("ryanoasis/vim-devicons")
 	-- even more icons
