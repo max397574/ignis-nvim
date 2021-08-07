@@ -15,8 +15,3 @@ function! VisualBold()
     normal! i**
     normal! `m
 endfunction
-
-function! MdHorizontalRule()
-    normal! o---
-    normal! j
-endfunction
