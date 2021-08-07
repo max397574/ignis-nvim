@@ -32,12 +32,6 @@ nnoremap <silent> <leader>j :m .+1<CR>==
 nnoremap <silent> <leader>k :m .-2<CR>==
 "}}}
 
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> <leader>trt :TroubleToggle<CR>
-nnoremap <silent> <leader>trtd :TodoTrouble<CR>
-nnoremap <silent> <leader>trld :Trouble lsp_workspace_diagnostics<CR>
-omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
-vnoremap <silent> m :lua require('tsht').nodes()<CR>
 let g:VM_maps = {}
 let g:VM_maps["Add Cursor Down"]    = '<Leader>cd'   " new cursor down
 let g:VM_maps["Add Cursor Up"]      = '<Leader>cu'   " new cursor up

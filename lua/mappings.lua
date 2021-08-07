@@ -42,6 +42,8 @@ map("i", "<leader>mdlt", "<ESC>MdTaskList", nore_silent)
 map("v", "<leader>s", ":s///g<LEFT><LEFT><LEFT>", nore)
 -- copy to system clipboard
 map("n", "<leader>y", "\"+y", nore)
+-- move right
+map("i", "kk", "<RIGHT>", nore)
 -- use vmath on visually selected area
 map("v", "<leader>vm", "<ESC>:Vmath<CR>", nore)
 -- DistractionFree writing
@@ -50,3 +52,13 @@ map("n", "<leader>df", "ZenMode<CR>", nore_silent)
 map("n", "<leader>hp", ":LvimHelper<CR>", nore_silent)
 -- toggle undotree
 map("n", "<leader>ut", ":UndotreeToggle<CR>", nore_silent)
+map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", nore)
+-- toggle trouble
+map("n", "<leader>trt", ":TroubleToggle<CR>", nore_silent)
+-- show todo items in trouble window
+map("n", "<leader>trtd", ":TroubleTodo<CR>", nore_silent)
+-- lsp diagnostics in trouble
+map("n", "<leader>trld", ":Trouble lsp_workspace_diagnostics<CR>", nore_silent)
+-- help from ts with textobjects
+map("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
+map("v", "m", ":<C-U>lua require('tsht').nodes()<CR>", nore_silent)
