@@ -8,6 +8,7 @@ vim.cmd("source ~/.config/nvim/mapping.vim")
 require("mappings")
 require("autocommands")
 vim.cmd("source ~/.config/nvim/autocmds.vim")
+vim.cmd("source ~/.config/nvim/random.vim")
 vim.cmd("source ~/.config/nvim/highlights.vim")
 
 vim.cmd([[
