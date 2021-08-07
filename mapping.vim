@@ -71,8 +71,8 @@ nnoremap S  :%s///g<LEFT><LEFT><LEFT>
 " move lines up and down in visual and normal mode
 inoremap <C-j> <ESC>:m .+1<CR>==i
 inoremap <C-k> <ESC>:m .-2<CR>==i
-nnoremap <leader>j :m .+1<CR>==
-nnoremap <leader>k :m .-2<CR>==
+nnoremap <silent> <leader>j :m .+1<CR>==
+nnoremap <silent> <leader>k :m .-2<CR>==
 "}}}
 
 "{{{ Plugins
