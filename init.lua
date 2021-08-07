@@ -6,7 +6,6 @@ vim.cmd("colorscheme gruvbox")
 vim.cmd("source ~/.config/nvim/tablemode.vim")
 require("mappings")
 require("autocommands")
-vim.cmd("source ~/.config/nvim/autocmds.vim")
 vim.cmd("source ~/.config/nvim/random.vim")
 vim.cmd("source ~/.config/nvim/highlights.vim")
 
