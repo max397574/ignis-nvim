@@ -1,20 +1,21 @@
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
-  -- colorscheme
+	-- colorscheme
 	use("morhetz/gruvbox")
 	use("~/jump-ray")
 	use("~/mark-ray")
 	use("~/vmath.nvim")
-  -- some functions to help with markdown
+	-- some functions to help with markdown
 	use("~/lua_markdown")
-  -- easily comment out code
+	-- easily comment out code
 	use("terrortylor/nvim-comment")
-  -- breakup of startup time
+	-- breakup of startup time
 	use({ "tweekmonster/startuptime.vim", cmd = { "StartupTime" } })
-  -- distraction free writing
+	-- distraction free writing
 	use("folke/zen-mode.nvim")
-  -- dimm inactive parts of code
-	use({"folke/twilight.nvim",
+	-- dimm inactive parts of code
+	use({
+		"folke/twilight.nvim",
 		config = function()
 			require("twilight").setup({
 				dimming = {
@@ -32,12 +33,13 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
-  -- easier use of f/F and t/T
+	-- easier use of f/F and t/T
 	use("rhysd/clever-f.vim")
-  -- easily create md tables
+	-- easily create md tables
 	use("dhruvasagar/vim-table-mode")
-  -- display keybindings help
-	use({"folke/which-key.nvim",
+	-- display keybindings help
+	use({
+		"folke/which-key.nvim",
 		config = function()
 			require("which-key").setup({
 				{
@@ -103,8 +105,9 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
-  -- highlight and search todo comments
-	use({"folke/todo-comments.nvim",
+	-- highlight and search todo comments
+	use({
+		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		config = function()
 			require("todo-comments").setup({
@@ -164,40 +167,48 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
-  -- automatically match parantheses etc
+	-- automatically match parantheses etc
 	use("jiangmiao/auto-pairs")
-  -- multiple cursors
+	-- multiple cursors
 	use("mg979/vim-visual-multi")
-  -- change,add and delete surroundings
+	-- change,add and delete surroundings
 	use("tpope/vim-surround")
-  -- display last undos
+	-- display last undos
 	use("mbbill/undotree")
-  -- display some infos in signcolumn
+	-- display some infos in signcolumn
 	use("mhinz/vim-signify")
-  -- run snippets of code
+	-- run snippets of code
 	use("michaelb/sniprun")
 	use("sharkdp/bat")
-  -- more icons
+	-- more icons
 	use("ryanoasis/vim-devicons")
-  -- even more icons
+	-- even more icons
 	use("kyazdani42/nvim-web-devicons")
-  -- a file explorer
-	use({ "nvim-telescope/telescope.nvim",
-    requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" }, { "sharkdp/bat" },{ "kyazdani42/nvim-web-devicons" } } })
-  -- display helpfiles
+	-- a file explorer
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = {
+			{ "nvim-lua/popup.nvim" },
+			{ "nvim-lua/plenary.nvim" },
+			{ "sharkdp/bat" },
+			{ "kyazdani42/nvim-web-devicons" },
+		},
+	})
+	-- display helpfiles
 	use("lvim-tech/lvim-helper")
-  -- colorize color codes
+	-- colorize color codes
 	use("norcalli/nvim-colorizer.lua")
-  -- completition
+	-- completition
 	use("hrsh7th/nvim-compe")
-  -- easily configure lsp
+	-- easily configure lsp
 	use("neovim/nvim-lspconfig")
-  -- easy install for lsp servers
+	-- easy install for lsp servers
 	use("kabouzeid/nvim-lspinstall")
-  -- colors for lsp diagnostics
+	-- colors for lsp diagnostics
 	use("folke/lsp-colors.nvim")
-  -- list for lsp,quickfix,telescope etc
-	use({"folke/trouble.nvim",
+	-- list for lsp,quickfix,telescope etc
+	use({
+		"folke/trouble.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = function()
 			require("trouble").setup({
@@ -246,20 +257,21 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
-  -- parsers for code
+	-- parsers for code
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-  -- refractor code with TS
+	-- refractor code with TS
 	use("nvim-treesitter/nvim-treesitter-refactor")
-  -- additional textobjects with TS
+	-- additional textobjects with TS
 	use("nvim-treesitter/nvim-treesitter-textobjects")
-  -- select code
+	-- select code
 	use("RRethy/nvim-treesitter-textsubjects")
-  -- TS based colored parantheses
+	-- TS based colored parantheses
 	use("p00f/nvim-ts-rainbow")
-  -- explore syntax tree and test TS queries
+	-- explore syntax tree and test TS queries
 	use("nvim-treesitter/playground")
-  -- display context of current function
+	-- display context of current function
 	use("romgrk/nvim-treesitter-context")
+	use("mfussenegger/nvim-ts-hint-textobject")
 
 	require("telescope").setup({
 		defaults = {
@@ -292,7 +304,7 @@ return require("packer").startup(function(use)
 			generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 			winblend = 0,
 			border = {},
-      borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+			borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 			color_devicons = true,
 			use_less = true,
 			path_display = {},
@@ -701,5 +713,4 @@ return require("packer").startup(function(use)
 		debug = false,
 		registers = true,
 	})
-
 end)
