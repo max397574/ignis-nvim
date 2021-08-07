@@ -41,4 +41,12 @@ map("i", "<leader>mdlt", "<ESC>MdTaskList", nore_silent)
 -- substitute on visual selection
 map("v", "<leader>s", ":s///g<LEFT><LEFT><LEFT>", nore)
 -- copy to system clipboard
-map("n", "<leader><", "\"+y", nore)
+map("n", "<leader>y", "\"+y", nore)
+-- use vmath on visually selected area
+map("v", "<leader>vm", "<ESC>:Vmath<CR>", nore)
+-- DistractionFree writing
+map("n", "<leader>df", "ZenMode<CR>", nore_silent)
+-- open help files
+map("n", "<leader>hp", ":LvimHelper<CR>", nore_silent)
+-- toggle undotree
+map("n", "<leader>ut", ":UndotreeToggle<CR>", nore_silent)

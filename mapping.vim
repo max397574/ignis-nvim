@@ -32,7 +32,6 @@ nnoremap <silent> <leader>j :m .+1<CR>==
 nnoremap <silent> <leader>k :m .-2<CR>==
 "}}}
 
-"{{{ Plugins
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <leader>trt :TroubleToggle<CR>
 nnoremap <silent> <leader>trtd :TodoTrouble<CR>
@@ -49,15 +48,6 @@ nnoremap <silent> <leader>sr :SnipRun<CR>
 nnoremap <silent> <leader>sc :SnipClose<CR>
 " run snippet
 vmap <leader>sr <Plug>SnipRun
-" use vmath on visually selected area
-vnoremap <leader>vm <ESC>:Vmath<CR>
-"DistractionFree writing
-nnoremap <silent> <leader>df :ZenMode<CR>
-" open help files
-nnoremap <silent> <leader>hp :LvimHelper<CR>
-" toggle undotree
-nnoremap <silent> <leader>ut :UndotreeToggle<CR>
-"}}}
 
 "{{{ Insert empty space/lines
 " insert empty line below/above
