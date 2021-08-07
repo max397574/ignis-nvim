@@ -23,7 +23,7 @@ map("v", "<leader>p", "_dP", nore)
 -- execute macro q
 map("n", "Q", "@q", nore)
 -- edit macro q
-map("n", "<leader>q", ":let @t = 'let @q = \"' . @q<CR>:<C-f>o<ESC>\"tp$a\"<Esc>", nore)
+map("n", "<leader>q", ':let @t = \'let @q = "\' . @q<CR>:<C-f>o<ESC>"tp$a"<Esc>', nore)
 -- don't move cursor down when joining lines
 map("n", "J", "mzJ`z", nore)
 map("x", "<BS>", "x", nore)
@@ -66,7 +66,7 @@ map("n", "<leader>a", "a <ESC>h", nore)
 -- substitute on visual selection
 map("v", "<leader>s", ":s///g<LEFT><LEFT><LEFT>", nore)
 -- copy to system clipboard
-map("n", "<leader>y", "\"+y", nore)
+map("n", "<leader>y", '"+y', nore)
 -- move right
 map("i", "kk", "<RIGHT>", nore)
 -- use vmath on visually selected area
