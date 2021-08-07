@@ -23,6 +23,8 @@ map("x", "<BS>", "x", nore)
 map("n", "<leader>ss", "V s", { noremap = false })
 -- and on whole file
 map("n", "<leader>S", "ggVG s", { noremap = false })
+-- and to the end of the file
+map("n", "<leader>sG", "VG s", { noremap = false })
 -- markdown
 map("n", "<leader>mdh1", ":MdHeading1<CR>", nore_silent)
 map("n", "<leader>mdh2", ":MdHeading2<CR>", nore_silent)
