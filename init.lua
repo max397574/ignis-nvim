@@ -3,7 +3,6 @@ vim.g.mapleader = " "
 require("config_files.options")
 require("plugins")
 vim.cmd("colorscheme gruvbox")
-vim.cmd("source ~/.config/nvim/tablemode.vim")
 require("mappings")
 require("autocommands")
 vim.cmd("source ~/.config/nvim/random.vim")
