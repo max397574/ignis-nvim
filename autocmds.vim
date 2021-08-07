@@ -1,9 +1,3 @@
-augroup SexNoArgs
-    autocmd!
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | Sex | wincmd j | close | endif
-augroup END
-
 augroup tab_completition
     autocmd!
     "use <Tab> to go through list of completitions
