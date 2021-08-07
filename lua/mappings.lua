@@ -75,6 +75,7 @@ map("n", "<leader>a", "a <ESC>h", nore)
 map("v", "<leader>s", ":s///g<LEFT><LEFT><LEFT>", nore)
 -- copy to system clipboard
 map("n", "<leader>y", '"+y', nore)
+map("n", "<leader>Y", 'gg"+yG', nore)
 -- move right
 map("i", "kk", "<RIGHT>", nore)
 -- use vmath on visually selected area
