@@ -15,16 +15,16 @@ long term:
                  == ==                     max397574 ~ git version 2.24.3 (Apple Git-128)
           ==               ==    @@@@@@    ----------------------------------------------
                @@@@@@@@@@       @@@@@@@@   Project: Vim_Config (3 branches)
-     ==    @@@@@@@@@@@@@@@@@    @@@@@@@@   HEAD: 56f567e (master, origin/master)
+     ==    @@@@@@@@@@@@@@@@@    @@@@@@@@   HEAD: 571f6bb (master, origin/master)
    ==    @@@@@@@@@@@@@@@@@@@@@   @@@@@@    Created: 2 months ago
-        @@@@@@@@@@@@@@@@@@@@@@@@           Languages: Lua (70.2 %) VimScript (29.8 %)
- ==    @@@@@@@@@@@@@@@@@@@@@@@@@@    ==    Authors: 98% max397574 464
+        @@@@@@@@@@@@@@@@@@@@@@@@           Languages: Lua (81.7 %) VimScript (18.3 %)
+ ==    @@@@@@@@@@@@@@@@@@@@@@@@@@    ==    Authors: 98% max397574 493
 ==    @@@@@@@@@@@@@@@@@@@@@@@@@@@@    ==            1% max397574 6
      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@        Last change: 2 minutes ago
 ==   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   ==   Repo: https://github.com/max397574/Vim_Config.git
-==   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   ==   Commits: 470
-     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@        Lines of code: 949
-==   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   ==   Size: 39.21 KiB (15 files)
+==   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   ==   Commits: 499
+     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@        Lines of code: 914
+==   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   ==   Size: 39.70 KiB (17 files)
 ==   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   ==
       @@@@@@@@@@@@@@@@@@@@@@@@@@@@
 ==     @@@@@@@@@@@@@@@@@@@@@@@@@     ==
@@ -44,20 +44,22 @@ The structure of the directory:
 ├── highlights.vim
 ├── init.lua
 ├── lua
+│   ├── autocommands.lua
 │   ├── config_files
 │   │   └── options.lua
 │   ├── mappings.lua
-│   └── plugins.lua
-├── mapping.vim
+│   ├── plugins.lua
+│   └── utils.lua
 ├── plugins
 │   ├── markdown.vim
 │   └── simplefunctions.vim
 ├── queries
+├── random.vim
 ├── tablemode.vim
 └── vimhelp
     └── treesitter.md
 
-5 directories, 12 files
+5 directories, 14 files
 ```
 
 Feel free to write something in the Discussions tab.
