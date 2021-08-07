@@ -31,11 +31,6 @@ augroup filetypes
       \ exe "normal Opublic class " . expand('%:t:r') . "{\npublic static void main(String[] args) {\n}\n}\<Esc>"
 augroup END
 
-augroup highlight_yank
-    autocmd!
-    au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
-augroup END
-
 let ErrorMsg='Duplicate edit session (readonly)'
 augroup NoSimultaneousEdits
     autocmd!
