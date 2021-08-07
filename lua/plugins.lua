@@ -271,6 +271,7 @@ return require("packer").startup(function(use)
 	use("nvim-treesitter/playground")
 	-- display context of current function
 	use("romgrk/nvim-treesitter-context")
+  -- hints for operators
 	use("mfussenegger/nvim-ts-hint-textobject")
 
 	require("telescope").setup({
