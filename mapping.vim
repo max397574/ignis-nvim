@@ -6,16 +6,6 @@ nnoremap <leader>tclg <cmd>Telescope live_grep<CR>
 "1}}}
 
 "{{{ changes of some keybindings
-vnoremap jk <ESC>
-inoremap jj <ESC>
-" easily write file
-nnoremap <leader>w :w<CR>
-" paste over selected text without overwriting yank register
-vnoremap <leader>p "_dP
-" execute macro q
-nnoremap Q @q
-" edit macro q
-nnoremap <Leader>q :let @t = 'let @q = "' . @q<CR>:<C-f>o<ESC>"tp$a"<Esc>
 "add j and k with count to jumplist
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
