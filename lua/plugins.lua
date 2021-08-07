@@ -183,7 +183,7 @@ return require("packer").startup(function(use)
 	use("kyazdani42/nvim-web-devicons")
   -- a file explorer
 	use({ "nvim-telescope/telescope.nvim",
-    requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } } })
+    requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" }, { "sharkdp/bat" },{ "kyazdani42/nvim-web-devicons" } } })
   -- display helpfiles
 	use("lvim-tech/lvim-helper")
   -- colorize color codes
@@ -292,7 +292,7 @@ return require("packer").startup(function(use)
 			generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 			winblend = 0,
 			border = {},
-			borderchars = { "‚îÄ", "‚îÇ", "‚îÄ", "‚îÇ", "‚ï≠", "‚ïÆ", "‚ïØ", "‚ï∞" },
+      borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
 			color_devicons = true,
 			use_less = true,
 			path_display = {},
