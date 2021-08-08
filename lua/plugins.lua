@@ -7,7 +7,7 @@ return require("packer").startup(function(use)
   use("morhetz/gruvbox")
 
   -- calculate math figures on visual selection
-  use("~/vmath.nvim")
+  use({"~/vmath.nvim", cmd = { "Vmath" } })
 
   -- some functions to help with markdown
   use("~/lua_markdown")
@@ -19,10 +19,11 @@ return require("packer").startup(function(use)
   use({ "tweekmonster/startuptime.vim", cmd = { "StartupTime" } })
 
   -- distraction free writing
-  use("folke/zen-mode.nvim")
+  use({"folke/zen-mode.nvim", cmd = { "ZenMode" } })
 
   -- dimm inactive parts of code
   use({"folke/twilight.nvim",
+    cmd = { "ZenMode" },
     config = function()
       require("twilight").setup({
         dimming = {
@@ -187,7 +188,7 @@ return require("packer").startup(function(use)
   })
 
   -- automatically match parantheses etc
-  use("jiangmiao/auto-pairs")
+  use({"jiangmiao/auto-pairs", event = { "InsertEnter" } })
 
   -- multiple cursors
   use("mg979/vim-visual-multi")
@@ -196,7 +197,7 @@ return require("packer").startup(function(use)
   use("tpope/vim-surround")
 
   -- display last undos
-  use("mbbill/undotree")
+  use({"mbbill/undotree", cmd = { "UndotreeToggle" } })
 
   -- display some infos in signcolumn
   use("mhinz/vim-signify")
@@ -227,7 +228,7 @@ return require("packer").startup(function(use)
   use("norcalli/nvim-colorizer.lua")
 
   -- completition
-  use("hrsh7th/nvim-compe")
+  use({"hrsh7th/nvim-compe", event = { "InsertEnter" } })
 
   -- easily configure lsp
   use("neovim/nvim-lspconfig")
