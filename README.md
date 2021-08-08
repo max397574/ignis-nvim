@@ -8,6 +8,7 @@ At the moment there are still some files in vimscript.
 - [x] Configure TreeSitter
 - [x] Create mappings for TreeSitter
 - [x] Switch to lua plugin manager
+- [x] Lazy Loading
 
 long term:
 - [ ] Create lua functions/plugins
