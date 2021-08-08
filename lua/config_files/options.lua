@@ -19,6 +19,7 @@ opt.ignorecase = true
 opt.smartcase = true
 opt.hidden = true
 opt.timeoutlen = 300
+opt.compatible = false
 opt.wrap = true
 opt.breakindent = true
 opt.showbreak = string.rep(" ", 3)
@@ -32,21 +33,11 @@ opt.signcolumn = "yes"
 opt.termguicolors = true
 opt.conceallevel = 0
 
-vim.api.nvim_exec([[
-  set undodir=~/.vim/undodir
-  set undofile
-  set foldmethod=expr
-  set foldexpr=nvim_treesitter#foldexpr()
-  function! MyFoldText()
-      let line = getline(v:foldstart)
-      let folded_line_num = v:foldend - v:foldstart
-      let line_text = substitute(line, '^"{\+', '', 'g')
-      let fillcharcount = &textwidth - len(line_text) + 2
-      return '+'. line_text . repeat('.', fillcharcount) . ' (' . folded_line_num . ' L)'
-  endfunction
-  set foldtext=MyFoldText()
-]],
-true)
+opt.foldmethod="expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+opt.undodir = vim.fn.expand('~') .. '/.vim/undodir'
+opt.undofile = true
 
 opt.joinspaces = false
 opt.fillchars = { eob = "~" }
