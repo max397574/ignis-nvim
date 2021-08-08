@@ -23,7 +23,7 @@ opt.wrap = true
 opt.breakindent = true
 opt.showbreak = string.rep(" ", 3)
 opt.linebreak = true
-opt.mouse="n"
+opt.mouse="nv"
 
 opt.foldlevel = 0
 opt.joinspaces = false
