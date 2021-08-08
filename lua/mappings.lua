@@ -81,7 +81,7 @@ map("i", "kk", "<RIGHT>", nore)
 -- use vmath on visually selected area
 map("v", "<leader>vm", "<ESC>:Vmath<CR>", nore)
 -- DistractionFree writing
-map("n", "<leader>df", "ZenMode<CR>", nore_silent)
+map("n", "<leader>df", ":ZenMode<CR>", nore_silent)
 -- open help files
 map("n", "<leader>hp", ":LvimHelper<CR>", nore_silent)
 -- toggle undotree
