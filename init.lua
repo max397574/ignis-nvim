@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 
-require("config_files.options")
+require("options")
 -- plugins (packer) and settings
 require("plugins")
 vim.cmd("colorscheme gruvbox")
