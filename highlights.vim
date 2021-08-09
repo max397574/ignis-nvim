@@ -27,8 +27,8 @@ highlight GreenFunction guifg=#8ABB26 cterm=bold
 highlight SignColumn ctermbg=none guibg=none
 
 "{{{ Signify
-highlight SignifyLineChange ctermfg=108 ctermbg=none guifg=#8EC07C guibg=none
-highlight SignifySignChange ctermfg=108 ctermbg=none guifg=#8EC07C guibg=none
+highlight SignifyLineChange ctermfg=108 ctermbg=none guifg=#FE8019 guibg=none
+highlight SignifySignChange ctermfg=108 ctermbg=none guifg=#FE8019 guibg=none
 highlight SignifyLineAdd ctermfg=142 ctermbg=none guifg=#B8BB26 guibg=none
 highlight SignifySignAdd ctermfg=142 ctermbg=none guifg=#B8BB26 guibg=none
 highlight SignifyLineDelete guifg=#D82B26 guibg=none
