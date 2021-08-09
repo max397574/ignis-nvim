@@ -1,4 +1,6 @@
 ## These are my configurations for nvim
+#### Always WIP ¯\_(ツ)_/¯
+
 I recently switched to `init.lua`.
 
 At the moment there are still some files in vimscript.
