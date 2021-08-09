@@ -90,7 +90,7 @@ map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", nore)
 -- toggle trouble
 map("n", "<leader>trt", ":TroubleToggle<CR>", nore_silent)
 -- show todo items in trouble window
-map("n", "<leader>trtd", ":TroubleTodo<CR>", nore_silent)
+map("n", "<leader>trtd", ":TodoTrouble<CR>", nore_silent)
 -- lsp diagnostics in trouble
 map("n", "<leader>trld", ":Trouble lsp_workspace_diagnostics<CR>", nore_silent)
 -- help from ts with textobjects
