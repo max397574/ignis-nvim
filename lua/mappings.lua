@@ -58,8 +58,8 @@ map("i", "!", "!<c-g>u", nore)
 map("i", ".", ".<c-g>u", nore)
 map("i", "?", "?<c-g>u", nore)
 -- move lines up and down in visual and normal mode
-map("i", "<C-j>", "<ESC>:m .+1<CR>==i", nore)
-map("i", "<C-k>", "<ESC>:m .-2<CR>==i", nore)
+map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
+map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
 map("n", "<leader>j", ":m .+1<CR>==", nore_silent)
 map("n", "<leader>k", ":m .-2<CR>==", nore_silent)
 -- Snip Run
