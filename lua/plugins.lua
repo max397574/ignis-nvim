@@ -6,6 +6,9 @@ return require("packer").startup(function(use)
   -- colorscheme
   use("morhetz/gruvbox")
 
+  -- stats
+  use({"wakatime/vim-wakatime"})
+
   -- calculate math figures on visual selection
   use({"~/vmath.nvim"})
 
