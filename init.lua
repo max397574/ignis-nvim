@@ -27,4 +27,5 @@ vim.cmd("source ~/.config/nvim/random.vim")
 -- all highlights
 vim.cmd("source ~/.config/nvim/highlights.vim")
 -- file for testing some configurations
+require("temporary")
 vim.cmd("source ~/.config/nvim/temporary.vim")
