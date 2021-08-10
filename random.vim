@@ -34,3 +34,9 @@ inoreabbrev <expr> __
           \ <SID>isAtStartOfLine('__') ?
           \ '<c-o>:silent! TableModeDisable<CR>' : '__'
 
+
+
+
+let g:UltiSnipsExpandTrigger='<tab><tab>'
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "snippets"]
+let g:UltiSnipsListSnippets="<leader>sp"

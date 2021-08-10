@@ -22,8 +22,8 @@ return require("packer").startup(function(use)
   use({"tpope/vim-repeat"})
 
   -- snippets
-  use({"L3MON4D3/LuaSnip"})
-  use ({"rafamadriz/friendly-snippets"})
+  use ({"SirVer/ultisnips"})
+  use ({"honza/vim-snippets"})
 
   -- Git from Vim
   use ({"tpope/vim-fugitive"})
