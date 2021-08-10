@@ -23,6 +23,7 @@ return require("packer").startup(function(use)
 
   -- snippets
   use({"L3MON4D3/LuaSnip"})
+  use ({"rafamadriz/friendly-snippets"})
 
   -- Git from Vim
   use ({"tpope/vim-fugitive"})
