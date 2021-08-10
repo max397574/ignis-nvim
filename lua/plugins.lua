@@ -18,6 +18,9 @@ return require("packer").startup(function(use)
   -- breakup of startup time
   use({ "tweekmonster/startuptime.vim"})
 
+  -- Git from Vim
+  use ({"tpope/vim-fugitive"})
+
   -- distraction free writing
   use({"folke/zen-mode.nvim"})
 
