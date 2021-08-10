@@ -9,7 +9,7 @@ map("n", "nh", ":nohlsearch<CR>", nore_silent)
 map("n", "<leader>ga", ":Git add %<CR>", nore_silent)
 map("n", "<leader>gc", ":Git commit<CR>", nore_silent)
 map("n", "<leader>gl", ":GV<CR>", nore_silent)
-map("n", "<leader>gp", ":!gp origin<CR>", nore_silent)
+map("n", "<leader>gp", ":!git push origin<CR>", nore_silent)
 -- Telescope
 map("n", "<leader>tcff", "<cmd>Telescope find_files<CR>", nore)
 map("n", "<leader>tcts", "<cmd>Telescope treesitter<CR>", nore)
