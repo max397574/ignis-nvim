@@ -21,6 +21,9 @@ return require("packer").startup(function(use)
   -- more commands can be repeated with `.`
   use({"tpope/vim-repeat"})
 
+  -- snippets
+  use({"L3MON4D3/LuaSnip"})
+
   -- Git from Vim
   use ({"tpope/vim-fugitive"})
 
