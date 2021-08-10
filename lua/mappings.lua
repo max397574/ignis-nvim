@@ -5,6 +5,9 @@ local silent = { silent = true }
 
 -- remove highlighting from search
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
+-- easy fugitive
+map("n", "<leader>ga", ":Git add %<CR>", nore_silent)
+map("n", "<leader>gc", ":Git commit<CR>", nore_silent)
 -- Telescope
 map("n", "<leader>tcff", "<cmd>Telescope find_files<CR>", nore)
 map("n", "<leader>tcts", "<cmd>Telescope treesitter<CR>", nore)
