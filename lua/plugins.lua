@@ -18,6 +18,9 @@ return require("packer").startup(function(use)
   -- breakup of startup time
   use({ "tweekmonster/startuptime.vim"})
 
+  -- more commands can be repeated with `.`
+  use({"tpope/vim-repeat"})
+
   -- Git from Vim
   use ({"tpope/vim-fugitive"})
 
