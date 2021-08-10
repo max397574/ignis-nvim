@@ -27,8 +27,3 @@ vim.cmd("source ~/.config/nvim/random.vim")
 vim.cmd("source ~/.config/nvim/highlights.vim")
 -- file for testing some configurations
 vim.cmd("source ~/.config/nvim/temporary.vim")
-
-vim.cmd([[
-  source ~/.config/nvim/plugins/markdown.vim
-  source ~/.config/nvim/plugins/simplefunctions.vim
-]])
