@@ -38,5 +38,5 @@ inoreabbrev <expr> __
 
 
 let g:UltiSnipsExpandTrigger='<tab><tab>'
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "snippets"]
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "my_snippets"]
 let g:UltiSnipsListSnippets="<leader>sp"
