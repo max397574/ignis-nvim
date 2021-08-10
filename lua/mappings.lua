@@ -12,6 +12,8 @@ map("n", "<leader>gl", ":GV<CR>", nore_silent)
 map("n", "<leader>gp", ":!git push origin<CR>", nore_silent)
 map("n", "<leader>gs", ":Git status<CR>", nore_silent)
 map("n", "<leader>gd", ":Git diff<CR>", nore_silent)
+-- treesitter playground
+map("n", "<leader>tspg", ":TSPlaygroundToggle<CR>", nore_silent)
 -- Telescope
 map("n", "<leader>tcff", "<cmd>Telescope find_files<CR>", nore)
 map("n", "<leader>tcts", "<cmd>Telescope treesitter<CR>", nore)
