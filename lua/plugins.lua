@@ -69,12 +69,10 @@ return require("packer").startup(function(use)
       require("which-key").setup({
         {
           plugins = {
-            marks = true, -- shows a list of your marks on ' and `
-            registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-            -- the presets plugin, adds help for a bunch of default keybindings in Neovim
-            -- No actual key bindings are created
+            marks = true,
+            registers = true,
             spelling = {
-              enabled = false, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+              enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
               suggestions = 20, -- how many suggestions should be shown in the list?
             },
             presets = {
@@ -87,15 +85,8 @@ return require("packer").startup(function(use)
               g = true, -- bindings for prefixed with g
             },
           },
-          -- add operators that will trigger motion and text object completion
-          -- to enable all native operators, set the preset / operators plugin above
           operators = { gc = "Comments" },
           key_labels = {
-            -- override the label used to display some keys. It doesn't effect WK in any other way.
-            -- For example:
-            -- ["<space>"] = "SPC",
-            -- ["<CR>"] = "RET",
-            -- ["<tab>"] = "TAB",
           },
           icons = {
             breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
@@ -175,8 +166,6 @@ return require("packer").startup(function(use)
           max_line_len = 400, -- ignore lines longer than this
           exclude = {}, -- list of file types to exclude highlighting
         },
-        -- list of named colors where we try to extract the guifg from the
-        -- list of hilight groups or use the hex color if hl not found as a fallback
         colors = {
           error = { "LspDiagnosticsDefaultError", "ErrorMsg", "#DC2626" },
           warning = { "LspDiagnosticsDefaultWarning", "WarningMsg", "#FBBF24" },
@@ -196,7 +185,6 @@ return require("packer").startup(function(use)
           -- regex that will be used to match keywords.
           -- don't replace the (KEYWORDS) placeholder
           pattern = [[\b(KEYWORDS):]], -- ripgrep regex
-          -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
         },
       })
     end,
@@ -238,6 +226,7 @@ return require("packer").startup(function(use)
   -- telescope extensions
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use {'nvim-telescope/telescope-symbols.nvim'}
+  use {'nvim-telescope/telescope-smart-history.nvim'}
 
   -- display helpfiles
   use("lvim-tech/lvim-helper")
@@ -350,6 +339,10 @@ return require("packer").startup(function(use)
           case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
         }
       },
+      history = {
+        path = '~/.local/share/nvim/databases/telescope_history.sqlite3',
+        limit = 100,
+      },
       vimgrep_arguments = {
         "rg",
         "--color=never",
@@ -390,6 +383,7 @@ return require("packer").startup(function(use)
     },
   })
   require('telescope').load_extension('fzf')
+  require('telescope').load_extension('smart_history')
 
   local home = os.getenv("HOME")
   require("lvim-helper").setup({
