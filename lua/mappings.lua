@@ -20,6 +20,9 @@ map("n", "<leader>gl", ":GV<CR>", nore_silent)
 map("n", "<leader>gp", ":Git push<CR>", nore_silent)
 map("n", "<leader>gs", ":G<CR>", nore_silent)
 map("n", "<leader>gd", ":Git diff<CR>", nore_silent)
+-- faster navigation
+map("n", "<leader>K", "10k",nore)
+map("n", "<leader>J", "10j",nore)
 -- treesitter playground
 map("n", "<leader>tspg", ":TSPlaygroundToggle<CR>", nore_silent)
 -- Telescope
