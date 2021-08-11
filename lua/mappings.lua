@@ -27,6 +27,8 @@ map("n", "<leader>tcts", "<cmd>Telescope treesitter<CR>", nore)
 map("n", "<leader>tcht", "<cmd>Telescope help_tags<CR>", nore)
 map("n", "<leader>tclg", "<cmd>Telescope live_grep<CR>", nore)
 map("n", "<leader>tctd", "<cmd>TodoTelescope<CR>", nore)
+map("n", "<leader>tcch", ":lua require'telescope.builtin'.command_history{}<CR>", nore)
+map("n", "<leader>tcsh", ":lua require'telescope.builtin'.search_history{}<CR>", nore)
 -- highlight search result and center cursor
 map("n", "n", "nzzzv:call HLNext(0.4)<CR>", nore_silent)
 map("n", "N", "Nzzzv:call HLNext(0.4)<CR>", nore_silent)
