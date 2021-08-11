@@ -1,5 +1,6 @@
 -- for vim-repeat
 -- silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
+
 local map = vim.api.nvim_set_keymap
 local nore_silent = { noremap = true, silent = true }
 local nore = { noremap = true }
