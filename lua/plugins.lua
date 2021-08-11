@@ -5,7 +5,7 @@ return require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
 
   -- colorscheme
-  use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+  use("lifepillar/vim-gruvbox8")
   -- stats
   use({"wakatime/vim-wakatime"})
 

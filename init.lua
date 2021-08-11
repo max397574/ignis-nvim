@@ -17,7 +17,7 @@ vim.g.mapleader = " "
 require("options")
 -- plugins (packer) and settings
 require("plugins")
-vim.cmd("colorscheme gruvbox")
+vim.cmd("colorscheme gruvbox8")
 -- all the mappings
 require("mappings")
 -- the autocommands
