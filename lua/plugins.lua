@@ -1,4 +1,6 @@
 local actions = require('telescope.actions')
+
+-- ===Plugins===
 return require("packer").startup(function(use)
   -- stylua: ignore start
   -- package manager
@@ -539,10 +541,40 @@ return require("packer").startup(function(use)
   wk.register({
     tc = {
       name = "telescope",
-      ff = { "Find Files" },
-      ts = { "TreeSitter" },
-      ht = { "Help Tags" },
-      lg = { "Live Grep" },
+      f = {
+        name = "Find Files",
+        f = { "Find Files" },
+      },
+      t = {
+        name = "TreeSitter, Todo",
+        s = { "TreeSitter" },
+        d = { "Todo" },
+      },
+      h = {
+        name = "Help Tags",
+        t = {"Help Tags"},
+      },
+      l = {
+        name = "Live Grep",
+        g = { "Live Grep" },
+      },
+      c = {
+        name = "Command History",
+        h = { "Command History" },
+      },
+      s = {
+        name = "Search History, Symbols",
+        h = { "Search History" },
+        b = { "Symbols" },
+      },
+      g = {
+        name = "Git",
+        c = {"Commits"},
+      },
+      b = {
+        name = "Builtin Pickers",
+        i = { "Builtin Pickers" },
+      },
     },
     md = {
       name = "markdown",
