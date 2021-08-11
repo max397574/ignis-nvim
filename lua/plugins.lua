@@ -235,6 +235,8 @@ return require("packer").startup(function(use)
       { "kyazdani42/nvim-web-devicons" },
     },
   })
+  -- telescope extensions
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   -- display helpfiles
   use("lvim-tech/lvim-helper")
@@ -339,6 +341,14 @@ return require("packer").startup(function(use)
 
   require("telescope").setup({
     defaults = {
+      extensions = {
+        fzf = {
+          fuzzy = true,                    -- false will only do exact matching
+          override_generic_sorter = false, -- override the generic sorter
+          override_file_sorter = true,     -- override the file sorter
+          case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+        }
+      },
       vimgrep_arguments = {
         "rg",
         "--color=never",
@@ -378,6 +388,7 @@ return require("packer").startup(function(use)
       qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
     },
   })
+  require('telescope').load_extension('fzf')
 
   local home = os.getenv("HOME")
   require("lvim-helper").setup({
