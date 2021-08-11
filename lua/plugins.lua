@@ -237,6 +237,7 @@ return require("packer").startup(function(use)
   })
   -- telescope extensions
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use {'nvim-telescope/telescope-symbols.nvim'}
 
   -- display helpfiles
   use("lvim-tech/lvim-helper")
