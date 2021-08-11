@@ -31,6 +31,9 @@ map("n", "<leader>tctd", "<cmd>TodoTelescope<CR>", nore)
 -- https://github.com/nvim-telescope/telescope.nvim#pickers
 map("n", "<leader>tcch", ":lua require'telescope.builtin'.command_history{}<CR>", nore)
 map("n", "<leader>tcsh", ":lua require'telescope.builtin'.search_history{}<CR>", nore)
+map("n", "<leader>tcgc", ":lua require'telescope.builtin'.git_commits{}<CR>", nore)
+map("n", "<leader>tcsb", ":lua require'telescope.builtin'.symbols{}<CR>", nore)
+map("n", "<leader>tcbi", ":lua require'telescope.builtin'.builtin{}<CR>", nore)
 -- highlight search result and center cursor
 map("n", "n", "nzzzv:call HLNext(0.4)<CR>", nore_silent)
 map("n", "N", "Nzzzv:call HLNext(0.4)<CR>", nore_silent)
