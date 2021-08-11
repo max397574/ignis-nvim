@@ -24,6 +24,12 @@ highlight RedLoops guifg=#CC0000
 highlight GreenFunction guifg=#8ABB26 cterm=bold
 "1}}}
 
+highlight diffAdded guifg=#8ABB26 cterm=bold
+highlight gitDiff guifg=#FFFFFF
+
+highlight preProc guifg=#4090FF
+highlight fugitiveHunk guifg=#FFFFFF
+
 highlight SignColumn ctermbg=none guibg=none
 
 "{{{ Signify
