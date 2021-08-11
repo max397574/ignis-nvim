@@ -7,6 +7,11 @@ local silent = { silent = true }
 
 -- remove highlighting from search
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
+-- easy split navigation
+map("n", "<c-j>", ":wincmd j<CR>", nore_silent)
+map("n", "<c-h>", ":wincmd h<CR>", nore_silent)
+map("n", "<c-k>", ":wincmd k<CR>", nore_silent)
+map("n", "<c-l>", ":wincmd l<CR>", nore_silent)
 -- easy git
 map("n", "<leader>ga", ":Git add %<CR>", nore_silent)
 map("n", "<leader>gc", ":Git commit<CR>", nore_silent)
