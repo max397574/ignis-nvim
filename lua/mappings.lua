@@ -17,7 +17,7 @@ map("n", "<c-l>", ":wincmd l<CR>", nore_silent)
 map("n", "<leader>ga", ":Git add %<CR>", nore_silent)
 map("n", "<leader>gc", ":Git commit<CR>", nore_silent)
 map("n", "<leader>gl", ":GV<CR>", nore_silent)
-map("n", "<leader>gp", ":!git push origin<CR>", nore_silent)
+map("n", "<leader>gp", ":Git push<CR>", nore_silent)
 map("n", "<leader>gs", ":G<CR>", nore_silent)
 map("n", "<leader>gd", ":Git diff<CR>", nore_silent)
 -- treesitter playground
