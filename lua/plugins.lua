@@ -1,6 +1,7 @@
 local actions = require('telescope.actions')
 
--- ===Plugins===
+-- Plugins
+-- =======
 return require("packer").startup(function(use)
   -- stylua: ignore start
   -- package manager
