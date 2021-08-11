@@ -1,3 +1,4 @@
+local actions = require('telescope.actions')
 return require("packer").startup(function(use)
   -- stylua: ignore start
   -- package manager
@@ -331,6 +332,19 @@ return require("packer").startup(function(use)
 
   require("telescope").setup({
     defaults = {
+      -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua
+      mappings = {
+        n = {
+          ["<C-j>"] = actions.move_selection_next,
+          ["<C-k>"] = actions.move_selection_previous,
+          ["<C-o>"] = actions.select_vertical,
+        },
+        i = {
+          ["<C-j>"] = actions.move_selection_next,
+          ["<C-k>"] = actions.move_selection_previous,
+          ["<C-o>"] = actions.select_vertical,
+        },
+      },
       extensions = {
         fzf = {
           fuzzy = true,                    -- false will only do exact matching
