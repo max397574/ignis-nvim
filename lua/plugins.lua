@@ -540,7 +540,7 @@ return require("packer").startup(function(use)
 
   wk.register({
     tc = {
-      name = "telescope",
+      name = "Telescope",
       f = {
         name = "Find Files",
         f = { "Find Files" },
@@ -576,35 +576,72 @@ return require("packer").startup(function(use)
         i = { "Builtin Pickers" },
       },
     },
-    md = {
-      name = "markdown",
-      h = {
-        name = "headings",
-        ["1"] = { "Heading 1" },
-        ["2"] = { "Heading 2" },
-        ["3"] = { "Heading 3" },
-      },
-      pw = { "preview in browser" },
-      a = { "add a link" },
-      hr = { "add horizontal rule" },
-      l = {
-        name = "list",
-        u = { "unordered list" },
-        o = { "ordered list" },
-        t = { "task list" },
+    m = {
+      name = "Markdown",
+      d = {
+        name = "Markdown",
+        h = {
+          name = "Headings",
+          ["1"] = { "Heading 1" },
+          ["2"] = { "Heading 2" },
+          ["3"] = { "Heading 3" },
+        },
+        pw = { "preview in browser" },
+        a = { "add a link" },
+        hr = { "add horizontal rule" },
+        l = {
+          name = "list",
+          u = { "unordered list" },
+          o = { "ordered list" },
+          t = { "task list" },
+        },
       },
     },
-    hp = { "Help Files" },
+    g = {
+      name = "Git",
+      a = "Add",
+      c = "Commit",
+      d = "Diff",
+      l = "Log",
+      p = "Push",
+      s = "Status"
+    },
+    h = {
+      name = "Help Files",
+      p = "Help Files",
+    },
+    f = {
+      name = "Find Under",
+      u = "Find Under"
+    },
     j = { "Move Current line down" },
     k = { "Move Current line up" },
-    tb = { "Toggle Tagbar" },
     o = { "Add empty line below" },
     O = { "Add empty line above" },
-    df = { "Write distraction free" },
+    i = { "Add space before" },
+    a = { "Add space after" },
+    n = { "TreeSitter Next Usage" },
+    p = { "TreeSitter Previous Usage" },
+    q = { "Edit Register(Macro) q" },
+    S = { "Substitute in whole File" },
+    y = { "Yank to Clipboard" },
+    Y = { "Yank File to Clipboard" },
+    d = {
+      name = "Distraction Free",
+      f = { "Distraction Free" },
+    },
     w = { "Write current file" },
-    ['"'] = { "Surround inner word with quotes" },
-    ev = { "Edit init.vim in split" },
     t = {
+      name = "Telescope, Trouble, Table Mode, TreeSitter",
+      m = "Table Mode",
+      t = "Tabelize",
+      s = {
+        name = "TreeSitter",
+        p = {
+          name = "Playground Toggle",
+          g = "Playground Toggle",
+        },
+      },
       r = {
         name = "Trouble",
         t = { "Toggle" },
@@ -615,8 +652,12 @@ return require("packer").startup(function(use)
         },
       },
     },
+    u = {
+      name = "UndoTree",
+      t = "UndotreeToggle",
+    },
     s = {
-      name = "Substitue Snippet Run",
+      name = "Substitue SnipRun",
       s = { "Substitue on current line" },
       G = { "Substitue to the end of the file" },
       r = { "Run Snippet" },
