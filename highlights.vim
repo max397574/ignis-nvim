@@ -25,6 +25,7 @@ highlight GreenFunction guifg=#8ABB26 cterm=bold
 "1}}}
 
 highlight diffAdded guifg=#8ABB26 cterm=bold
+highlight diffRemoved guifg=#B30B00 cterm=bold
 highlight gitDiff guifg=#FFFFFF
 
 highlight preProc guifg=#4090FF
