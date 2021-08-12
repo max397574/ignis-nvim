@@ -29,3 +29,5 @@ vim.cmd("source ~/.config/nvim/highlights.vim")
 -- file for testing some configurations
 require("temporary")
 vim.cmd("source ~/.config/nvim/temporary.vim")
+
+vim.cmd("command -nargs=1 H vertical help")
