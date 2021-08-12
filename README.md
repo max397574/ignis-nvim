@@ -1,5 +1,5 @@
 # These are my configurations for nvim
-#### Always WIP ¯\\_(ツ)_/¯
+#### Always WIP ¯\\\_(ツ)_/¯
 
 I recently switched to `init.lua`.
 
