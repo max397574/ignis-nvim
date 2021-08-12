@@ -27,6 +27,5 @@ vim.cmd("source ~/.config/nvim/random.vim")
 -- all highlights
 require "colors.color_galaxy".shine()
 require "colors.vimcolors"
--- file for testing some configurations
 
 vim.cmd("command -nargs=1 H vertical help")
