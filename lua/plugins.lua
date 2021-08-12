@@ -612,8 +612,9 @@ return require("packer").startup(function(use)
       p = "Help Files",
     },
     f = {
-      name = "Find Under",
-      u = "Find Under"
+      name = "Find Under, Files",
+      u = "Find Under",
+      f = "Find Files",
     },
     j = { "Move Current line down" },
     k = { "Move Current line up" },
