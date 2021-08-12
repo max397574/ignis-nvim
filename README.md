@@ -8,9 +8,9 @@ At the moment there are still some files in vimscript.
 Table of Contents
 =================
 
-[Todo](https://github.com/max397574/Vim_Config#todoplans)
-[Structure](https://github.com/max397574/Vim_Config#the-structure-of-the-directory)
-[Features](https://github.com/max397574/Vim_Config#features)
+* [Todo](https://github.com/max397574/Vim_Config#todoplans)
+* [Structure](https://github.com/max397574/Vim_Config#the-structure-of-the-directory)
+* [Features](https://github.com/max397574/Vim_Config#features)
 
 ## Todo/Plans:
 
