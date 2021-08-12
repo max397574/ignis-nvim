@@ -33,6 +33,7 @@ map("n", "<leader>J", "10j",nore)
 map("n", "<leader>tspg", ":TSPlaygroundToggle<CR>", nore_silent)
 -- Telescope
 map("n", "<leader>tcff", "<cmd>Telescope find_files<CR>", nore)
+map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", nore)
 map("n", "<leader>tcts", "<cmd>Telescope treesitter<CR>", nore)
 map("n", "<leader>tcht", "<cmd>Telescope help_tags<CR>", nore)
 map("n", "<leader>tclg", "<cmd>Telescope live_grep<CR>", nore)
