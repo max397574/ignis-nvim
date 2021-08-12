@@ -13,6 +13,12 @@ map("n", "<c-j>", ":wincmd j<CR>", nore_silent)
 map("n", "<c-h>", ":wincmd h<CR>", nore_silent)
 map("n", "<c-k>", ":wincmd k<CR>", nore_silent)
 map("n", "<c-l>", ":wincmd l<CR>", nore_silent)
+-- alt hjkl
+-- use sed -n l to get chars with alt
+map("n", "º", ":wincmd J<CR>", nore_silent)
+map("n", "ª", ":wincmd H<CR>", nore_silent)
+map("n", "∆", ":wincmd K<CR>", nore_silent)
+map("n", "¬", ":wincmd L<CR>", nore_silent)
 -- easy git
 map("n", "<leader>ga", ":Git add %<CR>", nore_silent)
 map("n", "<leader>gc", ":Git commit<CR>", nore_silent)
