@@ -25,7 +25,8 @@ require("autocommands")
 -- some stuff which hasn't been converted to lua yet
 vim.cmd("source ~/.config/nvim/random.vim")
 -- all highlights
-require "color_galaxy".shine()
+require "colors.color_galaxy".shine()
+require "colors.vimcolors"
 -- file for testing some configurations
 
 vim.cmd("command -nargs=1 H vertical help")
