@@ -55,10 +55,10 @@ long term:
 Features:
 ---------
 
-* Completition with nvim-compe
+### * Completition with nvim-compe
 ![compe](https://user-images.githubusercontent.com/81827001/129145672-b2119bfd-d7ff-4de8-8110-f2e31d3e8d5b.png)
 
-* Syntax Highlighting with TreeSitter
+### * Syntax Highlighting with TreeSitter
 ![highlight](https://user-images.githubusercontent.com/81827001/129145712-337d5daa-7862-4cf7-a15a-9ceaa7d92828.png)
 
 * Telescope for:
