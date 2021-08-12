@@ -126,7 +126,7 @@ function M.shine()
     local bg = back or "none"
     vim.cmd('hi Normal guibg='..bg..' guifg=#dddddd')
 
-    -- vim.cmd [[au BufEnter,FileType * :lua require"color_galaxy".Lang_high(vim.bo.ft)]]
+    vim.cmd [[au BufEnter,FileType * :lua require"colors.color_galaxy".Lang_high(vim.bo.ft)]]
     vim.api.nvim__set_hl_ns(ns)
 end
 
