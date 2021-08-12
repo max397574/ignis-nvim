@@ -1,9 +1,16 @@
-## These are my configurations for nvim
+# These are my configurations for nvim
 #### Always WIP ¯\_(ツ)_/¯
 
 I recently switched to `init.lua`.
 
 At the moment there are still some files in vimscript.
+
+Table of Contents
+=================
+
+[todo](link)
+
+## Todo/Plans:
 
 - [x] Switch to `init.lua`
 - [ ] Change more files to lua
@@ -14,7 +21,7 @@ At the moment there are still some files in vimscript.
 long term:
 - [ ] Create lua functions/plugins
 
-The structure of the directory:
+## The structure of the directory:
 ```
 .
 ├── README.md
