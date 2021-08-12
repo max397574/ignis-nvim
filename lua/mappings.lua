@@ -6,6 +6,8 @@ local nore_silent = { noremap = true, silent = true }
 local nore = { noremap = true }
 local silent = { silent = true }
 
+-- open helpfile of word under cursor
+map('n', '<C-h>', ':lua vim.cmd(":vert :h "..vim.fn.expand("<cword>"))<CR>', nore_silent)
 -- remove highlighting from search
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
 -- easy split navigation
