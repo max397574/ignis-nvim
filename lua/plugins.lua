@@ -522,6 +522,7 @@ return require("packer").startup(function(use)
     debug = false,
     registers = true,
   })
+
   require("lualine").setup({
     options = {
       icons_enabled = true,
