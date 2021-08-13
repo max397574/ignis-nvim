@@ -40,7 +40,7 @@ local c = {
 local back = nil
 
 local Usual = {
-  UsualHihglights = {
+  UsualHighlights = {
     Normal              = { bg = back },
     NonText             = { bg = back },
     LineNr              = { fg = c.background_two },
