@@ -1,4 +1,5 @@
 local opt = vim.opt
+local g = vim.g
 
 opt.runtimepath = opt.runtimepath + '~/.config/nvim/queries'
 
@@ -43,3 +44,11 @@ opt.undofile = true
 
 opt.joinspaces = false
 opt.fillchars = { eob = "~" }
+
+
+-- netrw
+
+g.netrw_liststyle = 3
+g.netrw_banner = 0
+g.netrw_browse_split = 2
+g.netrw_winsize = 25
