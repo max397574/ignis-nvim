@@ -34,6 +34,7 @@ local c = {
   background_one    = "#3C3836",
   background_two    = "#7C6F64",
   background_three  = "#504945",
+  background_three_two  = "#504944",
 
 }
 
@@ -72,7 +73,7 @@ local Usual = {
     CursorLine          = { bg = c.background_one },
     CursorLineNr        = { fg = c.yellow_one, bold = true },
     StatusLine          = { fg = c.white_two, bg = c.background_three },
-    StatusLineNC        = { fg = c.white_two, bg = c.background_three },
+    StatusLineNC        = { fg = c.white_two, bg = c.background_three_two },
     Search              = { fg = c.black_two, bg =c.yellow_one, bold = true },
     IncSearch           = { fg = c.black_two, bg =c.orange_one, bold = true},
     Folded              = { fg = c.white, bold = true, italic = true },
