@@ -10,14 +10,12 @@ return require("packer").startup(function(use)
   use("lifepillar/vim-gruvbox8")
   use("shaunsingh/moonlight.nvim")
   -- statusline
-  use {'hoob3rt/lualine.nvim',
-    requires = {'kyazdani42/nvim-web-devicons'}
-  }
+  use({ "hoob3rt/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
   -- stats
-  use({"wakatime/vim-wakatime"})
+  use({ "wakatime/vim-wakatime" })
 
   -- calculate math figures on visual selection
-  use({"~/vmath.nvim"})
+  use({ "~/vmath.nvim" })
 
   -- some functions to help with markdown
   use("~/lua_markdown")
@@ -26,23 +24,23 @@ return require("packer").startup(function(use)
   use("terrortylor/nvim-comment")
 
   -- breakup of startup time
-  use({ "tweekmonster/startuptime.vim"})
+  use({ "tweekmonster/startuptime.vim" })
 
   -- more commands can be repeated with `.`
-  use({"tpope/vim-repeat"})
+  use({ "tpope/vim-repeat" })
 
   -- snippets
-  use ({"SirVer/ultisnips"})
-  use ({"honza/vim-snippets"})
+  use({ "SirVer/ultisnips" })
+  use({ "honza/vim-snippets" })
 
   -- Git from Vim
-  use ({"tpope/vim-fugitive"})
+  use({ "tpope/vim-fugitive" })
 
   -- see git commits
-  use ({"junegunn/gv.vim"})
+  use({ "junegunn/gv.vim" })
 
   -- distraction free writing
-  use({"folke/zen-mode.nvim"})
+  use({ "folke/zen-mode.nvim" })
 
   -- dimm inactive parts of code
   use({"folke/twilight.nvim",
@@ -57,7 +55,7 @@ return require("packer").startup(function(use)
   use("rhysd/clever-f.vim")
 
   -- easily create md tables
-  use({"dhruvasagar/vim-table-mode"})
+  use({ "dhruvasagar/vim-table-mode" })
 
   -- display keybindings help
   use({"folke/which-key.nvim",
@@ -70,13 +68,12 @@ return require("packer").startup(function(use)
   use({"folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
     config = function()
-      require("todo-comments").setup({
-      })
+      require("todo-comments").setup({})
     end,
   })
 
   -- automatically match parantheses etc
-  use({"jiangmiao/auto-pairs"})
+  use({ "jiangmiao/auto-pairs" })
 
   -- multiple cursors
   use("mg979/vim-visual-multi")
@@ -85,7 +82,7 @@ return require("packer").startup(function(use)
   use("tpope/vim-surround")
 
   -- display last undos
-  use({"mbbill/undotree"})
+  use({ "mbbill/undotree" })
 
   -- display some infos in signcolumn
   use("mhinz/vim-signify")
@@ -109,9 +106,9 @@ return require("packer").startup(function(use)
     },
   })
   -- telescope extensions
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use {'nvim-telescope/telescope-symbols.nvim'}
-  use {'nvim-telescope/telescope-smart-history.nvim'}
+  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+  use({ "nvim-telescope/telescope-symbols.nvim" })
+  use({ "nvim-telescope/telescope-smart-history.nvim" })
 
   -- display helpfiles
   use("lvim-tech/lvim-helper")
@@ -120,7 +117,7 @@ return require("packer").startup(function(use)
   use("norcalli/nvim-colorizer.lua")
 
   -- completition
-  use({"hrsh7th/nvim-compe"})
+  use({ "hrsh7th/nvim-compe" })
 
   -- easily configure lsp
   use("neovim/nvim-lspconfig")
@@ -148,7 +145,7 @@ return require("packer").startup(function(use)
   use("nvim-treesitter/nvim-treesitter-refactor")
 
   -- structural editing with ts queries
-  use ("vigoux/architext.nvim")
+  use("vigoux/architext.nvim")
 
   -- additional textobjects with TS
   use("nvim-treesitter/nvim-treesitter-textobjects")
@@ -168,10 +165,8 @@ return require("packer").startup(function(use)
   -- hints for operators
   use("mfussenegger/nvim-ts-hint-textobject")
 
-  -- stylua: ingore end
-
--- Settings
--- ========
+  -- Settings
+  -- ========
   require("telescope").setup({
     defaults = {
       -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua
@@ -189,21 +184,21 @@ return require("packer").startup(function(use)
       },
       extensions = {
         fzf = {
-          fuzzy = true,                    -- false will only do exact matching
+          fuzzy = true, -- false will only do exact matching
           override_generic_sorter = false, -- override the generic sorter
-          override_file_sorter = true,     -- override the file sorter
-          case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-        }
+          override_file_sorter = true, -- override the file sorter
+          case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+        },
       },
       history = {
-        path = '~/.local/share/nvim/databases/telescope_history.sqlite3',
+        path = "~/.local/share/nvim/databases/telescope_history.sqlite3",
         limit = 100,
       },
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     },
   })
-  require('telescope').load_extension('fzf')
-  require('telescope').load_extension('smart_history')
+  require("telescope").load_extension("fzf")
+  require("telescope").load_extension("smart_history")
 
   local home = os.getenv("HOME")
   require("lvim-helper").setup({
@@ -318,7 +313,7 @@ return require("packer").startup(function(use)
       },
       h = {
         name = "Help Tags",
-        t = {"Help Tags"},
+        t = { "Help Tags" },
       },
       l = {
         name = "Live Grep",
@@ -335,7 +330,7 @@ return require("packer").startup(function(use)
       },
       g = {
         name = "Git",
-        c = {"Commits"},
+        c = { "Commits" },
       },
       b = {
         name = "Builtin Pickers",
@@ -370,7 +365,7 @@ return require("packer").startup(function(use)
       d = "Diff",
       l = "Log",
       p = "Push",
-      s = "Status"
+      s = "Status",
     },
     h = {
       name = "Help Files",
@@ -496,7 +491,7 @@ return require("packer").startup(function(use)
         },
       },
     },
-    playground = {enable = true},
+    playground = { enable = true },
     query_linter = {
       enable = true,
       use_virtual_text = true,
@@ -527,21 +522,21 @@ return require("packer").startup(function(use)
     debug = false,
     registers = true,
   })
-  require'lualine'.setup {
+  require("lualine").setup({
     options = {
       icons_enabled = true,
-      theme = 'powerline',
-      component_separators = {'', ''},
-      section_separators = {'', ''},
-      disabled_filetypes = {}
+      theme = "powerline",
+      component_separators = { "", "" },
+      section_separators = { "", "" },
+      disabled_filetypes = {},
     },
     sections = {
-      lualine_a = {'mode'},
-      lualine_b = {'branch'},
-      lualine_c = {'filename'},
-      lualine_x = {'encoding', 'fileformat', 'filetype'},
-      lualine_y = {'progress'},
-      lualine_z = {'location'}
+      lualine_a = { "mode" },
+      lualine_b = { "branch" },
+      lualine_c = { "filename" },
+      lualine_x = { "encoding", "fileformat", "filetype" },
+      lualine_y = { "progress" },
+      lualine_z = { "location" },
     },
-  }
+  })
 end)
