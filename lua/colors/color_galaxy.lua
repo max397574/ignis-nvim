@@ -64,6 +64,8 @@ local Usual = {
     Identifier          = { fg = c.green_two },
     Keyword             = { fg = c.red_one },
     FloatBorder         = { fg = c.blue_six, bg = c.background_one },
+    netrwDir            = { fg = c.blue_one },
+    netrwList           = { fg = c.green_four },
     NonText             = { bg = back },
     LineNr              = { fg = c.background_two },
     SignColumn          = { bg = nil },
@@ -117,6 +119,7 @@ local Usual = {
     TSRepeat            = { fg = c.red_two },
     TSKeywordFunction   = { fg = c.red_two },
     TSFunction          = { fg = c.green_two, bold = true },
+    TSType              = { fg = c.red_two },
   },
 
   LspRelated = {
@@ -124,6 +127,9 @@ local Usual = {
     LspDiagnosticsDefaultHint = { bg = back, fg = c.blue_two },
     LspDiagnosticsDefaultWarning = { bg = back, fg = c.orange_one },
     LspDiagnosticsDefaultInformation = { bg = back, fg = c.yellow_one },
+  },
+  Packer = {
+    packerStatusSuccess = { fg = c.blue_three }
   },
 }
 
@@ -154,7 +160,9 @@ local Plugins = {
 }
 
 local lang = {
-
+  lua = {
+    RequireCall = { fg = c.red_one, italic = true, bold =true },
+  }
 }
 
 local function add_highlight_table(tbl)
