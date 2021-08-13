@@ -48,8 +48,8 @@ map("n", "<leader>tcgc", ":lua require'telescope.builtin'.git_commits{}<CR>", no
 map("n", "<leader>tcsb", ":lua require'telescope.builtin'.symbols{}<CR>", nore)
 map("n", "<leader>tcbi", ":lua require'telescope.builtin'.builtin{}<CR>", nore)
 -- highlight search result and center cursor
-map("n", "n", "nzzzv:call HLNext(0.4)<CR>", nore_silent)
-map("n", "N", "Nzzzv:call HLNext(0.4)<CR>", nore_silent)
+map("n", "n", "nzzzv", nore_silent)
+map("n", "N", "Nzzzv", nore_silent)
 -- move visual blocks up and down
 map("v", "J", ":m '>+1<CR>gv=gv", nore_silent)
 map("v", "K", ":m '<-2<CR>gv=gv", nore_silent)
