@@ -33,6 +33,7 @@ map("n", "<leader>K", "10k",nore)
 map("n", "<leader>J", "10j",nore)
 -- treesitter playground
 map("n", "<leader>tspg", ":TSPlaygroundToggle<CR>", nore_silent)
+map("n", "<leader>tshc", ":TSHighlightCapturesUnderCursor<CR>", nore_silent)
 -- Telescope
 map("n", "<leader>tcff", "<cmd>Telescope find_files<CR>", nore)
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", nore)
