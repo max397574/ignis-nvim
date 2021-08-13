@@ -72,7 +72,7 @@ local Usual = {
     CursorLine          = { bg = c.background_one },
     CursorLineNr        = { fg = c.yellow_one, bold = true },
     StatusLine          = { fg = c.white_two, bg = c.background_three },
-    StatusLineNC          = { fg = c.white_two, bg = c.background_three },
+    StatusLineNC        = { fg = c.white_two, bg = c.background_three },
     Search              = { fg = c.black_two, bg =c.yellow_one, bold = true },
     IncSearch           = { fg = c.black_two, bg =c.orange_one, bold = true},
     Folded              = { fg = c.white, bold = true, italic = true },
@@ -129,7 +129,8 @@ local Usual = {
     LspDiagnosticsDefaultInformation = { bg = back, fg = c.yellow_one },
   },
   Packer = {
-    packerStatusSuccess = { fg = c.blue_three }
+    packerStatusSuccess = { fg = c.blue_three },
+    packerString = { fg = c.blue_three },
   },
 }
 
