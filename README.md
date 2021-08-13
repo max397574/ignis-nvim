@@ -27,14 +27,16 @@ long term:
 ```
 .
 ├── README.md
-├── highlights.vim
 ├── init.lua
 ├── lua
 │   ├── autocommands.lua
+│   ├── colors
+│   │   ├── color_galaxy.lua
+│   │   ├── fixed_highlights.lua
+│   │   └── vimcolors.lua
 │   ├── mappings.lua
 │   ├── options.lua
 │   ├── plugins.lua
-│   ├── temporary.lua
 │   └── utils.lua
 ├── my_snippets
 │   └── lua.snippets
@@ -45,11 +47,10 @@ long term:
 ├── queries
 ├── random.vim
 ├── stylua.toml
-├── temporary.vim
 └── vimhelp
     └── treesitter.md
 
-5 directories, 17 files
+6 directories, 17 files
 ```
 
 Features:
