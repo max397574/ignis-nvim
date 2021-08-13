@@ -41,7 +41,7 @@ local back = nil
 
 local Usual = {
   UsualHihglights = {
-    -- Normal           = { bg = back },
+    Normal              = { bg = back },
     NonText             = { bg = back },
     LineNr              = { fg = c.background_two },
     SignColumn          = { bg = nil },
@@ -57,26 +57,21 @@ local Usual = {
     EndOfBuffer         = { bg = back },
     Comment             = { fg = c.white, bold = true, italic = true },
     preProc             = { fg = c.blue_four },
-    fugitiveHunk        = { fg = c.white },
     Matchparen	        = { underline = true},
     Pmenu               = { fg = c.white_two, bg = c.background_two },
     Pmenusel            = { fg = c.black, bg = c.purple_one },
-    fugitiveHeader      = { fg = c.orange_one },
-    fugitiveSymbolicRef = { fg = c.blue_six },
-    fugitiveUnstagedHeading = { fg = c.red_three },
-    fugitiveStagedHeading = { fg = c.red_three },
-    fugitiveUnstagedModifier = { fg = c.green_one },
-    fugitiveStagedModifier = { fg = c.green_one },
-    fugitiveHash        = { fg = c.blue_five },
-    fugitiveHeading     = { fg = c.blue_six },
-    fugitiveSection     = { fg = c.green_two },
-    fugitiveUnstagedSection = { fg = c.green_two },
-    fugitiveStagedSection = { fg = c.green_two },
-    fugitiveCount       = { fg = c.red_two },
+  },
+  Help = {
+    helpHyperTextEntry  = { fg = c.green_two },
+    helpHyperTextJump   = { fg = c.blue_three },
+    helpHeader          = { fg = c.red_three },
+    helpOption          = { fg = c.blue_five },
+    helpHeadline        = { fg = c.purple_one },
+  },
+  GitCommit = {
     gitcommitSummary    = { fg = c.orange_one },
     gitcommitSelectedType = { fg = c.green_four },
     gitcommitSelectedFile = { fg = c.red_three },
-
   },
   Diff = {
     diffAdded           = { fg = c.green_two, bold = true },
@@ -102,21 +97,36 @@ local Usual = {
   },
 
   LspRelated = {
-    LspDiagnosticsDefaultError = { bg = nil, fg = c.red_four },
-    LspDiagnosticsDefaultHint = { bg = nil, fg = c.blue_two },
-    LspDiagnosticsDefaultWarning = { bg = nil, fg = c.orange_one },
-    LspDiagnosticsDefaultInformation = { bg = nil, fg = c.yellow_one },
+    LspDiagnosticsDefaultError = { bg = back, fg = c.red_four },
+    LspDiagnosticsDefaultHint = { bg = back, fg = c.blue_two },
+    LspDiagnosticsDefaultWarning = { bg = back, fg = c.orange_one },
+    LspDiagnosticsDefaultInformation = { bg = back, fg = c.yellow_one },
   },
 }
 
 local Plugins = {
   signify = {
-    SignifyLineChange   = { bg = nil, fg = c.orange_one },
-    SignifySignChange   = { bg = nil, fg = c.orange_one },
-    SignifyLineAdd      = { bg = nil, fg = c.green_three },
-    SignifySignAdd      = { bg = nil, fg = c.green_three },
-    SignifyLineDelete   = { bg = nil, fg = c.red_three },
-    SignifySignDelete   = { bg = nil, fg = c.red_three },
+    SignifyLineChange   = { bg = back, fg = c.orange_one },
+    SignifySignChange   = { bg = back, fg = c.orange_one },
+    SignifyLineAdd      = { bg = back, fg = c.green_three },
+    SignifySignAdd      = { bg = back, fg = c.green_three },
+    SignifyLineDelete   = { bg = back, fg = c.red_three },
+    SignifySignDelete   = { bg = back, fg = c.red_three },
+  },
+  Fugitive = {
+    fugitiveHunk        = { fg = c.white },
+    fugitiveHeader      = { fg = c.orange_one },
+    fugitiveSymbolicRef = { fg = c.blue_six },
+    fugitiveUnstagedHeading = { fg = c.red_three },
+    fugitiveStagedHeading = { fg = c.red_three },
+    fugitiveUnstagedModifier = { fg = c.green_one },
+    fugitiveStagedModifier = { fg = c.green_one },
+    fugitiveHash        = { fg = c.blue_five },
+    fugitiveHeading     = { fg = c.blue_six },
+    fugitiveSection     = { fg = c.green_two },
+    fugitiveUnstagedSection = { fg = c.green_two },
+    fugitiveStagedSection = { fg = c.green_two },
+    fugitiveCount       = { fg = c.red_two },
   },
 }
 
