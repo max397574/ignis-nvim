@@ -3,7 +3,6 @@ local actions = require("telescope.actions")
 -- Plugins
 -- =======
 return require("packer").startup(function(use)
-  -- stylua: ignore start
   -- package manager
   use("wbthomason/packer.nvim")
 
@@ -12,7 +11,7 @@ return require("packer").startup(function(use)
   use("shaunsingh/moonlight.nvim")
   -- statusline
   use {'hoob3rt/lualine.nvim',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true}
+    requires = {'kyazdani42/nvim-web-devicons'}
   }
   -- stats
   use({"wakatime/vim-wakatime"})
@@ -49,18 +48,7 @@ return require("packer").startup(function(use)
   use({"folke/twilight.nvim",
     config = function()
       require("twilight").setup({
-        dimming = {
-          alpha = 0.25, -- amount of dimming
-          color = { "Normal", "#ffffff" },
-        },
         context = 20, -- amount of lines we will try to show around the current line
-        expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
-          "function",
-          "method",
-          "table",
-          "if_statement",
-        },
-        exclude = {}, -- exclude these filetypes
       })
     end,
   })
@@ -74,68 +62,7 @@ return require("packer").startup(function(use)
   -- display keybindings help
   use({"folke/which-key.nvim",
     config = function()
-      require("which-key").setup({
-        {
-          plugins = {
-            marks = true,
-            registers = true,
-            spelling = {
-              enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-              suggestions = 20, -- how many suggestions should be shown in the list?
-            },
-            presets = {
-              operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-              motions = true, -- adds help for motions
-              text_objects = true, -- help for text objects triggered after entering an operator
-              windows = true, -- default bindings on <c-w>
-              nav = true, -- misc bindings to work with windows
-              z = true, -- bindings for folds, spelling and others prefixed with z
-              g = true, -- bindings for prefixed with g
-            },
-          },
-          operators = { gc = "Comments" },
-          key_labels = {
-          },
-          icons = {
-            breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-            separator = "➜", -- symbol used between a key and it's label
-            group = "+", -- symbol prepended to a group
-          },
-          window = {
-            border = "none", -- none, single, double, shadow
-            position = "bottom", -- bottom, top
-            margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-            padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-          },
-          layout = {
-            height = { min = 4, max = 25 }, -- min and max height of the columns
-            width = { min = 20, max = 50 }, -- min and max width of the columns
-            spacing = 3, -- spacing between columns
-            align = "left", -- align columns left, center or right
-          },
-          ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
-          hidden = {
-            "<silent>",
-            "<cmd>",
-            "<Cmd>",
-            "<CR>",
-            "call",
-            "lua",
-            "^:",
-            "^ ",
-          }, -- hide mapping boilerplate
-          show_help = true, -- show help message on the command line when the popup is visible
-          triggers = "auto", -- automatically setup triggers
-          -- triggers = {"<leader>"} -- or specify a list manually
-          triggers_blacklist = {
-            -- list of mode / prefixes that should never be hooked by WhichKey
-            -- this is mostly relevant for key maps that start with a native binding
-            -- most people should not need to change this
-            i = { "j", "k" },
-            v = { "j", "k" },
-          },
-        },
-      })
+      require("which-key").setup({})
     end,
   })
 
@@ -144,56 +71,6 @@ return require("packer").startup(function(use)
     requires = "nvim-lua/plenary.nvim",
     config = function()
       require("todo-comments").setup({
-        signs = true, -- show icons in the signs column
-        sign_priority = 8, -- sign priority
-        -- keywords recognized as todo comments
-        keywords = {
-          FIX = {
-            icon = " ", -- icon used for the sign, and in search results
-            color = "error", -- can be a hex color, or a named color (see below)
-            alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
-            -- signs = false, -- configure signs for some keywords individually
-          },
-          TODO = { icon = " ", color = "info" },
-          HACK = { icon = " ", color = "warning" },
-          WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-          PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-          NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-        },
-        merge_keywords = true, -- when true, custom keywords will be merged with the defaults
-        -- highlighting of the line containing the todo comment
-        -- * before: highlights before the keyword (typically comment characters)
-        -- * keyword: highlights of the keyword
-        -- * after: highlights after the keyword (todo text)
-        highlight = {
-          before = "", -- "fg" or "bg" or empty
-          keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
-          after = "fg", -- "fg" or "bg" or empty
-          pattern = [[.*<(KEYWORDS)\s*:]], -- pattern used for highlightng (vim regex)
-          comments_only = true, -- uses treesitter to match keywords in comments only
-          max_line_len = 400, -- ignore lines longer than this
-          exclude = {}, -- list of file types to exclude highlighting
-        },
-        colors = {
-          error = { "LspDiagnosticsDefaultError", "ErrorMsg", "#DC2626" },
-          warning = { "LspDiagnosticsDefaultWarning", "WarningMsg", "#FBBF24" },
-          info = { "LspDiagnosticsDefaultInformation", "#2563EB" },
-          hint = { "LspDiagnosticsDefaultHint", "#10B981" },
-          default = { "Identifier", "#7C3AED" },
-        },
-        search = {
-          command = "rg",
-          args = {
-            "--color=never",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-          },
-          -- regex that will be used to match keywords.
-          -- don't replace the (KEYWORDS) placeholder
-          pattern = [[\b(KEYWORDS):]], -- ripgrep regex
-        },
       })
     end,
   })
@@ -259,48 +136,7 @@ return require("packer").startup(function(use)
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
       require("trouble").setup({
-        position = "bottom", -- position of the list can be: bottom, top, left, right
-        height = 10, -- height of the trouble list when position is top or bottom
-        width = 50, -- width of the list when position is left or right
-        icons = true, -- use devicons for filenames
-        mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
-        fold_open = "Ôëº", -- icon used for open folds
-        fold_closed = "Ôë†", -- icon used for closed folds
-        action_keys = { -- key mappings for actions in the trouble list
-          -- map to {} to remove a mapping, for example:
-          -- close = {},
-          close = "q", -- close the list
-          cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-          refresh = "r", -- manually refresh
-          jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
-          open_split = { "<c-x>" }, -- open buffer in new split
-          open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-          open_tab = { "<c-t>" }, -- open buffer in new tab
-          jump_close = { "o" }, -- jump to the diagnostic and close the list
-          toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-          toggle_preview = "P", -- toggle auto_preview
-          hover = "K", -- opens a small popup with the full multiline message
-          preview = "p", -- preview the diagnostic location
-          close_folds = { "zM", "zm" }, -- close all folds
-          open_folds = { "zR", "zr" }, -- open all folds
-          toggle_fold = { "zA", "za" }, -- toggle fold of current file
-          previous = "k", -- preview item
-          next = "j", -- next item
-        },
-        indent_lines = true, -- add an indent guide below the fold icons
-        auto_open = false, -- automatically open the list when you have diagnostics
-        auto_close = false, -- automatically close the list when you have no diagnostics
-        auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
-        auto_fold = false, -- automatically fold a file trouble list at creation
-        signs = {
-          -- icons / text used for a diagnostic
-          error = "Ôôô",
-          warning = "Ôî©",
-          hint = "Ô†µ",
-          information = "Ôëâ",
-          other = "Ô´†",
-        },
-        use_lsp_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
+        auto_preview = false, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
       })
     end,
   })
@@ -363,43 +199,7 @@ return require("packer").startup(function(use)
         path = '~/.local/share/nvim/databases/telescope_history.sqlite3',
         limit = 100,
       },
-      vimgrep_arguments = {
-        "rg",
-        "--color=never",
-        "--no-heading",
-        "--with-filename",
-        "--line-number",
-        "--column",
-        "--smart-case",
-      },
-      prompt_prefix = "> ",
-      selection_caret = "> ",
-      entry_prefix = "  ",
-      initial_mode = "insert",
-      selection_strategy = "reset",
-      sorting_strategy = "descending",
-      layout_strategy = "horizontal",
-      layout_config = {
-        horizontal = {
-          mirror = false,
-        },
-        vertical = {
-          mirror = false,
-        },
-      },
-      file_sorter = require("telescope.sorters").get_fuzzy_file,
-      file_ignore_patterns = {},
-      generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-      winblend = 0,
-      border = {},
-      borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-      color_devicons = true,
-      use_less = true,
-      path_display = {},
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
-      file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-      grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-      qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
     },
   })
   require('telescope').load_extension('fzf')
@@ -410,31 +210,8 @@ return require("packer").startup(function(use)
     files = {
       home .. "/.config/nvim/vimhelp/treesitter.md",
     },
-    width = 80,
-    side = "right",
-    current_file = 1,
     winopts = {
-      relativenumber = false,
-      number = false,
-      list = false,
-      winfixwidth = true,
-      winfixheight = true,
-      foldenable = false,
-      spell = false,
-      signcolumn = "no",
-      foldmethod = "manual",
-      foldcolumn = "0",
-      cursorcolumn = false,
-      colorcolumn = "0",
-      wrap = false,
       winhl = table.concat({ "Normal:LvimHelperNormal" }, ","),
-    },
-    bufopts = {
-      swapfile = false,
-      buftype = "nofile",
-      modifiable = false,
-      filetype = "LvimHelper",
-      bufhidden = "hide",
     },
   })
 
@@ -443,25 +220,9 @@ return require("packer").startup(function(use)
   }, { mode = "foreground" })
 
   require("compe").setup({
-    enabled = true,
-    autocomplete = true,
-    debug = false,
-    min_length = 1,
-    preselect = "enable",
-    throttle_time = 80,
-    source_timeout = 200,
-    resolve_timeout = 800,
-    incomplete_delay = 400,
-    max_abbr_width = 100,
-    max_kind_width = 100,
-    max_menu_width = 100,
     documentation = {
-      border = { "", "", "", " ", "", "", "", " " }, -- the border option is the same as `|help nvim_open_win|`
-      winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-      max_width = 120,
       min_width = 30,
       max_height = math.floor(vim.o.lines),
-      min_height = 1,
     },
 
     source = {
@@ -685,15 +446,9 @@ return require("packer").startup(function(use)
   })
 
   require("nvim_comment").setup({
-    -- Linters prefer comment and line to have a space in between markers
-    marker_padding = true,
-    -- should comment out empty or whitespace only lines
     comment_empty = false,
-    -- Should key mappings be created
     create_mappings = true,
-    -- Normal mode mapping left hand side
     line_mapping = "<leader>cc",
-    -- Visual/Operator mapping left hand side
     operator_mapping = "<leader>c",
   })
 
@@ -701,10 +456,7 @@ return require("packer").startup(function(use)
     ensure_installed = "maintained",
     highlight = {
       enable = true,
-      --disable = { "c", "rust" },  -- list of language that will be disabled
       custom_captures = {
-        -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-        --["foo.bar"] = "Identifier",
         ["variable"] = "TSVariable",
         ["keyword.operator"] = "TSKeywordOperator",
         ["conditional"] = "TSConditional",
@@ -744,113 +496,19 @@ return require("packer").startup(function(use)
         },
       },
     },
-    textobjects = {
-      lsp_interop = {
-        enable = true,
-        border = "none",
-        peek_definition_code = {
-          ["df"] = "@function.outer",
-          ["dF"] = "@class.outer",
-        },
-      },
-      select = {
-        enable = true,
-        keymaps = {
-          -- You can use the capture groups defined in textobjects.scm
-          -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects/blob/master/queries/python/textobjects.scm
-          ["af"] = "@function.outer",
-          ["if"] = "@function.inner",
-          ["ac"] = "@class.outer",
-          ["ic"] = "@class.inner",
-
-          -- Or you can define your own textobjects like this
-          --["iF"] = {
-          --python = "(function_definition) @function",
-          --cpp = "(function_definition) @function",
-          --c = "(function_definition) @function",
-          --java = "(method_declaration) @function",
-        },
-      },
-      swap = {
-        enable = true,
-        swap_next = {
-          ["gsp"] = "@parameter.inner",
-          ["gsf"] = "@function.outer",
-        },
-        swap_previous = {
-          ["gsP"] = "@parameter.inner",
-          ["gsF"] = "@function.outer",
-        },
-      },
-      move = {
-        enable = false,
-        set_jumps = true, -- whether to set jumps in the jumplist
-        goto_next_start = {
-          ["]m"] = "@function.outer",
-          ["]]"] = "@class.outer",
-        },
-        goto_next_end = {
-          ["]M"] = "@function.outer",
-          ["]["] = "@class.outer",
-        },
-        goto_previous_start = {
-          ["[m"] = "@function.outer",
-          ["[["] = "@class.outer",
-        },
-        goto_previous_end = {
-          ["[M"] = "@function.outer",
-          ["[]"] = "@class.outer",
-        },
-      },
-    },
-    playground = {
-      enable = true,
-      disable = {},
-      updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-      persist_queries = false, -- Whether the query persists across vim sessions
-      keybindings = {
-        toggle_query_editor = "o",
-        toggle_hl_groups = "i",
-        toggle_injected_languages = "t",
-        toggle_anonymous_nodes = "a",
-        toggle_language_display = "I",
-        focus_language = "f",
-        unfocus_language = "F",
-        update = "R",
-        goto_node = "<CR>",
-        show_help = "?",
-      },
-    },
+    playground = {enable = true},
     query_linter = {
       enable = true,
       use_virtual_text = true,
       lint_events = { "BufWrite", "CursorHold", "CursorMoved" },
     },
-    incremental_selection = {
-      enable = true,
-      keymaps = {
-        init_selection = "gnn",
-        node_incremental = "grn",
-        scope_incremental = "grc",
-        node_decremental = "grm",
-      },
-    },
     indent = {
       enable = true,
     },
-    textsubjects = {
-      enable = true,
-      keymaps = {
-        ["."] = "textsubjects-smart",
-        [";"] = "textsubjects-container-outer",
-      },
-    },
     rainbow = {
       enable = true,
-      extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-      max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-      --colors = {}, -- table of hex strings
-      --termcolors = {}, -- table of colour name strings
+      extended_mode = true,
+      max_file_lines = 1000,
     },
   })
 
@@ -885,15 +543,5 @@ return require("packer").startup(function(use)
       lualine_y = {'progress'},
       lualine_z = {'location'}
     },
-    inactive_sections = {
-      lualine_a = {},
-      lualine_b = {},
-      lualine_c = {'filename'},
-      lualine_x = {'location'},
-      lualine_y = {},
-      lualine_z = {}
-    },
-    tabline = {},
-    extensions = {}
   }
 end)
