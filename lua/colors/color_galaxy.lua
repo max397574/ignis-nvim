@@ -40,8 +40,28 @@ local c = {
 local back = nil
 
 local Usual = {
+  MarkdownHighlights = {
+    markdownH1          = { fg = c.red_three, bold = true },
+    markdownH2          = { fg = c.red_three, bold = true },
+    markdownH3          = { fg = c.red_three, bold = true },
+    markdownHeadingDelimiter = { fg = c.white_two },
+    markdownListMarker = { fg = c.blue_three },
+    markdownUnorderedListMarker = { fg = c.blue_three },
+    markdownOrderedListMarker = { fg = c.blue_three },
+    markdownItalic      = { italic = true },
+    markdownBold        = { bold = true },
+    markdownCodeDelimiter = { fg = c.orange_one },
+    markdownLinkText    = { fg = c.blue_six },
+    markdownUrl         = { fg = c.red_three },
+    markdownRule        = { fg = c.blue_four },
+    markdownHeadingRule        = { fg = c.blue_four },
+  },
   UsualHighlights = {
     Normal              = { bg = back },
+    NormalFloat         = { bg = c.background_two, fg = c.white_two },
+    Identifier          = { fg = c.green_two },
+    Keyword             = { fg = c.red_one },
+    FloatBorder         = { fg = c.blue_six, bg = c.background_one },
     NonText             = { bg = back },
     LineNr              = { fg = c.background_two },
     SignColumn          = { bg = nil },
@@ -50,8 +70,6 @@ local Usual = {
     StatusLine          = { fg = c.white_two, bg = c.background_three },
     Search              = { fg = c.black_two, bg =c.yellow_one, bold = true },
     IncSearch           = { fg = c.black_two, bg =c.orange_one, bold = true},
-    MarkdownItalic      = { italic = true },
-    MarkdownBold        = { bold = true },
     Folded              = { fg = c.white, bold = true, italic = true },
     Visual              = { reverse = true },
     EndOfBuffer         = { bg = back },
@@ -80,6 +98,8 @@ local Usual = {
     diffLine            = { fg = c.blue_three },
   },
   TSHighlights = {
+    NodeNumber          = { fg = c.blue_five },
+    NodeOp              = { fg = c.red_four },
     TSVariable          = { fg = c.yellow_one },
     TSKeywordOperator   = { fg = c.red_one },
     TSConditional       = { fg = c.red_one },
