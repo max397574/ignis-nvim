@@ -9,6 +9,7 @@ return require("packer").startup(function(use)
 
   -- colorscheme
   use("lifepillar/vim-gruvbox8")
+  use("shaunsingh/moonlight.nvim")
   -- stats
   use({"wakatime/vim-wakatime"})
 
@@ -717,6 +718,7 @@ return require("packer").startup(function(use)
         ["repeat"] = "TSRepeat",
         ["keyword.function"] = "TSKeywordFunction",
         ["function"] = "TSFunction",
+        ["require_call"] = "RequireCall",
       },
     },
     refactor = {
