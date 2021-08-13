@@ -10,6 +10,7 @@ return require("packer").startup(function(use)
   use("lifepillar/vim-gruvbox8")
   use("shaunsingh/moonlight.nvim")
   use("navarasu/onedark.nvim")
+  use("folke/tokyonight.nvim")
   -- statusline
   use({ "hoob3rt/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
   -- stats

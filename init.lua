@@ -13,7 +13,7 @@
 -- set this early because the other mappings are created with this
 vim.g.mapleader = " "
 
--- possible options color_galaxy, moonlight, gruvbox8, onedark
+-- possible options color_galaxy, moonlight, gruvbox8, onedark, tokyonight
 local color_choice = "color_galaxy"
 
 -- all the vim settings

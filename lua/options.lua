@@ -4,6 +4,7 @@ local g = vim.g
 opt.runtimepath = opt.runtimepath + '~/.config/nvim/queries'
 
 g.onedark_style = "deep"
+g.tokyonight_style = "storm"
 
 opt.pumblend = 18
 opt.background = "dark"
