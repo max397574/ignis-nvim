@@ -44,6 +44,7 @@ local Usual = {
     markdownH1          = { fg = c.red_three, bold = true },
     markdownH2          = { fg = c.red_three, bold = true },
     markdownH3          = { fg = c.red_three, bold = true },
+    markdownH4          = { fg = c.red_three, bold = true },
     markdownHeadingDelimiter = { fg = c.white_two },
     markdownListMarker = { fg = c.blue_three },
     markdownUnorderedListMarker = { fg = c.blue_three },
