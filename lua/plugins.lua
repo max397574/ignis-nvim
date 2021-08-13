@@ -1,4 +1,4 @@
-local actions = require('telescope.actions')
+local actions = require("telescope.actions")
 
 -- Plugins
 -- =======
@@ -10,6 +10,10 @@ return require("packer").startup(function(use)
   -- colorscheme
   use("lifepillar/vim-gruvbox8")
   use("shaunsingh/moonlight.nvim")
+  -- statusline
+  use {'hoob3rt/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true}
+  }
   -- stats
   use({"wakatime/vim-wakatime"})
 
@@ -332,7 +336,6 @@ return require("packer").startup(function(use)
 
 -- Settings
 -- ========
-
   require("telescope").setup({
     defaults = {
       -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua
@@ -866,4 +869,31 @@ return require("packer").startup(function(use)
     debug = false,
     registers = true,
   })
+  require'lualine'.setup {
+    options = {
+      icons_enabled = true,
+      theme = 'powerline',
+      component_separators = {'', ''},
+      section_separators = {'', ''},
+      disabled_filetypes = {}
+    },
+    sections = {
+      lualine_a = {'mode'},
+      lualine_b = {'branch'},
+      lualine_c = {'filename'},
+      lualine_x = {'encoding', 'fileformat', 'filetype'},
+      lualine_y = {'progress'},
+      lualine_z = {'location'}
+    },
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {'filename'},
+      lualine_x = {'location'},
+      lualine_y = {},
+      lualine_z = {}
+    },
+    tabline = {},
+    extensions = {}
+  }
 end)
