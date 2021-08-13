@@ -73,6 +73,9 @@ local Usual = {
     fugitiveUnstagedSection = { fg = c.green_two },
     fugitiveStagedSection = { fg = c.green_two },
     fugitiveCount       = { fg = c.red_two },
+    gitcommitSummary    = { fg = c.orange_one },
+    gitcommitSelectedType = { fg = c.green_four },
+    gitcommitSelectedFile = { fg = c.red_three },
 
   },
   Diff = {
