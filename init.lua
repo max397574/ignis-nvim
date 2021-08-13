@@ -32,6 +32,7 @@ if color_choice == "color_galaxy" then
   require "colors.vimcolors"
 else
   vim.cmd("colorscheme " .. color_choice)
+  require("colors.fixed_highlights")
 end
 
 vim.cmd("command -nargs=1 H vertical help")
