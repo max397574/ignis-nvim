@@ -388,6 +388,10 @@ return require("packer").startup(function(use)
     S = { "Substitute in whole File" },
     y = { "Yank to Clipboard" },
     Y = { "Yank File to Clipboard" },
+    v = {
+      name = "Vertical Explore",
+      e = "Vertical Explore",
+    },
     d = {
       name = "Distraction Free",
       f = { "Distraction Free" },
