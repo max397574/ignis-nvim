@@ -18,6 +18,10 @@ augroup random
       \let w:m1=matchadd('Search', '\%<81v.\%>80v', -1)
 augroup END
 
+augroup sex
+    autocmd!
+    autocmd VimEnter * if argc() == 0 | Sex | wincmd j | close | endif
+augroup end
 " Tablemode
 let g:table_mode_corner='|'
 inoremap <leader>tm <ESC>:TableModeToggle<CR>i
