@@ -18,6 +18,7 @@ local c = {
   blue_three        = "#009999",
   blue_four         = "#4090FF",
   blue_five         = "#316AD0",
+  blue_six          = "#0048FF",
 
   purple_one        = "#6600CC",
 
@@ -57,11 +58,28 @@ local Usual = {
     Comment             = { fg = c.white, bold = true, italic = true },
     preProc             = { fg = c.blue_four },
     fugitiveHunk        = { fg = c.white },
+    Matchparen	        = { underline = true},
+    Pmenu               = { fg = c.white_two, bg = c.background_two },
+    Pmenusel            = { fg = c.black, bg = c.purple_one },
+    fugitiveHeader      = { fg = c.orange_one },
+    fugitiveSymbolicRef = { fg = c.blue_six },
+    fugitiveUnstagedHeading = { fg = c.red_three },
+    fugitiveStagedHeading = { fg = c.red_three },
+    fugitiveUnstagedModifier = { fg = c.green_one },
+    fugitiveStagedModifier = { fg = c.green_one },
+    fugitiveHash        = { fg = c.blue_five },
+    fugitiveHeading     = { fg = c.blue_six },
+    fugitiveSection     = { fg = c.green_two },
+    fugitiveUnstagedSection = { fg = c.green_two },
+    fugitiveStagedSection = { fg = c.green_two },
+    fugitiveCount       = { fg = c.red_two },
+
   },
   Diff = {
     diffAdded           = { fg = c.green_two, bold = true },
     diffRemoved         = { fg = c.red_one, bold = true },
     gitDiff             = { fg = c.white },
+    diffLine            = { fg = c.blue_three },
   },
   TSHighlights = {
     TSVariable          = { fg = c.yellow_one },
