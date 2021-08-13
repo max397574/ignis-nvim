@@ -3,6 +3,8 @@ local g = vim.g
 
 opt.runtimepath = opt.runtimepath + '~/.config/nvim/queries'
 
+g.onedark_style = "deep"
+
 opt.pumblend = 18
 opt.background = "dark"
 opt.cmdheight = 1

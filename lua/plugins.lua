@@ -6,9 +6,10 @@ return require("packer").startup(function(use)
   -- package manager
   use("wbthomason/packer.nvim")
 
-  -- colorscheme
+  -- colorschemes
   use("lifepillar/vim-gruvbox8")
   use("shaunsingh/moonlight.nvim")
+  use("navarasu/onedark.nvim")
   -- statusline
   use({ "hoob3rt/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
   -- stats
