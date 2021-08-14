@@ -163,7 +163,7 @@ local Plugins = {
 
 local lang = {
   lua = {
-    RequireCall = { fg = c.red_one, italic = true, bold =true },
+    RequireCall = { fg = c.blue_six, italic = true, bold =true },
   }
 }
 
