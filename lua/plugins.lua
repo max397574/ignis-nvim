@@ -1,5 +1,15 @@
 local actions = require("telescope.actions")
 
+local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
+
+parser_configs.norg = {
+    install_info = {
+        url = "https://github.com/vhyrro/tree-sitter-norg",
+        files = { "src/parser.c" },
+        branch = "main"
+    },
+}
+
 -- Plugins
 -- =======
 return require("packer").startup(function(use)
@@ -12,6 +22,26 @@ return require("packer").startup(function(use)
   use("navarasu/onedark.nvim")
   use("folke/tokyonight.nvim")
   use('tiagovla/tokyodark.nvim')
+  -- take notes
+  use {"vhyrro/neorg",
+    config = function()
+        require('neorg').setup {
+            -- Tell Neorg what modules to load
+            load = {
+                ["core.defaults"] = {}, -- Load all the default modules
+                ["core.norg.concealer"] = {}, -- Allows for use of icons
+                ["core.norg.dirman"] = { -- Manage your directories with Neorg
+                    config = {
+                        workspaces = {
+                            my_workspace = "~/neorg"
+                        }
+                    }
+                }
+            },
+        }
+    end,
+    requires = "nvim-lua/plenary.nvim"
+}
   -- statusline
   use({ "hoob3rt/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
   -- stats
@@ -234,6 +264,7 @@ return require("packer").startup(function(use)
       nvim_lua = true,
       vsnip = true,
       ultisnips = true,
+      norg = true,
       luasnip = true,
       emoji = true,
     },
