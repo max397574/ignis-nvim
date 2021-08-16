@@ -1,5 +1,4 @@
 vim.cmd[[
-  highlight Normal guibg = none
   highlight SignColumn guibg = none
   highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
   highlight WhiteOnRed ctermbg=red guibg=red ctermfg=white guifg=white

@@ -31,9 +31,11 @@ vim.cmd("source ~/.config/nvim/random.vim")
 if color_choice == "color_galaxy" then
   require "colors.color_galaxy".shine()
   require "colors.vimcolors"
+  vim.cmd("highlight Normal guibg = none")
 else
   vim.cmd("colorscheme " .. color_choice)
   require("colors.fixed_highlights")
+  vim.cmd("highlight Normal guibg = none")
 end
 
 vim.cmd("command -nargs=1 H vertical help")
