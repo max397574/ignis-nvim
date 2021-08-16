@@ -1,14 +1,6 @@
 local actions = require("telescope.actions")
 
-local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
-
-parser_configs.norg = {
-    install_info = {
-        url = "https://github.com/vhyrro/tree-sitter-norg",
-        files = { "src/parser.c" },
-        branch = "main"
-    },
-}
+local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
 
 -- Plugins
 -- =======
@@ -21,8 +13,8 @@ return require("packer").startup(function(use)
   use("shaunsingh/moonlight.nvim")
   use("navarasu/onedark.nvim")
   use("folke/tokyonight.nvim")
-  use('tiagovla/tokyodark.nvim')
-  use('sainnhe/gruvbox-material')
+  use("tiagovla/tokyodark.nvim")
+  use("sainnhe/gruvbox-material")
   -- statusline
   use({ "hoob3rt/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
   -- stats
@@ -57,7 +49,8 @@ return require("packer").startup(function(use)
   use({ "folke/zen-mode.nvim" })
 
   -- dimm inactive parts of code
-  use({"folke/twilight.nvim",
+  use({
+    "folke/twilight.nvim",
     config = function()
       require("twilight").setup({
         context = 20, -- amount of lines we will try to show around the current line
@@ -72,14 +65,16 @@ return require("packer").startup(function(use)
   use({ "dhruvasagar/vim-table-mode" })
 
   -- display keybindings help
-  use({"folke/which-key.nvim",
+  use({
+    "folke/which-key.nvim",
     config = function()
       require("which-key").setup({})
     end,
   })
 
   -- highlight and search todo comments
-  use({"folke/todo-comments.nvim",
+  use({
+    "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
     config = function()
       require("todo-comments").setup({})
@@ -111,7 +106,8 @@ return require("packer").startup(function(use)
   use("kyazdani42/nvim-web-devicons")
 
   -- a file explorer
-  use({"nvim-telescope/telescope.nvim",
+  use({
+    "nvim-telescope/telescope.nvim",
     requires = {
       { "nvim-lua/popup.nvim" },
       { "nvim-lua/plenary.nvim" },
@@ -143,7 +139,8 @@ return require("packer").startup(function(use)
   use("folke/lsp-colors.nvim")
 
   -- list for lsp,quickfix,telescope etc
-  use({"folke/trouble.nvim",
+  use({
+    "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
       require("trouble").setup({
@@ -178,29 +175,6 @@ return require("packer").startup(function(use)
 
   -- hints for operators
   use("mfussenegger/nvim-ts-hint-textobject")
-  -- take notes
-  use {"vhyrro/neorg",
-    branch = 'unstable',
-    config = function()
-        require('neorg').setup {
-            -- Tell Neorg what modules to load
-            load = {
-                ["core.defaults"] = {}, -- Load all the default modules
-                ["core.norg.concealer"] = {}, -- Allows for use of icons
-                ["core.norg.dirman"] = { -- Manage your directories with Neorg
-                    config = {
-                        workspaces = {
-                            my_workspace = "~/neorg"
-                        }
-                    }
-                },
-                ["core.norg.tangle"] = {},
-                ["core.integrations.telescope"] = {},
-            },
-        }
-    end,
-    requires = "nvim-lua/plenary.nvim", "vhyrro/neorg-telescope"
-  }
 
   -- Settings
   -- ========
@@ -514,6 +488,22 @@ return require("packer").startup(function(use)
         ["require_call"] = "RequireCall",
       },
     },
+    incremental_selection = {
+      enable = true,
+
+      keymaps = {
+        init_selection = "gnn",
+        node_incremental = "gnn",
+        scope_incremental = "gns",
+        node_decremental = "gnp",
+      },
+    },
+    textsubjects = {
+      enable = true,
+      keymaps = {
+        [","] = "textsubjects-smart",
+      },
+    },
     refactor = {
       highlight_definitions = { enable = true },
       highlight_current_scope = { enable = false },
@@ -540,14 +530,68 @@ return require("packer").startup(function(use)
       use_virtual_text = true,
       lint_events = { "BufWrite", "CursorHold", "CursorMoved" },
     },
-    indent = {
-      enable = true,
-    },
+    indent = { enable = true },
     rainbow = {
       enable = true,
       extended_mode = true,
       max_file_lines = 1000,
     },
+    textobjects = {
+    				select = {
+      	  	  	  	  	enable = true,
+
+						-- Automatically jump forward to textobj, similar to targets.vim
+      					lookahead = true,
+
+      	  	  	  	  	keymaps = {
+        					["af"] = "@function.outer",
+        					["if"] = "@function.inner",
+        					["il"] = "@loop.outer",
+        					["al"] = "@loop.outer",
+        					["icd"] = "@conditional.inner",
+        					["acd"] = "@conditional.outer",
+        					["acm"] = "@comment.outer",
+        					["ast"] = "@statement.outer",
+        					["isc"] = "@scopename.inner",
+        					["iB"] = "@block.inner",
+        					["aB"] = "@block.outer",
+        					["p"] = "@parameter.inner",
+      	  	  	  	  	},
+    				},
+
+					move = {
+      					enable = true,
+      					set_jumps = true, -- Whether to set jumps in the jumplist
+      					goto_next_start = {
+        					["gnf"] = "@function.outer",
+        					["gnif"] = "@function.inner",
+        					["gnp"] = "@parameter.inner",
+        					["gnc"] = "@call.outer",
+        					["gnic"] = "@call.inner",
+      					},
+      					goto_next_end = {
+        					["gnF"] = "@function.outer",
+        					["gniF"] = "@function.inner",
+        					["gnP"] = "@parameter.inner",
+        					["gnC"] = "@call.outer",
+        					["gniC"] = "@call.inner",
+      					},
+      					goto_previous_start = {
+        					["gpf"] = "@function.outer",
+        					["gpif"] = "@function.inner",
+        					["gpp"] = "@parameter.inner",
+        					["gpc"] = "@call.outer",
+        					["gpic"] = "@call.inner",
+      					},
+      					goto_previous_end = {
+        					["gpF"] = "@function.outer",
+        					["gpiF"] = "@function.inner",
+        					["gpP"] = "@parameter.inner",
+        					["gpC"] = "@call.outer",
+        					["gpiC"] = "@call.inner",
+      					},
+    				},
+  	  	  	  	},
   })
 
   require("treesitter-context.config").setup({
