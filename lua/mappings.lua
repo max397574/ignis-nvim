@@ -11,6 +11,8 @@ local silent = { silent = true }
 map('n', '<C-f>', ':lua vim.cmd(":vert :h "..vim.fn.expand("<cword>"))<CR>', nore_silent)
 -- remove highlighting from search
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
+-- select colorscheme
+map("n", "<leader>cs", ":lua require 'colors/scheme_picker'.scheme_picker()<CR>", nore_silent )
 -- easy split navigation
 map("n", "<c-j>", ":wincmd j<CR>", nore_silent)
 map("n", "<c-h>", ":wincmd h<CR>", nore_silent)
