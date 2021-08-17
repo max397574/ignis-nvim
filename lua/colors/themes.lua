@@ -14,7 +14,6 @@ function Colo.random()
 	math.randomseed(os.clock())
 	local rand_int = math.random() * #colors
 	local selected = colors[math.floor(rand_int)+1]
-	print("ColorScheme: "..selected)
   if selected == "color_galaxy" then
     require "colors.color_galaxy".shine()
     require "colors.vimcolors"
@@ -24,6 +23,7 @@ function Colo.random()
     require("colors.fixed_highlights")
     vim.cmd("highlight Normal guibg = none")
   end
+	print("ColorScheme: "..selected)
 end
 
 
