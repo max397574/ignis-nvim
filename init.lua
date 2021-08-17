@@ -13,8 +13,8 @@
 -- set this early because the other mappings are created with this
 vim.g.mapleader = " "
 
--- possible options color_galaxy, moonlight, gruvbox8, onedark, tokyonight, tokyodark
-local color_choice = "color_galaxy"
+-- possible options galaxy, moonlight, gruvbox8, onedark, tokyonight, tokyodark
+local color_choice = "galaxy"
 
 -- all the vim settings
 require("options")
@@ -30,14 +30,8 @@ vim.cmd("source ~/.config/nvim/random.vim")
 
 -- require "colors/themes".random()
 
-if color_choice == "color_galaxy" then
-  require "colors.color_galaxy".shine()
-  require "colors.vimcolors"
-  vim.cmd("highlight Normal guibg = none")
-else
-  vim.cmd("colorscheme " .. color_choice)
-  require("colors.fixed_highlights")
-  vim.cmd("highlight Normal guibg = none")
-end
+vim.cmd("colorscheme " .. color_choice)
+require("colors.fixed_highlights")
+vim.cmd("highlight Normal guibg = none")
 
 vim.cmd("command -nargs=1 H vertical help")
