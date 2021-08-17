@@ -85,6 +85,23 @@ local Usual = {
     Pmenu               = { fg = c.white_two, bg = c.background_two },
     Pmenusel            = { fg = c.black, bg = c.purple_one },
   },
+  Vim = {
+    VimCommand          = { fg = c.red_one },
+    VimVar              = { fg = c.blue_three},
+    VimString           = { fg = c.green_one },
+    VimAttrib           = { fg = c.green_one },
+    VimHiAttrib         = { fg = c.green_one },
+    VimOption           = { fg = c.green_four },
+    VimIsCommand        = { fg = c.orange_one },
+    VimUsrCmd           = { fg = c.orange_one },
+    VimHiGroup          = { fg = c.blue_five },
+    VimGroup            = { fg = c.blue_five },
+    VimHiGuiFgBg        = { fg = c.yellow_one, bold = true },
+    VimHiCtermFgBg      = { fg = c.yellow_one, bold = true },
+    VimHiCterm          = { fg = c.yellow_one, bold = true },
+    VimHiTermFgBg       = { fg = c.yellow_one, bold = true },
+    VimFgBgAttrib       = { fg = c.green_five },
+  },
   Help = {
     helpHyperTextEntry  = { fg = c.green_two },
     helpHyperTextJump   = { fg = c.blue_three },
@@ -182,7 +199,7 @@ end
 function M.shine()
     vim.cmd 'highlight clear'
     if vim.fn.exists("syntax_on") then vim.cmd'syntax reset' end
-    vim.g.colors_name = "noice"
+    vim.g.colors_name = "galaxy"
 
     for _, tbl in pairs(Usual) do add_highlight_table(tbl) end
     for _, tbl in pairs(Plugins) do add_highlight_table(tbl) end

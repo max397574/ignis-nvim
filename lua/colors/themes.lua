@@ -17,7 +17,6 @@ function Colo.random()
 	print("ColorScheme: "..selected)
   if selected == "color_galaxy" then
     require "colors.color_galaxy".shine()
-    require "colors.vimcolors"
     vim.cmd("highlight Normal guibg = none")
   elseif selected == "gruvbox_material" then
     vim.cmd("colorscheme gruvbox-material")
@@ -31,7 +30,6 @@ end
 
 function Colo.color_galaxy(transparent)
   require "colors.color_galaxy".shine()
-  require "colors.vimcolors"
   if transparent == true then
     vim.cmd("highlight Normal guibg=none")
   end
