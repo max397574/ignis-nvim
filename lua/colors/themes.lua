@@ -1,14 +1,32 @@
 Colo = {}
 
 local colors = {
+  'tokyonight',
   'color_galaxy',
   'moonlight',
-  'gruvbox8',
-  'gruvbox_material',
   'onedark',
-  'tokyonight',
+  'gruvbox8',
   'tokyodark',
+  'gruvbox_material',
 }
+
+function Colo.random()
+	math.randomseed(os.clock())
+	local rand_int = math.random() * #colors
+	local selected = colors[math.floor(rand_int)+1]
+	print("ColorScheme: "..selected)
+	vim.cmd('colo '..selected)
+  if selected == "color_galaxy" then
+    require "colors.color_galaxy".shine()
+    require "colors.vimcolors"
+    vim.cmd("highlight Normal guibg = none")
+  else
+    vim.cmd("colorscheme " .. selected)
+    require("colors.fixed_highlights")
+    vim.cmd("highlight Normal guibg = none")
+  end
+end
+
 
 function Colo.color_galaxy(transparent)
   require "colors.color_galaxy".shine()
