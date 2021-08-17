@@ -15,7 +15,6 @@ function Colo.random()
 	local rand_int = math.random() * #colors
 	local selected = colors[math.floor(rand_int)+1]
 	print("ColorScheme: "..selected)
-	vim.cmd('colo '..selected)
   if selected == "color_galaxy" then
     require "colors.color_galaxy".shine()
     require "colors.vimcolors"
