@@ -12,7 +12,7 @@ map('n', '<C-f>', ':lua vim.cmd(":vert :h "..vim.fn.expand("<cword>"))<CR>', nor
 -- remove highlighting from search
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
 -- select colorscheme
-map("n", "<leader>cs", ":lua require 'colors/scheme_picker'.scheme_picker()<CR>", nore_silent )
+map("n", "<leader>cs", ":lua require'telescope.builtin'.colorscheme{}<CR>", nore)
 -- easy split navigation
 map("n", "<c-j>", ":wincmd j<CR>", nore_silent)
 map("n", "<c-h>", ":wincmd h<CR>", nore_silent)
@@ -53,7 +53,6 @@ map("n", "<leader>tcsh", ":lua require'telescope.builtin'.search_history{}<CR>",
 map("n", "<leader>tcgc", ":lua require'telescope.builtin'.git_commits{}<CR>", nore)
 map("n", "<leader>tcsb", ":lua require'telescope.builtin'.symbols{}<CR>", nore)
 map("n", "<leader>tcbi", ":lua require'telescope.builtin'.builtin{}<CR>", nore)
-map("n", "<leader>tccs", ":lua require'telescope.builtin'.colorscheme{}<CR>", nore)
 -- highlight search result and center cursor
 map("n", "n", "nzzzv", nore_silent)
 map("n", "N", "Nzzzv", nore_silent)
