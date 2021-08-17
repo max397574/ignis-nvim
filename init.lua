@@ -28,6 +28,8 @@ require("autocommands")
 vim.cmd("source ~/.config/nvim/random.vim")
 -- all highlights
 
+-- require "colors/themes".random()
+
 if color_choice == "color_galaxy" then
   require "colors.color_galaxy".shine()
   require "colors.vimcolors"
