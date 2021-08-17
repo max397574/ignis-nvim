@@ -13,13 +13,14 @@ local function scheme_picker(opts)
       "gruvbox8",
       "tokyodark",
       "gruvbox_material",
+      "random",
     }),
     sorter = conf.generic_sorter({}),
 
     attach_mappings = function(_, map)
       map("i", "<CR>", function(bufnr)
         local scheme = require("telescope.actions.state").get_selected_entry()
-        require("colors.colorschemes")[scheme[1]](true)
+        require("colors.themes")[scheme[1]](true)
         require("telescope.actions").close(bufnr)
       end)
       return true

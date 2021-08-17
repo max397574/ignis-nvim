@@ -1,5 +1,15 @@
 Colo = {}
 
+local colors = {
+  'color_galaxy',
+  'moonlight',
+  'gruvbox8',
+  'gruvbox_material',
+  'onedark',
+  'tokyonight',
+  'tokyodark',
+}
+
 function Colo.color_galaxy(transparent)
   require "colors.color_galaxy".shine()
   require "colors.vimcolors"
