@@ -51,6 +51,7 @@ map("n", "<leader>tcsh", ":lua require'telescope.builtin'.search_history{}<CR>",
 map("n", "<leader>tcgc", ":lua require'telescope.builtin'.git_commits{}<CR>", nore)
 map("n", "<leader>tcsb", ":lua require'telescope.builtin'.symbols{}<CR>", nore)
 map("n", "<leader>tcbi", ":lua require'telescope.builtin'.builtin{}<CR>", nore)
+map("n", "<leader>tccs", ":lua require'telescope.builtin'.colorscheme{}<CR>", nore)
 -- highlight search result and center cursor
 map("n", "n", "nzzzv", nore_silent)
 map("n", "N", "Nzzzv", nore_silent)
