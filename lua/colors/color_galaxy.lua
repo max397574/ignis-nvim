@@ -130,6 +130,7 @@ local Usual = {
     TSKeywordOperator   = { fg = c.red_one },
     TSConditional       = { fg = c.red_one },
     TSNumber            = { fg = c.blue_two },
+    TSFloat             = { fg = c.blue_two },
     TSOperator          = { fg = c.blue_one },
     TSKeyword           = { fg = c.red_one, italic = true },
     TSString            = { fg = c.blue_three },
