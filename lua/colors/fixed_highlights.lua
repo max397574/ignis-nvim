@@ -1,6 +1,5 @@
 vim.cmd[[
   highlight SignColumn guibg = none
-  highlight Comment term=bold cterm=italic ctermfg=white gui=italic guifg=white
   highlight WhiteOnRed ctermbg=red guibg=red ctermfg=white guifg=white
   highlight ItalicRed term=italic ctermfg=12 gui=italic guifg=#b30b00
   highlight SignifyLineChange ctermfg=108 ctermbg=none guifg=#FE8019 guibg=none

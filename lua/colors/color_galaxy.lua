@@ -115,6 +115,8 @@ local Usual = {
   GitCommit = {
     gitcommitSummary    = { fg = c.orange_one },
     gitcommitSelectedType = { fg = c.green_four },
+    gitcommitDiscardedType = { fg = c.green_four },
+    gitcommitDiscardedFile = { fg = c.red_one, bold = true },
     gitcommitSelectedFile = { fg = c.red_three },
   },
   Diff = {
@@ -127,6 +129,7 @@ local Usual = {
     NodeNumber          = { fg = c.blue_five },
     NodeOp              = { fg = c.red_four },
     TSVariable          = { fg = c.yellow_one },
+    TSComent            = { fg = c.white, bold = true, italic = true },
     TSKeywordOperator   = { fg = c.red_one },
     TSConditional       = { fg = c.red_one },
     TSNumber            = { fg = c.blue_two },
@@ -144,6 +147,7 @@ local Usual = {
     TSMethod            = { fg = c.green_two, bold = true },
     TSType              = { fg = c.red_two },
     TSTypeBuiltin       = { fg = c.red_one, italic = true },
+    TSException         = { fg = c.blue_six }
   },
 
   LspRelated = {
