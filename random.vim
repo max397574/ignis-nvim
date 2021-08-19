@@ -43,5 +43,5 @@ inoreabbrev <expr> __
 
 
 let g:UltiSnipsExpandTrigger='<tab><tab>'
-let g:UltiSnipsJumpForwardTrigger='<leader>n'
+let g:UltiSnipsJumpForwardTrigger='<leader><tab>'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "my_snippets"]
