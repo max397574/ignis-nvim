@@ -141,7 +141,9 @@ local Usual = {
     TSRepeat            = { fg = c.red_two },
     TSKeywordFunction   = { fg = c.red_two },
     TSFunction          = { fg = c.green_two, bold = true },
+    TSMethod            = { fg = c.green_two, bold = true },
     TSType              = { fg = c.red_two },
+    TSTypeBuiltin       = { fg = c.red_one, italic = true },
   },
 
   LspRelated = {
