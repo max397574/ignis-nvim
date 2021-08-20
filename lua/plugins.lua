@@ -321,15 +321,15 @@ return require("packer").startup(function(use)
   local wk = require("which-key")
 
   wk.register({
-      f = {
-        name = "Find",
-        f = { "Files" },
-        h = { "Help Tags" },
-        b = { "Buffers" },
-        o = { "OldFiles" },
-        s = { "Lsp Symbols" },
-        u = { "Under" },
-      },
+    f = {
+      name = "Find",
+      f = { "Files" },
+      h = { "Help Tags" },
+      b = { "Buffers" },
+      o = { "OldFiles" },
+      s = { "Lsp Symbols" },
+      u = { "Under" },
+    },
     tc = {
       name = "Telescope",
       t = {
@@ -485,18 +485,17 @@ return require("packer").startup(function(use)
       P = { "End Inner Parameter" },
       C = { "End Outer Call" },
     },
-  },
-    {
-      prefix = "g",
-      mode = "n"
-    })
---   local presets = require("which-key.plugins.presets")
---   presets.text_objects({
+  }, {
+    prefix = "g",
+    mode = "n",
+  })
+  --   local presets = require("which-key.plugins.presets")
+  --   presets.text_objects({
 
---   },
---     {
---       prefix = "g",
---     })
+  --   },
+  --     {
+  --       prefix = "g",
+  --     })
 
   require("nvim_comment").setup({
     comment_empty = false,
@@ -510,22 +509,6 @@ return require("packer").startup(function(use)
     highlight = {
       enable = true,
       custom_captures = {
-        -- ["variable"] = "TSVariable",
-        -- ["keyword.operator"] = "TSKeywordOperator",
-        -- ["conditional"] = "TSConditional",
-        -- ["number"] = "TSNumber",
-        -- ["float"] = "TSFloat",
-        -- ["operator"] = "TSOperator",
-        -- ["keyword"] = "TSKeyword",
-        -- ["keyword.return"] = "TSKeyword",
-        -- ["string"] = "TSString",
-        -- ["field"] = "TSField",
-        -- ["boolean"] = "TSBoolean",
-        -- ["constant"] = "TSConstant",
-        -- ["property"] = "TSProperty",
-        -- ["repeat"] = "TSRepeat",
-        -- ["keyword.function"] = "TSKeywordFunction",
-        -- ["function"] = "TSFunction",
         ["require_call"] = "RequireCall",
       },
     },
