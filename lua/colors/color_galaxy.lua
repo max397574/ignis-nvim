@@ -192,6 +192,9 @@ local Plugins = {
 local lang = {
   lua = {
     RequireCall = { fg = c.red_one, italic = true, bold =true },
+  },
+  vim = {
+    Mapping     = { fg = c.green_one, italic = true },
   }
 }
 
