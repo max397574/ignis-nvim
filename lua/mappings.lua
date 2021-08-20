@@ -40,12 +40,15 @@ map("n", "<leader>J", "10j",nore)
 -- treesitter playground
 map("n", "<leader>tspg", ":TSPlaygroundToggle<CR>", nore_silent)
 map("n", "<leader>tshc", ":TSHighlightCapturesUnderCursor<CR>", nore_silent)
--- Telescope
-map("n", "<leader>tcff", "<cmd>Telescope find_files<CR>", nore)
+-- Telescope Mappings
+map('n', "<C-s>", ":Telescope current_buffer_fuzzy_find<CR>", nore_silent)
+map('n', "<Leader>lg", ":Telescope live_grep<CR>", nore_silent)
+map('n', "<Leader>fh", ":Telescope help_tags<CR>", nore_silent)
+map('n', "<Leader>fb", ":Telescope buffers<CR>", nore_silent)
+map('n', "<Leader>fo", ":Telescope oldfiles<CR>", nore_silent)
+map('n', "<Leader>fs", ":Telescope lsp_workspace_symbols<CR>", nore_silent)
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", nore)
 map("n", "<leader>tcts", "<cmd>Telescope treesitter<CR>", nore)
-map("n", "<leader>tcht", "<cmd>Telescope help_tags<CR>", nore)
-map("n", "<leader>tclg", "<cmd>Telescope live_grep<CR>", nore)
 map("n", "<leader>tctd", "<cmd>TodoTelescope<CR>", nore)
 -- https://github.com/nvim-telescope/telescope.nvim#pickers
 map("n", "<leader>tcch", ":lua require'telescope.builtin'.command_history{}<CR>", nore)
@@ -131,7 +134,9 @@ map("n", "<leader>df", ":ZenMode<CR>", nore_silent)
 map("n", "<leader>hp", ":LvimHelper<CR>", nore_silent)
 -- toggle undotree
 map("n", "<leader>ut", ":UndotreeToggle<CR>", nore_silent)
+-- lsp
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", nore)
+map("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", nore_silent)
 -- toggle trouble
 map("n", "<leader>trt", ":TroubleToggle<CR>", nore_silent)
 -- show todo items in trouble window
