@@ -215,6 +215,7 @@ return require("packer").startup(function(use)
   require("lvim-helper").setup({
     files = {
       home .. "/.config/nvim/vimhelp/treesitter.md",
+      home .. "/.config/nvim/vimhelp/telescope.md",
     },
     winopts = {
       winhl = table.concat({ "Normal:LvimHelperNormal" }, ","),
