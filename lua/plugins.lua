@@ -215,6 +215,8 @@ return require("packer").startup(function(use)
   require("lvim-helper").setup({
     files = {
       home .. "/.config/nvim/vimhelp/treesitter.md",
+      home .. "/.config/nvim/vimhelp/ts_textobjects_move.md",
+      home .. "/.config/nvim/vimhelp/ts_textobjects_select.md",
       home .. "/.config/nvim/vimhelp/telescope.md",
     },
     winopts = {
@@ -547,7 +549,7 @@ return require("packer").startup(function(use)
       	  	  	  	  	keymaps = {
         					["af"] = "@function.outer",
         					["if"] = "@function.inner",
-        					["il"] = "@loop.outer",
+        					["il"] = "@loop.inner",
         					["al"] = "@loop.outer",
         					["icd"] = "@conditional.inner",
         					["acd"] = "@conditional.outer",
