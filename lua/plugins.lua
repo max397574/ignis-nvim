@@ -225,8 +225,8 @@ return require("packer").startup(function(use)
   })
   local lvim_helper_bindings = require("lvim-helper.bindings")
   lvim_helper_bindings.bindings = {
-    ["j"] = lvim_helper_bindings.lvim_helper_callback("next"),
-    ["k"] = lvim_helper_bindings.lvim_helper_callback("prev"),
+    ["J"] = lvim_helper_bindings.lvim_helper_callback("next"),
+    ["K"] = lvim_helper_bindings.lvim_helper_callback("prev"),
     ["q"] = lvim_helper_bindings.lvim_helper_callback("close"),
   }
 
@@ -321,24 +321,21 @@ return require("packer").startup(function(use)
   local wk = require("which-key")
 
   wk.register({
+      f = {
+        name = "Find",
+        f = { "Files" },
+        h = { "Help Tags" },
+        b = { "Buffers" },
+        o = { "OldFiles" },
+        s = { "Lsp Symbols" },
+        u = { "Under" },
+      },
     tc = {
       name = "Telescope",
-      f = {
-        name = "Find Files",
-        f = { "Find Files" },
-      },
       t = {
         name = "TreeSitter, Todo",
         s = { "TreeSitter" },
         d = { "Todo" },
-      },
-      h = {
-        name = "Help Tags",
-        t = { "Help Tags" },
-      },
-      l = {
-        name = "Live Grep",
-        g = { "Live Grep" },
       },
       c = {
         name = "Command History",
@@ -391,11 +388,6 @@ return require("packer").startup(function(use)
     h = {
       name = "Help Files",
       p = "Help Files",
-    },
-    f = {
-      name = "Find Under, Files",
-      u = "Find Under",
-      f = "Find Files",
     },
     j = { "Move Current line down" },
     k = { "Move Current line up" },
@@ -456,15 +448,55 @@ return require("packer").startup(function(use)
     mode = "n",
   })
   wk.register({
-    md = {
-      name = "markdown",
-      it = { "italic" },
-      bd = { "bold" },
+    n = {
+      name = "Goto Next, Incremental Selection, List",
+      n = { "Incremental Selection" },
+      d = { "Goto Definition" },
+      D = { "List Definitions" },
+      O = { "List Definitions TOC" },
+      ["0"] = { "List Lsp Workspace" },
+      f = "Start Outer Function",
+      i = {
+        name = "Inner",
+        c = { "Start Call" },
+        f = { "Start Function" },
+        F = { "End Function" },
+        C = { "End Call" },
+      },
+      F = { "End Outer Function" },
+      p = { "Start Inner Parameter" },
+      c = { "Start Outer Call" },
+      P = { "End Inner Parameter" },
+      C = { "End Outer Call" },
     },
-  }, {
-    prefix = "<leader>",
-    mode = "v",
-  })
+    p = {
+      name = "Goto Previous",
+      f = "Start Outer Function",
+      i = {
+        name = "Inner",
+        c = { "Start Call" },
+        f = { "Start Function" },
+        F = { "End Function" },
+        C = { "End Call" },
+      },
+      F = { "End Outer Function" },
+      p = { "Start Inner Parameter" },
+      c = { "Start Outer Call" },
+      P = { "End Inner Parameter" },
+      C = { "End Outer Call" },
+    },
+  },
+    {
+      prefix = "g",
+      mode = "n"
+    })
+--   local presets = require("which-key.plugins.presets")
+--   presets.text_objects({
+
+--   },
+--     {
+--       prefix = "g",
+--     })
 
   require("nvim_comment").setup({
     comment_empty = false,
