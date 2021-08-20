@@ -13,6 +13,8 @@ map('n', '<C-f>', ':lua vim.cmd(":vert :h "..vim.fn.expand("<cword>"))<CR>', nor
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
 -- select colorscheme
 map("n", "<leader>cs", ":lua require'telescope.builtin'.colorscheme{}<CR>", nore)
+-- capitalize word under cursor
+map("n", "<C-U>", "b~", nore_silent)
 -- easy split navigation
 map("n", "<c-j>", ":wincmd j<CR>", nore_silent)
 map("n", "<c-h>", ":wincmd h<CR>", nore_silent)
