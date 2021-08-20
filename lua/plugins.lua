@@ -487,7 +487,6 @@ return require("packer").startup(function(use)
         -- ["keyword.function"] = "TSKeywordFunction",
         -- ["function"] = "TSFunction",
         ["require_call"] = "RequireCall",
-        ["mapping_command"] = "Mapping",
       },
     },
     incremental_selection = {
