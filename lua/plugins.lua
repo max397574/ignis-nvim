@@ -223,6 +223,12 @@ return require("packer").startup(function(use)
       winhl = table.concat({ "Normal:LvimHelperNormal" }, ","),
     },
   })
+  local lvim_helper_bindings = require("lvim-helper.bindings")
+  lvim_helper_bindings.bindings = {
+    ["j"] = lvim_helper_bindings.lvim_helper_callback("next"),
+    ["k"] = lvim_helper_bindings.lvim_helper_callback("prev"),
+    ["q"] = lvim_helper_bindings.lvim_helper_callback("close"),
+  }
 
   require("colorizer").setup({
     "*",
@@ -540,61 +546,61 @@ return require("packer").startup(function(use)
       max_file_lines = 1000,
     },
     textobjects = {
-    				select = {
-      	  	  	  	  	enable = true,
+      select = {
+        enable = true,
 
-						-- Automatically jump forward to textobj, similar to targets.vim
-      					lookahead = true,
+        -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true,
 
-      	  	  	  	  	keymaps = {
-        					["af"] = "@function.outer",
-        					["if"] = "@function.inner",
-        					["il"] = "@loop.inner",
-        					["al"] = "@loop.outer",
-        					["icd"] = "@conditional.inner",
-        					["acd"] = "@conditional.outer",
-        					["acm"] = "@comment.outer",
-        					["ast"] = "@statement.outer",
-        					["isc"] = "@scopename.inner",
-        					["iB"] = "@block.inner",
-        					["aB"] = "@block.outer",
-        					["p"] = "@parameter.inner",
-      	  	  	  	  	},
-    				},
+        keymaps = {
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["il"] = "@loop.inner",
+          ["al"] = "@loop.outer",
+          ["icd"] = "@conditional.inner",
+          ["acd"] = "@conditional.outer",
+          ["acm"] = "@comment.outer",
+          ["ast"] = "@statement.outer",
+          ["isc"] = "@scopename.inner",
+          ["iB"] = "@block.inner",
+          ["aB"] = "@block.outer",
+          ["p"] = "@parameter.inner",
+        },
+      },
 
-					move = {
-      					enable = true,
-      					set_jumps = true, -- Whether to set jumps in the jumplist
-      					goto_next_start = {
-        					["gnf"] = "@function.outer",
-        					["gnif"] = "@function.inner",
-        					["gnp"] = "@parameter.inner",
-        					["gnc"] = "@call.outer",
-        					["gnic"] = "@call.inner",
-      					},
-      					goto_next_end = {
-        					["gnF"] = "@function.outer",
-        					["gniF"] = "@function.inner",
-        					["gnP"] = "@parameter.inner",
-        					["gnC"] = "@call.outer",
-        					["gniC"] = "@call.inner",
-      					},
-      					goto_previous_start = {
-        					["gpf"] = "@function.outer",
-        					["gpif"] = "@function.inner",
-        					["gpp"] = "@parameter.inner",
-        					["gpc"] = "@call.outer",
-        					["gpic"] = "@call.inner",
-      					},
-      					goto_previous_end = {
-        					["gpF"] = "@function.outer",
-        					["gpiF"] = "@function.inner",
-        					["gpP"] = "@parameter.inner",
-        					["gpC"] = "@call.outer",
-        					["gpiC"] = "@call.inner",
-      					},
-    				},
-  	  	  	  	},
+      move = {
+        enable = true,
+        set_jumps = true, -- Whether to set jumps in the jumplist
+        goto_next_start = {
+          ["gnf"] = "@function.outer",
+          ["gnif"] = "@function.inner",
+          ["gnp"] = "@parameter.inner",
+          ["gnc"] = "@call.outer",
+          ["gnic"] = "@call.inner",
+        },
+        goto_next_end = {
+          ["gnF"] = "@function.outer",
+          ["gniF"] = "@function.inner",
+          ["gnP"] = "@parameter.inner",
+          ["gnC"] = "@call.outer",
+          ["gniC"] = "@call.inner",
+        },
+        goto_previous_start = {
+          ["gpf"] = "@function.outer",
+          ["gpif"] = "@function.inner",
+          ["gpp"] = "@parameter.inner",
+          ["gpc"] = "@call.outer",
+          ["gpic"] = "@call.inner",
+        },
+        goto_previous_end = {
+          ["gpF"] = "@function.outer",
+          ["gpiF"] = "@function.inner",
+          ["gpP"] = "@parameter.inner",
+          ["gpC"] = "@call.outer",
+          ["gpiC"] = "@call.inner",
+        },
+      },
+    },
   })
 
   require("treesitter-context.config").setup({
