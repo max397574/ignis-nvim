@@ -27,30 +27,40 @@ long term:
 ```
 .
 ├── README.md
+├── colors
+│   └── galaxy.lua
 ├── init.lua
 ├── lua
 │   ├── autocommands.lua
 │   ├── colors
 │   │   ├── color_galaxy.lua
 │   │   ├── fixed_highlights.lua
-│   │   └── vimcolors.lua
+│   │   └── themes.lua
 │   ├── mappings.lua
 │   ├── options.lua
 │   ├── plugins.lua
 │   └── utils.lua
 ├── my_snippets
+│   ├── java.snippets
 │   └── lua.snippets
+├── notes.txt
 ├── plugin
-│   ├── markdown.vim
 │   ├── packer_compiled.lua
 │   └── simplefunctions.vim
 ├── queries
+│   ├── lua
+│   │   └── highlights.scm
+│   └── vim
+│       └── highlights.scm
 ├── random.vim
 ├── stylua.toml
 └── vimhelp
-    └── treesitter.md
+    ├── telescope.md
+    ├── treesitter.md
+    ├── ts_textobjects_move.md
+    └── ts_textobjects_select.md
 
-6 directories, 17 files
+9 directories, 24 files
 ```
 
 Features:
