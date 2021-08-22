@@ -1,7 +1,5 @@
 local actions = require("telescope.actions")
 
-local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
-
 -- Plugins
 -- =======
 return require("packer").startup(function(use)
