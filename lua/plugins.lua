@@ -24,6 +24,9 @@ return require("packer").startup(function(use)
   -- some functions to help with markdown
   use("~/lua_markdown")
 
+  -- show taglist
+  use("~/taglist.nvim")
+
   -- easily comment out code
   use("terrortylor/nvim-comment")
 
