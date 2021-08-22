@@ -120,6 +120,7 @@ return require("packer").startup(function(use)
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
   use({ "nvim-telescope/telescope-symbols.nvim" })
   use({ "nvim-telescope/telescope-smart-history.nvim" })
+  use({ "jvgrootveld/telescope-zoxide" })
 
   -- display helpfiles
   use("lvim-tech/lvim-helper")
@@ -211,6 +212,7 @@ return require("packer").startup(function(use)
   })
   require("telescope").load_extension("fzf")
   require("telescope").load_extension("smart_history")
+  require'telescope'.load_extension('zoxide')
 
   local home = os.getenv("HOME")
   require("lvim-helper").setup({
@@ -312,6 +314,7 @@ return require("packer").startup(function(use)
       b = { "Buffers" },
       o = { "OldFiles" },
       s = { "Lsp Symbols" },
+      d = { "Directories (Zoxide)" },
       u = { "Under" },
     },
     tc = {
