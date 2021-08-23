@@ -6,6 +6,7 @@ return require("packer").startup(function(use)
   -- notes
   use({
     "vhyrro/neorg",
+    branch = 'unstable',
     config = function()
       require("neorg").setup({
         -- Tell Neorg what modules to load
