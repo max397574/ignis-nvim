@@ -24,7 +24,7 @@ local c = {
   blue_four         = "#4090FF",
   blue_five         = "#316AD0",
   blue_six          = "#0048FF",
-  blue_seven        = "#7ABCF5",
+  blue_seven        = "#4B93D1",
 
   purple_one        = "#6600CC",
 
