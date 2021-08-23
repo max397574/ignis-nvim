@@ -10,6 +10,8 @@ local c = {
   white             = "#FFFFFF",
   white_two         = "#EBDBB2",
 
+  gray_one          = "#B5B5B5",
+
   green_one         = "#207245",
   green_two         = "#8ABB26",
   green_three       = "#B8BB26",
@@ -22,6 +24,7 @@ local c = {
   blue_four         = "#4090FF",
   blue_five         = "#316AD0",
   blue_six          = "#0048FF",
+  blue_seven        = "#7ABCF5",
 
   purple_one        = "#6600CC",
 
@@ -79,10 +82,10 @@ local Usual = {
     StatusLineNC        = { fg = c.white_two, bg = c.background_three_two },
     Search              = { fg = c.black_two, bg =c.yellow_one, bold = true },
     IncSearch           = { fg = c.black_two, bg =c.orange_one, bold = true},
-    Folded              = { fg = c.white, bold = true, italic = true },
+    Folded              = { fg = c.blue_seven, bold = true, italic = true },
     Visual              = { reverse = true },
     EndOfBuffer         = { bg = back },
-    Comment             = { fg = c.white, bold = true, italic = true },
+    Comment             = { fg = c.blue_seven, bold = true, italic = true },
     preProc             = { fg = c.blue_four },
     Matchparen	        = { underline = true},
     Pmenu               = { fg = c.white_two, bg = c.background_two },
@@ -129,7 +132,7 @@ local Usual = {
     NodeNumber          = { fg = c.blue_five },
     NodeOp              = { fg = c.red_four },
     TSVariable          = { fg = c.yellow_one },
-    TSComment            = { fg = c.white, bold = true, italic = true },
+    TSComment           = { fg = c.blue_seven, bold = true, italic = true },
     TSInclude           = { fg = c.blue_six, italic = true, bold =true },
     TSKeywordOperator   = { fg = c.red_one },
     TSConditional       = { fg = c.red_one },
