@@ -8,6 +8,7 @@ return require("packer").startup(function(use)
 
   -- colorschemes
   use("lifepillar/vim-gruvbox8")
+  use "Pocco81/Catppuccino.nvim"
   use("shaunsingh/moonlight.nvim")
   use("navarasu/onedark.nvim")
   use("folke/tokyonight.nvim")
