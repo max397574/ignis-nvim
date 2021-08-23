@@ -8,7 +8,7 @@ return require("packer").startup(function(use)
 
   -- colorschemes
   use("lifepillar/vim-gruvbox8")
-  use "Pocco81/Catppuccino.nvim"
+  use("Pocco81/Catppuccino.nvim")
   use("shaunsingh/moonlight.nvim")
   use("navarasu/onedark.nvim")
   use("folke/tokyonight.nvim")
@@ -213,7 +213,7 @@ return require("packer").startup(function(use)
   })
   require("telescope").load_extension("fzf")
   require("telescope").load_extension("smart_history")
-  require'telescope'.load_extension('zoxide')
+  require("telescope").load_extension("zoxide")
 
   local home = os.getenv("HOME")
   require("lvim-helper").setup({
