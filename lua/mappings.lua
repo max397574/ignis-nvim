@@ -6,6 +6,9 @@ local nore_silent = { noremap = true, silent = true }
 local nore = { noremap = true }
 local silent = { silent = true }
 
+-- neorg cycle tasks
+map("n", "<c-t>", ":Neorg keybind norg core.norg.qol.todo_items.todo.task_cycle<CR>", nore_silent)
+
 -- open helpfile of word under cursor
 -- follow link
 map('n', '<C-f>', ':lua vim.cmd(":vert :h "..vim.fn.expand("<cword>"))<CR>', nore_silent)
