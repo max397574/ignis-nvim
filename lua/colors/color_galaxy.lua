@@ -196,6 +196,11 @@ local lang = {
   lua = {
     RequireCall = { fg = c.red_one, italic = true, bold =true },
   },
+  norg = {
+    NeorgHeading2   = { fg = c.yellow_one },
+    NeorgMarker     = { fg = c.yellow_one },
+    NeorgMarkerTitle = { fg = c.yellow_one },
+  },
 }
 
 local function add_highlight_table(tbl)
