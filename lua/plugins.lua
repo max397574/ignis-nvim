@@ -44,6 +44,11 @@ return require("packer").startup(function(use)
   -- package manager
   use("wbthomason/packer.nvim")
 
+  -- bufferline
+  use({
+    "akinsho/bufferline.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+  })
   -- colorschemes
   use("lifepillar/vim-gruvbox8")
   use("Pocco81/Catppuccino.nvim")
