@@ -309,6 +309,7 @@ return require("packer").startup(function(use)
       home .. "/.config/nvim/vimhelp/ts_textobjects_move.md",
       home .. "/.config/nvim/vimhelp/ts_textobjects_select.md",
       home .. "/.config/nvim/vimhelp/telescope.md",
+      home .. "/.config/nvim/vimhelp/latex.md",
     },
     winopts = {
       winhl = table.concat({ "Normal:LvimHelperNormal" }, ","),
