@@ -10,7 +10,7 @@ local silent = { silent = true }
 map("n", "<c-t>", ":Neorg keybind norg core.norg.qol.todo_items.todo.task_cycle<CR>", nore_silent)
 
 -- view latex pdf in preview
-map("n","<leader>vl", ":silent !pdflatex %; open %:t:r.pdf<CR>", nore_silent)
+map("n","<leader>vl", ":call LatexPreview()<CR>", nore_silent)
 
 -- open helpfile of word under cursor
 -- follow link
