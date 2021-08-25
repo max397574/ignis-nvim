@@ -1,0 +1,44 @@
+# see here:
+# https://github.com/gillescastel/latex-snippets/blob/master/tex.snippets
+snippet beg "begin{} / end{}" bA
+\\begin{$1}
+	$0
+\\end{$1}
+endsnippet
+
+priority 100
+snippet ... "ldots" iA
+\ldots
+endsnippet
+
+snippet enum "Enumerate" bA
+\begin{enumerate}
+	\item $0
+\end{enumerate}
+endsnippet
+
+snippet item "Itemize" bA
+\begin{itemize}
+	\item $0
+\end{itemize}
+endsnippet
+
+snippet => "implies" Ai
+\implies
+endsnippet
+
+snippet =< "implied by" Ai
+\impliedby
+endsnippet
+
+snippet / "Fraction" i
+\\frac{${VISUAL}}{$1}$0
+endsnippet
+
+snippet == "equals" iA
+&= $1 \\\\
+endsnippet
+
+snippet != "equals" iA
+\neq 
+endsnippet
