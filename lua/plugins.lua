@@ -217,7 +217,15 @@ return require("packer").startup(function(use)
   use("norcalli/nvim-colorizer.lua")
 
   -- completition
-  use({ "hrsh7th/nvim-compe" })
+  use({"hrsh7th/nvim-cmp"})
+  use({ "quangnguyen30192/cmp-nvim-ultisnips" })
+  use({"hrsh7th/cmp-emoji"})
+  use({"kdheepak/cmp-latex-symbols"})
+  use({ "hrsh7th/cmp-buffer" })
+  use({"hrsh7th/cmp-path"})
+  use({"hrsh7th/cmp-calc"})
+  use({ "hrsh7th/cmp-nvim-lua" })
+  use({ "hrsh7th/cmp-nvim-lsp" })
 
   -- easily configure lsp
   use("neovim/nvim-lspconfig")
@@ -326,26 +334,57 @@ return require("packer").startup(function(use)
     "*",
   }, { mode = "foreground" })
 
-  require("compe").setup({
-    documentation = {
-      min_width = 30,
-      max_height = math.floor(vim.o.lines),
+  local cmp = require("cmp")
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["UltiSnips#Anon"](args.body)
+      end,
     },
 
-    source = {
-      path = true,
-      buffer = true,
-      calc = true,
-      nvim_lsp = {
-        max_num_results = 5,
-        max_line = 100,
-      },
-      nvim_lua = true,
-      vsnip = true,
-      ultisnips = true,
-      neorg = true,
-      luasnip = true,
-      emoji = true,
+    -- You can set mapping if you want.
+    mapping = {
+      ["<C-p>"] = cmp.mapping.select_prev_item(),
+      ["<C-n>"] = cmp.mapping.select_next_item(),
+      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-f>"] = cmp.mapping.scroll_docs(4),
+      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<C-e>"] = cmp.mapping.close(),
+      ["<CR>"] = cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Insert,
+        select = true,
+      }),
+    },
+
+    sources = {
+      { name = "buffer" },
+      { name = "path" },
+      { name = "emoji" },
+      { name = "calc" },
+      { name = "latex_symbols" },
+      { name = "nvim_lsp" },
+      { name = "ultisnips" },
+    },
+    formatting = {
+      format = function(entry, vim_item)
+        local icons = require("configs/lsp_kind").icons
+        vim_item.kind = icons[vim_item.kind]
+        vim_item.menu = ({
+          nvim_lsp = "[L]",
+          emoji = "[E]",
+          path = "[F]",
+          calc = "[C]",
+          buffer = "[B]",
+          ultisnips = "[U]"
+          -- add nvim_lua as well
+        })[entry.source.name]
+        vim_item.dup = ({
+          buffer = 1,
+          path = 1,
+          nvim_lsp = 1,
+        })[entry.source.name] or 0
+        return vim_item
+      end,
     },
   })
 
