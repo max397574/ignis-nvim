@@ -151,7 +151,10 @@ local Usual = {
     TSMethod            = { fg = c.green_two, bold = true },
     TSType              = { fg = c.red_two },
     TSTypeBuiltin       = { fg = c.red_one, italic = true },
-    TSException         = { fg = c.blue_six }
+    TSException         = { fg = c.blue_six },
+    TSEnvironmentName   = { fg = c.blue_six },
+    TSTitle             = { fg = c.green_one },
+    TSEnvironment       = { fg = c.red_two },
   },
 
   LspRelated = {
