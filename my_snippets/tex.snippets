@@ -6,6 +6,21 @@ snippet beg "begin{} / end{}" b
 \\end{$1}
 endsnippet
 
+snippet template "Basic Template"
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{textcomp}
+\usepackage[german]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+
+\begin{document}
+$0
+\end{document}
+
+endsnippet
+
 snippet sec "section"
 \section{$1}
 endsnippet
