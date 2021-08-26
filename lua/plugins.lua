@@ -217,12 +217,12 @@ return require("packer").startup(function(use)
   use("norcalli/nvim-colorizer.lua")
 
   -- completition
-  use({"hrsh7th/nvim-cmp"})
+  use({ "hrsh7th/nvim-cmp" })
   use({ "quangnguyen30192/cmp-nvim-ultisnips" })
-  use({"hrsh7th/cmp-emoji"})
+  use({ "hrsh7th/cmp-emoji" })
   use({ "hrsh7th/cmp-buffer" })
-  use({"hrsh7th/cmp-path"})
-  use({"hrsh7th/cmp-calc"})
+  use({ "hrsh7th/cmp-path" })
+  use({ "hrsh7th/cmp-calc" })
   use({ "hrsh7th/cmp-nvim-lua" })
   use({ "hrsh7th/cmp-nvim-lsp" })
 
@@ -373,7 +373,7 @@ return require("packer").startup(function(use)
           path = "[F]",
           calc = "[C]",
           buffer = "[B]",
-          ultisnips = "[U]"
+          ultisnips = "[U]",
           -- add nvim_lua as well
         })[entry.source.name]
         vim_item.dup = ({
