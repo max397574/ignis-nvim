@@ -15,6 +15,7 @@ Table of Contents
 ## Todo/Plans:
 
 - [x] Switch to `init.lua`
+- [x] Switch to nvim-cmp
 - [ ] Change more files to lua
 - [x] Configure TreeSitter
 - [x] Create mappings for TreeSitter
