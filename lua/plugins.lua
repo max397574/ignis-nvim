@@ -220,7 +220,6 @@ return require("packer").startup(function(use)
   use({"hrsh7th/nvim-cmp"})
   use({ "quangnguyen30192/cmp-nvim-ultisnips" })
   use({"hrsh7th/cmp-emoji"})
-  use({"kdheepak/cmp-latex-symbols"})
   use({ "hrsh7th/cmp-buffer" })
   use({"hrsh7th/cmp-path"})
   use({"hrsh7th/cmp-calc"})
@@ -361,7 +360,6 @@ return require("packer").startup(function(use)
       { name = "path" },
       { name = "emoji" },
       { name = "calc" },
-      { name = "latex_symbols" },
       { name = "nvim_lsp" },
       { name = "ultisnips" },
     },
