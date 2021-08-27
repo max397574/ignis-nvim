@@ -13,7 +13,7 @@
 -- set this early because the other mappings are created with this
 vim.g.mapleader = " "
 
--- possible options galaxy, moonlight, gruvbox8, onedark, tokyonight, tokyodark
+-- possible options galaxy,galaxy_light, moonlight, gruvbox8, onedark, tokyonight, tokyodark
 local color_choice = "galaxy"
 
 require("options")
