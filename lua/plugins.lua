@@ -44,6 +44,9 @@ return require("packer").startup(function(use)
   -- package manager
   use("wbthomason/packer.nvim")
 
+  -- dimm inactive window
+  use("sunjon/shade.nvim")
+
   -- bufferline
   use({
     "akinsho/bufferline.nvim",
@@ -275,6 +278,15 @@ return require("packer").startup(function(use)
 
   -- Settings
   -- ========
+  require("shade").setup({
+    overlay_opacity = 50,
+    opacity_step = 1,
+    keys = {
+      brightness_up = "<C-Up>",
+      brightness_down = "<C-Down>",
+      toggle = "<Leader>s",
+    },
+  })
   require("telescope").setup({
     defaults = {
       -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua
