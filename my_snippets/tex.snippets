@@ -6,6 +6,10 @@ snippet beg "begin{} / end{}" b
 \\end{$1}
 endsnippet
 
+snippet para "paragraph"
+\paragraph{$1}
+endsnippet
+
 snippet template "Basic Template"
 
 \documentclass[a4paper,12pt]{article}
@@ -40,7 +44,15 @@ snippet enum "Enumerate" bA
 \end{enumerate}
 endsnippet
 
-snippet item "Itemize" bA
+snippet it "item"
+\item 
+endsnippet
+
+snippet bd "bold"
+\textbf{$1}
+endsnippet
+
+snippet item "Itemize" b
 \begin{itemize}
 	\item $0
 \end{itemize}
