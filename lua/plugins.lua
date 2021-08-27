@@ -388,16 +388,6 @@ return require("packer").startup(function(use)
 
   require("lspinstall").setup()
 
-  require("lspconfig").sumneko_lua.setup({
-    settings = {
-      Lua = {
-        diagnostics = {
-          globals = { "vim" },
-        },
-      },
-    },
-  })
-
   -- Refernce: https://github.com/kabouzeid/nvim-lspinstall/wiki
   local lua_settings = {
     Lua = {
