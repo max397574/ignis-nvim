@@ -31,6 +31,6 @@ vim.cmd("highlight Normal guibg = none")
 local time = os.date("*t")
 if time.hour >= 8 and time.hour < 20 then
   vim.cmd([[
-    highlight Normal guibg=#E6DAC8 guifg=#5E5C5B
+    colorscheme galaxy_light
   ]])
 end
