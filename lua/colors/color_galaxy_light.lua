@@ -1,8 +1,5 @@
 M = {}
-local ns = vim.api.nvim_create_namespace('color_galaxy')
-
--- TODO:
--- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/doc/nvim-treesitter.txt#L450
+local ns = vim.api.nvim_create_namespace('color_galaxy_light')
 
 local c = {
   black             = "#000000",
@@ -44,7 +41,7 @@ local c = {
 
 }
 
-local back = nil
+local back = "#E6DAC8"
 
 local Usual = {
   MarkdownHighlights = {
@@ -76,7 +73,7 @@ local Usual = {
     NonText             = { bg = back },
     LineNr              = { fg = c.background_two },
     SignColumn          = { bg = nil },
-    CursorLine          = { bg = c.background_one },
+    CursorLine          = { bg = c.background_two },
     CursorLineNr        = { fg = c.yellow_one, bold = true },
     StatusLine          = { fg = c.white_two, bg = c.background_three },
     StatusLineNC        = { fg = c.white_two, bg = c.background_three_two },
@@ -221,7 +218,7 @@ end
 function M.shine()
     vim.cmd 'highlight clear'
     if vim.fn.exists("syntax_on") then vim.cmd'syntax reset' end
-    vim.g.colors_name = "galaxy"
+    vim.g.colors_name = "galaxy_light"
 
     for _, tbl in pairs(Usual) do add_highlight_table(tbl) end
     for _, tbl in pairs(Plugins) do add_highlight_table(tbl) end
@@ -229,7 +226,7 @@ function M.shine()
     local bg = back or "none"
     vim.cmd('hi Normal guibg='..bg..' guifg=#dddddd')
 
-    vim.cmd [[au BufEnter,FileType * :lua require"colors.color_galaxy".Lang_high(vim.bo.ft)]]
+    vim.cmd [[au BufEnter,FileType * :lua require"colors.color_galaxy_light".Lang_high(vim.bo.ft)]]
     vim.api.nvim__set_hl_ns(ns)
 end
 
