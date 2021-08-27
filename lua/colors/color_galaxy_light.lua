@@ -63,7 +63,7 @@ local Usual = {
     markdownHeadingRule        = { fg = c.blue_four },
   },
   UsualHighlights = {
-    Normal              = { bg = back },
+    Normal              = { bg = back, fg = c.background_one },
     NormalFloat         = { bg = c.background_two, fg = c.white_two },
     Identifier          = { fg = c.green_two },
     Keyword             = { fg = c.red_one },
@@ -79,10 +79,10 @@ local Usual = {
     StatusLineNC        = { fg = c.white_two, bg = c.background_three_two },
     Search              = { fg = c.black_two, bg =c.yellow_one, bold = true },
     IncSearch           = { fg = c.black_two, bg =c.orange_one, bold = true},
-    Folded              = { fg = c.blue_seven, bold = true, italic = true },
+    Folded              = { fg = c.background_three, bold = true, italic = true },
     Visual              = { reverse = true },
     EndOfBuffer         = { bg = back },
-    Comment             = { fg = c.blue_seven, bold = true, italic = true },
+    Comment             = { fg = c.background_three, bold = true, italic = true },
     preProc             = { fg = c.blue_four },
     Matchparen	        = { underline = true},
     Pmenu               = { fg = c.white_two, bg = c.background_two },
@@ -129,7 +129,7 @@ local Usual = {
     NodeNumber          = { fg = c.blue_five },
     NodeOp              = { fg = c.red_four },
     TSVariable          = { fg = c.yellow_one },
-    TSComment           = { fg = c.blue_seven, bold = true, italic = true },
+    TSComment           = { fg = c.background_three, bold = true, italic = true },
     TSInclude           = { fg = c.blue_six, italic = true, bold =true },
     TSKeywordOperator   = { fg = c.red_one },
     TSConditional       = { fg = c.red_one },
@@ -222,9 +222,6 @@ function M.shine()
 
     for _, tbl in pairs(Usual) do add_highlight_table(tbl) end
     for _, tbl in pairs(Plugins) do add_highlight_table(tbl) end
-
-    local bg = back or "none"
-    vim.cmd('hi Normal guibg='..bg..' guifg=#dddddd')
 
     vim.cmd [[au BufEnter,FileType * :lua require"colors.color_galaxy_light".Lang_high(vim.bo.ft)]]
     vim.api.nvim__set_hl_ns(ns)
