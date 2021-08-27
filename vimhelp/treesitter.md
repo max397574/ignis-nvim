@@ -1,5 +1,3 @@
-Command Overview
-
 TreeSitter
 ==========
 

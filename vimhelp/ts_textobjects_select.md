@@ -1,8 +1,8 @@
-Command Overview
-
 TreeSitter Textobjects
------------
-### Select
+======================
+
+Select
+------
 
 | Keymap | Textobject        |
 |--------|-------------------|
