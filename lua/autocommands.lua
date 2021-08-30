@@ -17,5 +17,6 @@ u.create_augroup({"BufNewFile,BufRead,BufWinEnter *.html syntax on",
 "BufNewFile,BufRead,BufWinEnter *.lua set shiftwidth=2",
 "BufNewFile,BufRead,BufWinEnter *.lua set tabstop=2",
 "BufNewFile,BufRead,BufWinEnter *.{java,py} set tabstop=4",
-"BufNewFile,BufRead,BufWinEnter * set formatoptions-=o"},
+"BufNewFile,BufRead,BufWinEnter * set formatoptions-=o",
+"BufNewFile,BufRead,BufWinEnter *tex set filetype=tex"},
 "filetypes")
