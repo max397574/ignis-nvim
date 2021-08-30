@@ -6,6 +6,28 @@ snippet beg "begin{} / end{}" b
 \\end{$1}
 endsnippet
 
+snippet tikzpic "tikz picture"
+\begin{tikzpicture}
+    $1
+\end{tikzpicture}
+endsnippet
+
+snippet circle "circle"
+\draw ($1) circle [radius=$2];
+endsnippet
+
+snippet tcircle "tikz circle"
+\tikz \draw ($1) circle [radius=$2];
+endsnippet
+
+snippet ellipse "ellipse"
+\draw ($1) ellipse [x radius=$2, y radius=$3];
+endsnippet
+
+snippet tellipse "tikz ellipse"
+\tikz \draw ($1) ellipse [x radius=$2, y radius=$3];
+endsnippet
+
 snippet -> "arrow"
 $\implies$
 endsnippet
