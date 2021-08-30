@@ -27,6 +27,7 @@ vim.cmd("source ~/.config/nvim/random.vim")
 vim.cmd("colorscheme " .. color_choice)
 require("colors.fixed_highlights")
 vim.cmd("highlight Normal guibg = none")
+require("configs.lsp")
 
 local time = os.date("*t")
 if time.hour >= 8 and time.hour < 20 then
