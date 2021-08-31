@@ -7,6 +7,17 @@ g.onedark_style = "deep"
 g.tokyonight_style = "day"
 g.tokyodark_transparent_background = true
 
+g.loaded_gzip = false
+g.loaded_matchit = false
+g.loaded_netrwPlugin = false
+g.loaded_tarPlugin = false
+g.loaded_zipPlugin = false
+g.loaded_man = false
+g.loaded_2html_plugin = false
+g.loaded_remote_plugins = false
+
+
+
 opt.pumblend = 18
 opt.background = "dark"
 opt.cmdheight = 1
@@ -48,10 +59,3 @@ opt.undofile = true
 
 opt.joinspaces = false
 opt.fillchars = { eob = "~" }
-
-
--- netrw
-
-g.netrw_liststyle = 3
-g.netrw_banner = 0
-g.netrw_winsize = 25
