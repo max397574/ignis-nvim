@@ -47,6 +47,9 @@ return require("packer").startup(function(use)
   -- dimm inactive window
   use("sunjon/shade.nvim")
 
+  -- dashboard
+  use("glepnir/dashboard-nvim")
+
   -- bufferline
   use({
     "akinsho/bufferline.nvim",
