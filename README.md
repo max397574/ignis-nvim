@@ -29,21 +29,29 @@ long term:
 .
 ├── README.md
 ├── colors
-│   └── galaxy.lua
+│   ├── galaxy.lua
+│   └── galaxy_light.lua
 ├── init.lua
 ├── lua
 │   ├── autocommands.lua
 │   ├── colors
 │   │   ├── color_galaxy.lua
+│   │   ├── color_galaxy_light.lua
 │   │   ├── fixed_highlights.lua
 │   │   └── themes.lua
+│   ├── configs
+│   │   ├── dashboard.lua
+│   │   ├── lsp.lua
+│   │   └── lsp_kind.lua
 │   ├── mappings.lua
 │   ├── options.lua
 │   ├── plugins.lua
 │   └── utils.lua
 ├── my_snippets
 │   ├── java.snippets
-│   └── lua.snippets
+│   ├── lua.snippets
+│   ├── markdown.snippets
+│   └── tex.snippets
 ├── notes.txt
 ├── plugin
 │   ├── packer_compiled.lua
@@ -56,12 +64,14 @@ long term:
 ├── random.vim
 ├── stylua.toml
 └── vimhelp
+    ├── cmp.md
+    ├── latex.md
     ├── telescope.md
     ├── treesitter.md
     ├── ts_textobjects_move.md
     └── ts_textobjects_select.md
 
-9 directories, 24 files
+10 directories, 33 files
 ```
 
 Features:
