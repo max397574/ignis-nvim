@@ -66,6 +66,9 @@ local Usual = {
     markdownHeadingRule        = { fg = c.blue_four },
   },
   UsualHighlights = {
+    DashboardCenter     = { fg = c.blue_three },
+    DashboardHeader     = { fg = c.green_one },
+    DashboardFooter     = { fg = c.red_one },
     Normal              = { bg = back },
     NormalFloat         = { bg = c.background_two, fg = c.white_two },
     Identifier          = { fg = c.green_two },
