@@ -31,7 +31,7 @@ require("configs.lsp")
 require("configs.dashboard")
 
 local time = os.date("*t")
-if time.hour >= 8 and time.hour < 20 then
+if time.hour >= 8 and time.hour < 18 then
   vim.cmd([[
     colorscheme galaxy_light
   ]])
