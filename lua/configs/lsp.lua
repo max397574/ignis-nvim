@@ -5,6 +5,20 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
   severity_sort = true,
 })
 
+local border = {
+  {"🭽", "FloatBorder"},
+  {"▔", "FloatBorder"},
+  {"🭾", "FloatBorder"},
+  {"▕", "FloatBorder"},
+  {"🭿", "FloatBorder"},
+  {"▁", "FloatBorder"},
+  {"🭼", "FloatBorder"},
+  {"▏", "FloatBorder"},
+}
+
+vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border})
+vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border})
+
 local signs = { Error = "", Warning = "", Hint = "", Information = "" }
 
 for type, icon in pairs(signs) do
