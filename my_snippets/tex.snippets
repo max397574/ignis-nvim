@@ -1,5 +1,16 @@
 # see here:
 # https://github.com/gillescastel/latex-snippets/blob/master/tex.snippets
+
+snippet table "Table environment" b
+\begin{center}
+\begin{tabular}{${1:c}}
+$0${1/((?<=.)c|l|r)|./(?1: & )/g}\\\\
+\hline
+$0${1/((?<=.)c|l|r)|./(?1: & )/g}\\\\
+\end{tabular}
+\end{center}
+endsnippet
+
 snippet beg "begin{} / end{}" b
 \\begin{$1}
 	$0
