@@ -213,7 +213,6 @@ return require("packer").startup(function(use)
   -- telescope extensions
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
   use({ "nvim-telescope/telescope-symbols.nvim" })
-  use({ "nvim-telescope/telescope-smart-history.nvim" })
   use({ "jvgrootveld/telescope-zoxide" })
 
   -- display helpfiles
@@ -313,15 +312,10 @@ return require("packer").startup(function(use)
           case_mode = "smart_case", -- or "ignore_case" or "respect_case"
         },
       },
-      history = {
-        path = "~/.local/share/nvim/databases/telescope_history.sqlite3",
-        limit = 100,
-      },
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     },
   })
   require("telescope").load_extension("fzf")
-  require("telescope").load_extension("smart_history")
   require("telescope").load_extension("zoxide")
 
   local home = os.getenv("HOME")
