@@ -6,14 +6,6 @@ local nore_silent = { noremap = true, silent = true }
 local nore = { noremap = true }
 local silent = { silent = true }
 
--- neorg cycle tasks
-map(
-  "n",
-  "<c-t>",
-  ":Neorg keybind norg core.norg.qol.todo_items.todo.task_cycle<CR>",
-  nore_silent
-)
-
 -- view latex pdf in preview
 map("n", "<leader>vl", ":call LatexPreview()<CR>", nore_silent)
 
