@@ -49,6 +49,10 @@ return require("packer").startup(function(use)
 
   -- lua repl
   use("bfredl/nvim-luadev")
+
+  -- show where lsp code action as available
+  use("kosayoda/nvim-lightbulb")
+
   -- dashboard
   use("glepnir/dashboard-nvim")
 
