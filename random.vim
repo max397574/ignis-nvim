@@ -30,6 +30,7 @@ endfunction
 
 autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 
+" Tablemode
 inoreabbrev <expr> <bar><bar>
           \ <SID>isAtStartOfLine('\|\|') ?
           \ '<c-o>:TableModeEnable<CR><bar><space><bar><left><left>' : '<bar><bar>'
@@ -37,9 +38,7 @@ inoreabbrev <expr> __
           \ <SID>isAtStartOfLine('__') ?
           \ '<c-o>:silent! TableModeDisable<CR>' : '__'
 
-
-
-
+" UltiSnips
 let g:UltiSnipsExpandTrigger='<leader><tab>'
 let g:UltiSnipsJumpForwardTrigger='<leader><tab>'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "my_snippets"]
