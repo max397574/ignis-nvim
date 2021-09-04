@@ -6,10 +6,11 @@ require("packer").startup({
     use("wbthomason/packer.nvim")
 
     -- dimm inactive window
-    use({"sunjon/shade.nvim",
+    use({
+      "sunjon/shade.nvim",
       config = function()
         require("configs.shade")
-      end
+      end,
     })
 
     -- lua repl
@@ -38,20 +39,22 @@ require("packer").startup({
     use("tiagovla/tokyodark.nvim")
     use("sainnhe/gruvbox-material")
     -- statusline
-    use({ "hoob3rt/lualine.nvim",
+    use({
+      "hoob3rt/lualine.nvim",
       requires = { "kyazdani42/nvim-web-devicons" },
       config = function()
         require("configs.lualine")
-      end
+      end,
     })
     -- stats
     use({ "wakatime/vim-wakatime" })
 
     -- calculate math figures on visual selection
-    use({ "~/vmath.nvim",
+    use({
+      "~/vmath.nvim",
       config = function()
         require("configs.vmath")
-      end
+      end,
     })
 
     -- some functions to help with markdown
@@ -61,10 +64,11 @@ require("packer").startup({
     use("~/taglist.nvim")
 
     -- easily comment out code
-    use({"terrortylor/nvim-comment",
+    use({
+      "terrortylor/nvim-comment",
       config = function()
         require("configs.nvim_comment")
-      end
+      end,
     })
 
     -- breakup of startup time
@@ -152,7 +156,7 @@ require("packer").startup({
       },
       config = function()
         require("configs.telescope")
-      end
+      end,
     })
     -- telescope extensions
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
@@ -160,26 +164,31 @@ require("packer").startup({
     use({ "jvgrootveld/telescope-zoxide" })
 
     -- display helpfiles
-    use({"lvim-tech/lvim-helper",
+    use({
+      "lvim-tech/lvim-helper",
       config = function()
         require("configs.lvim_helper")
-      end
+      end,
     })
 
     -- colorize color codes
-    use({"norcalli/nvim-colorizer.lua",
+    use({
+      "norcalli/nvim-colorizer.lua",
       config = function()
         require("colorizer").setup({
           "*",
-        }, { mode = "foreground" })
-      end
+        }, {
+          mode = "foreground",
+        })
+      end,
     })
 
     -- completition
-    use({ "hrsh7th/nvim-cmp",
+    use({
+      "hrsh7th/nvim-cmp",
       config = function()
         require("configs.cmp")
-      end
+      end,
     })
     use({ "quangnguyen30192/cmp-nvim-ultisnips" })
     use({ "hrsh7th/cmp-emoji" })
@@ -193,11 +202,12 @@ require("packer").startup({
     use("neovim/nvim-lspconfig")
 
     -- easy install for lsp servers
-    use({"kabouzeid/nvim-lspinstall",
+    use({
+      "kabouzeid/nvim-lspinstall",
       after = "nvim-lspconfig",
       config = function()
         require("configs.lsp")
-      end
+      end,
     })
 
     -- colors for lsp diagnostics
