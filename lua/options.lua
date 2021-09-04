@@ -56,4 +56,5 @@ opt.undodir = vim.fn.expand("~") .. "/.vim/undodir"
 opt.undofile = true
 
 opt.joinspaces = false
-opt.fillchars = { eob = "~" }
+
+opt.fillchars = { eob = " " }
