@@ -7,18 +7,33 @@ local nore = { noremap = true }
 local silent = { silent = true }
 
 -- neorg cycle tasks
-map("n", "<c-t>", ":Neorg keybind norg core.norg.qol.todo_items.todo.task_cycle<CR>", nore_silent)
+map(
+  "n",
+  "<c-t>",
+  ":Neorg keybind norg core.norg.qol.todo_items.todo.task_cycle<CR>",
+  nore_silent
+)
 
 -- view latex pdf in preview
-map("n","<leader>vl", ":call LatexPreview()<CR>", nore_silent)
+map("n", "<leader>vl", ":call LatexPreview()<CR>", nore_silent)
 
 -- open helpfile of word under cursor
 -- follow link
-map('n', '<C-f>', ':lua vim.cmd(":vert :h "..vim.fn.expand("<cword>"))<CR>', nore_silent)
+map(
+  "n",
+  "<C-f>",
+  ':lua vim.cmd(":vert :h "..vim.fn.expand("<cword>"))<CR>',
+  nore_silent
+)
 -- remove highlighting from search
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
 -- select colorscheme
-map("n", "<leader>cs", ":lua require'telescope.builtin'.colorscheme{}<CR>", nore)
+map(
+  "n",
+  "<leader>cs",
+  ":lua require'telescope.builtin'.colorscheme{}<CR>",
+  nore
+)
 -- capitalize word under cursor
 map("n", "<C-U>", "b~", nore_silent)
 -- easy split navigation
@@ -40,26 +55,41 @@ map("n", "<leader>gp", ":Git push<CR>", nore_silent)
 map("n", "<leader>gs", ":G<CR>", nore_silent)
 map("n", "<leader>gd", ":Git diff<CR>", nore_silent)
 -- faster navigation
-map("n", "<leader>K", "10k",nore)
-map("n", "<leader>J", "10j",nore)
+map("n", "<leader>K", "10k", nore)
+map("n", "<leader>J", "10j", nore)
 -- treesitter playground
 map("n", "<leader>tspg", ":TSPlaygroundToggle<CR>", nore_silent)
 map("n", "<leader>tshc", ":TSHighlightCapturesUnderCursor<CR>", nore_silent)
 -- Telescope Mappings
-map('n', "<C-s>", ":Telescope current_buffer_fuzzy_find<CR>", nore_silent)
-map('n', "<Leader>lg", ":Telescope live_grep<CR>", nore_silent)
-map('n', "<Leader>fh", ":Telescope help_tags<CR>", nore_silent)
-map('n', "<Leader>fb", ":Telescope buffers<CR>", nore_silent)
-map('n', "<Leader>fo", ":Telescope oldfiles<CR>", nore_silent)
-map('n', "<Leader>fs", ":Telescope lsp_workspace_symbols<CR>", nore_silent)
+map("n", "<C-s>", ":Telescope current_buffer_fuzzy_find<CR>", nore_silent)
+map("n", "<Leader>lg", ":Telescope live_grep<CR>", nore_silent)
+map("n", "<Leader>fh", ":Telescope help_tags<CR>", nore_silent)
+map("n", "<Leader>fb", ":Telescope buffers<CR>", nore_silent)
+map("n", "<Leader>fo", ":Telescope oldfiles<CR>", nore_silent)
+map("n", "<Leader>fs", ":Telescope lsp_workspace_symbols<CR>", nore_silent)
 map("n", "<leader>ff", ":Telescope find_files<CR>", nore_silent)
-map('n', "<leader>fd", ":Telescope zoxide list<CR>", nore_silent)
+map("n", "<leader>fd", ":Telescope zoxide list<CR>", nore_silent)
 map("n", "<leader>tcts", ":Telescope treesitter<CR>", nore_silent)
 map("n", "<leader>tctd", ":TodoTelescope<CR>", nore_silent)
 -- https://github.com/nvim-telescope/telescope.nvim#pickers
-map("n", "<leader>tcch", ":lua require'telescope.builtin'.command_history{}<CR>", nore)
-map("n", "<leader>tcsh", ":lua require'telescope.builtin'.search_history{}<CR>", nore)
-map("n", "<leader>tcgc", ":lua require'telescope.builtin'.git_commits{}<CR>", nore)
+map(
+  "n",
+  "<leader>tcch",
+  ":lua require'telescope.builtin'.command_history{}<CR>",
+  nore
+)
+map(
+  "n",
+  "<leader>tcsh",
+  ":lua require'telescope.builtin'.search_history{}<CR>",
+  nore
+)
+map(
+  "n",
+  "<leader>tcgc",
+  ":lua require'telescope.builtin'.git_commits{}<CR>",
+  nore
+)
 map("n", "<leader>tcsb", ":lua require'telescope.builtin'.symbols{}<CR>", nore)
 map("n", "<leader>tcbi", ":lua require'telescope.builtin'.builtin{}<CR>", nore)
 -- luadev mappings
@@ -83,7 +113,12 @@ map("v", "<leader>p", "_dP", nore)
 -- execute macro q
 map("n", "Q", "@q", nore)
 -- edit macro q
-map("n", "<leader>q", ':let @t = \'let @q = "\' . @q<CR>:<C-f>o<ESC>"tp$a"<Esc>', nore)
+map(
+  "n",
+  "<leader>q",
+  ':let @t = \'let @q = "\' . @q<CR>:<C-f>o<ESC>"tp$a"<Esc>',
+  nore
+)
 -- don't move cursor down when joining lines
 map("n", "J", "mzJ`z", nore)
 map("x", "<BS>", "x", nore)

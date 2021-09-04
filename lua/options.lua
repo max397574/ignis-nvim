@@ -1,7 +1,7 @@
 local opt = vim.opt
 local g = vim.g
 
-opt.runtimepath = opt.runtimepath + '~/.config/nvim/queries'
+opt.runtimepath = opt.runtimepath + "~/.config/nvim/queries"
 
 g.onedark_style = "deep"
 g.tokyonight_style = "day"
@@ -16,12 +16,10 @@ g.loaded_man = false
 g.loaded_2html_plugin = false
 g.loaded_remote_plugins = false
 
-
-
 opt.pumblend = 18
 opt.background = "dark"
 opt.cmdheight = 1
-opt.virtualedit="block"
+opt.virtualedit = "block"
 opt.expandtab = true
 opt.softtabstop = 4
 opt.shiftwidth = 4
@@ -42,7 +40,7 @@ opt.wrap = true
 opt.breakindent = true
 opt.showbreak = string.rep(" ", 3)
 opt.linebreak = true
-opt.mouse="nv"
+opt.mouse = "nv"
 
 opt.foldlevel = 0
 opt.joinspaces = false
@@ -51,10 +49,10 @@ opt.signcolumn = "yes"
 opt.termguicolors = true
 opt.conceallevel = 0
 
-opt.foldmethod="expr"
+opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-opt.undodir = vim.fn.expand('~') .. '/.vim/undodir'
+opt.undodir = vim.fn.expand("~") .. "/.vim/undodir"
 opt.undofile = true
 
 opt.joinspaces = false

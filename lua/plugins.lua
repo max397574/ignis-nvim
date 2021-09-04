@@ -456,7 +456,7 @@ return require("packer").startup(function(use)
         r = { "Run" },
         l = { "Run Line" },
       },
-      g = "Live Grep"
+      g = "Live Grep",
     },
     tc = {
       name = "Telescope",
