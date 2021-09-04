@@ -2,7 +2,7 @@ local actions = require("telescope.actions")
 
 -- Plugins
 -- =======
-return require("packer").startup(function(use)
+require("packer").startup { function(use)
 
   -- package manager
   use("wbthomason/packer.nvim")
@@ -246,6 +246,21 @@ return require("packer").startup(function(use)
 
   -- hints for operators
   use("mfussenegger/nvim-ts-hint-textobject")
+end,
+  config = {
+    profile = {
+      enable = true,
+      threshold = 0,
+    },
+    display = {
+			open_fn = function()
+				return require('packer.util').float{
+					border = require"utils".border
+				}
+			end
+		}
+  }
+}
 
   -- Settings
   -- ========
@@ -742,4 +757,3 @@ return require("packer").startup(function(use)
       lualine_z = { "location" },
     },
   })
-end)
