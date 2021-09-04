@@ -6,14 +6,14 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 })
 
 local border = {
-  {"🭽", "FloatBorder"},
-  {"▔", "FloatBorder"},
-  {"🭾", "FloatBorder"},
-  {"▕", "FloatBorder"},
-  {"🭿", "FloatBorder"},
-  {"▁", "FloatBorder"},
-  {"🭼", "FloatBorder"},
-  {"▏", "FloatBorder"},
+  {"╭", "FloatBorder"},
+  {"─", "FloatBorder"},
+  {"╮", "FloatBorder"},
+  {"│", "FloatBorder"},
+  {"╯", "FloatBorder"},
+  {"─", "FloatBorder"},
+  {"╰", "FloatBorder"},
+  {"│", "FloatBorder"},
 }
 
 vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border})
