@@ -596,13 +596,6 @@ wk.register({
   prefix = "g",
   mode = "n",
 })
---   local presets = require("which-key.plugins.presets")
---   presets.text_objects({
-
---   },
---     {
---       prefix = "g",
---     })
 
 require("nvim_comment").setup({
   comment_empty = false,
