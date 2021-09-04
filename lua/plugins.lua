@@ -38,7 +38,12 @@ require("packer").startup({
     use("tiagovla/tokyodark.nvim")
     use("sainnhe/gruvbox-material")
     -- statusline
-    use({ "hoob3rt/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
+    use({ "hoob3rt/lualine.nvim",
+      requires = { "kyazdani42/nvim-web-devicons" },
+      config = function()
+        require("configs.lualine")
+      end
+    })
     -- stats
     use({ "wakatime/vim-wakatime" })
 
@@ -273,22 +278,4 @@ require("vmath_nvim").setup({
   show_median = true,
   debug = false,
   registers = true,
-})
-
-require("lualine").setup({
-  options = {
-    icons_enabled = true,
-    theme = "powerline",
-    component_separators = { "", "" },
-    section_separators = { "", "" },
-    disabled_filetypes = {},
-  },
-  sections = {
-    lualine_a = { "mode" },
-    lualine_b = { "branch" },
-    lualine_c = { "filename" },
-    lualine_x = { "encoding", "fileformat", "filetype" },
-    lualine_y = { "progress" },
-    lualine_z = { "location" },
-  },
 })
