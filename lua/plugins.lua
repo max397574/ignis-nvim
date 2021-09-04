@@ -47,6 +47,8 @@ return require("packer").startup(function(use)
   -- dimm inactive window
   use("sunjon/shade.nvim")
 
+  -- lua repl
+  use("bfredl/nvim-luadev")
   -- dashboard
   use("glepnir/dashboard-nvim")
 
@@ -442,6 +444,15 @@ return require("packer").startup(function(use)
       s = { "Lsp Symbols" },
       d = { "Directories (Zoxide)" },
       u = { "Under" },
+    },
+    l = {
+      name = "LiveGrep, LuaDev",
+      d = {
+        name = "LuaDev",
+        r = { "Run" },
+        l = { "Run Line" },
+      },
+      g = "Live Grep"
     },
     tc = {
       name = "Telescope",

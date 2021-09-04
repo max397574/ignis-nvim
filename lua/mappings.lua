@@ -27,7 +27,7 @@ map("n", "<c-h>", ":wincmd h<CR>", nore_silent)
 map("n", "<c-k>", ":wincmd k<CR>", nore_silent)
 map("n", "<c-l>", ":wincmd l<CR>", nore_silent)
 -- alt hjkl
--- use sed -n l to get chars with alt
+-- use `sed -n l` to get chars with alt
 map("n", "º", ":wincmd J<CR>", nore_silent)
 map("n", "ª", ":wincmd H<CR>", nore_silent)
 map("n", "∆", ":wincmd K<CR>", nore_silent)
@@ -62,6 +62,11 @@ map("n", "<leader>tcsh", ":lua require'telescope.builtin'.search_history{}<CR>",
 map("n", "<leader>tcgc", ":lua require'telescope.builtin'.git_commits{}<CR>", nore)
 map("n", "<leader>tcsb", ":lua require'telescope.builtin'.symbols{}<CR>", nore)
 map("n", "<leader>tcbi", ":lua require'telescope.builtin'.builtin{}<CR>", nore)
+-- luadev mappings
+map("n", "<leader>ld", ":Luadev<CR>", nore_silent)
+map("n", "<leader>ldl", "<Plug>(Luadev-RunLine)", silent)
+map("n", "<leader>ldr", "<Plug>(Luadev-Run)", silent)
+map("v", "<leader>ldr", "<Plug>(Luadev-Run)", silent)
 -- highlight search result and center cursor
 map("n", "n", "nzzzv", nore_silent)
 map("n", "N", "Nzzzv", nore_silent)
