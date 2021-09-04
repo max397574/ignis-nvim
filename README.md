@@ -88,11 +88,13 @@ long term:
 Features:
 ---------
 
-### Completition with nvim-compe
-![compe](https://user-images.githubusercontent.com/81827001/129145672-b2119bfd-d7ff-4de8-8110-f2e31d3e8d5b.png)
+### Completition with nvim-cmp
+![cmp](https://user-images.githubusercontent.com/81827001/132104885-a8961020-dccf-4be4-9e02-0fce969c74c7.png)
+
 
 ### Syntax Highlighting with TreeSitter
-![highlight](https://user-images.githubusercontent.com/81827001/129145712-337d5daa-7862-4cf7-a15a-9ceaa7d92828.png)
+![treesitter](https://user-images.githubusercontent.com/81827001/132104907-ed1f152d-c2ce-4cb4-ab12-04358f148872.png)
+
 
 ### Telescope for:
   * Finding Files
@@ -100,18 +102,23 @@ Features:
   * Search History
   * Command History
   * Help Tags
-![telescope](https://user-images.githubusercontent.com/81827001/129145747-c3dc649f-ad13-4bd4-87ea-e8afe33d0a0a.png)
+  * And more...
+
+![Screen Shot 2021-09-04 at 20 44 40](https://user-images.githubusercontent.com/81827001/132104944-7c75754d-5d5f-44d9-8453-2fdead83f270.png)
+
 
 ### Plugins and Mappings for all Git Commands
 ![git](https://user-images.githubusercontent.com/81827001/129145817-6ceb0aa2-b5ec-49c9-ad21-e45ef821c3e6.png)
 
 ### Which Key to display mappings
-![which_key](https://user-images.githubusercontent.com/81827001/129145832-74f42989-70f8-440a-989c-f408294b78f6.png)
+![which_key](https://user-images.githubusercontent.com/81827001/132104980-a7efc624-2062-40cd-982e-518ed3f22b4d.png)
+
 
 ### Mappings for easy markdown
 ### Snippets for UltiSnips and vim-snippets
 ### LspDiagnostics
-![lsp_diagnostics](https://user-images.githubusercontent.com/81827001/129145849-7c9fc267-9aa6-4eb3-994e-15566c303a07.png)
+![lsp](https://user-images.githubusercontent.com/81827001/132105006-e6f88337-30e9-4156-ad25-ff3215d40de8.png)
+
 
 ### TreeSitter plugins for:
   * TextObjects
