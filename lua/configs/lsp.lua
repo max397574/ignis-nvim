@@ -19,7 +19,7 @@ local border = {
 vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border})
 vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border})
 
-local signs = { Error = "", Warning = "", Hint = "", Information = "" }
+local signs = { Error = "", Warning = "", Hint = "", Information = "" }
 
 for type, icon in pairs(signs) do
   local hl = "LspDiagnosticsSign" .. type
