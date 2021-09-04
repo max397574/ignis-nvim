@@ -153,7 +153,13 @@ require("packer").startup({
     })
 
     -- colorize color codes
-    use("norcalli/nvim-colorizer.lua")
+    use({"norcalli/nvim-colorizer.lua",
+      config = function()
+        require("colorizer").setup({
+          "*",
+        }, { mode = "foreground" })
+      end
+    })
 
     -- completition
     use({ "hrsh7th/nvim-cmp",
@@ -245,9 +251,6 @@ require("packer").startup({
 -- Settings
 -- ========
 
-require("colorizer").setup({
-  "*",
-}, { mode = "foreground" })
 
 local wk = require("which-key")
 
