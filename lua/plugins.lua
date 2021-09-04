@@ -48,7 +48,11 @@ require("packer").startup({
     use({ "wakatime/vim-wakatime" })
 
     -- calculate math figures on visual selection
-    use({ "~/vmath.nvim" })
+    use({ "~/vmath.nvim",
+      config = function()
+        require("configs.vmath")
+      end
+    })
 
     -- some functions to help with markdown
     use("~/lua_markdown")
@@ -57,7 +61,11 @@ require("packer").startup({
     use("~/taglist.nvim")
 
     -- easily comment out code
-    use("terrortylor/nvim-comment")
+    use({"terrortylor/nvim-comment",
+      config = function()
+        require("configs.nvim_comment")
+      end
+    })
 
     -- breakup of startup time
     use({ "tweekmonster/startuptime.vim" })
@@ -257,12 +265,6 @@ require("packer").startup({
 -- Settings
 -- ========
 
-require("nvim_comment").setup({
-  comment_empty = false,
-  create_mappings = true,
-  line_mapping = "<leader>cc",
-  operator_mapping = "<leader>c",
-})
 
 require("treesitter-context.config").setup({
   enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
