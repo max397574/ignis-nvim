@@ -10,4 +10,6 @@ function M.create_augroup(autocmds, name)
     cmd('augroup END')
 end
 
+M.border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+
 return M
