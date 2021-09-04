@@ -160,9 +160,6 @@ require("packer").startup({
     -- display some infos in signcolumn
     use("mhinz/vim-signify")
 
-    -- run snippets of code
-    use("michaelb/sniprun")
-
     -- more icons
     use("ryanoasis/vim-devicons")
 
@@ -549,11 +546,9 @@ wk.register({
     t = "UndotreeToggle",
   },
   s = {
-    name = "Substitue SnipRun",
+    name = "Substitue",
     s = { "Substitue on current line" },
     G = { "Substitue to the end of the file" },
-    r = { "Run Snippet" },
-    c = { "Close Snippet Result" },
   },
 }, {
   prefix = "<leader>",

@@ -147,10 +147,6 @@ map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
 map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
 map("n", "<leader>j", ":m .+1<CR>==", nore_silent)
 map("n", "<leader>k", ":m .-2<CR>==", nore_silent)
--- Snip Run
-map("n", "<leader>sr", ":SnipRun<CR>", nore_silent)
-map("n", "<leader>sc", ":SnipClose<CR>", nore_silent)
-map("v", "<leader>sr", "<Plug>SnipRun", silent)
 -- insert empty line below/above
 map("n", "<leader>o", "o<ESC>k", nore)
 map("n", "<leader>O", "O<ESC>j", nore)
