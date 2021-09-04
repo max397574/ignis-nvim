@@ -9,31 +9,19 @@ require("bufferline").setup({
         local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
 
         if error ~= 0 then
-          table.insert(
-            result,
-            { text = "  " .. error, guifg = "#EC5241" }
-          )
+          table.insert(result, { text = "  " .. error, guifg = "#EC5241" })
         end
 
         if warning ~= 0 then
-          table.insert(
-            result,
-            { text = "  " .. warning, guifg = "#EFB839" }
-          )
+          table.insert(result, { text = "  " .. warning, guifg = "#EFB839" })
         end
 
         if hint ~= 0 then
-          table.insert(
-            result,
-            { text = "  " .. hint, guifg = "#A3BA5E" }
-          )
+          table.insert(result, { text = "  " .. hint, guifg = "#A3BA5E" })
         end
 
         if info ~= 0 then
-          table.insert(
-            result,
-            { text = "  " .. info, guifg = "#7EA9A7" }
-          )
+          table.insert(result, { text = "  " .. info, guifg = "#7EA9A7" })
         end
         return result
       end,

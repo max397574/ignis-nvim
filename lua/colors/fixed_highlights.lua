@@ -1,4 +1,4 @@
-vim.cmd[[
+vim.cmd([[
   highlight SignColumn guibg = none
   highlight WhiteOnRed ctermbg=red guibg=red ctermfg=white guifg=white
   highlight ItalicRed term=italic ctermfg=12 gui=italic guifg=#b30b00
@@ -9,4 +9,4 @@ vim.cmd[[
   highlight SignifyLineDelete guifg=#D82B26 guibg=none
   highlight SignifySignDelete guifg=#D82B26 guibg=none
   highlight EndOfBuffer  guibg=none
-]]
+]])
