@@ -1,9 +1,6 @@
 M = {}
 local ns = vim.api.nvim_create_namespace("color_galaxy")
 
--- TODO:
--- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/doc/nvim-treesitter.txt#L450
-
 local c = {
   black = "#000000",
   black_two = "#282828",
