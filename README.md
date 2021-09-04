@@ -28,6 +28,7 @@ long term:
 ```
 .
 ├── README.md
+├── UltiSnips
 ├── colors
 │   ├── galaxy.lua
 │   └── galaxy_light.lua
@@ -40,9 +41,19 @@ long term:
 │   │   ├── fixed_highlights.lua
 │   │   └── themes.lua
 │   ├── configs
+│   │   ├── bufferline.lua
+│   │   ├── cmp.lua
 │   │   ├── dashboard.lua
 │   │   ├── lsp.lua
-│   │   └── lsp_kind.lua
+│   │   ├── lsp_kind.lua
+│   │   ├── lualine.lua
+│   │   ├── lvim_helper.lua
+│   │   ├── nvim_comment.lua
+│   │   ├── shade.lua
+│   │   ├── telescope.lua
+│   │   ├── treesitter.lua
+│   │   ├── vmath.lua
+│   │   └── which_key.lua
 │   ├── mappings.lua
 │   ├── options.lua
 │   ├── plugins.lua
@@ -71,7 +82,7 @@ long term:
     ├── ts_textobjects_move.md
     └── ts_textobjects_select.md
 
-10 directories, 33 files
+11 directories, 43 files
 ```
 
 Features:
