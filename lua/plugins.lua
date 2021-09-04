@@ -227,7 +227,7 @@ require("packer").startup({
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
       config = function()
-        print("ts loaded")
+        require("configs.treesitter")
       end,
     })
 
