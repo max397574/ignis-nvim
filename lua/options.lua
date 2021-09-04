@@ -45,7 +45,7 @@ opt.mouse = "nv"
 opt.foldlevel = 0
 opt.joinspaces = false
 opt.completeopt = "menuone,noselect"
-opt.signcolumn = "yes"
+opt.signcolumn = "yes:3"
 opt.termguicolors = true
 opt.conceallevel = 0
 
