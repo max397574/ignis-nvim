@@ -1,3 +1,37 @@
+require("lspinstall").setup()
+
+-- Refernce: https://github.com/kabouzeid/nvim-lspinstall/wiki
+local lua_settings = {
+  Lua = {
+    diagnostics = {
+      globals = { "vim" },
+    },
+  },
+}
+
+local function make_config()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  return {
+    capabilities = capabilities,
+    on_attach = on_attach,
+  }
+end
+
+local function setup_servers()
+  require("lspinstall").setup()
+  local servers = require("lspinstall").installed_servers()
+  for _, server in pairs(servers) do
+    local config = make_config()
+    if server == "lua" then
+      config.settings = lua_settings
+    end
+    require("lspconfig")[server].setup(config)
+  end
+end
+
+setup_servers()
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   underline = true, -- this
   update_in_insert = false,

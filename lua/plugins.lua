@@ -201,7 +201,12 @@ require("packer").startup({
     use("neovim/nvim-lspconfig")
 
     -- easy install for lsp servers
-    use("kabouzeid/nvim-lspinstall")
+    use({"kabouzeid/nvim-lspinstall",
+      after = "nvim-lspconfig",
+      config = function()
+        require("configs.lsp")
+      end
+    })
 
     -- colors for lsp diagnostics
     use("folke/lsp-colors.nvim")
@@ -383,39 +388,6 @@ cmp.setup({
   },
 })
 
-require("lspinstall").setup()
-
--- Refernce: https://github.com/kabouzeid/nvim-lspinstall/wiki
-local lua_settings = {
-  Lua = {
-    diagnostics = {
-      globals = { "vim" },
-    },
-  },
-}
-
-local function make_config()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  return {
-    capabilities = capabilities,
-    on_attach = on_attach,
-  }
-end
-
-local function setup_servers()
-  require("lspinstall").setup()
-  local servers = require("lspinstall").installed_servers()
-  for _, server in pairs(servers) do
-    local config = make_config()
-    if server == "lua" then
-      config.settings = lua_settings
-    end
-    require("lspconfig")[server].setup(config)
-  end
-end
-
-setup_servers()
 
 local wk = require("which-key")
 
