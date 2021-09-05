@@ -19,6 +19,10 @@ map(
 )
 -- remove highlighting from search
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
+
+-- tablemode
+map("n", "<leader>tm", "<ESC>:TableModeToggle<CR>i", nore_silent)
+
 -- select colorscheme
 map(
   "n",
