@@ -13,9 +13,6 @@
 -- set this early because the other mappings are created with this
 vim.g.mapleader = " "
 
--- possible options galaxy,galaxy_light, moonlight, gruvbox8, onedark, tokyonight, tokyodark
-local color_choice = "galaxy"
-
 require("options")
 require("plugins")
 require("mappings")
@@ -24,9 +21,6 @@ require("autocommands")
 vim.cmd("source ~/.config/nvim/random.vim")
 
 -- require "colors/themes".random()
-vim.cmd("colorscheme " .. color_choice)
-require("colors.fixed_highlights")
-vim.cmd("highlight Normal guibg = none")
 require("configs.lsp")
 require("configs.dashboard")
 
@@ -35,4 +29,10 @@ if time.hour >= 8 and time.hour < 18 then
   vim.cmd([[
     colorscheme galaxy_light
   ]])
+else
+  -- possible options galaxy,galaxy_light, moonlight, gruvbox8, onedark, tokyonight, tokyodark
+  vim.cmd[[
+    colorscheme galaxy
+    highlight Normal guibg = none]]
+  require("colors.fixed_highlights")
 end
