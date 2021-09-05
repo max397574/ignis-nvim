@@ -5,10 +5,16 @@ fix(${1:scope}): 🐛${2:title}
 ${0:${VISUAL}}
 endsnippet
 
-snippet revert "revert conventional commit"
-revert(${1:scope}): 🔙${2:title}
+snippet cleanup "cleanup conventional commit"
+cleanup(${1:scope}): 🗑️${2:title}
 
 ${0:${VISUAL}}
+endsnippet
+
+snippet revert "revert conventional commit"
+revert: 🔙${2:header of reverted commit}
+
+This reverts commit ${0:<hash>}
 endsnippet
 
 snippet style "style conventional commit"
