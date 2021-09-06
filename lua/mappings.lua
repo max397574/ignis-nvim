@@ -20,7 +20,7 @@ map("n", "nh", ":nohlsearch<CR>", nore_silent)
 -- tablemode
 map("n", "<leader>tm", "<ESC>:TableModeToggle<CR>i", nore_silent)
 
--- capitalize word under cursor
+-- change case of cword
 map("n", "<C-U>", "b~", nore_silent)
 -- easy split navigation
 map("n", "<c-j>", ":wincmd j<CR>", nore_silent)
@@ -45,6 +45,7 @@ map("n", "<leader>K", "10k", nore)
 map("n", "<leader>J", "10j", nore)
 -- treesitter playground
 map("n", "<leader>tspg", ":TSPlaygroundToggle<CR>", nore_silent)
+-- treesitter highlight captures
 map("n", "<leader>tshc", ":TSHighlightCapturesUnderCursor<CR>", nore_silent)
 -- Telescope Mappings
 map("n", "<C-s>", ":Telescope current_buffer_fuzzy_find<CR>", nore_silent)
