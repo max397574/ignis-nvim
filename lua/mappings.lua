@@ -28,12 +28,14 @@ map("n", "<c-j>", ":wincmd j<CR>", nore_silent)
 map("n", "<c-h>", ":wincmd h<CR>", nore_silent)
 map("n", "<c-k>", ":wincmd k<CR>", nore_silent)
 map("n", "<c-l>", ":wincmd l<CR>", nore_silent)
--- alt hjkl
--- use `sed -n l` to get chars with alt
-map("n", "º", ":wincmd J<CR>", nore_silent)
-map("n", "ª", ":wincmd H<CR>", nore_silent)
-map("n", "∆", ":wincmd K<CR>", nore_silent)
-map("n", "¬", ":wincmd L<CR>", nore_silent)
+-- move windows with arrows
+map("n", "<down>", ":wincmd J<CR>", nore_silent)
+map("n", "<left>", ":wincmd H<CR>", nore_silent)
+map("n", "<up>", ":wincmd K<CR>", nore_silent)
+map("n", "<right>", ":wincmd L<CR>", nore_silent)
+-- faster navigation
+map("n", "<leader>K", "10k", nore)
+map("n", "<leader>J", "10j", nore)
 
 -- Git
 -- ===
@@ -43,13 +45,14 @@ map("n", "<leader>gl", ":GV<CR>", nore_silent)
 map("n", "<leader>gp", ":Git push<CR>", nore_silent)
 map("n", "<leader>gs", ":G<CR>", nore_silent)
 map("n", "<leader>gd", ":Git diff<CR>", nore_silent)
--- faster navigation
-map("n", "<leader>K", "10k", nore)
-map("n", "<leader>J", "10j", nore)
+
+-- Treesitter
+-- ==========
 -- treesitter playground
 map("n", "<leader>tspg", ":TSPlaygroundToggle<CR>", nore_silent)
 -- treesitter highlight captures
 map("n", "<leader>tshc", ":TSHighlightCapturesUnderCursor<CR>", nore_silent)
+
 -- Telescope
 -- =========
 map("n", "<C-s>", ":Telescope current_buffer_fuzzy_find<CR>", nore_silent)
@@ -96,6 +99,13 @@ map("v", "<leader>ldr", "<Plug>(Luadev-Run)", silent)
 -- highlight search result and center cursor
 map("n", "n", "nzzzv", nore_silent)
 map("n", "N", "Nzzzv", nore_silent)
+-- alt hjkl
+-- use `sed -n l` to get chars with alt
+-- faster movements
+map("n", "º", "10j", nore_silent)
+map("n", "ª", "10h", nore_silent)
+map("n", "∆", "10k", nore_silent)
+map("n", "¬", "10l", nore_silent)
 -- copy to system clipboard
 map("n", "<leader>y", '"+y', nore)
 map("n", "<leader>Y", 'gg"+yG', nore)
