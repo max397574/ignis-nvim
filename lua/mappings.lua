@@ -20,13 +20,6 @@ map("n", "nh", ":nohlsearch<CR>", nore_silent)
 -- tablemode
 map("n", "<leader>tm", "<ESC>:TableModeToggle<CR>i", nore_silent)
 
--- select colorscheme
-map(
-  "n",
-  "<leader>cs",
-  ":lua require'telescope.builtin'.colorscheme{}<CR>",
-  nore
-)
 -- capitalize word under cursor
 map("n", "<C-U>", "b~", nore_silent)
 -- easy split navigation
