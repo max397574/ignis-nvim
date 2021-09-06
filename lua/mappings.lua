@@ -175,9 +175,3 @@ map("n", "<leader>trld", ":Trouble lsp_workspace_diagnostics<CR>", nore_silent)
 -- help from ts with textobjects
 map("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
 map("v", "m", ":<C-U>lua require('tsht').nodes()<CR>", nore_silent)
--- visual multi
-vim.cmd([[let g:VM_maps = {}
-  let g:VM_maps["Add Cursor Down"]    = '<Leader>cd'   " new cursor down
-  let g:VM_maps["Add Cursor Up"]      = '<Leader>cu'   " new cursor up
-  let g:VM_maps['Find Under']         = '<Leader>fu'
-]])

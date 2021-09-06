@@ -124,9 +124,6 @@ require("packer").startup({
     -- automatically match parantheses etc
     use({ "jiangmiao/auto-pairs" })
 
-    -- multiple cursors
-    use("mg979/vim-visual-multi")
-
     -- change,add and delete surroundings
     use("tpope/vim-surround")
 
