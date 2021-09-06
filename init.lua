@@ -17,6 +17,7 @@ require("options")
 require("plugins")
 require("mappings")
 require("autocommands")
+require("utils")
 -- some stuff which hasn't been converted to lua yet
 vim.cmd("source ~/.config/nvim/random.vim")
 
