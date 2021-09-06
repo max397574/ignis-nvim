@@ -9,7 +9,6 @@ wk.register({
     o = { "OldFiles" },
     s = { "Lsp Symbols" },
     d = { "Directories (Zoxide)" },
-    u = { "Under" },
   },
   l = {
     name = "LiveGrep, LuaDev",
