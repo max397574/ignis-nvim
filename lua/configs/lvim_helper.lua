@@ -6,7 +6,7 @@ require("lvim-helper").setup({
     home .. "/.config/nvim/vimhelp/ts_textobjects_select.md",
     home .. "/.config/nvim/vimhelp/telescope.md",
     home .. "/.config/nvim/vimhelp/cmp.md",
-    home .. "/.config/nvim/vimhelp/latex.md",
+    home .. "/.config/nvim/vimhelp/usefull.md",
   },
   winopts = {
     winhl = table.concat({ "Normal:LvimHelperNormal" }, ","),
