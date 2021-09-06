@@ -7,66 +7,69 @@ g.tokyonight_style = "day"
 g.tokyodark_transparent_background = true
 
 -- builtin plugins
-g.loaded_gzip = false
-g.loaded_matchit = false
-g.loaded_netrwPlugin = false
-g.loaded_tarPlugin = false
-g.loaded_zipPlugin = false
-g.loaded_man = false
-g.loaded_2html_plugin = false
-g.loaded_remote_plugins = false
+g.loaded_gzip = 1
+g.loaded_zip = 1
+g.loaded_zipPlugin = 1
+g.loaded_tar = 1
+g.loaded_tarPlugin = 1
+
+g.loaded_getscript = 1
+g.loaded_getscriptPlugin = 1
+g.loaded_vimball = 1
+g.loaded_vimballPlugin = 1
+g.loaded_2html_plugin = 1
+
+g.loaded_matchit = 1
+g.loaded_matchparen = 1
+g.loaded_logiPat = 1
+g.loaded_rrhelper = 1
+
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+g.loaded_netrwSettings = 1
+g.loaded_netrwFileHandlers = 1
 
 opt.pumblend = 18
--- dark background
-opt.background = "dark"
--- height of cmd line
-opt.cmdheight = 1
--- allow visual mode to go over end of lines
-opt.virtualedit = "block"
--- expand tabs to spaces
-opt.expandtab = true
+opt.background = "dark" -- dark background
+opt.cmdheight = 1 -- height of cmd line
+opt.virtualedit = "block" -- allow visual mode to go over end of lines
+opt.expandtab = true -- expand tabs to spaces
 opt.softtabstop = 4
 opt.shiftwidth = 4
--- show preview of commands in split
-opt.inccommand = "split"
+opt.inccommand = "split" -- show preview of commands in split
 opt.splitbelow = true
 opt.splitright = true
--- relative line numbers
-opt.relativenumber = true
--- show line number at cursor line
-opt.number = true
--- start scrolling 3 lines away from top/bottom
-opt.scrolloff = 3
--- highlight current line
-opt.cursorline = true
--- update every 2000ms
-opt.updatetime = 2000
--- ignore case for search
-opt.ignorecase = true
--- don't ignore when upercase search
-opt.smartcase = true
+opt.relativenumber = true -- relative line numbers
+opt.number = true -- show line number at cursor line
+opt.scrolloff = 3 -- start scrolling 3 lines away from top/bottom
+opt.cursorline = true -- highlight current line
+opt.updatetime = 2000 -- update CursorHold and save swap every 2000ms
+opt.ignorecase = true -- ignore case for search
+opt.smartcase = true -- don't ignore when upercase search
 opt.hidden = true
--- time between keystrokes of mappings
-opt.timeoutlen = 300
+opt.timeoutlen = 300 -- time between keystrokes of mappings
 opt.compatible = false
--- wrap long lines
-opt.wrap = true
+opt.wrap = true -- wrap long lines
 opt.breakindent = true
 opt.showbreak = string.rep(" ", 3)
 opt.linebreak = true
--- allow mouse in normal and visual mode
-opt.mouse = "nv"
+opt.mouse = "nv" -- allow mouse in normal and visual mode
 
 opt.foldlevel = 0
 opt.joinspaces = false
 opt.completeopt = "menuone,noselect"
--- always signcolumn, 3 wide
-opt.signcolumn = "yes:3"
+opt.signcolumn = "yes:3" -- always signcolumn, 3 wide
 opt.termguicolors = true
 opt.conceallevel = 0
 
--- use treesitter for folding
-opt.foldmethod = "expr"
+opt.list = true --show some hidden characters
+opt.listchars = {
+     tab = '> ',
+     nbsp = '␣',
+     trail = '•',
+}
+
+opt.foldmethod = "expr" -- use treesitter for folding
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 opt.undodir = vim.fn.expand("~") .. "/.vim/undodir"
@@ -74,5 +77,4 @@ opt.undofile = true
 
 opt.joinspaces = false
 
--- no fillchars at end of buffer
-opt.fillchars = { eob = " " }
+opt.fillchars = { eob = " " } -- no fillchars at end of buffer
