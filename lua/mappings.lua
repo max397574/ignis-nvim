@@ -99,6 +99,9 @@ map("v", "<leader>ldr", "<Plug>(Luadev-Run)", silent)
 -- highlight search result and center cursor
 map("n", "n", "nzzzv", nore_silent)
 map("n", "N", "Nzzzv", nore_silent)
+-- reselect selection after shifting
+map("x", "<", "<gv", nore)
+map("x", ">", ">gv", nore)
 -- alt hjkl
 -- use `sed -n l` to get chars with alt
 -- faster movements
