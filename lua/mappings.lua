@@ -14,14 +14,15 @@ map(
   ':lua vim.cmd(":vert :h "..vim.fn.expand("<cword>"))<CR>',
   nore_silent
 )
--- remove highlighting from search
-map("n", "nh", ":nohlsearch<CR>", nore_silent)
 
 -- tablemode
 map("n", "<leader>tm", "<ESC>:TableModeToggle<CR>i", nore_silent)
 
 -- change case of cword
 map("n", "<C-U>", "b~", nore_silent)
+
+-- Windows
+-- =======
 -- easy split navigation
 map("n", "<c-j>", ":wincmd j<CR>", nore_silent)
 map("n", "<c-h>", ":wincmd h<CR>", nore_silent)
@@ -33,7 +34,9 @@ map("n", "º", ":wincmd J<CR>", nore_silent)
 map("n", "ª", ":wincmd H<CR>", nore_silent)
 map("n", "∆", ":wincmd K<CR>", nore_silent)
 map("n", "¬", ":wincmd L<CR>", nore_silent)
--- easy git
+
+-- Git
+-- ===
 map("n", "<leader>ga", ":Git add %<CR>", nore_silent)
 map("n", "<leader>gc", ":Git commit<CR>", nore_silent)
 map("n", "<leader>gl", ":GV<CR>", nore_silent)
@@ -47,7 +50,8 @@ map("n", "<leader>J", "10j", nore)
 map("n", "<leader>tspg", ":TSPlaygroundToggle<CR>", nore_silent)
 -- treesitter highlight captures
 map("n", "<leader>tshc", ":TSHighlightCapturesUnderCursor<CR>", nore_silent)
--- Telescope Mappings
+-- Telescope
+-- =========
 map("n", "<C-s>", ":Telescope current_buffer_fuzzy_find<CR>", nore_silent)
 map("n", "<Leader>lg", ":Telescope live_grep<CR>", nore_silent)
 map("n", "<Leader>fh", ":Telescope help_tags<CR>", nore_silent)
@@ -79,17 +83,34 @@ map(
 )
 map("n", "<leader>tcsb", ":lua require'telescope.builtin'.symbols{}<CR>", nore)
 map("n", "<leader>tcbi", ":lua require'telescope.builtin'.builtin{}<CR>", nore)
--- luadev mappings
+
+-- Luadev
+-- ======
 map("n", "<leader>ld", ":Luadev<CR>", nore_silent)
 map("n", "<leader>ldl", "<Plug>(Luadev-RunLine)", silent)
 map("n", "<leader>ldr", "<Plug>(Luadev-Run)", silent)
 map("v", "<leader>ldr", "<Plug>(Luadev-Run)", silent)
+
+-- Simple Commands
+-- ===============
 -- highlight search result and center cursor
 map("n", "n", "nzzzv", nore_silent)
 map("n", "N", "Nzzzv", nore_silent)
--- move visual blocks up and down
-map("v", "J", ":m '>+1<CR>gv=gv", nore_silent)
-map("v", "K", ":m '<-2<CR>gv=gv", nore_silent)
+-- copy to system clipboard
+map("n", "<leader>y", '"+y', nore)
+map("n", "<leader>Y", 'gg"+yG', nore)
+-- move right
+map("i", "kk", "<RIGHT>", nore)
+-- move lines up and down in visual and normal mode
+map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
+map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
+map("n", "<leader>j", ":m .+1<CR>==", nore_silent)
+map("n", "<leader>k", ":m .-2<CR>==", nore_silent)
+-- remove highlighting from search
+map("n", "nh", ":nohlsearch<CR>", nore_silent)
+-- insert empty line below/above
+map("n", "<leader>o", "o<ESC>k", nore)
+map("n", "<leader>O", "O<ESC>j", nore)
 -- easier escape
 map("v", "jk", "<ESC>", nore)
 map("i", "jj", "<ESC>", nore)
@@ -106,16 +127,27 @@ map(
   ':let @t = \'let @q = "\' . @q<CR>:<C-f>o<ESC>"tp$a"<Esc>',
   nore
 )
+
+-- move visual blocks up and down
+map("v", "J", ":m '>+1<CR>gv=gv", nore_silent)
+map("v", "K", ":m '<-2<CR>gv=gv", nore_silent)
 -- don't move cursor down when joining lines
 map("n", "J", "mzJ`z", nore)
 map("x", "<BS>", "x", nore)
+
+-- Better subsitute
+-- ================
+-- substitute on visual selection
+map("v", "<leader>s", ":s///g<LEFT><LEFT><LEFT>", nore)
 -- subsitute on current line
 map("n", "<leader>ss", "V s", { noremap = false })
 -- and on whole file
 map("n", "<leader>S", "ggVG s", { noremap = false })
 -- and to the end of the file
 map("n", "<leader>sG", "VG s", { noremap = false })
--- markdown
+
+-- Markdown
+-- ========
 map("n", "<leader>mdh1", ":MdHeading1<CR>", nore_silent)
 map("n", "<leader>mdh2", ":MdHeading2<CR>", nore_silent)
 map("n", "<leader>mdh3", ":MdHeading3<CR>", nore_silent)
@@ -130,6 +162,7 @@ map("i", "<leader>mdlo", "<ESC>:MdOrderedList<CR>", nore_silent)
 map("i", "<leader>mdlt", "<ESC>:MdTaskList<CR>", nore_silent)
 map("v", "<leader>mdit", ":call VisualItalic()<CR>", nore_silent)
 map("v", "<leader>mdbd", ":call VisualBold()<CR>", nore_silent)
+
 -- better undo
 map("i", ",", ",<c-g>u", nore)
 map("i", "!", "!<c-g>u", nore)
@@ -137,24 +170,9 @@ map("i", ".", ".<c-g>u", nore)
 map("i", " ", " <c-g>u", nore)
 map("i", "?", "?<c-g>u", nore)
 map("i", "<CR>", "<CR><c-g>u", nore)
--- move lines up and down in visual and normal mode
-map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
-map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
-map("n", "<leader>j", ":m .+1<CR>==", nore_silent)
-map("n", "<leader>k", ":m .-2<CR>==", nore_silent)
--- insert empty line below/above
-map("n", "<leader>o", "o<ESC>k", nore)
-map("n", "<leader>O", "O<ESC>j", nore)
 -- enter space before/after
 map("n", "<leader>i", "i <ESC>l", nore)
 map("n", "<leader>a", "a <ESC>h", nore)
--- substitute on visual selection
-map("v", "<leader>s", ":s///g<LEFT><LEFT><LEFT>", nore)
--- copy to system clipboard
-map("n", "<leader>y", '"+y', nore)
-map("n", "<leader>Y", 'gg"+yG', nore)
--- move right
-map("i", "kk", "<RIGHT>", nore)
 -- use vmath on visually selected area
 map("v", "<leader>vm", "<ESC>:Vmath<CR>", nore)
 -- DistractionFree writing
