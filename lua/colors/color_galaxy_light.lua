@@ -226,7 +226,9 @@ function M.shine()
     add_highlight_table(tbl)
   end
 
-  vim.cmd([[au BufEnter,FileType * :lua require"colors.color_galaxy_light".Lang_high(vim.bo.ft)]])
+  vim.cmd(
+    [[au BufEnter,FileType * :lua require"colors.color_galaxy_light".Lang_high(vim.bo.ft)]]
+  )
   vim.api.nvim__set_hl_ns(ns)
 end
 

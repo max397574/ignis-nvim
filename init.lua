@@ -31,8 +31,8 @@ if time.hour >= 8 and time.hour < 18 then
   ]])
 else
   -- possible options galaxy,galaxy_light, moonlight, gruvbox8, onedark, tokyonight, tokyodark
-  vim.cmd[[
+  vim.cmd([[
     colorscheme galaxy
-    highlight Normal guibg = none]]
+    highlight Normal guibg = none]])
   require("colors.fixed_highlights")
 end

@@ -1,1 +1,1 @@
-require "colors.color_galaxy".shine()
+require("colors.color_galaxy").shine()
