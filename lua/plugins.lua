@@ -74,9 +74,6 @@ require("packer").startup({
     -- breakup of startup time
     use({ "tweekmonster/startuptime.vim" })
 
-    -- more commands can be repeated with `.`
-    use({ "tpope/vim-repeat" })
-
     -- snippets
     use({ "SirVer/ultisnips" })
     use({ "honza/vim-snippets" })
