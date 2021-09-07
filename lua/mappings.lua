@@ -20,17 +20,17 @@ wk.register({
       name = "Markdown",
       h = {
         name = "Heading, HR",
-        ["1"] = {"<cmd>MdHeading1<CR>", "Heading 1"},
-        ["2"] = {"<cmd>MdHeading2<CR>", "Heading 2"},
-        ["3"] = {"<cmd>MdHeading3<CR>", "Heading 3"},
-        ["r"] = {"<cmd>MdHorizontalRule<CR>", "Horizontal Rule"},
+        ["1"] = { "<cmd>MdHeading1<CR>", "Heading 1" },
+        ["2"] = { "<cmd>MdHeading2<CR>", "Heading 2" },
+        ["3"] = { "<cmd>MdHeading3<CR>", "Heading 3" },
+        ["r"] = { "<cmd>MdHorizontalRule<CR>", "Horizontal Rule" },
       },
-      a = {"<cmd>MdLink<CR>", "Link"},
+      a = { "<cmd>MdLink<CR>", "Link" },
       l = {
         name = "List",
-        u = {"<cmd>MdUnorderedList<CR>", "Unordered"},
-        o = {"<cmd>MdOrderedList<CR>", "Ordered"},
-        t = {"<cmd>MdTaskList<CR>", "Task"},
+        u = { "<cmd>MdUnorderedList<CR>", "Unordered" },
+        o = { "<cmd>MdOrderedList<CR>", "Ordered" },
+        t = { "<cmd>MdTaskList<CR>", "Task" },
       },
     },
   },
@@ -48,10 +48,10 @@ wk.register({
     name = "Luadev",
     d = {
       name = "Run",
-      l = { "<Plug>(Luadev-RunLine)", "Line"},
-      r = { "<Plug>(Luadev-Run)", "Motion or Object"},
+      l = { "<Plug>(Luadev-RunLine)", "Line" },
+      r = { "<Plug>(Luadev-Run)", "Motion or Object" },
     },
-    t = {"<cmd>Luadev<CR>", "Toggle"},
+    t = { "<cmd>Luadev<CR>", "Toggle" },
   },
   ["h"] = {
     name = "+help",
@@ -99,7 +99,7 @@ wk.register({
     },
     h = { "<cmd>Telescope command_history<CR>", "Command History" },
     m = { "<cmd>Telescope marks<CR>", "Jump to Mark" },
-    c = {"<cmd>Telescope lsp_code_actions<CR>", "Code Actions"}
+    c = { "<cmd>Telescope lsp_code_actions<CR>", "Code Actions" },
   },
   f = {
     name = "+file",
@@ -109,12 +109,15 @@ wk.register({
     n = { "<cmd>enew<CR>", "New File" },
   },
   ["`"] = { "<cmd>:e #<cr>", "Switch to Other Buffer" },
-  [" "] = {"<cmd>Telescope find_files<CR>", "Find File"},
+  [" "] = { "<cmd>Telescope find_files<CR>", "Find File" },
   ["."] = { "<cmd>Telescope file_browser<CR>", "Browse Files" },
   [","] = { "<cmd>Telescope buffers show_all_buffers=true<cr>", "Switch Buffer" },
   ["/"] = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
   [":"] = { "<cmd>Telescope command_history<cr>", "Command History" },
-  q = { ':let @t = \'let @q = "\' . @q<CR>:<C-f>o<ESC>"tp$a"<Esc>', "Edit Macro q"},
+  q = {
+    ':let @t = \'let @q = "\' . @q<CR>:<C-f>o<ESC>"tp$a"<Esc>',
+    "Edit Macro q",
+  },
   w = {
     name = "+Window",
     ["w"] = { "<C-W>p", "other-window" },
@@ -136,8 +139,8 @@ wk.register({
   },
   v = {
     name = "+View",
-    l = { "<cmd>call LatexPreview()<CR>", "Latex"}
-  }
+    l = { "<cmd>call LatexPreview()<CR>", "Latex" },
+  },
 }, {
   prefix = "<leader>",
   mode = "n",
