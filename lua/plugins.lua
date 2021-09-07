@@ -190,10 +190,12 @@ require("packer").startup({
     use({ "hrsh7th/cmp-nvim-lsp" })
 
     -- autopairs
-    use({"windwp/nvim-autopairs",
-    config = function()
-      require("configs.nvim_autopairs")
-      end})
+    use({
+      "windwp/nvim-autopairs",
+      config = function()
+        require("configs.nvim_autopairs")
+      end,
+    })
 
     -- easily configure lsp
     use("neovim/nvim-lspconfig")

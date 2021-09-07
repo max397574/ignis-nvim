@@ -64,9 +64,9 @@ opt.conceallevel = 0
 
 opt.list = true --show some hidden characters
 opt.listchars = {
-     tab = '> ',
-     nbsp = '␣',
-     trail = '•',
+  tab = "> ",
+  nbsp = "␣",
+  trail = "•",
 }
 
 opt.foldmethod = "expr" -- use treesitter for folding

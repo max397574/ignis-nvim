@@ -15,7 +15,12 @@ _G.profile = function(command, times)
   for _ = 1, times, 1 do
     local ok = pcall(command, unpack(args))
     if not ok then
-      error("Command failed: " .. tostring(ok) .. " " .. vim.inspect({ command = command, args = args }))
+      error(
+        "Command failed: "
+          .. tostring(ok)
+          .. " "
+          .. vim.inspect({ command = command, args = args })
+      )
     end
   end
   print(((vim.loop.hrtime() - start) / 1000000 / times) .. "ms")
