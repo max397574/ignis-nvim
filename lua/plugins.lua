@@ -84,19 +84,6 @@ require("packer").startup({
     -- see git commits
     use({ "junegunn/gv.vim" })
 
-    -- distraction free writing
-    use({ "folke/zen-mode.nvim" })
-
-    -- dimm inactive parts of code
-    use({
-      "folke/twilight.nvim",
-      config = function()
-        require("twilight").setup({
-          context = 20, -- amount of lines we will try to show around the current line
-        })
-      end,
-    })
-
     -- easier use of f/F and t/T
     use("rhysd/clever-f.vim")
 
