@@ -121,9 +121,6 @@ require("packer").startup({
       end,
     })
 
-    -- automatically match parantheses etc
-    use({ "jiangmiao/auto-pairs" })
-
     -- change,add and delete surroundings
     use("tpope/vim-surround")
 
@@ -191,6 +188,12 @@ require("packer").startup({
     use({ "hrsh7th/cmp-calc" })
     use({ "hrsh7th/cmp-nvim-lua" })
     use({ "hrsh7th/cmp-nvim-lsp" })
+
+    -- autopairs
+    use({"windwp/nvim-autopairs",
+    config = function()
+      require("configs.nvim_autopairs")
+      end})
 
     -- easily configure lsp
     use("neovim/nvim-lspconfig")
