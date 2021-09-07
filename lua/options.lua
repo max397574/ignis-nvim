@@ -3,31 +3,8 @@ local g = vim.g
 
 -- colorscheme settings
 g.onedark_style = "deep"
-g.tokyonight_style = "day"
+g.tokyonight_style = "storm"
 g.tokyodark_transparent_background = true
-
--- builtin plugins
-g.loaded_gzip = 1
-g.loaded_zip = 1
-g.loaded_zipPlugin = 1
-g.loaded_tar = 1
-g.loaded_tarPlugin = 1
-
-g.loaded_getscript = 1
-g.loaded_getscriptPlugin = 1
-g.loaded_vimball = 1
-g.loaded_vimballPlugin = 1
-g.loaded_2html_plugin = 1
-
-g.loaded_matchit = 1
-g.loaded_matchparen = 1
-g.loaded_logiPat = 1
-g.loaded_rrhelper = 1
-
-g.loaded_netrw = 1
-g.loaded_netrwPlugin = 1
-g.loaded_netrwSettings = 1
-g.loaded_netrwFileHandlers = 1
 
 opt.pumblend = 18
 opt.background = "dark" -- dark background
@@ -72,9 +49,30 @@ opt.listchars = {
 opt.foldmethod = "expr" -- use treesitter for folding
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-opt.undodir = vim.fn.expand("~") .. "/.vim/undodir"
+opt.undodir = vim.fn.expand("~") .. "/.vim/undodir" -- directory to save undofiles
 opt.undofile = true
 
-opt.joinspaces = false
-
 opt.fillchars = { eob = " " } -- no fillchars at end of buffer
+
+-- builtin plugins
+g.loaded_gzip = 1
+g.loaded_zip = 1
+g.loaded_zipPlugin = 1
+g.loaded_tar = 1
+g.loaded_tarPlugin = 1
+
+g.loaded_getscript = 1
+g.loaded_getscriptPlugin = 1
+g.loaded_vimball = 1
+g.loaded_vimballPlugin = 1
+g.loaded_2html_plugin = 1
+
+g.loaded_matchit = 1
+g.loaded_matchparen = 1
+g.loaded_logiPat = 1
+g.loaded_rrhelper = 1
+
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+g.loaded_netrwSettings = 1
+g.loaded_netrwFileHandlers = 1
