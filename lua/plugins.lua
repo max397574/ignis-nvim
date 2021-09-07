@@ -201,8 +201,8 @@ require("packer").startup({
     -- easy install for lsp servers
     use({
       "kabouzeid/nvim-lspinstall",
-      after = "nvim-lspconfig",
       config = function()
+        require("lspinstall").setup()
         require("configs.lsp")
       end,
     })
