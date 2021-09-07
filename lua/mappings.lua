@@ -146,20 +146,6 @@ wk.register({
   mode = "n",
 })
 
--- open helpfile of word under cursor
--- follow link
-map(
-  "n",
-  "<C-f>",
-  ':lua vim.cmd(":vert :h "..vim.fn.expand("<cword>"))<CR>',
-  nore_silent
-)
-
--- tablemode
-map("n", "<leader>tm", "<ESC>:TableModeToggle<CR>i", nore_silent)
-
--- change case of cword
-map("n", "<C-U>", "b~", nore_silent)
 
 -- Windows
 -- =======
@@ -182,8 +168,8 @@ map("n", "<C-s>", ":Telescope current_buffer_fuzzy_find<CR>", nore_silent)
 -- ======
 map("v", "<leader>ldr", "<Plug>(Luadev-Run)", silent)
 
--- Simple Commands
--- ===============
+-- Simple Commands (Improvements of commands)
+-- ==========================================
 -- highlight search result and center cursor
 map("n", "n", "nzzzv", nore_silent)
 map("n", "N", "Nzzzv", nore_silent)
@@ -227,10 +213,11 @@ map("v", "K", ":m '<-2<CR>gv=gv", nore_silent)
 map("n", "J", "mzJ`z", nore)
 map("x", "<BS>", "x", nore)
 
--- Better subsitute
--- ================
 -- substitute on visual selection
 map("v", "<leader>s", ":s///g<LEFT><LEFT><LEFT>", nore)
+
+-- Random
+-- ======
 
 -- better undo
 map("i", ",", ",<c-g>u", nore)
@@ -256,3 +243,17 @@ map("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", nore_silent)
 -- help from ts with textobjects
 map("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
 map("v", "m", ":<C-U>lua require('tsht').nodes()<CR>", nore_silent)
+
+-- open helpfile of word under cursor
+map(
+  "n",
+  "<C-f>",
+  ':lua vim.cmd(":vert :h "..vim.fn.expand("<cword>"))<CR>',
+  nore_silent
+)
+
+-- tablemode
+map("n", "<leader>tm", "<ESC>:TableModeToggle<CR>i", nore_silent)
+
+-- change case of cword
+map("n", "<C-U>", "b~", nore_silent)
