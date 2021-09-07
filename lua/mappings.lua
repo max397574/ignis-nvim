@@ -2,9 +2,146 @@ local map = vim.api.nvim_set_keymap
 local nore_silent = { noremap = true, silent = true }
 local nore = { noremap = true }
 local silent = { silent = true }
+local wk = require("which-key")
 
--- view latex pdf in preview
-map("n", "<leader>vl", ":call LatexPreview()<CR>", nore_silent)
+wk.register({
+  g = {
+    name = "+Git",
+    s = { "<cmd>G<CR>", "Status" },
+    p = { "<cmd>Git push<CR>", "Push" },
+    d = { "<cmd>Git diff<CR>", "Diff" },
+    l = { "<cmd>GV<CR>", "Log" },
+    c = { "<cmd>Git commit<CR>", "Commit" },
+    a = { "<cmd>Git add %<CR>", "Add" },
+  },
+  m = {
+    name = "Markdown",
+    d = {
+      name = "Markdown",
+      h = {
+        name = "Heading, HR",
+        ["1"] = {"<cmd>MdHeading1<CR>", "Heading 1"},
+        ["2"] = {"<cmd>MdHeading2<CR>", "Heading 2"},
+        ["3"] = {"<cmd>MdHeading3<CR>", "Heading 3"},
+        ["r"] = {"<cmd>MdHorizontalRule<CR>", "Horizontal Rule"},
+      },
+      a = {"<cmd>MdLink<CR>", "Link"},
+      l = {
+        name = "List",
+        u = {"<cmd>MdUnorderedList<CR>", "Unordered"},
+        o = {"<cmd>MdOrderedList<CR>", "Ordered"},
+        t = {"<cmd>MdTaskList<CR>", "Task"},
+      },
+    },
+  },
+  x = {
+    name = "+Errors",
+    x = { "<cmd>TroubleToggle<CR>", "Trouble" },
+    w = { "<cmd>Trouble lsp_workspace_diagnostics<CR>", "Workspace Trouble" },
+    d = { "<cmd>Trouble lsp_document_diagnostics<CR>", "Document Trouble" },
+    t = { "<cmd>TodoTrouble<CR>", "Todo Trouble" },
+    T = { "<cmd>TodoTelescope<CR>", "Todo Telescope" },
+    l = { "<cmd>lopen<CR>", "Open Location List" },
+    q = { "<cmd>copen<CR>", "Open Quickfix List" },
+  },
+  l = {
+    name = "Luadev",
+    d = {
+      name = "Run",
+      l = { "<Plug>(Luadev-RunLine)", "Line"},
+      r = { "<Plug>(Luadev-Run)", "Motion or Object"},
+    },
+    t = {":Luadev<CR>", "Toggle"},
+  },
+  ["h"] = {
+    name = "+help",
+    t = { "<cmd>:Telescope builtin<CR>", "Telescope" },
+    c = { "<cmd>:Telescope commands<CR>", "Commands" },
+    h = { "<cmd>:Telescope help_tags<CR>", "Help Pages" },
+    m = { "<cmd>:Telescope man_pages<CR>", "Man Pages" },
+    k = { "<cmd>:Telescope keymaps<CR>", "Key Maps" },
+    s = { "<cmd>:Telescope highlights<CR>", "Search Highlight Groups" },
+    l = {
+      [[<cmd>TSHighlightCapturesUnderCursor<CR>]],
+      "Highlight Groups at cursor",
+    },
+    f = { "<cmd>:Telescope filetypes<CR>", "File Types" },
+    o = { "<cmd>:Telescope vim_options<CR>", "Options" },
+    a = { "<cmd>:Telescope autocommands<CR>", "Auto Commands" },
+    p = {
+      name = "+packer",
+      p = { "<cmd>PackerSync<CR>", "Sync" },
+      s = { "<cmd>PackerStatus<CR>", "Status" },
+      i = { "<cmd>PackerInstall<CR>", "Install" },
+      c = { "<cmd>PackerCompile<CR>", "Compile" },
+    },
+  },
+  u = { "<cmd>UndotreeToggle<CR>", "UndoTree" },
+  b = {
+    name = "+Buffer",
+    ["b"] = { "<cmd>:e #<CR>", "Switch to Other Buffer" },
+    ["p"] = { "<cmd>:BufferLineCyclePrev<CR>", "Previous Buffer" },
+    ["["] = { "<cmd>:BufferLineCyclePrev<CR>", "Previous Buffer" },
+    ["n"] = { "<cmd>:BufferLineCycleNext<CR>", "Next Buffer" },
+    ["]"] = { "<cmd>:BufferLineCycleNext<CR>", "Next Buffer" },
+    ["d"] = { "<cmd>:bd<CR>", "Delete Buffer" },
+    ["g"] = { "<cmd>:BufferLinePick<CR>", "Goto Buffer" },
+  },
+  s = {
+    name = "+Search",
+    g = { "<cmd>Telescope live_grep<CR>", "Grep" },
+    b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Buffer" },
+    s = {
+      function()
+        require("telescope.builtin").lsp_workspace_symbols()
+      end,
+      "Goto Symbol",
+    },
+    h = { "<cmd>Telescope command_history<CR>", "Command History" },
+    m = { "<cmd>Telescope marks<CR>", "Jump to Mark" },
+    c = {"<cmd>Telescope lsp_code_actions<CR>", "Code Actions"}
+  },
+  f = {
+    name = "+file",
+    t = { "<cmd>NvimTreeToggle<CR>", "NvimTree" },
+    f = { "<cmd>Telescope find_files<CR>", "Find File" },
+    r = { "<cmd>Telescope oldfiles<CR>", "Open Recent File" },
+    n = { "<cmd>enew<CR>", "New File" },
+  },
+  ["`"] = { "<cmd>:e #<cr>", "Switch to Other Buffer" },
+  [" "] = {"<cmd>Telescope find_files<CR>", "Find File"},
+  ["."] = { ":Telescope file_browser<CR>", "Browse Files" },
+  [","] = { "<cmd>Telescope buffers show_all_buffers=true<cr>", "Switch Buffer" },
+  ["/"] = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
+  [":"] = { "<cmd>Telescope command_history<cr>", "Command History" },
+  q = { ':let @t = \'let @q = "\' . @q<CR>:<C-f>o<ESC>"tp$a"<Esc>', "Edit Macro q"},
+  w = {
+    name = "+Window",
+    ["w"] = { "<C-W>p", "other-window" },
+    ["d"] = { "<C-W>c", "delete-window" },
+    ["-"] = { "<C-W>s", "split-window-below" },
+    ["|"] = { "<C-W>v", "split-window-right" },
+    ["2"] = { "<C-W>v", "layout-double-columns" },
+    ["h"] = { "<C-W>h", "window-left" },
+    ["j"] = { "<C-W>j", "window-below" },
+    ["l"] = { "<C-W>l", "window-right" },
+    ["k"] = { "<C-W>k", "window-up" },
+    ["H"] = { "<C-W>5<", "expand-window-left" },
+    ["J"] = { ":resize +5", "expand-window-below" },
+    ["L"] = { "<C-W>5>", "expand-window-right" },
+    ["K"] = { ":resize -5", "expand-window-up" },
+    ["="] = { "<C-W>=", "balance-window" },
+    ["s"] = { "<C-W>s", "split-window-below" },
+    ["v"] = { "<C-W>v", "split-window-right" },
+  },
+  v = {
+    name = "+View",
+    l = { "<cmd>call LatexPreview()<CR>", "Latex"}
+  }
+}, {
+  prefix = "<leader>",
+  mode = "n",
+})
 
 -- open helpfile of word under cursor
 -- follow link
@@ -33,65 +170,13 @@ map("n", "<down>", ":wincmd J<CR>", nore_silent)
 map("n", "<left>", ":wincmd H<CR>", nore_silent)
 map("n", "<up>", ":wincmd K<CR>", nore_silent)
 map("n", "<right>", ":wincmd L<CR>", nore_silent)
--- faster navigation
-map("n", "<leader>K", "10k", nore)
-map("n", "<leader>J", "10j", nore)
-
--- Git
--- ===
-map("n", "<leader>ga", ":Git add %<CR>", nore_silent)
-map("n", "<leader>gc", ":Git commit<CR>", nore_silent)
-map("n", "<leader>gl", ":GV<CR>", nore_silent)
-map("n", "<leader>gp", ":Git push<CR>", nore_silent)
-map("n", "<leader>gs", ":G<CR>", nore_silent)
-map("n", "<leader>gd", ":Git diff<CR>", nore_silent)
-
--- Treesitter
--- ==========
--- treesitter playground
-map("n", "<leader>tspg", ":TSPlaygroundToggle<CR>", nore_silent)
--- treesitter highlight captures
-map("n", "<leader>tshc", ":TSHighlightCapturesUnderCursor<CR>", nore_silent)
 
 -- Telescope
 -- =========
 map("n", "<C-s>", ":Telescope current_buffer_fuzzy_find<CR>", nore_silent)
-map("n", "<Leader>lg", ":Telescope live_grep<CR>", nore_silent)
-map("n", "<Leader>fh", ":Telescope help_tags<CR>", nore_silent)
-map("n", "<Leader>fb", ":Telescope buffers<CR>", nore_silent)
-map("n", "<Leader>fo", ":Telescope oldfiles<CR>", nore_silent)
-map("n", "<Leader>fs", ":Telescope lsp_workspace_symbols<CR>", nore_silent)
-map("n", "<leader>ff", ":Telescope find_files<CR>", nore_silent)
-map("n", "<leader>fd", ":Telescope zoxide list<CR>", nore_silent)
-map("n", "<leader>tcts", ":Telescope treesitter<CR>", nore_silent)
-map("n", "<leader>tctd", ":TodoTelescope<CR>", nore_silent)
--- https://github.com/nvim-telescope/telescope.nvim#pickers
-map(
-  "n",
-  "<leader>tcch",
-  ":lua require'telescope.builtin'.command_history{}<CR>",
-  nore
-)
-map(
-  "n",
-  "<leader>tcsh",
-  ":lua require'telescope.builtin'.search_history{}<CR>",
-  nore
-)
-map(
-  "n",
-  "<leader>tcgc",
-  ":lua require'telescope.builtin'.git_commits{}<CR>",
-  nore
-)
-map("n", "<leader>tcsb", ":lua require'telescope.builtin'.symbols{}<CR>", nore)
-map("n", "<leader>tcbi", ":lua require'telescope.builtin'.builtin{}<CR>", nore)
 
 -- Luadev
 -- ======
-map("n", "<leader>ld", ":Luadev<CR>", nore_silent)
-map("n", "<leader>ldl", "<Plug>(Luadev-RunLine)", silent)
-map("n", "<leader>ldr", "<Plug>(Luadev-Run)", silent)
 map("v", "<leader>ldr", "<Plug>(Luadev-Run)", silent)
 
 -- Simple Commands
@@ -127,19 +212,10 @@ map("n", "<leader>O", "O<ESC>j", nore)
 -- easier escape
 map("v", "jk", "<ESC>", nore)
 map("i", "jj", "<ESC>", nore)
--- easy save
-map("n", "<leader>w", ":w<CR>", nore)
 -- paste over selected text without overwriting yank register
 map("v", "<leader>p", "_dP", nore)
 -- execute macro q
 map("n", "Q", "@q", nore)
--- edit macro q
-map(
-  "n",
-  "<leader>q",
-  ':let @t = \'let @q = "\' . @q<CR>:<C-f>o<ESC>"tp$a"<Esc>',
-  nore
-)
 
 -- move visual blocks up and down
 map("v", "J", ":m '>+1<CR>gv=gv", nore_silent)
@@ -152,29 +228,6 @@ map("x", "<BS>", "x", nore)
 -- ================
 -- substitute on visual selection
 map("v", "<leader>s", ":s///g<LEFT><LEFT><LEFT>", nore)
--- subsitute on current line
-map("n", "<leader>ss", "V s", { noremap = false })
--- and on whole file
-map("n", "<leader>S", "ggVG s", { noremap = false })
--- and to the end of the file
-map("n", "<leader>sG", "VG s", { noremap = false })
-
--- Markdown
--- ========
-map("n", "<leader>mdh1", ":MdHeading1<CR>", nore_silent)
-map("n", "<leader>mdh2", ":MdHeading2<CR>", nore_silent)
-map("n", "<leader>mdh3", ":MdHeading3<CR>", nore_silent)
-map("n", "<leader>mda", ":MdLink<CR>", nore_silent)
-map("n", "<leader>mdhr", ":MdHorizontalRule<CR>", nore_silent)
-map("i", "<leader>mdhr", "<ESC>:MdHorizontalRule<CR>", nore_silent)
-map("n", "<leader>mdlu", ":MdUnorderedList<CR>", nore_silent)
-map("n", "<leader>mdlo", ":MdOrderedList<CR>", nore_silent)
-map("n", "<leader>mdlt", ":MdTaskList<CR>", nore_silent)
-map("i", "<leader>mdlu", "<ESC>:MdUnorderedList<CR>", nore_silent)
-map("i", "<leader>mdlo", "<ESC>:MdOrderedList<CR>", nore_silent)
-map("i", "<leader>mdlt", "<ESC>:MdTaskList<CR>", nore_silent)
-map("v", "<leader>mdit", ":call VisualItalic()<CR>", nore_silent)
-map("v", "<leader>mdbd", ":call VisualBold()<CR>", nore_silent)
 
 -- better undo
 map("i", ",", ",<c-g>u", nore)
@@ -197,12 +250,6 @@ map("n", "<leader>ut", ":UndotreeToggle<CR>", nore_silent)
 -- lsp
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", nore)
 map("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", nore_silent)
--- toggle trouble
-map("n", "<leader>trt", ":TroubleToggle<CR>", nore_silent)
--- show todo items in trouble window
-map("n", "<leader>trtd", ":TodoTrouble<CR>", nore_silent)
--- lsp diagnostics in trouble
-map("n", "<leader>trld", ":Trouble lsp_workspace_diagnostics<CR>", nore_silent)
 -- help from ts with textobjects
 map("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
 map("v", "m", ":<C-U>lua require('tsht').nodes()<CR>", nore_silent)
