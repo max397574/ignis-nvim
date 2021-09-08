@@ -27,3 +27,17 @@ require("telescope").setup {
 }
 require("telescope").load_extension "fzf"
 require("telescope").load_extension "zoxide"
+
+local M = {}
+local themes = require "telescope.themes"
+local builtin = require "telescope.builtin"
+function M.code_actions()
+  local opts = {
+    winblend = 10,
+    border = true,
+    previewer = false,
+    shorten_path = false,
+  }
+  builtin.lsp_code_actions(themes.get_dropdown(opts))
+end
+return M
