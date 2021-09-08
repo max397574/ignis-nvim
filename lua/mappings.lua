@@ -2,7 +2,7 @@ local map = vim.api.nvim_set_keymap
 local nore_silent = { noremap = true, silent = true }
 local nore = { noremap = true }
 local silent = { silent = true }
-local wk = require("which-key")
+local wk = require "which-key"
 
 wk.register({
   g = {
@@ -47,7 +47,7 @@ wk.register({
   t = {
     name = "Table Mode",
     m = { "<cmd>TableModeToggle<CR>", "Toggle Table Mode" },
-    t = { "Tabelize"},
+    t = { "Tabelize" },
   },
   l = {
     name = "Luadev",

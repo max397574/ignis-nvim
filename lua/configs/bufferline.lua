@@ -1,4 +1,4 @@
-require("bufferline").setup({
+require("bufferline").setup {
   options = {
     custom_areas = {
       right = function()
@@ -27,4 +27,4 @@ require("bufferline").setup({
       end,
     },
   },
-})
+}

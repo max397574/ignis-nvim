@@ -1,125 +1,125 @@
 -- Plugins
 -- =======
-require("packer").startup({
+require("packer").startup {
   function(use)
     -- package manager
-    use("wbthomason/packer.nvim")
+    use "wbthomason/packer.nvim"
 
     -- lua repl
-    use("bfredl/nvim-luadev")
+    use "bfredl/nvim-luadev"
 
     -- better word motion/object
-    use("chaoren/vim-wordmotion")
+    use "chaoren/vim-wordmotion"
 
     -- show where lsp code action as available
-    use("kosayoda/nvim-lightbulb")
+    use "kosayoda/nvim-lightbulb"
 
     -- dashboard
-    use("glepnir/dashboard-nvim")
+    use "glepnir/dashboard-nvim"
 
     -- bufferline
-    use({
+    use {
       "akinsho/bufferline.nvim",
       requires = "kyazdani42/nvim-web-devicons",
       config = function()
-        require("configs.bufferline")
+        require "configs.bufferline"
       end,
-    })
+    }
     -- colorschemes
-    use("lifepillar/vim-gruvbox8")
-    use("Pocco81/Catppuccino.nvim")
-    use("shaunsingh/moonlight.nvim")
-    use("navarasu/onedark.nvim")
-    use("folke/tokyonight.nvim")
-    use("tiagovla/tokyodark.nvim")
-    use("sainnhe/gruvbox-material")
+    use "lifepillar/vim-gruvbox8"
+    use "Pocco81/Catppuccino.nvim"
+    use "shaunsingh/moonlight.nvim"
+    use "navarasu/onedark.nvim"
+    use "folke/tokyonight.nvim"
+    use "tiagovla/tokyodark.nvim"
+    use "sainnhe/gruvbox-material"
     -- statusline
-    use({
+    use {
       "hoob3rt/lualine.nvim",
       requires = { "kyazdani42/nvim-web-devicons" },
       config = function()
-        require("configs.lualine")
+        require "configs.lualine"
       end,
-    })
+    }
     -- stats
-    use({ "wakatime/vim-wakatime" })
+    use { "wakatime/vim-wakatime" }
 
     -- calculate math figures on visual selection
-    use({
+    use {
       "~/vmath.nvim",
       config = function()
-        require("configs.vmath")
+        require "configs.vmath"
       end,
-    })
+    }
 
     -- some functions to help with markdown
-    use("~/lua_markdown")
+    use "~/lua_markdown"
 
     -- show taglist
-    use("~/taglist.nvim")
+    use "~/taglist.nvim"
 
     -- easily comment out code
-    use({
+    use {
       "terrortylor/nvim-comment",
       config = function()
-        require("configs.nvim_comment")
+        require "configs.nvim_comment"
       end,
-    })
+    }
 
     -- breakup of startup time
-    use({ "tweekmonster/startuptime.vim" })
+    use { "tweekmonster/startuptime.vim" }
 
     -- snippets
-    use({ "SirVer/ultisnips" })
-    use({ "honza/vim-snippets" })
+    use { "SirVer/ultisnips" }
+    use { "honza/vim-snippets" }
 
     -- Git from Vim
-    use({ "tpope/vim-fugitive" })
+    use { "tpope/vim-fugitive" }
 
     -- see git commits
-    use({ "junegunn/gv.vim" })
+    use { "junegunn/gv.vim" }
 
     -- easier use of f/F and t/T
-    use("rhysd/clever-f.vim")
+    use "rhysd/clever-f.vim"
 
     -- easily create md tables
-    use({ "dhruvasagar/vim-table-mode" })
+    use { "dhruvasagar/vim-table-mode" }
 
     -- display keybindings help
-    use({
+    use {
       "folke/which-key.nvim",
       config = function()
-        require("which-key").setup({})
-        require("configs.which_key")
+        require("which-key").setup {}
+        require "configs.which_key"
       end,
-    })
+    }
 
     -- highlight and search todo comments
-    use({
+    use {
       "folke/todo-comments.nvim",
       requires = "nvim-lua/plenary.nvim",
       config = function()
-        require("todo-comments").setup({})
+        require("todo-comments").setup {}
       end,
-    })
+    }
 
     -- change,add and delete surroundings
-    use("tpope/vim-surround")
+    use "tpope/vim-surround"
 
     -- display last undos
-    use({ "mbbill/undotree" })
+    use { "mbbill/undotree" }
 
     -- display some infos in signcolumn
-    use("mhinz/vim-signify")
+    use "mhinz/vim-signify"
 
     -- more icons
-    use("ryanoasis/vim-devicons")
+    use "ryanoasis/vim-devicons"
 
     -- even more icons
-    use("kyazdani42/nvim-web-devicons")
+    use "kyazdani42/nvim-web-devicons"
 
     -- a file explorer
-    use({
+    use {
       "nvim-telescope/telescope.nvim",
       requires = {
         { "nvim-lua/popup.nvim" },
@@ -128,24 +128,24 @@ require("packer").startup({
         { "kyazdani42/nvim-web-devicons" },
       },
       config = function()
-        require("configs.telescope")
+        require "configs.telescope"
       end,
-    })
+    }
     -- telescope extensions
-    use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-    use({ "nvim-telescope/telescope-symbols.nvim" })
-    use({ "jvgrootveld/telescope-zoxide" })
+    use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+    use { "nvim-telescope/telescope-symbols.nvim" }
+    use { "jvgrootveld/telescope-zoxide" }
 
     -- display helpfiles
-    use({
+    use {
       "lvim-tech/lvim-helper",
       config = function()
-        require("configs.lvim_helper")
+        require "configs.lvim_helper"
       end,
-    })
+    }
 
     -- colorize color codes
-    use({
+    use {
       "norcalli/nvim-colorizer.lua",
       config = function()
         require("colorizer").setup({
@@ -154,89 +154,89 @@ require("packer").startup({
           mode = "foreground",
         })
       end,
-    })
+    }
 
     -- completition
-    use({
+    use {
       "hrsh7th/nvim-cmp",
       config = function()
-        require("configs.cmp")
+        require "configs.cmp"
       end,
-    })
-    use({ "quangnguyen30192/cmp-nvim-ultisnips" })
-    use({ "hrsh7th/cmp-emoji" })
-    use({ "hrsh7th/cmp-buffer" })
-    use({ "hrsh7th/cmp-path" })
-    use({ "hrsh7th/cmp-calc" })
-    use({ "hrsh7th/cmp-nvim-lua" })
-    use({ "hrsh7th/cmp-nvim-lsp" })
+    }
+    use { "quangnguyen30192/cmp-nvim-ultisnips" }
+    use { "hrsh7th/cmp-emoji" }
+    use { "hrsh7th/cmp-buffer" }
+    use { "hrsh7th/cmp-path" }
+    use { "hrsh7th/cmp-calc" }
+    use { "hrsh7th/cmp-nvim-lua" }
+    use { "hrsh7th/cmp-nvim-lsp" }
 
     -- autopairs
-    use({
+    use {
       "windwp/nvim-autopairs",
       config = function()
-        require("configs.nvim_autopairs")
+        require "configs.nvim_autopairs"
       end,
-    })
+    }
 
     -- easily configure lsp
-    use("neovim/nvim-lspconfig")
+    use "neovim/nvim-lspconfig"
 
     -- easy install for lsp servers
-    use({
+    use {
       "kabouzeid/nvim-lspinstall",
       config = function()
         require("lspinstall").setup()
-        require("configs.lsp")
+        require "configs.lsp"
       end,
-    })
+    }
 
     -- colors for lsp diagnostics
-    use("folke/lsp-colors.nvim")
+    use "folke/lsp-colors.nvim"
 
     -- list for lsp,quickfix,telescope etc
-    use({
+    use {
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
       config = function()
-        require("trouble").setup({
+        require("trouble").setup {
           auto_preview = false, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
-        })
+        }
       end,
-    })
+    }
 
     -- parsers for code
-    use({
+    use {
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
       config = function()
-        require("configs.treesitter")
+        require "configs.treesitter"
       end,
-    })
+    }
 
     -- refractor code with TS
-    use("nvim-treesitter/nvim-treesitter-refactor")
+    use "nvim-treesitter/nvim-treesitter-refactor"
 
     -- structural editing with ts queries
-    use("vigoux/architext.nvim")
+    use "vigoux/architext.nvim"
 
     -- additional textobjects with TS
-    use("nvim-treesitter/nvim-treesitter-textobjects")
+    use "nvim-treesitter/nvim-treesitter-textobjects"
 
     -- select code
-    use("RRethy/nvim-treesitter-textsubjects")
+    use "RRethy/nvim-treesitter-textsubjects"
 
     -- TS based colored parantheses
-    use("p00f/nvim-ts-rainbow")
+    use "p00f/nvim-ts-rainbow"
 
     -- explore syntax tree and test TS queries
-    use("nvim-treesitter/playground")
+    use "nvim-treesitter/playground"
 
     -- display context of current function
-    use("romgrk/nvim-treesitter-context")
+    use "romgrk/nvim-treesitter-context"
 
     -- hints for operators
-    use("mfussenegger/nvim-ts-hint-textobject")
+    use "mfussenegger/nvim-ts-hint-textobject"
   end,
   config = {
     profile = {
@@ -245,10 +245,10 @@ require("packer").startup({
     },
     display = {
       open_fn = function()
-        return require("packer.util").float({
+        return require("packer.util").float {
           border = require("utils").border,
-        })
+        }
       end,
     },
   },
-})
+}

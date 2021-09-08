@@ -1,4 +1,4 @@
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter.configs").setup {
   ensure_installed = "maintained",
   highlight = {
     enable = true,
@@ -110,8 +110,8 @@ require("nvim-treesitter.configs").setup({
       },
     },
   },
-})
+}
 
-require("treesitter-context.config").setup({
+require("treesitter-context.config").setup {
   enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-})
+}

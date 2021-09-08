@@ -49,7 +49,7 @@ opt.listchars = {
 opt.foldmethod = "expr" -- use treesitter for folding
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-opt.undodir = vim.fn.expand("~") .. "/.vim/undodir" -- directory to save undofiles
+opt.undodir = vim.fn.expand "~" .. "/.vim/undodir" -- directory to save undofiles
 opt.undofile = true
 
 opt.fillchars = { eob = " " } -- no fillchars at end of buffer

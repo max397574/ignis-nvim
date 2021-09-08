@@ -1,12 +1,12 @@
-local u = require("utils")
+local u = require "utils"
 
-vim.cmd([[au CursorHold  * lua vim.lsp.diagnostic.show_line_diagnostics({ focusable=false})]])
+vim.cmd [[au CursorHold  * lua vim.lsp.diagnostic.show_line_diagnostics({ focusable=false})]]
 
 u.create_augroup({
   "TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch',timeout=700}",
 }, "highlight_yank")
 
-vim.cmd("let ErrorMsg='Duplicate edit session (readonly)'")
+vim.cmd "let ErrorMsg='Duplicate edit session (readonly)'"
 u.create_augroup({
   "SwapExists * let v:swapchoice = 'o'",
   "SwapExists * echomsg ErrorMsg",

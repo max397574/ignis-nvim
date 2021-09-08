@@ -1,5 +1,5 @@
 M = {}
-local ns = vim.api.nvim_create_namespace("color_galaxy")
+local ns = vim.api.nvim_create_namespace "color_galaxy"
 
 local c = {
   black = "#000000",
@@ -213,9 +213,9 @@ function M.Lang_high(ft)
 end
 
 function M.shine()
-  vim.cmd("highlight clear")
-  if vim.fn.exists("syntax_on") then
-    vim.cmd("syntax reset")
+  vim.cmd "highlight clear"
+  if vim.fn.exists "syntax_on" then
+    vim.cmd "syntax reset"
   end
   vim.g.colors_name = "galaxy"
 
@@ -229,9 +229,7 @@ function M.shine()
   local bg = back or "none"
   vim.cmd("hi Normal guibg=" .. bg .. " guifg=#dddddd")
 
-  vim.cmd(
-    [[au BufEnter,FileType * :lua require"colors.color_galaxy".Lang_high(vim.bo.ft)]]
-  )
+  vim.cmd [[au BufEnter,FileType * :lua require"colors.color_galaxy".Lang_high(vim.bo.ft)]]
   vim.api.nvim__set_hl_ns(ns)
 end
 

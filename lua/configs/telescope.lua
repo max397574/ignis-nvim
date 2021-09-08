@@ -1,5 +1,5 @@
-local actions = require("telescope.actions")
-require("telescope").setup({
+local actions = require "telescope.actions"
+require("telescope").setup {
   defaults = {
     -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua
     mappings = {
@@ -24,6 +24,6 @@ require("telescope").setup({
     },
     set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
   },
-})
-require("telescope").load_extension("fzf")
-require("telescope").load_extension("zoxide")
+}
+require("telescope").load_extension "fzf"
+require("telescope").load_extension "zoxide"

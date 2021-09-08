@@ -1,4 +1,4 @@
-require("lualine").setup({
+require("lualine").setup {
   options = {
     icons_enabled = true,
     theme = "powerline",
@@ -14,4 +14,4 @@ require("lualine").setup({
     lualine_y = { "progress" },
     lualine_z = { "location" },
   },
-})
+}

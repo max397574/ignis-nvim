@@ -13,27 +13,27 @@
 -- set this early because the other mappings are created with this
 vim.g.mapleader = " "
 
-require("options")
-require("plugins")
-require("mappings")
-require("autocommands")
-require("utils")
+require "options"
+require "plugins"
+require "mappings"
+require "autocommands"
+require "utils"
 -- some stuff which hasn't been converted to lua yet
-vim.cmd("source ~/.config/nvim/random.vim")
+vim.cmd "source ~/.config/nvim/random.vim"
 
 -- require "colors/themes".random()
-require("configs.lsp")
-require("configs.dashboard")
+require "configs.lsp"
+require "configs.dashboard"
 
-local time = os.date("*t")
+local time = os.date "*t"
 if time.hour >= 8 and time.hour < 18 then
-  vim.cmd([[
+  vim.cmd [[
     colorscheme galaxy_light
-  ]])
+  ]]
 else
   -- possible options galaxy,galaxy_light, moonlight, gruvbox8, onedark, tokyonight, tokyodark
-  vim.cmd([[
+  vim.cmd [[
     colorscheme galaxy
-    highlight Normal guibg = none]])
-  require("colors.fixed_highlights")
+    highlight Normal guibg = none]]
+  require "colors.fixed_highlights"
 end

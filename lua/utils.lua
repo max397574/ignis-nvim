@@ -19,7 +19,7 @@ _G.profile = function(command, times)
         "Command failed: "
           .. tostring(ok)
           .. " "
-          .. vim.inspect({ command = command, args = args })
+          .. vim.inspect { command = command, args = args }
       )
     end
   end
@@ -30,11 +30,11 @@ local M = {}
 
 function M.create_augroup(autocmds, name)
   cmd("augroup " .. name)
-  cmd("autocmd!")
+  cmd "autocmd!"
   for _, autocmd in ipairs(autocmds) do
     cmd("autocmd " .. autocmd)
   end
-  cmd("augroup END")
+  cmd "augroup END"
 end
 
 M.border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
