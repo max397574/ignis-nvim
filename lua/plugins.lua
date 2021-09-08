@@ -5,14 +5,6 @@ require("packer").startup({
     -- package manager
     use("wbthomason/packer.nvim")
 
-    -- dimm inactive window
-    use({
-      "sunjon/shade.nvim",
-      config = function()
-        require("configs.shade")
-      end,
-    })
-
     -- lua repl
     use("bfredl/nvim-luadev")
 
