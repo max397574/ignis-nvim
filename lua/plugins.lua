@@ -15,7 +15,12 @@ require("packer").startup {
     use "kosayoda/nvim-lightbulb"
 
     -- dashboard
-    use "glepnir/dashboard-nvim"
+    use {
+      "glepnir/dashboard-nvim",
+      config = function()
+        require "configs.dashboard"
+      end,
+    }
 
     -- bufferline
     use {

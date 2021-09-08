@@ -22,8 +22,6 @@ require "utils"
 vim.cmd "source ~/.config/nvim/random.vim"
 
 -- require "colors/themes".random()
-require "configs.lsp"
-require "configs.dashboard"
 
 local time = os.date "*t"
 if time.hour >= 8 and time.hour < 18 then
