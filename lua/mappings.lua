@@ -47,6 +47,7 @@ wk.register({
   t = {
     name = "Table Mode",
     m = { "<cmd>TableModeToggle<CR>", "Toggle Table Mode" },
+    t = { "Tabelize"},
   },
   l = {
     name = "Luadev",
