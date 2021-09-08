@@ -16,6 +16,9 @@ require("packer").startup({
     -- lua repl
     use("bfredl/nvim-luadev")
 
+    -- better word motion/object
+    use("chaoren/vim-wordmotion")
+
     -- show where lsp code action as available
     use("kosayoda/nvim-lightbulb")
 
