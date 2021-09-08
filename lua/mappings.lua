@@ -44,6 +44,10 @@ wk.register({
     l = { "<cmd>lopen<CR>", "Open Location List" },
     q = { "<cmd>copen<CR>", "Open Quickfix List" },
   },
+  t = {
+    name = "Table Mode",
+    m = { "<cmd>TableModeToggle<CR>", "Toggle Table Mode" },
+  },
   l = {
     name = "Luadev",
     d = {
@@ -54,7 +58,7 @@ wk.register({
     t = { "<cmd>Luadev<CR>", "Toggle" },
   },
   ["h"] = {
-    name = "+help",
+    name = "+Help",
     t = { "<cmd>Telescope builtin<CR>", "Telescope" },
     c = { "<cmd>Telescope commands<CR>", "Commands" },
     h = { "<cmd>Telescope help_tags<CR>", "Help Pages" },
@@ -68,13 +72,7 @@ wk.register({
     f = { "<cmd>Telescope filetypes<CR>", "File Types" },
     o = { "<cmd>Telescope vim_options<CR>", "Options" },
     a = { "<cmd>Telescope autocommands<CR>", "Auto Commands" },
-    p = {
-      name = "+packer",
-      p = { "<cmd>PackerSync<CR>", "Sync" },
-      s = { "<cmd>PackerStatus<CR>", "Status" },
-      i = { "<cmd>PackerInstall<CR>", "Install" },
-      c = { "<cmd>PackerCompile<CR>", "Compile" },
-    },
+    p = { "<cmd>LvimHelper<CR>", "Help Files" },
   },
   u = { "<cmd>UndotreeToggle<CR>", "UndoTree" },
   b = {
@@ -118,6 +116,13 @@ wk.register({
     ':let @t = \'let @q = "\' . @q<CR>:<C-f>o<ESC>"tp$a"<Esc>',
     "Edit Macro q",
   },
+  j = { ":m .+1<CR>==", "Move Current line down" },
+  k = { ":m .-2<CR>==", "Move Current line up" },
+  o = { "o<ESC>k", "Add empty line below" },
+  O = { "O<ESC>j", "Add empty line above" },
+  y = { '"+y', "Yank to clipboard" },
+  i = { "i <ESC>l", "Add space before" },
+  a = { "a <ESC>h", "Add space after" },
   w = {
     name = "+Window",
     ["w"] = { "<C-W>p", "other-window" },
@@ -145,7 +150,6 @@ wk.register({
   prefix = "<leader>",
   mode = "n",
 })
-
 
 -- Windows
 -- =======
@@ -183,21 +187,13 @@ map("n", "º", "10j", nore_silent)
 map("n", "ª", "10h", nore_silent)
 map("n", "∆", "10k", nore_silent)
 map("n", "¬", "10l", nore_silent)
--- copy to system clipboard
-map("n", "<leader>y", '"+y', nore)
-map("n", "<leader>Y", 'gg"+yG', nore)
 -- move right
 map("i", "kk", "<RIGHT>", nore)
 -- move lines up and down in visual and normal mode
 map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
 map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
-map("n", "<leader>j", ":m .+1<CR>==", nore_silent)
-map("n", "<leader>k", ":m .-2<CR>==", nore_silent)
 -- remove highlighting from search
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
--- insert empty line below/above
-map("n", "<leader>o", "o<ESC>k", nore)
-map("n", "<leader>O", "O<ESC>j", nore)
 -- easier escape
 map("v", "jk", "<ESC>", nore)
 map("i", "jj", "<ESC>", nore)
@@ -226,17 +222,8 @@ map("i", ".", ".<c-g>u", nore)
 map("i", " ", " <c-g>u", nore)
 map("i", "?", "?<c-g>u", nore)
 map("i", "<CR>", "<CR><c-g>u", nore)
--- enter space before/after
-map("n", "<leader>i", "i <ESC>l", nore)
-map("n", "<leader>a", "a <ESC>h", nore)
 -- use vmath on visually selected area
 map("v", "<leader>vm", "<ESC>:Vmath<CR>", nore)
--- DistractionFree writing
-map("n", "<leader>df", ":ZenMode<CR>", nore_silent)
--- open help files
-map("n", "<leader>hp", ":LvimHelper<CR>", nore_silent)
--- toggle undotree
-map("n", "<leader>ut", ":UndotreeToggle<CR>", nore_silent)
 -- lsp
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", nore)
 map("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", nore_silent)
@@ -251,9 +238,6 @@ map(
   ':lua vim.cmd(":vert :h "..vim.fn.expand("<cword>"))<CR>',
   nore_silent
 )
-
--- tablemode
-map("n", "<leader>tm", "<ESC>:TableModeToggle<CR>i", nore_silent)
 
 -- change case of cword
 map("n", "<C-U>", "b~", nore_silent)
