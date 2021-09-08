@@ -124,8 +124,8 @@ wk.register({
   y = { '"+y', "Yank to clipboard" },
   i = { "i <ESC>l", "Add space before" },
   a = { "a <ESC>h", "Add space after" },
-  p = { '"0p', "Paste last yanked text"},
-  P = { '"0P', "Paste last yanked text"},
+  p = { '"0p', "Paste last yanked text" },
+  P = { '"0P', "Paste last yanked text" },
   w = {
     name = "+Window",
     ["w"] = { "<C-W>p", "other-window" },
