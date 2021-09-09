@@ -6,6 +6,7 @@ g.onedark_style = "deep"
 g.tokyonight_style = "storm"
 g.tokyodark_transparent_background = true
 
+opt.shortmess:append("c")
 opt.pumblend = 18
 opt.background = "dark" -- dark background
 opt.cmdheight = 1 -- height of cmd line
