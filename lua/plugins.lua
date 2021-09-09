@@ -107,6 +107,7 @@ require("packer").startup {
     use {
       "folke/todo-comments.nvim",
       requires = "nvim-lua/plenary.nvim",
+      cmd = "TodoTelescope",
       config = function()
         require("todo-comments").setup {}
       end,
@@ -246,7 +247,7 @@ require("packer").startup {
 
     -- explore syntax tree and test TS queries
     use {"nvim-treesitter/playground",
-    cmd = "TSPlaygroundToggle"}
+    cmd = {"TSPlaygroundToggle", "TSHighlightCapturesUnderCursor"}}
 
     -- display context of current function
     use "romgrk/nvim-treesitter-context"
