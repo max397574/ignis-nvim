@@ -24,6 +24,10 @@ local conditions = {
   end
 }
 
+local function clock()
+  return " " .. os.date "%H:%M"
+end
+
 local config = {
   options = {
     component_separators = { "", "" },
@@ -50,6 +54,7 @@ local config = {
     lualine_x = {}
   }
 }
+
 local mode_color = {
   n = colors.red,
   i = colors.green,
@@ -89,8 +94,7 @@ ins_left {
 function()
 -- auto change color according to neovims mode
     vim.api.nvim_command(
-'hi! LualineMode guifg=' .. mode_color[vim.fn.mode()] .. " guibg=" ..
-            colors.bg)
+'hi! LualineMode guifg=' .. mode_color[vim.fn.mode()])
 return '█████'
 end,
   color = "LualineMode",
@@ -143,6 +147,18 @@ ins_left {
   color = {fg = '#ffffff', gui = 'bold'}
 }
 
+ins_right {
+    function()
+      if next(vim.treesitter.highlighter.active) then
+        return "  "
+      end
+      return ""
+    end,
+    left_padding = 0,
+    right_padding = 0,
+    color = { fg = colors.green },
+    condition = conditions.hide_in_width,
+  }
 -- Add components to right sections
 ins_right {
   'branch',
@@ -159,6 +175,12 @@ ins_right {
   color_removed = colors.red,
   condition = conditions.hide_in_width
 }
+
+ins_right {
+    clock,
+    condition = conditions.hide_in_width,
+    color = { fg = colors.blue},
+  }
 
 ins_right {
     -- filesize component
