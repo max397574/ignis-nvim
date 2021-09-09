@@ -28,14 +28,7 @@ require("packer").startup {
         require "configs.bufferline"
       end,
     }
-    -- colorschemes
-    use "lifepillar/vim-gruvbox8"
-    use "Pocco81/Catppuccino.nvim"
-    use "shaunsingh/moonlight.nvim"
-    use "navarasu/onedark.nvim"
-    use "folke/tokyonight.nvim"
-    use "tiagovla/tokyodark.nvim"
-    use "sainnhe/gruvbox-material"
+
     -- statusline
     use {
       "hoob3rt/lualine.nvim",
@@ -243,23 +236,21 @@ require("packer").startup {
     -- refractor code with TS
     use {
       "nvim-treesitter/nvim-treesitter-refactor",
-      after = "nvim-treesitter",
     }
 
     -- structural editing with ts queries
-    use { "vigoux/architext.nvim", after = "nvim-treesitter" }
+    use  "vigoux/architext.nvim"
 
     -- additional textobjects with TS
     use {
       "nvim-treesitter/nvim-treesitter-textobjects",
-      after = "nvim-treesitter",
     }
 
     -- select code
-    use { "RRethy/nvim-treesitter-textsubjects", after = "nvim-treesitter" }
+    use  "RRethy/nvim-treesitter-textsubjects"
 
     -- TS based colored parantheses
-    use { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" }
+    use  "p00f/nvim-ts-rainbow"
 
     -- explore syntax tree and test TS queries
     use {
@@ -268,10 +259,10 @@ require("packer").startup {
     }
 
     -- display context of current function
-    use { "{romgrk/nvim-treesitter-context", after = "nvim-treesitter" }
+    use  "romgrk/nvim-treesitter-context"
 
     -- hints for operators
-    use { "mfussenegger/nvim-ts-hint-textobject", after = "nvim-treesitter" }
+    use  "mfussenegger/nvim-ts-hint-textobject"
   end,
   config = {
     profile = {
