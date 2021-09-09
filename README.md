@@ -28,7 +28,6 @@ long term:
 ```
 .
 ├── README.md
-├── UltiSnips
 ├── colors
 │   ├── galaxy.lua
 │   └── galaxy_light.lua
@@ -48,8 +47,8 @@ long term:
 │   │   ├── lsp_kind.lua
 │   │   ├── lualine.lua
 │   │   ├── lvim_helper.lua
+│   │   ├── nvim_autopairs.lua
 │   │   ├── nvim_comment.lua
-│   │   ├── shade.lua
 │   │   ├── telescope.lua
 │   │   ├── treesitter.lua
 │   │   ├── vmath.lua
@@ -59,6 +58,7 @@ long term:
 │   ├── plugins.lua
 │   └── utils.lua
 ├── my_snippets
+│   ├── gitcommit.snippets
 │   ├── java.snippets
 │   ├── lua.snippets
 │   ├── markdown.snippets
@@ -68,21 +68,22 @@ long term:
 │   ├── packer_compiled.lua
 │   └── simplefunctions.vim
 ├── queries
-│   ├── lua
-│   │   └── highlights.scm
-│   └── vim
+│   └── lua
 │       └── highlights.scm
 ├── random.vim
+├── spell
+│   ├── de.utf-8.spl
+│   └── de.utf-8.sug
 ├── stylua.toml
 └── vimhelp
     ├── cmp.md
-    ├── latex.md
     ├── telescope.md
     ├── treesitter.md
     ├── ts_textobjects_move.md
-    └── ts_textobjects_select.md
+    ├── ts_textobjects_select.md
+    └── useful.md
 
-11 directories, 43 files
+10 directories, 45 files
 ```
 
 Features:
