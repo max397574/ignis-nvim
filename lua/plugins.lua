@@ -6,7 +6,8 @@ require("packer").startup {
     use "wbthomason/packer.nvim"
 
     -- lua repl
-    use "bfredl/nvim-luadev"
+    use {"bfredl/nvim-luadev",
+    ft = { "lua"}, }
 
     -- show where lsp code action as available
     use "kosayoda/nvim-lightbulb"
@@ -72,20 +73,26 @@ require("packer").startup {
     use { "tweekmonster/startuptime.vim" }
 
     -- snippets
-    use { "SirVer/ultisnips" }
-    use { "honza/vim-snippets" }
+    use { "SirVer/ultisnips", 
+      event = "Insert Enter",
+      requires = {"honza/vim-snippets"}
+    }
 
     -- Git from Vim
-    use { "tpope/vim-fugitive" }
+    use { "tpope/vim-fugitive",
+      cmd = "G"
+    }
 
     -- see git commits
-    use { "junegunn/gv.vim" }
+    use { "junegunn/gv.vim",
+    cmd = "GV"}
 
     -- easier use of f/F and t/T
     use "rhysd/clever-f.vim"
 
     -- easily create md tables
-    use { "dhruvasagar/vim-table-mode" }
+    use { "dhruvasagar/vim-table-mode",
+    cmd = "TableModeToggle"}
 
     -- display keybindings help
     use {
@@ -109,7 +116,8 @@ require("packer").startup {
     use "tpope/vim-surround"
 
     -- display last undos
-    use { "mbbill/undotree" }
+    use { "mbbill/undotree",
+    cmd = "UndotreeToggle"}
 
     -- display some infos in signcolumn
     use "mhinz/vim-signify"
@@ -123,6 +131,7 @@ require("packer").startup {
     -- a file explorer
     use {
       "nvim-telescope/telescope.nvim",
+      cmd = "Telescope",
       requires = {
         { "nvim-lua/popup.nvim" },
         { "nvim-lua/plenary.nvim" },
@@ -141,6 +150,7 @@ require("packer").startup {
     -- display helpfiles
     use {
       "lvim-tech/lvim-helper",
+      cmd = "LvimHelper",
       config = function()
         require "configs.lvim_helper"
       end,
@@ -161,21 +171,24 @@ require("packer").startup {
     -- completition
     use {
       "hrsh7th/nvim-cmp",
+      event = "InsertEnter",
       config = function()
         require "configs.cmp"
       end,
     }
-    use { "quangnguyen30192/cmp-nvim-ultisnips" }
-    use { "hrsh7th/cmp-emoji" }
-    use { "hrsh7th/cmp-buffer" }
-    use { "hrsh7th/cmp-path" }
-    use { "hrsh7th/cmp-calc" }
-    use { "hrsh7th/cmp-nvim-lua" }
-    use { "hrsh7th/cmp-nvim-lsp" }
+    use { "quangnguyen30192/cmp-nvim-ultisnips",
+    after = "nvim-cmp"}
+    use { "hrsh7th/cmp-emoji",after = "nvim-cmp"}
+    use { "hrsh7th/cmp-buffer",after = "nvim-cmp"}
+    use { "hrsh7th/cmp-path",after = "nvim-cmp"}
+    use { "hrsh7th/cmp-calc",after = "nvim-cmp"}
+    use { "hrsh7th/cmp-nvim-lua",after = "nvim-cmp"}
+    use { "hrsh7th/cmp-nvim-lsp",after = "nvim-cmp"}
 
     -- autopairs
     use {
       "windwp/nvim-autopairs",
+      event = "InsertEnter",
       config = function()
         require "configs.nvim_autopairs"
       end,
@@ -232,7 +245,8 @@ require("packer").startup {
     use "p00f/nvim-ts-rainbow"
 
     -- explore syntax tree and test TS queries
-    use "nvim-treesitter/playground"
+    use {"nvim-treesitter/playground",
+    cmd = "TSPlaygroundToggle"}
 
     -- display context of current function
     use "romgrk/nvim-treesitter-context"
@@ -241,10 +255,10 @@ require("packer").startup {
     use "mfussenegger/nvim-ts-hint-textobject"
   end,
   config = {
-    profile = {
-      enable = true,
-      threshold = 0,
-    },
+    -- profile = {
+      -- enable = true,
+      -- threshold = 0,
+    -- },
     display = {
       open_fn = function()
         return require("packer.util").float {
