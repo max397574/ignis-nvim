@@ -25,7 +25,7 @@ local c = {
 
   purple_one = "#6600CC",
 
-  yellow_one = "#FABD2F",
+  yellow_one = "#EDB200",
 
   red_one = "#B30B00",
   red_two = "#CC0000",
@@ -130,7 +130,7 @@ local Usual = {
   TSHighlights = {
     NodeNumber = { fg = c.blue_five },
     NodeOp = { fg = c.red_four },
-    TSVariable = { fg = c.yellow_one },
+    TSVariable = { fg = c.yellow_one, bold = true },
     TSComment = { fg = c.background_three, bold = true, italic = true },
     TSInclude = { fg = c.blue_six, italic = true, bold = true },
     TSKeywordOperator = { fg = c.red_one },
