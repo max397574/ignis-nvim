@@ -16,6 +16,7 @@ opt.shiftwidth = 4
 opt.inccommand = "split" -- show preview of commands in split
 opt.splitbelow = true
 opt.splitright = true
+opt.showmode = false -- don't show mode (I've lualine)
 opt.relativenumber = true -- relative line numbers
 opt.number = true -- show line number at cursor line
 opt.scrolloff = 3 -- start scrolling 3 lines away from top/bottom
