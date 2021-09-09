@@ -255,10 +255,10 @@ require("packer").startup {
     use "mfussenegger/nvim-ts-hint-textobject"
   end,
   config = {
-    -- profile = {
-      -- enable = true,
-      -- threshold = 0,
-    -- },
+    profile = {
+      enable = true,
+      threshold = 0,
+    },
     display = {
       open_fn = function()
         return require("packer.util").float {
