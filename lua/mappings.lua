@@ -98,8 +98,11 @@ wk.register({
     },
     h = { "<cmd>Telescope command_history<CR>", "Command History" },
     m = { "<cmd>Telescope marks<CR>", "Jump to Mark" },
-    c = { "<cmd>lua require'configs.telescope'.code_actions()<CR>", "Code Actions" },
-    t = { "<cmd>TodoTelescope<CR>", "Todo Comments"}
+    c = {
+      "<cmd>lua require'configs.telescope'.code_actions()<CR>",
+      "Code Actions",
+    },
+    t = { "<cmd>TodoTelescope<CR>", "Todo Comments" },
   },
   f = {
     name = "+File",
