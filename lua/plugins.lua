@@ -1,5 +1,6 @@
 -- Plugins
 -- =======
+-- packer options: https://github.com/wbthomason/packer.nvim#specifying-plugins
 require("packer").startup {
   function(use)
     -- package manager
