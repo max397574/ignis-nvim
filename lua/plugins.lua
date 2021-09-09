@@ -7,8 +7,7 @@ require("packer").startup {
     use "wbthomason/packer.nvim"
 
     -- lua repl
-    use {"bfredl/nvim-luadev",
-    ft = { "lua"}, }
+    use { "bfredl/nvim-luadev", ft = { "lua" } }
 
     -- show where lsp code action as available
     use "kosayoda/nvim-lightbulb"
@@ -74,26 +73,23 @@ require("packer").startup {
     use { "tweekmonster/startuptime.vim" }
 
     -- snippets
-    use { "SirVer/ultisnips", 
+    use {
+      "SirVer/ultisnips",
       event = "InsertEnter",
-      requires = {"honza/vim-snippets"}
+      requires = { "honza/vim-snippets" },
     }
 
     -- Git from Vim
-    use { "tpope/vim-fugitive",
-      cmd = "G"
-    }
+    use { "tpope/vim-fugitive", cmd = "G" }
 
     -- see git commits
-    use { "junegunn/gv.vim",
-    cmd = "GV"}
+    use { "junegunn/gv.vim", cmd = "GV" }
 
     -- easier use of f/F and t/T
     use "rhysd/clever-f.vim"
 
     -- easily create md tables
-    use { "dhruvasagar/vim-table-mode",
-    cmd = "TableModeToggle"}
+    use { "dhruvasagar/vim-table-mode", cmd = "TableModeToggle" }
 
     -- display keybindings help
     use {
@@ -118,8 +114,7 @@ require("packer").startup {
     use "tpope/vim-surround"
 
     -- display last undos
-    use { "mbbill/undotree",
-    cmd = "UndotreeToggle"}
+    use { "mbbill/undotree", cmd = "UndotreeToggle" }
 
     -- display some infos in signcolumn
     use "mhinz/vim-signify"
@@ -178,29 +173,43 @@ require("packer").startup {
         require "configs.cmp"
       end,
     }
-    use { "quangnguyen30192/cmp-nvim-ultisnips",
-    after = "nvim-cmp"}
-    use { "hrsh7th/cmp-emoji",after = "nvim-cmp"}
-    use { "hrsh7th/cmp-buffer",after = "nvim-cmp"}
-    use { "hrsh7th/cmp-path",after = "nvim-cmp"}
-    use { "hrsh7th/cmp-calc",after = "nvim-cmp"}
-    use { "hrsh7th/cmp-nvim-lua",after = "nvim-cmp"}
-    use { "hrsh7th/cmp-nvim-lsp",after = "nvim-cmp"}
+    use { "quangnguyen30192/cmp-nvim-ultisnips", after = "nvim-cmp" }
+    use { "hrsh7th/cmp-emoji", after = "nvim-cmp" }
+    use { "hrsh7th/cmp-buffer", after = "nvim-cmp" }
+    use { "hrsh7th/cmp-path", after = "nvim-cmp" }
+    use { "hrsh7th/cmp-calc", after = "nvim-cmp" }
+    use { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }
+    use { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }
 
     -- autopairs
     use {
       "windwp/nvim-autopairs",
-      event = "InsertEnter",
+      after = "nvim-cmp",
       config = function()
         require "configs.nvim_autopairs"
       end,
     }
 
     -- easily configure lsp
-    use "neovim/nvim-lspconfig"
+    use {
+      "neovim/nvim-lspconfig",
+      ft = {
+        "vim",
+        "typescript",
+        "cpp",
+        "html",
+        "lua",
+        "csharp",
+        "css",
+        "tex",
+        "java",
+        "python",
+      },
+    }
 
     -- easy install for lsp servers
     use {
+      after = "nvim-lspconfig",
       "kabouzeid/nvim-lspinstall",
       config = function()
         require("lspinstall").setup()
@@ -232,29 +241,37 @@ require("packer").startup {
     }
 
     -- refractor code with TS
-    use "nvim-treesitter/nvim-treesitter-refactor"
+    use {
+      "nvim-treesitter/nvim-treesitter-refactor",
+      after = "nvim-treesitter",
+    }
 
     -- structural editing with ts queries
-    use "vigoux/architext.nvim"
+    use { "vigoux/architext.nvim", after = "nvim-treesitter" }
 
     -- additional textobjects with TS
-    use "nvim-treesitter/nvim-treesitter-textobjects"
+    use {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      after = "nvim-treesitter",
+    }
 
     -- select code
-    use "RRethy/nvim-treesitter-textsubjects"
+    use { "RRethy/nvim-treesitter-textsubjects", after = "nvim-treesitter" }
 
     -- TS based colored parantheses
-    use "p00f/nvim-ts-rainbow"
+    use { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" }
 
     -- explore syntax tree and test TS queries
-    use {"nvim-treesitter/playground",
-    cmd = {"TSPlaygroundToggle", "TSHighlightCapturesUnderCursor"}}
+    use {
+      "nvim-treesitter/playground",
+      cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
+    }
 
     -- display context of current function
-    use "romgrk/nvim-treesitter-context"
+    use { "{romgrk/nvim-treesitter-context", after = "nvim-treesitter" }
 
     -- hints for operators
-    use "mfussenegger/nvim-ts-hint-textobject"
+    use { "mfussenegger/nvim-ts-hint-textobject", after = "nvim-treesitter" }
   end,
   config = {
     profile = {
