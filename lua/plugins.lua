@@ -239,7 +239,7 @@ require("packer").startup {
     }
 
     -- structural editing with ts queries
-    use  "vigoux/architext.nvim"
+    use "vigoux/architext.nvim"
 
     -- additional textobjects with TS
     use {
@@ -247,10 +247,10 @@ require("packer").startup {
     }
 
     -- select code
-    use  "RRethy/nvim-treesitter-textsubjects"
+    use "RRethy/nvim-treesitter-textsubjects"
 
     -- TS based colored parantheses
-    use  "p00f/nvim-ts-rainbow"
+    use "p00f/nvim-ts-rainbow"
 
     -- explore syntax tree and test TS queries
     use {
@@ -259,10 +259,10 @@ require("packer").startup {
     }
 
     -- display context of current function
-    use  "romgrk/nvim-treesitter-context"
+    use "romgrk/nvim-treesitter-context"
 
     -- hints for operators
-    use  "mfussenegger/nvim-ts-hint-textobject"
+    use "mfussenegger/nvim-ts-hint-textobject"
   end,
   config = {
     profile = {
