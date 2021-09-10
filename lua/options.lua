@@ -7,6 +7,7 @@ g.tokyonight_style = "storm"
 g.tokyodark_transparent_background = true
 
 opt.shortmess:append "c"
+opt.iskeyword:append('-') -- seperate words at -
 opt.pumblend = 18
 opt.formatoptions:remove { "c", "r", "o" }
 opt.background = "dark" -- dark background
