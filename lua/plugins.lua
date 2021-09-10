@@ -15,6 +15,14 @@ require("packer").startup {
     -- lua repl
     use { "bfredl/nvim-luadev", ft = { "lua" } }
 
+    -- floating terminal
+    use {"akinsho/toggleterm.nvim",
+      keys = {"<c-t>", "<leader>r"},
+      config = function()
+        require "configs.toggleterm"
+      end
+    }
+
     -- show where lsp code action as available
     use "kosayoda/nvim-lightbulb"
 
