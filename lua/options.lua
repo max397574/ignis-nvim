@@ -8,7 +8,7 @@ g.tokyodark_transparent_background = true
 
 opt.shortmess:append "c"
 opt.pumblend = 18
-opt.formatoptions:remove({ "c", "r", "o" }) -- :help fo
+opt.formatoptions:remove { "c", "r", "o" }
 opt.background = "dark" -- dark background
 opt.cmdheight = 1 -- height of cmd line
 opt.virtualedit = "block" -- allow visual mode to go over end of lines

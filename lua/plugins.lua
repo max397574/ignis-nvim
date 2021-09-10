@@ -7,20 +7,23 @@ require("packer").startup {
     use "wbthomason/packer.nvim"
 
     -- improve startuptime
-    use {"lewis6991/impatient.nvim",
+    use {
+      "lewis6991/impatient.nvim",
       config = function()
-        require'impatient'
-      end}
+        require "impatient"
+      end,
+    }
 
     -- lua repl
     use { "bfredl/nvim-luadev", ft = { "lua" } }
 
     -- floating terminal
-    use {"akinsho/toggleterm.nvim",
-      keys = {"<c-t>", "<leader>r"},
+    use {
+      "akinsho/toggleterm.nvim",
+      keys = { "<c-t>", "<leader>r" },
       config = function()
         require "configs.toggleterm"
-      end
+      end,
     }
 
     -- show where lsp code action as available
