@@ -27,7 +27,20 @@ require("packer").startup {
     }
 
     -- show where lsp code action as available
-    use "kosayoda/nvim-lightbulb"
+    use {"kosayoda/nvim-lightbulb",
+      ft = {
+        "vim",
+        "typescript",
+        "cpp",
+        "html",
+        "lua",
+        "csharp",
+        "css",
+        "tex",
+        "java",
+        "python",
+      },
+    }
 
     -- dashboard
     use {
@@ -66,10 +79,8 @@ require("packer").startup {
     }
 
     -- some functions to help with markdown
-    use "~/lua_markdown"
-
-    -- show taglist
-    use "~/taglist.nvim"
+    use {"~/lua_markdown",
+    ft = { "md"}}
 
     -- easily comment out code
     use {
@@ -80,7 +91,8 @@ require("packer").startup {
     }
 
     -- breakup of startup time
-    use { "tweekmonster/startuptime.vim" }
+    use { "tweekmonster/startuptime.vim",
+    cmd = "StartupTime"}
 
     -- snippets
     use {
@@ -96,7 +108,8 @@ require("packer").startup {
     use { "junegunn/gv.vim", cmd = "GV" }
 
     -- easier use of f/F and t/T
-    use "rhysd/clever-f.vim"
+    use {"rhysd/clever-f.vim",
+    keys = "f"}
 
     -- easily create md tables
     use { "dhruvasagar/vim-table-mode", cmd = "TableModeToggle" }
@@ -104,6 +117,7 @@ require("packer").startup {
     -- display keybindings help
     use {
       "folke/which-key.nvim",
+      key = "<leader>",
       config = function()
         require("which-key").setup {}
         require "configs.which_key"
