@@ -1,3 +1,4 @@
+vim.cmd [[au CursorHold  * lua vim.lsp.diagnostic.show_line_diagnostics({ focusable=false})]]
 require("lspinstall").setup()
 local function lsp_highlight_document(client)
   if client.resolved_capabilities.document_highlight == false then
