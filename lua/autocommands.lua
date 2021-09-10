@@ -16,10 +16,8 @@ u.create_augroup({
 }, "NoSimultaneousEdits")
 
 u.create_augroup({
-  "BufNewFile,BufRead,BufWinEnter *.html syntax on",
   "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html} set spell",
   "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html} set spelllang+=de",
-  "BufNewFile,BufRead,BufWinEnter *.vim set foldmethod=marker",
   "BufNewFile,BufRead,BufWinEnter *.lua set shiftwidth=2",
   "BufNewFile,BufRead,BufWinEnter *.lua set tabstop=2",
   "BufNewFile,BufRead,BufWinEnter *.{java,py} set tabstop=4",
