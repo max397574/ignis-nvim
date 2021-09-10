@@ -6,6 +6,12 @@ require("packer").startup {
     -- package manager
     use "wbthomason/packer.nvim"
 
+    -- improve startuptime
+    use {"lewis6991/impatient.nvim",
+      config = function()
+        require'impatient'
+      end}
+
     -- lua repl
     use { "bfredl/nvim-luadev", ft = { "lua" } }
 

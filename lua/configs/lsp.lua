@@ -35,6 +35,9 @@ local function make_config()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   return {
     capabilities = capabilities,
+    flags = {
+      debounce_text_changes = 500,
+    },
     on_attach = function(client)
       lsp_highlight_document(client)
     end,
