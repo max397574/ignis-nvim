@@ -4,15 +4,6 @@ u.create_augroup({
   "TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch',timeout=700}",
 }, "highlight_yank")
 
-vim.cmd "let ErrorMsg='Duplicate edit session (readonly)'"
-u.create_augroup({
-  "SwapExists * let v:swapchoice = 'o'",
-  "SwapExists * echomsg ErrorMsg",
-  "SwapExists * echo 'Duplicate edit session (readonly)'",
-  "SwapExists * echohl None",
-  "SwapExists * sleep 2",
-}, "NoSimultaneousEdits")
-
 u.create_augroup({
   "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html} set spell",
   "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html} set spelllang+=de",
