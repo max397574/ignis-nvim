@@ -26,26 +26,6 @@ require("packer").startup {
       end,
     }
 
-    -- show where lsp code action as available
-    use {
-      "kosayoda/nvim-lightbulb",
-      ft = {
-        "vim",
-        "typescript",
-        "cpp",
-        "html",
-        "lua",
-        "csharp",
-        "css",
-        "tex",
-        "java",
-        "python",
-      },
-      config = function()
-        vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
-      end,
-    }
-
     -- dashboard
     use {
       "glepnir/dashboard-nvim",
@@ -229,6 +209,7 @@ require("packer").startup {
         "tex",
         "java",
         "python",
+        "c",
       },
     }
 
@@ -241,6 +222,16 @@ require("packer").startup {
         require "configs.lsp"
       end,
     }
+
+    -- show where lsp code action as available
+    use {
+      "kosayoda/nvim-lightbulb",
+      after = "nvim-lspconfig",
+      config = function()
+        vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+      end,
+    }
+
 
     -- colors for lsp diagnostics
     use "folke/lsp-colors.nvim"
