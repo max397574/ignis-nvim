@@ -81,6 +81,7 @@ local Usual = {
     StatusLine = { fg = c.white_two, bg = c.background_three },
     StatusLineNC = { fg = c.white_two, bg = c.background_three_two },
     Search = { fg = c.black_two, bg = c.yellow_one, bold = true },
+    Type = { fg = c.blue_six},
     IncSearch = { fg = c.black_two, bg = c.orange_one, bold = true },
     Folded = { fg = c.background_three, bold = true, italic = true },
     Visual = { reverse = true },
@@ -97,6 +98,17 @@ local Usual = {
     helpHeader = { fg = c.red_three },
     helpOption = { fg = c.blue_five },
     helpHeadline = { fg = c.purple_one },
+  },
+  Snippets = {
+    snipSnippetDocContextString = { fg = c.blue_three},
+    snipSnippetDocString = { fg = c.blue_three},
+    snipSnippetTrigger = { fg = c.green_one},
+    snipMirror = { fg = c.red_three},
+    snipTransformationReplace = { fg = c.red_two},
+    snipTransformationPattern = { fg = c.red_one},
+    snipTransformationPatternDelim = { fg = c.yellow_one},
+    snipTransformationOptions = { fg = c.yellow_one},
+    snipLeadingSpaces = { fg = nil, underline = true},
   },
   GitCommit = {
     gitcommitSummary = { fg = c.orange_one },
@@ -240,3 +252,4 @@ function M.shine()
 end
 
 return M
+

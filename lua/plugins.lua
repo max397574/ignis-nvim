@@ -80,6 +80,7 @@ require("packer").startup {
     use {
       "SirVer/ultisnips",
       event = "InsertEnter",
+      ft = "conf",
       requires = { "honza/vim-snippets" },
     }
 
