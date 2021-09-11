@@ -173,10 +173,6 @@ map("n", "<right>", ":wincmd L<CR>", nore_silent)
 -- =========
 map("n", "<C-s>", ":Telescope current_buffer_fuzzy_find<CR>", nore_silent)
 
--- Luadev
--- ======
-map("v", "<leader>ldr", "<Plug>(Luadev-Run)", silent)
-
 -- Simple Commands (Improvements of commands)
 -- ==========================================
 -- highlight search result and center cursor
