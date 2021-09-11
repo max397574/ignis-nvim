@@ -232,7 +232,6 @@ require("packer").startup {
       end,
     }
 
-
     -- colors for lsp diagnostics
     use "folke/lsp-colors.nvim"
 

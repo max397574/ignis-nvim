@@ -104,8 +104,8 @@ local Usual = {
     gitcommitDiscardedType = { fg = c.green_four },
     gitcommitDiscardedFile = { fg = c.red_one, bold = true },
     gitcommitSelectedFile = { fg = c.red_three },
-    gitcommitUntracked = { fg = c.red_one},
-    gitcommitUntrackedFile = { fg = c.red_one},
+    gitcommitUntracked = { fg = c.red_one },
+    gitcommitUntrackedFile = { fg = c.red_one },
   },
   Diff = {
     diffAdded = { fg = c.green_two, bold = true },
@@ -198,8 +198,8 @@ local Plugins = {
     fugitiveUnstagedSection = { fg = c.green_two },
     fugitiveStagedSection = { fg = c.green_two },
     fugitiveCount = { fg = c.red_two },
-    fugitiveUntrackedSection = { fg = c.red_two},
-    fugitiveUntrackedModifier = { fg = c.green_one},
+    fugitiveUntrackedSection = { fg = c.red_two },
+    fugitiveUntrackedModifier = { fg = c.green_one },
   },
 }
 
