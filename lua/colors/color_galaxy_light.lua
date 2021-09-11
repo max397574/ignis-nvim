@@ -34,6 +34,7 @@ local c = {
 
   orange_one = "#FE8019",
 
+  background_dark = "#353D46",
   background_one = "#3C3836",
   background_two = "#7C6F64",
   background_three = "#504945",
@@ -161,6 +162,9 @@ local Usual = {
     LspDiagnosticsDefaultHint = { bg = back, fg = c.blue_two },
     LspDiagnosticsDefaultWarning = { bg = back, fg = c.orange_one },
     LspDiagnosticsDefaultInformation = { bg = back, fg = c.yellow_one },
+    LspReferenceRead = { bg = c.backround_dark },
+    LspReferenceText = { bg = c.backround_dark },
+    LspReferenceWrite = { bg = c.backround_dark },
   },
   Packer = {
     packerStatusSuccess = { fg = c.blue_three },
