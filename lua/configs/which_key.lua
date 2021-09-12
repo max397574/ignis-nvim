@@ -1,5 +1,11 @@
 local wk = require "which-key"
 
+require("which-key").setup {
+  window = {
+    border = "single", -- none, single, double, shadow
+  },
+}
+
 wk.register({
   n = { "TreeSitter Next Usage" },
   p = { "TreeSitter Previous Usage" },
