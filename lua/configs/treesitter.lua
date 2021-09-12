@@ -83,6 +83,11 @@ require("nvim-treesitter.configs").setup {
         ["iB"] = "@block.inner",
         ["aB"] = "@block.outer",
         ["p"] = "@parameter.inner",
+        -- markdown
+        ["ili"] = "@list_item.inner",
+        ["ali"] = "@list_item.outer",
+        ["icb"] = "@code_block.inner",
+        ["acb"] = "@code_block.outer",
       },
     },
 
