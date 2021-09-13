@@ -25,7 +25,7 @@ require("toggleterm").setup {
   },
 }
 local files = {
-  python = "python " .. exp "%:t",
+  python = "python3 -i " .. exp "%:t",
   lua = "lua " .. exp "%:t",
   c = "gcc -o temp " .. exp "%:t" .. " && ./temp && rm ./temp",
   java = "javac " .. exp "%:t" .. " && java " .. exp "%:t:r" .. " && rm *.class",
