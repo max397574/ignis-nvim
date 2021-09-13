@@ -54,6 +54,13 @@ require("packer").startup {
     -- stats
     use { "wakatime/vim-wakatime" }
 
+    -- highlight edited lines
+    use {"~/footprints.nvim",
+      config = function ()
+        require("footprints_nvim").setup {
+          highlight_color = "#A1A1A1",}
+    end}
+
     -- calculate math figures on visual selection
     use {
       "~/vmath.nvim",
