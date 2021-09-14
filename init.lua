@@ -29,7 +29,6 @@ if time.hour >= 8 and time.hour < 18 then
     colorscheme galaxy_light
   ]]
 else
-  -- possible options galaxy,galaxy_light, moonlight, gruvbox8, onedark, tokyonight, tokyodark
   vim.cmd [[
     colorscheme galaxy
     highlight Normal guibg = none]]
