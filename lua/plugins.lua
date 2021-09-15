@@ -14,6 +14,12 @@ require("packer").startup {
       end,
     }
 
+    -- better escape
+    use {"~/betterEscape.nvim",
+    config = function ()
+      require"betterEscape_nvim".init()
+    end}
+
     -- lua repl
     use { "bfredl/nvim-luadev", ft = { "lua" } }
 
