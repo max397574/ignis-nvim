@@ -6,6 +6,7 @@ require("lvim-helper").setup {
     home .. "/.config/nvim/vimhelp/ts_textobjects_select.md",
     home .. "/.config/nvim/vimhelp/telescope.md",
     home .. "/.config/nvim/vimhelp/cmp.md",
+    home .. "/.config/nvim/vimhelp/emmet.md",
     home .. "/.config/nvim/vimhelp/useful.md",
   },
   winopts = {
