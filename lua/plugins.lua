@@ -15,10 +15,12 @@ require("packer").startup {
     }
 
     -- better escape
-    use {"~/betterEscape.nvim",
-    config = function ()
-      require"betterEscape_nvim".init()
-    end}
+    use {
+      "~/betterEscape.nvim",
+      config = function()
+        require("betterEscape_nvim").init()
+      end,
+    }
 
     -- lua repl
     use { "bfredl/nvim-luadev", ft = { "lua" } }
@@ -27,10 +29,12 @@ require("packer").startup {
     use "sainnhe/gruvbox-material"
 
     -- stay healthy while coding
-    use {"~/healthy.nvim",
-    config = function()
-      require("healthy_nvim").init()
-      end}
+    use {
+      "~/healthy.nvim",
+      config = function()
+        require("healthy_nvim").init()
+      end,
+    }
 
     -- floating terminal
     use {
