@@ -26,6 +26,12 @@ require("packer").startup {
     -- colorscheme
     use "sainnhe/gruvbox-material"
 
+    -- stay healthy while coding
+    use {"~/healthy.nvim",
+    config = function()
+      require("healthy_nvim").init()
+      end}
+
     -- floating terminal
     use {
       "akinsho/toggleterm.nvim",
