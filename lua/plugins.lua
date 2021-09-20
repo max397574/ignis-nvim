@@ -24,6 +24,15 @@ require("packer").startup {
       end
     }
 
+    -- create directories if they don't exist
+    use {
+      "jghauser/mkdir.nvim",
+      config = function()
+        require('mkdir')
+      end,
+      event = "BufWritePre"
+    }
+
     -- better escape
     use {
       "~/betterEscape.nvim",
