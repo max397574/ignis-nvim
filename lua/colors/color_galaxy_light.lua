@@ -162,9 +162,9 @@ local Usual = {
     LspDiagnosticsDefaultHint = { bg = back, fg = c.blue_two },
     LspDiagnosticsDefaultWarning = { bg = back, fg = c.orange_one },
     LspDiagnosticsDefaultInformation = { bg = back, fg = c.yellow_one },
-    LspReferenceRead = { bg = c.backround_dark },
-    LspReferenceText = { bg = c.backround_dark },
-    LspReferenceWrite = { bg = c.backround_dark },
+    LspReferenceRead = { bg = c.background_dark },
+    LspReferenceText = { bg = c.background_dark },
+    LspReferenceWrite = { bg = c.background_dark },
   },
   Packer = {
     packerStatusSuccess = { fg = c.blue_three },

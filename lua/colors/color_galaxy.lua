@@ -163,8 +163,8 @@ local Usual = {
     LspDiagnosticsDefaultWarning = { bg = back, fg = c.orange_one },
     LspDiagnosticsDefaultInformation = { bg = back, fg = c.yellow_one },
     LspReferenceRead = { bg = c.backround_light },
-    LspReferenceText = { bg = c.backround_lightk },
-    LspReferenceWrite = { bg = c.backround_lightrk },
+    LspReferenceText = { bg = c.backround_light },
+    LspReferenceWrite = { bg = c.backround_light },
   },
   Packer = {
     packerStatusSuccess = { fg = c.blue_three },
