@@ -126,6 +126,7 @@ wk.register({
   y = { '"+y', "Yank to clipboard" },
   i = { "i <ESC>l", "Add space before" },
   a = { "a <ESC>h", "Add space after" },
+  ["<CR>"] = { "i<CR><ESC>", "Linebreak at Cursor" },
   p = { '"0p', "Paste last yanked text" },
   P = { '"0P', "Paste last yanked text" },
   w = {
