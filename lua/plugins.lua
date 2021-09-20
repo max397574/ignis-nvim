@@ -54,14 +54,6 @@ require("packer").startup {
       end,
     }
 
-    -- dashboard
-    use {
-      "glepnir/dashboard-nvim",
-      config = function()
-        require "configs.dashboard"
-      end,
-    }
-
     -- bufferline
     use {
       "akinsho/bufferline.nvim",
@@ -79,12 +71,11 @@ require("packer").startup {
         require "configs.lualine"
       end,
     }
-    -- stats
-    use { "wakatime/vim-wakatime" }
 
     -- calculate math figures on visual selection
     use {
       "~/vmath.nvim",
+      cmd = { "Vmath"},
       config = function()
         require "configs.vmath"
       end,
