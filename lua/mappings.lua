@@ -228,7 +228,6 @@ map("i", "<CR>", "<CR><c-g>u", nore)
 -- use vmath on visually selected area
 map("v", "<leader>vm", "<ESC>:Vmath<CR>", nore)
 -- lsp
-map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", nore)
 map("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", nore_silent)
 -- help from ts with textobjects
 map("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
