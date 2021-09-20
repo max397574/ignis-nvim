@@ -68,6 +68,7 @@ local Usual = {
     DashboardFooter = { fg = c.red_one },
     Normal = { bg = back, fg = c.background_one },
     NormalFloat = { bg = c.background_two, fg = c.white_two },
+    String = { fg = c.green_two },
     Identifier = { fg = c.green_two },
     Keyword = { fg = c.red_one },
     FloatBorder = { fg = c.blue_six, bg = c.background_one },
