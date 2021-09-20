@@ -151,6 +151,7 @@ wk.register({
   v = {
     name = "+View",
     l = { "<cmd>call LatexPreview()<CR>", "Latex" },
+    m = { "<Plug>MarkdownPreview", "Markdown"},
   },
 }, {
   prefix = "<leader>",

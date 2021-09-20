@@ -14,6 +14,16 @@ require("packer").startup {
       end,
     }
 
+    -- markdown preview
+    use {
+      "iamcco/markdown-preview.nvim",
+      run = "cd app && yarn install",
+      ft = { "markdown"},
+      config = function()
+        vim.cmd[[call mkdp#util#install()]]
+      end
+    }
+
     -- better escape
     use {
       "~/betterEscape.nvim",
