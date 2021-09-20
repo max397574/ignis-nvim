@@ -1,10 +1,7 @@
 vim.cmd [[au CursorHold  * lua vim.lsp.diagnostic.show_line_diagnostics({ focusable=false})]]
 require("lspinstall").setup()
+
 local function lsp_highlight_document(client)
-  if client.resolved_capabilities.document_highlight == false then
-    return -- we don't need further
-  end
-  -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_exec(
       [[
@@ -35,7 +32,6 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", opts)
-
   lsp_highlight_document(client)
 end
 
