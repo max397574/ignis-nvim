@@ -45,6 +45,14 @@ function M.MarkdownPreview()
   ]]
 end
 
+-- highlight group of text under cursor
+function M.SynGroup()
+  vim.cmd[[
+  let l:s = synID(line('.'), col('.'), 1)
+  echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+  ]]
+end
+
 function M.create_augroup(autocmds, name)
   cmd("augroup " .. name)
   cmd "autocmd!"
