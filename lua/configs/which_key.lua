@@ -44,7 +44,7 @@ wk.register({
     c = { "Start Outer Call" },
     P = { "End Inner Parameter" },
     C = { "End Outer Call" },
-    u = { "Previous Usage"},
+    u = { "Previous Usage" },
   },
 }, {
   prefix = "g",

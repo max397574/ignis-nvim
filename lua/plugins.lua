@@ -18,9 +18,9 @@ require("packer").startup {
     use {
       "jghauser/mkdir.nvim",
       config = function()
-        require('mkdir')
+        require "mkdir"
       end,
-      event = "BufWritePre"
+      event = "BufWritePre",
     }
 
     -- better escape
@@ -75,7 +75,7 @@ require("packer").startup {
     -- calculate math figures on visual selection
     use {
       "~/vmath.nvim",
-      cmd = { "Vmath"},
+      cmd = { "Vmath" },
       config = function()
         require "configs.vmath"
       end,
@@ -113,11 +113,13 @@ require("packer").startup {
     use { "rhysd/clever-f.vim", keys = "f" }
 
     -- easily create md tables
-    use { "dhruvasagar/vim-table-mode",
+    use {
+      "dhruvasagar/vim-table-mode",
       cmd = "TableModeToggle",
       config = function()
-        require"configs.TableMode"
-      end}
+        require "configs.TableMode"
+      end,
+    }
 
     -- display keybindings help
     use {

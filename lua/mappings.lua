@@ -227,6 +227,7 @@ map("i", "?", "?<c-g>u", nore)
 map("i", "<CR>", "<CR><c-g>u", nore)
 -- use vmath on visually selected area
 map("v", "<leader>vm", "<ESC>:Vmath<CR>", nore)
+map("t", "<c-t>", "<cmd>ToggleTerm<CR>", nore_silent)
 -- lsp
 map("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", nore_silent)
 -- help from ts with textobjects

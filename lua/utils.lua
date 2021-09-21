@@ -30,7 +30,7 @@ local M = {}
 
 -- write latex file, create pdf and open in preview
 function M.LatexPreview()
-  vim.cmd[[
+  vim.cmd [[
   write
   silent !pdflatex %; open %:t:r.pdf
   ]]
@@ -38,7 +38,7 @@ end
 
 -- convert markdown file to html and open
 function M.MarkdownPreview()
-  vim.cmd[[
+  vim.cmd [[
   write
   silent !python3 -m markdown % > ~/temp_html.html
   silent !open ~/temp_html.html
@@ -47,7 +47,7 @@ end
 
 -- highlight group of text under cursor
 function M.SynGroup()
-  vim.cmd[[
+  vim.cmd [[
   let l:s = synID(line('.'), col('.'), 1)
   echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
   ]]
