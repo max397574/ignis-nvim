@@ -15,8 +15,5 @@ u.create_augroup({
 }, "filetypes")
 
 u.create_augroup({
-  "TextChanged * let w:m1=matchadd('Search', '\\%81v.\\%>80v', -1)",
-  "BufWinEnter * let w:m1=matchadd('Search', '\\%81v.\\%>80v', -1)",
-  "TextChangedI * let w:m1=matchadd('Search', '\\%81v.\\%>80v', -1)",
- }, "column_limit"
-)
+  "TextChanged, BufChangedI, BufWinEnter * let w:m1=matchadd('Search', '\\%81v.\\%>80v', -1)",
+}, "column_limit")
