@@ -264,7 +264,7 @@ require("packer").startup {
       requires = "kyazdani42/nvim-web-devicons",
       config = function()
         require("trouble").setup {
-          auto_preview = false, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
+          auto_preview = false,
         }
       end,
     }
