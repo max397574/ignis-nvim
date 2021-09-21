@@ -150,8 +150,8 @@ wk.register({
   },
   v = {
     name = "+View",
-    l = { "<cmd>call LatexPreview()<CR>", "Latex" },
-    m = { "<cmd>call MarkdownPreview()<CR>", "Markdown" },
+    l = { "<cmd>lua require'utils'.LatexPreview()<CR>", "Latex" },
+    m = { "<cmd>lua require'utils'.MarkdownPreview()<CR>", "Markdown" },
   },
 }, {
   prefix = "<leader>",

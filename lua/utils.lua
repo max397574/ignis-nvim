@@ -28,6 +28,23 @@ end
 
 local M = {}
 
+-- write latex file, create pdf and open in preview
+function M.LatexPreview()
+  vim.cmd[[
+  write
+  silent !pdflatex %; open %:t:r.pdf
+  ]]
+end
+
+-- convert markdown file to html and open
+function M.MarkdownPreview()
+  vim.cmd[[
+  write
+  silent !python3 -m markdown % > ~/temp_html.html
+  silent !open ~/temp_html.html
+  ]]
+end
+
 function M.create_augroup(autocmds, name)
   cmd("augroup " .. name)
   cmd "autocmd!"
