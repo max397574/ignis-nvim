@@ -182,7 +182,7 @@ local Plugins = {
     SignifySignDelete = { bg = back, fg = c.red_three },
   },
   Trouble = {
-    TroubleFoldIcon = { fg = c.yellow_one}
+    TroubleFoldIcon = { fg = c.yellow_one },
   },
   Telescope = {
     TelescopeMultiSelection = { fg = c.green_two },

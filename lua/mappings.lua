@@ -90,7 +90,7 @@ wk.register({
     name = "+Search",
     g = { "<cmd>Telescope live_grep<CR>", "Grep" },
     b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Buffer" },
-    d = { "<cmd>Telescope lsp_document_diagnostics<CR>", "Diagnostics"},
+    d = { "<cmd>Telescope lsp_document_diagnostics<CR>", "Diagnostics" },
     s = {
       function()
         require("telescope.builtin").lsp_workspace_symbols()
