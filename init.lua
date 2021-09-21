@@ -21,8 +21,6 @@ require "utils"
 -- some stuff which hasn't been converted to lua yet
 vim.cmd "source ~/.config/nvim/random.vim"
 
--- require "colors/themes".random()
-
 local time = os.date "*t"
 if time.hour >= 8 and time.hour < 18 then
   vim.cmd [[
