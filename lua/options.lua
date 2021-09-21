@@ -63,6 +63,8 @@ g.UltiSnipsExpandTrigger = "<leader><tab>"
 g.UltiSnipsJumpForwardTrigger = "<leader><tab>"
 g.UltiSnipsSnippetDirectories={"UltiSnips", "my_snippets"}
 
+g.table_mode_corner="|" -- Tablemode
+
 -- builtin plugins
 g.loaded_gzip = 1
 g.loaded_zip = 1
