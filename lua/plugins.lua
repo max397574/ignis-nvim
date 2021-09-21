@@ -113,7 +113,11 @@ require("packer").startup {
     use { "rhysd/clever-f.vim", keys = "f" }
 
     -- easily create md tables
-    use { "dhruvasagar/vim-table-mode", cmd = "TableModeToggle" }
+    use { "dhruvasagar/vim-table-mode",
+      cmd = "TableModeToggle",
+      config = function()
+        require"configs.TableMode"
+      end}
 
     -- display keybindings help
     use {
