@@ -181,6 +181,9 @@ local Plugins = {
     SignifyLineDelete = { bg = back, fg = c.red_three },
     SignifySignDelete = { bg = back, fg = c.red_three },
   },
+  Trouble = {
+    TroubleFoldIcon = { fg = c.yellow_one}
+  },
   Telescope = {
     TelescopeMultiSelection = { fg = c.green_two },
     TelescopePreviewPipe = { fg = c.red_two },
