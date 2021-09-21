@@ -116,9 +116,6 @@ require("packer").startup {
     use {
       "dhruvasagar/vim-table-mode",
       cmd = "TableModeToggle",
-      config = function()
-        require "configs.TableMode"
-      end,
     }
 
     -- display keybindings help
