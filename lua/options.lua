@@ -58,6 +58,11 @@ opt.undofile = true
 
 opt.fillchars = { eob = " " } -- no fillchars at end of buffer
 
+-- UltiSnips
+g.UltiSnipsExpandTrigger = "<leader><tab>"
+g.UltiSnipsJumpForwardTrigger = "<leader><tab>"
+g.UltiSnipsSnippetDirectories={"UltiSnips", "my_snippets"}
+
 -- builtin plugins
 g.loaded_gzip = 1
 g.loaded_zip = 1

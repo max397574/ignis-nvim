@@ -28,8 +28,3 @@ inoreabbrev <expr> <bar><bar>
 inoreabbrev <expr> __
           \ <SID>isAtStartOfLine('__') ?
           \ '<c-o>:silent! TableModeDisable<CR>' : '__'
-
-" UltiSnips
-let g:UltiSnipsExpandTrigger='<leader><tab>'
-let g:UltiSnipsJumpForwardTrigger='<leader><tab>'
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "my_snippets"]
