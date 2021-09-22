@@ -222,6 +222,7 @@ map("i", "!", "!<c-g>u", nore)
 map("i", ".", ".<c-g>u", nore)
 map("i", " ", " <c-g>u", nore)
 map("i", "?", "?<c-g>u", nore)
+map("i", "_", "_<c-g>u", nore)
 map("i", "<CR>", "<CR><c-g>u", nore)
 -- use vmath on visually selected area
 map("v", "<leader>vm", "<ESC>:Vmath<CR>", nore)
