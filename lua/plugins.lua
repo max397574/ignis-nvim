@@ -27,7 +27,7 @@ require("packer").startup {
     use {
       "~/betterEscape.nvim",
       config = function()
-        require("betterEscape_nvim").init()
+        require("better_escape").init()
       end,
     }
 
