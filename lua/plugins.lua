@@ -26,6 +26,7 @@ require("packer").startup {
     -- better escape
     use {
       "~/betterEscape.nvim",
+      event = {"InsertEnter"},
       config = function()
         require("better_escape").setup()
       end,
