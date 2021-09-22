@@ -27,9 +27,7 @@ require("packer").startup {
     use {
       "~/betterEscape.nvim",
       config = function()
-        require("better_escape").setup {
-          mapping = "jj",
-        }
+        require("better_escape").setup()
       end,
     }
 
