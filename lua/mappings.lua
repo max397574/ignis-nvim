@@ -191,8 +191,6 @@ map("n", "º", "10j", nore_silent)
 map("n", "ª", "10h", nore_silent)
 map("n", "∆", "10k", nore_silent)
 map("n", "¬", "10l", nore_silent)
--- move right
-map("i", "kk", "<RIGHT>", nore)
 -- move lines up and down in visual and normal mode
 map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
 map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
@@ -200,7 +198,6 @@ map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
 -- easier escape
 map("v", "jk", "<ESC>", nore)
-map("i", "jj", "<ESC>", nore)
 -- paste over selected text without overwriting yank register
 map("v", "<leader>p", "_dP", nore)
 -- execute macro q
