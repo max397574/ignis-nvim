@@ -9,7 +9,7 @@ wk.register({
     name = "+Git",
     s = { "<cmd>G<CR>", "Status" },
     p = { "<cmd>Git push<CR>", "Push" },
-    d = { "<cmd>Git diff<CR>", "Diff" },
+    d = { "<cmd>Telescope git_status<CR>", "Diff" },
     l = { "<cmd>GV<CR>", "Log" },
     c = { "<cmd>Git commit<CR>", "Commit" },
     a = { "<cmd>Git add %<CR>", "Add" },
