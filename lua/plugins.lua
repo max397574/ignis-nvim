@@ -82,7 +82,7 @@ require("packer").startup {
     }
 
     -- some functions to help with markdown
-    use { "~/lua_markdown", ft = { "md" } }
+    use { "~/lua_markdown", ft = { "markdown" } }
 
     -- easily comment out code
     use {
