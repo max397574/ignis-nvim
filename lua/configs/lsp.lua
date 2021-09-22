@@ -1,4 +1,4 @@
-vim.cmd [[au CursorHold  * lua vim.diagnostic.show_line_diagnostics({ focusable=false})]]
+vim.cmd [[au CursorHold  * lua vim.diagnostic.show_position_diagnostics()]]
 require("lspinstall").setup()
 
 local function lsp_highlight_document(client)
