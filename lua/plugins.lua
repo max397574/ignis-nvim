@@ -25,10 +25,14 @@ require("packer").startup {
 
     -- better escape
     use {
-      "~/betterEscape.nvim",
+      "max397574/better-escape.nvim",
+      branch = "dev",
       event = {"InsertEnter"},
       config = function()
-        require("better_escape").setup()
+        require("better_escape").setup({
+          keys = "<ESC>",
+          timeout = 200,
+        })
       end,
     }
 
