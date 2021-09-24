@@ -16,7 +16,7 @@ require("toggleterm").setup {
   close_on_exit = false,
   direction = "float",
   float_opts = {
-    border = require("utils").border,
+    border = require("utils").border_thin_rounded,
     winblend = 10,
     highlights = {
       border = "FloatBorder",
