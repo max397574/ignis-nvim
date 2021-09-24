@@ -322,7 +322,7 @@ require("packer").startup {
     display = {
       open_fn = function()
         return require("packer.util").float {
-          border = require("utils").border,
+          border = require("utils").border_thin_rounded,
         }
       end,
     },
