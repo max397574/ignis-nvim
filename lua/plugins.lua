@@ -291,7 +291,12 @@ require("packer").startup {
 
     -- display context of current function
     use {"romgrk/nvim-treesitter-context",
-    event = { "CursorMoved"}}
+    event = { "CursorMoved"},
+    config = function()
+require("treesitter-context.config").setup {
+  enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+}
+      end}
 
     -- hints for operators
     use "mfussenegger/nvim-ts-hint-textobject"
