@@ -6,14 +6,6 @@ require("packer").startup {
     -- package manager
     use "wbthomason/packer.nvim"
 
-    -- improve startuptime
-    use {
-      "lewis6991/impatient.nvim",
-      config = function()
-        require "impatient"
-      end,
-    }
-
     -- create directories if they don't exist
     use {
       "jghauser/mkdir.nvim",
@@ -35,9 +27,6 @@ require("packer").startup {
         })
       end,
     }
-
-    -- lua repl
-    use { "bfredl/nvim-luadev", ft = { "lua" } }
 
     -- colorscheme
     use "sainnhe/gruvbox-material"
@@ -97,9 +86,6 @@ require("packer").startup {
       end,
     }
 
-    -- breakup of startup time
-    use { "tweekmonster/startuptime.vim", cmd = "StartupTime" }
-
     -- snippets
     use {
       "SirVer/ultisnips",
@@ -112,7 +98,10 @@ require("packer").startup {
     use { "tpope/vim-fugitive", cmd = "G" }
 
     -- see git commits
-    use { "junegunn/gv.vim", cmd = "GV" }
+    use { "junegunn/gv.vim",
+      cmd = "GV",
+      requires = { "tpope/vim-fugitive"},
+    }
 
     -- easier use of f/F and t/T
     use { "rhysd/clever-f.vim", keys = "f" }
@@ -165,17 +154,15 @@ require("packer").startup {
       requires = {
         { "nvim-lua/popup.nvim" },
         { "nvim-lua/plenary.nvim" },
-        { "sharkdp/bat" },
         { "kyazdani42/nvim-web-devicons" },
+        { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+        { "nvim-telescope/telescope-symbols.nvim" },
+        { "jvgrootveld/telescope-zoxide" },
       },
       config = function()
         require "configs.telescope"
       end,
     }
-    -- telescope extensions
-    use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
-    use { "nvim-telescope/telescope-symbols.nvim" }
-    use { "jvgrootveld/telescope-zoxide" }
 
     -- display helpfiles
     use {
@@ -260,9 +247,6 @@ require("packer").startup {
       end,
     }
 
-    -- colors for lsp diagnostics
-    use "folke/lsp-colors.nvim"
-
     -- list for lsp,quickfix,telescope etc
     use {
       "folke/trouble.nvim",
@@ -288,9 +272,6 @@ require("packer").startup {
       "nvim-treesitter/nvim-treesitter-refactor",
     }
 
-    -- structural editing with ts queries
-    use "vigoux/architext.nvim"
-
     -- additional textobjects with TS
     use {
       "nvim-treesitter/nvim-treesitter-textobjects",
@@ -309,7 +290,8 @@ require("packer").startup {
     }
 
     -- display context of current function
-    use "romgrk/nvim-treesitter-context"
+    use {"romgrk/nvim-treesitter-context",
+    event = { "CursorMoved"}}
 
     -- hints for operators
     use "mfussenegger/nvim-ts-hint-textobject"
