@@ -91,6 +91,7 @@ wk.register({
     g = { "<cmd>Telescope live_grep<CR>", "Grep" },
     b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Buffer" },
     d = { "<cmd>Telescope lsp_document_diagnostics<CR>", "Diagnostics" },
+    o = { "<cmd>Telscope buffers<CR>", "Open Buffers"},
     s = {
       function()
         require("telescope.builtin").lsp_workspace_symbols()
@@ -142,9 +143,9 @@ wk.register({
     ["l"] = { "<C-W>l", "window-right" },
     ["k"] = { "<C-W>k", "window-up" },
     ["H"] = { "<C-W>5<", "expand-window-left" },
-    ["J"] = { ":resize +5", "expand-window-below" },
+    ["J"] = { ":resize +5<CR>", "expand-window-below" },
     ["L"] = { "<C-W>5>", "expand-window-right" },
-    ["K"] = { ":resize -5", "expand-window-up" },
+    ["K"] = { ":resize -5<CR>", "expand-window-up" },
     ["="] = { "<C-W>=", "balance-window" },
     ["s"] = { "<C-W>s", "split-window-below" },
     ["v"] = { "<C-W>v", "split-window-right" },
@@ -186,11 +187,11 @@ map("x", "<", "<gv", nore)
 map("x", ">", ">gv", nore)
 -- alt hjkl
 -- use `sed -n l` to get chars with alt
--- faster movements
-map("n", "º", "10j", nore_silent)
-map("n", "ª", "10h", nore_silent)
-map("n", "∆", "10k", nore_silent)
-map("n", "¬", "10l", nore_silent)
+-- resize windows
+map("n", "º", ":resize +5<CR>", nore_silent)
+map("n", "ª", ":vert resize -5<CR>", nore_silent)
+map("n", "∆", ":resize -5<CR>", nore_silent)
+map("n", "¬", ":vert resize +5<CR>", nore_silent)
 -- move lines up and down in visual and normal mode
 map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
 map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
