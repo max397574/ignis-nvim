@@ -17,8 +17,9 @@ require("packer").startup {
 
     -- better escape
     use {
-      "max397574/better-escape.nvim",
-      branch = "dev",
+      -- "max397574/better-escape.nvim",
+      -- branch = "dev",
+      "~/betterEscape.nvim",
       event = {"InsertEnter"},
       config = function()
         require("better_escape").setup({
@@ -27,6 +28,9 @@ require("packer").startup {
         })
       end,
     }
+
+    -- faster filetype detection
+    use "~/filetype.nvim"
 
     -- colorscheme
     use "sainnhe/gruvbox-material"
@@ -126,7 +130,7 @@ require("packer").startup {
     use {
       "folke/todo-comments.nvim",
       requires = "nvim-lua/plenary.nvim",
-      cmd = "TodoTelescope",
+      cmd = {"TodoTelescope", "TodoTrouble"},
       config = function()
         require("todo-comments").setup {}
       end,
@@ -251,6 +255,7 @@ require("packer").startup {
     use {
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
+      cmd = { "Trouble", "TroubleToggle"},
       config = function()
         require("trouble").setup {
           auto_preview = false,
