@@ -21,14 +21,18 @@ require "utils"
 -- some stuff which hasn't been converted to lua yet
 vim.cmd "source ~/.config/nvim/random.vim"
 
-local time = os.date "*t"
-if time.hour >= 8 and time.hour < 18 then
-  vim.cmd [[
+vim.cmd[[colorscheme galaxy]]
+
+if vim.g.galaxy_dynamic then
+  local time = os.date "*t"
+  if time.hour >= 8 and time.hour < 18 then
+    vim.cmd [[
     colorscheme galaxy_light
-  ]]
-else
-  vim.cmd [[
+    ]]
+  else
+    vim.cmd [[
     colorscheme galaxy
-    highlight Normal guibg = none]]
-  require "colors.fixed_highlights"
+  highlight Normal guibg = none]]
+    require "colors.fixed_highlights"
+  end
 end

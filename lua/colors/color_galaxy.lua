@@ -41,7 +41,12 @@ local c = {
   background_three_two = "#504944",
 }
 
-local back = nil
+local back
+if vim.g.galaxy_transparancy then
+  back = nil
+else
+  back = "#1f2227"
+end
 
 local Usual = {
   MarkdownHighlights = {

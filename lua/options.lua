@@ -5,6 +5,8 @@ local g = vim.g
 g.onedark_style = "deep"
 g.tokyonight_style = "storm"
 g.tokyodark_transparent_background = true
+g.galaxy_transparancy = false
+g.galaxy_dynamic = false
 
 opt.shortmess:append "c"
 opt.iskeyword:append "-"
