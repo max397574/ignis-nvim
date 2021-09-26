@@ -67,12 +67,17 @@ g.UltiSnipsSnippetDirectories = { "UltiSnips", "my_snippets" }
 
 g.table_mode_corner = "|" -- Tablemode
 
+g.did_load_filetypes = 1 -- use filetype.nvim instead
+
 -- builtin plugins
 g.loaded_gzip = 1
 g.loaded_zip = 1
 g.loaded_zipPlugin = 1
 g.loaded_tar = 1
 g.loaded_tarPlugin = 1
+g.loaded_matchit = 1
+g.loaded_man = 1
+g.loaded_remote_plugins = 1
 
 g.loaded_getscript = 1
 g.loaded_getscriptPlugin = 1
