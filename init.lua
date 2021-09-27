@@ -22,17 +22,3 @@ require "utils"
 vim.cmd "source ~/.config/nvim/random.vim"
 
 vim.cmd[[colorscheme galaxy]]
-
-if vim.g.galaxy_dynamic then
-  local time = os.date "*t"
-  if time.hour >= 8 and time.hour < 18 then
-    vim.cmd [[
-    colorscheme galaxy_light
-    ]]
-  else
-    vim.cmd [[
-    colorscheme galaxy
-  highlight Normal guibg = none]]
-    require "colors.fixed_highlights"
-  end
-end
