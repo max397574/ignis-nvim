@@ -4,8 +4,8 @@ require("telescope").setup {
     -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua
     layout_strategy = "horizontal",
     layout_config = {
-      width = 0.90,
-      height = 0.95,
+      width = 0.99,
+      height = 0.99,
       preview_cutoff = 90,
       prompt_position = "bottom",
       horizontal = {
@@ -29,6 +29,7 @@ require("telescope").setup {
         },
       },
     },
+    winblend = 15,
     mappings = {
       n = {
         ["<C-j>"] = actions.move_selection_next,
