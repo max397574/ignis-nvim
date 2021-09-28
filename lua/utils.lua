@@ -62,7 +62,25 @@ function M.create_augroup(autocmds, name)
   cmd "augroup END"
 end
 
-M.border_thin_rounded = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
-M.border_wide_angular = { '▛', '▀', '▜', '▐', '▟', '▄', '▙', '▌' }
+M.border_thin_rounded = {
+  "╭",
+  "─",
+  "╮",
+  "│",
+  "╯",
+  "─",
+  "╰",
+  "│",
+}
+M.border_wide_angular = {
+  "▛",
+  "▀",
+  "▜",
+  "▐",
+  "▟",
+  "▄",
+  "▙",
+  "▌",
+}
 
 return M

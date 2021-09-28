@@ -1,7 +1,7 @@
 local cmp = require "cmp"
 cmp.setup {
   documentation = {
-    border = require"utils".border_wide_angular
+    border = require("utils").border_wide_angular,
   },
   snippet = {
     expand = function(args)
