@@ -268,7 +268,7 @@ require("packer").startup {
     -- parsers for code
     use {
       "nvim-treesitter/nvim-treesitter",
-      event = { "BufReadPre"},
+      event = { "BufEnter"},
       run = ":TSUpdate",
       config = function()
         require "configs.treesitter"
