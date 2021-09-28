@@ -34,12 +34,13 @@ require("packer").startup {
 
     -- colorscheme
     use "sainnhe/gruvbox-material"
+    use "~/galaxy.nvim"
 
     -- stay healthy while coding
     use {
       "~/healthy.nvim",
       config = function()
-        require("healthy_nvim").init()
+        -- require("healthy_nvim").init()
       end,
     }
 
@@ -180,6 +181,7 @@ require("packer").startup {
     -- colorize color codes
     use {
       "norcalli/nvim-colorizer.lua",
+      event = { "CursorMoved", "CursorHold"},
       config = function()
         require("colorizer").setup({
           "*",
@@ -266,6 +268,7 @@ require("packer").startup {
     -- parsers for code
     use {
       "nvim-treesitter/nvim-treesitter",
+      event = { "BufReadPre"},
       run = ":TSUpdate",
       config = function()
         require "configs.treesitter"
@@ -275,28 +278,34 @@ require("packer").startup {
     -- refractor code with TS
     use {
       "nvim-treesitter/nvim-treesitter-refactor",
+      after = "nvim-treesitter",
     }
 
     -- additional textobjects with TS
     use {
       "nvim-treesitter/nvim-treesitter-textobjects",
+      after = "nvim-treesitter",
     }
 
     -- select code
-    use "RRethy/nvim-treesitter-textsubjects"
+    use {"RRethy/nvim-treesitter-textsubjects",
+      after = "nvim-treesitter",}
 
     -- TS based colored parantheses
-    use "p00f/nvim-ts-rainbow"
+    use {"p00f/nvim-ts-rainbow",
+      after = "nvim-treesitter",
+      }
 
     -- explore syntax tree and test TS queries
     use {
       "nvim-treesitter/playground",
+      after = "nvim-treesitter",
       cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
     }
 
     -- display context of current function
     use {"romgrk/nvim-treesitter-context",
-    event = { "CursorMoved"},
+    after = "nvim-treesitter",
     config = function()
 require("treesitter-context.config").setup {
   enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
@@ -304,7 +313,9 @@ require("treesitter-context.config").setup {
       end}
 
     -- hints for operators
-    use "mfussenegger/nvim-ts-hint-textobject"
+    use {"mfussenegger/nvim-ts-hint-textobject",
+      after = "nvim-treesitter",
+    }
   end,
   config = {
     profile = {
