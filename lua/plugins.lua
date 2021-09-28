@@ -34,7 +34,7 @@ require("packer").startup {
 
     -- colorscheme
     use "sainnhe/gruvbox-material"
-    use "~/galaxy.nvim"
+    use "~/galaxy_nvim"
 
     -- stay healthy while coding
     use {
