@@ -157,6 +157,7 @@ require("packer").startup {
     use {
       "nvim-telescope/telescope.nvim",
       cmd = "Telescope",
+      event = { "CursorMoved", "CursorHold"},
       requires = {
         { "nvim-lua/popup.nvim" },
         { "nvim-lua/plenary.nvim" },
@@ -189,6 +190,7 @@ require("packer").startup {
         }, {
           mode = "foreground",
         })
+      vim.cmd[[ColorizerAttachToBuffer]]
       end,
     }
 
