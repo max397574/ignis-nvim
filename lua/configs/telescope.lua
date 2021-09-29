@@ -133,7 +133,6 @@ end
 function M.find_string()
   local opts = {
     border = true,
-    previewer = false,
     shorten_path = false,
     layout_strategy = "flex",
     layout_config = {

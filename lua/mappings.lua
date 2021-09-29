@@ -51,7 +51,7 @@ wk.register({
   },
   l = {
     name = "+Search Last",
-    s = { "<cmd>lua require('configs.telescope').grep_last_search", "Search"},
+    s = { "<cmd>lua require('configs.telescope').grep_last_search()<CR>", "Search"},
     d = { "<cmd>Telescope zoxide list<CR>", "Directories"},
     f = {
       "<cmd>lua require('telescope').extensions.frecency.frecency()<CR>",
