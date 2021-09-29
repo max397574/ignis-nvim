@@ -157,7 +157,7 @@ require("packer").startup {
     use {
       "nvim-telescope/telescope.nvim",
       cmd = "Telescope",
-      event = { "CursorMoved", "CursorHold"},
+      event = { "CursorMoved", "CursorHold" },
       requires = {
         { "nvim-lua/popup.nvim" },
         { "nvim-lua/plenary.nvim" },
@@ -174,9 +174,9 @@ require("packer").startup {
     use {
       "nvim-telescope/telescope-frecency.nvim",
       config = function()
-        require"telescope".load_extension("frecency")
+        require("telescope").load_extension "frecency"
       end,
-      requires = {"tami5/sqlite.lua"}
+      requires = { "tami5/sqlite.lua" },
     }
 
     -- display helpfiles
@@ -198,7 +198,7 @@ require("packer").startup {
         }, {
           mode = "foreground",
         })
-      vim.cmd[[ColorizerAttachToBuffer]]
+        vim.cmd [[ColorizerAttachToBuffer]]
       end,
     }
 

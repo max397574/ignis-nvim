@@ -83,7 +83,10 @@ function M.file_browser()
 
       local modify_cwd = function(new_cwd)
         current_picker.cwd = new_cwd
-        current_picker:refresh(opts.new_finder(new_cwd), { reset_prompt = true })
+        current_picker:refresh(
+          opts.new_finder(new_cwd),
+          { reset_prompt = true }
+        )
       end
 
       map("i", "-", function()
@@ -99,7 +102,10 @@ function M.file_browser()
           opts.depth = opts.depth + mod
 
           local this_picker = action_state.get_current_picker(prompt_bufnr)
-          this_picker:refresh(opts.new_finder(current_picker.cwd), { reset_prompt = true })
+          this_picker:refresh(
+            opts.new_finder(current_picker.cwd),
+            { reset_prompt = true }
+          )
         end
       end
 
@@ -161,7 +167,10 @@ function M.grep_last_search(opts)
 
   -- \<getreg\>\C
   -- -> Subs out the search things
-  local register = vim.fn.getreg("/"):gsub("\\<", ""):gsub("\\>", ""):gsub("\\C", "")
+  local register = vim.fn.getreg("/")
+    :gsub("\\<", "")
+    :gsub("\\>", "")
+    :gsub("\\C", "")
 
   opts.path_display = { "shorten" }
   opts.word_match = "-w"

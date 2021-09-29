@@ -51,11 +51,15 @@ wk.register({
   },
   l = {
     name = "+Search Last",
-    s = { "<cmd>lua require('configs.telescope').grep_last_search()<CR>", "Search"},
-    d = { "<cmd>Telescope zoxide list<CR>", "Directories"},
+    s = {
+      "<cmd>lua require('configs.telescope').grep_last_search()<CR>",
+      "Search",
+    },
+    d = { "<cmd>Telescope zoxide list<CR>", "Directories" },
     f = {
       "<cmd>lua require('telescope').extensions.frecency.frecency()<CR>",
-      "Files"},
+      "Files",
+    },
   },
   ["h"] = {
     name = "+Help",
@@ -91,7 +95,7 @@ wk.register({
     b = { "<cmd>lua require('configs.telescope').curbuf()<CR>", "Buffer" },
     d = { "<cmd>Telescope lsp_document_diagnostics<CR>", "Diagnostics" },
     o = { "<cmd>Telescope buffers<CR>", "Open Buffers" },
-    e = { "<cmd>lua require'telescope.builtin'.symbols{}<CR>", "Emojis"},
+    e = { "<cmd>lua require'telescope.builtin'.symbols{}<CR>", "Emojis" },
     s = {
       function()
         require("telescope.builtin").lsp_workspace_symbols()
@@ -113,9 +117,15 @@ wk.register({
     n = { "<cmd>enew<CR>", "New File" },
   },
   [" "] = { "<cmd>Telescope find_files<CR>", "Find File" },
-  ["."] = { "<cmd>lua require('configs.telescope').file_browser()<CR>", "Browse Files" },
+  ["."] = {
+    "<cmd>lua require('configs.telescope').file_browser()<CR>",
+    "Browse Files",
+  },
   [","] = { "<cmd>Telescope buffers show_all_buffers=true<cr>", "Switch Buffer" },
-  ["/"] = { "<cmd>lua require('configs.telescope').find_string()<cr>", "Live Grep" },
+  ["/"] = {
+    "<cmd>lua require('configs.telescope').find_string()<cr>",
+    "Live Grep",
+  },
   [":"] = { "<cmd>Telescope command_history<cr>", "Command History" },
   q = {
     ':let @t = \'let @q = "\' . @q<CR>:<C-f>o<ESC>"tp$a"<Esc>',
