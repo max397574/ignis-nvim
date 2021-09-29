@@ -171,6 +171,14 @@ require("packer").startup {
       end,
     }
 
+    use {
+      "nvim-telescope/telescope-frecency.nvim",
+      config = function()
+        require"telescope".load_extension("frecency")
+      end,
+      requires = {"tami5/sqlite.lua"}
+    }
+
     -- display helpfiles
     use {
       "lvim-tech/lvim-helper",

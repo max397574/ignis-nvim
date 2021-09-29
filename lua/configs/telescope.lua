@@ -39,11 +39,16 @@ require("telescope").setup {
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-o>"] = actions.select_vertical,
+        -- alt j and k
+        ["º"] = actions.preview_scrolling_down,
+        ["∆"] = actions.preview_scrolling_up,
       },
       i = {
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-o>"] = actions.select_vertical,
+        ["º"] = actions.preview_scrolling_down,
+        ["∆"] = actions.preview_scrolling_up,
       },
     },
     extensions = {
@@ -98,8 +103,10 @@ function M.file_browser()
         end
       end
 
-      map("i", "<M-=>", modify_depth(1))
-      map("i", "<M-+>", modify_depth(-1))
+      -- alt =
+      map("i", "Ú", modify_depth(1))
+      -- alt +
+      map("i", "∞", modify_depth(-1))
 
       map("n", "yy", function()
         local entry = action_state.get_selected_entry()
@@ -148,6 +155,45 @@ function M.find_string()
     winblend = 15,
   }
   builtin.live_grep(opts)
+end
+
+function M.grep_last_search(opts)
+  opts = opts or {}
+
+  -- \<getreg\>\C
+  -- -> Subs out the search things
+  local register = vim.fn.getreg("/"):gsub("\\<", ""):gsub("\\>", ""):gsub("\\C", "")
+
+  opts.path_display = { "shorten" }
+  opts.word_match = "-w"
+  opts.search = register
+
+  require("telescope.builtin").grep_string(opts)
+end
+
+function M.curbuf()
+  local opts = themes.get_dropdown {
+    winblend = 10,
+    border = true,
+    previewer = false,
+    shorten_path = false,
+  }
+  require("telescope.builtin").current_buffer_fuzzy_find(opts)
+end
+
+function M.git_diff()
+  local opts = {
+    layout_strategy = "horizontal",
+    border = true,
+    prompt_title = "~ Git Diff ~",
+    layout_config = {
+      width = 0.99,
+      height = 0.99,
+      preview_width = 0.8,
+      prompt_position = "top",
+    },
+  }
+  require("telescope.builtin").git_status(opts)
 end
 
 return M

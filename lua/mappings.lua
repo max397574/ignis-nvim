@@ -9,8 +9,8 @@ wk.register({
     name = "+Git",
     s = { "<cmd>G<CR>", "Status" },
     p = { "<cmd>Git push<CR>", "Push" },
-    d = { "<cmd>Telescope git_status<CR>", "Diff" },
-    l = { "<cmd>GV<CR>", "Log" },
+    d = { "<cmd>lua require('configs.telescope').git_diff()<CR>", "Diff" },
+    l = { "<cmd>Telescope git_commits<CR>", "Log" },
     c = { "<cmd>Git commit<CR>", "Commit" },
     a = { "<cmd>Git add %<CR>", "Add" },
   },
@@ -50,13 +50,12 @@ wk.register({
     t = { "Tabelize" },
   },
   l = {
-    name = "Luadev",
-    d = {
-      name = "Run",
-      l = { "<Plug>(Luadev-RunLine)", "Line" },
-      r = { "<Plug>(Luadev-Run)", "Motion or Object" },
-    },
-    t = { "<cmd>Luadev<CR>", "Toggle" },
+    name = "+Search Last",
+    s = { "<cmd>lua require('configs.telescope').grep_last_search", "Search"},
+    d = { "<cmd>Telescope zoxide list<CR>", "Directories"},
+    f = {
+      "<cmd>lua require('telescope').extensions.frecency.frecency()<CR>",
+      "Files"},
   },
   ["h"] = {
     name = "+Help",
@@ -89,9 +88,9 @@ wk.register({
   s = {
     name = "+Search",
     g = { "<cmd>lua require('configs.telescope').find_string()<CR>", "Grep" },
-    b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Buffer" },
+    b = { "<cmd>lua require('configs.telescope').curbuf()<CR>", "Buffer" },
     d = { "<cmd>Telescope lsp_document_diagnostics<CR>", "Diagnostics" },
-    o = { "<cmd>Telscope buffers<CR>", "Open Buffers" },
+    o = { "<cmd>Telescope buffers<CR>", "Open Buffers" },
     e = { "<cmd>lua require'telescope.builtin'.symbols{}<CR>", "Emojis"},
     s = {
       function()
@@ -176,7 +175,7 @@ map("n", "<right>", ":wincmd L<CR>", nore_silent)
 
 -- Telescope
 -- =========
-map("n", "<C-s>", ":Telescope current_buffer_fuzzy_find<CR>", nore_silent)
+map("n", "<C-s>", ":lua require('configs.telescope').curbuf()<CR>", nore_silent)
 
 -- Simple Commands (Improvements of commands)
 -- ==========================================
