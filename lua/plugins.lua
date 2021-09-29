@@ -165,18 +165,13 @@ require("packer").startup {
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
         { "nvim-telescope/telescope-symbols.nvim" },
         { "jvgrootveld/telescope-zoxide" },
+        {"nvim-telescope/telescope-frecency.nvim"},
+        { "tami5/sqlite.lua" },
+        { "nvim-telescope/telescope-packer.nvim"},
       },
       config = function()
         require "configs.telescope"
       end,
-    }
-
-    use {
-      "nvim-telescope/telescope-frecency.nvim",
-      config = function()
-        require("telescope").load_extension "frecency"
-      end,
-      requires = { "tami5/sqlite.lua" },
     }
 
     -- display helpfiles

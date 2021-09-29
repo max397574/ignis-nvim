@@ -64,6 +64,8 @@ require("telescope").setup {
 }
 require("telescope").load_extension "fzf"
 require("telescope").load_extension "zoxide"
+require("telescope").load_extension "packer"
+require("telescope").load_extension "frecency"
 
 local M = {}
 
