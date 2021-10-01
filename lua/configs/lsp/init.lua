@@ -1,4 +1,7 @@
 vim.cmd [[au CursorHold  * lua vim.diagnostic.show_position_diagnostics()]]
+
+require "configs.lsp.kind"
+
 require("lspinstall").setup()
 
 local function lsp_highlight_document(client)
@@ -85,7 +88,7 @@ setup_servers()
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics,
   {
-    underline = true, -- this
+    underline = true,
     update_in_insert = false,
     virtual_text = false,
     severity_sort = true,
@@ -113,14 +116,14 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 )
 
 local signs = {
-  Error = "",
-  Warning = "",
-  Hint = "",
+  Error = " ",
+  Warning = " ",
+  Hint = "",
   Information = "",
+  other = "﫠",
 }
 
 for type, icon in pairs(signs) do
-  local hl = "LspDiagnosticsSign" .. type
-  local numhl = "LspDiagnosticsDefault" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = numhl })
+  local hl = "DiagnosticsSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end

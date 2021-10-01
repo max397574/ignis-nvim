@@ -33,7 +33,7 @@ cmp.setup {
   },
   formatting = {
     format = function(entry, vim_item)
-      local icons = require("configs/lsp_kind").icons
+      local icons = require("configs.lsp.kind").icons
       vim_item.kind = icons[vim_item.kind]
       vim_item.menu = ({
         nvim_lsp = "[L]",
