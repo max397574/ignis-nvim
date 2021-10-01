@@ -165,9 +165,9 @@ require("packer").startup {
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
         { "nvim-telescope/telescope-symbols.nvim" },
         { "jvgrootveld/telescope-zoxide" },
-        {"nvim-telescope/telescope-frecency.nvim"},
+        { "nvim-telescope/telescope-frecency.nvim" },
         { "tami5/sqlite.lua" },
-        { "nvim-telescope/telescope-packer.nvim"},
+        { "nvim-telescope/telescope-packer.nvim" },
       },
       config = function()
         require "configs.telescope"
