@@ -88,6 +88,7 @@ require("nvim-treesitter.configs").setup {
         ["ali"] = "@list_item.outer",
         ["icb"] = "@code_block.inner",
         ["acb"] = "@code_block.outer",
+        ["itc"] = "@table_cell.inner",
       },
     },
 
