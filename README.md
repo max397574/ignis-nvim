@@ -28,28 +28,21 @@ long term:
 ```
 .
 ├── README.md
-├── colors
-│   ├── galaxy.lua
-│   └── galaxy_light.lua
 ├── init.lua
 ├── lua
 │   ├── autocommands.lua
-│   ├── colors
-│   │   ├── color_galaxy.lua
-│   │   ├── color_galaxy_light.lua
-│   │   ├── fixed_highlights.lua
-│   │   └── themes.lua
 │   ├── configs
 │   │   ├── bufferline.lua
 │   │   ├── cmp.lua
-│   │   ├── dashboard.lua
-│   │   ├── lsp.lua
-│   │   ├── lsp_kind.lua
+│   │   ├── lsp
+│   │   │   ├── init.lua
+│   │   │   └── kind.lua
 │   │   ├── lualine.lua
 │   │   ├── lvim_helper.lua
 │   │   ├── nvim_autopairs.lua
 │   │   ├── nvim_comment.lua
 │   │   ├── telescope.lua
+│   │   ├── toggleterm.lua
 │   │   ├── treesitter.lua
 │   │   ├── vmath.lua
 │   │   └── which_key.lua
@@ -65,25 +58,34 @@ long term:
 │   └── tex.snippets
 ├── notes.txt
 ├── plugin
-│   ├── packer_compiled.lua
-│   └── simplefunctions.vim
+│   └── packer_compiled.lua
 ├── queries
-│   └── lua
-│       └── highlights.scm
+│   ├── lua
+│   │   └── highlights.scm
+│   └── markdown
+│       └── textobjects.scm
 ├── random.vim
 ├── spell
+│   ├── de.utf-8.add
 │   ├── de.utf-8.spl
-│   └── de.utf-8.sug
+│   ├── de.utf-8.sug
+│   ├── en.utf-8.add
+│   └── en.utf-8.add.spl
 ├── stylua.toml
-└── vimhelp
-    ├── cmp.md
-    ├── telescope.md
-    ├── treesitter.md
-    ├── ts_textobjects_move.md
-    ├── ts_textobjects_select.md
-    └── useful.md
+├── test.lua
+├── test.md
+├── test.py
+├── vimhelp
+│   ├── cmp.md
+│   ├── emmet.md
+│   ├── telescope.md
+│   ├── treesitter.md
+│   ├── ts_textobjects_move.md
+│   ├── ts_textobjects_select.md
+│   └── useful.md
+└── xd
 
-10 directories, 45 files
+10 directories, 47 files
 ```
 
 Features:
