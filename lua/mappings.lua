@@ -14,6 +14,9 @@ wk.register({
     c = { "<cmd>Git commit<CR>", "Commit" },
     a = { "<cmd>Git add %<CR>", "Add" },
   },
+  r = {
+    n = { "<cmd>lua require('configs.lsp.custom').RenameWithQuickfix()<CR>", "Rename"},
+  },
   m = {
     name = "Markdown",
     d = {
