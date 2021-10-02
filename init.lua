@@ -22,10 +22,3 @@ require "utils"
 vim.cmd "source ~/.config/nvim/random.vim"
 
 vim.cmd [[colorscheme galaxy]]
-
--- TODO: fix error that forces me to do this
-vim.api.nvim_feedkeys(
-  vim.api.nvim_replace_termcodes("<CR>", true, true, true),
-  "n",
-  false
-)
