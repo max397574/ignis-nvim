@@ -230,6 +230,8 @@ map("v", "<leader>s", ":s///g<LEFT><LEFT><LEFT>", nore)
 -- Random
 -- ======
 
+-- move right in insert mode
+map("i", "  ", "<RIGHT>", nore)
 -- better undo
 map("i", ",", ",<c-g>u", nore)
 map("i", "!", "!<c-g>u", nore)
