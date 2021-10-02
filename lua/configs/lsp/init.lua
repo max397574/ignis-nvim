@@ -74,6 +74,7 @@ end
 local function setup_servers()
   require("lspinstall").setup()
   local servers = require("lspinstall").installed_servers()
+  table.insert(servers, "pyright")
   for _, server in pairs(servers) do
     local config = make_config()
     if server == "lua" then
