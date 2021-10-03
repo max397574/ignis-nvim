@@ -91,7 +91,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   {
     underline = true,
     update_in_insert = false,
-    virtual_text = true,
+    virtual_text = false,
     severity_sort = true,
   }
 )
@@ -116,15 +116,16 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
   { border = border }
 )
 
-local signs = {
-  Error = " ",
-  Warning = " ",
-  Hint = "",
-  Information = "",
-  other = "﫠",
-}
 
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticsSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
+
+vim.cmd [[
+  highlight LspDiagnosticsLineNrError guifg=#FF0000
+  highlight LspDiagnosticsLineNrWarning guifg=#FFA500
+  highlight LspDiagnosticsLineNrInformation guifg=#EDB200
+  highlight LspDiagnosticsLineNrHint guifg=#3793BA
+
+  sign define DiagnosticSignError text= texthl=LspDiagnosticsSignError linehl= numhl=LspDiagnosticsLineNrError
+  sign define DiagnosticSignWarn text= texthl=LspDiagnosticsSignWarning linehl= numhl=LspDiagnosticsLineNrWarning
+  sign define DiagnosticSignInfo text= texthl=LspDiagnosticsSignInformation linehl= numhl=LspDiagnosticsLineNrInformation
+  sign define DiagnosticSignHint text= texthl=LspDiagnosticsSignHint linehl= numhl=LspDiagnosticsSignHint
+]]
