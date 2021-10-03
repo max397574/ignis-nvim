@@ -1,23 +1,11 @@
 vim.cmd [[au CursorHold  * lua vim.diagnostic.show_position_diagnostics()]]
 
-require "configs.lsp.kind"
+local attach = require "configs.lsp.on_attach"
+require "configs.lsp.signs"
+require "configs.lsp.border"
 
 require("lspinstall").setup()
 
-local function lsp_highlight_document(client)
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec(
-      [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]],
-      false
-    )
-  end
-end
 
 -- Refernce: https://github.com/kabouzeid/nvim-lspinstall/wiki
 local lua_settings = {
@@ -28,17 +16,6 @@ local lua_settings = {
   },
 }
 
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
-  end
-  local opts = { noremap = true, silent = true }
-  buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  buf_set_keymap("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", opts)
-  lsp_highlight_document(client)
-end
 
 local lspconfig = require "lspconfig"
 local configs = require "lspconfig/configs"
@@ -51,7 +28,7 @@ if not lspconfig.emmet_ls then
     default_config = {
       cmd = { "emmet-ls", "--stdio" },
       filetypes = { "html", "css" },
-      root_dir = function(fname)
+      root_dir = function()
         return vim.loop.cwd()
       end,
       settings = {},
@@ -67,7 +44,7 @@ local function make_config()
     flags = {
       debounce_text_changes = 500,
     },
-    on_attach = on_attach,
+    on_attach = attach.on_attach,
   }
 end
 
@@ -95,37 +72,3 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     severity_sort = true,
   }
 )
-
-local border = {
-  { "╭", "FloatBorder" },
-  { "─", "FloatBorder" },
-  { "╮", "FloatBorder" },
-  { "│", "FloatBorder" },
-  { "╯", "FloatBorder" },
-  { "─", "FloatBorder" },
-  { "╰", "FloatBorder" },
-  { "│", "FloatBorder" },
-}
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover,
-  { border = border }
-)
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.hover,
-  { border = border }
-)
-
-
-
-vim.cmd [[
-  highlight LspDiagnosticsLineNrError guifg=#FF0000
-  highlight LspDiagnosticsLineNrWarning guifg=#FFA500
-  highlight LspDiagnosticsLineNrInformation guifg=#EDB200
-  highlight LspDiagnosticsLineNrHint guifg=#3793BA
-
-  sign define DiagnosticSignError text= texthl=LspDiagnosticsSignError linehl= numhl=LspDiagnosticsLineNrError
-  sign define DiagnosticSignWarn text= texthl=LspDiagnosticsSignWarning linehl= numhl=LspDiagnosticsLineNrWarning
-  sign define DiagnosticSignInfo text= texthl=LspDiagnosticsSignInformation linehl= numhl=LspDiagnosticsLineNrInformation
-  sign define DiagnosticSignHint text= texthl=LspDiagnosticsSignHint linehl= numhl=LspDiagnosticsSignHint
-]]
