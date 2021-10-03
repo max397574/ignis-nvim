@@ -33,7 +33,8 @@ require("packer").startup {
     use "~/filetype.nvim"
 
     -- colorscheme
-    use "sainnhe/gruvbox-material"
+    use {"sainnhe/gruvbox-material",}
+    use {"LunarVim/onedarker.nvim",}
     use "~/galaxy_nvim"
 
     -- stay healthy while coding
@@ -167,7 +168,7 @@ require("packer").startup {
         { "jvgrootveld/telescope-zoxide" },
         { "nvim-telescope/telescope-frecency.nvim" },
         { "tami5/sqlite.lua" },
-        { "nvim-telescope/telescope-packer.nvim" },
+        -- { "nvim-telescope/telescope-packer.nvim" },
       },
       config = function()
         require "configs.telescope"
