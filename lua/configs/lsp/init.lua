@@ -4,9 +4,6 @@ local attach = require "configs.lsp.on_attach"
 require "configs.lsp.signs"
 require "configs.lsp.border"
 
-require("lspinstall").setup()
-
-
 -- Refernce: https://github.com/kabouzeid/nvim-lspinstall/wiki
 local lua_settings = {
   Lua = {
