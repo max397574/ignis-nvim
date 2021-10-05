@@ -29,6 +29,11 @@ require("packer").startup {
       end,
     }
 
+    -- startup screen
+    use {
+      "~/startuptools.nvim",
+    }
+
     -- faster filetype detection
     use "~/filetype.nvim"
 
