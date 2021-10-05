@@ -32,6 +32,9 @@ require("packer").startup {
     -- startup screen
     use {
       "~/startuptools.nvim",
+      config = function ()
+        require"startuptools".setup()
+      end
     }
 
     -- faster filetype detection
@@ -238,6 +241,7 @@ require("packer").startup {
         "html",
         "lua",
         "csharp",
+        "cs",
         "css",
         "tex",
         "java",
