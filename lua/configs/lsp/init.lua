@@ -13,7 +13,6 @@ local lua_settings = {
   },
 }
 
-
 local lspconfig = require "lspconfig"
 local configs = require "lspconfig/configs"
 

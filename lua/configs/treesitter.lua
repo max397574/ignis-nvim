@@ -7,6 +7,7 @@ parser_configs.markdown = {
   },
   filetype = "markdown",
 }
+
 require("nvim-treesitter.configs").setup {
   ensure_installed = "maintained",
   highlight = {

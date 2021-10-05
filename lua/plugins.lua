@@ -38,8 +38,8 @@ require("packer").startup {
     use "~/filetype.nvim"
 
     -- colorscheme
-    use {"sainnhe/gruvbox-material",}
-    use {"LunarVim/onedarker.nvim",}
+    use { "sainnhe/gruvbox-material" }
+    use { "LunarVim/onedarker.nvim" }
     use "~/galaxy_nvim"
 
     -- stay healthy while coding
