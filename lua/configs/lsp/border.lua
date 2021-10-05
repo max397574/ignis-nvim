@@ -14,6 +14,6 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   { border = border }
 )
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signatureHelp,
+  vim.lsp.handlers.signature_help,
   { border = border }
 )

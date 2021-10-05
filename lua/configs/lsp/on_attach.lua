@@ -24,6 +24,7 @@ function M.on_attach(client, bufnr)
   buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   buf_set_keymap("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", opts)
+  require "configs.lsp.border"
   lsp_highlight_document(client)
 end
 return M
