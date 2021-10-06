@@ -31,9 +31,9 @@ require("packer").startup {
 
     -- startup screen
     use {
-      "~/startuptools.nvim",
+      "~/startup.nvim",
       config = function ()
-        require"startuptools".setup()
+        require"startup".setup()
       end
     }
 
