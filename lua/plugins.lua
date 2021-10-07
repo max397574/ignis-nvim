@@ -32,9 +32,9 @@ require("packer").startup {
     -- startup screen
     use {
       "~/startup.nvim",
-      config = function ()
-        require"startup".setup()
-      end
+      config = function()
+        require("startup").setup(require "configs.startup_nvim")
+      end,
     }
 
     -- faster filetype detection
