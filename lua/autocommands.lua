@@ -1,6 +1,7 @@
 local u = require "utils"
 
 vim.cmd [[autocmd! BufWinEnter COMMIT_EDITMSG set filetype=gitcommit]]
+vim.cmd [[autocmd! BufWritePost *.lua !stylua %]]
 
 u.create_augroup({
   "TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch',timeout=700}",
