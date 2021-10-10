@@ -1,11 +1,23 @@
 local cmp = require "cmp"
+local luasnip = require "luasnip"
+
+local icons = require("configs.lsp.kind").icons
+
+local function t(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local function get_kind(kind_type)
+  return icons[kind_type]
+end
+
 cmp.setup {
   documentation = {
-    border = require("utils").border_wide_angular,
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
   },
   snippet = {
     expand = function(args)
-      vim.fn["UltiSnips#Anon"](args.body)
+      require("luasnip").lsp_expand(args.body)
     end,
   },
 
@@ -19,35 +31,48 @@ cmp.setup {
     ["<C-e>"] = cmp.mapping.close(),
     ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
+      select = false,
     },
+    ["<Tab>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        vim.fn.feedkeys(t "<Plug>luasnip-expand-or-jump", "")
+      else
+        fallback()
+      end
+    end,
   },
 
   sources = {
-    { name = "buffer" },
-    { name = "path" },
-    { name = "emoji" },
-    { name = "calc" },
-    { name = "nvim_lsp" },
-    { name = "ultisnips" },
+    { name = "buffer", priority = 7 },
+    { name = "path", priority = 5 },
+    { name = "emoji", priority = 3 },
+    { name = "calc", priority = 4 },
+    { name = "nvim_lsp", priority = 9 },
+    { name = "luasnip", priority = 8 },
   },
   formatting = {
     format = function(entry, vim_item)
-      local icons = require("configs.lsp.kind").icons
-      vim_item.kind = icons[vim_item.kind]
+      vim_item.kind = string.format(
+        "%s %s",
+        get_kind(vim_item.kind),
+        vim_item.kind
+      )
+
       vim_item.menu = ({
-        nvim_lsp = "[L]",
-        emoji = "[E]",
-        path = "[F]",
-        calc = "[C]",
-        buffer = "[B]",
-        ultisnips = "[U]",
-        -- add nvim_lua as well
+        nvim_lsp = "(LSP)",
+        emoji = "(Emoji)",
+        path = "(Path)",
+        calc = "(Calc)",
+        vsnip = "(Snippet)",
+        luasnip = "(Snippet)",
+        buffer = "(Buffer)",
       })[entry.source.name]
       vim_item.dup = ({
         buffer = 1,
         path = 1,
-        nvim_lsp = 1,
+        nvim_lsp = 0,
       })[entry.source.name] or 0
       return vim_item
     end,

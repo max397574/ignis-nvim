@@ -1,4 +1,4 @@
-vim.cmd [[au CursorHold  * lua vim.diagnostic.show_position_diagnostics()]]
+vim.cmd [[au CursorHold  * lua vim.diagnostic.show_position_diagnostics({border = 'single', focusable = false})]]
 
 local attach = require "configs.lsp.on_attach"
 require "configs.lsp.signs"

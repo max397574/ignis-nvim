@@ -29,6 +29,23 @@ require("packer").startup {
       end,
     }
 
+    use {
+      "AckslD/nvim-neoclip.lua",
+      requires = { "tami5/sqlite.lua", module = "sqlite" },
+      config = function()
+        require("neoclip").setup()
+      end,
+    }
+
+    use {
+      "edluffy/specs.nvim",
+      config = function()
+        require "configs.specs"
+      end,
+    }
+
+    use "tamton-aquib/essentials.nvim"
+
     -- startup screen
     use {
       "~/startup.nvim",
@@ -44,6 +61,23 @@ require("packer").startup {
     use { "sainnhe/gruvbox-material" }
     use { "LunarVim/onedarker.nvim" }
     use "~/galaxy_nvim"
+    use {
+      "folke/tokyonight.nvim",
+      config = function()
+        require "configs.theme"
+        local _time = os.date "*t"
+        if _time.hour < 9 then
+          vim.g.tokyonight_style = "night"
+        end
+      end,
+    }
+
+    use {
+      "lukas-reineke/indent-blankline.nvim",
+      setup = function()
+        require("configs.blankline").setup()
+      end,
+    }
 
     -- stay healthy while coding
     use {
@@ -80,6 +114,16 @@ require("packer").startup {
       end,
     }
 
+    use {
+      "lewis6991/gitsigns.nvim",
+      event = "BufReadPre",
+      wants = "plenary.nvim",
+      requires = { "nvim-lua/plenary.nvim" },
+      config = function()
+        require "configs.gitsigns"
+      end,
+    }
+
     -- calculate math figures on visual selection
     use {
       "~/vmath.nvim",
@@ -98,14 +142,6 @@ require("packer").startup {
       config = function()
         require "configs.nvim_comment"
       end,
-    }
-
-    -- snippets
-    use {
-      "SirVer/ultisnips",
-      event = "InsertEnter",
-      ft = "conf",
-      requires = { "honza/vim-snippets" },
     }
 
     -- Git from Vim
@@ -147,20 +183,38 @@ require("packer").startup {
       end,
     }
 
+    use {
+      "kyazdani42/nvim-tree.lua",
+      cmd = { "NvimTreeToggle", "NvimTreeClose" },
+      config = function()
+        require "configs.nvim_tree"
+      end,
+    }
+
     -- change,add and delete surroundings
     use "tpope/vim-surround"
 
     -- display last undos
     use { "mbbill/undotree", cmd = "UndotreeToggle" }
 
-    -- display some infos in signcolumn
-    use "mhinz/vim-signify"
-
     -- more icons
     use "ryanoasis/vim-devicons"
 
     -- even more icons
-    use "kyazdani42/nvim-web-devicons"
+    use {
+      "kyazdani42/nvim-web-devicons",
+      config = function()
+        require "configs.web_devicons"
+      end,
+    }
+
+    use {
+      "tamago324/lir.nvim",
+      config = function()
+        require "configs.lir"
+      end,
+      requires = "kyazdani42/nvim-web-devicons",
+    }
 
     -- a file explorer
     use {
@@ -213,8 +267,17 @@ require("packer").startup {
       config = function()
         require "configs.cmp"
       end,
+      requires = {
+        {
+          "L3MON4D3/LuaSnip",
+          requires = "rafamadriz/friendly-snippets",
+          config = function()
+            require "configs.snippets"
+          end,
+        },
+      },
     }
-    use { "quangnguyen30192/cmp-nvim-ultisnips", after = "nvim-cmp" }
+    use { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" }
     use { "hrsh7th/cmp-emoji", after = "nvim-cmp" }
     use { "hrsh7th/cmp-buffer", after = "nvim-cmp" }
     use { "hrsh7th/cmp-path", after = "nvim-cmp" }

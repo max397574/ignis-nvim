@@ -14,6 +14,14 @@ wk.register({
     c = { "<cmd>Git commit<CR>", "Commit" },
     a = { "<cmd>Git add %<CR>", "Add" },
   },
+  c = {
+    name = "+Comment, Clipboard",
+    b = {
+      "<cmd>lua require('telescope').extensions.neoclip.default()<CR>",
+      "Clipboard",
+    },
+    c = { "Toggle comment line" },
+  },
   r = {
     n = {
       "<cmd>lua require('configs.lsp.custom').RenameWithQuickfix()<CR>",
@@ -259,6 +267,8 @@ map(
   ':lua vim.cmd(":vert :h "..vim.fn.expand("<cword>"))<CR>',
   nore_silent
 )
+
+map("n", "<ESC>", "<cmd>nohl<CR>", nore_silent)
 
 -- change case of cword
 map("n", "<C-U>", "b~", nore_silent)

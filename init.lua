@@ -21,4 +21,4 @@ require "utils"
 -- some stuff which hasn't been converted to lua yet
 vim.cmd "source ~/.config/nvim_config/random.vim"
 
-vim.cmd [[colorscheme galaxy]]
+vim.cmd [[colorscheme tokyonight]]
