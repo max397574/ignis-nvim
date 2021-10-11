@@ -15,7 +15,7 @@ local function lsp_highlight_document(client)
   end
 end
 
-function M.on_attach(client, bufnr)
+function M.setup(client, bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end

@@ -1,4 +1,4 @@
-local util = require "util"
+local util = require "utils"
 local luasnip = require "luasnip"
 
 luasnip.config.set_config {

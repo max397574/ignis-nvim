@@ -192,7 +192,13 @@ require("packer").startup {
     }
 
     -- change,add and delete surroundings
-    use "tpope/vim-surround"
+    -- use "tpope/vim-surround"
+    use {
+      "blackCauldron7/surround.nvim",
+      config = function()
+        require("surround").setup { mappings_style = "surround" }
+      end,
+    }
 
     -- display last undos
     use { "mbbill/undotree", cmd = "UndotreeToggle" }
@@ -297,29 +303,14 @@ require("packer").startup {
     -- easily configure lsp
     use {
       "neovim/nvim-lspconfig",
-      ft = {
-        "vim",
-        "typescript",
-        "cpp",
-        "html",
-        "lua",
-        "csharp",
-        "cs",
-        "css",
-        "tex",
-        "java",
-        "python",
-        "c",
+      requires = {
+        "jose-elias-alvarez/nvim-lsp-ts-utils",
+        "folke/lua-dev.nvim",
+        "kabouzeid/nvim-lspinstall",
       },
-    }
-
-    -- easy install for lsp servers
-    use {
-      after = "nvim-lspconfig",
-      "kabouzeid/nvim-lspinstall",
       config = function()
-        require("lspinstall").setup()
         require "configs.lsp"
+        require("lspinstall").setup()
       end,
     }
 
@@ -389,6 +380,7 @@ require("packer").startup {
         }
       end,
     }
+    use "folke/lua-dev.nvim"
 
     -- hints for operators
     use {

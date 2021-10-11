@@ -26,7 +26,7 @@ opt.relativenumber = true -- relative line numbers
 opt.number = true -- show line number at cursor line
 opt.scrolloff = 3 -- start scrolling 3 lines away from top/bottom
 opt.cursorline = true -- highlight current line
-opt.updatetime = 200 -- update CursorHold and save swap every 2000ms
+opt.updatetime = 300 -- update CursorHold and save swap every 2000ms
 opt.ignorecase = true -- ignore case for search
 opt.smartcase = true -- don't ignore when upercase search
 opt.hidden = true
@@ -39,6 +39,7 @@ opt.linebreak = true
 opt.autowrite = true -- enable auto write
 opt.mouse = "nv" -- allow mouse in normal and visual mode
 
+-- opt.foldlevel = 100
 opt.foldlevel = 0
 opt.joinspaces = false
 opt.completeopt = "menuone,noselect"
@@ -53,7 +54,7 @@ opt.listchars = {
   trail = "•",
 }
 
-opt.foldmethod = "expr" -- use treesitter for folding
+opt.foldmethod = "indent" -- use treesitter for folding
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 opt.undodir = vim.fn.expand "~" .. "/.vim/undodir" -- directory to save undofiles

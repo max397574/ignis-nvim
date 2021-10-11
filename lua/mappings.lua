@@ -13,6 +13,19 @@ wk.register({
     l = { "<cmd>Telescope git_commits<CR>", "Log" },
     c = { "<cmd>Git commit<CR>", "Commit" },
     a = { "<cmd>Git add %<CR>", "Add" },
+    h = {
+      name = "+Hunk",
+      s = "Stage",
+      u = "Undo stage",
+      r = "Reset",
+      R = "Reset buffer",
+      p = "Preview",
+      b = "Blame line",
+    },
+  },
+  d = {
+    name = "+Definition",
+    p = { "<cmd>lua require'configs.lsp'.PeekDefinition()<CR>", "Peek" },
   },
   c = {
     name = "+Comment, Clipboard",
@@ -22,12 +35,7 @@ wk.register({
     },
     c = { "Toggle comment line" },
   },
-  r = {
-    n = {
-      "<cmd>lua require('configs.lsp.custom').RenameWithQuickfix()<CR>",
-      "Rename",
-    },
-  },
+  r = "Run",
   m = {
     name = "Markdown",
     d = {
@@ -197,6 +205,8 @@ map("n", "<left>", ":wincmd H<CR>", nore_silent)
 map("n", "<up>", ":wincmd K<CR>", nore_silent)
 map("n", "<right>", ":wincmd L<CR>", nore_silent)
 
+map("n", "°", ":normal! zO<CR>", nore_silent)
+
 -- Telescope
 -- =========
 map("n", "<C-s>", ":lua require('configs.telescope').curbuf()<CR>", nore_silent)
@@ -268,6 +278,7 @@ map(
   nore_silent
 )
 
+map("n", ",,", "<cmd>lua require'utils'.append_comma()<CR>", nore_silent)
 map("n", "<ESC>", "<cmd>nohl<CR>", nore_silent)
 
 -- change case of cword

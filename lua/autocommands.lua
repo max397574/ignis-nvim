@@ -3,9 +3,8 @@ local cmd = vim.cmd
 
 cmd [[autocmd! BufWinEnter COMMIT_EDITMSG set filetype=gitcommit]]
 cmd [[autocmd! BufWritePost *.lua !stylua %]]
-cmd [[
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif
-]]
+
+cmd [[au BufReadPost * lua require"utils".last_place()]]
 
 -- show cursor line only in active window
 cmd [[
