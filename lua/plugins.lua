@@ -6,6 +6,15 @@ require("packer").startup {
     -- package manager
     use "wbthomason/packer.nvim"
 
+    use {
+      "lewis6991/impatient.nvim",
+      opt = true,
+      config = function()
+        require "impatient"
+        require("impatient").enable_profile()
+      end,
+    }
+
     -- create directories if they don't exist
     use {
       "jghauser/mkdir.nvim",
@@ -13,6 +22,10 @@ require("packer").startup {
         require "mkdir"
       end,
       event = "BufWritePre",
+    }
+
+    use {
+      "NvChad/nvim-base16.lua",
     }
 
     -- better escape
@@ -30,21 +43,12 @@ require("packer").startup {
     }
 
     use {
-      "AckslD/nvim-neoclip.lua",
-      requires = { "tami5/sqlite.lua", module = "sqlite" },
-      config = function()
-        require("neoclip").setup()
-      end,
-    }
-
-    use {
       "edluffy/specs.nvim",
+      event = { "CursorMoved" },
       config = function()
         require "configs.specs"
       end,
     }
-
-    use "tamton-aquib/essentials.nvim"
 
     -- startup screen
     use {
@@ -59,8 +63,10 @@ require("packer").startup {
 
     -- colorscheme
     use { "sainnhe/gruvbox-material" }
-    use { "LunarVim/onedarker.nvim" }
-    use "~/galaxy_nvim"
+    use "~/colorschemes"
+    -- use { "~/onedarker.nvim" }
+    -- use { "tiagovla/tokyodark.nvim" }
+    -- use "~/galaxy_nvim"
     use {
       "folke/tokyonight.nvim",
       config = function()
@@ -71,6 +77,39 @@ require("packer").startup {
         end
       end,
     }
+    -- parsers for code
+    use {
+      "nvim-treesitter/nvim-treesitter",
+      after = "impatient.nvim",
+      opt = true,
+      run = ":TSUpdate",
+      event = "BufRead",
+      config = function()
+        require "configs.treesitter"
+      end,
+    }
+    use { "nvim-treesitter/nvim-treesitter-refactor", after = "nvim-treesitter" }
+    use {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      after = "nvim-treesitter",
+    }
+    use { "RRethy/nvim-treesitter-textsubjects", after = "nvim-treesitter" }
+    use { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" }
+    use {
+      "nvim-treesitter/playground",
+      cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
+      after = "nvim-treesitter",
+    }
+    use {
+      "romgrk/nvim-treesitter-context",
+      after = "nvim-treesitter",
+      config = function()
+        require("treesitter-context.config").setup {
+          enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        }
+      end,
+    }
+    use { "mfussenegger/nvim-ts-hint-textobject", after = "nvim-treesitter" }
 
     use {
       "lukas-reineke/indent-blankline.nvim",
@@ -80,12 +119,12 @@ require("packer").startup {
     }
 
     -- stay healthy while coding
-    use {
-      "~/healthy.nvim",
-      config = function()
-        -- require("healthy_nvim").init()
-      end,
-    }
+    -- use {
+    --   "~/healthy.nvim",
+    --   config = function()
+    --     -- require("healthy_nvim").init()
+    --   end,
+    -- }
 
     -- floating terminal
     use {
@@ -139,6 +178,7 @@ require("packer").startup {
     -- easily comment out code
     use {
       "terrortylor/nvim-comment",
+      keys = { "<leader>c", "<leader>cc" },
       config = function()
         require "configs.nvim_comment"
       end,
@@ -166,10 +206,12 @@ require("packer").startup {
     -- display keybindings help
     use {
       "folke/which-key.nvim",
-      key = "<leader>",
+      opt = true,
+      after = "nvim-treesitter",
       config = function()
         require("which-key").setup {}
         require "configs.which_key"
+        require "mappings"
       end,
     }
 
@@ -225,8 +267,10 @@ require("packer").startup {
     -- a file explorer
     use {
       "nvim-telescope/telescope.nvim",
+      opt = true,
       cmd = "Telescope",
-      event = { "CursorMoved", "CursorHold" },
+      after = "impatient.nvim",
+      event = "BufRead",
       requires = {
         { "nvim-lua/popup.nvim" },
         { "nvim-lua/plenary.nvim" },
@@ -235,11 +279,19 @@ require("packer").startup {
         { "nvim-telescope/telescope-symbols.nvim" },
         { "jvgrootveld/telescope-zoxide" },
         { "nvim-telescope/telescope-frecency.nvim" },
+        { "benfowler/telescope-luasnip.nvim" },
         { "tami5/sqlite.lua" },
-        -- { "nvim-telescope/telescope-packer.nvim" },
+        -- { "nvim-telescope/telescope-packer.nvim" }, -- breaks packer
       },
       config = function()
         require "configs.telescope"
+      end,
+    }
+    use {
+      "AckslD/nvim-neoclip.lua",
+      requires = { "tami5/sqlite.lua", module = "sqlite" },
+      config = function()
+        require("neoclip").setup()
       end,
     }
 
@@ -247,6 +299,7 @@ require("packer").startup {
     use {
       "lvim-tech/lvim-helper",
       cmd = "LvimHelper",
+      keys = { "<leader>hp" },
       config = function()
         require "configs.lvim_helper"
       end,
@@ -276,7 +329,14 @@ require("packer").startup {
       requires = {
         {
           "L3MON4D3/LuaSnip",
-          requires = "rafamadriz/friendly-snippets",
+          opt = true,
+          requires = {
+            "rafamadriz/friendly-snippets",
+            after = "LuaSnip",
+            event = "InsertEnter",
+          },
+          event = "InsertEnter",
+          after = "nvim-cmp",
           config = function()
             require "configs.snippets"
           end,
@@ -303,14 +363,14 @@ require("packer").startup {
     -- easily configure lsp
     use {
       "neovim/nvim-lspconfig",
+      opt = true,
       requires = {
-        "jose-elias-alvarez/nvim-lsp-ts-utils",
-        "folke/lua-dev.nvim",
+        { "folke/lua-dev.nvim", opt = true },
         "kabouzeid/nvim-lspinstall",
       },
       config = function()
         require "configs.lsp"
-        require("lspinstall").setup()
+        -- require("lspinstall").setup()
       end,
     }
 
@@ -319,7 +379,7 @@ require("packer").startup {
       "kosayoda/nvim-lightbulb",
       after = "nvim-lspconfig",
       config = function()
-        vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+        vim.cmd [[autocmd CursorHold,CursorHoldI *.{lua} lua require'nvim-lightbulb'.update_lightbulb()]]
       end,
     }
 
@@ -334,61 +394,9 @@ require("packer").startup {
         }
       end,
     }
-
-    -- parsers for code
-    use {
-      "nvim-treesitter/nvim-treesitter",
-      event = { "BufEnter" },
-      run = ":TSUpdate",
-      config = function()
-        require "configs.treesitter"
-      end,
-    }
-
-    -- refractor code with TS
-    use {
-      "nvim-treesitter/nvim-treesitter-refactor",
-      after = "nvim-treesitter",
-    }
-
-    -- additional textobjects with TS
-    use {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      after = "nvim-treesitter",
-    }
-
-    -- select code
-    use { "RRethy/nvim-treesitter-textsubjects", after = "nvim-treesitter" }
-
-    -- TS based colored parantheses
-    use { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" }
-
-    -- explore syntax tree and test TS queries
-    use {
-      "nvim-treesitter/playground",
-      after = "nvim-treesitter",
-      cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
-    }
-
-    -- display context of current function
-    use {
-      "romgrk/nvim-treesitter-context",
-      after = "nvim-treesitter",
-      config = function()
-        require("treesitter-context.config").setup {
-          enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-        }
-      end,
-    }
-    use "folke/lua-dev.nvim"
-
-    -- hints for operators
-    use {
-      "mfussenegger/nvim-ts-hint-textobject",
-      after = "nvim-treesitter",
-    }
   end,
   config = {
+    compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
     profile = {
       enable = true,
       threshold = 0,
