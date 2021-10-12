@@ -91,7 +91,7 @@ wk.register({
     name = "+Help",
     t = { "<cmd>Telescope builtin<CR>", "Telescope" },
     c = { "<cmd>Telescope commands<CR>", "Commands" },
-    h = { "<cmd>Telescope help_tags<CR>", "Help Pages" },
+    h = { "<cmd>lua require'configs.telescope'.help_tags()<CR>", "Help Pages" },
     m = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
     k = { "<cmd>Telescope keymaps<CR>", "Key Maps" },
     s = { "<cmd>Telescope highlights<CR>", "Search Highlight Groups" },
