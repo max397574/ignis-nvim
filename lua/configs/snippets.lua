@@ -39,33 +39,33 @@ public void ${1:function_name}(${2:parameters}) {
 ]]
 
 local gitcommit_fix = [[
-fix(${1:scope}): ${2:title}
+fix(${1:scope}): 🐛${2:title}
 
 ${0}
 ]]
 
 local gitcommit_cleanup = [[
-cleanup(${1:scope}): ${2:title}
+cleanup(${1:scope}): 🗑️${2:title}
 
 ${0}
 ]]
 local gitcommit_revert = [[
 revert: ${2:header of reverted commit}
 
-This reverts commit ${0:<hash>}
+This reverts commit 🔙${0:<hash>}
 ]]
 local gitcommit_feat = [[
-feat(${1:scope}): ${2:title}
+feat(${1:scope}): ✨${2:title}
 
 ${0}
 ]]
 local gitcommit_docs = [[
-docs(${1:scope}): ${2:title}
+docs(${1:scope}): 📚${2:title}
 
 ${0}
 ]]
 local gitcommit_refactor = [[
-refactor(${1:scope}): ${2:title}
+refactor(${1:scope}): 🔄${2:title}
 
 ${0}
 ]]
