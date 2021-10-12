@@ -136,6 +136,32 @@ function M.file_browser()
   builtin.file_browser(opts)
 end
 
+function M.help_tags()
+  local opts = {
+    prompt_prefix = "   ",
+    selection_caret = "  ",
+    entry_prefix = "  ",
+    initial_mode = "insert",
+    selection_strategy = "reset",
+    sorting_strategy = "ascending",
+    layout_strategy = "horizontal",
+    layout_config = {
+      horizontal = {
+        prompt_position = "top",
+        preview_width = 0.55,
+        results_width = 0.8,
+      },
+      vertical = {
+        mirror = false,
+      },
+      width = 0.87,
+      height = 0.80,
+      preview_cutoff = 120,
+    },
+  }
+  builtin.help_tags(opts)
+end
+
 function M.code_actions()
   local opts = {
     winblend = 10,
@@ -212,6 +238,59 @@ function M.git_diff()
     },
   }
   require("telescope.builtin").git_status(opts)
+end
+
+local function base_16_finder(opts)
+  opts = opts or {}
+  local pickers = require "telescope.pickers"
+  local finders = require "telescope.finders"
+  local conf = require("telescope.config").values
+  local custom_action = function()
+    local action_state = require "telescope.actions.state"
+    local entry = action_state.get_selected_entry()
+    if entry ~= nil then
+      require("colors").init(entry[1])
+    end
+    vim.fn.feedkeys(utils.t "<ESC><ESC>", "i")
+  end
+
+  pickers.new(opts, {
+    prompt_title = "Base 16 Colorschemes",
+    layout_strategy = "flex",
+    finder = finders.new_table(opts.data),
+    sorter = conf.generic_sorter(opts),
+    attach_mappings = function(_, map)
+      map("i", "<CR>", custom_action)
+      return true
+    end,
+  }):find()
+end
+
+function M.colorschemes()
+  local opts = {
+    data = {
+      "aquarium",
+      "blossom",
+      "chadracula",
+      "doom-chad",
+      "everforest",
+      "gruvbox",
+      "gruvchad",
+      "javacafe",
+      "jellybeans",
+      "lfgruv",
+      "mountain",
+      "nord",
+      "one-light",
+      "onedark",
+      "onejelly",
+      "onenord",
+      "tokyonight",
+      "tomorrow-night",
+      "uwu",
+    },
+  }
+  base_16_finder(opts)
 end
 
 return M
