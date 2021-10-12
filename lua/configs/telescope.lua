@@ -1,7 +1,15 @@
+vim.cmd [[PackerLoad telescope-fzf-native.nvim]]
+vim.cmd [[PackerLoad telescope-symbols.nvim]]
+vim.cmd [[PackerLoad telescope-zoxide]]
+vim.cmd [[PackerLoad telescope-frecency.nvim]]
+vim.cmd [[PackerLoad telescope-luasnip.nvim]]
+vim.cmd [[PackerLoad sqlite.lua]]
+
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 local themes = require "telescope.themes"
 local builtin = require "telescope.builtin"
+local utils = require "utils"
 
 require("telescope").setup {
   defaults = {
@@ -65,6 +73,7 @@ require("telescope").setup {
 require("telescope").load_extension "fzf"
 require("telescope").load_extension "zoxide"
 require("telescope").load_extension "frecency"
+require("telescope").load_extension "luasnip"
 
 local M = {}
 

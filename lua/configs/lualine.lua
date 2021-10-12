@@ -1,6 +1,7 @@
 local function clock()
   return " " .. os.date "%H:%M"
 end
+
 local function empty()
   return "%="
 end
@@ -50,7 +51,7 @@ vim.cmd [[autocmd User LspProgressUpdate let &ro = &ro]]
 
 local config = {
   options = {
-    theme = "palenight",
+    theme = "onedark",
     section_separators = { left = "", right = "" },
     component_separators = { left = "", right = "" },
     -- section_separators = { "", "" },
@@ -64,7 +65,7 @@ local config = {
       { "diagnostics", sources = { "nvim_lsp" } },
       {
         "diff",
-        symbols = { added = " ", modified = "柳 ", removed = " " },
+        symbols = { added = " ", modified = "柳", removed = " " },
         color_added = colors.green,
         color_modified = colors.orange,
         color_removed = colors.red,

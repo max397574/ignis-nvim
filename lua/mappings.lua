@@ -28,12 +28,16 @@ wk.register({
     p = { "<cmd>lua require'configs.lsp'.PeekDefinition()<CR>", "Peek" },
   },
   c = {
-    name = "+Comment, Clipboard",
+    name = "+Comment, Clipboard, Colors",
     b = {
       "<cmd>lua require('telescope').extensions.neoclip.default()<CR>",
       "Clipboard",
     },
     c = { "Toggle comment line" },
+    n = {
+      "<cmd>lua require'configs.telescope'.colorschemes()<CR>",
+      "NvChad Base 16 Picker",
+    },
   },
   r = "Run",
   m = {
@@ -111,6 +115,7 @@ wk.register({
     ["d"] = { "<cmd>bd<CR>", "Delete Buffer" },
     ["g"] = { "<cmd>BufferLinePick<CR>", "Goto Buffer" },
   },
+
   s = {
     name = "+Search",
     g = { "<cmd>lua require('configs.telescope').find_string()<CR>", "Grep" },
@@ -118,6 +123,7 @@ wk.register({
     d = { "<cmd>Telescope lsp_document_diagnostics<CR>", "Diagnostics" },
     o = { "<cmd>Telescope buffers<CR>", "Open Buffers" },
     e = { "<cmd>lua require'telescope.builtin'.symbols{}<CR>", "Emojis" },
+    l = { "<cmd>Telescope luasnip<CR>", "Luasnip" },
     s = {
       function()
         require("telescope.builtin").lsp_workspace_symbols()
@@ -283,3 +289,10 @@ map("n", "<ESC>", "<cmd>nohl<CR>", nore_silent)
 
 -- change case of cword
 map("n", "<C-U>", "b~", nore_silent)
+
+map(
+  "i",
+  "<leader><tab>",
+  "<cmd>lua require('luasnip').expand_or_jump()<CR>",
+  nore_silent
+)

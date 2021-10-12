@@ -1,3 +1,4 @@
+vim.cmd [[PackerLoad lua-dev.nvim]]
 vim.cmd [[au CursorHold  * lua vim.diagnostic.show_position_diagnostics({border = 'single', focusable = false})]]
 local util = require "utils"
 
@@ -178,7 +179,6 @@ local servers = {
         workspace = {
           -- Make the server aware of Neovim runtime files
           library = {
-            [vim.fn.expand "~/.local/share/lunarvim/lvim/lua"] = true,
             [vim.fn.expand "~/.config/nvim/lua"] = true,
             [vim.fn.expand "$VIMRUNTIME/lua"] = true,
             [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
@@ -194,20 +194,14 @@ local servers = {
   tailwindcss = {},
 }
 
--- local function setup_servers()
---   require("lspinstall").setup()
---   local servers = require("lspinstall").installed_servers()
---   table.insert(servers, "pyright")
---   for _, servers in pairs(servers) do
---     local config = make_config()
---     if server == "lua" then
---       config.settings = lua_settings
---     end
---     require("lspconfig")[server].setup(config)
---   end
--- end
+require("lspinstall").setup() -- important
 
--- setup_servers()
+local lspinstall_servers = require("lspinstall").installed_servers()
+for _, server in pairs(lspinstall_servers) do
+  if server ~= "lua" then
+    require("lspconfig")[server].setup {}
+  end
+end
 
 local function on_attach(client, bufnr)
   require("configs.lsp.on_attach").setup(client, bufnr)

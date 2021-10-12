@@ -9,9 +9,9 @@ require("lvim-helper").setup {
     home .. "/.config/nvim/vimhelp/emmet.md",
     home .. "/.config/nvim/vimhelp/useful.md",
   },
-  winopts = {
-    winhl = table.concat({ "Normal:LvimHelperNormal" }, ","),
-  },
+  -- winopts = {
+  --   winhl = table.concat({ "Normal:LvimHelperNormal" }, ","),
+  -- },
 }
 local lvim_helper_bindings = require "lvim-helper.bindings"
 lvim_helper_bindings.bindings = {
