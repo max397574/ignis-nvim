@@ -1,3 +1,5 @@
+vim.cmd [[PackerLoad LuaSnip]]
+vim.cmd [[PackerLoad lua-dev.nvim]]
 local cmp = require "cmp"
 local luasnip = require "luasnip"
 
@@ -5,6 +7,15 @@ local icons = require("configs.lsp.kind").icons
 
 local function t(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local function check_backspace()
+  local col = vim.fn.col "." - 1
+  if col == 0 or vim.fn.getline("."):sub(col, col):match "%s" then
+    return true
+  else
+    return false
+  end
 end
 
 local function get_kind(kind_type)
@@ -33,15 +44,32 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Insert,
       select = false,
     },
-    ["<Tab>"] = function(fallback)
+    ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.select_next_item()
+        cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
       elseif luasnip.expand_or_jumpable() then
         vim.fn.feedkeys(t "<Plug>luasnip-expand-or-jump", "")
+      elseif check_backspace() then
+        vim.fn.feedkeys(t "<Tab>", "n")
+      else
+        vim.fn.feedkeys(t "<C-Space>") -- Manual trigger
+      end
+    end, {
+      "i",
+      "s",
+    }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
+      elseif luasnip.jumpable(-1) then
+        vim.fn.feedkeys(t "<Plug>luasnip-jump-prev", "")
       else
         fallback()
       end
-    end,
+    end, {
+      "i",
+      "s",
+    }),
   },
 
   sources = {
