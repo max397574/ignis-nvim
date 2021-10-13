@@ -9,7 +9,16 @@ parser_configs.markdown = {
 }
 
 require("nvim-treesitter.configs").setup {
-  ensure_installed = { "markdown", "lua", "python", "c", "vim", "latex", "java" },
+  ensure_installed = {
+    "markdown",
+    "lua",
+    "python",
+    "c",
+    "vim",
+    "latex",
+    "java",
+    "vim",
+  },
   highlight = {
     enable = true,
     custom_captures = {
