@@ -64,7 +64,6 @@ else
 end
 
 -- Disable cusror line
-cmd "hi clear CursorLine"
 -- Line number
 fg("cursorlinenr", white)
 
@@ -87,6 +86,7 @@ fg("NvimInternalError", red)
 fg("VertSplit", one_bg2)
 
 if ui.transparency then
+  cmd "hi clear CursorLine"
   bg("Normal", "NONE")
   bg("Folded", "NONE")
   fg("Folded", "NONE")
@@ -153,6 +153,8 @@ if ui.transparency then
 end
 
 -- Telescope
+-- bg("TelescopeNormal", one_bg)
+-- bg("TelescopePreviewNormal", one_bg)
 fg("TelescopeBorder", line)
 fg("TelescopePreviewBorder", grey)
 fg("TelescopePromptBorder", line)
