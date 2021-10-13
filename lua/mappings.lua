@@ -27,6 +27,11 @@ wk.register({
     name = "+Definition",
     p = { "<cmd>lua require'configs.lsp'.PeekDefinition()<CR>", "Peek" },
   },
+  n = {
+    name = "+Nvim-Tree",
+    t = { "<cmd>NvimTreeToggle<CR>", "Toggle" },
+    c = { "<cmd>NvimTreeClose<CR>", "Close" },
+  },
   c = {
     name = "+Comment, Clipboard, Colors",
     b = {
