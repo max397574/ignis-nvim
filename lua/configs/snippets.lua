@@ -22,9 +22,7 @@ ${0}
 return $1
 ]]
 
-local map_cmd = [[
-  <cmd>${0}<CR>
-]]
+local map_cmd = [[<cmd>${0}<CR>]]
 
 local public_string = [[
 public String ${1:function_name}(${2:parameters}) {
