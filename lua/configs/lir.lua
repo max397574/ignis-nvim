@@ -49,7 +49,7 @@ require("lir").setup {
     --   }
     -- end,
   },
-  hide_cursor = true,
+  hide_cursor = false,
 }
 
 -- custom folder icon
