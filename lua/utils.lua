@@ -103,8 +103,6 @@ M.border_wide_angular = {
   "▌",
 }
 
-
-
 -- selene: allow(global_usage)
 _G.profile = function(command, times)
   times = times or 100
@@ -149,9 +147,13 @@ local map = function(mode, key, command, opts, defaults)
   if type(command) == "function" then
     table.insert(M.functions, command)
     if opts.expr then
-      command = ([[luaeval('require("util").execute(%d)')]]):format(#M.functions)
+      command = ([[luaeval('require("util").execute(%d)')]]):format(
+        #M.functions
+      )
     else
-      command = ("<command>lua require('util').execute(%d)<cr>"):format(#M.functions)
+      command = ("<command>lua require('util').execute(%d)<cr>"):format(
+        #M.functions
+      )
     end
   end
   if opts.buffer ~= nil then
@@ -286,6 +288,62 @@ function M.lsp_config()
     }
   end
   dump(ret)
+end
+
+-- TODO: Clean this mess with highest scope variables
+-- TODO: extract this to folder
+-- TODO: Create function to view files in float
+local win
+local file_nr = 1
+local function get_lines(file_number)
+  local files = require"configs.float_help"
+  if file_number > #files then
+    file_number = 1
+    file_nr = 1
+  elseif file_number < 1 then
+    file_number = #files
+    file_nr = #files
+  end
+  local lines_cat = vim.api.nvim_exec("!cat " .. files[file_number], true)
+  local lines_lua = {}
+  for line in string.gmatch(lines_cat, "[^\n]+") do
+    table.insert(lines_lua,line)
+  end
+  table.remove(lines_lua, 1)
+  return lines_lua
+end
+
+-- function to use to preview helpfiles
+function M.float_preview(increment)
+  local buf = vim.api.nvim_create_buf(false, true)
+  local inc = increment or 0
+  file_nr = file_nr + inc
+  local lines = get_lines(file_nr)
+
+  vim.api.nvim_buf_set_lines(buf,0,-1,false,lines)
+  local width = vim.api.nvim_win_get_width(0)
+  local height = vim.api.nvim_win_get_height(0)
+  win = vim.api.nvim_open_win(buf, true, {relative = "win",
+    win = 0,
+    width = math.floor(width * 0.8),
+    height = math.floor(height * 0.8),
+    col = math.floor(width * 0.1),
+    row = math.floor(height * 0.1),
+    border = "single",
+    style = "minimal",
+  })
+  vim.api.nvim_win_set_option(win,"winblend",20)
+  vim.api.nvim_buf_set_keymap(buf, "n", "J", "<cmd>lua require'utils'.float_help_next_file()<CR>", {noremap = true, silent = true})
+  vim.api.nvim_buf_set_keymap(buf, "n", "K", "<cmd>lua require'utils'.float_help_prev_file()<CR>", {noremap = true, silent = true})
+end
+
+function M.float_help_next_file()
+  vim.api.nvim_win_close(win,true)
+  require"utils".float_preview(1)
+end
+function M.float_help_prev_file()
+  vim.api.nvim_win_close(win,true)
+  require"utils".float_preview(-1)
 end
 
 return M
