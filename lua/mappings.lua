@@ -107,7 +107,7 @@ wk.register({
     f = { "<cmd>Telescope filetypes<CR>", "File Types" },
     o = { "<cmd>Telescope vim_options<CR>", "Options" },
     a = { "<cmd>Telescope autocommands<CR>", "Auto Commands" },
-    p = { "<cmd>LvimHelper<CR>", "Help Files" },
+    p = { "<cmd>lua require'utils'.float_preview()<CR>", "Help Files" },
   },
   u = { "<cmd>UndotreeToggle<CR>", "UndoTree" },
   b = {
