@@ -83,6 +83,7 @@ function M.file_browser()
   opts = {
     sorting_strategy = "ascending",
     scroll_strategy = "cycle",
+    prompt_prefix = "  ",
     layout_config = {
       prompt_position = "top",
     },
