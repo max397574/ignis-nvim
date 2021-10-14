@@ -1,24 +1,24 @@
 local u = require "utils"
 local cmd = vim.cmd
 
-vim.cmd [[autocmd! BufWinEnter COMMIT_EDITMSG set filetype=gitcommit]]
-vim.cmd [[autocmd! BufWritePost *.lua !stylua %]]
+cmd [[autocmd! BufWinEnter COMMIT_EDITMSG set filetype=gitcommit]]
+-- cmd [[autocmd! BufWritePost *.lua !stylua %]]
 
-vim.cmd [[au BufReadPost * lua require"utils".last_place()]]
+cmd [[au BufReadPost * lua require"utils".last_place()]]
 
 -- show cursor line only in active window
-vim.cmd [[
+cmd [[
   autocmd InsertLeave,WinEnter * set cursorline
   autocmd InsertEnter,WinLeave * set nocursorline
 ]]
 
 -- windows to close with "q"
-vim.cmd [[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]]
+cmd [[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]]
 cmd [[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]]
 
-vim.cmd "lua print()"
+cmd "lua print()"
 
-vim.cmd [[au FocusGained * :checktime]]
+cmd [[au FocusGained * :checktime]]
 
 u.create_augroup({
   "TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch',timeout=200}",
