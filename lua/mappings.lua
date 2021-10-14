@@ -230,13 +230,15 @@ map("n", "N", "Nzzzv", nore_silent)
 -- reselect selection after shifting
 map("x", "<", "<gv", nore)
 map("x", ">", ">gv", nore)
--- alt hjkl
+
+-- alt u,n,g,ö
+-- above and left for smaller, below and right for bigger
 -- use `sed -n l` to get chars with alt
 -- resize windows
-map("n", "º", ":resize +5<CR>", nore_silent)
-map("n", "ª", ":vert resize -5<CR>", nore_silent)
-map("n", "∆", ":resize -5<CR>", nore_silent)
-map("n", "¬", ":vert resize +5<CR>", nore_silent)
+map("n", "~", ":resize +5<CR>", nore_silent)
+map("n", "@", ":vert resize -5<CR>", nore_silent)
+map("n", "°", ":resize -5<CR>", nore_silent)
+map("n", "¢", ":vert resize +5<CR>", nore_silent)
 -- move lines up and down in visual and normal mode
 map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
 map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
@@ -248,6 +250,14 @@ map("v", "jk", "<ESC>", nore)
 map("v", "<leader>p", "_dP", nore)
 -- execute macro q
 map("n", "Q", "@q", nore)
+
+-- alt-r to see registers
+map(
+  "n",
+  "®",
+  "<cmd>lua require('which-key').show('@', {mode='n',auto=true})<CR>",
+  nore_silent
+)
 
 -- move visual blocks up and down
 map("v", "J", ":m '>+1<CR>gv=gv", nore_silent)
