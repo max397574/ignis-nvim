@@ -1,4 +1,5 @@
 vim.cmd [[PackerLoad lua-dev.nvim]]
+vim.cmd [[PackerLoad nvim-lspinstall]]
 vim.cmd [[au CursorHold  * lua vim.diagnostic.show_position_diagnostics({border = 'single', focusable = false})]]
 local util = require "utils"
 
