@@ -135,6 +135,13 @@ require("packer").startup {
       end,
     }
 
+    use {
+      "chentau/marks.nvim",
+      config = function()
+        require("marks").setup {}
+      end,
+    }
+
     -- bufferline
     use {
       "akinsho/bufferline.nvim",
@@ -370,7 +377,7 @@ require("packer").startup {
       },
       config = function()
         require "configs.lsp"
-        -- require("lspinstall").setup()
+        require("lspinstall").setup()
       end,
     }
 
