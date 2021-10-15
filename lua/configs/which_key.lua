@@ -2,7 +2,9 @@ local wk = require "which-key"
 
 require("which-key").setup {
   window = {
-    border = "single", -- none, single, double, shadow
+    border = "none", -- none, single, double, shadow
+    margin = {1,0,1,0},
+    winblend = 20,
   },
 }
 
