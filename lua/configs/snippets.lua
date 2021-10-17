@@ -84,12 +84,17 @@ local tex_paragraph = [[
 
 local tex_template = [[
 \documentclass[a4paper,12pt]{article}
+  \usepackage{import}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{xcolor}
 
 \usepackage{textcomp}
 \usepackage[german]{babel}
 \usepackage{amsmath, amssymb}
 \usepackage{graphicx}
 \usepackage{tikz}
+\usepackage{wrapfig}
 
 \begin{document}
 $0
