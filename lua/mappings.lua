@@ -107,7 +107,7 @@ wk.register({
     f = { "<cmd>Telescope filetypes<CR>", "File Types" },
     o = { "<cmd>Telescope vim_options<CR>", "Options" },
     a = { "<cmd>Telescope autocommands<CR>", "Auto Commands" },
-    p = { "<cmd>lua require'utils'.float_preview()<CR>", "Help Files" },
+    p = { "<cmd>lua require'float_help'.float_help()<CR>", "Help Files" },
   },
   u = { "<cmd>UndotreeToggle<CR>", "UndoTree" },
   b = {
@@ -231,12 +231,12 @@ map("n", "N", "Nzzzv", nore_silent)
 map("x", "<", "<gv", nore)
 map("x", ">", ">gv", nore)
 
--- alt u,n,g,ö
+-- alt u,n,f,ö
 -- above and left for smaller, below and right for bigger
 -- use `sed -n l` to get chars with alt
 -- resize windows
 map("n", "~", ":resize +5<CR>", nore_silent)
-map("n", "@", ":vert resize -5<CR>", nore_silent)
+map("n", "ƒ", ":vert resize -5<CR>", nore_silent)
 map("n", "°", ":resize -5<CR>", nore_silent)
 map("n", "¢", ":vert resize +5<CR>", nore_silent)
 -- move lines up and down in visual and normal mode
@@ -304,6 +304,8 @@ map("n", "<ESC>", "<cmd>nohl<CR>", nore_silent)
 
 -- change case of cword
 map("n", "<C-U>", "b~", nore_silent)
+
+map("v", "<leader>n", ":norm ", nore_silent)
 
 map(
   "i",
