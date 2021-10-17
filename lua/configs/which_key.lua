@@ -3,7 +3,7 @@ local wk = require "which-key"
 require("which-key").setup {
   window = {
     border = "none", -- none, single, double, shadow
-    margin = {1,0,1,0},
+    margin = { 1, 0, 1, 0 },
     winblend = 20,
   },
 }

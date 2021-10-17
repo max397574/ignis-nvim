@@ -224,16 +224,16 @@ require("packer").startup {
 
     use "~/float_help.nvim/"
 
-    use({
-      'jameshiew/nvim-magic',
+    use {
+      "jameshiew/nvim-magic",
       config = function()
-        require('nvim-magic').setup()
+        require("nvim-magic").setup()
       end,
       requires = {
-        'nvim-lua/plenary.nvim',
-        'MunifTanjim/nui.nvim'
-      }
-    })
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+      },
+    }
 
     -- highlight and search todo comments
     use {
