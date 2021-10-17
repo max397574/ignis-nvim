@@ -212,8 +212,8 @@ require("packer").startup {
 
     -- display keybindings help
     use {
-      "folke/which-key.nvim",
       opt = true,
+      "max397574/which-key.nvim",
       after = "nvim-treesitter",
       config = function()
         require("which-key").setup {}
@@ -221,6 +221,19 @@ require("packer").startup {
         require "mappings"
       end,
     }
+
+    use "~/float_help.nvim/"
+
+    use({
+      'jameshiew/nvim-magic',
+      config = function()
+        require('nvim-magic').setup()
+      end,
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'MunifTanjim/nui.nvim'
+      }
+    })
 
     -- highlight and search todo comments
     use {
@@ -299,16 +312,6 @@ require("packer").startup {
       requires = { "tami5/sqlite.lua", module = "sqlite" },
       config = function()
         require("neoclip").setup()
-      end,
-    }
-
-    -- display helpfiles
-    use {
-      "lvim-tech/lvim-helper",
-      cmd = "LvimHelper",
-      keys = { "<leader>hp" },
-      config = function()
-        require "configs.lvim_helper"
       end,
     }
 
