@@ -10,7 +10,8 @@ g.galaxy_dynamic = false
 g.galaxy_light = false
 
 opt.shortmess:append "c"
-opt.iskeyword:append "-"
+opt.iskeyword:remove "_"
+
 opt.pumblend = 18
 opt.formatoptions:remove { "c", "r", "o" }
 opt.background = "dark" -- dark background
