@@ -313,3 +313,16 @@ map(
   "<cmd>lua require('luasnip').expand_or_jump()<CR>",
   nore_silent
 )
+-- add j and k with count to jumplist
+map(
+  "n",
+  "j",
+  [[(v:count > 1 ? "m'" . v:count : '') . 'j']],
+  { noremap = true, expr = true }
+)
+map(
+  "n",
+  "k",
+  [[(v:count > 1 ? "m'" . v:count : '') . 'k']],
+  { noremap = true, expr = true }
+)

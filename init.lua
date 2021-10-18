@@ -44,7 +44,4 @@ vim.defer_fn(function()
 end, 0)
 -- end, 0)
 
--- some stuff which hasn't been converted to lua yet
-vim.cmd "source ~/.config/nvim_config/random.vim"
-
 vim.cmd [[colorscheme onedark]]
