@@ -50,14 +50,6 @@ require("packer").startup {
       end,
     }
 
-    -- startup screen
-    -- use {
-    --   "~/startup.nvim",
-    --   config = function()
-    --     require("startup").setup(require "configs.startup_nvim")
-    --   end,
-    -- }
-
     -- faster filetype detection
     use "~/filetype.nvim"
 
@@ -312,6 +304,14 @@ require("packer").startup {
       requires = { "tami5/sqlite.lua", module = "sqlite" },
       config = function()
         require("neoclip").setup()
+      end,
+    }
+
+    use {
+      "~/startup.nvim",
+      config = function()
+        require("startup").setup(require "configs.startup_nvim")
+        -- require("startup").setup()
       end,
     }
 
