@@ -11,3 +11,7 @@ test.md
 spell/
 sessions/
 lua/configs/float_help.lua
+test.norg
+notes.norg
+plugin/
+virtext_test.lua
