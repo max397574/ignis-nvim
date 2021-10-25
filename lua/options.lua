@@ -40,8 +40,8 @@ opt.linebreak = true
 opt.autowrite = true -- enable auto write
 opt.mouse = "nv" -- allow mouse in normal and visual mode
 
--- opt.foldlevel = 100
-opt.foldlevel = 0
+opt.foldlevel = 100
+-- opt.foldlevel = 0
 opt.joinspaces = false
 opt.completeopt = "menuone,noselect"
 opt.signcolumn = "yes:3" -- always signcolumn, 3 wide
