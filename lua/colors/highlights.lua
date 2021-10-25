@@ -31,7 +31,7 @@ local ui = {
   },
   -- Enable this only if your terminal has the colorscheme set which nvchad uses
   -- For Ex : if you have onedark set in nvchad, set onedark's bg color on your terminal
-  transparency = false,
+  transparency = true,
 }
 
 -- Define bg color
@@ -150,11 +150,11 @@ if ui.transparency then
   bg("NvimTreeStatusLineNC", "NONE")
   bg("NvimTreeVertSplit", "NONE")
   fg("NvimTreeVertSplit", grey)
+  bg("TelescopeNormal", one_bg2)
+  bg("TelescopePreviewNormal", one_bg2)
 end
 
 -- Telescope
--- bg("TelescopeNormal", one_bg)
--- bg("TelescopePreviewNormal", one_bg)
 fg("TelescopeBorder", line)
 fg("TelescopePreviewBorder", grey)
 fg("TelescopePromptBorder", line)
