@@ -32,7 +32,6 @@ cmp.setup {
     end,
   },
 
-  -- You can set mapping if you want.
   mapping = {
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -42,7 +41,7 @@ cmp.setup {
     ["<C-e>"] = cmp.mapping.close(),
     ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
-      select = false,
+      select = true,
     },
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -73,12 +72,14 @@ cmp.setup {
   },
 
   sources = {
-    { name = "buffer", priority = 7 },
+    { name = "buffer", priority = 7, keyword_length = 4 },
     { name = "path", priority = 5 },
     { name = "emoji", priority = 3 },
     { name = "calc", priority = 4 },
     { name = "nvim_lsp", priority = 9 },
     { name = "luasnip", priority = 8 },
+    { name = "neorg", priority = 6 },
+    -- { name = "spell", prority = 2 },
   },
   formatting = {
     format = function(entry, vim_item)
@@ -89,13 +90,14 @@ cmp.setup {
       )
 
       vim_item.menu = ({
-        nvim_lsp = "(LSP)",
-        emoji = "(Emoji)",
-        path = "(Path)",
-        calc = "(Calc)",
-        vsnip = "(Snippet)",
-        luasnip = "(Snippet)",
-        buffer = "(Buffer)",
+        nvim_lsp = "[LSP]",
+        emoji = "[Emoji]",
+        path = "[Path]",
+        calc = "[Calc]",
+        luasnip = "[Snip]",
+        buffer = "[Buf]",
+        neorg = "[Norg]",
+        -- spell = "(Spell)",
       })[entry.source.name]
       vim_item.dup = ({
         buffer = 1,
@@ -104,5 +106,9 @@ cmp.setup {
       })[entry.source.name] or 0
       return vim_item
     end,
+  },
+  experimental = {
+    ghost_text = true,
+    native_menu = false,
   },
 }

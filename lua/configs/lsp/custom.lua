@@ -11,6 +11,7 @@ function M.VirttextDefinition()
       vim.lsp.handlers["textDocument/definition"](err, result, ...)
 
       if result then
+        local lines
         for _, temp in pairs(result) do
           local bufnr = vim.uri_to_bufnr(temp.targetUri)
           local start_line_nr = temp.targetRange.start.line
@@ -22,7 +23,8 @@ function M.VirttextDefinition()
           )
         end
         local ns = vim.api.nvim_create_namespace "virttext_definition"
-        local line = lines[1]
+        -- local line = lines[1]
+        local line = "local line = lines[1]"
         local line_nr = cursor[1] - 1
         vim.api.nvim_win_set_cursor(0, cursor)
         vim.api.nvim_buf_set_extmark(

@@ -57,6 +57,7 @@ local config = {
     -- section_separators = { "", "" },
     -- component_separators = { "", "" },
     icons_enabled = true,
+    disabled_filetypes = { "startup" },
   },
   sections = {
     lualine_a = { "mode" },

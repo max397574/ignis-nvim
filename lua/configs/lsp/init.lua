@@ -1,6 +1,6 @@
 vim.cmd [[PackerLoad lua-dev.nvim]]
 vim.cmd [[PackerLoad nvim-lspinstall]]
-vim.cmd [[au CursorHold  * lua vim.diagnostic.show_position_diagnostics({border = 'single', focusable = false})]]
+vim.cmd [[au CursorHold  * lua vim.diagnostic.show_position_diagnostics()]]
 local util = require "utils"
 
 local DATA_PATH = vim.fn.stdpath "data"
@@ -192,7 +192,7 @@ local servers = {
   },
   -- efm = require("config.lsp.efm").config,
   vimls = {},
-  tailwindcss = {},
+  -- tailwindcss = {},
 }
 
 require("lspinstall").setup() -- important
@@ -211,12 +211,12 @@ end
 local luadev = require("lua-dev").setup {
   lspconfig = servers.sumneko_lua,
 }
-lspconfig.sumneko_lua.setup(luadev)
+-- lspconfig.sumneko_lua.setup(luadev)
 
 for server, config in pairs(servers) do
-  if server == "sumneko_lua" then
-    break
-  end
+  -- if server == "sumneko_lua" then
+  --   break
+  -- end
   lspconfig[server].setup(vim.tbl_deep_extend("force", {
     on_attach = on_attach,
     capabilities = capabilities,

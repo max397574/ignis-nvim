@@ -251,6 +251,7 @@ local function base_16_finder(opts)
     local entry = action_state.get_selected_entry()
     if entry ~= nil then
       require("colors").init(entry[1])
+      require "colorscheme_switcher"
     end
     vim.fn.feedkeys(utils.t "<ESC><ESC>", "i")
   end
