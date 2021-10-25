@@ -9,7 +9,7 @@ _G.profile = function(command, times)
   local args = {}
   if type(cmd) == "string" then
     args = { cmd }
-    cmd = vim.cmd
+    cmd = cmd
   end
   local start = vim.loop.hrtime()
   for _ = 1, times, 1 do
@@ -30,7 +30,7 @@ local M = {}
 
 function M.append_comma()
   local cursor = vim.api.nvim_win_get_cursor(0)
-  vim.cmd [[normal A,]]
+  cmd [[normal A,]]
   vim.api.nvim_win_set_cursor(0, cursor)
 end
 
@@ -39,10 +39,10 @@ function M.last_place()
     vim.tbl_contains(vim.api.nvim_list_bufs(), vim.api.nvim_get_current_buf())
   then
     if not vim.tbl_contains({ "help", "packer", "toggleterm" }, vim.bo.ft) then
-      vim.cmd [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]]
+      cmd [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]]
       local cursor = vim.api.nvim_win_get_cursor(0)
       if vim.fn.foldclosed(cursor[1]) ~= -1 then
-        vim.cmd [[silent normal! zO]]
+        cmd [[silent normal! zO]]
       end
     end
   end
@@ -50,7 +50,7 @@ end
 
 -- write latex file, create pdf and open in preview
 function M.LatexPreview()
-  vim.cmd [[
+  cmd [[
   write
   silent !pdflatex %; open %:t:r.pdf
   ]]
@@ -58,7 +58,7 @@ end
 
 -- convert markdown file to html and open
 function M.MarkdownPreview()
-  vim.cmd [[
+  cmd [[
   write
   silent !python3 -m markdown % > ~/temp_html.html
   silent !open ~/temp_html.html
@@ -67,7 +67,7 @@ end
 
 -- highlight group of text under cursor
 function M.SynGroup()
-  vim.cmd [[
+  cmd [[
   let l:s = synID(line('.'), col('.'), 1)
   echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
   ]]
@@ -109,7 +109,7 @@ _G.profile = function(command, times)
   local args = {}
   if type(command) == "string" then
     args = { command }
-    command = vim.cmd
+    command = cmd
   end
   local start = vim.loop.hrtime()
   for _ = 1, times, 1 do
@@ -263,8 +263,8 @@ function M.float_terminal(command)
     string.format("vim.api.nvim_win_close(%d, {force = true});", win),
     string.format("vim.api.nvim_buf_delete(%d, {force = true});", buf),
   }
-  vim.cmd(table.concat(autocommand, " "))
-  vim.cmd [[startinsert]]
+  cmd(table.concat(autocommand, " "))
+  cmd [[startinsert]]
 end
 
 function M.docs()
