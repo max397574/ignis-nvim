@@ -56,6 +56,7 @@ cmp.setup {
     end, {
       "i",
       "s",
+      "c",
     }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -112,3 +113,14 @@ cmp.setup {
     native_menu = false,
   },
 }
+cmp.setup.cmdline(':', {
+  sources = {
+    { name = 'cmdline' },
+    { name = 'path' },
+  },
+})
+cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
