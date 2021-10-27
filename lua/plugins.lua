@@ -224,8 +224,8 @@ require("packer").startup {
       branch = "unstable",
       config = function()
         vim.cmd [[PackerLoad nvim-cmp]]
+        vim.cmd [[PackerLoad telescope.nvim]]
         require("neorg").setup {
-          -- Tell Neorg what modules to load
           load = {
             ["core.defaults"] = {}, -- Load all the default modules
             ["core.norg.concealer"] = {
@@ -233,23 +233,23 @@ require("packer").startup {
                 icon_preset = "diamond",
                 icons = {
                   marker = {
-                    icon = "",
+                    icon = " ",
                   },
                 },
               },
-            }, -- Allows for use of icons
-            ["core.keybinds"] = { -- Configure core.keybinds
+            },
+            ["core.keybinds"] = {
               config = {
-                default_keybinds = true, -- Generate the default keybinds
-                neorg_leader = "<Leader>o", -- This is the default if unspecified
+                default_keybinds = true,
+                neorg_leader = "<Leader>o",
               },
             },
             ["core.norg.completion"] = {
               config = {
-                engine = "nvim-cmp", -- We current support nvim-compe and nvim-cmp only
+                engine = "nvim-cmp",
               },
             },
-            ["core.norg.dirman"] = { -- Manage your directories with Neorg
+            ["core.norg.dirman"] = {
               config = {
                 workspaces = {
                   my_workspace = "~/neorg",
@@ -259,15 +259,15 @@ require("packer").startup {
             },
             ["core.gtd.base"] = {
               config = {
-                workspace = "startup", -- assign the workspace,
-                -- exclude = { "file_to_exclude.norg" } -- Optional: all excluded files from the workspace are not part of the gtd workflow
+                workspace = "startup",
               },
             },
+            ["core.integrations.telescope"] = {},
           },
         }
       end,
 
-      requires = "nvim-lua/plenary.nvim",
+      requires = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
     }
 
     use {
@@ -414,6 +414,7 @@ require("packer").startup {
     use { "hrsh7th/cmp-calc", after = "nvim-cmp" }
     use { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }
     use { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }
+    use { "hrsh7th/cmp-cmdline", after = "nvim-cmp" }
 
     -- autopairs
     use {
