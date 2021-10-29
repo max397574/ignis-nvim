@@ -11,8 +11,8 @@ vim.g.loaded_2html_plugin = false
 vim.g.loaded_remote_plugins = false
 vim.g.loaded_tar = false
 vim.opt.shadafile = "NONE"
-vim.g.loaded_matchit = 1
-vim.g.loaded_matchparen = 1
+-- vim.g.loaded_matchit = 1
+-- vim.g.loaded_matchparen = 1
 
 vim.g.did_load_filetypes = 1
 
