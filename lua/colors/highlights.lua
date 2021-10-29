@@ -150,8 +150,8 @@ if ui.transparency then
   bg("NvimTreeStatusLineNC", "NONE")
   bg("NvimTreeVertSplit", "NONE")
   fg("NvimTreeVertSplit", grey)
-  bg("TelescopeNormal", one_bg2)
-  bg("TelescopePreviewNormal", one_bg2)
+  bg("TelescopeNormal", "NONE")
+  bg("TelescopePreviewNormal", "NONE")
 end
 
 -- Telescope
