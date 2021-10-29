@@ -2,7 +2,7 @@ local u = require "utils"
 local cmd = vim.cmd
 
 cmd [[autocmd! BufWinEnter COMMIT_EDITMSG set filetype=gitcommit]]
-cmd [[autocmd! BufWritePost *.lua !stylua %]]
+-- cmd [[autocmd! BufWritePost *.lua !stylua %]]
 
 cmd [[au BufReadPost * lua require"utils".last_place()]]
 
