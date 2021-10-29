@@ -41,7 +41,7 @@ require("telescope").setup {
         },
       },
     },
-    winblend = 15,
+    winblend = 0,
     mappings = {
       n = {
         ["<C-j>"] = actions.move_selection_next,
@@ -165,7 +165,7 @@ end
 
 function M.code_actions()
   local opts = {
-    winblend = 10,
+    -- winblend = 10,
     border = true,
     previewer = false,
     shorten_path = false,
@@ -194,7 +194,7 @@ function M.find_string()
       "%.otf",
       "%.ttf",
     },
-    winblend = 15,
+    -- winblend = 15,
   }
   builtin.live_grep(opts)
 end
@@ -218,7 +218,7 @@ end
 
 function M.curbuf()
   local opts = themes.get_dropdown {
-    winblend = 10,
+    -- winblend = 10,
     border = true,
     previewer = false,
     shorten_path = false,
@@ -285,9 +285,11 @@ function M.colorschemes()
       "nord",
       "one-light",
       "onedark",
+      "onedark-deep",
       "onejelly",
       "onenord",
       "tokyonight",
+      "xterm",
       "tomorrow-night",
       "uwu",
     },
