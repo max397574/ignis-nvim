@@ -25,7 +25,7 @@ require("packer").startup {
     }
 
     use {
-      "NvChad/nvim-base16.lua",
+      "~/nvim-base16.lua",
     }
 
     -- better escape
@@ -55,6 +55,7 @@ require("packer").startup {
 
     -- colorscheme
     use { "sainnhe/gruvbox-material" }
+    use"NTBBloodbath/doombox.nvim"
     use "~/colorschemes"
     -- use { "~/onedarker.nvim" }
     -- use { "tiagovla/tokyodark.nvim" }
@@ -184,7 +185,7 @@ require("packer").startup {
     }
 
     -- Git from Vim
-    use { "tpope/vim-fugitive", cmd = "G" }
+    use { "tpope/vim-fugitive", cmd = {"G","GV"} }
 
     -- see git commits
     use {
