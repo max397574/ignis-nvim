@@ -1,6 +1,4 @@
-vim.cmd [[
-  sign define DiagnosticSignError text= texthl=DiagnosticError linehl= numhl=DiagnosticError
-  sign define DiagnosticSignWarn text= texthl=DiagnosticWarn linehl= numhl=DiagnosticWarn
-  sign define DiagnosticSignInfo text= texthl=DiagnosticInfo linehl= numhl=DiagnosticInfo
-  sign define DiagnosticSignHint text= texthl=DiagnosticHint linehl= numhl=DiagnosticHint
-]]
+local signs = {Error="", Warn="", Info="", Hint=""}
+for sign, icon in pairs(signs) do
+  vim.fn.sign_define("DiagnosticSign"..sign,{text = icon, texthl = "Diagnostic"..sign, linehl = false, numhl = "Diagnostic"..sign})
+end
