@@ -33,12 +33,6 @@ local files = {
   javascript = "node " .. exp "%:t",
   typescript = "tsc " .. exp "%:t" .. " && node " .. exp "%:t:r" .. ".js",
 }
-map(
-  "n",
-  "<leader>l",
-  ':lua Open_term:new{cmd="lazygit", close_on_exit=true}:toggle()<CR>',
-  nore_silent
-)
 function Run_file()
   local command = files[vim.bo.filetype]
   if command ~= nil then
