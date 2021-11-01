@@ -1,115 +1,136 @@
 -- Plugins
 -- =======
 -- packer options: https://github.com/wbthomason/packer.nvim#specifying-plugins
-require("packer").startup {
+require("packer").startup({
   function(use)
     -- package manager
-    use "wbthomason/packer.nvim"
+    use("wbthomason/packer.nvim")
 
-    use {
+    use({
       "lewis6991/impatient.nvim",
       opt = true,
       config = function()
-        require "impatient"
+        require("impatient")
         require("impatient").enable_profile()
       end,
-    }
+    })
 
     -- create directories if they don't exist
-    use {
+    use({
       "jghauser/mkdir.nvim",
       config = function()
-        require "mkdir"
+        require("mkdir")
       end,
       event = "BufWritePre",
-    }
+    })
 
-    use {
+    use({
       "~/nvim-base16.lua",
-    }
+    })
+
+    use({
+      "narutoxy/themer.lua",
+      branch = "dev",
+      -- after = "packer.nvim", -- hmm for some reason this errors out also `themer.lua` is not a heavy plugin
+      config = function()
+        -- require("themer").load("onedark")
+      end,
+    })
+
+    -- use {"~/footprints.nvim/", after = "themer.lua",
+    --   config = function()
+    --     require"footprints_nvim".setup({
+    --       ns_id = require"themer.utils.util".ns,
+    --       highlight_color_2 = "#353b45",
+    --       highlight_color_3 = "#3e4451",
+    --       highlight_color_4 = "#545862",
+    --       highlight_color_5 = "#565c64",
+    --     })
+    --   end}
 
     -- better escape
-    use {
+    use({
       -- "max397574/better-escape.nvim",
       -- branch = "dev",
       "~/betterEscape.nvim",
       event = { "InsertEnter" },
       config = function()
-        require("better_escape").setup {
+        require("better_escape").setup({
           keys = "<ESC>",
           timeout = 200,
-        }
+        })
       end,
-    }
+    })
 
-    use {
+    use({
       "edluffy/specs.nvim",
       event = { "CursorMoved" },
       config = function()
-        require "configs.specs"
+        require("configs.specs")
       end,
-    }
+    })
 
     -- faster filetype detection
-    use "~/filetype.nvim"
+    use("~/filetype.nvim")
 
     -- colorscheme
-    use { "sainnhe/gruvbox-material" }
-    use"NTBBloodbath/doombox.nvim"
-    use "~/colorschemes"
+    use({ "sainnhe/gruvbox-material" })
+    use({ "NTBBloodbath/doombox.nvim" })
+    use({ "NTBBloodbath/doom-one.nvim" })
+    use("~/colorschemes")
     -- use { "~/onedarker.nvim" }
     -- use { "tiagovla/tokyodark.nvim" }
     -- use "~/galaxy_nvim"
-    use {
+    use({
       "folke/tokyonight.nvim",
       config = function()
-        require "configs.theme"
-        local _time = os.date "*t"
+        require("configs.theme")
+        local _time = os.date("*t")
         if _time.hour < 9 then
           vim.g.tokyonight_style = "night"
         end
       end,
-    }
+    })
     -- parsers for code
-    use {
+    use({
       "nvim-treesitter/nvim-treesitter",
       after = "impatient.nvim",
       opt = true,
       run = ":TSUpdate",
       event = "BufRead",
       config = function()
-        require "configs.treesitter"
+        require("configs.treesitter")
       end,
-    }
-    use { "nvim-treesitter/nvim-treesitter-refactor", after = "nvim-treesitter" }
-    use {
+    })
+    use({ "nvim-treesitter/nvim-treesitter-refactor", after = "nvim-treesitter" })
+    use({
       "nvim-treesitter/nvim-treesitter-textobjects",
       after = "nvim-treesitter",
-    }
-    use { "RRethy/nvim-treesitter-textsubjects", after = "nvim-treesitter" }
-    use { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" }
-    use {
+    })
+    use({ "RRethy/nvim-treesitter-textsubjects", after = "nvim-treesitter" })
+    use({ "p00f/nvim-ts-rainbow", after = "nvim-treesitter" })
+    use({
       "nvim-treesitter/playground",
       cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
       after = "nvim-treesitter",
-    }
-    use {
+    })
+    use({
       "romgrk/nvim-treesitter-context",
       after = "nvim-treesitter",
       config = function()
-        require("treesitter-context.config").setup {
+        require("treesitter-context.config").setup({
           enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-        }
+        })
       end,
-    }
-    use { "mfussenegger/nvim-ts-hint-textobject", after = "nvim-treesitter" }
+    })
+    use({ "mfussenegger/nvim-ts-hint-textobject", after = "nvim-treesitter" })
 
-    use {
+    use({
       "lukas-reineke/indent-blankline.nvim",
       setup = function()
         require("configs.blankline").setup()
       end,
-    }
+    })
 
     -- stay healthy while coding
     -- use {
@@ -120,113 +141,113 @@ require("packer").startup {
     -- }
 
     -- floating terminal
-    use {
+    use({
       "akinsho/toggleterm.nvim",
       keys = { "<c-t>", "<leader>r" },
       config = function()
-        require "configs.toggleterm"
+        require("configs.toggleterm")
       end,
-    }
+    })
 
-    use {
+    use({
       "chentau/marks.nvim",
       config = function()
-        require("marks").setup {}
+        require("marks").setup({})
       end,
-    }
+    })
 
     -- bufferline
-    use {
+    use({
       "akinsho/bufferline.nvim",
       requires = "kyazdani42/nvim-web-devicons",
       config = function()
-        require "configs.bufferline"
+        require("configs.bufferline")
       end,
-    }
+    })
 
     -- statusline
-    use {
+    use({
       "hoob3rt/lualine.nvim",
       requires = { "kyazdani42/nvim-web-devicons" },
       config = function()
-        require "configs.lualine"
+        require("configs.lualine")
       end,
-    }
+    })
 
-    use {
+    use({
       "lewis6991/gitsigns.nvim",
       event = "BufReadPre",
       wants = "plenary.nvim",
       requires = { "nvim-lua/plenary.nvim" },
       config = function()
-        require "configs.gitsigns"
+        require("configs.gitsigns")
       end,
-    }
+    })
 
     -- calculate math figures on visual selection
-    use {
+    use({
       "~/vmath.nvim",
       cmd = { "Vmath" },
       config = function()
-        require "configs.vmath"
+        require("configs.vmath")
       end,
-    }
+    })
 
     -- some functions to help with markdown
-    use { "~/lua_markdown", ft = { "markdown" } }
+    use({ "~/lua_markdown", ft = { "markdown" } })
 
     -- easily comment out code
-    use {
+    use({
       "terrortylor/nvim-comment",
       keys = { "<leader>c", "<leader>cc" },
       config = function()
-        require "configs.nvim_comment"
+        require("configs.nvim_comment")
       end,
-    }
+    })
 
     -- Git from Vim
-    use { "tpope/vim-fugitive", cmd = {"G","GV"} }
+    use({ "tpope/vim-fugitive", cmd = { "G", "GV" } })
 
     -- see git commits
-    use {
+    use({
       "junegunn/gv.vim",
       cmd = "GV",
       requires = { "tpope/vim-fugitive" },
-    }
+    })
 
     -- easier use of f/F and t/T
-    use { "rhysd/clever-f.vim", keys = "f" }
+    use({ "rhysd/clever-f.vim", keys = "f" })
 
     -- easily create md tables
-    use {
+    use({
       "dhruvasagar/vim-table-mode",
       cmd = "TableModeToggle",
-    }
+    })
 
     -- display keybindings help
-    use {
+    use({
       opt = true,
       "folke/which-key.nvim",
       after = "nvim-treesitter",
       config = function()
-        require("which-key").setup {}
-        require "configs.which_key"
-        require "mappings"
+        require("which-key").setup({})
+        require("configs.which_key")
+        require("mappings")
       end,
-    }
+    })
 
-    use "~/float_help.nvim/"
+    use("~/float_help.nvim/")
 
-    use "~/colorscheme_switcher/"
+    use("~/colorscheme_switcher/")
 
-    use {
+    use({
       "nvim-neorg/neorg",
       after = "nvim-treesitter",
       branch = "unstable",
       config = function()
-        vim.cmd [[PackerLoad nvim-cmp]]
-        vim.cmd [[PackerLoad telescope.nvim]]
-        require("neorg").setup {
+        vim.cmd([[PackerLoad nvim-cmp]])
+        vim.cmd([[PackerLoad telescope.nvim]])
+        require("neorg").setup({
           load = {
             ["core.defaults"] = {}, -- Load all the default modules
             ["core.norg.concealer"] = {
@@ -265,13 +286,13 @@ require("packer").startup {
             },
             ["core.integrations.telescope"] = {},
           },
-        }
+        })
       end,
 
       requires = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
-    }
+    })
 
-    use {
+    use({
       "jameshiew/nvim-magic",
       config = function()
         require("nvim-magic").setup()
@@ -280,59 +301,59 @@ require("packer").startup {
         "nvim-lua/plenary.nvim",
         "MunifTanjim/nui.nvim",
       },
-    }
+    })
 
     -- highlight and search todo comments
-    use {
+    use({
       "folke/todo-comments.nvim",
       requires = "nvim-lua/plenary.nvim",
       cmd = { "TodoTelescope", "TodoTrouble" },
       config = function()
-        require("todo-comments").setup {}
+        require("todo-comments").setup({})
       end,
-    }
+    })
 
-    use {
+    use({
       "kyazdani42/nvim-tree.lua",
       cmd = { "NvimTreeToggle", "NvimTreeClose" },
       config = function()
-        require "configs.nvim_tree"
+        require("configs.nvim_tree")
       end,
-    }
+    })
 
     -- change,add and delete surroundings
     -- use "tpope/vim-surround"
-    use {
+    use({
       "blackCauldron7/surround.nvim",
       config = function()
-        require("surround").setup { mappings_style = "surround" }
+        require("surround").setup({ mappings_style = "surround" })
       end,
-    }
+    })
 
     -- display last undos
-    use { "mbbill/undotree", cmd = "UndotreeToggle" }
+    use({ "mbbill/undotree", cmd = "UndotreeToggle" })
 
     -- more icons
-    use "ryanoasis/vim-devicons"
+    use("ryanoasis/vim-devicons")
 
     -- even more icons
-    use {
+    use({
       "kyazdani42/nvim-web-devicons",
       config = function()
-        require "configs.web_devicons"
+        require("configs.web_devicons")
       end,
-    }
+    })
 
-    use {
+    use({
       "tamago324/lir.nvim",
       config = function()
-        require "configs.lir"
+        require("configs.lir")
       end,
       requires = "kyazdani42/nvim-web-devicons",
-    }
+    })
 
     -- a file explorer
-    use {
+    use({
       "nvim-telescope/telescope.nvim",
       opt = true,
       cmd = "Telescope",
@@ -351,27 +372,27 @@ require("packer").startup {
         -- { "nvim-telescope/telescope-packer.nvim" }, -- breaks packer
       },
       config = function()
-        require "configs.telescope"
+        require("configs.telescope")
       end,
-    }
-    use {
+    })
+    use({
       "AckslD/nvim-neoclip.lua",
       requires = { "tami5/sqlite.lua", module = "sqlite" },
       config = function()
         require("neoclip").setup()
       end,
-    }
+    })
 
-    use {
+    use({
       "~/startup.nvim",
       config = function()
-        require("startup").setup(require "configs.startup_nvim")
+        require("startup").setup(require("configs.startup_nvim"))
         -- require("startup").setup()
       end,
-    }
+    })
 
     -- colorize color codes
-    use {
+    use({
       "norcalli/nvim-colorizer.lua",
       event = { "CursorMoved", "CursorHold" },
       config = function()
@@ -380,16 +401,16 @@ require("packer").startup {
         }, {
           mode = "foreground",
         })
-        vim.cmd [[ColorizerAttachToBuffer]]
+        vim.cmd([[ColorizerAttachToBuffer]])
       end,
-    }
+    })
 
     -- completition
-    use {
+    use({
       "hrsh7th/nvim-cmp",
       event = "InsertEnter",
       config = function()
-        require "configs.cmp"
+        require("configs.cmp")
       end,
       requires = {
         {
@@ -403,31 +424,31 @@ require("packer").startup {
           event = "InsertEnter",
           after = "nvim-cmp",
           config = function()
-            require "configs.snippets"
+            require("configs.snippets")
           end,
         },
       },
-    }
-    use { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" }
-    use { "hrsh7th/cmp-emoji", after = "nvim-cmp" }
-    use { "hrsh7th/cmp-buffer", after = "nvim-cmp" }
-    use { "hrsh7th/cmp-path", after = "nvim-cmp" }
-    use { "hrsh7th/cmp-calc", after = "nvim-cmp" }
-    use { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }
-    use { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }
-    use { "hrsh7th/cmp-cmdline", after = "nvim-cmp" }
+    })
+    use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" })
+    use({ "hrsh7th/cmp-emoji", after = "nvim-cmp" })
+    use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
+    use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
+    use({ "hrsh7th/cmp-calc", after = "nvim-cmp" })
+    use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" })
+    use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" })
+    use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
 
     -- autopairs
-    use {
+    use({
       "windwp/nvim-autopairs",
       after = "nvim-cmp",
       config = function()
-        require "configs.nvim_autopairs"
+        require("configs.nvim_autopairs")
       end,
-    }
+    })
 
     -- easily configure lsp
-    use {
+    use({
       "neovim/nvim-lspconfig",
       opt = true,
       requires = {
@@ -435,44 +456,44 @@ require("packer").startup {
         "kabouzeid/nvim-lspinstall",
       },
       config = function()
-        require "configs.lsp"
+        require("configs.lsp")
         require("lspinstall").setup()
       end,
-    }
+    })
 
     -- show where lsp code action as available
-    use {
+    use({
       "kosayoda/nvim-lightbulb",
       after = "nvim-lspconfig",
       config = function()
-        vim.cmd [[autocmd CursorHold,CursorHoldI *.{lua} lua require'nvim-lightbulb'.update_lightbulb()]]
+        vim.cmd([[autocmd CursorHold,CursorHoldI *.{lua} lua require'nvim-lightbulb'.update_lightbulb()]])
       end,
-    }
+    })
 
     -- list for lsp,quickfix,telescope etc
-    use {
+    use({
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
       cmd = { "Trouble", "TroubleToggle" },
       config = function()
-        require("trouble").setup {
+        require("trouble").setup({
           auto_preview = false,
-        }
+        })
       end,
-    }
+    })
   end,
   config = {
-    compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
+    compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
     profile = {
       enable = true,
       threshold = 0,
     },
     display = {
       open_fn = function()
-        return require("packer.util").float {
+        return require("packer.util").float({
           border = require("utils").border_thin_rounded,
-        }
+        })
       end,
     },
   },
-}
+})

@@ -1,17 +1,17 @@
-vim.cmd [[PackerLoad telescope-fzf-native.nvim]]
-vim.cmd [[PackerLoad telescope-symbols.nvim]]
-vim.cmd [[PackerLoad telescope-zoxide]]
-vim.cmd [[PackerLoad telescope-frecency.nvim]]
-vim.cmd [[PackerLoad telescope-luasnip.nvim]]
-vim.cmd [[PackerLoad sqlite.lua]]
+vim.cmd([[PackerLoad telescope-fzf-native.nvim]])
+vim.cmd([[PackerLoad telescope-symbols.nvim]])
+vim.cmd([[PackerLoad telescope-zoxide]])
+vim.cmd([[PackerLoad telescope-frecency.nvim]])
+vim.cmd([[PackerLoad telescope-luasnip.nvim]])
+vim.cmd([[PackerLoad sqlite.lua]])
 
-local actions = require "telescope.actions"
-local action_state = require "telescope.actions.state"
-local themes = require "telescope.themes"
-local builtin = require "telescope.builtin"
-local utils = require "utils"
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+local themes = require("telescope.themes")
+local builtin = require("telescope.builtin")
+local utils = require("utils")
 
-require("telescope").setup {
+require("telescope").setup({
   defaults = {
     -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua
     layout_strategy = "horizontal",
@@ -41,7 +41,7 @@ require("telescope").setup {
         },
       },
     },
-    winblend = 0,
+    winblend = 20,
     mappings = {
       n = {
         ["<C-j>"] = actions.move_selection_next,
@@ -69,15 +69,15 @@ require("telescope").setup {
     },
     set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
   },
-}
-require("telescope").load_extension "fzf"
-require("telescope").load_extension "zoxide"
-require("telescope").load_extension "frecency"
-require("telescope").load_extension "luasnip"
+})
+require("telescope").load_extension("fzf")
+require("telescope").load_extension("zoxide")
+require("telescope").load_extension("frecency")
+require("telescope").load_extension("luasnip")
 
-local M = {}
+local ts = {}
 
-function M.file_browser()
+function ts.file_browser()
   local opts
 
   opts = {
@@ -105,7 +105,7 @@ function M.file_browser()
       end)
 
       map("i", "~", function()
-        modify_cwd(vim.fn.expand "~")
+        modify_cwd(vim.fn.expand("~"))
       end)
 
       local modify_depth = function(mod)
@@ -137,7 +137,7 @@ function M.file_browser()
   builtin.file_browser(opts)
 end
 
-function M.help_tags()
+function ts.help_tags()
   local opts = {
     prompt_prefix = "   ",
     selection_caret = "  ",
@@ -163,7 +163,7 @@ function M.help_tags()
   builtin.help_tags(opts)
 end
 
-function M.code_actions()
+function ts.code_actions()
   local opts = {
     -- winblend = 10,
     border = true,
@@ -173,7 +173,7 @@ function M.code_actions()
   builtin.lsp_code_actions(themes.get_dropdown(opts))
 end
 
-function M.find_string()
+function ts.find_string()
   local opts = {
     border = true,
     shorten_path = false,
@@ -199,7 +199,7 @@ function M.find_string()
   builtin.live_grep(opts)
 end
 
-function M.grep_last_search(opts)
+function ts.grep_last_search(opts)
   opts = opts or {}
 
   -- \<getreg\>\C
@@ -216,17 +216,17 @@ function M.grep_last_search(opts)
   require("telescope.builtin").grep_string(opts)
 end
 
-function M.curbuf()
-  local opts = themes.get_dropdown {
+function ts.curbuf()
+  local opts = themes.get_dropdown({
     -- winblend = 10,
     border = true,
     previewer = false,
     shorten_path = false,
-  }
+  })
   require("telescope.builtin").current_buffer_fuzzy_find(opts)
 end
 
-function M.git_diff()
+function ts.git_diff()
   local opts = {
     layout_strategy = "horizontal",
     border = true,
@@ -243,17 +243,16 @@ end
 
 local function base_16_finder(opts)
   opts = opts or {}
-  local pickers = require "telescope.pickers"
-  local finders = require "telescope.finders"
+  local pickers = require("telescope.pickers")
+  local finders = require("telescope.finders")
   local conf = require("telescope.config").values
   local custom_action = function()
-    local action_state = require "telescope.actions.state"
     local entry = action_state.get_selected_entry()
     if entry ~= nil then
       require("colors").init(entry[1])
-      require "colorscheme_switcher"
+      require("colorscheme_switcher").new_scheme()
     end
-    vim.fn.feedkeys(utils.t "<ESC><ESC>", "i")
+    vim.fn.feedkeys(utils.t("<ESC><ESC>"), "i")
   end
 
   pickers.new(opts, {
@@ -263,12 +262,13 @@ local function base_16_finder(opts)
     sorter = conf.generic_sorter(opts),
     attach_mappings = function(_, map)
       map("i", "<CR>", custom_action)
+      map("n", "<CR>", custom_action)
       return true
     end,
   }):find()
 end
 
-function M.colorschemes()
+function ts.colorschemes()
   local opts = {
     data = {
       "aquarium",
@@ -297,4 +297,4 @@ function M.colorschemes()
   base_16_finder(opts)
 end
 
-return M
+return ts

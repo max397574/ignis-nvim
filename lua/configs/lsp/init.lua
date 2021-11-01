@@ -1,9 +1,9 @@
-vim.cmd [[PackerLoad lua-dev.nvim]]
-vim.cmd [[PackerLoad nvim-lspinstall]]
-vim.cmd [[au CursorHold  * lua vim.diagnostic.show_position_diagnostics()]]
-local util = require "utils"
+vim.cmd([[PackerLoad lua-dev.nvim]])
+vim.cmd([[PackerLoad nvim-lspinstall]])
+vim.cmd([[au CursorHold  * lua vim.diagnostic.open_float(0,{scope = "cursor"})]])
+local util = require("utils")
 
-local DATA_PATH = vim.fn.stdpath "data"
+local DATA_PATH = vim.fn.stdpath("data")
 
 local lua_cmd = {
   DATA_PATH .. "/lspinstall/lua/sumneko-lua-language-server",
@@ -101,11 +101,11 @@ function lsp_conf.PeekImplementation()
   end
 end
 
-require "configs.lsp.signs"
-require "configs.lsp.border"
+require("configs.lsp.signs")
+require("configs.lsp.border")
 
-local lspconfig = require "lspconfig"
-local configs = require "lspconfig/configs"
+local lspconfig = require("lspconfig")
+local configs = require("lspconfig/configs")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.preselectSupport = true
@@ -151,7 +151,7 @@ if not lspconfig.emmet_ls then
     },
   }
 end
-lspconfig.emmet_ls.setup { capabilities = capabilities }
+lspconfig.emmet_ls.setup({ capabilities = capabilities })
 
 local servers = {
   pyright = {},
@@ -180,9 +180,9 @@ local servers = {
         workspace = {
           -- Make the server aware of Neovim runtime files
           library = {
-            [vim.fn.expand "~/.config/nvim/lua"] = true,
-            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-            [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+            [vim.fn.expand("~/.config/nvim/lua")] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
           },
           maxPreload = 100000,
           preloadFileSize = 1000,
@@ -200,7 +200,7 @@ require("lspinstall").setup() -- important
 local lspinstall_servers = require("lspinstall").installed_servers()
 for _, server in pairs(lspinstall_servers) do
   if server ~= "lua" then
-    require("lspconfig")[server].setup {}
+    require("lspconfig")[server].setup({})
   end
 end
 
@@ -208,9 +208,9 @@ local function on_attach(client, bufnr)
   require("configs.lsp.on_attach").setup(client, bufnr)
 end
 
-local luadev = require("lua-dev").setup {
+local luadev = require("lua-dev").setup({
   lspconfig = servers.sumneko_lua,
-}
+})
 -- lspconfig.sumneko_lua.setup(luadev)
 
 for server, config in pairs(servers) do

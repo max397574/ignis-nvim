@@ -31,7 +31,7 @@ local ui = {
   },
   -- Enable this only if your terminal has the colorscheme set which nvchad uses
   -- For Ex : if you have onedark set in nvchad, set onedark's bg color on your terminal
-  transparency = true,
+  transparency = false,
 }
 
 -- Define bg color
@@ -86,7 +86,7 @@ fg("NvimInternalError", red)
 fg("VertSplit", one_bg2)
 
 if ui.transparency then
-  cmd "hi clear CursorLine"
+  cmd("hi clear CursorLine")
   bg("Normal", "NONE")
   bg("Folded", "NONE")
   fg("Folded", "NONE")

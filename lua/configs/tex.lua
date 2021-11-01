@@ -1,6 +1,6 @@
-local M = {}
+local tex_conf = {}
 
-M.config = function()
+tex_conf.config = function()
   local tex_preview_settings = {}
   local forward_search_executable =
     "/Applications/Skim.app/Contents/SharedSupport/displayline"
@@ -38,7 +38,7 @@ M.config = function()
     tex_preview_settings = skim_args
   end
   return {
-    cmd = { vim.fn.stdpath "data" .. "/lspinstall/latex/texlab" },
+    cmd = { vim.fn.stdpath("data") .. "/lspinstall/latex/texlab" },
     filetypes = { "tex", "bib" },
     settings = {
       texlab = {
@@ -82,4 +82,4 @@ M.config = function()
   }
 end
 
-return M
+return tex_conf

@@ -19,70 +19,70 @@ _G.profile = function(command, times)
         "Command failed: "
           .. tostring(ok)
           .. " "
-          .. vim.inspect { command = command, args = args }
+          .. vim.inspect({ command = command, args = args })
       )
     end
   end
   print(((vim.loop.hrtime() - start) / 1000000 / times) .. "ms")
 end
 
-local M = {}
+local utils = {}
 
-function M.append_comma()
+function utils.append_comma()
   local cursor = vim.api.nvim_win_get_cursor(0)
-  cmd [[normal A,]]
+  cmd([[normal A,]])
   vim.api.nvim_win_set_cursor(0, cursor)
 end
 
-function M.last_place()
+function utils.last_place()
   if
     vim.tbl_contains(vim.api.nvim_list_bufs(), vim.api.nvim_get_current_buf())
   then
     if not vim.tbl_contains({ "help", "packer", "toggleterm" }, vim.bo.ft) then
-      cmd [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]]
+      cmd([[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]])
       local cursor = vim.api.nvim_win_get_cursor(0)
       if vim.fn.foldclosed(cursor[1]) ~= -1 then
-        cmd [[silent normal! zO]]
+        cmd([[silent normal! zO]])
       end
     end
   end
 end
 
 -- write latex file, create pdf and open in preview
-function M.LatexPreview()
-  cmd [[
+function utils.LatexPreview()
+  cmd([[
   write
   silent !pdflatex %; open %:t:r.pdf
-  ]]
+  ]])
 end
 
 -- convert markdown file to html and open
-function M.MarkdownPreview()
-  cmd [[
+function utils.MarkdownPreview()
+  cmd([[
   write
   silent !python3 -m markdown % > ~/temp_html.html
   silent !open ~/temp_html.html
-  ]]
+  ]])
 end
 
 -- highlight group of text under cursor
-function M.SynGroup()
-  cmd [[
+function utils.SynGroup()
+  cmd([[
   let l:s = synID(line('.'), col('.'), 1)
   echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
-  ]]
+  ]])
 end
 
-function M.create_augroup(autocmds, name)
+function utils.create_augroup(autocmds, name)
   cmd("augroup " .. name)
-  cmd "autocmd!"
+  cmd("autocmd!")
   for _, autocmd in ipairs(autocmds) do
     cmd("autocmd " .. autocmd)
   end
-  cmd "augroup END"
+  cmd("augroup END")
 end
 
-M.border_thin_rounded = {
+utils.border_thin_rounded = {
   "╭",
   "─",
   "╮",
@@ -92,7 +92,7 @@ M.border_thin_rounded = {
   "╰",
   "│",
 }
-M.border_wide_angular = {
+utils.border_wide_angular = {
   "▛",
   "▀",
   "▜",
@@ -119,17 +119,17 @@ _G.profile = function(command, times)
         "Command failed: "
           .. tostring(ok)
           .. " "
-          .. vim.inspect { command = command, args = args }
+          .. vim.inspect({ command = command, args = args })
       )
     end
   end
   print(((vim.loop.hrtime() - start) / 1000000 / times) .. "ms")
 end
 
-M.functions = {}
+utils.functions = {}
 
-function M.execute(id)
-  local func = M.functions[id]
+function utils.execute(id)
+  local func = utils.functions[id]
   if not func then
     error("Function doest not exist: " .. id)
   end
@@ -145,14 +145,14 @@ local map = function(mode, key, command, opts, defaults)
   )
 
   if type(command) == "function" then
-    table.insert(M.functions, command)
+    table.insert(utils.functions, command)
     if opts.expr then
       command = ([[luaeval('require("util").execute(%d)')]]):format(
-        #M.functions
+        #utils.functions
       )
     else
       command = ("<command>lua require('util').execute(%d)<cr>"):format(
-        #M.functions
+        #utils.functions
       )
     end
   end
@@ -165,71 +165,71 @@ local map = function(mode, key, command, opts, defaults)
   end
 end
 
-function M.map(mode, key, command, opt, defaults)
+function utils.map(mode, key, command, opt, defaults)
   return map(mode, key, command, opt, defaults)
 end
 
-function M.nmap(key, command, opts)
+function utils.nmap(key, command, opts)
   return map("n", key, command, opts)
 end
-function M.vmap(key, command, opts)
+function utils.vmap(key, command, opts)
   return map("v", key, command, opts)
 end
-function M.xmap(key, command, opts)
+function utils.xmap(key, command, opts)
   return map("x", key, command, opts)
 end
-function M.imap(key, command, opts)
+function utils.imap(key, command, opts)
   return map("i", key, command, opts)
 end
-function M.omap(key, command, opts)
+function utils.omap(key, command, opts)
   return map("o", key, command, opts)
 end
-function M.smap(key, command, opts)
+function utils.smap(key, command, opts)
   return map("s", key, command, opts)
 end
 
-function M.nnoremap(key, command, opts)
+function utils.nnoremap(key, command, opts)
   return map("n", key, command, opts, { noremap = true })
 end
-function M.vnoremap(key, command, opts)
+function utils.vnoremap(key, command, opts)
   return map("v", key, command, opts, { noremap = true })
 end
-function M.xnoremap(key, command, opts)
+function utils.xnoremap(key, command, opts)
   return map("x", key, command, opts, { noremap = true })
 end
-function M.inoremap(key, command, opts)
+function utils.inoremap(key, command, opts)
   return map("i", key, command, opts, { noremap = true })
 end
-function M.onoremap(key, command, opts)
+function utils.onoremap(key, command, opts)
   return map("o", key, command, opts, { noremap = true })
 end
-function M.snoremap(key, command, opts)
+function utils.snoremap(key, command, opts)
   return map("s", key, command, opts, { noremap = true })
 end
 
-function M.t(str)
+function utils.t(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-function M.log(msg, hl, name)
+function utils.log(msg, hl, name)
   name = name or "Neovim"
   hl = hl or "Todo"
   vim.api.nvim_echo({ { name .. ": ", hl }, { msg } }, true, {})
 end
 
-function M.warn(msg, name)
-  M.log(msg, "LspDiagnosticsDefaultWarning", name)
+function utils.warn(msg, name)
+  utils.log(msg, "LspDiagnosticsDefaultWarning", name)
 end
 
-function M.error(msg, name)
-  M.log(msg, "LspDiagnosticsDefaultError", name)
+function utils.error(msg, name)
+  utils.log(msg, "LspDiagnosticsDefaultError", name)
 end
 
-function M.info(msg, name)
-  M.log(msg, "LspDiagnosticsDefaultInformation", name)
+function utils.info(msg, name)
+  utils.log(msg, "LspDiagnosticsDefaultInformation", name)
 end
 
-function M.toggle(option, silent)
+function utils.toggle(option, silent)
   local info = vim.api.nvim_get_option_info(option)
   local scopes = { buf = "bo", win = "wo", global = "o" }
   local scope = scopes[info.scope]
@@ -237,14 +237,14 @@ function M.toggle(option, silent)
   options[option] = not options[option]
   if silent ~= true then
     if options[option] then
-      M.info("enabled vim." .. scope .. "." .. option, "Toggle")
+      utils.info("enabled vim." .. scope .. "." .. option, "Toggle")
     else
-      M.warn("disabled vim." .. scope .. "." .. option, "Toggle")
+      utils.warn("disabled vim." .. scope .. "." .. option, "Toggle")
     end
   end
 end
 
-function M.float_terminal(command)
+function utils.float_terminal(command)
   local buf = vim.api.nvim_create_buf(false, true)
   local vpad = 4
   local hpad = 10
@@ -264,12 +264,12 @@ function M.float_terminal(command)
     string.format("vim.api.nvim_buf_delete(%d, {force = true});", buf),
   }
   cmd(table.concat(autocommand, " "))
-  cmd [[startinsert]]
+  cmd([[startinsert]])
 end
 
-function M.docs()
+function utils.docs()
   local name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-  local docgen = require "babelfish"
+  local docgen = require("babelfish")
   vim.fn.mkdir("./doc", "p")
   local metadata = {
     input_file = "./README.md",
@@ -279,7 +279,7 @@ function M.docs()
   docgen.generate_readme(metadata)
 end
 
-function M.lsp_config()
+function utils.lsp_config()
   local ret = {}
   for _, client in pairs(vim.lsp.get_active_clients()) do
     ret[client.name] = {
@@ -290,7 +290,7 @@ function M.lsp_config()
   dump(ret)
 end
 
-function M.float_file(filepath)
+function utils.float_file(filepath)
   local lines_cat = vim.api.nvim_exec("!cat " .. filepath, true)
   local lines_lua = {}
   for line in string.gmatch(lines_cat, "[^\n]+") do
@@ -315,4 +315,4 @@ function M.float_file(filepath)
   vim.api.nvim_buf_set_option(buf, "modifiable", false)
 end
 
-return M
+return utils

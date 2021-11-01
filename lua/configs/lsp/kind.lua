@@ -1,6 +1,6 @@
-local M = {}
+local lsp_kind = {}
 
-M.icons = {
+lsp_kind.icons = {
   Class = "  ",
   Color = "  ",
   Constant = "  ",
@@ -29,11 +29,11 @@ M.icons = {
   Variable = "  ",
 }
 
-function M.setup()
+function lsp_kind.setup()
   local kinds = vim.lsp.protocol.CompletionItemKind
   for i, kind in ipairs(kinds) do
-    kinds[i] = M.icons[kind] or kind
+    kinds[i] = lsp_kind.icons[kind] or kind
   end
 end
 
-return M
+return lsp_kind

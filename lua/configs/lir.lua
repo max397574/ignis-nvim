@@ -1,8 +1,8 @@
-local actions = require "lir.actions"
-local mark_actions = require "lir.mark.actions"
-local clipboard_actions = require "lir.clipboard.actions"
+local actions = require("lir.actions")
+local mark_actions = require("lir.mark.actions")
+local clipboard_actions = require("lir.clipboard.actions")
 
-require("lir").setup {
+require("lir").setup({
   show_hidden_files = false,
   devicons_enable = true,
   mappings = {
@@ -24,7 +24,7 @@ require("lir").setup {
 
     ["J"] = function()
       mark_actions.toggle_mark()
-      vim.cmd "normal! j"
+      vim.cmd("normal! j")
     end,
     ["C"] = clipboard_actions.copy,
     ["X"] = clipboard_actions.cut,
@@ -50,16 +50,16 @@ require("lir").setup {
     -- end,
   },
   hide_cursor = false,
-}
+})
 
 -- custom folder icon
-require("nvim-web-devicons").set_icon {
+require("nvim-web-devicons").set_icon({
   lir_folder_icon = {
     icon = "",
     color = "#7ebae4",
     name = "LirFolderNode",
   },
-}
+})
 
 -- use visual mode
 function _G.LirSettings()
@@ -72,10 +72,10 @@ function _G.LirSettings()
   )
 
   -- echo cwd
-  vim.api.nvim_echo({ { vim.fn.expand "%:p", "Normal" } }, false, {})
+  vim.api.nvim_echo({ { vim.fn.expand("%:p"), "Normal" } }, false, {})
 end
 
-vim.cmd [[augroup lir-settings]]
-vim.cmd [[  autocmd!]]
-vim.cmd [[  autocmd Filetype lir :lua LirSettings()]]
-vim.cmd [[augroup END]]
+vim.cmd([[augroup lir-settings]])
+vim.cmd([[  autocmd!]])
+vim.cmd([[  autocmd Filetype lir :lua LirSettings()]])
+vim.cmd([[augroup END]])

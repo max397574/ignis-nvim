@@ -1,4 +1,4 @@
-require("nvim-web-devicons").setup {
+require("nvim-web-devicons").setup({
   override = {
     lir_folder_icon = {
       icon = "",
@@ -6,4 +6,4 @@ require("nvim-web-devicons").setup {
       name = "LirFolderNode",
     },
   },
-}
+})

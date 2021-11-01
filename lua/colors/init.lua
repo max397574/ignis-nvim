@@ -1,7 +1,7 @@
-local M = {}
+local colors = {}
 
 -- if theme given, load given theme if given, otherwise nvchad_theme
-M.init = function(theme)
+colors.init = function(theme)
   -- if not theme then
   --   theme = "onedark"
   -- end
@@ -19,14 +19,14 @@ M.init = function(theme)
     -- unload to force reload
     package.loaded["colors.highlights" or false] = nil
     -- then load the highlights
-    require "colors.highlights"
+    require("colors.highlights")
   else
     return false
   end
 end
 
 -- returns a table of colors for givem or current theme
-M.get = function(theme)
+colors.get = function(theme)
   if not theme then
     theme = vim.g.nvchad_theme
   end
@@ -34,4 +34,4 @@ M.get = function(theme)
   return require("hl_themes." .. theme)
 end
 
-return M
+return colors

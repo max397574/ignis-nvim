@@ -1,5 +1,5 @@
 local function clock()
-  return " " .. os.date "%H:%M"
+  return " " .. os.date("%H:%M")
 end
 
 local function empty()
@@ -12,8 +12,8 @@ local colors = {
 }
 
 local function progress_bar()
-  local current_line = vim.fn.line "."
-  local total_lines = vim.fn.line "$"
+  local current_line = vim.fn.line(".")
+  local total_lines = vim.fn.line("$")
   local chars = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
   local line_ratio = current_line / total_lines
   local index = math.ceil(line_ratio * #chars)
@@ -47,7 +47,7 @@ local function lsp_progress()
   return table.concat(status, " | ") .. " " .. spinners[frame + 1]
 end
 
-vim.cmd [[autocmd User LspProgressUpdate let &ro = &ro]]
+vim.cmd([[autocmd User LspProgressUpdate let &ro = &ro]])
 
 local config = {
   options = {
@@ -96,18 +96,18 @@ local function ins_right(component)
   table.insert(config.sections.lualine_y, component)
 end
 
-ins_left {
+ins_left({
   function()
     return "%="
   end,
-}
-ins_right "location"
+})
+ins_right("location")
 
 -- try to load matching lualine theme
 
-local M = {}
+local lualine = {}
 
-function M.load()
+function lualine.load()
   local name = vim.g.colors_name or ""
   local ok, _ = pcall(require, "lualine.themes." .. name)
   if ok then
@@ -116,5 +116,5 @@ function M.load()
   require("lualine").setup(config)
 end
 
-M.load()
-return M
+lualine.load()
+return lualine

@@ -1,7 +1,7 @@
-vim.cmd [[PackerLoad LuaSnip]]
-vim.cmd [[PackerLoad lua-dev.nvim]]
-local cmp = require "cmp"
-local luasnip = require "luasnip"
+vim.cmd([[PackerLoad LuaSnip]])
+vim.cmd([[PackerLoad lua-dev.nvim]])
+local cmp = require("cmp")
+local luasnip = require("luasnip")
 
 local icons = require("configs.lsp.kind").icons
 
@@ -10,8 +10,8 @@ local function t(str)
 end
 
 local function check_backspace()
-  local col = vim.fn.col "." - 1
-  if col == 0 or vim.fn.getline("."):sub(col, col):match "%s" then
+  local col = vim.fn.col(".") - 1
+  if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
     return true
   else
     return false
@@ -22,7 +22,7 @@ local function get_kind(kind_type)
   return icons[kind_type]
 end
 
-cmp.setup {
+cmp.setup({
   documentation = {
     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
   },
@@ -31,44 +31,46 @@ cmp.setup {
       require("luasnip").lsp_expand(args.body)
     end,
   },
-
   mapping = {
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.close(),
-    ["<CR>"] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Insert,
+    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-e>"] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
+    ["<CR>"] = cmp.mapping.confirm({
       select = true,
-    },
+      behavior = cmp.ConfirmBehavior.Insert,
+    }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+        -- cmp.select_next_item {}
+        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
       elseif luasnip.expand_or_jumpable() then
-        vim.fn.feedkeys(t "<Plug>luasnip-expand-or-jump", "")
+        vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
       elseif check_backspace() then
-        vim.fn.feedkeys(t "<Tab>", "n")
+        vim.fn.feedkeys(t("<Tab>"), "n")
       else
-        vim.fn.feedkeys(t "<C-Space>") -- Manual trigger
+        vim.fn.feedkeys(t("<C-Space>")) -- Manual trigger
       end
     end, {
       "i",
       "s",
-      "c",
+      -- "c",
     }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
+        cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
       elseif luasnip.jumpable(-1) then
-        vim.fn.feedkeys(t "<Plug>luasnip-jump-prev", "")
+        vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
       else
         fallback()
       end
     end, {
       "i",
       "s",
+      -- "c",
     }),
   },
 
@@ -80,7 +82,6 @@ cmp.setup {
     { name = "nvim_lsp", priority = 9 },
     { name = "luasnip", priority = 8 },
     { name = "neorg", priority = 6 },
-    -- { name = "spell", prority = 2 },
   },
   formatting = {
     format = function(entry, vim_item)
@@ -112,15 +113,17 @@ cmp.setup {
     ghost_text = true,
     native_menu = false,
   },
-}
-cmp.setup.cmdline(':', {
+})
+cmp.setup.cmdline(":", {
+  sources = cmp.config.sources({
+    { name = "path" },
+  }, {
+    { name = "cmdline" },
+  }),
+})
+
+cmp.setup.cmdline("/", {
   sources = {
-    { name = 'cmdline' },
-    { name = 'path' },
+    { name = "buffer" },
   },
 })
-cmp.setup.cmdline('/', {
-    sources = {
-      { name = 'buffer' }
-    }
-  })

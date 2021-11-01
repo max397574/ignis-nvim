@@ -1,5 +1,5 @@
-local M = {}
-function M.VirttextDefinition()
+local lsp_custom = {}
+function lsp_custom.VirttextDefinition()
   local position_params = vim.lsp.util.make_position_params()
   local lines
   local cursor = vim.api.nvim_win_get_cursor(0)
@@ -22,9 +22,9 @@ function M.VirttextDefinition()
             false
           )
         end
-        local ns = vim.api.nvim_create_namespace "virttext_definition"
-        -- local line = lines[1]
-        local line = "local line = lines[1]"
+        local ns = vim.api.nvim_create_namespace("virttext_definition")
+        local line = lines[1]
+        -- local line = "local line = lines[1]"
         local line_nr = cursor[1] - 1
         vim.api.nvim_win_set_cursor(0, cursor)
         vim.api.nvim_buf_set_extmark(
@@ -35,7 +35,7 @@ function M.VirttextDefinition()
           { virt_lines = { { { line, "NormalFloat" } } } }
         )
       else
-        print "Can't find definition"
+        print("Can't find definition")
       end
     end
   )
@@ -44,8 +44,8 @@ end
 local a
 print(a)
 
-function M.RenameWithQuickfix()
-  local old_name = vim.fn.expand "<cword>"
+function lsp_custom.RenameWithQuickfix()
+  local old_name = vim.fn.expand("<cword>")
   local position_params = vim.lsp.util.make_position_params()
   local new_name = vim.fn.input("New Name > ", old_name)
 
@@ -58,7 +58,7 @@ function M.RenameWithQuickfix()
     function(err, result, ...)
       vim.lsp.handlers["textDocument/rename"](err, result, ...)
 
-      print "result"
+      print("result")
       dump(result)
       local entries = {}
       if result.changes then
@@ -84,9 +84,9 @@ function M.RenameWithQuickfix()
         end
       end
       vim.fn.setqflist(entries, "r")
-      vim.cmd [[copen]]
+      vim.cmd([[copen]])
     end
   )
 end
 
-return M
+return lsp_custom

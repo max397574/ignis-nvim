@@ -1,4 +1,4 @@
-require("vmath_nvim").setup {
+require("vmath_nvim").setup({
   show_sum = true,
   show_average = true,
   show_count = true,
@@ -8,4 +8,4 @@ require("vmath_nvim").setup {
   show_median = true,
   debug = false,
   registers = true,
-}
+})

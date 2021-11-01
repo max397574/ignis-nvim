@@ -1,12 +1,12 @@
-local wk = require "which-key"
+local wk = require("which-key")
 
-require("which-key").setup {
+require("which-key").setup({
   window = {
     border = "none", -- none, single, double, shadow
     margin = { 1, 0, 1, 0 },
     winblend = 20,
   },
-}
+})
 
 wk.register({
   n = {

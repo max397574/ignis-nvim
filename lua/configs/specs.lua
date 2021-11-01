@@ -1,4 +1,4 @@
-require("specs").setup {
+require("specs").setup({
   show_jumps = true,
   min_jump = 10,
   popup = {
@@ -12,4 +12,4 @@ require("specs").setup {
   },
   ignore_filetypes = {},
   ignore_buftypes = { nofile = true },
-}
+})

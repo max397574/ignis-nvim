@@ -1,15 +1,15 @@
-local util = require "utils"
-local luasnip = require "luasnip"
+local util = require("utils")
+local luasnip = require("luasnip")
 
-luasnip.config.set_config {
+luasnip.config.set_config({
   history = true,
   -- Update more often, :h events for more info.
   updateevents = "TextChanged,TextChangedI",
-}
+})
 
 require("luasnip/loaders/from_vscode").load()
 
-local ls = require "luasnip"
+local ls = require("luasnip")
 local parse = ls.parser.parse_snippet
 
 local high = [[
@@ -175,6 +175,6 @@ ls.snippets = {
     parse({ trig = "fix", wordTrig = true }, gitcommit_fix),
   },
 }
-require("luasnip/loaders/from_vscode").load {
+require("luasnip/loaders/from_vscode").load({
   paths = { "~/.local/share/nvim/site/pack/packer/opt/friendly-snippets" },
-}
+})

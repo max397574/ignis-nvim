@@ -9,11 +9,11 @@ g.galaxy_transparancy = false
 g.galaxy_dynamic = false
 g.galaxy_light = false
 
-opt.shortmess:append "c"
-opt.iskeyword:remove "_"
+opt.shortmess:append("c")
+opt.iskeyword:remove("_")
 
 opt.pumblend = 18
-opt.formatoptions:remove { "c", "r", "o" }
+opt.formatoptions:remove({ "c", "r", "o" })
 opt.background = "dark" -- dark background
 opt.cmdheight = 1 -- height of cmd line
 opt.virtualedit = "block" -- allow visual mode to go over end of lines
@@ -58,7 +58,7 @@ opt.listchars = {
 opt.foldmethod = "indent" -- use treesitter for folding
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-opt.undodir = vim.fn.expand "~" .. "/.vim/undodir" -- directory to save undofiles
+opt.undodir = vim.fn.expand("~") .. "/.vim/undodir" -- directory to save undofiles
 opt.undofile = true
 
 opt.fillchars = { eob = " " } -- no fillchars at end of buffer

@@ -1,4 +1,4 @@
-require("bufferline").setup {
+require("bufferline").setup({
   options = {
     diagnostics = "nvim_lsp",
     custom_areas = {
@@ -28,4 +28,4 @@ require("bufferline").setup {
       end,
     },
   },
-}
+})

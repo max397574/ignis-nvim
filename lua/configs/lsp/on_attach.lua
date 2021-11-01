@@ -1,4 +1,4 @@
-local M = {}
+local on_attach = {}
 
 local function lsp_highlight_document(client)
   if client.resolved_capabilities.document_highlight then
@@ -15,7 +15,7 @@ local function lsp_highlight_document(client)
   end
 end
 
-function M.setup(client, bufnr)
+function on_attach.setup(client, bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
@@ -24,7 +24,7 @@ function M.setup(client, bufnr)
   buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   buf_set_keymap("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", opts)
-  require "configs.lsp.border"
+  require("configs.lsp.border")
   lsp_highlight_document(client)
 end
-return M
+return on_attach

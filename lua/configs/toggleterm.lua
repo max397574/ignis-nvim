@@ -5,7 +5,7 @@ local nore_silent = { noremap = true, silent = true }
 
 Open_term = require("toggleterm.terminal").Terminal
 
-require("toggleterm").setup {
+require("toggleterm").setup({
   hide_numbers = true,
   start_in_insert = true,
   insert_mappings = true,
@@ -23,15 +23,19 @@ require("toggleterm").setup {
       background = "NormalFloat",
     },
   },
-}
+})
 local files = {
-  python = "python3 -i " .. exp "%:t",
-  lua = "lua " .. exp "%:t",
-  c = "gcc -o temp " .. exp "%:t" .. " && ./temp && rm ./temp",
-  java = "javac " .. exp "%:t" .. " && java " .. exp "%:t:r" .. " && rm *.class",
+  python = "python3 -i " .. exp("%:t"),
+  lua = "lua " .. exp("%:t"),
+  c = "gcc -o temp " .. exp("%:t") .. " && ./temp && rm ./temp",
+  java = "javac "
+    .. exp("%:t")
+    .. " && java "
+    .. exp("%:t:r")
+    .. " && rm *.class",
   rust = "cargo run",
-  javascript = "node " .. exp "%:t",
-  typescript = "tsc " .. exp "%:t" .. " && node " .. exp "%:t:r" .. ".js",
+  javascript = "node " .. exp("%:t"),
+  typescript = "tsc " .. exp("%:t") .. " && node " .. exp("%:t:r") .. ".js",
 }
 function Run_file()
   local command = files[vim.bo.filetype]

@@ -15,7 +15,7 @@ parser_configs.markdown = {
   filetype = "markdown",
 }
 
-require("nvim-treesitter.configs").setup {
+require("nvim-treesitter.configs").setup({
   ensure_installed = {
     "markdown",
     "lua",
@@ -26,11 +26,12 @@ require("nvim-treesitter.configs").setup {
     "java",
     "vim",
     "norg",
+    "comment",
   },
   highlight = {
     enable = true,
     custom_captures = {
-    ["require_call"] = "RequireCall",
+      ["require_call"] = "RequireCall",
     },
   },
   incremental_selection = {
@@ -143,4 +144,4 @@ require("nvim-treesitter.configs").setup {
       },
     },
   },
-}
+})

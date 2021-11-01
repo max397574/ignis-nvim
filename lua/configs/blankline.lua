@@ -1,6 +1,6 @@
-local M = {}
+local blankline = {}
 
-M.setup = function()
+blankline.setup = function()
   vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
   vim.g.indent_blankline_filetype_exclude = {
     "help",
@@ -46,4 +46,4 @@ M.setup = function()
   vim.wo.colorcolumn = "99999"
 end
 
-return M
+return blankline

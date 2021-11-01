@@ -1,4 +1,4 @@
-require("gitsigns").setup {
+require("gitsigns").setup({
   signs = {
     add = {
       hl = "GitSignsAdd",
@@ -53,9 +53,9 @@ require("gitsigns").setup {
     ["o ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
     ["x ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
   },
-}
-vim.cmd [[
+})
+vim.cmd([[
 highlight GitSignsAdd guifg=#9ece6a
 highlight GitSignsChange guifg=#e0af68
 highlight GitSignsDelete guifg=#db4b4b
-]]
+]])

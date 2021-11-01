@@ -1,9 +1,9 @@
-vim.cmd [[hi lualine_a_normal gui=none]]
-vim.cmd [[hi lualine_a_select gui=none]]
-vim.cmd [[hi lualine_a_visual gui=none]]
-vim.cmd [[hi lualine_a_replace gui=none]]
-vim.cmd [[hi lualine_a_insert gui=none]]
-vim.cmd [[hi CursorLineNr gui=none]]
-vim.cmd [[highlight link LspReferenceWrite Visual]]
-vim.cmd [[highlight link LspReferenceRead Visual]]
-vim.cmd [[highlight link LspReferenceText Visual]]
+vim.cmd([[hi lualine_a_normal gui=none]])
+vim.cmd([[hi lualine_a_select gui=none]])
+vim.cmd([[hi lualine_a_visual gui=none]])
+vim.cmd([[hi lualine_a_replace gui=none]])
+vim.cmd([[hi lualine_a_insert gui=none]])
+vim.cmd([[hi CursorLineNr gui=none]])
+vim.cmd([[highlight link LspReferenceWrite Visual]])
+vim.cmd([[highlight link LspReferenceRead Visual]])
+vim.cmd([[highlight link LspReferenceText Visual]])
