@@ -124,6 +124,6 @@ cmp.setup.cmdline(":", {
 
 cmp.setup.cmdline("/", {
   sources = {
-    { name = "buffer" },
+    { name = "buffer", keyword_length = 1},
   },
 })
