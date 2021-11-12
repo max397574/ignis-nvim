@@ -9,7 +9,7 @@ wk.register({
     d = { "Done" },
     u = { "Undone" },
     p = { "Pending" },
-  }
+  },
 }, {
   prefix = "g",
   mode = "n",
@@ -22,11 +22,10 @@ wk.register({
     h = "Traverse Heading",
   },
   t = {
-    "+Gtd",
+    name = "+Gtd",
     c = "Capture",
     e = "Edit",
-    v = "Views"
-
+    v = "Views",
   },
   n = {
     name = "+New Note",

@@ -1,6 +1,8 @@
 vim.cmd([[PackerLoad lua-dev.nvim]])
 vim.cmd([[PackerLoad nvim-lspinstall]])
-vim.cmd([[au CursorHold  * lua vim.diagnostic.open_float(0,{scope = "cursor"})]])
+vim.cmd(
+  [[au CursorHold  * lua vim.diagnostic.open_float(0,{scope = "cursor"})]]
+)
 local util = require("utils")
 
 local DATA_PATH = vim.fn.stdpath("data")

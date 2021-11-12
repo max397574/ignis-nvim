@@ -12,6 +12,8 @@ require("luasnip/loaders/from_vscode").load()
 local ls = require("luasnip")
 local parse = ls.parser.parse_snippet
 
+local gitcommmit_stylua = [[chore: autoformat with stylua]]
+
 local high = [[
 ${1:HighlightGroup} = { fg = "${2}", bg = "${3}" },${0}]]
 
@@ -100,7 +102,10 @@ local tex_template = [[
 
 \begin{document}
 \maketitle
+\tableofcontents
+
 $0
+\addcontentsline{toc}{section}{Unnumbered Section}
 \end{document}]]
 
 local tex_section = [[
@@ -173,6 +178,7 @@ ls.snippets = {
     parse({ trig = "revert", wordTrig = true }, gitcommit_revert),
     parse({ trig = "cleanup", wordTrig = true }, gitcommit_cleanup),
     parse({ trig = "fix", wordTrig = true }, gitcommit_fix),
+    parse({ trig = "stylua", wordTrig = true }, gitcommmit_stylua),
   },
 }
 require("luasnip/loaders/from_vscode").load({

@@ -13,7 +13,9 @@ cmd([[
 ]])
 
 -- windows to close with "q"
-cmd([[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]])
+cmd(
+  [[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]]
+)
 cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
 
 cmd("lua print()")
@@ -25,7 +27,7 @@ u.create_augroup({
 }, "highlight_yank")
 
 u.create_augroup({
-  "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html} set spell",
+  "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html,norg} set spell",
   "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html} set spelllang+=de",
   "BufNewFile,BufRead,BufWinEnter *.lua set shiftwidth=2",
   "BufNewFile,BufRead,BufWinEnter *.lua set tabstop=2",

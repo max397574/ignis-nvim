@@ -29,7 +29,7 @@
 -- }
 -- local settings = require "startup.themes.startify"
 -- local settings = require "startup.themes.default"
-local settings = require("startup.themes.evil_startup")
+local settings = require("startup.themes.evil")
 -- settings.footer = {
 --   type = "text",
 --   content = function()
@@ -60,6 +60,7 @@ local settings = require("startup.themes.evil_startup")
 --   "⠀⠀⠀   ⠀ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⢐⢐⠴⡊⠌⠌⠈⡈⠈⠈⠁⠀  ⠀",
 --   "⠀⠀ ⠀⠀⠀ ⠀ ⠀  ⠀ ⠀ ⠀  ⠀  ⠀⠀ ⠀   ⠀ ⠀⠀⠀",
 -- }
+-- settings.parts = { "body", "header" }
 settings.header.content = {
   "⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ",
   "⠀⠀⠀⠀⠀⢫⠉⠒⠲⠤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
@@ -81,4 +82,7 @@ settings.header.content = {
   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⢀⠤⠊⠀⠀⠀⠀⠀⠈⠁⠀⠀⠀⠀",
   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ",
 }
+
+-- settings.header.content = require("startup.utils").get_oldfiles(10)
+
 return settings

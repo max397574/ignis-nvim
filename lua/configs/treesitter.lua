@@ -4,7 +4,16 @@ parser_configs.norg = {
   install_info = {
     url = "https://github.com/nvim-neorg/tree-sitter-norg",
     files = { "src/parser.c", "src/scanner.cc" },
+    -- branch = "main",
+    branch = "attached-modifiers",
+  },
+}
+
+parser_configs.norg_meta = {
+  install_info = {
+    url = "https://github.com/nvim-neorg/tree-sitter-norg-meta",
     branch = "main",
+    files = { "src/parser.c" },
   },
 }
 parser_configs.markdown = {

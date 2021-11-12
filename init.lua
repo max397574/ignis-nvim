@@ -27,6 +27,7 @@ require("autocommands")
 require("utils")
 vim.opt.shadafile = ""
 vim.cmd([[
+PackerLoad startup.nvim
 rshada!
 doautocmd BufRead
 syntax on
@@ -45,3 +46,8 @@ end, 0)
 -- end, 0) -- toggle comment for MIN STARTUP
 
 vim.cmd([[colorscheme onedark]])
+vim.cmd([[
+imap <silent><script><expr> <C-i> copilot#Accept("\<CR>")
+]])
+-- let g:copilot_no_tab_map = v:true
+-- ask for two numbers as input and return the bigger one

@@ -10,6 +10,25 @@ require("neorg").setup({
           marker = {
             icon = " ",
           },
+          todo = {
+            enable = true,
+            pending = {
+              -- icon = ""
+              icon = "",
+            },
+            uncertaint = {
+              icon = "?",
+            },
+            urgent = {
+              icon = "",
+            },
+            on_hold = {
+              icon = "",
+            },
+            cancelled = {
+              icon = "",
+            },
+          },
         },
       },
     },
@@ -27,17 +46,28 @@ require("neorg").setup({
     ["core.norg.dirman"] = {
       config = {
         workspaces = {
-          my_workspace = "~/neorg",
           startup = "~/startup.nvim",
-          gtd = "~/gtd"
+          example_ws = "~/example_workspaces/gtd/",
+          gtd = "~/gtd",
+          dany_gtd = "~/dany_gtd/",
         },
       },
     },
     ["core.gtd.base"] = {
       config = {
-        workspace = {"gtd","startup"}
+        workspace = "gtd",
+        -- workspace = "example_ws",
+        -- workspace = "dany_gtd",
+        -- exclude = { "gtd.norg", "neogen.norg", "kenaos.norg"},
       },
     },
     ["core.integrations.telescope"] = {},
+    -- ["core.norg.journal"] = {
+    --   config = {
+    --     -- workspace = "dany_gtd",
+    --     journal_folder = "my_journal",
+    --     use_folders = false,
+    --   }
+    -- }
   },
 })

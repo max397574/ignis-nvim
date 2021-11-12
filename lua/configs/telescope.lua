@@ -3,6 +3,7 @@ vim.cmd([[PackerLoad telescope-symbols.nvim]])
 vim.cmd([[PackerLoad telescope-zoxide]])
 vim.cmd([[PackerLoad telescope-frecency.nvim]])
 vim.cmd([[PackerLoad telescope-luasnip.nvim]])
+vim.cmd([[PackerLoad trouble.nvim]])
 vim.cmd([[PackerLoad sqlite.lua]])
 
 local actions = require("telescope.actions")

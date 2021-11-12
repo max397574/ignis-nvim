@@ -76,9 +76,12 @@ wk.register({
     q = { "<cmd>copen<CR>", "Open Quickfix List" },
   },
   t = {
-    name = "Table Mode",
+    name = "+Table, Tasks",
     m = { "<cmd>TableModeToggle<CR>", "Toggle Table Mode" },
     t = { "Tabelize" },
+    v = { "<cmd>Neorg gtd views<CR>", "View Tasks" },
+    c = { "<cmd>Neorg gtd capture<CR>", "Capture Taks" },
+    e = { "<cmd>Neorg gtd edit<CR>", "Edit Task" },
   },
   l = {
     name = "+Search Last",
@@ -304,6 +307,7 @@ map("n", "<ESC>", "<cmd>nohl<CR>", nore_silent)
 
 -- change case of cword
 map("n", "<C-U>", "b~", nore_silent)
+-- map("n", "<C-U>", "<cmd>lua require'utils'.change_case()<CR>", nore_silent)
 
 map("v", "<leader>n", ":norm ", nore_silent)
 

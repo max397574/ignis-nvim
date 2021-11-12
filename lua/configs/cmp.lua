@@ -109,6 +109,9 @@ cmp.setup({
       return vim_item
     end,
   },
+  sorting = {
+    comparators = cmp.config.compare.recently_used,
+  },
   experimental = {
     ghost_text = true,
     native_menu = false,
@@ -124,6 +127,6 @@ cmp.setup.cmdline(":", {
 
 cmp.setup.cmdline("/", {
   sources = {
-    { name = "buffer", keyword_length = 1},
+    { name = "buffer", keyword_length = 1 },
   },
 })

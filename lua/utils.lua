@@ -34,12 +34,20 @@ function utils.append_comma()
   vim.api.nvim_win_set_cursor(0, cursor)
 end
 
+function utils.change_case()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  cmd([[normal b~]])
+  vim.api.nvim_win_set_cursor(0, cursor)
+end
+
 function utils.last_place()
   if
     vim.tbl_contains(vim.api.nvim_list_bufs(), vim.api.nvim_get_current_buf())
   then
     if not vim.tbl_contains({ "help", "packer", "toggleterm" }, vim.bo.ft) then
-      cmd([[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]])
+      cmd(
+        [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]]
+      )
       local cursor = vim.api.nvim_win_get_cursor(0)
       if vim.fn.foldclosed(cursor[1]) ~= -1 then
         cmd([[silent normal! zO]])

@@ -24,6 +24,8 @@ require("packer").startup({
       event = "BufWritePre",
     })
 
+    -- use("github/copilot.vim")
+
     use({
       "~/nvim-base16.lua",
     })
@@ -31,6 +33,7 @@ require("packer").startup({
     use({
       "narutoxy/themer.lua",
       branch = "dev",
+      after = "impatient.nvim",
       -- after = "packer.nvim", -- hmm for some reason this errors out also `themer.lua` is not a heavy plugin
       config = function()
         -- require("themer").load("onedark")
@@ -76,6 +79,7 @@ require("packer").startup({
     -- colorscheme
     use({ "sainnhe/gruvbox-material" })
     use({ "NTBBloodbath/doombox.nvim" })
+    use({ "MordechaiHadad/nvim-papadark", requires = { "rktjmp/lush.nvim" } })
     use({ "NTBBloodbath/doom-one.nvim" })
     use("~/colorschemes")
     -- use { "~/onedarker.nvim" }
@@ -243,7 +247,8 @@ require("packer").startup({
     use({
       "nvim-neorg/neorg",
       after = "nvim-treesitter",
-      branch = "unstable",
+      -- branch = "unstable",
+      branch = "new-links",
       config = function()
         require("configs.neorg")
       end,
@@ -344,6 +349,7 @@ require("packer").startup({
 
     use({
       "~/startup.nvim",
+      opt = true,
       config = function()
         require("startup").setup(require("configs.startup_nvim"))
         -- require("startup").setup()
@@ -359,6 +365,7 @@ require("packer").startup({
           "*",
         }, {
           mode = "foreground",
+          hsl_fn = true,
         })
         vim.cmd([[ColorizerAttachToBuffer]])
       end,
@@ -425,7 +432,9 @@ require("packer").startup({
       "kosayoda/nvim-lightbulb",
       after = "nvim-lspconfig",
       config = function()
-        vim.cmd([[autocmd CursorHold,CursorHoldI *.{lua} lua require'nvim-lightbulb'.update_lightbulb()]])
+        vim.cmd(
+          [[autocmd CursorHold,CursorHoldI *.{lua} lua require'nvim-lightbulb'.update_lightbulb()]]
+        )
       end,
     })
 
