@@ -16,7 +16,7 @@ require("neorg").setup({
               -- icon = ""
               icon = "",
             },
-            uncertaint = {
+            uncertain = {
               icon = "?",
             },
             urgent = {
