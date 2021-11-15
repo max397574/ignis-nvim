@@ -9,6 +9,11 @@ wk.register({
     d = { "Done" },
     u = { "Undone" },
     p = { "Pending" },
+    i = { "Important" },
+    h = { "On Hold" },
+    c = { "Cancelled" },
+    r = { "Recurring" },
+
   },
 }, {
   prefix = "g",
