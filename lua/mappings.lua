@@ -1,7 +1,6 @@
 local map = vim.api.nvim_set_keymap
 local nore_silent = { noremap = true, silent = true }
 local nore = { noremap = true }
-local silent = { silent = true }
 local wk = require("which-key")
 
 wk.register({
@@ -152,6 +151,14 @@ wk.register({
     r = { "<cmd>Telescope oldfiles<CR>", "Open Recent File" },
     n = { "<cmd>enew<CR>", "New File" },
   },
+  i = {
+    name = "+Insert",
+    o = { "o<ESC>k", "Empty line below" },
+    O = { "O<ESC>j", "Empty line above" },
+    i = { "i <ESC>l", "Space before" },
+    a = { "a <ESC>h", "Space after" },
+    ["<CR>"] = { "i<CR><ESC>", "Linebreak at Cursor" },
+  },
   [" "] = { "<cmd>Telescope find_files<CR>", "Find File" },
   ["."] = {
     "<cmd>lua require('configs.telescope').file_browser()<CR>",
@@ -169,12 +176,7 @@ wk.register({
   },
   j = { ":m .+1<CR>==", "Move Current line down" },
   k = { ":m .-2<CR>==", "Move Current line up" },
-  o = { "o<ESC>k", "Add empty line below" },
-  O = { "O<ESC>j", "Add empty line above" },
   y = { '"+y', "Yank to clipboard" },
-  i = { "i <ESC>l", "Add space before" },
-  a = { "a <ESC>h", "Add space after" },
-  ["<CR>"] = { "i<CR><ESC>", "Linebreak at Cursor" },
   p = { '"0p', "Paste last yanked text" },
   P = { '"0P', "Paste last yanked text" },
   w = {
