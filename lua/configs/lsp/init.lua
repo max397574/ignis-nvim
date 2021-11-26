@@ -3,6 +3,8 @@ vim.cmd([[PackerLoad nvim-lspinstall]])
 vim.cmd(
   [[au CursorHold  * lua vim.diagnostic.open_float(0,{scope = "cursor"})]]
 )
+
+---@type nvim_config.utils
 local util = require("utils")
 
 local DATA_PATH = vim.fn.stdpath("data")
@@ -141,19 +143,34 @@ capabilities.textDocument.codeAction = {
   },
 }
 
-if not lspconfig.emmet_ls then
-  configs.emmet_ls = {
-    default_config = {
-      cmd = { "emmet-ls", "--stdio" },
-      filetypes = { "html", "css" },
-      root_dir = function()
-        return vim.loop.cwd()
-      end,
-      settings = {},
+configs.ls_emmet = {
+  default_config = {
+    cmd = { "ls_emmet", "--stdio" },
+    filetypes = {
+      "html",
+      "css",
+      "scss",
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "haml",
+      "xml",
+      "xsl",
+      "pug",
+      "slim",
+      "sass",
+      "stylus",
+      "less",
+      "sss",
     },
-  }
-end
-lspconfig.emmet_ls.setup({ capabilities = capabilities })
+    root_dir = function(fname)
+      return vim.loop.cwd()
+    end,
+    settings = {},
+  },
+}
+lspconfig.ls_emmet.setup({ capabilities = capabilities })
 
 local servers = {
   pyright = {},
@@ -176,8 +193,7 @@ local servers = {
           path = vim.split(package.path, ";"),
         },
         diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = { "vim" },
+          globals = { "vim","dump" },
         },
         workspace = {
           -- Make the server aware of Neovim runtime files
@@ -213,12 +229,12 @@ end
 local luadev = require("lua-dev").setup({
   lspconfig = servers.sumneko_lua,
 })
--- lspconfig.sumneko_lua.setup(luadev)
+lspconfig.sumneko_lua.setup(luadev)
 
 for server, config in pairs(servers) do
-  -- if server == "sumneko_lua" then
-  --   break
-  -- end
+  if server == "sumneko_lua" then
+    break
+  end
   lspconfig[server].setup(vim.tbl_deep_extend("force", {
     on_attach = on_attach,
     capabilities = capabilities,

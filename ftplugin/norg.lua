@@ -1,5 +1,6 @@
 vim.bo.shiftwidth = 2
 vim.o.conceallevel = 2
+vim.bo.commentstring = "#%s"
 
 local wk = require("which-key")
 
@@ -13,7 +14,6 @@ wk.register({
     h = { "On Hold" },
     c = { "Cancelled" },
     r = { "Recurring" },
-
   },
 }, {
   prefix = "g",

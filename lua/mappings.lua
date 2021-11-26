@@ -171,8 +171,9 @@ wk.register({
   },
   [":"] = { "<cmd>Telescope command_history<cr>", "Command History" },
   q = {
-    ':let @t = \'let @q = "\' . @q<CR>:<C-f>o<ESC>"tp$a"<Esc>',
-    "Edit Macro q",
+    name = "+Quickfix",
+    n = { "<cmd>cnext<CR>", "Next Entry"},
+    p = { "<cmd>cprevious<CR>", "Previous Entry"},
   },
   j = { ":m .+1<CR>==", "Move Current line down" },
   k = { ":m .-2<CR>==", "Move Current line up" },
@@ -245,8 +246,8 @@ map("n", "ƒ", ":vert resize -5<CR>", nore_silent)
 map("n", "°", ":resize -5<CR>", nore_silent)
 map("n", "¢", ":vert resize +5<CR>", nore_silent)
 -- move lines up and down in visual and normal mode
-map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
-map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
+-- map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
+-- map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
 -- remove highlighting from search
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
 -- easier escape
@@ -309,6 +310,7 @@ map("n", "<ESC>", "<cmd>nohl<CR>", nore_silent)
 
 -- change case of cword
 map("n", "<C-U>", "b~", nore_silent)
+map("i", "<C-U>", "<ESC>b~A", nore_silent)
 -- map("n", "<C-U>", "<cmd>lua require'utils'.change_case()<CR>", nore_silent)
 
 map("v", "<leader>n", ":norm ", nore_silent)
@@ -338,3 +340,4 @@ map(
   ':PackerLoad toggleterm.nvim<CR>:lua Open_term:new{cmd="lazygit", close_on_exit=true}:toggle()<CR>',
   nore_silent
 )
+map("n", "<Leader>?", ":TodoQuickFix<CR>", nore)

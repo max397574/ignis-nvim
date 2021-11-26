@@ -86,7 +86,7 @@ fg("NvimInternalError", red)
 fg("VertSplit", one_bg2)
 
 if ui.transparency then
-  cmd("hi clear CursorLine")
+  vim.cmd("hi clear CursorLine")
   bg("Normal", "NONE")
   bg("Folded", "NONE")
   fg("Folded", "NONE")

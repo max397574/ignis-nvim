@@ -1,5 +1,7 @@
 vim.cmd([[PackerLoad nvim-cmp]])
 vim.cmd([[PackerLoad telescope.nvim]])
+vim.cmd([[PackerLoad zen-mode.nvim]])
+-- vim.cmd([[PackerLoad neorg-telescope]])
 require("neorg").setup({
   load = {
     ["core.defaults"] = {}, -- Load all the default modules
@@ -30,6 +32,11 @@ require("neorg").setup({
             },
           },
         },
+      },
+    },
+    ["core.presenter"] = {
+      config = {
+        zen_mode = "zen-mode",
       },
     },
     ["core.keybinds"] = {
@@ -69,5 +76,20 @@ require("neorg").setup({
     --     use_folders = false,
     --   }
     -- }
+  },
+})
+
+require("telescope").setup({
+  pickers = {
+    find_files = {
+      mappings = {
+        i = {
+          ["<C-t>"] = require("custom.telescope").append_task,
+        },
+        n = {
+          ["<C-t>"] = require("custom.telescope").append_task,
+        },
+      },
+    },
   },
 })

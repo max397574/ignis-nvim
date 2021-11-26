@@ -15,6 +15,8 @@ require("packer").startup({
       end,
     })
 
+    use("nvim-lua/plenary.nvim")
+
     -- create directories if they don't exist
     use({
       "jghauser/mkdir.nvim",
@@ -24,7 +26,7 @@ require("packer").startup({
       event = "BufWritePre",
     })
 
-    -- use("github/copilot.vim")
+    use("github/copilot.vim")
 
     use({
       "~/nvim-base16.lua",
@@ -52,18 +54,18 @@ require("packer").startup({
     --   end}
 
     -- better escape
-    use({
-      -- "max397574/better-escape.nvim",
-      -- branch = "dev",
-      "~/betterEscape.nvim",
-      event = { "InsertEnter" },
-      config = function()
-        require("better_escape").setup({
-          keys = "<ESC>",
-          timeout = 200,
-        })
-      end,
-    })
+    -- use({
+    -- "max397574/better-escape.nvim",
+    -- branch = "dev",
+    -- "~/betterEscape.nvim",
+    -- event = { "InsertEnter" },
+    -- config = function()
+    -- require("better_escape").setup({
+    --   keys = "<ESC>",
+    --   timeout = 200,
+    -- })
+    -- end,
+    -- })
 
     use({
       "edluffy/specs.nvim",
@@ -144,6 +146,8 @@ require("packer").startup({
     --   end,
     -- }
 
+    use({ "Binx-Codes/calc.nvim" })
+
     -- floating terminal
     use({
       "akinsho/toggleterm.nvim",
@@ -154,47 +158,42 @@ require("packer").startup({
     })
 
     use({
-      "chentau/marks.nvim",
-      config = function()
-        require("marks").setup({})
-      end,
+      "nacro90/numb.nvim",
+      event = "CmdlineEnter",
+      config = [[require('numb').setup() ]],
+    })
+
+    use({
+      "Krafi2/jeskape.nvim",
+      event = "InsertEnter",
+      config = [[ require("configs.jeskape") ]],
     })
 
     -- bufferline
     use({
       "akinsho/bufferline.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      config = function()
-        require("configs.bufferline")
-      end,
+      config = [[ require("configs.bufferline") ]],
     })
 
     -- statusline
     use({
       "hoob3rt/lualine.nvim",
       requires = { "kyazdani42/nvim-web-devicons" },
-      config = function()
-        require("configs.lualine")
-      end,
+      config = [[ require("configs.lualine") ]],
     })
 
     use({
       "lewis6991/gitsigns.nvim",
       event = "BufReadPre",
-      wants = "plenary.nvim",
-      requires = { "nvim-lua/plenary.nvim" },
-      config = function()
-        require("configs.gitsigns")
-      end,
+      config = [[ require("configs.gitsigns") ]],
     })
 
     -- calculate math figures on visual selection
     use({
       "~/vmath.nvim",
       cmd = { "Vmath" },
-      config = function()
-        require("configs.vmath")
-      end,
+      config = [[ require("configs.vmath") ]],
     })
 
     -- some functions to help with markdown
@@ -204,9 +203,7 @@ require("packer").startup({
     use({
       "terrortylor/nvim-comment",
       keys = { "<leader>c", "<leader>cc" },
-      config = function()
-        require("configs.nvim_comment")
-      end,
+      config = [[ require("configs.nvim_comment") ]],
     })
 
     -- Git from Vim
@@ -246,23 +243,35 @@ require("packer").startup({
 
     use({
       "nvim-neorg/neorg",
+      -- "~/neorg",
       after = "nvim-treesitter",
       -- branch = "unstable",
-      branch = "new-links",
-      config = function()
-        require("configs.neorg")
-      end,
+      -- branch = "new-links",
+      branch = "ts-based-concealing",
+      config = [[ require("configs.neorg") ]],
 
-      requires = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
+      requires = {
+        -- {"max397574/neorg-telescope/",
+        -- branch = "heading_picker"},
+        "nvim-neorg/neorg-telescope",
+        -- "~/neorg-telescope/",
+      },
+    })
+
+    use({
+      "folke/zen-mode.nvim",
+      config = [[require("configs.zenmode")]],
+      cmd = "ZenMode",
+      requires = {
+        "folke/twilight.nvim",
+        config = [[ require("configs.twilight") ]],
+      },
     })
 
     use({
       "jameshiew/nvim-magic",
-      config = function()
-        require("nvim-magic").setup()
-      end,
+      config = [[ require("nvim-magic").setup() ]],
       requires = {
-        "nvim-lua/plenary.nvim",
         "MunifTanjim/nui.nvim",
       },
     })
@@ -270,28 +279,21 @@ require("packer").startup({
     -- highlight and search todo comments
     use({
       "folke/todo-comments.nvim",
-      requires = "nvim-lua/plenary.nvim",
-      cmd = { "TodoTelescope", "TodoTrouble" },
-      config = function()
-        require("todo-comments").setup({})
-      end,
+      cmd = { "TodoTelescope", "TodoTrouble","TodoQuickFix" },
+      config = [[ require("todo-comments").setup({}) ]],
     })
 
     use({
       "kyazdani42/nvim-tree.lua",
       cmd = { "NvimTreeToggle", "NvimTreeClose" },
-      config = function()
-        require("configs.nvim_tree")
-      end,
+      config = [[ require("configs.nvim_tree") ]],
     })
 
     -- change,add and delete surroundings
     -- use "tpope/vim-surround"
     use({
       "blackCauldron7/surround.nvim",
-      config = function()
-        require("surround").setup({ mappings_style = "surround" })
-      end,
+      config = [[ require("surround").setup({ mappings_style = "surround" }) ]],
     })
 
     -- display last undos
@@ -303,16 +305,12 @@ require("packer").startup({
     -- even more icons
     use({
       "kyazdani42/nvim-web-devicons",
-      config = function()
-        require("configs.web_devicons")
-      end,
+      config = [[ require("configs.web_devicons") ]],
     })
 
     use({
       "tamago324/lir.nvim",
-      config = function()
-        require("configs.lir")
-      end,
+      config = [[ require("configs.lir") ]],
       requires = "kyazdani42/nvim-web-devicons",
     })
 
@@ -325,7 +323,6 @@ require("packer").startup({
       event = "BufRead",
       requires = {
         { "nvim-lua/popup.nvim" },
-        { "nvim-lua/plenary.nvim" },
         { "kyazdani42/nvim-web-devicons" },
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
         { "nvim-telescope/telescope-symbols.nvim" },
@@ -335,25 +332,18 @@ require("packer").startup({
         { "tami5/sqlite.lua" },
         -- { "nvim-telescope/telescope-packer.nvim" }, -- breaks packer
       },
-      config = function()
-        require("configs.telescope")
-      end,
+      config = [[ require("configs.telescope") ]],
     })
     use({
       "AckslD/nvim-neoclip.lua",
       requires = { "tami5/sqlite.lua", module = "sqlite" },
-      config = function()
-        require("neoclip").setup()
-      end,
+      config = [[ require("neoclip").setup() ]],
     })
 
     use({
       "~/startup.nvim",
       opt = true,
-      config = function()
-        require("startup").setup(require("configs.startup_nvim"))
-        -- require("startup").setup()
-      end,
+      config = [[ require("startup").setup(require("configs.startup_nvim")) ]],
     })
 
     -- colorize color codes
@@ -375,9 +365,7 @@ require("packer").startup({
     use({
       "hrsh7th/nvim-cmp",
       event = "InsertEnter",
-      config = function()
-        require("configs.cmp")
-      end,
+      config = [[ require("configs.cmp") ]],
       requires = {
         {
           "L3MON4D3/LuaSnip",
@@ -403,14 +391,13 @@ require("packer").startup({
     use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" })
     use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" })
     use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
+    use({ "hrsh7th/cmp-copilot", after = "nvim-cmp" })
 
     -- autopairs
     use({
       "windwp/nvim-autopairs",
       after = "nvim-cmp",
-      config = function()
-        require("configs.nvim_autopairs")
-      end,
+      config = [[ require("configs.nvim_autopairs") ]],
     })
 
     -- easily configure lsp
@@ -457,11 +444,12 @@ require("packer").startup({
       threshold = 0,
     },
     display = {
-      open_fn = function()
-        return require("packer.util").float({
-          border = require("utils").border_thin_rounded,
-        })
-      end,
+      title = "Packer",
+      done_sym = "",
+      error_syn = "×",
+      keybindings = {
+        toggle_info = "<TAB>",
+      },
     },
   },
 })

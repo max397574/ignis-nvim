@@ -37,6 +37,30 @@ local files = {
   javascript = "node " .. exp("%:t"),
   typescript = "tsc " .. exp("%:t") .. " && node " .. exp("%:t:r") .. ".js",
 }
+
+local file_extenstions = {
+  ["typescript"] = "ts",
+  ["python"] = "py",
+  ["java"] = "java",
+  ["html"] = "html",
+  ["css"] = "css",
+  ["javascript"] = "js",
+  ["javascriptreact"] = "jsx",
+  ["markdown"] = "md",
+  ["sh"] = "sh",
+  ["zsh"] = "zsh",
+  ["vim"] = "vim",
+  ["rust"] = "rs",
+  ["cpp"] = "cpp",
+  ["c"] = "c",
+  ["go"] = "go",
+  ["lua"] = "lua",
+  ["conf"] = "conf",
+  ["haskel"] = "hs",
+  ["ruby"] = "rb",
+  ["txt"] = "txt",
+}
+
 function Run_file()
   local command = files[vim.bo.filetype]
   if command ~= nil then

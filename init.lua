@@ -1,7 +1,7 @@
 vim.cmd([[
-  syntax off
-  filetype off
-  filetype plugin indent off
+syntax off
+filetype off
+filetype plugin indent off
 ]])
 vim.g.loaded_gzip = false
 vim.g.loaded_netrwPlugin = false
@@ -48,6 +48,5 @@ end, 0)
 vim.cmd([[colorscheme onedark]])
 vim.cmd([[
 imap <silent><script><expr> <C-i> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:false
 ]])
--- let g:copilot_no_tab_map = v:true
--- ask for two numbers as input and return the bigger one

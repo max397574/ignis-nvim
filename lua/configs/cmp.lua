@@ -3,6 +3,11 @@ vim.cmd([[PackerLoad lua-dev.nvim]])
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
+luasnip.config.setup({
+	region_check_events = "CursorMoved",
+	delete_check_events = "TextChanged",
+})
+
 local icons = require("configs.lsp.kind").icons
 
 local function t(str)
@@ -34,44 +39,53 @@ cmp.setup({
   mapping = {
     ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<c-space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<tab>"] = cmp.mapping(cmp.mapping.complete(), { "i" }),
     ["<C-e>"] = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
+    ["<C-j>"] = cmp.mapping({
+			i = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+      c = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+		}),
+		["<C-k>"] = cmp.mapping({
+			i = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+      c = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+		}),
     ["<CR>"] = cmp.mapping.confirm({
       select = true,
       behavior = cmp.ConfirmBehavior.Insert,
     }),
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        -- cmp.select_next_item {}
-        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-      elseif luasnip.expand_or_jumpable() then
-        vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
-      elseif check_backspace() then
-        vim.fn.feedkeys(t("<Tab>"), "n")
-      else
-        vim.fn.feedkeys(t("<C-Space>")) -- Manual trigger
-      end
-    end, {
-      "i",
-      "s",
-      -- "c",
-    }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-      elseif luasnip.jumpable(-1) then
-        vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
-      else
-        fallback()
-      end
-    end, {
-      "i",
-      "s",
-      -- "c",
-    }),
+    -- ["<Tab>"] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     -- cmp.select_next_item {}
+    --     cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+    --   elseif luasnip.expand_or_jumpable() then
+    --     vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
+    --   elseif check_backspace() then
+    --     vim.fn.feedkeys(t("<Tab>"), "n")
+    --   else
+    --     vim.fn.feedkeys(t("<C-Space>")) -- Manual trigger
+    --   end
+    -- end, {
+    --   "i",
+    --   "s",
+    --   -- "c",
+    -- }),
+    -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+    --   elseif luasnip.jumpable(-1) then
+    --     vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+    --   else
+    --     fallback()
+    --   end
+    -- end, {
+    --   "i",
+    --   "s",
+    --   -- "c",
+    -- }),
   },
 
   sources = {
@@ -82,6 +96,7 @@ cmp.setup({
     { name = "nvim_lsp", priority = 9 },
     { name = "luasnip", priority = 8 },
     { name = "neorg", priority = 6 },
+    { name = "copilot", priority = 10 },
   },
   formatting = {
     format = function(entry, vim_item)
@@ -99,6 +114,7 @@ cmp.setup({
         luasnip = "[Snip]",
         buffer = "[Buf]",
         neorg = "[Norg]",
+        copilot = "[COP]",
         -- spell = "(Spell)",
       })[entry.source.name]
       vim_item.dup = ({

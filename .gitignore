@@ -16,3 +16,4 @@ notes.norg
 plugin/
 virtext_test.lua
 example.norg
+testlog.lua

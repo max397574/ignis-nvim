@@ -1,3 +1,4 @@
+---@type nvim_config.utils
 local util = require("utils")
 local luasnip = require("luasnip")
 
@@ -31,46 +32,40 @@ local map_cmd = [[<cmd>${0}<CR>]]
 local public_string = [[
 public String ${1:function_name}(${2:parameters}) {
   ${0}
-}
-]]
+}]]
 
 local public_void = [[
 public void ${1:function_name}(${2:parameters}) {
   ${0}
-}
-]]
+}]]
 
 local gitcommit_fix = [[
-fix(${1:scope}): 🐛${2:title}
+fix(${1:scope}): ${2:title}
 
-${0}
-]]
+${0}]]
 
 local gitcommit_cleanup = [[
-cleanup(${1:scope}): 🗑️${2:title}
+cleanup(${1:scope}): ${2:title}
 
-${0}
-]]
+${0}]]
 local gitcommit_revert = [[
 revert: ${2:header of reverted commit}
 
-This reverts commit 🔙${0:<hash>}
-]]
+This reverts commit ${0:<hash>}]]
+
 local gitcommit_feat = [[
-feat(${1:scope}): ✨${2:title}
+feat(${1:scope}): ${2:title}
 
-${0}
-]]
+${0}]]
 local gitcommit_docs = [[
-docs(${1:scope}): 📚${2:title}
+docs(${1:scope}): ${2:title}
 
-${0}
-]]
+${0}]]
+
 local gitcommit_refactor = [[
-refactor(${1:scope}): 🔄${2:title}
+refactor(${1:scope}): ${2:title}
 
-${0}
-]]
+${0}]]
 
 local tex_begin = [[
 \\begin{$1}
@@ -80,8 +75,7 @@ local tex_begin = [[
 local tex_arrow = [[\$\implies\$]]
 
 local tex_paragraph = [[
-\paragraph{$1}
-]]
+\paragraph{$1}]]
 
 local tex_template = [[
 \documentclass[a4paper,12pt]{article}
@@ -124,27 +118,23 @@ local tex_table = [[
     cell4 & cell5 & cell6 \\
     cell7 & cell8 & cell9
   \end{tabular}
-\end{center}
-]]
+\end{center}]]
 
 local tex_enumerate = [[
 \begin{enumerate}
   \item $0
-\end{enumerate}
-]]
+\end{enumerate}]]
 
 local tex_item = [[
 \item ]]
 
 local tex_bold = [[
-\textbf{$1}
-]]
+\textbf{$1}]]
 
 local tex_itemize = [[
 \begin{itemize}
 	\item $0
-\end{itemize}
-]]
+\end{itemize}]]
 
 ls.snippets = {
   lua = {

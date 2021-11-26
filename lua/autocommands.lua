@@ -1,26 +1,22 @@
+---@type nvim_config.utils
 local u = require("utils")
-local cmd = vim.cmd
 
-cmd([[autocmd! BufWinEnter COMMIT_EDITMSG set filetype=gitcommit]])
+vim.cmd([[autocmd! BufWinEnter COMMIT_EDITMSG set filetype=gitcommit]], false)
 -- cmd [[autocmd! BufWritePost *.lua !stylua %]]
 
-cmd([[au BufReadPost * lua require"utils".last_place()]])
+vim.cmd([[au BufReadPost * lua require"utils".last_place()]])
 
 -- show cursor line only in active window
-cmd([[
-  autocmd InsertLeave,WinEnter * set cursorline
-  autocmd InsertEnter,WinLeave * set nocursorline
-]])
+vim.cmd([[autocmd InsertLeave,WinEnter * set cursorline
+  autocmd InsertEnter,WinLeave * set nocursorline]])
 
 -- windows to close with "q"
-cmd(
+vim.cmd(
   [[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]]
 )
-cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
+vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
 
-cmd("lua print()")
-
-cmd([[au FocusGained * :checktime]])
+vim.cmd([[au FocusGained * :checktime]])
 
 u.create_augroup({
   "TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch',timeout=200}",
@@ -28,7 +24,7 @@ u.create_augroup({
 
 u.create_augroup({
   "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html,norg} set spell",
-  "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html} set spelllang+=de",
+  "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html,norg} set spelllang=de,en",
   "BufNewFile,BufRead,BufWinEnter *.lua set shiftwidth=2",
   "BufNewFile,BufRead,BufWinEnter *.lua set tabstop=2",
   "BufNewFile,BufRead,BufWinEnter *.{java,py} set tabstop=4",

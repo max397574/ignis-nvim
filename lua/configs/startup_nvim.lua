@@ -83,6 +83,26 @@ settings.header.content = {
   "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ",
 }
 
+settings.header.content = {
+  "                              ",
+  "       ⢀⣠⣴⣶⣿⣿⣿⣿⣿⣿⣶⣦⣄⡀         ",
+  "     ⣠⣶⡿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⣷⣄       ",
+  "   ⢀⣼⣿⣿   ⠙⠛⠛⠛⠛⠛⠛⠋⠁  ⢻⣿⣷⡀     ",
+  "  ⢀⣾⣿⣿⣿              ⢿⣿⣿⣿⡄    ",
+  "  ⣼⣿⣿⣿⠁              ⠈⢿⣿⣿⣷    ",
+  "  ⣿⣿⣿⡇                ⢸⣿⣿⣿    ",
+  "  ⣿⣿⣿⣧                ⣸⣿⣿⣿    ",
+  "  ⢻⣿⣿⣿⣧⡀            ⢀⣴⣿⣿⣿⡿    ",
+  "  ⠈⢿⣿⣛⠛⢿⣶⣤⣄⡀    ⢀⣠⣤⣶⣿⣿⣿⣿⣿⠃    ",
+  "   ⠈⢿⣿⣦⠈⠛⠻⠟⠃     ⣿⣿⣿⣿⣿⣿⡿⠁     ",
+  "     ⠙⢿⣷⣦⣤⣤⡄     ⣿⣿⣿⣿⡿⠋       ",
+  "       ⠈⠙⠻⠿⠁     ⠿⠿⠛⠁         ",
+}
+
+-- settings.options.after = function() print("noice") end
+
 -- settings.header.content = require("startup.utils").get_oldfiles(10)
+
+-- settings.body.content = require"github_nots".setup()
 
 return settings
