@@ -6,14 +6,7 @@ require("packer").startup({
     -- package manager
     use("wbthomason/packer.nvim")
 
-    use({
-      "lewis6991/impatient.nvim",
-      opt = true,
-      config = function()
-        require("impatient")
-        require("impatient").enable_profile()
-      end,
-    })
+    use("lewis6991/impatient.nvim")
 
     use("nvim-lua/plenary.nvim")
 
@@ -279,7 +272,7 @@ require("packer").startup({
     -- highlight and search todo comments
     use({
       "folke/todo-comments.nvim",
-      cmd = { "TodoTelescope", "TodoTrouble","TodoQuickFix" },
+      cmd = { "TodoTelescope", "TodoTrouble", "TodoQuickFix" },
       config = [[ require("todo-comments").setup({}) ]],
     })
 
@@ -406,11 +399,10 @@ require("packer").startup({
       opt = true,
       requires = {
         { "folke/lua-dev.nvim", opt = true },
-        "kabouzeid/nvim-lspinstall",
+        "williamboman/nvim-lsp-installer",
       },
       config = function()
         require("configs.lsp")
-        require("lspinstall").setup()
       end,
     })
 

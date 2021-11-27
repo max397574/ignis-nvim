@@ -172,8 +172,8 @@ wk.register({
   [":"] = { "<cmd>Telescope command_history<cr>", "Command History" },
   q = {
     name = "+Quickfix",
-    n = { "<cmd>cnext<CR>", "Next Entry"},
-    p = { "<cmd>cprevious<CR>", "Previous Entry"},
+    n = { "<cmd>cnext<CR>", "Next Entry" },
+    p = { "<cmd>cprevious<CR>", "Previous Entry" },
   },
   j = { ":m .+1<CR>==", "Move Current line down" },
   k = { ":m .-2<CR>==", "Move Current line up" },

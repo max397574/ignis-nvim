@@ -331,6 +331,16 @@ end
 
 -- https://paste.sh/GkuItIwS#SIH7vDr2kHsl-Zd6wxSdkXvc
 function utils.siduck_function(mappings)
+  if vim.g.nvchad_cheatsheet_displayed then
+    return
+  end
+  vim.g.nvchad_cheatsheet_displayed = true
+  vim.cmd(
+    [[autocmd BufWinLeave * ++once lua vim.g.nvchad_cheatsheet_displayed = false]]
+  )
+  local function spaces(amount)
+    return string.rep(" ", amount)
+  end
   vim.cmd([[highlight SiduckSectionContent guibg = #353b45]])
   vim.cmd([[highlight SiduckHeading guifg = #8bcd5b]])
   vim.cmd([[highlight SiduckBorder guifg = #617190 guibg = #353b45]])
@@ -343,7 +353,9 @@ function utils.siduck_function(mappings)
     "#34bfd0",
   }
   for i, color in ipairs(section_title_colors) do
-    vim.cmd("highlight SiduckTopic" .. i .. " guifg = " .. color)
+    vim.cmd(
+      "highlight SiduckTopic" .. i .. " guifg = " .. color .. " guibg=#617190"
+    )
   end
   local ns = vim.api.nvim_create_namespace("help")
   -- local lines = {" ","          My Mappings:"}
@@ -353,24 +365,31 @@ function utils.siduck_function(mappings)
   local section_lines = {}
   local section_titles = {}
   local border_lines = {}
+  local width = vim.api.nvim_win_get_width(0)
+  local height = vim.api.nvim_win_get_height(0)
+  local spacing = math.floor((width * 0.6 - 33) / 2)
+  if spacing < 4 then
+    spacing = 0
+  end
+
   local line_nr = 0
   for main_sec, section_contents in pairs(mappings) do
     table.insert(lines, " ")
-    table.insert(lines, "          " .. main_sec)
+    table.insert(lines, spaces(spacing - 4) .. main_sec)
     line_nr = line_nr + 2
     table.insert(section_titles, line_nr)
     for topic, values in pairs(section_contents) do
       if type(values) == "table" then
         lines[#lines + 1] = " "
         line_nr = line_nr + 1
-        lines[#lines + 1] = "            " .. topic
+        lines[#lines + 1] = spaces(spacing - 2) .. topic
         table.insert(heading_lines, line_nr)
         line_nr = line_nr + 1
-        lines[#lines + 1] = "                                               "
+        lines[#lines + 1] = " "
         line_nr = line_nr + 1
         table.insert(
           lines,
-          "              " .. "▛" .. string.rep("▀", 31) .. "▜"
+          spaces(spacing) .. "▛" .. string.rep("▀", 31) .. "▜"
         )
         table.insert(border_lines, line_nr)
         line_nr = line_nr + 1
@@ -378,7 +397,8 @@ function utils.siduck_function(mappings)
           if type(key) == "string" then
             table.insert(
               lines,
-              "              ▌"
+              spaces(spacing)
+                .. "▌"
                 .. mapping
                 .. string.rep(" ", 30 - #mapping - #key)
                 .. key
@@ -390,7 +410,8 @@ function utils.siduck_function(mappings)
             if type(key[1]) == "string" then
               table.insert(
                 lines,
-                "              ▌"
+                spaces(spacing)
+                  .. "▌"
                   .. mapping
                   .. string.rep(" ", 30 - #mapping - #key[1])
                   .. key[1]
@@ -401,7 +422,8 @@ function utils.siduck_function(mappings)
             elseif type(key) == "table" then
               table.insert(
                 lines,
-                "              ▌"
+                spaces(spacing)
+                  .. "▌"
                   .. mapping
                   .. ":"
                   .. string.rep(" ", 30 - #mapping)
@@ -412,9 +434,13 @@ function utils.siduck_function(mappings)
               for mapping_name, keystroke in pairs(key) do
                 table.insert(
                   lines,
-                  "              ▌  "
+                  spaces(spacing)
+                    .. "▌  "
                     .. mapping_name
-                    .. string.rep(" ", 30 - #mapping_name - 2 - #keystroke)
+                    .. string.rep(
+                      " ",
+                      30 - #mapping_name - 2 - #keystroke
+                    )
                     .. keystroke
                     .. " ▐"
                 )
@@ -426,7 +452,7 @@ function utils.siduck_function(mappings)
         end
         table.insert(
           lines,
-          "              " .. "▙" .. string.rep("▄", 31) .. "▟"
+          spaces(spacing) .. "▙" .. string.rep("▄", 31) .. "▟"
         )
         table.insert(border_lines, line_nr)
         line_nr = line_nr + 1
@@ -437,7 +463,8 @@ function utils.siduck_function(mappings)
         line_nr = line_nr + 1
         table.insert(
           lines,
-          "            ▌"
+          spaces(spacing)
+            .. "▌"
             .. topic
             .. string.rep(" ", 30 - #topic - #values)
             .. values
@@ -447,7 +474,7 @@ function utils.siduck_function(mappings)
         line_nr = line_nr + 1
         table.insert(
           lines,
-          "              " .. "▙" .. string.rep("▄", 31) .. "▟"
+          spaces(spacing) .. "▙" .. string.rep("▄", 31) .. "▟"
         )
         table.insert(section_lines, line_nr)
         line_nr = line_nr + 1
@@ -464,22 +491,17 @@ function utils.siduck_function(mappings)
     { noremap = true, silent = true, nowait = true }
   )
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-  local width = vim.api.nvim_win_get_width(0)
-  local height = vim.api.nvim_win_get_height(0)
-  win = vim.api.nvim_open_win(
-    buf,
-    true,
-    {
-      relative = "win",
-      win = 0,
-      width = math.floor(58),
-      height = math.floor(height * 0.9),
-      col = math.floor(width * 0.1),
-      row = math.floor(height * 0.1),
-      border = "shadow",
-      style = "minimal",
-    }
-  )
+  win = vim.api.nvim_open_win(buf, true, {
+    relative = "win",
+    win = 0,
+    width = math.floor(width * 0.6),
+    height = math.floor(height * 0.9),
+    col = math.floor(width * 0.2),
+    row = math.floor(height * 0.1),
+    border = "none",
+    style = "minimal",
+  })
+  vim.api.nvim_win_set_option(win, "wrap", false)
   local highlight_nr = 1
   for i, line in ipairs(heading_lines) do
     if true then
@@ -489,7 +511,7 @@ function utils.siduck_function(mappings)
         ns,
         "SiduckTopic" .. highlight_nr,
         line,
-        0,
+        spacing >= 4 and spacing - 2 or 0,
         -1
       )
       if highlight_nr == 6 then
@@ -503,110 +525,174 @@ function utils.siduck_function(mappings)
       ns,
       "SiduckSectionContent",
       line,
-      15,
+      spacing,
       -1
     )
   end
   for _, line in ipairs(border_lines) do
-    vim.api.nvim_buf_add_highlight(buf, ns, "SiduckBorder", line, 15, -1)
+    vim.api.nvim_buf_add_highlight(buf, ns, "SiduckBorder", line, spacing, -1)
   end
   for _, line in ipairs(section_lines) do
-    vim.api.nvim_buf_add_highlight(buf, ns, "SiduckBorder", line, 16, 17)
-    vim.api.nvim_buf_add_highlight(buf, ns, "SiduckBorder", line, 50, 51)
+    vim.api.nvim_buf_add_highlight(
+      buf,
+      ns,
+      "SiduckBorder",
+      line,
+      spacing + 2,
+      spacing + 3
+    )
+    vim.api.nvim_buf_add_highlight(
+      buf,
+      ns,
+      "SiduckBorder",
+      line,
+      spacing + 36,
+      spacing + 37
+    )
   end
   for _, line in ipairs(section_titles) do
-    vim.api.nvim_buf_add_highlight(buf, ns, "SiduckHeading", line - 1, 1, -1)
+    vim.api.nvim_buf_add_highlight(buf, ns, "SiduckHeading", line - 1, 0, -1)
   end
   vim.api.nvim_buf_set_option(buf, "modifiable", false)
 end
 
-function utils.siduck_test()
-  utils.siduck_function({
+local function siduck_mappings()
+  local siduck_mappings = {
+    -- custom = {}, -- all custom user mappings
+    -- close current focused buffer
+    close_buffer = "<leader>x",
+    copy_whole_file = "<C-a>", -- copy all contents of the current buffer
+    line_number_toggle = "<leader>n", -- show or hide line number
+    new_buffer = "<S-t>", -- open a new buffer
+    new_tab = "<C-t>b", -- open a new vim tab
+    save_file = "<C-s>", -- save file using :w
+    theme_toggler = "<leader>tt", -- for theme toggler, see in ui.theme_toggler
+    -- navigation in insert mode, only if enabled in options
+    insert_nav = {
+      backward = "<C-h>",
+      end_of_line = "<C-e>",
+      forward = "<C-l>",
+      next_line = "<C-k>",
+      prev_line = "<C-j>",
+      beginning_of_line = "<C-a>",
+    },
+    --better window movement
+    window_nav = {
+      moveLeft = "<C-h>",
+      moveRight = "<C-l>",
+      moveUp = "<C-k>",
+      moveDown = "<C-j>",
+    },
+    -- terminal related mappings
+    terminal = {
+      -- multiple mappings can be given for esc_termmode and esc_hide_termmode
+      -- get out of terminal mode
+      esc_termmode = { "jk" }, -- multiple mappings allowed
+      -- get out of terminal mode and hide it
+      esc_hide_termmode = { "JK" }, -- multiple mappings allowed
+      -- show & recover hidden terminal buffers in a telescope picker
+      pick_term = "<leader>W",
+      -- below three are for spawning terminals
+      new_horizontal = "<leader>h",
+      new_vertical = "<leader>v",
+      new_window = "<leader>w",
+    },
+    -- update nvchad from nvchad, chadness 101
+    update_nvchad = "<leader>uu",
+  }
 
-    ["General Mappings"] = {
-      misc = {
-        close_buffer = "<leader>x",
-        copy_whole_file = "<C-a>", -- copy all contents of current buffer
-        line_number_toggle = "<leader>n", -- toggle line number
-        update_nvchad = "<leader>uu",
-        new_buffer = "<S-t>",
-        new_tab = "<C-t>b",
-        save_file = "<C-s>", -- save file using :w
-        theme_toggler = "<leader>tt", -- see in ui.theme_toggler
-      },
-      -- navigation in insert mode, only if enabled in options
-      insert_nav = {
-        backward = "<C-h>",
-        end_of_line = "<C-e>",
-        forward = "<C-l>",
-        next_line = "<C-k>",
-        prev_line = "<C-j>",
-        beginning_of_line = "<C-a>",
-      },
-      -- better window movement
-      window_nav = {
-        moveLeft = "<C-h>",
-        moveRight = "<C-l>",
-        moveUp = "<C-k>",
-        moveDown = "<C-j>",
-      },
-      -- terminal related mappings
-      terminal = {
-        -- multiple mappings can be given for esc_termmode, esc_hide_termmode
-        -- get out of terminal mode
-        esc_termmode = { "jk" },
-        -- get out of terminal mode and hide it
-        esc_hide_termmode = { "JK" },
-        -- show & recover hidden terminal buffers in a telescope picker
-        pick_term = "<leader>W",
-        -- spawn terminals
-        new_horizontal = "<leader>h",
-        new_vertical = "<leader>v",
-        new_window = "<leader>w",
-      },
-      bufferline = {
-        next_buffer = "<TAB>",
-        prev_buffer = "<S-Tab>",
-      },
-      cheatsheet = {
-        default_keys = "<leader>dk",
-        user_keys = "<leader>uk",
+  -- all plugins related mappings
+  siduck_mappings.plugins = {
+    -- list open buffers up the top, easy switching too
+    bufferline = {
+      next_buffer = "<TAB>", -- next buffer
+      prev_buffer = "<S-Tab>", -- previous buffer
+    },
+    -- easily (un)comment code, language aware
+    comment = {
+      toggle = "<leader>/", -- toggle comment (works on multiple lines)
+    },
+    -- NeoVim 'home screen' on open
+    dashboard = {
+      bookmarks = "<leader>bm",
+      new_file = "<leader>fn", -- basically create a new buffer
+      open = "<leader>db", -- open dashboard
+      session_load = "<leader>l", -- load a saved session
+      session_save = "<leader>s", -- save a session
+    },
+    -- map to <ESC> with no lag
+    better_escape = { -- <ESC> will still work
+      esc_insertmode = { "jk" }, -- multiple mappings allowed
+    },
+    -- file explorer/tree
+    nvimtree = {
+      toggle = "<C-n>",
+      focus = "<leader>e",
+    },
+    -- multitool for finding & picking things
+    telescope = {
+      buffers = "<leader>fb",
+      find_files = "<leader>ff",
+      find_hiddenfiles = "<leader>fa",
+      git_commits = "<leader>cm",
+      git_status = "<leader>gt",
+      help_tags = "<leader>fh",
+      live_grep = "<leader>fw",
+      oldfiles = "<leader>fo",
+      themes = "<leader>th", -- NvChad theme picker
+      -- media previews within telescope finders
+      telescope_media = {
+        media_files = "<leader>fp",
       },
     },
-    Plugins = {
-      comment = {
-        toggle = "<leader>/",
-      },
-      dashboard = {
-        bookmarks = "<leader>bm",
-        new_file = "<leader>fn", -- basically create a new buffer
-        open = "<leader>db", -- open dashboard
-        session_load = "<leader>l",
-        session_save = "<leader>s",
-      },
-      -- map to <ESC> with no lag
-      better_escape = { -- <ESC> will still work
-        esc_insertmode = { "jk" }, -- multiple mappings allowed
-      },
-      nvimtree = {
-        toggle = "<C-n>",
-        focus = "<leader>e",
-      },
-      telescope = {
-        buffers = "<leader>fb",
-        find_files = "<leader>ff",
-        find_hiddenfiles = "<leader>fa",
-        git_commits = "<leader>cm",
-        git_status = "<leader>gt",
-        help_tags = "<leader>fh",
-        live_grep = "<leader>fw",
-        oldfiles = "<leader>fo",
-        themes = "<leader>th", -- NvChad theme picker
-        telescope_media = {
-          media_files = "<leader>fp",
-        },
-      },
-    },
+  }
+  return siduck_mappings
+end
+
+function utils.siduck_test()
+  local mappings = siduck_mappings()
+  local random_mappings = {}
+  for index, value in pairs(mappings) do
+    if type(value) ~= "table" then
+      random_mappings[index] = value
+      mappings[index] = nil
+    end
+  end
+  local pluginsMap = mappings.plugins
+  mappings.random_mappings = random_mappings
+
+  mappings.plugins = nil
+
+  utils.siduck_function({
+    ["Normal mappings"] = mappings,
+    ["Plugin Mappings"] = pluginsMap,
+  })
+end
+
+function utils.install_sumneko()
+  local config = require("lspinstall/util").extract_config("sumneko_lua")
+  config.default_config.cmd = { "./sumneko-lua-language-server" }
+
+  return vim.tbl_extend("error", config, {
+    install_script = [[
+    os=$(uname -s | tr "[:upper:]" "[:lower:]")
+    case $os in
+    linux)
+    platform="Linux"
+    ;;
+    darwin)
+    platform="macOS"
+    ;;
+    esac
+    curl -L -o sumneko-lua.vsix $(curl -s https://api.github.com/repos/sumneko/vscode-lua/releases/latest | grep 'browser_' | cut -d\" -f4)
+    rm -rf sumneko-lua
+    unzip sumneko-lua.vsix -d sumneko-lua
+    rm sumneko-lua.vsix
+    chmod +x sumneko-lua/extension/server/bin/$platform/lua-language-server
+    echo "#!/usr/bin/env bash" > sumneko-lua-language-server
+    echo "\$(dirname \$0)/sumneko-lua/extension/server/bin/$platform/lua-language-server -E -e LANG=en \$(dirname \$0)/sumneko-lua/extension/server/main.lua \$*" >> sumneko-lua-language-server
+    chmod +x sumneko-lua-language-server
+    ]],
   })
 end
 

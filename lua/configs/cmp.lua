@@ -4,8 +4,8 @@ local cmp = require("cmp")
 local luasnip = require("luasnip")
 
 luasnip.config.setup({
-	region_check_events = "CursorMoved",
-	delete_check_events = "TextChanged",
+  region_check_events = "CursorMoved",
+  delete_check_events = "TextChanged",
 })
 
 local icons = require("configs.lsp.kind").icons
@@ -46,13 +46,13 @@ cmp.setup({
       c = cmp.mapping.close(),
     }),
     ["<C-j>"] = cmp.mapping({
-			i = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+      i = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
       c = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-		}),
-		["<C-k>"] = cmp.mapping({
-			i = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+    }),
+    ["<C-k>"] = cmp.mapping({
+      i = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
       c = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-		}),
+    }),
     ["<CR>"] = cmp.mapping.confirm({
       select = true,
       behavior = cmp.ConfirmBehavior.Insert,

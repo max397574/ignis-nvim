@@ -20,6 +20,7 @@ vim.g.did_load_filetypes = 1
 vim.g.mapleader = " "
 
 -- vim.defer_fn(function() -- toggle comment for MIN STARTUP
+require("impatient")
 require("plugins")
 require("options")
 require("packer_compiled")

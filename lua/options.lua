@@ -48,6 +48,8 @@ opt.signcolumn = "yes:3" -- always signcolumn, 3 wide
 opt.termguicolors = true
 opt.conceallevel = 0
 
+opt.lazyredraw = true -- Do not redraw screen while processing macros
+
 opt.list = true --show some hidden characters
 opt.listchars = {
   tab = "> ",
@@ -55,18 +57,13 @@ opt.listchars = {
   trail = "•",
 }
 
-opt.foldmethod = "indent" -- use treesitter for folding
+opt.foldmethod = "expr" -- use treesitter for folding
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-opt.undodir = vim.fn.expand("~") .. "/.vim/undodir" -- directory to save undofiles
 opt.undofile = true
+opt.undodir = vim.fn.expand("~") .. "/.vim/undodir" -- directory to save undofiles
 
 opt.fillchars = { eob = " " } -- no fillchars at end of buffer
-
--- UltiSnips
-g.UltiSnipsExpandTrigger = "<leader><tab>"
-g.UltiSnipsJumpForwardTrigger = "<leader><tab>"
-g.UltiSnipsSnippetDirectories = { "UltiSnips", "my_snippets" }
 
 g.table_mode_corner = "|" -- Tablemode
 

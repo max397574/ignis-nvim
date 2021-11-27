@@ -343,8 +343,7 @@ local filetype_names = {
   "java  ",
 }
 
-
-  local function temp_files(opts)
+local function temp_files(opts)
   opts = opts or {}
   local pickers = require("telescope.pickers")
   local finders = require("telescope.finders")
@@ -362,23 +361,21 @@ local filetype_names = {
         "n",
         "q",
         "<cmd>q<CR>",
-        { noremap = true, silent = true, nowait = true })
+        { noremap = true, silent = true, nowait = true }
+      )
       local width = vim.api.nvim_win_get_width(0)
       local height = vim.api.nvim_win_get_height(0)
-      local win = vim.api.nvim_open_win(
-        buf,
-        true,
-        {
-          relative = "win",
-          win = 0,
-          width = math.floor(80),
-          height = math.floor(20),
-          col = math.floor(3),
-          row = math.floor(3),
-          -- border = "shadow",
-          border = "single",
-          style = "minimal",
-        })
+      local win = vim.api.nvim_open_win(buf, true, {
+        relative = "win",
+        win = 0,
+        width = math.floor(80),
+        height = math.floor(20),
+        col = math.floor(3),
+        row = math.floor(3),
+        -- border = "shadow",
+        border = "single",
+        style = "minimal",
+      })
       vim.api.nvim_buf_set_option(buf, "filetype", filetypes[entry[1]])
       vim.api.nvim_win_set_option(win, "winblend", 10)
     end
@@ -399,8 +396,7 @@ local filetype_names = {
 end
 
 function ts.temporary_files()
-  temp_files({data = filetype_names})
+  temp_files({ data = filetype_names })
 end
-
 
 return ts

@@ -1,5 +1,4 @@
 vim.cmd([[PackerLoad lua-dev.nvim]])
-vim.cmd([[PackerLoad nvim-lspinstall]])
 vim.cmd(
   [[au CursorHold  * lua vim.diagnostic.open_float(0,{scope = "cursor"})]]
 )
@@ -10,10 +9,13 @@ local util = require("utils")
 local DATA_PATH = vim.fn.stdpath("data")
 
 local lua_cmd = {
-  DATA_PATH .. "/lspinstall/lua/sumneko-lua-language-server",
+  DATA_PATH
+    .. "/lsp_servers/sumneko_lua/extension/server/bin/macOS/lua-language-server",
   "-E",
-  DATA_PATH .. "/lspinstall/lua/main.lua",
+  DATA_PATH .. "/lsp_servers/sumneko_lua/extension/server/main.lua",
 }
+
+local nvim_lsp = require("lspconfig")
 
 local lsp_conf = {}
 
@@ -109,7 +111,7 @@ require("configs.lsp.signs")
 require("configs.lsp.border")
 
 local lspconfig = require("lspconfig")
-local configs = require("lspconfig/configs")
+local configs = require("lspconfig.configs")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.preselectSupport = true
@@ -143,7 +145,95 @@ capabilities.textDocument.codeAction = {
   },
 }
 
-configs.ls_emmet = {
+local function on_attach(client, bufnr)
+  require("configs.lsp.on_attach").setup(client, bufnr)
+end
+
+local servers = {
+  pyright = {},
+  -- bashls = {},
+  dockerls = {},
+  tsserver = {},
+  clangd = {},
+  cssls = { cmd = { "css-languageserver", "--stdio" } },
+  rnix = {},
+  texlab = require("configs.tex").config(),
+  html = { cmd = { "html-languageserver", "--stdio" } },
+  intelephense = {},
+  -- efm = require("config.lsp.efm").config,
+  vimls = {},
+  -- tailwindcss = {},
+}
+local sumneko_lua_server = {
+  on_attach = on_attach,
+  cmd = lua_cmd,
+  settings = {
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
+        path = vim.split(package.path, ";"),
+      },
+      diagnostics = {
+        globals = { "vim", "dump" },
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = {
+          [vim.fn.expand("~/.config/nvim_config/lua")] = true,
+          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+        },
+        maxPreload = 100000,
+        preloadFileSize = 1000,
+      },
+    },
+  },
+}
+
+-- require("lspinstall").setup() -- important
+
+-- local lspinstall_servers = require("lspinstall").installed_servers()
+-- for _, server in pairs(lspinstall_servers) do
+--   if server ~= "lua" then
+--     -- require("lspconfig")[server].setup({})
+--   end
+-- end
+
+local luadev = require("lua-dev").setup({
+  library = {
+    vimruntime = true,
+    types = true,
+    plugins = false,
+  },
+  lspconfig = sumneko_lua_server,
+})
+lspconfig.sumneko_lua.setup(luadev)
+
+for server, config in pairs(servers) do
+  lspconfig[server].setup(vim.tbl_deep_extend("force", {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+      debounce_text_changes = 150,
+    },
+  }, config))
+  local cfg = lspconfig[server]
+  if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
+    util.error(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
+  end
+end
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics,
+  {
+    underline = true,
+    update_in_insert = false,
+    virtual_text = false,
+    severity_sort = true,
+  }
+)
+
+configs.emmet_ls = {
   default_config = {
     cmd = { "ls_emmet", "--stdio" },
     filetypes = {
@@ -170,91 +260,5 @@ configs.ls_emmet = {
     settings = {},
   },
 }
-lspconfig.ls_emmet.setup({ capabilities = capabilities })
 
-local servers = {
-  pyright = {},
-  -- bashls = {},
-  dockerls = {},
-  tsserver = {},
-  cssls = { cmd = { "css-languageserver", "--stdio" } },
-  rnix = {},
-  texlab = require("configs.tex").config(),
-  html = { cmd = { "html-languageserver", "--stdio" } },
-  intelephense = {},
-  sumneko_lua = {
-    cmd = lua_cmd,
-    settings = {
-      Lua = {
-        runtime = {
-          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-          version = "LuaJIT",
-          -- Setup your lua path
-          path = vim.split(package.path, ";"),
-        },
-        diagnostics = {
-          globals = { "vim","dump" },
-        },
-        workspace = {
-          -- Make the server aware of Neovim runtime files
-          library = {
-            [vim.fn.expand("~/.config/nvim/lua")] = true,
-            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-          },
-          maxPreload = 100000,
-          preloadFileSize = 1000,
-        },
-      },
-    },
-  },
-  -- efm = require("config.lsp.efm").config,
-  vimls = {},
-  -- tailwindcss = {},
-}
-
-require("lspinstall").setup() -- important
-
-local lspinstall_servers = require("lspinstall").installed_servers()
-for _, server in pairs(lspinstall_servers) do
-  if server ~= "lua" then
-    require("lspconfig")[server].setup({})
-  end
-end
-
-local function on_attach(client, bufnr)
-  require("configs.lsp.on_attach").setup(client, bufnr)
-end
-
-local luadev = require("lua-dev").setup({
-  lspconfig = servers.sumneko_lua,
-})
-lspconfig.sumneko_lua.setup(luadev)
-
-for server, config in pairs(servers) do
-  if server == "sumneko_lua" then
-    break
-  end
-  lspconfig[server].setup(vim.tbl_deep_extend("force", {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = {
-      debounce_text_changes = 150,
-    },
-  }, config))
-  local cfg = lspconfig[server]
-  if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
-    util.error(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
-  end
-end
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    underline = true,
-    update_in_insert = false,
-    virtual_text = false,
-    severity_sort = true,
-  }
-)
 return lsp_conf
