@@ -2,6 +2,10 @@ _G.dump = function(...)
   print(vim.inspect(...))
 end
 
+local x
+local y
+local z
+
 _G.profile = function(command, times)
   times = times or 100
   local args = {}
@@ -30,6 +34,12 @@ local utils = {}
 function utils.append_comma()
   local cursor = vim.api.nvim_win_get_cursor(0)
   vim.cmd([[normal A,]])
+  vim.api.nvim_win_set_cursor(0, cursor)
+end
+
+function utils.append_semicolon()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  vim.cmd([[normal A;]])
   vim.api.nvim_win_set_cursor(0, cursor)
 end
 
@@ -365,8 +375,16 @@ function utils.siduck_function(mappings)
   local section_lines = {}
   local section_titles = {}
   local border_lines = {}
-  local width = vim.api.nvim_win_get_width(0)
-  local height = vim.api.nvim_win_get_height(0)
+  local columns = vim.o.columns
+  local height = vim.o.lines
+  local width = columns
+  local function parse_mapping(mapping)
+    mapping = string.gsub(mapping, "C%-", "ctrl+")
+    mapping = string.gsub(mapping, "c%-", "ctrl+")
+    mapping = string.gsub(mapping, "%<leader%>","leader+")
+    mapping = string.gsub(mapping, "%<(.+)%>", "%1")
+    return mapping
+  end
   local spacing = math.floor((width * 0.6 - 33) / 2)
   if spacing < 4 then
     spacing = 0
@@ -395,6 +413,7 @@ function utils.siduck_function(mappings)
         line_nr = line_nr + 1
         for mapping, key in pairs(values) do
           if type(key) == "string" then
+            key = parse_mapping(key)
             table.insert(
               lines,
               spaces(spacing)
@@ -408,6 +427,7 @@ function utils.siduck_function(mappings)
             line_nr = line_nr + 1
           else
             if type(key[1]) == "string" then
+              key[1] = parse_mapping(key[1])
               table.insert(
                 lines,
                 spaces(spacing)
@@ -432,6 +452,7 @@ function utils.siduck_function(mappings)
               table.insert(section_lines, line_nr)
               line_nr = line_nr + 1
               for mapping_name, keystroke in pairs(key) do
+                keystroke = parse_mapping(keystroke)
                 table.insert(
                   lines,
                   spaces(spacing)
@@ -492,8 +513,8 @@ function utils.siduck_function(mappings)
   )
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
   win = vim.api.nvim_open_win(buf, true, {
-    relative = "win",
-    win = 0,
+    relative = "editor",
+    -- win = 0,
     width = math.floor(width * 0.6),
     height = math.floor(height * 0.9),
     col = math.floor(width * 0.2),
@@ -666,33 +687,6 @@ function utils.siduck_test()
   utils.siduck_function({
     ["Normal mappings"] = mappings,
     ["Plugin Mappings"] = pluginsMap,
-  })
-end
-
-function utils.install_sumneko()
-  local config = require("lspinstall/util").extract_config("sumneko_lua")
-  config.default_config.cmd = { "./sumneko-lua-language-server" }
-
-  return vim.tbl_extend("error", config, {
-    install_script = [[
-    os=$(uname -s | tr "[:upper:]" "[:lower:]")
-    case $os in
-    linux)
-    platform="Linux"
-    ;;
-    darwin)
-    platform="macOS"
-    ;;
-    esac
-    curl -L -o sumneko-lua.vsix $(curl -s https://api.github.com/repos/sumneko/vscode-lua/releases/latest | grep 'browser_' | cut -d\" -f4)
-    rm -rf sumneko-lua
-    unzip sumneko-lua.vsix -d sumneko-lua
-    rm sumneko-lua.vsix
-    chmod +x sumneko-lua/extension/server/bin/$platform/lua-language-server
-    echo "#!/usr/bin/env bash" > sumneko-lua-language-server
-    echo "\$(dirname \$0)/sumneko-lua/extension/server/bin/$platform/lua-language-server -E -e LANG=en \$(dirname \$0)/sumneko-lua/extension/server/main.lua \$*" >> sumneko-lua-language-server
-    chmod +x sumneko-lua-language-server
-    ]],
   })
 end
 
