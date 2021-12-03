@@ -4,7 +4,7 @@ local cond = require("nvim-autopairs.conds")
 
 require("nvim-autopairs").setup({
   ignored_next_char = "",
-  enable_check_bracket_line = false,
+  enable_check_bracket_line = true,
 })
 
 -- require("nvim-autopairs.completion.cmp").setup {
@@ -13,6 +13,13 @@ require("nvim-autopairs").setup({
 --   ignored_next_char = "",
 --   auto_select = true,
 -- }
+
+-- npairs.add_rule(Rule("*","|","norg"))
+-- npairs.add_rule(Rule("/","|","norg"))
+-- npairs.add_rule(Rule("$","|","norg"))
+-- npairs.add_rule(Rule("_","|","norg"))
+-- npairs.add_rule(Rule("-","|","norg"))
+-- npairs.add_rule(Rule("~","|","norg"))
 
 npairs.add_rules({
   Rule("=", "")

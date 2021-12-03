@@ -1,7 +1,12 @@
 vim.cmd([[PackerLoad LuaSnip]])
 vim.cmd([[PackerLoad lua-dev.nvim]])
 local cmp = require("cmp")
+local types = require("cmp.types")
 local luasnip = require("luasnip")
+
+local str = require("cmp.utils.str")
+
+local kind = require("configs.lsp.kind")
 
 luasnip.config.setup({
   region_check_events = "CursorMoved",
@@ -40,7 +45,7 @@ cmp.setup({
     ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
     ["<c-space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    ["<tab>"] = cmp.mapping(cmp.mapping.complete(), { "i" }),
+    -- ["<tab>"] = cmp.mapping(cmp.mapping.complete(), { "i" }),
     ["<C-e>"] = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
@@ -99,31 +104,67 @@ cmp.setup({
     { name = "copilot", priority = 10 },
   },
   formatting = {
-    format = function(entry, vim_item)
-      vim_item.kind = string.format(
-        "%s %s",
-        get_kind(vim_item.kind),
-        vim_item.kind
-      )
+    fields = {
+      cmp.ItemField.Kind,
+      cmp.ItemField.Abbr,
+      cmp.ItemField.Menu,
+    },
+    format = kind.cmp_format({
+      with_text = false,
+      before = function(entry, vim_item)
+        -- Get the full snippet (and only keep first line)
+        local word = entry:get_insert_text()
+        if
+          entry.completion_item.insertTextFormat
+          == types.lsp.InsertTextFormat.Snippet
+        then
+          word = vim.lsp.util.parse_snippet(word)
+        end
+        word = str.oneline(word)
 
-      vim_item.menu = ({
-        nvim_lsp = "[LSP]",
-        emoji = "[Emoji]",
-        path = "[Path]",
-        calc = "[Calc]",
-        luasnip = "[Snip]",
-        buffer = "[Buf]",
-        neorg = "[Norg]",
-        copilot = "[COP]",
-        -- spell = "(Spell)",
-      })[entry.source.name]
-      vim_item.dup = ({
-        buffer = 1,
-        path = 1,
-        nvim_lsp = 0,
-      })[entry.source.name] or 0
-      return vim_item
-    end,
+        -- concatenates the string
+        -- local max = 50
+        -- if string.len(word) >= max then
+        -- 	local before = string.sub(word, 1, math.floor((max - 3) / 2))
+        -- 	word = before .. "..."
+        -- end
+
+        if
+          entry.completion_item.insertTextFormat
+            == types.lsp.InsertTextFormat.Snippet
+          and string.sub(vim_item.abbr, -1, -1) == "~"
+        then
+          word = word .. "~"
+        end
+        vim_item.abbr = word
+
+        vim_item.dup = ({
+          buffer = 1,
+          path = 1,
+          nvim_lsp = 0,
+        })[entry.source.name] or 0
+        return vim_item
+      end,
+    }),
+    -- format = function(entry, vim_item)
+    --   vim_item.kind = string.format(
+    --     -- "%s %s",
+    --     "%s",
+    --     get_kind(vim_item.kind),
+    --     vim_item.kind
+    --   )
+
+    -- vim_item.menu = ({
+    --   nvim_lsp = "[LSP]",
+    --   emoji = "[Emoji]",
+    --   path = "[Path]",
+    --   calc = "[Calc]",
+    --   luasnip = "[Snip]",
+    --   buffer = "[Buf]",
+    --   neorg = "[Norg]",
+    --   copilot = "[COP]",
+    -- spell = "(Spell)",
+    -- })[entry.source.name]
   },
   sorting = {
     comparators = cmp.config.compare.recently_used,
@@ -146,3 +187,4 @@ cmp.setup.cmdline("/", {
     { name = "buffer", keyword_length = 1 },
   },
 })
+vim.cmd([[hi NormalFloat guibg=none]])

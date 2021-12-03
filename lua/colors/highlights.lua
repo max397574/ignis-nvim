@@ -144,6 +144,19 @@ fg("NvimTreeVertSplit", darker_black)
 bg("NvimTreeVertSplit", darker_black)
 fg_bg("NvimTreeWindowPicker", red, black2)
 
+fg_bg("TelescopeResultsBorder", one_bg2, one_bg2)
+fg_bg("TelescopeBorder", one_bg2, one_bg2)
+fg_bg("TelescopePreviewBorder", one_bg2, one_bg2)
+fg_bg("TelescopePromptBorder", one_bg2, one_bg2)
+bg("TelescopeNormal", one_bg2)
+bg("TelescopePreviewNormal", one_bg2)
+fg_bg("TelescopePreviewTitle", "NONE", green)
+fg_bg("TelescopePromptTitle", "NONE", red)
+fg_bg("TelescopeResultsTitle", "NONE", blue)
+fg_bg("TelescopePromptNormal", purple, grey_fg)
+fg_bg("TelescopePromptPrefix", red, one_bg2)
+fg("TelescopeSelection", blue)
+
 -- Disable some highlight in nvim tree if transparency enabled
 if ui.transparency then
   bg("NvimTreeNormal", "NONE")
@@ -154,8 +167,11 @@ if ui.transparency then
   bg("TelescopePreviewNormal", "NONE")
 end
 
+bg("Search", yellow)
+bg("IncSearch", red)
+
 -- Telescope
-fg("TelescopeBorder", line)
-fg("TelescopePreviewBorder", grey)
-fg("TelescopePromptBorder", line)
-fg("TelescopeResultsBorder", line)
+fg("TelescopeBorder", folder_bg)
+-- fg("TelescopePreviewBorder", folder_bg)
+-- fg("TelescopePromptBorder", folder_bg)
+-- fg("TelescopeResultsBorder", folder_bg)

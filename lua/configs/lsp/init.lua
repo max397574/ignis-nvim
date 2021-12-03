@@ -1,23 +1,22 @@
 vim.cmd([[PackerLoad lua-dev.nvim]])
-vim.cmd(
-  [[au CursorHold  * lua vim.diagnostic.open_float(0,{scope = "cursor"})]]
-)
+vim.cmd([[hi DiagnosticHeader gui=bold,italic guifg=#56b6c2]])
+vim.cmd([[au CursorHold  * lua vim.diagnostic.open_float(0, { scope = "cursor",source = "if_many",format = function(diagnostic) return require'configs.lsp'.parse_diagnostic(diagnostic) end, header = {"Cursor Diagnostics:","DiagnosticHeader"}, prefix = function(diagnostic,i,total) local icon, highlight if diagnostic.severity == 1 then icon = ""; highlight ="DiagnosticError" elseif diagnostic.severity == 2 then icon = ""; highlight ="DiagnosticWarn" elseif diagnostic.severity == 3 then icon = ""; highlight ="DiagnosticInfo" elseif diagnostic.severity == 4 then icon = ""; highlight ="DiagnosticHint" end return i.."/"..total.." "..icon.."  ",highlight end})]])
+-- vim.cmd([[au CursorHold  * lua vim.diagnostic.open_float(0,{scope = "cursor"})]])
 
 ---@type nvim_config.utils
 local util = require("utils")
 
-local DATA_PATH = vim.fn.stdpath("data")
-
 local lua_cmd = {
-  DATA_PATH
-    .. "/lsp_servers/sumneko_lua/extension/server/bin/macOS/lua-language-server",
-  "-E",
-  DATA_PATH .. "/lsp_servers/sumneko_lua/extension/server/main.lua",
+  vim.fn.expand("~") .. "/lua-language-server/bin/macOS/lua-language-server",
 }
 
 local nvim_lsp = require("lspconfig")
 
 local lsp_conf = {}
+
+function lsp_conf.parse_diagnostic(diagnostic)
+  return diagnostic.message
+end
 
 function lsp_conf.preview_location(location, context, before_context)
   -- location may be LocationLink or Location (more useful for the former)
@@ -162,7 +161,7 @@ local servers = {
   intelephense = {},
   -- efm = require("config.lsp.efm").config,
   vimls = {},
-  -- tailwindcss = {},
+  -- tailwindcss = {}, -- installed but not used too much cpu
 }
 local sumneko_lua_server = {
   on_attach = on_attach,
@@ -177,7 +176,6 @@ local sumneko_lua_server = {
         globals = { "vim", "dump" },
       },
       workspace = {
-        -- Make the server aware of Neovim runtime files
         library = {
           [vim.fn.expand("~/.config/nvim_config/lua")] = true,
           [vim.fn.expand("$VIMRUNTIME/lua")] = true,
@@ -189,15 +187,6 @@ local sumneko_lua_server = {
     },
   },
 }
-
--- require("lspinstall").setup() -- important
-
--- local lspinstall_servers = require("lspinstall").installed_servers()
--- for _, server in pairs(lspinstall_servers) do
---   if server ~= "lua" then
---     -- require("lspconfig")[server].setup({})
---   end
--- end
 
 local luadev = require("lua-dev").setup({
   library = {
@@ -260,5 +249,7 @@ configs.emmet_ls = {
     settings = {},
   },
 }
+
+lspconfig.emmet_ls.setup({ capabilities = capabilities })
 
 return lsp_conf

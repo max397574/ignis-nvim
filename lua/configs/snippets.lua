@@ -92,7 +92,7 @@ local tex_template = [[
 \usepackage{wrapfig}
 
 \title{$1}
-\author{Andri Limacher}
+\author{$2}
 
 \begin{document}
 \maketitle

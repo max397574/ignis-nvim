@@ -14,22 +14,28 @@ local builtin = require("telescope.builtin")
 local utils = require("utils")
 
 require("telescope").setup({
-  defaults = {
+  defaults = themes.get_ivy({
     -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua
-    layout_strategy = "horizontal",
+    selection_caret = "  ",
+    -- layout_strategy = "horizontal",
+    selection_strategy = "reset",
+    -- file_ignore_patterns = { "^.git" },
+    prompt_prefix = " ",
+    entry_prefix = " ",
     layout_config = {
       width = 0.99,
-      height = 0.99,
-      preview_cutoff = 90,
-      prompt_position = "bottom",
+      height = 0.5,
+      preview_width = 0.65,
+      preview_cutoff = 20,
+      prompt_position = "top",
       horizontal = {
-        preview_width = function(_, cols, _)
-          if cols > 200 then
-            return math.floor(cols * 0.5)
-          else
-            return math.floor(cols * 0.6)
-          end
-        end,
+        -- preview_width = function(_, cols, _)
+        --   if cols > 200 then
+        --     return math.floor(cols * 0.5)
+        --   else
+        --     return math.floor(cols * 0.6)
+        --   end
+        -- end,
       },
       vertical = {
         width = 0.9,
@@ -39,11 +45,11 @@ require("telescope").setup({
 
       flex = {
         horizontal = {
-          preview_width = 0.9,
+          -- preview_width = 0.9,
         },
       },
     },
-    winblend = 20,
+    -- winblend = 20,
     mappings = {
       n = {
         ["<C-j>"] = actions.move_selection_next,
@@ -51,6 +57,7 @@ require("telescope").setup({
         ["<C-o>"] = actions.select_vertical,
         ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
         ["<C-a>"] = actions.send_to_qflist + actions.open_qflist,
+        ["<C-h>"] = "which_key",
       },
       i = {
         ["<C-j>"] = actions.move_selection_next,
@@ -58,6 +65,7 @@ require("telescope").setup({
         ["<C-o>"] = actions.select_vertical,
         ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
         ["<C-a>"] = actions.send_to_qflist + actions.open_qflist,
+        ["<C-h>"] = "which_key",
       },
     },
     extensions = {
@@ -69,8 +77,9 @@ require("telescope").setup({
       },
     },
     set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
-  },
+  }),
 })
+
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("zoxide")
 require("telescope").load_extension("frecency")
@@ -138,28 +147,27 @@ function ts.file_browser()
 end
 
 function ts.help_tags()
-  local opts = {
-    prompt_prefix = "   ",
-    selection_caret = "  ",
-    entry_prefix = "  ",
+  local opts = themes.get_ivy({
     initial_mode = "insert",
-    selection_strategy = "reset",
     sorting_strategy = "ascending",
-    layout_strategy = "horizontal",
     layout_config = {
-      horizontal = {
-        prompt_position = "top",
-        preview_width = 0.55,
-        results_width = 0.8,
-      },
-      vertical = {
-        mirror = false,
-      },
-      width = 0.87,
-      height = 0.80,
-      preview_cutoff = 120,
+      prompt_position = "top",
+      preview_width = 0.75,
+      -- horizontal = {
+      --   preview_width = 0.55,
+      --   results_width = 0.8,
+      -- },
+      -- vertical = {
+      --   mirror = false,
+      -- },
+      -- width = 0.87,
+      height = 0.6,
     },
-  }
+    preview = {
+      preview_cutoff = 120,
+      preview_width = 80,
+    },
+  })
   builtin.help_tags(opts)
 end
 
@@ -174,15 +182,16 @@ function ts.code_actions()
 end
 
 function ts.find_string()
-  local opts = {
+  local opts = themes.get_ivy({
     border = true,
     shorten_path = false,
-    layout_strategy = "flex",
+    -- layout_strategy = "flex",
     layout_config = {
       width = 0.99,
-      height = 0.8,
-      horizontal = { width = { padding = 0.05 } },
-      vertical = { preview_height = 0.75 },
+      height = 0.5,
+      prompt_position = "top",
+      -- horizontal = { width = { padding = 0.05 } },
+      -- vertical = { preview_height = 0.75 },
     },
     file_ignore_patterns = {
       "vendor/*",
@@ -194,8 +203,8 @@ function ts.find_string()
       "%.otf",
       "%.ttf",
     },
-    -- winblend = 15,
-  }
+  })
+  -- winblend = 15,
   builtin.live_grep(opts)
 end
 
@@ -217,11 +226,13 @@ function ts.grep_last_search(opts)
 end
 
 function ts.curbuf()
-  local opts = themes.get_dropdown({
+  local opts = themes.get_ivy({
     -- winblend = 10,
-    border = true,
-    previewer = false,
+    -- border = false,
+    -- previewer = false,
     shorten_path = false,
+    prompt_position = "top",
+    layout_config = { prompt_position = "top", height = 0.4 },
   })
   require("telescope.builtin").current_buffer_fuzzy_find(opts)
 end
@@ -274,6 +285,7 @@ function ts.colorschemes()
       "aquarium",
       "blossom",
       "chadracula",
+      "classic-dark",
       "doom-chad",
       "everforest",
       "gruvbox",
@@ -281,6 +293,7 @@ function ts.colorschemes()
       "javacafe",
       "jellybeans",
       "lfgruv",
+      "monokai",
       "mountain",
       "nord",
       "one-light",
@@ -288,13 +301,15 @@ function ts.colorschemes()
       "onedark-deep",
       "onejelly",
       "onenord",
+      "palenight",
+      "penokai",
+      "solarized",
       "tokyonight",
-      "xterm",
       "tomorrow-night",
       "uwu",
     },
   }
-  base_16_finder(opts)
+  base_16_finder(themes.get_ivy(opts))
 end
 
 local filetypes = {

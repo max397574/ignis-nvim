@@ -385,7 +385,7 @@ function utils.siduck_function(mappings)
     mapping = string.gsub(mapping, "%<(.+)%>", "%1")
     return mapping
   end
-  local spacing = math.floor((width * 0.6 - 33) / 2)
+  local spacing = math.floor((width * 0.6 - 38) / 2)
   if spacing < 4 then
     spacing = 0
   end
@@ -400,14 +400,14 @@ function utils.siduck_function(mappings)
       if type(values) == "table" then
         lines[#lines + 1] = " "
         line_nr = line_nr + 1
-        lines[#lines + 1] = spaces(spacing - 2) .. topic
+        lines[#lines + 1] = spaces(spacing) .. topic
         table.insert(heading_lines, line_nr)
         line_nr = line_nr + 1
         lines[#lines + 1] = " "
         line_nr = line_nr + 1
         table.insert(
           lines,
-          spaces(spacing) .. "▛" .. string.rep("▀", 31) .. "▜"
+          spaces(spacing) .. "▛" .. string.rep("▀", 36) .. "▜"
         )
         table.insert(border_lines, line_nr)
         line_nr = line_nr + 1
@@ -419,7 +419,7 @@ function utils.siduck_function(mappings)
               spaces(spacing)
                 .. "▌"
                 .. mapping
-                .. string.rep(" ", 30 - #mapping - #key)
+                .. string.rep(" ", 35 - #mapping - #key)
                 .. key
                 .. " ▐"
             )
@@ -433,7 +433,7 @@ function utils.siduck_function(mappings)
                 spaces(spacing)
                   .. "▌"
                   .. mapping
-                  .. string.rep(" ", 30 - #mapping - #key[1])
+                  .. string.rep(" ", 35 - #mapping - #key[1])
                   .. key[1]
                   .. " ▐"
               )
@@ -446,7 +446,7 @@ function utils.siduck_function(mappings)
                   .. "▌"
                   .. mapping
                   .. ":"
-                  .. string.rep(" ", 30 - #mapping)
+                  .. string.rep(" ", 35 - #mapping)
                   .. "▐"
               )
               table.insert(section_lines, line_nr)
@@ -460,7 +460,7 @@ function utils.siduck_function(mappings)
                     .. mapping_name
                     .. string.rep(
                       " ",
-                      30 - #mapping_name - 2 - #keystroke
+                      35 - #mapping_name - 2 - #keystroke
                     )
                     .. keystroke
                     .. " ▐"
@@ -473,7 +473,7 @@ function utils.siduck_function(mappings)
         end
         table.insert(
           lines,
-          spaces(spacing) .. "▙" .. string.rep("▄", 31) .. "▟"
+          spaces(spacing) .. "▙" .. string.rep("▄", 36) .. "▟"
         )
         table.insert(border_lines, line_nr)
         line_nr = line_nr + 1
@@ -487,7 +487,7 @@ function utils.siduck_function(mappings)
           spaces(spacing)
             .. "▌"
             .. topic
-            .. string.rep(" ", 30 - #topic - #values)
+            .. string.rep(" ", 35 - #topic - #values)
             .. values
             .. " "
         )
@@ -495,7 +495,7 @@ function utils.siduck_function(mappings)
         line_nr = line_nr + 1
         table.insert(
           lines,
-          spaces(spacing) .. "▙" .. string.rep("▄", 31) .. "▟"
+          spaces(spacing) .. "▙" .. string.rep("▄", 36) .. "▟"
         )
         table.insert(section_lines, line_nr)
         line_nr = line_nr + 1
@@ -532,7 +532,7 @@ function utils.siduck_function(mappings)
         ns,
         "SiduckTopic" .. highlight_nr,
         line,
-        spacing >= 4 and spacing - 2 or 0,
+        spacing >= 4 and spacing or 0,
         -1
       )
       if highlight_nr == 6 then
@@ -567,8 +567,8 @@ function utils.siduck_function(mappings)
       ns,
       "SiduckBorder",
       line,
-      spacing + 36,
-      spacing + 37
+      spacing + 41,
+      spacing + 42
     )
   end
   for _, line in ipairs(section_titles) do

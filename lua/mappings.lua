@@ -101,7 +101,7 @@ wk.register({
     h = { "<cmd>lua require'configs.telescope'.help_tags()<CR>", "Help Pages" },
     m = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
     k = { "<cmd>Telescope keymaps<CR>", "Key Maps" },
-    s = { "<cmd>Telescope highlights<CR>", "Search Highlight Groups" },
+    -- s = { "<cmd>Telescope highlights<CR>", "Search Highlight Groups" },
     l = {
       [[<cmd>TSHighlightCapturesUnderCursor<CR>]],
       "Highlight Groups at cursor",
@@ -139,15 +139,22 @@ wk.register({
     },
     h = { "<cmd>Telescope command_history<CR>", "Command History" },
     m = { "<cmd>Telescope marks<CR>", "Jump to Mark" },
+    -- c = {
+    --   "<cmd>lua require'configs.telescope'.code_actions()<CR>",
+    --   "Code Actions",
+    -- },
     c = {
-      "<cmd>lua require'configs.telescope'.code_actions()<CR>",
-      "Code Actions",
+      "<cmd>Telescope highlights<CR>",
+      "Colors",
     },
     t = { "<cmd>TodoTelescope<CR>", "Todo Comments" },
   },
   f = {
     name = "+File",
-    f = { "<cmd>Telescope find_files<CR>", "Find File" },
+    f = {
+      [[<cmd>lua require'telescope.builtin'.find_files({find_command={"rg","-g", "!.git","--files","--hidden","--no-ignore"}})<CR>]],
+      "Find File",
+    },
     r = { "<cmd>Telescope oldfiles<CR>", "Open Recent File" },
     n = { "<cmd>enew<CR>", "New File" },
   },
@@ -297,6 +304,9 @@ map("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", nore_silent)
 map("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
 map("v", "m", ":<C-U>lua require('tsht').nodes()<CR>", nore_silent)
 
+-- map("n", "<c-n>", "<cmd>bnext<CR>", nore_silent)
+-- map("n", "<c-p>", "<cmd>bprev<CR>", nore_silent)
+
 -- open helpfile of word under cursor
 map(
   "n",
@@ -305,7 +315,11 @@ map(
   nore_silent
 )
 
+-- jump to mark m
+map("n", "M", "`m", nore_silent)
+
 map("n", ",,", "<cmd>lua require'utils'.append_comma()<CR>", nore_silent)
+map("n", ";;", "<cmd>lua require'utils'.append_semicolon()<CR>", nore_silent)
 map("n", "<ESC>", "<cmd>nohl<CR>", nore_silent)
 
 -- change case of cword
@@ -328,16 +342,21 @@ map(
   [[(v:count > 1 ? "m'" . v:count : '') . 'j']],
   { noremap = true, expr = true }
 )
+
 map(
   "n",
   "k",
   [[(v:count > 1 ? "m'" . v:count : '') . 'k']],
   { noremap = true, expr = true }
 )
+
 map(
   "n",
   "<leader>l",
   ':PackerLoad toggleterm.nvim<CR>:lua Open_term:new{cmd="lazygit", close_on_exit=true}:toggle()<CR>',
   nore_silent
 )
+
 map("n", "<Leader>?", ":TodoQuickFix<CR>", nore)
+
+vim.cmd[[inoremap <leader><cr> <cmd>lua vim.api.nvim_feedkeys(vim.fn['copilot#Accept'](), 'i', true)<CR>]]

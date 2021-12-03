@@ -28,6 +28,7 @@ local files = {
   python = "python3 -i " .. exp("%:t"),
   lua = "lua " .. exp("%:t"),
   c = "gcc -o temp " .. exp("%:t") .. " && ./temp && rm ./temp",
+  cpp = "clang++ -o temp " .. exp("%:t") .. " && ./temp && rm ./temp",
   java = "javac "
     .. exp("%:t")
     .. " && java "

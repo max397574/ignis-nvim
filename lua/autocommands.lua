@@ -2,6 +2,7 @@
 local u = require("utils")
 
 vim.cmd([[autocmd! BufWinEnter COMMIT_EDITMSG set filetype=gitcommit]], false)
+vim.cmd([[autocmd! BufWinEnter *.cpp set filetype=cpp]], false)
 -- cmd [[autocmd! BufWritePost *.lua !stylua %]]
 
 vim.cmd([[au BufReadPost * lua require"utils".last_place()]])

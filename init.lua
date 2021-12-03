@@ -46,8 +46,8 @@ vim.defer_fn(function()
 end, 0)
 -- end, 0) -- toggle comment for MIN STARTUP
 
-vim.cmd([[colorscheme onedark]])
 vim.cmd([[
-imap <silent><script><expr> <C-i> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:false
+let g:copilot_no_tab_map = v:true
 ]])
+
+vim.cmd([[colorscheme onedark]])

@@ -40,3 +40,5 @@ wk.register({
   prefix = "<leader>o",
   mode = "n",
 })
+
+vim.cmd[[source ~/.config/nvim_config/clipboard_neorg.vim]]

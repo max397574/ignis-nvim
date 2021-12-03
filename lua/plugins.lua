@@ -60,13 +60,13 @@ require("packer").startup({
     -- end,
     -- })
 
-    use({
-      "edluffy/specs.nvim",
-      event = { "CursorMoved" },
-      config = function()
-        require("configs.specs")
-      end,
-    })
+    -- use({
+    --   "edluffy/specs.nvim",
+    --   event = { "CursorMoved" },
+    --   config = function()
+    --     require("configs.specs")
+    --   end,
+    -- })
 
     -- faster filetype detection
     use("~/filetype.nvim")
@@ -92,7 +92,8 @@ require("packer").startup({
     })
     -- parsers for code
     use({
-      "nvim-treesitter/nvim-treesitter",
+      -- "nvim-treesitter/nvim-treesitter",
+      "~/nvim-treesitter",
       after = "impatient.nvim",
       opt = true,
       run = ":TSUpdate",
@@ -246,8 +247,8 @@ require("packer").startup({
       requires = {
         -- {"max397574/neorg-telescope/",
         -- branch = "heading_picker"},
-        "nvim-neorg/neorg-telescope",
-        -- "~/neorg-telescope/",
+        -- "nvim-neorg/neorg-telescope",
+        "~/neorg-telescope/",
       },
     })
 
@@ -310,6 +311,7 @@ require("packer").startup({
     -- a file explorer
     use({
       "nvim-telescope/telescope.nvim",
+      -- "~/telescope.nvim/",
       opt = true,
       cmd = "Telescope",
       after = "impatient.nvim",
@@ -399,7 +401,7 @@ require("packer").startup({
       opt = true,
       requires = {
         { "folke/lua-dev.nvim", opt = true },
-        "williamboman/nvim-lsp-installer",
+        { "williamboman/nvim-lsp-installer", opt = true },
       },
       config = function()
         require("configs.lsp")
