@@ -381,7 +381,7 @@ function utils.siduck_function(mappings)
   local function parse_mapping(mapping)
     mapping = string.gsub(mapping, "C%-", "ctrl+")
     mapping = string.gsub(mapping, "c%-", "ctrl+")
-    mapping = string.gsub(mapping, "%<leader%>","leader+")
+    mapping = string.gsub(mapping, "%<leader%>", "leader+")
     mapping = string.gsub(mapping, "%<(.+)%>", "%1")
     return mapping
   end

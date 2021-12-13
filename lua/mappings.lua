@@ -108,7 +108,6 @@ wk.register({
     },
     f = { "<cmd>Telescope filetypes<CR>", "File Types" },
     o = { "<cmd>Telescope vim_options<CR>", "Options" },
-    a = { "<cmd>Telescope autocommands<CR>", "Auto Commands" },
     p = { "<cmd>lua require'float_help'.float_help()<CR>", "Help Files" },
   },
   u = { "<cmd>UndotreeToggle<CR>", "UndoTree" },
@@ -125,6 +124,7 @@ wk.register({
 
   s = {
     name = "+Search",
+    a = { "<cmd>Telescope autocommands<CR>", "Auto Commands" },
     g = { "<cmd>lua require('configs.telescope').find_string()<CR>", "Grep" },
     b = { "<cmd>lua require('configs.telescope').curbuf()<CR>", "Buffer" },
     d = { "<cmd>Telescope lsp_document_diagnostics<CR>", "Diagnostics" },
@@ -358,5 +358,3 @@ map(
 )
 
 map("n", "<Leader>?", ":TodoQuickFix<CR>", nore)
-
-vim.cmd[[inoremap <leader><cr> <cmd>lua vim.api.nvim_feedkeys(vim.fn['copilot#Accept'](), 'i', true)<CR>]]

@@ -101,7 +101,6 @@ cmp.setup({
     { name = "nvim_lsp", priority = 9 },
     { name = "luasnip", priority = 8 },
     { name = "neorg", priority = 6 },
-    { name = "copilot", priority = 10 },
   },
   formatting = {
     fields = {
@@ -162,7 +161,6 @@ cmp.setup({
     --   luasnip = "[Snip]",
     --   buffer = "[Buf]",
     --   neorg = "[Norg]",
-    --   copilot = "[COP]",
     -- spell = "(Spell)",
     -- })[entry.source.name]
   },

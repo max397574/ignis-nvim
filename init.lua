@@ -20,6 +20,7 @@ vim.g.did_load_filetypes = 1
 vim.g.mapleader = " "
 
 -- vim.defer_fn(function() -- toggle comment for MIN STARTUP
+require("impatient").enable_profile()
 require("impatient")
 require("plugins")
 require("options")
@@ -45,9 +46,5 @@ vim.defer_fn(function()
   require("after")
 end, 0)
 -- end, 0) -- toggle comment for MIN STARTUP
-
-vim.cmd([[
-let g:copilot_no_tab_map = v:true
-]])
 
 vim.cmd([[colorscheme onedark]])

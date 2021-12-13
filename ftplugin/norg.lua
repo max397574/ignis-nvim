@@ -41,4 +41,4 @@ wk.register({
   mode = "n",
 })
 
-vim.cmd[[source ~/.config/nvim_config/clipboard_neorg.vim]]
+vim.cmd([[source ~/.config/nvim_config/clipboard_neorg.vim]])

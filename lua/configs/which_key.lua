@@ -9,6 +9,17 @@ require("which-key").setup({
 })
 
 wk.register({
+  c = {
+    name = "+Comment",
+    c = "Current line",
+    o = "Enter insert below",
+    O = "Enter insert above",
+    A = "Enter insert eol",
+  },
+  b = {
+    name = "+Block Comment",
+    c = "Current Line",
+  },
   n = {
     name = "Goto Next, Incremental Selection, List",
     n = { "Incremental Selection" },

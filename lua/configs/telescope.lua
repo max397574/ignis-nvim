@@ -7,6 +7,7 @@ vim.cmd([[PackerLoad trouble.nvim]])
 vim.cmd([[PackerLoad sqlite.lua]])
 
 local actions = require("telescope.actions")
+local actions_layout = require("telescope.actions.layout")
 local action_state = require("telescope.actions.state")
 local themes = require("telescope.themes")
 local builtin = require("telescope.builtin")
@@ -20,15 +21,19 @@ require("telescope").setup({
     -- layout_strategy = "horizontal",
     selection_strategy = "reset",
     -- file_ignore_patterns = { "^.git" },
-    prompt_prefix = " ",
+    -- prompt_prefix = " ",
+    prompt_prefix = "  ",
+    preview = {
+      hide_on_startup = true,
+    },
     entry_prefix = " ",
     layout_config = {
       width = 0.99,
       height = 0.5,
-      preview_width = 0.65,
       preview_cutoff = 20,
       prompt_position = "top",
       horizontal = {
+        preview_width = 0.65,
         -- preview_width = function(_, cols, _)
         --   if cols > 200 then
         --     return math.floor(cols * 0.5)
@@ -38,12 +43,14 @@ require("telescope").setup({
         -- end,
       },
       vertical = {
+        preview_width = 0.65,
         width = 0.9,
         height = 0.95,
         preview_height = 0.5,
       },
 
       flex = {
+        preview_width = 0.65,
         horizontal = {
           -- preview_width = 0.9,
         },
@@ -58,6 +65,7 @@ require("telescope").setup({
         ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
         ["<C-a>"] = actions.send_to_qflist + actions.open_qflist,
         ["<C-h>"] = "which_key",
+        ["<C-l>"] = actions_layout.toggle_preview,
       },
       i = {
         ["<C-j>"] = actions.move_selection_next,
@@ -66,6 +74,7 @@ require("telescope").setup({
         ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
         ["<C-a>"] = actions.send_to_qflist + actions.open_qflist,
         ["<C-h>"] = "which_key",
+        ["<C-l>"] = actions_layout.toggle_preview,
       },
     },
     extensions = {
@@ -166,6 +175,7 @@ function ts.help_tags()
     preview = {
       preview_cutoff = 120,
       preview_width = 80,
+      hide_on_startup = false,
     },
   })
   builtin.help_tags(opts)
@@ -202,6 +212,9 @@ function ts.find_string()
       "%.svg",
       "%.otf",
       "%.ttf",
+    },
+    preview = {
+      hide_on_startup = false,
     },
   })
   -- winblend = 15,
@@ -247,6 +260,7 @@ function ts.git_diff()
       height = 0.99,
       preview_width = 0.8,
       prompt_position = "top",
+      hide_on_startup = false,
     },
   }
   require("telescope.builtin").git_status(opts)

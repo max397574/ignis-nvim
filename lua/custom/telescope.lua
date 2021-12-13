@@ -10,6 +10,8 @@ local get_node_recursively = function(opts)
   opts.win_id = vim.F.if_nil(opts.win_id, 0)
   opts.type = vim.F.if_nil(opts.type, "carryover_tag_set")
   local current_node = ts_utils.get_node_at_cursor(opts.win_id)
+  print("current_node:")
+  dump(current_node)
   if not current_node then
     return ""
   end

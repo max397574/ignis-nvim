@@ -51,16 +51,41 @@ local parse_json = function(json_data)
 end
 
 M.setup = function()
+  local result
   local username = "budswa"
   -- local url = ("https://api.github.com/users/%s/received_events"):format(username)
   local url = ("https://api.github.com/users/%s/events"):format(username)
 
-  vim.schedule(function()
-    local sauce = job:new({ command = "curl", args = { url } }):sync()
-    local json_data = vim.json.decode(table.concat(sauce, ""))
-    parse_json(json_data)
-    float_win(M.events)
-  end)
+  require("plenary.job")
+    :new({
+      command = "curl",
+      args = { url },
+      on_exit = function(j, return_val)
+        result = j:result()
+      end,
+    })
+    :sync()
+  -- local result = {}
+  -- local j = job:new({
+  --   command = "curl",
+  --   args = {url},
+  --   cwd = vim.loop.cwd(),
+  --   on_stdout = function(error, data)
+  --     table.insert(result.output, { data, 1 })
+  --   end,
+  --   on_stderr = function(error, data)
+  --     table.insert(result.output, { data, 2})
+  --   end,
+  --   on_exit = function(job, code)
+  --     result.exit_code = code
+  --   end
+  -- }):sync(10000)
+  -- print("result:")
+  -- dump(result)
+  local json_data = vim.json.decode(table.concat(result, ""))
+  -- local json_data = vim.json.decode(sauce, "")
+  parse_json(json_data)
+  float_win(M.events)
 end
 
 return M

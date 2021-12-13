@@ -1,6 +1,8 @@
 vim.cmd([[PackerLoad lua-dev.nvim]])
 vim.cmd([[hi DiagnosticHeader gui=bold,italic guifg=#56b6c2]])
-vim.cmd([[au CursorHold  * lua vim.diagnostic.open_float(0, { scope = "cursor",source = "if_many",format = function(diagnostic) return require'configs.lsp'.parse_diagnostic(diagnostic) end, header = {"Cursor Diagnostics:","DiagnosticHeader"}, prefix = function(diagnostic,i,total) local icon, highlight if diagnostic.severity == 1 then icon = ""; highlight ="DiagnosticError" elseif diagnostic.severity == 2 then icon = ""; highlight ="DiagnosticWarn" elseif diagnostic.severity == 3 then icon = ""; highlight ="DiagnosticInfo" elseif diagnostic.severity == 4 then icon = ""; highlight ="DiagnosticHint" end return i.."/"..total.." "..icon.."  ",highlight end})]])
+vim.cmd(
+  [[au CursorHold  * lua vim.diagnostic.open_float(0, { focusable = false,scope = "cursor",source = "if_many",format = function(diagnostic) return require'configs.lsp'.parse_diagnostic(diagnostic) end, header = {"Cursor Diagnostics:","DiagnosticHeader"}, prefix = function(diagnostic,i,total) local icon, highlight if diagnostic.severity == 1 then icon = ""; highlight ="DiagnosticError" elseif diagnostic.severity == 2 then icon = ""; highlight ="DiagnosticWarn" elseif diagnostic.severity == 3 then icon = ""; highlight ="DiagnosticInfo" elseif diagnostic.severity == 4 then icon = ""; highlight ="DiagnosticHint" end return i.."/"..total.." "..icon.."  ",highlight end})]]
+)
 -- vim.cmd([[au CursorHold  * lua vim.diagnostic.open_float(0,{scope = "cursor"})]])
 
 ---@type nvim_config.utils
@@ -173,7 +175,7 @@ local sumneko_lua_server = {
         path = vim.split(package.path, ";"),
       },
       diagnostics = {
-        globals = { "vim", "dump" },
+        globals = { "vim", "dump", "hs"},
       },
       workspace = {
         library = {

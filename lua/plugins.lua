@@ -19,21 +19,21 @@ require("packer").startup({
       event = "BufWritePre",
     })
 
-    use("github/copilot.vim")
+    use("~/selection_popup")
 
     use({
       "~/nvim-base16.lua",
     })
 
-    use({
-      "narutoxy/themer.lua",
-      branch = "dev",
-      after = "impatient.nvim",
-      -- after = "packer.nvim", -- hmm for some reason this errors out also `themer.lua` is not a heavy plugin
-      config = function()
-        -- require("themer").load("onedark")
-      end,
-    })
+    -- use({
+    --   "narutoxy/themer.lua",
+    --   branch = "dev",
+    --   after = "impatient.nvim",
+    --   -- after = "packer.nvim", -- hmm for some reason this errors out also `themer.lua` is not a heavy plugin
+    --   config = function()
+    --     -- require("themer").load("onedark")
+    --   end,
+    -- })
 
     -- use {"~/footprints.nvim/", after = "themer.lua",
     --   config = function()
@@ -72,28 +72,29 @@ require("packer").startup({
     use("~/filetype.nvim")
 
     -- colorscheme
-    use({ "sainnhe/gruvbox-material" })
-    use({ "NTBBloodbath/doombox.nvim" })
-    use({ "MordechaiHadad/nvim-papadark", requires = { "rktjmp/lush.nvim" } })
-    use({ "NTBBloodbath/doom-one.nvim" })
+    -- use({ "sainnhe/gruvbox-material" })
+    -- use({ "NTBBloodbath/doombox.nvim" })
+    -- use({ "MordechaiHadad/nvim-papadark", requires = { "rktjmp/lush.nvim" } })
+    -- use({ "NTBBloodbath/doom-one.nvim" })
     use("~/colorschemes")
     -- use { "~/onedarker.nvim" }
     -- use { "tiagovla/tokyodark.nvim" }
     -- use "~/galaxy_nvim"
-    use({
-      "folke/tokyonight.nvim",
-      config = function()
-        require("configs.theme")
-        local _time = os.date("*t")
-        if _time.hour < 9 then
-          vim.g.tokyonight_style = "night"
-        end
-      end,
-    })
+    -- use({
+    --   "folke/tokyonight.nvim",
+    --   config = function()
+    --     require("configs.theme")
+    --     local _time = os.date("*t")
+    --     if _time.hour < 9 then
+    --       vim.g.tokyonight_style = "night"
+    --     end
+    --   end,
+    -- })
+
     -- parsers for code
     use({
-      -- "nvim-treesitter/nvim-treesitter",
-      "~/nvim-treesitter",
+      "nvim-treesitter/nvim-treesitter",
+      -- "~/nvim-treesitter",
       after = "impatient.nvim",
       opt = true,
       run = ":TSUpdate",
@@ -139,8 +140,6 @@ require("packer").startup({
     --     -- require("healthy_nvim").init()
     --   end,
     -- }
-
-    use({ "Binx-Codes/calc.nvim" })
 
     -- floating terminal
     use({
@@ -194,10 +193,16 @@ require("packer").startup({
     use({ "~/lua_markdown", ft = { "markdown" } })
 
     -- easily comment out code
+    -- use({
+    --   "terrortylor/nvim-comment",
+    --   keys = { "<leader>c", "<leader>cc" },
+    --   config = [[ require("configs.nvim_comment") ]],
+    -- })
     use({
-      "terrortylor/nvim-comment",
-      keys = { "<leader>c", "<leader>cc" },
-      config = [[ require("configs.nvim_comment") ]],
+      "numToStr/Comment.nvim",
+      config = function()
+        require("configs.comment")
+      end,
     })
 
     -- Git from Vim
@@ -262,13 +267,13 @@ require("packer").startup({
       },
     })
 
-    use({
-      "jameshiew/nvim-magic",
-      config = [[ require("nvim-magic").setup() ]],
-      requires = {
-        "MunifTanjim/nui.nvim",
-      },
-    })
+    -- use({
+    --   "jameshiew/nvim-magic",
+    --   config = [[ require("nvim-magic").setup() ]],
+    --   requires = {
+    --     "MunifTanjim/nui.nvim",
+    --   },
+    -- })
 
     -- highlight and search todo comments
     use({
@@ -287,7 +292,12 @@ require("packer").startup({
     -- use "tpope/vim-surround"
     use({
       "blackCauldron7/surround.nvim",
-      config = [[ require("surround").setup({ mappings_style = "surround" }) ]],
+      config = [[ require("surround").setup({ mappings_style = "surround",
+      pairs = {
+        nestable = {{"(", ")"}, {"[", "]"}, {"{", "}"},{"/","/"}},
+        linear = {{"'", "'"}, {"`", "`"}, {'"', '"'}}
+      },
+    }) ]],
     })
 
     -- display last undos
@@ -312,6 +322,8 @@ require("packer").startup({
     use({
       "nvim-telescope/telescope.nvim",
       -- "~/telescope.nvim/",
+      -- "l-kershaw/telescope.nvim",
+      -- branch = "fix/bottom_pane_overlaps",
       opt = true,
       cmd = "Telescope",
       after = "impatient.nvim",
@@ -339,6 +351,8 @@ require("packer").startup({
       "~/startup.nvim",
       opt = true,
       config = [[ require("startup").setup(require("configs.startup_nvim")) ]],
+      -- config = [[ require("startup").setup(require("custom.nv_startup")) ]],
+      -- config = [[ require("startup").setup({theme = "evil"}) ]],
     })
 
     -- colorize color codes
@@ -386,7 +400,6 @@ require("packer").startup({
     use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" })
     use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" })
     use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
-    use({ "hrsh7th/cmp-copilot", after = "nvim-cmp" })
 
     -- autopairs
     use({

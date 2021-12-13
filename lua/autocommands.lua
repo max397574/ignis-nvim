@@ -36,3 +36,7 @@ u.create_augroup({
 u.create_augroup({
   "TextChanged, BufChangedI, BufWinEnter * let w:m1=matchadd('Search', '\\%81v.\\%>80v', -1)",
 }, "column_limit")
+
+vim.cmd(
+  "autocmd User TelescopeFindPre lua vim.opt.laststatus=0; vim.cmd[[autocmd BufWinLeave * ++once lua vim.opt.laststatus=2]]"
+)

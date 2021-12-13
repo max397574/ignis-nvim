@@ -77,7 +77,7 @@ bg("NormalFloat", one_bg)
 -- Pmenu
 bg("Pmenu", one_bg)
 bg("PmenuSbar", one_bg2)
-bg("PmenuSel", pmenu_bg)
+bg("PmenuSel", blue)
 bg("PmenuThumb", nord_blue)
 
 -- misc
@@ -144,17 +144,21 @@ fg("NvimTreeVertSplit", darker_black)
 bg("NvimTreeVertSplit", darker_black)
 fg_bg("NvimTreeWindowPicker", red, black2)
 
-fg_bg("TelescopeResultsBorder", one_bg2, one_bg2)
-fg_bg("TelescopeBorder", one_bg2, one_bg2)
-fg_bg("TelescopePreviewBorder", one_bg2, one_bg2)
-fg_bg("TelescopePromptBorder", one_bg2, one_bg2)
-bg("TelescopeNormal", one_bg2)
-bg("TelescopePreviewNormal", one_bg2)
-fg_bg("TelescopePreviewTitle", "NONE", green)
-fg_bg("TelescopePromptTitle", "NONE", red)
-fg_bg("TelescopeResultsTitle", "NONE", blue)
-fg_bg("TelescopePromptNormal", purple, grey_fg)
-fg_bg("TelescopePromptPrefix", red, one_bg2)
+fg_bg("TelescopeBorder", darker_black, darker_black)
+fg_bg("TelescopePromptBorder", black2, black2)
+fg_bg("TelescopePreviewBorder", darker_black, darker_black)
+-- fg_bg("TelescopeResultsBorder", black2, black2)
+
+fg_bg("TelescopePromptNormal", white, black2)
+fg_bg("TelescopePromptPrefix", red, black2)
+
+bg("TelescopeNormal", darker_black)
+bg("TelescopePreviewNormal", darker_black)
+
+fg_bg("TelescopePreviewTitle", black, green)
+fg_bg("TelescopePromptTitle", black, red)
+fg_bg("TelescopeResultsTitle", darker_black, darker_black)
+fg_bg("TelescopePreviewLine", darker_black, darker_black)
 fg("TelescopeSelection", blue)
 
 -- Disable some highlight in nvim tree if transparency enabled

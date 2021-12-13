@@ -57,13 +57,13 @@ local config = {
     -- section_separators = { "", "" },
     -- component_separators = { "", "" },
     icons_enabled = true,
-    -- disabled_filetypes = { "startup" },
+    disabled_filetypes = { "startup", "TelescopePrompt" },
   },
   sections = {
     lualine_a = { "mode" },
     lualine_b = { "branch" },
     lualine_c = {
-      { "diagnostics", sources = { "nvim_lsp" } },
+      { "diagnostics", sources = { "nvim_diagnostic" } },
       {
         "diff",
         symbols = { added = " ", modified = "柳", removed = " " },

@@ -1,28 +1,33 @@
 require("bufferline").setup({
   options = {
-    diagnostics = "nvim_lsp",
+    diagnostics = "nvim_diagnostic",
     custom_areas = {
       right = function()
+        local warning
+        local error
+        local info
+        local hint
+        local diagnostics = vim.diagnostic.get(0)
+        local count = { 0, 0, 0, 0 }
+        for _, diagnostic in ipairs(diagnostics) do
+          count[diagnostic.severity] = count[diagnostic.severity] + 1
+        end
         local result = {}
-        local error = vim.lsp.diagnostic.get_count(0, [[Error]])
-        local warning = vim.lsp.diagnostic.get_count(0, [[Warning]])
-        local info = vim.lsp.diagnostic.get_count(0, [[Information]])
-        local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
 
-        if error ~= 0 then
-          table.insert(result, { text = "  " .. error, guifg = "#B30B00" })
+        if count[1] ~= 0 then
+          table.insert(result, { text = "  " .. count[1], guifg = "#B30B00" })
         end
 
-        if warning ~= 0 then
-          table.insert(result, { text = "  " .. warning, guifg = "#FABD2F" })
+        if count[2] ~= 0 then
+          table.insert(result, { text = "  " .. count[2], guifg = "#FABD2F" })
         end
 
-        if hint ~= 0 then
-          table.insert(result, { text = "  " .. hint, guifg = "#207245" })
+        if count[4] ~= 0 then
+          table.insert(result, { text = "  " .. count[4], guifg = "#207245" })
         end
 
-        if info ~= 0 then
-          table.insert(result, { text = "  " .. info, guifg = "#0048FF" })
+        if count[3] ~= 0 then
+          table.insert(result, { text = "  " .. count[3], guifg = "#0048FF" })
         end
         return result
       end,
