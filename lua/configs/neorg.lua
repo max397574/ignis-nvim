@@ -1,7 +1,31 @@
+local neorg_callbacks = require("neorg.callbacks")
+-- neorg_callbacks.on_event("core.autocommands.events.bufenter", function(event, event_content)
 vim.cmd([[PackerLoad nvim-cmp]])
-vim.cmd([[PackerLoad telescope.nvim]])
-vim.cmd([[PackerLoad zen-mode.nvim]])
--- vim.cmd([[PackerLoad neorg-telescope]])
+neorg_callbacks.on_event("core.started", function(event, event_content)
+  vim.cmd([[PackerLoad telescope.nvim]])
+  vim.cmd([[PackerLoad zen-mode.nvim]])
+  vim.cmd([[PackerLoad neorg-telescope]])
+  require("neorg").setup({
+    load = {
+      ["core.integrations.telescope"] = {},
+    },
+  })
+  require("telescope").setup({
+    pickers = {
+      find_files = {
+        mappings = {
+          i = {
+            ["<C-t>"] = require("custom.telescope").append_task,
+          },
+          n = {
+            ["<C-t>"] = require("custom.telescope").append_task,
+          },
+        },
+      },
+    },
+  })
+end)
+
 require("neorg").setup({
   load = {
     ["core.defaults"] = {}, -- Load all the default modules
@@ -39,17 +63,22 @@ require("neorg").setup({
         zen_mode = "zen-mode",
       },
     },
+    ["core.norg.completion"] = {
+      config = {
+        engine = "nvim-cmp",
+      },
+    },
     ["core.keybinds"] = {
       config = {
         default_keybinds = true,
         neorg_leader = "<Leader>o",
       },
     },
-    ["core.norg.completion"] = {
-      config = {
-        engine = "nvim-cmp",
-      },
-    },
+    -- ["core.norg.completion"] = {
+    --   config = {
+    --     engine = "nvim-cmp",
+    --   },
+    -- },
     ["core.norg.dirman"] = {
       config = {
         workspaces = {
@@ -65,10 +94,9 @@ require("neorg").setup({
         workspace = "gtd",
         -- workspace = "example_ws",
         -- workspace = "dany_gtd",
-        -- exclude = { "gtd.norg", "neogen.norg", "kenaos.norg"},
+        -- exclude = { "" },
       },
     },
-    ["core.integrations.telescope"] = {},
     -- ["core.norg.journal"] = {
     --   config = {
     --     -- workspace = "dany_gtd",
@@ -79,17 +107,20 @@ require("neorg").setup({
   },
 })
 
-require("telescope").setup({
-  pickers = {
-    find_files = {
-      mappings = {
-        i = {
-          ["<C-t>"] = require("custom.telescope").append_task,
-        },
-        n = {
-          ["<C-t>"] = require("custom.telescope").append_task,
+local neorg_callbacks = require("neorg.callbacks")
+
+neorg_callbacks.on_event(
+  "core.keybinds.events.enable_keybinds",
+  function(_, content)
+    content.map_to_mode("traverse-heading", {
+      n = {
+        {
+          "<C-s>",
+          '<cmd>lua require"telescope".extensions.neorg.search_headings({theme="ivy"})<CR>',
         },
       },
-    },
-  },
-})
+    }, {
+      silent = true,
+    })
+  end
+)
