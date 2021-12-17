@@ -3,7 +3,6 @@ vim.cmd([[PackerLoad telescope-symbols.nvim]])
 vim.cmd([[PackerLoad telescope-zoxide]])
 vim.cmd([[PackerLoad telescope-frecency.nvim]])
 vim.cmd([[PackerLoad telescope-luasnip.nvim]])
-vim.cmd([[PackerLoad trouble.nvim]])
 vim.cmd([[PackerLoad sqlite.lua]])
 
 local actions = require("telescope.actions")
@@ -23,6 +22,7 @@ require("telescope").setup({
     -- file_ignore_patterns = { "^.git" },
     -- prompt_prefix = " ",
     prompt_prefix = "  ",
+    shorten_path = true,
     preview = {
       hide_on_startup = true,
     },
@@ -252,14 +252,16 @@ end
 
 function ts.git_diff()
   local opts = {
-    layout_strategy = "horizontal",
+    -- layout_strategy = "horizontal",
     border = true,
     prompt_title = "~ Git Diff ~",
     layout_config = {
       width = 0.99,
-      height = 0.99,
-      preview_width = 0.8,
+      height = 0.69,
+      preview_width = 0.7,
       prompt_position = "top",
+    },
+    preview = {
       hide_on_startup = false,
     },
   }

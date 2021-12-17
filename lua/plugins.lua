@@ -95,51 +95,38 @@ require("packer").startup({
     use({
       "nvim-treesitter/nvim-treesitter",
       -- "~/nvim-treesitter",
-      after = "impatient.nvim",
-      opt = true,
+      -- after = "impatient.nvim",
+      -- opt = true,
       run = ":TSUpdate",
-      event = "BufRead",
+      -- event = "BufRead",
       config = function()
         require("configs.treesitter")
       end,
+      requires = {
+        "nvim-treesitter/nvim-treesitter-refactor",
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        "RRethy/nvim-treesitter-textsubjects",
+        {
+          "nvim-treesitter/playground",
+          cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
+        },
+        "mfussenegger/nvim-ts-hint-textobject",
+        {
+          "romgrk/nvim-treesitter-context",
+          config = function()
+            require("treesitter-context.config").setup({
+              enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+            })
+          end,
+        },
+      },
     })
-    use({ "nvim-treesitter/nvim-treesitter-refactor", after = "nvim-treesitter" })
-    use({
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      after = "nvim-treesitter",
-    })
-    use({ "RRethy/nvim-treesitter-textsubjects", after = "nvim-treesitter" })
-    use({ "p00f/nvim-ts-rainbow", after = "nvim-treesitter" })
-    use({
-      "nvim-treesitter/playground",
-      cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
-      after = "nvim-treesitter",
-    })
-    use({
-      "romgrk/nvim-treesitter-context",
-      after = "nvim-treesitter",
-      config = function()
-        require("treesitter-context.config").setup({
-          enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-        })
-      end,
-    })
-    use({ "mfussenegger/nvim-ts-hint-textobject", after = "nvim-treesitter" })
-
     use({
       "lukas-reineke/indent-blankline.nvim",
       setup = function()
         require("configs.blankline").setup()
       end,
     })
-
-    -- stay healthy while coding
-    -- use {
-    --   "~/healthy.nvim",
-    --   config = function()
-    --     -- require("healthy_nvim").init()
-    --   end,
-    -- }
 
     -- floating terminal
     use({
@@ -165,6 +152,7 @@ require("packer").startup({
     -- bufferline
     use({
       "akinsho/bufferline.nvim",
+      opt = true,
       requires = "kyazdani42/nvim-web-devicons",
       config = [[ require("configs.bufferline") ]],
     })
@@ -178,7 +166,7 @@ require("packer").startup({
 
     use({
       "lewis6991/gitsigns.nvim",
-      event = "BufReadPre",
+      opt = true,
       config = [[ require("configs.gitsigns") ]],
     })
 
@@ -193,13 +181,9 @@ require("packer").startup({
     use({ "~/lua_markdown", ft = { "markdown" } })
 
     -- easily comment out code
-    -- use({
-    --   "terrortylor/nvim-comment",
-    --   keys = { "<leader>c", "<leader>cc" },
-    --   config = [[ require("configs.nvim_comment") ]],
-    -- })
     use({
       "numToStr/Comment.nvim",
+      keys = {"<leader>c","gb"},
       config = function()
         require("configs.comment")
       end,
@@ -236,17 +220,17 @@ require("packer").startup({
       end,
     })
 
-    use("~/float_help.nvim/")
+    use({"~/float_help.nvim/",keys = {"<leader>hp"}})
 
-    use("~/colorscheme_switcher/")
+    use({"~/colorscheme_switcher/",
+      keys = {"<leader>cn"},}
+    )
 
     use({
       "nvim-neorg/neorg",
       -- "~/neorg",
-      after = "nvim-treesitter",
-      -- branch = "unstable",
-      -- branch = "new-links",
-      branch = "ts-based-concealing",
+      branch = "display-inline-toc",
+      -- branch = "main",
       config = [[ require("configs.neorg") ]],
 
       requires = {
@@ -262,6 +246,7 @@ require("packer").startup({
       config = [[require("configs.zenmode")]],
       cmd = "ZenMode",
       requires = {
+        opt = true,
         "folke/twilight.nvim",
         config = [[ require("configs.twilight") ]],
       },
@@ -294,10 +279,10 @@ require("packer").startup({
       "blackCauldron7/surround.nvim",
       config = [[ require("surround").setup({ mappings_style = "surround",
       pairs = {
-        nestable = {{"(", ")"}, {"[", "]"}, {"{", "}"},{"/","/"}},
-        linear = {{"'", "'"}, {"`", "`"}, {'"', '"'}}
+      nestable = {{"(", ")"}, {"[", "]"}, {"{", "}"},{"/","/"}},
+      linear = {{"'", "'"}, {"`", "`"}, {'"', '"'}}
       },
-    }) ]],
+      }) ]],
     })
 
     -- display last undos
@@ -324,10 +309,10 @@ require("packer").startup({
       -- "~/telescope.nvim/",
       -- "l-kershaw/telescope.nvim",
       -- branch = "fix/bottom_pane_overlaps",
-      opt = true,
-      cmd = "Telescope",
-      after = "impatient.nvim",
-      event = "BufRead",
+      -- opt = true,
+      -- cmd = "Telescope",
+      -- after = "impatient.nvim",
+      -- event = "BufRead",
       requires = {
         { "nvim-lua/popup.nvim" },
         { "kyazdani42/nvim-web-devicons" },
@@ -363,9 +348,9 @@ require("packer").startup({
         require("colorizer").setup({
           "*",
         }, {
-          mode = "foreground",
-          hsl_fn = true,
-        })
+            mode = "foreground",
+            hsl_fn = true,
+          })
         vim.cmd([[ColorizerAttachToBuffer]])
       end,
     })

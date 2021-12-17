@@ -172,17 +172,17 @@ cmp.setup({
     native_menu = false,
   },
 })
-cmp.setup.cmdline(":", {
-  sources = cmp.config.sources({
-    { name = "path" },
-  }, {
-    { name = "cmdline" },
-  }),
-})
-
-cmp.setup.cmdline("/", {
-  sources = {
-    { name = "buffer", keyword_length = 1 },
-  },
-})
+-- cmp.setup.cmdline(":", {
+--   sources = cmp.config.sources({
+--     { name = "path" },
+--   }, {
+--     { name = "cmdline" },
+--   }),
+-- })
+--
+-- cmp.setup.cmdline("/", {
+--   sources = {
+--     { name = "buffer", keyword_length = 1 },
+--   },
+-- })
 vim.cmd([[hi NormalFloat guibg=none]])

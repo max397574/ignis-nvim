@@ -158,8 +158,9 @@ bg("TelescopePreviewNormal", darker_black)
 fg_bg("TelescopePreviewTitle", black, green)
 fg_bg("TelescopePromptTitle", black, red)
 fg_bg("TelescopeResultsTitle", darker_black, darker_black)
-fg_bg("TelescopePreviewLine", darker_black, darker_black)
 fg("TelescopeSelection", blue)
+bg("TelescopeSelection", "#353b45")
+bg("TelescopePreviewLine", "#353b45")
 
 -- Disable some highlight in nvim tree if transparency enabled
 if ui.transparency then

@@ -1,4 +1,4 @@
-nnoremap silent <C-p> :call NeorgClipboardImage()<CR>
+nnoremap <C-p> :call NeorgClipboardImage()<CR>
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 function! NeorgClipboardImage() abort

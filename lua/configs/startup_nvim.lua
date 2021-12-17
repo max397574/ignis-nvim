@@ -170,5 +170,6 @@ vim.g.startup_bookmarks = {
 -- }
 
 local settings = require("startup.themes.evil")
+-- local settings = require("startup.themes.dashboard")
 
 return settings

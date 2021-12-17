@@ -41,10 +41,12 @@ vim.defer_fn(function()
   PackerLoad impatient.nvim
   PackerLoad which-key.nvim
   PackerLoad nvim-lspconfig
+  PackerLoad bufferline.nvim
+  PackerLoad gitsigns.nvim
   silent! bufdo e
   ]])
   require("after")
 end, 0)
--- end, 0) -- toggle comment for MIN STARTUP
+-- end, 1) -- toggle comment for MIN STARTUP
 
 vim.cmd([[colorscheme onedark]])

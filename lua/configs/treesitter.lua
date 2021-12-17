@@ -4,8 +4,8 @@ parser_configs.norg = {
   install_info = {
     url = "https://github.com/nvim-neorg/tree-sitter-norg",
     files = { "src/parser.c", "src/scanner.cc" },
-    -- branch = "main",
-    branch = "attached-modifiers",
+    branch = "main",
+    -- branch = "attached-modifiers",
   },
 }
 
@@ -23,13 +23,6 @@ parser_configs.norg_meta = {
     branch = "main",
     files = { "src/parser.c" },
   },
-}
-parser_configs.markdown = {
-  install_info = {
-    url = "https://github.com/ikatyang/tree-sitter-markdown",
-    files = { "src/parser.c", "src/scanner.cc" },
-  },
-  filetype = "markdown",
 }
 
 require("nvim-treesitter.configs").setup({

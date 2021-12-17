@@ -1,6 +1,6 @@
 local neorg_callbacks = require("neorg.callbacks")
 -- neorg_callbacks.on_event("core.autocommands.events.bufenter", function(event, event_content)
-vim.cmd([[PackerLoad nvim-cmp]])
+-- vim.cmd([[PackerLoad nvim-cmp]])
 neorg_callbacks.on_event("core.started", function(event, event_content)
   vim.cmd([[PackerLoad telescope.nvim]])
   vim.cmd([[PackerLoad zen-mode.nvim]])
@@ -29,6 +29,11 @@ end)
 require("neorg").setup({
   load = {
     ["core.defaults"] = {}, -- Load all the default modules
+    ["core.norg.completion"] = {
+      config = {
+        engine = "nvim-cmp",
+      },
+    },
     ["core.norg.concealer"] = {
       config = {
         icon_preset = "diamond",
@@ -63,22 +68,12 @@ require("neorg").setup({
         zen_mode = "zen-mode",
       },
     },
-    ["core.norg.completion"] = {
-      config = {
-        engine = "nvim-cmp",
-      },
-    },
     ["core.keybinds"] = {
       config = {
         default_keybinds = true,
         neorg_leader = "<Leader>o",
       },
     },
-    -- ["core.norg.completion"] = {
-    --   config = {
-    --     engine = "nvim-cmp",
-    --   },
-    -- },
     ["core.norg.dirman"] = {
       config = {
         workspaces = {
@@ -97,6 +92,12 @@ require("neorg").setup({
         -- exclude = { "" },
       },
     },
+    ["core.norg.qol.toc"]={
+      config = {
+        close_split_on_jump = false,
+        toc_split_placement = "left",
+      }
+    },
     -- ["core.norg.journal"] = {
     --   config = {
     --     -- workspace = "dany_gtd",
@@ -107,8 +108,6 @@ require("neorg").setup({
   },
 })
 
-local neorg_callbacks = require("neorg.callbacks")
-
 neorg_callbacks.on_event(
   "core.keybinds.events.enable_keybinds",
   function(_, content)
@@ -116,11 +115,12 @@ neorg_callbacks.on_event(
       n = {
         {
           "<C-s>",
-          '<cmd>lua require"telescope".extensions.neorg.search_headings({theme="ivy"})<CR>',
+          [[<cmd>lua require"telescope".extensions.neorg.search_headings({theme="ivy",border = true,previewer = false,shorten_path = false,prompt_prefix = " ◈  ",layout_config = {prompt_position = "top"}})<CR>]],
+
         },
       },
     }, {
-      silent = true,
-    })
+        silent = true,
+      })
   end
 )
