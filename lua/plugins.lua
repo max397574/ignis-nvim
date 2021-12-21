@@ -183,7 +183,7 @@ require("packer").startup({
     -- easily comment out code
     use({
       "numToStr/Comment.nvim",
-      keys = {"<leader>c","gb"},
+      keys = { "<leader>c", "gb" },
       config = function()
         require("configs.comment")
       end,
@@ -220,17 +220,15 @@ require("packer").startup({
       end,
     })
 
-    use({"~/float_help.nvim/",keys = {"<leader>hp"}})
+    use({ "~/float_help.nvim/", keys = { "<leader>hp" } })
 
-    use({"~/colorscheme_switcher/",
-      keys = {"<leader>cn"},}
-    )
+    use({ "~/colorscheme_switcher/", keys = { "<leader>cn" } })
 
     use({
       "nvim-neorg/neorg",
       -- "~/neorg",
-      branch = "display-inline-toc",
-      -- branch = "main",
+      -- branch = "display-inline-toc",
+      branch = "main",
       config = [[ require("configs.neorg") ]],
 
       requires = {
@@ -322,7 +320,7 @@ require("packer").startup({
         { "nvim-telescope/telescope-frecency.nvim" },
         { "benfowler/telescope-luasnip.nvim" },
         { "tami5/sqlite.lua" },
-        -- { "nvim-telescope/telescope-packer.nvim" }, -- breaks packer
+        { "nvim-telescope/telescope-file-browser.nvim" },
       },
       config = [[ require("configs.telescope") ]],
     })
@@ -338,6 +336,9 @@ require("packer").startup({
       config = [[ require("startup").setup(require("configs.startup_nvim")) ]],
       -- config = [[ require("startup").setup(require("custom.nv_startup")) ]],
       -- config = [[ require("startup").setup({theme = "evil"}) ]],
+      requires = {
+        "~/startup_themes/",
+      },
     })
 
     -- colorize color codes
@@ -348,9 +349,9 @@ require("packer").startup({
         require("colorizer").setup({
           "*",
         }, {
-            mode = "foreground",
-            hsl_fn = true,
-          })
+          mode = "foreground",
+          hsl_fn = true,
+        })
         vim.cmd([[ColorizerAttachToBuffer]])
       end,
     })
@@ -385,6 +386,31 @@ require("packer").startup({
     use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" })
     use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" })
     use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
+    use({ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" })
+
+    use({
+      "danymat/neogen",
+      config = function()
+        require("neogen").setup({
+          enabled = true,
+          languages = {
+            lua = {
+              template = {
+                emmylua = {
+                  { nil, "-$1", { type = { "class", "func" } } }, -- add this string only on requested types
+                  { nil, "-$1", { no_results = true } }, -- Shows only when there's no results from the granulator
+                  { "parameters", "-@param %s $1|any" },
+                  { "vararg", "-@vararg $1|any" },
+                  { "return_statement", "-@return $1|any" },
+                  { "class_name", "-@class $1|any" },
+                  { "type", "-@type $1" },
+                },
+              }
+            }
+          }
+        })
+      end,
+    })
 
     -- autopairs
     use({
@@ -433,7 +459,7 @@ require("packer").startup({
     compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
     profile = {
       enable = true,
-      threshold = 0,
+      threshold = 0.0001,
     },
     display = {
       title = "Packer",

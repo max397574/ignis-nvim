@@ -2,16 +2,13 @@ _G.dump = function(...)
   print(vim.inspect(...))
 end
 
-local x
-local y
-local z
+local cmd = vim.cmd
 
 _G.profile = function(command, times)
   times = times or 100
   local args = {}
-  if type(cmd) == "string" then
-    args = { cmd }
-    cmd = cmd
+  if type(command) == "string" then
+    args = { command }
   end
   local start = vim.loop.hrtime()
   for _ = 1, times, 1 do

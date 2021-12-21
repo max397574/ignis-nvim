@@ -86,6 +86,7 @@ M.setup = function()
   -- local json_data = vim.json.decode(sauce, "")
   parse_json(json_data)
   float_win(M.events)
+  return M.events
 end
 
 return M

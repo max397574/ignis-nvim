@@ -28,7 +28,9 @@ require("zen-mode").setup({
     },
   },
   -- callback where you can add custom code when the Zen window opens
-  on_open = function(win) vim.cmd[[PackerLoad twilight.nvim]]end,
+  on_open = function(win)
+    vim.cmd([[PackerLoad twilight.nvim]])
+  end,
   -- callback where you can add custom code when the Zen window closes
   on_close = function() end,
 })

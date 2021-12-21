@@ -3,6 +3,7 @@ vim.cmd([[PackerLoad lua-dev.nvim]])
 local cmp = require("cmp")
 local types = require("cmp.types")
 local luasnip = require("luasnip")
+local neogen = require("neogen")
 
 local str = require("cmp.utils.str")
 
@@ -62,6 +63,28 @@ cmp.setup({
       select = true,
       behavior = cmp.ConfirmBehavior.Insert,
     }),
+    ["<C-l>"] = cmp.mapping(function(fallback)
+      if luasnip.expand_or_jumpable() then
+        vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
+      elseif neogen.jumpable() then
+        vim.fn.feedkeys(t("<cmd>lua require('neogen').jump_next()<CR>"), "")
+      else
+        fallback()
+      end
+    end, {
+      "i",
+      "s",
+    }),
+    ["<C-h>"] = cmp.mapping(function(fallback)
+      if luasnip.jumpable(-1) then
+        vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+      else
+        fallback()
+      end
+    end, {
+      "i",
+      "s",
+    }),
     -- ["<Tab>"] = cmp.mapping(function(fallback)
     --   if cmp.visible() then
     --     -- cmp.select_next_item {}
@@ -101,6 +124,7 @@ cmp.setup({
     { name = "nvim_lsp", priority = 9 },
     { name = "luasnip", priority = 8 },
     { name = "neorg", priority = 6 },
+    { name = "vim_lsp_signature_help", priority = 10 },
   },
   formatting = {
     fields = {
@@ -115,6 +139,7 @@ cmp.setup({
         local word = entry:get_insert_text()
         if
           entry.completion_item.insertTextFormat
+          --[[  ]]
           == types.lsp.InsertTextFormat.Snippet
         then
           word = vim.lsp.util.parse_snippet(word)
@@ -122,11 +147,11 @@ cmp.setup({
         word = str.oneline(word)
 
         -- concatenates the string
-        -- local max = 50
-        -- if string.len(word) >= max then
-        -- 	local before = string.sub(word, 1, math.floor((max - 3) / 2))
-        -- 	word = before .. "..."
-        -- end
+        local max = 50
+        if string.len(word) >= max then
+          local before = string.sub(word, 1, math.floor((max - 3) / 2))
+          word = before .. "..."
+        end
 
         if
           entry.completion_item.insertTextFormat
@@ -142,27 +167,19 @@ cmp.setup({
           path = 1,
           nvim_lsp = 0,
         })[entry.source.name] or 0
+
         return vim_item
       end,
     }),
     -- format = function(entry, vim_item)
     --   vim_item.kind = string.format(
-    --     -- "%s %s",
-    --     "%s",
+    --     "%s %s",
+    --     -- "%s",
     --     get_kind(vim_item.kind),
     --     vim_item.kind
     --   )
 
-    -- vim_item.menu = ({
-    --   nvim_lsp = "[LSP]",
-    --   emoji = "[Emoji]",
-    --   path = "[Path]",
-    --   calc = "[Calc]",
-    --   luasnip = "[Snip]",
-    --   buffer = "[Buf]",
-    --   neorg = "[Norg]",
-    -- spell = "(Spell)",
-    -- })[entry.source.name]
+    -- end
   },
   sorting = {
     comparators = cmp.config.compare.recently_used,

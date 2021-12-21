@@ -167,6 +167,7 @@ wk.register({
     ["<CR>"] = { "i<CR><ESC>", "Linebreak at Cursor" },
   },
   [" "] = { "<cmd>Telescope find_files<CR>", "Find File" },
+  a = {"<cmd>lua require('neogen').generate()<CR>", "Generate Annotations"},
   ["."] = {
     "<cmd>lua require('configs.telescope').file_browser()<CR>",
     "Browse Files",
@@ -255,6 +256,8 @@ map("n", "¢", ":vert resize +5<CR>", nore_silent)
 -- move lines up and down in visual and normal mode
 -- map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
 -- map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
+map("i","<c-l>","<right>",nore_silent)
+map("i","<c-h>","<left>",nore_silent)
 -- remove highlighting from search
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
 -- easier escape

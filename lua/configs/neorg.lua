@@ -81,6 +81,7 @@ require("neorg").setup({
           example_ws = "~/example_workspaces/gtd/",
           gtd = "~/gtd",
           dany_gtd = "~/dany_gtd/",
+          notes = "~notes",
         },
       },
     },
@@ -92,12 +93,12 @@ require("neorg").setup({
         -- exclude = { "" },
       },
     },
-    ["core.norg.qol.toc"]={
-      config = {
-        close_split_on_jump = false,
-        toc_split_placement = "left",
-      }
-    },
+    -- ["core.norg.qol.toc"] = {
+    --   config = {
+    --     close_split_on_jump = false,
+    --     toc_split_placement = "left",
+    --   },
+    -- },
     -- ["core.norg.journal"] = {
     --   config = {
     --     -- workspace = "dany_gtd",
@@ -116,11 +117,10 @@ neorg_callbacks.on_event(
         {
           "<C-s>",
           [[<cmd>lua require"telescope".extensions.neorg.search_headings({theme="ivy",border = true,previewer = false,shorten_path = false,prompt_prefix = " ◈  ",layout_config = {prompt_position = "top"}})<CR>]],
-
         },
       },
     }, {
-        silent = true,
-      })
+      silent = true,
+    })
   end
 )

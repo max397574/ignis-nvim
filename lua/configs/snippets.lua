@@ -1,3 +1,4 @@
+local ls = require("luasnip")
 ---@type nvim_config.utils
 local util = require("utils")
 local luasnip = require("luasnip")
@@ -10,7 +11,6 @@ luasnip.config.set_config({
 
 require("luasnip/loaders/from_vscode").load()
 
-local ls = require("luasnip")
 local parse = ls.parser.parse_snippet
 
 local gitcommmit_stylua = [[chore: autoformat with stylua]]
@@ -66,11 +66,6 @@ local gitcommit_refactor = [[
 refactor(${1:scope}): ${2:title}
 
 ${0}]]
-
-local tex_begin = [[
-\\begin{$1}
-	$0
-\\end{$1}]]
 
 local tex_arrow = [[\$\implies\$]]
 
@@ -136,39 +131,44 @@ local tex_itemize = [[
 	\item $0
 \end{itemize}]]
 
+local tex_begin = [[
+\\begin{$1}
+	$0
+\\end{$1}]]
+
 ls.snippets = {
   lua = {
-    parse({ trig = "high", wordTrig = true }, high),
-    parse({ trig = "M", wordTrig = true }, module_snippet),
-    parse({ trig = "cmd", wordTrig = true }, map_cmd),
-    parse({ trig = "inspect", wordTrig = true }, inspect_snippet),
+    parse({ trig = "high" }, high),
+    parse({ trig = "M" }, module_snippet),
+    parse({ trig = "cmd" }, map_cmd),
+    parse({ trig = "inspect" }, inspect_snippet),
   },
   tex = {
-    parse({ trig = "beg", wordTrig = true }, tex_begin),
-    parse({ trig = "item", wordTrig = true }, tex_itemize),
-    parse({ trig = "table", wordTrig = true }, tex_table),
-    parse({ trig = "bd", wordTrig = true }, tex_bold),
-    parse({ trig = "it", wordTrig = true }, tex_item),
-    parse({ trig = "sec", wordTrig = true }, tex_section),
-    parse({ trig = "enum", wordTrig = true }, tex_enumerate),
-    parse({ trig = "ssec", wordTrig = true }, tex_subsection),
-    parse({ trig = "sssec", wordTrig = true }, tex_subsubsection),
-    parse({ trig = "para", wordTrig = true }, tex_paragraph),
+    parse({ trig = "beg" }, tex_begin),
+    parse({ trig = "item" }, tex_itemize),
+    parse({ trig = "table" }, tex_table),
+    parse({ trig = "bd" }, tex_bold),
+    parse({ trig = "it" }, tex_item),
+    parse({ trig = "sec" }, tex_section),
+    parse({ trig = "enum" }, tex_enumerate),
+    parse({ trig = "ssec" }, tex_subsection),
+    parse({ trig = "sssec" }, tex_subsubsection),
+    parse({ trig = "para" }, tex_paragraph),
     parse({ trig = "->" }, tex_arrow),
-    parse({ trig = "template", wordTrig = true }, tex_template),
+    parse({ trig = "template" }, tex_template),
   },
   java = {
-    parse({ trig = "pus", wordTrig = true }, public_string),
-    parse({ trig = "puv", wordTrig = true }, public_void),
+    parse({ trig = "pus" }, public_string),
+    parse({ trig = "puv" }, public_void),
   },
   gitcommit = {
-    parse({ trig = "docs", wordTrig = true }, gitcommit_docs),
-    parse({ trig = "feat", wordTrig = true }, gitcommit_feat),
-    parse({ trig = "refactor", wordTrig = true }, gitcommit_refactor),
-    parse({ trig = "revert", wordTrig = true }, gitcommit_revert),
-    parse({ trig = "cleanup", wordTrig = true }, gitcommit_cleanup),
-    parse({ trig = "fix", wordTrig = true }, gitcommit_fix),
-    parse({ trig = "stylua", wordTrig = true }, gitcommmit_stylua),
+    parse({ trig = "docs" }, gitcommit_docs),
+    parse({ trig = "feat" }, gitcommit_feat),
+    parse({ trig = "refactor" }, gitcommit_refactor),
+    parse({ trig = "revert" }, gitcommit_revert),
+    parse({ trig = "cleanup" }, gitcommit_cleanup),
+    parse({ trig = "fix" }, gitcommit_fix),
+    parse({ trig = "stylua" }, gitcommmit_stylua),
   },
 }
 require("luasnip/loaders/from_vscode").load({

@@ -15,19 +15,31 @@ require("bufferline").setup({
         local result = {}
 
         if count[1] ~= 0 then
-          table.insert(result, { text = "  " .. count[1], guifg = "#B30B00" })
+          table.insert(
+            result,
+            { text = "  " .. count[1], guifg = "#B30B00" }
+          )
         end
 
         if count[2] ~= 0 then
-          table.insert(result, { text = "  " .. count[2], guifg = "#FABD2F" })
+          table.insert(
+            result,
+            { text = "  " .. count[2], guifg = "#FABD2F" }
+          )
         end
 
         if count[4] ~= 0 then
-          table.insert(result, { text = "  " .. count[4], guifg = "#207245" })
+          table.insert(
+            result,
+            { text = "  " .. count[4], guifg = "#207245" }
+          )
         end
 
         if count[3] ~= 0 then
-          table.insert(result, { text = "  " .. count[3], guifg = "#0048FF" })
+          table.insert(
+            result,
+            { text = "  " .. count[3], guifg = "#0048FF" }
+          )
         end
         return result
       end,

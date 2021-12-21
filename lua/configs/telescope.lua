@@ -78,6 +78,17 @@ require("telescope").setup({
       },
     },
     extensions = {
+      file_browser = {
+        theme = "ivy",
+        mappings = {
+          ["i"] = {
+            -- your custom insert mode mappings
+          },
+          ["n"] = {
+            -- your custom normal mode mappings
+          },
+        },
+      },
       fzf = {
         fuzzy = true, -- false will only do exact matching
         override_generic_sorter = false, -- override the generic sorter
@@ -97,62 +108,19 @@ require("telescope").load_extension("luasnip")
 local ts = {}
 
 function ts.file_browser()
+  require("telescope").load_extension("file_browser")
   local opts
 
   opts = {
-    sorting_strategy = "ascending",
-    scroll_strategy = "cycle",
-    prompt_prefix = "  ",
-    layout_config = {
-      prompt_position = "top",
-    },
-
-    attach_mappings = function(prompt_bufnr, map)
-      local current_picker = action_state.get_current_picker(prompt_bufnr)
-
-      local modify_cwd = function(new_cwd)
-        current_picker.cwd = new_cwd
-        current_picker:refresh(
-          opts.new_finder(new_cwd),
-          { reset_prompt = true }
-        )
-      end
-
-      map("i", "-", function()
-        modify_cwd(current_picker.cwd .. "/..")
-      end)
-
-      map("i", "~", function()
-        modify_cwd(vim.fn.expand("~"))
-      end)
-
-      local modify_depth = function(mod)
-        return function()
-          opts.depth = opts.depth + mod
-
-          local this_picker = action_state.get_current_picker(prompt_bufnr)
-          this_picker:refresh(
-            opts.new_finder(current_picker.cwd),
-            { reset_prompt = true }
-          )
-        end
-      end
-
-      -- alt =
-      map("i", "Ú", modify_depth(1))
-      -- alt +
-      map("i", "∞", modify_depth(-1))
-
-      map("n", "yy", function()
-        local entry = action_state.get_selected_entry()
-        vim.fn.setreg("+", entry.value)
-      end)
-
-      return true
-    end,
+    --   sorting_strategy = "ascending",
+    --   scroll_strategy = "cycle",
+    --   prompt_prefix = "  ",
+    --   layout_config = {
+    --     prompt_position = "top",
+    --   },
   }
 
-  builtin.file_browser(opts)
+  require("telescope").extensions.file_browser.file_browser(opts)
 end
 
 function ts.help_tags()

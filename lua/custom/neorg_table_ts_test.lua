@@ -1,9 +1,8 @@
 local M = {}
 
-local parsers = require "nvim-treesitter.parsers"
+local parsers = require("nvim-treesitter.parsers")
 
 local ts_utils = require("nvim-treesitter.ts_utils")
-
 
 function M.test()
   local current_node = ts_utils.get_node_at_cursor()
@@ -32,14 +31,14 @@ end
 
 function M.get_top_node_at_cursor()
   local bufnr = vim.api.nvim_get_current_buf()
-	-- assert(parsers.has_parsers(parsers.get_buf_lang(bufnr)), "File has no parsers")
-	local root = parsers.get_tree_root(0)
+  -- assert(parsers.has_parsers(parsers.get_buf_lang(bufnr)), "File has no parsers")
+  local root = parsers.get_tree_root(0)
 
-	local cursor = vim.api.nvim_win_get_cursor(0)
-	local row = cursor[1]
-	local col = cursor[2]
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local row = cursor[1]
+  local col = cursor[2]
 
-	return root:named_descendant_for_range(row - 1, col, row - 1, col)
+  return root:named_descendant_for_range(row - 1, col, row - 1, col)
 end
 
 return M

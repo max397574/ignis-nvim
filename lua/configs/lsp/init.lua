@@ -175,7 +175,7 @@ local sumneko_lua_server = {
         path = vim.split(package.path, ";"),
       },
       diagnostics = {
-        globals = { "vim", "dump", "hs"},
+        globals = { "vim", "dump", "hs", "lvim" },
       },
       workspace = {
         library = {
