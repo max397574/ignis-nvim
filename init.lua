@@ -27,6 +27,7 @@ require("options")
 require("packer_compiled")
 require("autocommands")
 require("utils")
+vim.cmd([[ PackerLoad bufferline.nvim]])
 vim.opt.shadafile = ""
 vim.cmd([[
 PackerLoad startup.nvim
@@ -38,15 +39,15 @@ filetype plugin indent on
 ]])
 vim.defer_fn(function()
   vim.cmd([[
-  PackerLoad impatient.nvim
-  PackerLoad which-key.nvim
-  PackerLoad nvim-lspconfig
-  PackerLoad bufferline.nvim
-  PackerLoad gitsigns.nvim
-  silent! bufdo e
-  ]])
+PackerLoad impatient.nvim
+PackerLoad which-key.nvim
+PackerLoad nvim-lspconfig
+PackerLoad gitsigns.nvim
+PackerLoad indent-blankline.nvim
+silent! bufdo e
+]])
   require("after")
-end, 0)
+end, 5)
 -- end, 1) -- toggle comment for MIN STARTUP
 
 vim.cmd([[colorscheme onedark]])

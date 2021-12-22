@@ -47,24 +47,40 @@ require("packer").startup({
     --   end}
 
     -- better escape
-    -- use({
-    -- "max397574/better-escape.nvim",
-    -- branch = "dev",
-    -- "~/betterEscape.nvim",
-    -- event = { "InsertEnter" },
-    -- config = function()
-    -- require("better_escape").setup({
-    --   keys = "<ESC>",
-    --   timeout = 200,
-    -- })
-    -- end,
-    -- })
+    use({
+      -- "max397574/better-escape.nvim",
+      -- branch = "dev",
+      "~/betterEscape.nvim",
+      event = { "InsertEnter" },
+      config = function()
+        require("better_escape").setup({
+          mapping = { "yy" },
+          keys = "<ESC>",
+          timeout = 200,
+        })
+      end,
+    })
 
     -- use({
     --   "edluffy/specs.nvim",
     --   event = { "CursorMoved" },
     --   config = function()
-    --     require("configs.specs")
+    -- require("specs").setup({
+    --   show_jumps = true,
+    --   min_jump = 10,
+    --   popup = {
+    --     delay_ms = 0, -- delay before popup displays
+    --     inc_ms = 20, -- time increments used for fade/resize effects
+    --     blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
+    --     width = 20,
+    --     winhl = "PMenu",
+    --     fader = require("specs").linear_fader,
+    --     resizer = require("specs").shrink_resizer,
+    --   },
+    --   ignore_filetypes = { "norg", "neorg" },
+    --   ignore_buftypes = { nofile = true },
+    -- })
+
     --   end,
     -- })
 
@@ -123,6 +139,7 @@ require("packer").startup({
     })
     use({
       "lukas-reineke/indent-blankline.nvim",
+      opt = true,
       setup = function()
         require("configs.blankline").setup()
       end,
@@ -131,7 +148,7 @@ require("packer").startup({
     -- floating terminal
     use({
       "akinsho/toggleterm.nvim",
-      keys = { "<c-t>", "<leader>r" },
+      keys = { "<c-t>", "<leader>r", "<c-g>" },
       config = function()
         require("configs.toggleterm")
       end,
@@ -146,7 +163,19 @@ require("packer").startup({
     use({
       "Krafi2/jeskape.nvim",
       event = "InsertEnter",
-      config = [[ require("configs.jeskape") ]],
+      config = function()
+        require("jeskape").setup({
+          mappings = {
+            ["c"] = {
+              ["c"] = "<cmd>lua require'utils'.append_comma()<CR>",
+            },
+            j = {
+              k = "<esc>",
+              j = "<esc>o",
+            },
+          },
+        })
+      end,
     })
 
     -- bufferline
@@ -171,11 +200,11 @@ require("packer").startup({
     })
 
     -- calculate math figures on visual selection
-    use({
-      "~/vmath.nvim",
-      cmd = { "Vmath" },
-      config = [[ require("configs.vmath") ]],
-    })
+    -- use({
+    --   "~/vmath.nvim",
+    --   cmd = { "Vmath" },
+    --   config = [[ require("configs.vmath") ]],
+    -- })
 
     -- some functions to help with markdown
     use({ "~/lua_markdown", ft = { "markdown" } })
@@ -185,7 +214,25 @@ require("packer").startup({
       "numToStr/Comment.nvim",
       keys = { "<leader>c", "gb" },
       config = function()
-        require("configs.comment")
+        require("comment").setup({
+          toggler = {
+            ---line-comment keymap
+            line = "<leader>cc",
+            ---block-comment keymap
+            block = "gbc",
+          },
+
+          ---LHS of operator-pending mappings in NORMAL + VISUAL mode
+          opleader = {
+            ---line-comment keymap
+            line = "<leader>c",
+            ---block-comment keymap
+            block = "gb",
+          },
+          mappings = {
+            extended = true,
+          },
+        })
       end,
     })
 
@@ -225,10 +272,11 @@ require("packer").startup({
     use({ "~/colorscheme_switcher/", keys = { "<leader>cn" } })
 
     use({
-      "nvim-neorg/neorg",
-      -- "~/neorg",
+      -- "nvim-neorg/neorg",
+      "~/neorg",
       -- branch = "display-inline-toc",
       branch = "main",
+      -- branch = "better-concealing-performance",
       config = [[ require("configs.neorg") ]],
 
       requires = {
@@ -246,7 +294,24 @@ require("packer").startup({
       requires = {
         opt = true,
         "folke/twilight.nvim",
-        config = [[ require("configs.twilight") ]],
+        config = function()
+          require("twilight").setup({
+            dimming = {
+              alpha = 0.25,
+              color = { "Normal", "#ffffff" },
+              inactive = false,
+            },
+            context = 10,
+            treesitter = true,
+            expand = {
+              "function",
+              "method",
+              "table",
+              "if_statement",
+            },
+            exclude = {},
+          })
+        end,
       },
     })
 
@@ -268,7 +333,23 @@ require("packer").startup({
     use({
       "kyazdani42/nvim-tree.lua",
       cmd = { "NvimTreeToggle", "NvimTreeClose" },
-      config = [[ require("configs.nvim_tree") ]],
+      config = function()
+        vim.g.nvim_tree_ignore = { ".git", "node_modules" }
+        vim.g.nvim_tree_gitignore = 1
+        vim.g.nvim_tree_auto_ignore_ft = { "dashboard", "startify", "startup" }
+        vim.g.nvim_tree_indent_markers = 1
+        vim.g.nvim_tree_git_hl = 1
+        vim.g.nvim_tree_lsp_diagnostics = 1
+        require("nvim-tree").setup({
+          auto_open = 1,
+          auto_close = 1,
+          follow = 1,
+          -- disable_netrw = 0,
+        })
+        require("nvim-tree.events").on_nvim_tree_ready(function()
+          vim.cmd("NvimTreeRefresh")
+        end)
+      end,
     })
 
     -- change,add and delete surroundings
@@ -292,7 +373,17 @@ require("packer").startup({
     -- even more icons
     use({
       "kyazdani42/nvim-web-devicons",
-      config = [[ require("configs.web_devicons") ]],
+      config = function()
+        require("nvim-web-devicons").setup({
+          override = {
+            lir_folder_icon = {
+              icon = "",
+              color = "#7ebae4",
+              name = "LirFolderNode",
+            },
+          },
+        })
+      end,
     })
 
     use({
@@ -390,6 +481,7 @@ require("packer").startup({
 
     use({
       "danymat/neogen",
+      keys = { "<leader>a" },
       config = function()
         require("neogen").setup({
           enabled = true,
@@ -405,9 +497,9 @@ require("packer").startup({
                   { "class_name", "-@class $1|any" },
                   { "type", "-@type $1" },
                 },
-              }
-            }
-          }
+              },
+            },
+          },
         })
       end,
     })

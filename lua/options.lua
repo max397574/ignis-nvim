@@ -54,8 +54,10 @@ opt.list = true --show some hidden characters
 opt.listchars = {
   tab = "> ",
   nbsp = "␣",
-  trail = "•",
+  -- trail = "•",
 }
+
+opt.lazyredraw = true
 
 opt.foldmethod = "expr" -- use treesitter for folding
 opt.foldexpr = "nvim_treesitter#foldexpr()"

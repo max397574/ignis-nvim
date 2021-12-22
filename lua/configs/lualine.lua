@@ -74,7 +74,7 @@ local config = {
       empty,
       "filename",
     },
-    lualine_x = { "filetype", lsp_progress },
+    lualine_x = { "filetype" },
     lualine_y = { "progress", progress_bar },
     lualine_z = { "loaction", clock },
   },
@@ -114,6 +114,7 @@ function lualine.load()
     config.options.theme = name
   end
   require("lualine").setup(config)
+  -- require("lualine").setup()
 end
 
 lualine.load()

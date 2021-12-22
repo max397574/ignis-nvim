@@ -76,3 +76,9 @@ vim.api.nvim_buf_set_keymap(
   [[:w<CR>:lua Run_file()<CR>]],
   nore_silent
 )
+vim.api.nvim_set_keymap(
+  "n",
+  "<c-g>",
+  ':lua Open_term:new{cmd="lazygit", close_on_exit=true}:toggle()<CR>',
+  nore_silent
+)
