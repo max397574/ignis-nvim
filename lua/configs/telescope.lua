@@ -264,6 +264,7 @@ local function base_16_finder(opts)
 end
 
 function ts.colorschemes()
+  vim.cmd([[PackerLoad colorschemes]])
   local opts = {
     data = {
       "aquarium",

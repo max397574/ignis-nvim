@@ -15,6 +15,11 @@ local parse = ls.parser.parse_snippet
 
 local gitcommmit_stylua = [[chore: autoformat with stylua]]
 
+local time = [[
+local start = os.clock()
+print(os.clock-start.."s")
+]]
+
 local high = [[
 ${1:HighlightGroup} = { fg = "${2}", bg = "${3}" },${0}]]
 
@@ -139,6 +144,7 @@ local tex_begin = [[
 ls.snippets = {
   lua = {
     parse({ trig = "high" }, high),
+    parse({ trig = "time" }, time),
     parse({ trig = "M" }, module_snippet),
     parse({ trig = "cmd" }, map_cmd),
     parse({ trig = "inspect" }, inspect_snippet),

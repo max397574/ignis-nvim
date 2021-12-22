@@ -108,8 +108,34 @@ function lsp_conf.PeekImplementation()
   end
 end
 
-require("configs.lsp.signs")
-require("configs.lsp.border")
+local signs = { Error = "", Warn = "", Info = "", Hint = "" }
+for sign, icon in pairs(signs) do
+  vim.fn.sign_define("DiagnosticSign" .. sign, {
+    text = icon,
+    texthl = "Diagnostic" .. sign,
+    linehl = false,
+    numhl = "Diagnostic" .. sign,
+  })
+end
+local border = {
+  { "╭", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "╮", "FloatBorder" },
+  { "│", "FloatBorder" },
+  { "╯", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "╰", "FloatBorder" },
+  { "│", "FloatBorder" },
+}
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover,
+  { border = border }
+)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help,
+  { border = border }
+)
 
 local lspconfig = require("lspconfig")
 local configs = require("lspconfig.configs")

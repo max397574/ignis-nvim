@@ -41,7 +41,6 @@ function on_attach.setup(client, bufnr)
     ":lua vim.lsp.buf.formatting_sync()<CR>",
     opts
   )
-  require("configs.lsp.border")
   lsp_highlight_document(client)
 end
 return on_attach

@@ -92,7 +92,7 @@ require("packer").startup({
     -- use({ "NTBBloodbath/doombox.nvim" })
     -- use({ "MordechaiHadad/nvim-papadark", requires = { "rktjmp/lush.nvim" } })
     -- use({ "NTBBloodbath/doom-one.nvim" })
-    use("~/colorschemes")
+    use({ "~/colorschemes",opt = true })
     -- use { "~/onedarker.nvim" }
     -- use { "tiagovla/tokyodark.nvim" }
     -- use "~/galaxy_nvim"
@@ -121,7 +121,6 @@ require("packer").startup({
       requires = {
         "nvim-treesitter/nvim-treesitter-refactor",
         "nvim-treesitter/nvim-treesitter-textobjects",
-        "RRethy/nvim-treesitter-textsubjects",
         {
           "nvim-treesitter/playground",
           cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
@@ -152,12 +151,6 @@ require("packer").startup({
       config = function()
         require("configs.toggleterm")
       end,
-    })
-
-    use({
-      "nacro90/numb.nvim",
-      event = "CmdlineEnter",
-      config = [[require('numb').setup() ]],
     })
 
     use({
@@ -517,7 +510,7 @@ require("packer").startup({
       opt = true,
       requires = {
         { "folke/lua-dev.nvim", opt = true },
-        { "williamboman/nvim-lsp-installer", opt = true },
+        -- { "williamboman/nvim-lsp-installer", opt = true },
       },
       config = function()
         require("configs.lsp")
