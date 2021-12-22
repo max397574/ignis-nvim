@@ -1,4 +1,5 @@
 vim.cmd([[PackerLoad LuaSnip]])
+vim.cmd([[PackerLoad neogen]])
 vim.cmd([[PackerLoad lua-dev.nvim]])
 local cmp = require("cmp")
 local types = require("cmp.types")
