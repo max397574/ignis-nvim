@@ -19,7 +19,7 @@ require("packer").startup({
       event = "BufWritePre",
     })
 
-    use("~/selection_popup")
+    -- use("~/selection_popup")
 
     use({
       "~/nvim-base16.lua",
@@ -92,7 +92,7 @@ require("packer").startup({
     -- use({ "NTBBloodbath/doombox.nvim" })
     -- use({ "MordechaiHadad/nvim-papadark", requires = { "rktjmp/lush.nvim" } })
     -- use({ "NTBBloodbath/doom-one.nvim" })
-    use({ "~/colorschemes",opt = true })
+    use({ "~/colorschemes", opt = true })
     -- use { "~/onedarker.nvim" }
     -- use { "tiagovla/tokyodark.nvim" }
     -- use "~/galaxy_nvim"
@@ -128,6 +128,7 @@ require("packer").startup({
         "mfussenegger/nvim-ts-hint-textobject",
         {
           "romgrk/nvim-treesitter-context",
+          event = "InsertEnter",
           config = function()
             require("treesitter-context.config").setup({
               enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
@@ -175,19 +176,75 @@ require("packer").startup({
     use({
       "akinsho/bufferline.nvim",
       opt = true,
-      requires = "kyazdani42/nvim-web-devicons",
       config = [[ require("configs.bufferline") ]],
     })
 
     -- statusline
+    -- use({
+    --   "hoob3rt/lualine.nvim",
+    --   config = [[ require("configs.lualine") ]],
+    -- })
     use({
-      "hoob3rt/lualine.nvim",
-      requires = { "kyazdani42/nvim-web-devicons" },
-      config = [[ require("configs.lualine") ]],
+      "~/staline.nvim/",
+      -- "tamton-aquib/staline.nvim",
+      config = function()
+        vim.cmd([[hi StalineSeparator guifg=#181a23 guibg=none]])
+        vim.cmd([[hi StalineEmpty guibg=none guifg=#353b45]])
+        require("staline").setup({
+          sections = {
+            left = {
+              " ",
+              "file_name",
+              { "StalineSeparator", "left_sep" },
+              -- "left_sep",
+              {"StylineEmpty", " "},
+              { "StalineSeparator", "right_sep" },
+              -- "right_sep",
+              "branch",
+              { "StalineSeparator", "left_sep" },
+              -- "left_sep",
+              "-lsp",
+            },
+
+            mid = {
+              { "StalineSeparator", "right_sep" },
+              -- "right_sep",
+              "mode",
+              { "StalineSeparator", "left_sep" },
+              -- "left_sep",
+            },
+            right = {
+              { "StalineSeparator", "right_sep" },
+              -- "right_sep",
+              "line_column",
+            },
+          },
+
+          defaults = {
+            bg = "#181a23",
+            -- bg = "none",
+            left_separator = "",
+            -- left_separator = "",
+            right_separator = "",
+            -- right_separator = "",
+            true_colors = true,
+            line_column = "[%l:%c] %p%% ",
+            -- font_active = "bold"
+          },
+          mode_colors = {
+            n = "#98c379",
+            i = "#56b6c2",
+            ic = "#56b6c2",
+            c = "#c678dd",
+            v = "#61afef",       -- etc
+          },
+        })
+      end,
     })
 
     use({
       "lewis6991/gitsigns.nvim",
+      event = "InsertEnter",
       opt = true,
       config = [[ require("configs.gitsigns") ]],
     })
@@ -366,21 +423,12 @@ require("packer").startup({
     -- even more icons
     use({
       "kyazdani42/nvim-web-devicons",
-      config = function()
-        require("nvim-web-devicons").setup({
-          override = {
-            lir_folder_icon = {
-              icon = "",
-              color = "#7ebae4",
-              name = "LirFolderNode",
-            },
-          },
-        })
-      end,
     })
 
     use({
       "tamago324/lir.nvim",
+      opt = true,
+      keys = { "<leader>el", "<leader>ef" },
       config = [[ require("configs.lir") ]],
       requires = "kyazdani42/nvim-web-devicons",
     })
@@ -397,13 +445,8 @@ require("packer").startup({
       -- event = "BufRead",
       requires = {
         { "nvim-lua/popup.nvim" },
-        { "kyazdani42/nvim-web-devicons" },
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
         { "nvim-telescope/telescope-symbols.nvim" },
-        { "jvgrootveld/telescope-zoxide" },
-        { "nvim-telescope/telescope-frecency.nvim" },
-        { "benfowler/telescope-luasnip.nvim" },
-        { "tami5/sqlite.lua" },
         { "nvim-telescope/telescope-file-browser.nvim" },
       },
       config = [[ require("configs.telescope") ]],
@@ -428,14 +471,14 @@ require("packer").startup({
     -- colorize color codes
     use({
       "norcalli/nvim-colorizer.lua",
-      event = { "CursorMoved", "CursorHold" },
+      keys = { "<leader>vc" },
       config = function()
         require("colorizer").setup({
           "*",
         }, {
-          mode = "foreground",
-          hsl_fn = true,
-        })
+            mode = "foreground",
+            hsl_fn = true,
+          })
         vim.cmd([[ColorizerAttachToBuffer]])
       end,
     })
@@ -531,7 +574,6 @@ require("packer").startup({
     -- list for lsp,quickfix,telescope etc
     use({
       "folke/trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
       cmd = { "Trouble", "TroubleToggle" },
       config = function()
         require("trouble").setup({

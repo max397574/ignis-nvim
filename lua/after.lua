@@ -1,8 +1,3 @@
-vim.cmd([[hi lualine_a_normal gui=none]])
-vim.cmd([[hi lualine_a_select gui=none]])
-vim.cmd([[hi lualine_a_visual gui=none]])
-vim.cmd([[hi lualine_a_replace gui=none]])
-vim.cmd([[hi lualine_a_insert gui=none]])
 vim.cmd([[hi CursorLineNr gui=none]])
 vim.cmd([[hi packerSuccess guifg=#61afef gui=none]])
 vim.cmd([[highlight link LspReferenceWrite Visual]])

@@ -2,14 +2,40 @@ local function clock()
   return " " .. os.date("%H:%M")
 end
 
+local colors = {
+  blue = "#61afef",
+  green = "#98c379",
+  purple = "#c678dd",
+  red1 = "#e06c75",
+  red2 = "#be5046",
+  yellow = "#e5c07b",
+  fg = "#abb2bf",
+  bg = "#282c34",
+  gray1 = "#5c6370",
+  gray2 = "#2c323d",
+  gray3 = "#3e4452",
+  orange = "#e0af68",
+}
+
+local custom_onedark = {
+  normal = {
+    a = { fg = colors.bg, bg = colors.green },
+    b = { fg = colors.fg, bg = colors.gray3 },
+    c = { fg = colors.fg, bg = colors.gray2 },
+  },
+  insert = { a = { fg = colors.bg, bg = colors.blue } },
+  visual = { a = { fg = colors.bg, bg = colors.purple } },
+  replace = { a = { fg = colors.bg, bg = colors.red1 } },
+  inactive = {
+    a = { fg = colors.gray1, bg = colors.bg },
+    b = { fg = colors.gray1, bg = colors.bg },
+    c = { fg = colors.gray1, bg = colors.gray2 },
+  },
+}
+
 local function empty()
   return "%="
 end
-local colors = {
-  green = "#9ece6a",
-  red = "#db4b4b",
-  orange = "#e0af68",
-}
 
 local function progress_bar()
   local current_line = vim.fn.line(".")
@@ -24,7 +50,7 @@ vim.cmd([[autocmd User LspProgressUpdate let &ro = &ro]])
 
 local config = {
   options = {
-    theme = "onedark",
+    theme = custom_onedark,
     section_separators = { left = "", right = "" },
     component_separators = { left = "", right = "" },
     -- section_separators = { "", "" },
@@ -42,7 +68,7 @@ local config = {
         symbols = { added = " ", modified = "柳", removed = " " },
         color_added = colors.green,
         color_modified = colors.orange,
-        color_removed = colors.red,
+        color_removed = colors.red2,
       },
       empty,
       "filename",

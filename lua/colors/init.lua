@@ -11,7 +11,7 @@ colors.init = function(theme)
   vim.g.colors_name = theme
 
   local present = true
-  local base16 = require"base16"
+  local base16 = require("base16")
 
   if present then
     -- first load the base16 theme

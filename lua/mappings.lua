@@ -4,6 +4,11 @@ local nore = { noremap = true }
 local wk = require("which-key")
 
 wk.register({
+  e = {
+    name = "+Explore",
+    f = { "<cmd>lua require'lir.float'.init()<CR>", "Float" },
+    l = { "<cmd>PackerLoad lir.nvim<CR><cmd>lua require'lir'.init()<CR>", "Lir" },
+  },
   g = {
     name = "+Git",
     s = { "<cmd>G<CR>", "Status" },
@@ -211,6 +216,8 @@ wk.register({
     name = "+View",
     l = { "<cmd>lua require'utils'.LatexPreview()<CR>", "Latex" },
     m = { "<cmd>lua require'utils'.MarkdownPreview()<CR>", "Markdown" },
+    -- c = {"<cmd>ColorizerAttachToBuffer<CR>", "Colorizer"},
+    c = { "<cmd>PackerLoad nvim-colorizer.lua<CR>", "Colorizer" },
   },
 }, {
   prefix = "<leader>",
