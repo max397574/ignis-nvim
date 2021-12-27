@@ -21,10 +21,9 @@ vim.g.mapleader = " "
 
 -- vim.defer_fn(function() -- toggle comment for MIN STARTUP
 require("impatient").enable_profile()
-require("impatient")
 require("plugins")
-require("options")
 require("packer_compiled")
+require("options")
 require("autocommands")
 require("utils")
 vim.cmd([[ PackerLoad bufferline.nvim]])

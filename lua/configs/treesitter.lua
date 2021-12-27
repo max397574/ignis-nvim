@@ -44,7 +44,7 @@ require("nvim-treesitter.configs").setup({
   highlight = {
     enable = true,
     custom_captures = {
-      ["require_call"] = "RequireCall",
+      -- ["require_call"] = "RequireCall",
     },
   },
   incremental_selection = {

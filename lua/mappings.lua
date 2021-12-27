@@ -8,6 +8,7 @@ wk.register({
     name = "+Explore",
     f = { "<cmd>lua require'lir.float'.init()<CR>", "Float" },
     l = { "<cmd>PackerLoad lir.nvim<CR><cmd>lua require'lir'.init()<CR>", "Lir" },
+    s = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" },
   },
   g = {
     name = "+Git",
@@ -43,9 +44,16 @@ wk.register({
       "Clipboard",
     },
     c = { "Toggle comment line" },
+  },
+  C = {
+    name = "+Colors",
     n = {
       "<cmd>lua require'configs.telescope'.colorschemes()<CR>",
       "NvChad Base 16 Picker",
+    },
+    s = {
+      "<cmd>Telescope highlights<CR>",
+      "Search",
     },
   },
   r = "Run",
@@ -88,19 +96,15 @@ wk.register({
     e = { "<cmd>Neorg gtd edit<CR>", "Edit Task" },
   },
   l = {
-    name = "+Search Last",
+    name = "+Last, Load",
+    f = { "<cmd>so<CR>", "Load File" },
     s = {
       "<cmd>lua require('configs.telescope').grep_last_search()<CR>",
-      "Search",
-    },
-    d = { "<cmd>Telescope zoxide list<CR>", "Directories" },
-    f = {
-      "<cmd>lua require('telescope').extensions.frecency.frecency()<CR>",
-      "Files",
+      "Grep Last Search",
     },
   },
   ["h"] = {
-    name = "+Help",
+    name = "+Help, Harpoon",
     t = { "<cmd>Telescope builtin<CR>", "Telescope" },
     c = { "<cmd>Telescope commands<CR>", "Commands" },
     h = { "<cmd>lua require'configs.telescope'.help_tags()<CR>", "Help Pages" },
@@ -111,9 +115,16 @@ wk.register({
       [[<cmd>TSHighlightCapturesUnderCursor<CR>]],
       "Highlight Groups at cursor",
     },
-    f = { "<cmd>Telescope filetypes<CR>", "File Types" },
     o = { "<cmd>Telescope vim_options<CR>", "Options" },
-    p = { "<cmd>lua require'float_help'.float_help()<CR>", "Help Files" },
+    f = { "<cmd>lua require'float_help'.float_help()<CR>", "Help Files" },
+    p = {
+      name = "+Harpoon",
+      a = { "<cmd>lua require('harpoon.mark').add_file()<CR>", "Add File" },
+      m = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Menu" },
+      n = { "<cmd>lua require('harpoon.ui').nav_next()<CR>", "Next File" },
+      p = { "<cmd>lua require('harpoon.ui').nav_prev()<CR>", "Previous File" },
+      t = { "<cmd>Telescope harpoon marks<CR>", "Telescope" },
+    },
   },
   u = { "<cmd>UndotreeToggle<CR>", "UndoTree" },
   b = {
@@ -144,13 +155,9 @@ wk.register({
     },
     h = { "<cmd>Telescope command_history<CR>", "Command History" },
     m = { "<cmd>Telescope marks<CR>", "Jump to Mark" },
-    -- c = {
-    --   "<cmd>lua require'configs.telescope'.code_actions()<CR>",
-    --   "Code Actions",
-    -- },
     c = {
-      "<cmd>Telescope highlights<CR>",
-      "Colors",
+      "<cmd>lua require'configs.telescope'.code_actions()<CR>",
+      "Code Actions",
     },
     t = { "<cmd>TodoTelescope<CR>", "Todo Comments" },
   },
@@ -171,7 +178,6 @@ wk.register({
     a = { "a <ESC>h", "Space after" },
     ["<CR>"] = { "i<CR><ESC>", "Linebreak at Cursor" },
   },
-  [" "] = { "<cmd>Telescope find_files<CR>", "Find File" },
   a = { "<cmd>lua require('neogen').generate()<CR>", "Generate Annotations" },
   ["."] = {
     "<cmd>lua require('configs.telescope').file_browser()<CR>",
@@ -188,8 +194,8 @@ wk.register({
     n = { "<cmd>cnext<CR>", "Next Entry" },
     p = { "<cmd>cprevious<CR>", "Previous Entry" },
   },
-  j = { ":m .+1<CR>==", "Move Current line down" },
-  k = { ":m .-2<CR>==", "Move Current line up" },
+  -- j = { ":m .+1<CR>==", "Move Current line down" },
+  -- k = { ":m .-2<CR>==", "Move Current line up" },
   y = { '"+y', "Yank to clipboard" },
   p = { '"0p', "Paste last yanked text" },
   P = { '"0P', "Paste last yanked text" },
@@ -218,6 +224,15 @@ wk.register({
     m = { "<cmd>lua require'utils'.MarkdownPreview()<CR>", "Markdown" },
     -- c = {"<cmd>ColorizerAttachToBuffer<CR>", "Colorizer"},
     c = { "<cmd>PackerLoad nvim-colorizer.lua<CR>", "Colorizer" },
+  },
+}, {
+  prefix = "<leader>",
+  mode = "n",
+})
+wk.register({
+  R = {
+    name = "+Refactor",
+    t = { "" },
   },
 }, {
   prefix = "<leader>",
@@ -284,7 +299,7 @@ map(
 
 -- move visual blocks up and down
 map("v", "J", ":m '>+1<CR>gv=gv", nore_silent)
-map("v", "K", ":m '<-2<CR>gv=gv", nore_silent)
+map("v", "K", ": m'<-2<CR>gv=gv", nore_silent)
 -- don't move cursor down when joining lines
 map("n", "J", "mzJ`z", nore)
 map("x", "<BS>", "x", nore)
@@ -305,8 +320,6 @@ map("i", " ", " <c-g>u", nore)
 map("i", "?", "?<c-g>u", nore)
 map("i", "_", "_<c-g>u", nore)
 map("i", "<CR>", "<CR><c-g>u", nore)
--- use vmath on visually selected area
-map("v", "<leader>vm", "<ESC>:Vmath<CR>", nore)
 map("t", "<c-t>", "<cmd>ToggleTerm<CR>", nore_silent)
 -- lsp
 map("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", nore_silent)
@@ -353,6 +366,10 @@ map(
   { noremap = true, expr = true }
 )
 
+map("c", "<c-j>", "<down>", nore_silent)
+
+map("c", "<c-k>", "<up>", nore_silent)
+
 map(
   "n",
   "k",
@@ -360,11 +377,63 @@ map(
   { noremap = true, expr = true }
 )
 
+map("n", "<Leader>?", ":TodoQuickFix<CR>", nore)
+
+-- Refactor.nvim
+
+local opts = { noremap = true, silent = true, expr = false }
+
 map(
   "n",
-  "<leader>l",
-  ':PackerLoad toggleterm.nvim<CR>:lua Open_term:new{cmd="lazygit", close_on_exit=true}:toggle()<CR>',
-  nore_silent
+  "<leader>Rp",
+  ":lua require('refactoring').debug.printf({below = false})<CR>",
+  { noremap = true }
 )
 
-map("n", "<Leader>?", ":TodoQuickFix<CR>", nore)
+-- Print var: this remap should be made in visual mode
+map(
+  "v",
+  "<leader>Rv",
+  ":lua require('refactoring').debug.print_var({})<CR>",
+  { noremap = true }
+)
+
+-- Cleanup function: this remap should be made in normal mode
+map(
+  "n",
+  "<leader>Rc",
+  ":lua require('refactoring').debug.cleanup({})<CR>",
+  { noremap = true }
+)
+
+-- Remap to open the Telescope refactoring menu in visual mode
+map(
+  "v",
+  "<Leader>Rt",
+  [[ <Esc><Cmd>lua require"configs.refactor".refactors()<CR>]],
+  opts
+)
+map(
+  "v",
+  "<Leader>Re",
+  [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
+  opts
+)
+map(
+  "v",
+  "<Leader>Rf",
+  [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
+  opts
+)
+map(
+  "v",
+  "<Leader>Rv",
+  [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
+  opts
+)
+map(
+  "v",
+  "<Leader>Ri",
+  [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+  opts
+)

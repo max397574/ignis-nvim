@@ -17,7 +17,7 @@ local gitcommmit_stylua = [[chore: autoformat with stylua]]
 
 local time = [[
 local start = os.clock()
-print(os.clock-start.."s")
+print(os.clock()-start.."s")
 ]]
 
 local high = [[

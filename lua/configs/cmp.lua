@@ -15,28 +15,18 @@ luasnip.config.setup({
   delete_check_events = "TextChanged",
 })
 
-local icons = require("configs.lsp.kind").icons
-
-local function t(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local function check_backspace()
-  local col = vim.fn.col(".") - 1
-  if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-    return true
-  else
-    return false
-  end
-end
-
-local function get_kind(kind_type)
-  return icons[kind_type]
+local function t(string)
+  return vim.api.nvim_replace_termcodes(string, true, true, true)
 end
 
 cmp.setup({
+  completion = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    scrollbar = "║",
+  },
   documentation = {
     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    scrollbar = "║",
   },
   snippet = {
     expand = function(args)
@@ -125,7 +115,7 @@ cmp.setup({
     { name = "nvim_lsp", priority = 9 },
     { name = "luasnip", priority = 8 },
     { name = "neorg", priority = 6 },
-    { name = "vim_lsp_signature_help", priority = 10 },
+    { name = "nvim_lsp_signature_help", priority = 10 },
   },
   formatting = {
     fields = {

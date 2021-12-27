@@ -8,8 +8,10 @@ vim.cmd([[autocmd! BufWinEnter *.cpp set filetype=cpp]], false)
 vim.cmd([[au BufReadPost * lua require"utils".last_place()]])
 
 -- show cursor line only in active window
-vim.cmd([[autocmd InsertLeave,WinEnter * set cursorline
-  autocmd InsertEnter,WinLeave * set nocursorline]])
+vim.cmd([[
+  autocmd InsertLeave,WinEnter * set cursorline
+  autocmd InsertEnter,WinLeave * set nocursorline
+]])
 
 -- windows to close with "q"
 vim.cmd(
@@ -22,6 +24,20 @@ vim.cmd([[au FocusGained * :checktime]])
 u.create_augroup({
   "TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch',timeout=200}",
 }, "highlight_yank")
+
+vim.cmd([[
+  augroup nvim-luadev
+    autocmd!
+    function! SetLuaDevOptions()
+      nmap <buffer> <C-c><C-c> <Plug>(Luadev-RunLine)
+      vmap <buffer> <C-c><C-c> <Plug>(Luadev-Run)
+      nmap <buffer> <C-c><C-k> <Plug>(Luadev-RunWord)
+      map  <buffer> <C-x><C-p> <Plug>(Luadev-Complete)
+      set filetype=lua
+    endfunction
+    autocmd BufEnter \[nvim-lua\] call SetLuaDevOptions()
+  augroup end
+]])
 
 u.create_augroup({
   "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html,norg} set spell",

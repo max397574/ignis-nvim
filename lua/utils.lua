@@ -1,32 +1,43 @@
-_G.dump = function(...)
-  print(vim.inspect(...))
+P = function(v)
+  print(vim.inspect(v))
+  return v
 end
 
 local cmd = vim.cmd
 
-_G.profile = function(command, times)
-  times = times or 100
-  local args = {}
-  if type(command) == "string" then
-    args = { command }
-  end
-  local start = vim.loop.hrtime()
-  for _ = 1, times, 1 do
-    local ok = pcall(command, unpack(args))
-    if not ok then
-      error(
-        "Command failed: "
-          .. tostring(ok)
-          .. " "
-          .. vim.inspect({ command = command, args = args })
-      )
-    end
-  end
-  print(((vim.loop.hrtime() - start) / 1000000 / times) .. "ms")
+function _G.dump(...)
+  print(vim.inspect(...))
+end
+
+---reload module
+function RELOAD(...)
+  return require("plenary.reload").reload_module(...)
+end
+
+
+---reload and require module
+R = function(name)
+  RELOAD(name)
+  return require(name)
 end
 
 ---@class nvim_config.utils
 local utils = {}
+
+utils.get_themes = function()
+  local themes = {}
+  local theme_dir = vim.fn.expand("~").."/nvim-base16.lua/lua/hl_themes"
+  local theme_files = require"plenary.scandir".scan_dir(theme_dir, {})
+  for _, theme in ipairs(theme_files) do
+    table.insert(themes,(theme:gsub(vim.fn.expand("~").."/nvim%-base16%.lua/lua/hl%_themes/",""):gsub(".lua","")))
+  end
+  theme_dir = vim.fn.expand("~").."/.config/nvim_config/lua/hl_themes"
+  theme_files = require"plenary.scandir".scan_dir(theme_dir, {})
+  for _, theme in ipairs(theme_files) do
+    table.insert(themes,(theme:gsub(vim.fn.expand("~").."/%.config/nvim%_config/lua/hl%_themes/",""):gsub(".lua","")))
+  end
+  return themes
+end
 
 function utils.append_comma()
   local cursor = vim.api.nvim_win_get_cursor(0)
@@ -334,357 +345,6 @@ function utils.float_file(filepath)
   })
   vim.api.nvim_win_set_option(win, "winblend", 20)
   vim.api.nvim_buf_set_option(buf, "modifiable", false)
-end
-
--- https://paste.sh/GkuItIwS#SIH7vDr2kHsl-Zd6wxSdkXvc
-function utils.siduck_function(mappings)
-  if vim.g.nvchad_cheatsheet_displayed then
-    return
-  end
-  vim.g.nvchad_cheatsheet_displayed = true
-  vim.cmd(
-    [[autocmd BufWinLeave * ++once lua vim.g.nvchad_cheatsheet_displayed = false]]
-  )
-  local function spaces(amount)
-    return string.rep(" ", amount)
-  end
-  vim.cmd([[highlight SiduckSectionContent guibg = #353b45]])
-  vim.cmd([[highlight SiduckHeading guifg = #8bcd5b]])
-  vim.cmd([[highlight SiduckBorder guifg = #617190 guibg = #353b45]])
-  local section_title_colors = {
-    "#41a7fc",
-    "#ea8912",
-    "#f65866",
-    "#ebc275",
-    "#c678dd",
-    "#34bfd0",
-  }
-  for i, color in ipairs(section_title_colors) do
-    vim.cmd(
-      "highlight SiduckTopic" .. i .. " guifg = " .. color .. " guibg=#617190"
-    )
-  end
-  local ns = vim.api.nvim_create_namespace("help")
-  -- local lines = {" ","          My Mappings:"}
-  local lines = {}
-  local win, buf
-  local heading_lines = {}
-  local section_lines = {}
-  local section_titles = {}
-  local border_lines = {}
-  local columns = vim.o.columns
-  local height = vim.o.lines
-  local width = columns
-  local function parse_mapping(mapping)
-    mapping = string.gsub(mapping, "C%-", "ctrl+")
-    mapping = string.gsub(mapping, "c%-", "ctrl+")
-    mapping = string.gsub(mapping, "%<leader%>", "leader+")
-    mapping = string.gsub(mapping, "%<(.+)%>", "%1")
-    return mapping
-  end
-  local spacing = math.floor((width * 0.6 - 38) / 2)
-  if spacing < 4 then
-    spacing = 0
-  end
-
-  local line_nr = 0
-  for main_sec, section_contents in pairs(mappings) do
-    table.insert(lines, " ")
-    table.insert(lines, spaces(spacing - 4) .. main_sec)
-    line_nr = line_nr + 2
-    table.insert(section_titles, line_nr)
-    for topic, values in pairs(section_contents) do
-      if type(values) == "table" then
-        lines[#lines + 1] = " "
-        line_nr = line_nr + 1
-        lines[#lines + 1] = spaces(spacing) .. topic
-        table.insert(heading_lines, line_nr)
-        line_nr = line_nr + 1
-        lines[#lines + 1] = " "
-        line_nr = line_nr + 1
-        table.insert(
-          lines,
-          spaces(spacing) .. "▛" .. string.rep("▀", 36) .. "▜"
-        )
-        table.insert(border_lines, line_nr)
-        line_nr = line_nr + 1
-        for mapping, key in pairs(values) do
-          if type(key) == "string" then
-            key = parse_mapping(key)
-            table.insert(
-              lines,
-              spaces(spacing)
-                .. "▌"
-                .. mapping
-                .. string.rep(" ", 35 - #mapping - #key)
-                .. key
-                .. " ▐"
-            )
-            table.insert(section_lines, line_nr)
-            line_nr = line_nr + 1
-          else
-            if type(key[1]) == "string" then
-              key[1] = parse_mapping(key[1])
-              table.insert(
-                lines,
-                spaces(spacing)
-                  .. "▌"
-                  .. mapping
-                  .. string.rep(" ", 35 - #mapping - #key[1])
-                  .. key[1]
-                  .. " ▐"
-              )
-              table.insert(section_lines, line_nr)
-              line_nr = line_nr + 1
-            elseif type(key) == "table" then
-              table.insert(
-                lines,
-                spaces(spacing)
-                  .. "▌"
-                  .. mapping
-                  .. ":"
-                  .. string.rep(" ", 35 - #mapping)
-                  .. "▐"
-              )
-              table.insert(section_lines, line_nr)
-              line_nr = line_nr + 1
-              for mapping_name, keystroke in pairs(key) do
-                keystroke = parse_mapping(keystroke)
-                table.insert(
-                  lines,
-                  spaces(spacing)
-                    .. "▌  "
-                    .. mapping_name
-                    .. string.rep(
-                      " ",
-                      35 - #mapping_name - 2 - #keystroke
-                    )
-                    .. keystroke
-                    .. " ▐"
-                )
-                table.insert(section_lines, line_nr)
-                line_nr = line_nr + 1
-              end
-            end
-          end
-        end
-        table.insert(
-          lines,
-          spaces(spacing) .. "▙" .. string.rep("▄", 36) .. "▟"
-        )
-        table.insert(border_lines, line_nr)
-        line_nr = line_nr + 1
-        table.insert(lines, " ")
-        line_nr = line_nr + 1
-      else
-        lines[#lines + 1] = " "
-        line_nr = line_nr + 1
-        table.insert(
-          lines,
-          spaces(spacing)
-            .. "▌"
-            .. topic
-            .. string.rep(" ", 35 - #topic - #values)
-            .. values
-            .. " "
-        )
-        table.insert(section_lines, line_nr)
-        line_nr = line_nr + 1
-        table.insert(
-          lines,
-          spaces(spacing) .. "▙" .. string.rep("▄", 36) .. "▟"
-        )
-        table.insert(section_lines, line_nr)
-        line_nr = line_nr + 1
-      end
-    end
-  end
-  buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
-  vim.api.nvim_buf_set_keymap(
-    buf,
-    "n",
-    "q",
-    "<cmd>q<CR>",
-    { noremap = true, silent = true, nowait = true }
-  )
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-  win = vim.api.nvim_open_win(buf, true, {
-    relative = "editor",
-    -- win = 0,
-    width = math.floor(width * 0.6),
-    height = math.floor(height * 0.9),
-    col = math.floor(width * 0.2),
-    row = math.floor(height * 0.1),
-    border = "none",
-    style = "minimal",
-  })
-  vim.api.nvim_win_set_option(win, "wrap", false)
-  local highlight_nr = 1
-  for i, line in ipairs(heading_lines) do
-    if true then
-      highlight_nr = highlight_nr + 1
-      vim.api.nvim_buf_add_highlight(
-        buf,
-        ns,
-        "SiduckTopic" .. highlight_nr,
-        line,
-        spacing >= 4 and spacing or 0,
-        -1
-      )
-      if highlight_nr == 6 then
-        highlight_nr = 1
-      end
-    end
-  end
-  for _, line in ipairs(section_lines) do
-    vim.api.nvim_buf_add_highlight(
-      buf,
-      ns,
-      "SiduckSectionContent",
-      line,
-      spacing,
-      -1
-    )
-  end
-  for _, line in ipairs(border_lines) do
-    vim.api.nvim_buf_add_highlight(buf, ns, "SiduckBorder", line, spacing, -1)
-  end
-  for _, line in ipairs(section_lines) do
-    vim.api.nvim_buf_add_highlight(
-      buf,
-      ns,
-      "SiduckBorder",
-      line,
-      spacing + 2,
-      spacing + 3
-    )
-    vim.api.nvim_buf_add_highlight(
-      buf,
-      ns,
-      "SiduckBorder",
-      line,
-      spacing + 41,
-      spacing + 42
-    )
-  end
-  for _, line in ipairs(section_titles) do
-    vim.api.nvim_buf_add_highlight(buf, ns, "SiduckHeading", line - 1, 0, -1)
-  end
-  vim.api.nvim_buf_set_option(buf, "modifiable", false)
-end
-
-local function siduck_mappings()
-  local siduck_mappings = {
-    -- custom = {}, -- all custom user mappings
-    -- close current focused buffer
-    close_buffer = "<leader>x",
-    copy_whole_file = "<C-a>", -- copy all contents of the current buffer
-    line_number_toggle = "<leader>n", -- show or hide line number
-    new_buffer = "<S-t>", -- open a new buffer
-    new_tab = "<C-t>b", -- open a new vim tab
-    save_file = "<C-s>", -- save file using :w
-    theme_toggler = "<leader>tt", -- for theme toggler, see in ui.theme_toggler
-    -- navigation in insert mode, only if enabled in options
-    insert_nav = {
-      backward = "<C-h>",
-      end_of_line = "<C-e>",
-      forward = "<C-l>",
-      next_line = "<C-k>",
-      prev_line = "<C-j>",
-      beginning_of_line = "<C-a>",
-    },
-    --better window movement
-    window_nav = {
-      moveLeft = "<C-h>",
-      moveRight = "<C-l>",
-      moveUp = "<C-k>",
-      moveDown = "<C-j>",
-    },
-    -- terminal related mappings
-    terminal = {
-      -- multiple mappings can be given for esc_termmode and esc_hide_termmode
-      -- get out of terminal mode
-      esc_termmode = { "jk" }, -- multiple mappings allowed
-      -- get out of terminal mode and hide it
-      esc_hide_termmode = { "JK" }, -- multiple mappings allowed
-      -- show & recover hidden terminal buffers in a telescope picker
-      pick_term = "<leader>W",
-      -- below three are for spawning terminals
-      new_horizontal = "<leader>h",
-      new_vertical = "<leader>v",
-      new_window = "<leader>w",
-    },
-    -- update nvchad from nvchad, chadness 101
-    update_nvchad = "<leader>uu",
-  }
-
-  -- all plugins related mappings
-  siduck_mappings.plugins = {
-    -- list open buffers up the top, easy switching too
-    bufferline = {
-      next_buffer = "<TAB>", -- next buffer
-      prev_buffer = "<S-Tab>", -- previous buffer
-    },
-    -- easily (un)comment code, language aware
-    comment = {
-      toggle = "<leader>/", -- toggle comment (works on multiple lines)
-    },
-    -- NeoVim 'home screen' on open
-    dashboard = {
-      bookmarks = "<leader>bm",
-      new_file = "<leader>fn", -- basically create a new buffer
-      open = "<leader>db", -- open dashboard
-      session_load = "<leader>l", -- load a saved session
-      session_save = "<leader>s", -- save a session
-    },
-    -- map to <ESC> with no lag
-    better_escape = { -- <ESC> will still work
-      esc_insertmode = { "jk" }, -- multiple mappings allowed
-    },
-    -- file explorer/tree
-    nvimtree = {
-      toggle = "<C-n>",
-      focus = "<leader>e",
-    },
-    -- multitool for finding & picking things
-    telescope = {
-      buffers = "<leader>fb",
-      find_files = "<leader>ff",
-      find_hiddenfiles = "<leader>fa",
-      git_commits = "<leader>cm",
-      git_status = "<leader>gt",
-      help_tags = "<leader>fh",
-      live_grep = "<leader>fw",
-      oldfiles = "<leader>fo",
-      themes = "<leader>th", -- NvChad theme picker
-      -- media previews within telescope finders
-      telescope_media = {
-        media_files = "<leader>fp",
-      },
-    },
-  }
-  return siduck_mappings
-end
-
-function utils.siduck_test()
-  local mappings = siduck_mappings()
-  local random_mappings = {}
-  for index, value in pairs(mappings) do
-    if type(value) ~= "table" then
-      random_mappings[index] = value
-      mappings[index] = nil
-    end
-  end
-  local pluginsMap = mappings.plugins
-  mappings.random_mappings = random_mappings
-
-  mappings.plugins = nil
-
-  utils.siduck_function({
-    ["Normal mappings"] = mappings,
-    ["Plugin Mappings"] = pluginsMap,
-  })
 end
 
 return utils

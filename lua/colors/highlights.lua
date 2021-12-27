@@ -71,11 +71,10 @@ fg("cursorlinenr", white)
 fg("EndOfBuffer", black)
 
 -- For floating windows
-fg("FloatBorder", blue)
 bg("NormalFloat", one_bg)
 
 -- Pmenu
-bg("Pmenu", one_bg)
+-- bg("Pmenu", one_bg)
 bg("PmenuSbar", one_bg2)
 bg("PmenuSel", blue)
 bg("PmenuThumb", nord_blue)
@@ -157,7 +156,7 @@ bg("TelescopePreviewNormal", darker_black)
 
 fg_bg("TelescopePreviewTitle", black, green)
 fg_bg("TelescopePromptTitle", black, red)
-fg_bg("TelescopeResultsTitle", darker_black, darker_black)
+fg_bg("TelescopeResultsTitle", black, blue)
 fg("TelescopeSelection", blue)
 bg("TelescopeSelection", "#353b45")
 bg("TelescopePreviewLine", "#353b45")

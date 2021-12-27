@@ -12,7 +12,7 @@ g.galaxy_light = false
 opt.shortmess:append("c")
 opt.iskeyword:remove("_")
 
-opt.pumblend = 18
+opt.pumblend = 0
 opt.formatoptions:remove({ "c", "r", "o" })
 opt.background = "dark" -- dark background
 opt.cmdheight = 1 -- height of cmd line
@@ -68,6 +68,11 @@ opt.undodir = vim.fn.expand("~") .. "/.vim/undodir" -- directory to save undofil
 opt.fillchars = { eob = " " } -- no fillchars at end of buffer
 
 g.table_mode_corner = "|" -- Tablemode
+
+g.symbols_outline = {
+  highlight_hovered_item = false,
+  width = 65,
+}
 
 -- builtin plugins
 g.loaded_gzip = 1

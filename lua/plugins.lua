@@ -197,12 +197,13 @@ require("packer").startup({
               "file_name",
               { "StalineSeparator", "left_sep" },
               -- "left_sep",
-              {"StylineEmpty", " "},
+              { "StylineEmpty", " " },
               { "StalineSeparator", "right_sep" },
               -- "right_sep",
               "branch",
               { "StalineSeparator", "left_sep" },
               -- "left_sep",
+              { "StylineEmpty", " " },
               "-lsp",
             },
 
@@ -236,7 +237,7 @@ require("packer").startup({
             i = "#56b6c2",
             ic = "#56b6c2",
             c = "#c678dd",
-            v = "#61afef",       -- etc
+            v = "#61afef", -- etc
           },
         })
       end,
@@ -322,8 +323,13 @@ require("packer").startup({
     use({ "~/colorscheme_switcher/", keys = { "<leader>cn" } })
 
     use({
-      -- "nvim-neorg/neorg",
-      "~/neorg",
+      "bfredl/nvim-luadev",
+      cmd = "Luadev",
+    })
+
+    use({
+      "nvim-neorg/neorg",
+      -- "~/neorg",
       -- branch = "display-inline-toc",
       branch = "main",
       -- branch = "better-concealing-performance",
@@ -332,8 +338,8 @@ require("packer").startup({
       requires = {
         -- {"max397574/neorg-telescope/",
         -- branch = "heading_picker"},
-        -- "nvim-neorg/neorg-telescope",
-        "~/neorg-telescope/",
+        "nvim-neorg/neorg-telescope",
+        -- "~/neorg-telescope/",
       },
     })
 
@@ -433,6 +439,22 @@ require("packer").startup({
       requires = "kyazdani42/nvim-web-devicons",
     })
 
+    use({
+      "simrat39/symbols-outline.nvim",
+      cmd = "SymbolsOutline",
+      config = function()
+        vim.cmd([[highlight FocusedSymbol gui=italic guifg=#56b6c2 ]])
+      end,
+    })
+
+    use({
+      "ThePrimeagen/harpoon",
+      keys = { "<leader>hp" },
+      config = function()
+        require("telescope").load_extension("harpoon")
+      end,
+    })
+
     -- a file explorer
     use({
       "nvim-telescope/telescope.nvim",
@@ -476,17 +498,29 @@ require("packer").startup({
         require("colorizer").setup({
           "*",
         }, {
-            mode = "foreground",
-            hsl_fn = true,
-          })
+          mode = "foreground",
+          hsl_fn = true,
+        })
         vim.cmd([[ColorizerAttachToBuffer]])
       end,
     })
 
+    -- use({"~/dynamic-cursor.nvim",
+    --   config = function()
+    --     require("dynamic-cursor").setup()
+    --   end})
+
+    use({ "~/hangman.nvim/", command = "Hangman" })
+
+    use({ "oknozor/illumination", command = "Illuminate" })
+
+    use("hrsh7th/nvim-seak")
+
     -- completition
     use({
-      "hrsh7th/nvim-cmp",
+      "iron-e/nvim-cmp",
       event = "InsertEnter",
+      branch = "feat/completion-menu-borders",
       config = [[ require("configs.cmp") ]],
       requires = {
         {
@@ -566,9 +600,17 @@ require("packer").startup({
       after = "nvim-lspconfig",
       config = function()
         vim.cmd(
-          [[autocmd CursorHold,CursorHoldI *.{lua} lua require'nvim-lightbulb'.update_lightbulb()]]
+          [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
         )
       end,
+    })
+
+    use({
+      "ThePrimeagen/refactoring.nvim",
+      config = function()
+        require("configs.refactor")
+      end,
+      keys = { "<leader>R" },
     })
 
     -- list for lsp,quickfix,telescope etc

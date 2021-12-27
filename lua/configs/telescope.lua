@@ -2,12 +2,30 @@ vim.cmd([[PackerLoad telescope-fzf-native.nvim]])
 vim.cmd([[PackerLoad telescope-symbols.nvim]])
 
 local actions = require("telescope.actions")
+local action_layout = require "telescope.actions.layout"
 local actions_layout = require("telescope.actions.layout")
 local action_state = require("telescope.actions.state")
 local themes = require("telescope.themes")
 local builtin = require("telescope.builtin")
+local tele_utils = require "telescope.utils"
+local previewers = require "telescope.previewers"
 ---@type nvim_config.utils
 local utils = require("utils")
+
+local function reloader()
+  RELOAD("plenary")
+  RELOAD("telescope")
+  RELOAD("configs.telescope")
+end
+
+local set_prompt_to_entry_value = function(prompt_bufnr)
+  local entry = action_state.get_selected_entry()
+  if not entry or not type(entry) == "table" then
+    return
+  end
+
+  action_state.get_current_picker(prompt_bufnr):reset_prompt(entry.ordinal)
+end
 
 require("telescope").setup({
   defaults = themes.get_ivy({
@@ -15,6 +33,7 @@ require("telescope").setup({
     selection_caret = "  ",
     -- layout_strategy = "horizontal",
     selection_strategy = "reset",
+    path_display = { "shorten" },
     -- file_ignore_patterns = { "^.git" },
     -- prompt_prefix = " ",
     prompt_prefix = "  ",
@@ -62,10 +81,13 @@ require("telescope").setup({
         ["<C-a>"] = actions.send_to_qflist + actions.open_qflist,
         ["<C-h>"] = "which_key",
         ["<C-l>"] = actions_layout.toggle_preview,
+        ["<C-y>"] = set_prompt_to_entry_value,
       },
       i = {
         ["<C-j>"] = actions.move_selection_next,
+        ["<c-p>"] = action_layout.toggle_prompt_position,
         ["<C-k>"] = actions.move_selection_previous,
+        ["<C-y>"] = set_prompt_to_entry_value,
         ["<C-o>"] = actions.select_vertical,
         ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
         ["<C-a>"] = actions.send_to_qflist + actions.open_qflist,
@@ -101,6 +123,7 @@ require("telescope").load_extension("fzf")
 local ts = {}
 
 function ts.file_browser()
+  reloader()
   require("telescope").load_extension("file_browser")
   local opts
 
@@ -117,6 +140,7 @@ function ts.file_browser()
 end
 
 function ts.help_tags()
+  reloader()
   local opts = themes.get_ivy({
     initial_mode = "insert",
     sorting_strategy = "ascending",
@@ -143,9 +167,10 @@ function ts.help_tags()
 end
 
 function ts.code_actions()
+  reloader()
   local opts = {
     -- winblend = 10,
-    border = true,
+    border = false,
     previewer = false,
     shorten_path = false,
   }
@@ -153,6 +178,7 @@ function ts.code_actions()
 end
 
 function ts.find_string()
+  reloader()
   local opts = themes.get_ivy({
     border = true,
     shorten_path = false,
@@ -183,6 +209,7 @@ function ts.find_string()
 end
 
 function ts.grep_last_search(opts)
+  reloader()
   opts = opts or {}
 
   -- \<getreg\>\C
@@ -200,6 +227,7 @@ function ts.grep_last_search(opts)
 end
 
 function ts.curbuf()
+  reloader()
   local opts = themes.get_ivy({
     -- winblend = 10,
     -- border = false,
@@ -212,6 +240,7 @@ function ts.curbuf()
 end
 
 function ts.git_diff()
+  reloader()
   local opts = {
     -- layout_strategy = "horizontal",
     border = true,
@@ -230,6 +259,7 @@ function ts.git_diff()
 end
 
 local function base_16_finder(opts)
+  reloader()
   opts = opts or {}
   local pickers = require("telescope.pickers")
   local finders = require("telescope.finders")
@@ -243,11 +273,52 @@ local function base_16_finder(opts)
     vim.fn.feedkeys(utils.t("<ESC><ESC>"), "i")
   end
 
+  -- buffer number and name
+  local bufnr = vim.api.nvim_get_current_buf()
+  local bufname = vim.api.nvim_buf_get_name(bufnr)
+
+  local previewer
+
+  -- in case its not a normal buffer
+  if vim.fn.buflisted(bufnr) ~= 1 then
+    local deleted = false
+    local function del_win(win_id)
+      if win_id and vim.api.nvim_win_is_valid(win_id) then
+        tele_utils.buf_delete(vim.api.nvim_win_get_buf(win_id))
+        pcall(vim.api.nvim_win_close, win_id, true)
+      end
+    end
+
+    previewer = previewers.new {
+      preview_fn = function(_, entry, status)
+        if not deleted then
+          deleted = true
+          del_win(status.preview_win)
+          del_win(status.preview_border_win)
+        end
+        require("colors").init(entry.value)
+      end,
+    }
+  else
+    -- show current buffer content in previewer
+    previewer = previewers.new_buffer_previewer {
+      define_preview = function(self, entry)
+        local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
+        local filetype = require("plenary.filetype").detect(bufname) or "diff"
+
+        require("telescope.previewers.utils").highlighter(self.state.bufnr, filetype)
+        require("colors").init(entry.value)
+      end,
+    }
+  end
+
   pickers.new(opts, {
     prompt_title = "Base 16 Colorschemes",
     layout_strategy = "flex",
     finder = finders.new_table(opts.data),
     sorter = conf.generic_sorter(opts),
+    previewer = previewer,
     attach_mappings = function(_, map)
       map("i", "<CR>", custom_action)
       map("n", "<CR>", custom_action)
@@ -257,36 +328,11 @@ local function base_16_finder(opts)
 end
 
 function ts.colorschemes()
+  reloader()
   vim.cmd([[PackerLoad colorschemes]])
   vim.cmd([[PackerLoad colorscheme_switcher]])
   local opts = {
-    data = {
-      "aquarium",
-      "blossom",
-      "chadracula",
-      "classic-dark",
-      "doom-chad",
-      "everforest",
-      "gruvbox",
-      "gruvchad",
-      "javacafe",
-      "jellybeans",
-      "lfgruv",
-      "monokai",
-      "mountain",
-      "nord",
-      "one-light",
-      "onedark",
-      "onedark-deep",
-      "onejelly",
-      "onenord",
-      "palenight",
-      "penokai",
-      "solarized",
-      "tokyonight",
-      "tomorrow-night",
-      "uwu",
-    },
+    data = utils.get_themes()
   }
   base_16_finder(themes.get_ivy(opts))
 end
