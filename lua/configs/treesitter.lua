@@ -89,7 +89,7 @@ require("nvim-treesitter.configs").setup({
     use_virtual_text = true,
     lint_events = { "BufWrite", "CursorHold", "CursorMoved" },
   },
-  indent = { enable = true },
+  indent = { enable = true, disable = { "python" } },
   rainbow = {
     enable = true,
     extended_mode = true,

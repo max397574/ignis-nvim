@@ -6,7 +6,8 @@ vim.cmd([[highlight link LspReferenceText Visual]])
 vim.cmd([[sunmap s]])
 vim.cmd([[sunmap f]])
 vim.cmd([[highlight NeorgLinkLocationURL gui=none]])
+vim.cmd([[hi TelescopeBorder guifg=#252931 guibg=#252931  ]])
 vim.cmd([[
   let g:seak_enabled = v:true
-  cmap <C-j> <Plug>(seak-select)
+  cnoremap <C-j> <Cmd>call seak#select({ 'nohlsearch': v:true })<CR>
 ]])

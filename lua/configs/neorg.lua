@@ -89,7 +89,6 @@ require("neorg").setup({
       config = {
         workspace = "gtd",
         -- workspace = "example_ws",
-        -- workspace = "dany_gtd",
         -- exclude = { "" },
       },
     },
@@ -99,13 +98,12 @@ require("neorg").setup({
     --     toc_split_placement = "left",
     --   },
     -- },
-    -- ["core.norg.journal"] = {
-    --   config = {
-    --     -- workspace = "dany_gtd",
-    --     journal_folder = "my_journal",
-    --     use_folders = false,
-    --   }
-    -- }
+    ["core.norg.journal"] = {
+      config = {
+        journal_folder = "my_journal",
+        use_folders = false,
+      },
+    },
   },
 })
 

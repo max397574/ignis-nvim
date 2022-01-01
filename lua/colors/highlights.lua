@@ -146,7 +146,7 @@ fg_bg("NvimTreeWindowPicker", red, black2)
 fg_bg("TelescopeBorder", darker_black, darker_black)
 fg_bg("TelescopePromptBorder", black2, black2)
 fg_bg("TelescopePreviewBorder", darker_black, darker_black)
--- fg_bg("TelescopeResultsBorder", black2, black2)
+fg_bg("TelescopeResultsBorder", darker_black, darker_black)
 
 fg_bg("TelescopePromptNormal", white, black2)
 fg_bg("TelescopePromptPrefix", red, black2)

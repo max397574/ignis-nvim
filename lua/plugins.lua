@@ -22,35 +22,12 @@ require("packer").startup({
     -- use("~/selection_popup")
 
     use({
-      "~/nvim-base16.lua",
+      "~/neovim_plugins/nvim-base16.lua",
     })
-
-    -- use({
-    --   "narutoxy/themer.lua",
-    --   branch = "dev",
-    --   after = "impatient.nvim",
-    --   -- after = "packer.nvim", -- hmm for some reason this errors out also `themer.lua` is not a heavy plugin
-    --   config = function()
-    --     -- require("themer").load("onedark")
-    --   end,
-    -- })
-
-    -- use {"~/footprints.nvim/", after = "themer.lua",
-    --   config = function()
-    --     require"footprints_nvim".setup({
-    --       ns_id = require"themer.utils.util".ns,
-    --       highlight_color_2 = "#353b45",
-    --       highlight_color_3 = "#3e4451",
-    --       highlight_color_4 = "#545862",
-    --       highlight_color_5 = "#565c64",
-    --     })
-    --   end}
 
     -- better escape
     use({
-      -- "max397574/better-escape.nvim",
-      -- branch = "dev",
-      "~/betterEscape.nvim",
+      "~/neovim_plugins/betterEscape.nvim",
       event = { "InsertEnter" },
       config = function()
         require("better_escape").setup({
@@ -61,41 +38,18 @@ require("packer").startup({
       end,
     })
 
-    -- use({
-    --   "edluffy/specs.nvim",
-    --   event = { "CursorMoved" },
-    --   config = function()
-    -- require("specs").setup({
-    --   show_jumps = true,
-    --   min_jump = 10,
-    --   popup = {
-    --     delay_ms = 0, -- delay before popup displays
-    --     inc_ms = 20, -- time increments used for fade/resize effects
-    --     blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
-    --     width = 20,
-    --     winhl = "PMenu",
-    --     fader = require("specs").linear_fader,
-    --     resizer = require("specs").shrink_resizer,
-    --   },
-    --   ignore_filetypes = { "norg", "neorg" },
-    --   ignore_buftypes = { nofile = true },
-    -- })
-
-    --   end,
-    -- })
-
     -- faster filetype detection
-    use("~/filetype.nvim")
+    use("~/neovim_plugins/filetype.nvim")
 
     -- colorscheme
     -- use({ "sainnhe/gruvbox-material" })
     -- use({ "NTBBloodbath/doombox.nvim" })
-    -- use({ "MordechaiHadad/nvim-papadark", requires = { "rktjmp/lush.nvim" } })
     -- use({ "NTBBloodbath/doom-one.nvim" })
-    use({ "~/colorschemes", opt = true })
+    use("rebelot/kanagawa.nvim")
+    use("wuelnerdotexe/vim-enfocado")
+    use({ "~/neovim_plugins/colorschemes", opt = true })
     -- use { "~/onedarker.nvim" }
     -- use { "tiagovla/tokyodark.nvim" }
-    -- use "~/galaxy_nvim"
     -- use({
     --   "folke/tokyonight.nvim",
     --   config = function()
@@ -107,14 +61,9 @@ require("packer").startup({
     --   end,
     -- })
 
-    -- parsers for code
     use({
       "nvim-treesitter/nvim-treesitter",
-      -- "~/nvim-treesitter",
-      -- after = "impatient.nvim",
-      -- opt = true,
       run = ":TSUpdate",
-      -- event = "BufRead",
       config = function()
         require("configs.treesitter")
       end,
@@ -137,6 +86,7 @@ require("packer").startup({
         },
       },
     })
+
     use({
       "lukas-reineke/indent-blankline.nvim",
       opt = true,
@@ -180,13 +130,8 @@ require("packer").startup({
     })
 
     -- statusline
-    -- use({
-    --   "hoob3rt/lualine.nvim",
-    --   config = [[ require("configs.lualine") ]],
-    -- })
     use({
-      "~/staline.nvim/",
-      -- "tamton-aquib/staline.nvim",
+      "~/neovim_plugins/staline.nvim/",
       config = function()
         vim.cmd([[hi StalineSeparator guifg=#181a23 guibg=none]])
         vim.cmd([[hi StalineEmpty guibg=none guifg=#353b45]])
@@ -250,15 +195,8 @@ require("packer").startup({
       config = [[ require("configs.gitsigns") ]],
     })
 
-    -- calculate math figures on visual selection
-    -- use({
-    --   "~/vmath.nvim",
-    --   cmd = { "Vmath" },
-    --   config = [[ require("configs.vmath") ]],
-    -- })
-
     -- some functions to help with markdown
-    use({ "~/lua_markdown", ft = { "markdown" } })
+    use({ "~/neovim_plugins/lua_markdown", ft = { "markdown" } })
 
     -- easily comment out code
     use({
@@ -320,28 +258,49 @@ require("packer").startup({
 
     use({ "~/float_help.nvim/", keys = { "<leader>hp" } })
 
-    use({ "~/colorscheme_switcher/", keys = { "<leader>cn" } })
+    use({ "~/neovim_plugins/colorscheme_switcher/", module = { "colorscheme_switcher" } })
 
     use({
       "bfredl/nvim-luadev",
       cmd = "Luadev",
     })
 
+    -- more helpfiles
+    -- luv
+    use("nanotee/luv-vimdocs")
+    -- builtin lua functions
+    use("milisims/nvim-luaref")
+
+    -- make only certain arreas or code accessible
+    use({
+      "chrisbra/NrrwRgn",
+      cmd = { "NarrowRegion", "NarrowWindow" },
+    })
+
     use({
       "nvim-neorg/neorg",
-      -- "~/neorg",
-      -- branch = "display-inline-toc",
-      branch = "main",
-      -- branch = "better-concealing-performance",
+      branch = "better-concealing-performance",
+      -- branch = "main",
       config = [[ require("configs.neorg") ]],
 
       requires = {
-        -- {"max397574/neorg-telescope/",
-        -- branch = "heading_picker"},
-        "nvim-neorg/neorg-telescope",
-        -- "~/neorg-telescope/",
+        -- "nvim-neorg/neorg-telescope",
+        "~/neovim_plugins/neorg-telescope/",
       },
     })
+
+    use({
+      "rose-pine/neovim",
+      as = "rose-pine",
+      config = function()
+        vim.g.rose_pine_variant = "moon"
+        vim.g.rose_pine_bold_vertical_split_line = true
+        vim.g.rose_pine_disable_italics = false
+        vim.g.rose_pine_disable_background = false
+        vim.g.rose_pine_disable_float_background = true
+      end,
+    })
+
 
     use({
       "folke/zen-mode.nvim",
@@ -370,14 +329,6 @@ require("packer").startup({
         end,
       },
     })
-
-    -- use({
-    --   "jameshiew/nvim-magic",
-    --   config = [[ require("nvim-magic").setup() ]],
-    --   requires = {
-    --     "MunifTanjim/nui.nvim",
-    --   },
-    -- })
 
     -- highlight and search todo comments
     use({
@@ -409,15 +360,26 @@ require("packer").startup({
     })
 
     -- change,add and delete surroundings
-    -- use "tpope/vim-surround"
     use({
       "blackCauldron7/surround.nvim",
-      config = [[ require("surround").setup({ mappings_style = "surround",
-      pairs = {
-      nestable = {{"(", ")"}, {"[", "]"}, {"{", "}"},{"/","/"}},
-      linear = {{"'", "'"}, {"`", "`"}, {'"', '"'}}
-      },
-      }) ]],
+      config = function()
+        require("surround").setup({
+          mappings_style = "surround",
+          pairs = {
+            nestable = {
+              { "(", ")" },
+              { "[", "]" },
+              { "{", "}" },
+              { "/", "/" },
+              {
+                "*",
+                "*",
+              },
+            },
+            linear = { { "'", "'" }, { "`", "`" }, { '"', '"' } },
+          },
+        })
+      end,
     })
 
     -- display last undos
@@ -459,12 +421,8 @@ require("packer").startup({
     use({
       "nvim-telescope/telescope.nvim",
       -- "~/telescope.nvim/",
-      -- "l-kershaw/telescope.nvim",
-      -- branch = "fix/bottom_pane_overlaps",
-      -- opt = true,
-      -- cmd = "Telescope",
-      -- after = "impatient.nvim",
-      -- event = "BufRead",
+      cmd = "Telescope",
+      module = { "telescope", "configs.telescope" },
       requires = {
         { "nvim-lua/popup.nvim" },
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
@@ -473,6 +431,7 @@ require("packer").startup({
       },
       config = [[ require("configs.telescope") ]],
     })
+
     use({
       "AckslD/nvim-neoclip.lua",
       requires = { "tami5/sqlite.lua", module = "sqlite" },
@@ -483,8 +442,6 @@ require("packer").startup({
       "~/startup.nvim",
       opt = true,
       config = [[ require("startup").setup(require("configs.startup_nvim")) ]],
-      -- config = [[ require("startup").setup(require("custom.nv_startup")) ]],
-      -- config = [[ require("startup").setup({theme = "evil"}) ]],
       requires = {
         "~/startup_themes/",
       },
@@ -498,28 +455,22 @@ require("packer").startup({
         require("colorizer").setup({
           "*",
         }, {
-          mode = "foreground",
-          hsl_fn = true,
-        })
+            mode = "foreground",
+            hsl_fn = true,
+          })
         vim.cmd([[ColorizerAttachToBuffer]])
       end,
     })
 
-    -- use({"~/dynamic-cursor.nvim",
-    --   config = function()
-    --     require("dynamic-cursor").setup()
-    --   end})
-
     use({ "~/hangman.nvim/", command = "Hangman" })
 
-    use({ "oknozor/illumination", command = "Illuminate" })
-
-    use("hrsh7th/nvim-seak")
+    use({ "hrsh7th/nvim-seak", event = "CmdLineEnter" })
 
     -- completition
     use({
       "iron-e/nvim-cmp",
-      event = "InsertEnter",
+      -- "~/nvim-cmp/",
+      event = { "InsertEnter", "CmdLineEnter" },
       branch = "feat/completion-menu-borders",
       config = [[ require("configs.cmp") ]],
       requires = {
@@ -551,7 +502,7 @@ require("packer").startup({
 
     use({
       "danymat/neogen",
-      keys = { "<leader>a" },
+      module = { "neogen" },
       config = function()
         require("neogen").setup({
           enabled = true,
@@ -581,7 +532,7 @@ require("packer").startup({
       config = [[ require("configs.nvim_autopairs") ]],
     })
 
-    -- easily configure lsp
+    -- config for lsp
     use({
       "neovim/nvim-lspconfig",
       opt = true,
@@ -605,6 +556,7 @@ require("packer").startup({
       end,
     })
 
+    -- some functions to refactor
     use({
       "ThePrimeagen/refactoring.nvim",
       config = function()

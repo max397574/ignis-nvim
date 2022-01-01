@@ -1,5 +1,5 @@
 require("gitsigns").setup({
-  current_line_blame = true,
+  -- current_line_blame = true,
   signs = {
     add = {
       hl = "GitSignsAdd",

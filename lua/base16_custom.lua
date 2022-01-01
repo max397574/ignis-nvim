@@ -48,7 +48,7 @@ local function apply_base16_theme(theme)
   highlight("CmpItemKindText", theme.base0B, nil, nil, nil)
   highlight("CmpItemKindStructure", theme.base0E, nil, nil, nil)
   highlight("CmpItemKindType", theme.base0A, nil, "none", nil)
-     highlight("markdownBold", theme.base0A, nil, "bold", nil)
+  highlight("markdownBold", theme.base0A, nil, "bold", nil)
 end
 
 return setmetatable({

@@ -10,6 +10,7 @@ wk.register({
     l = { "<cmd>PackerLoad lir.nvim<CR><cmd>lua require'lir'.init()<CR>", "Lir" },
     s = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" },
   },
+  -- == Git ==
   g = {
     name = "+Git",
     s = { "<cmd>G<CR>", "Status" },
@@ -28,10 +29,10 @@ wk.register({
       b = "Blame line",
     },
   },
-  d = {
-    name = "+Definition",
-    p = { "<cmd>lua require'configs.lsp'.PeekDefinition()<CR>", "Peek" },
-  },
+  -- d = {
+  --   name = "+Definition",
+  --   p = { "<cmd>lua require'configs.lsp'.PeekDefinition()<CR>", "Peek" },
+  -- },
   n = {
     name = "+Nvim-Tree",
     t = { "<cmd>NvimTreeToggle<CR>", "Toggle" },
@@ -45,6 +46,7 @@ wk.register({
     },
     c = { "Toggle comment line" },
   },
+  -- == Colors ==
   C = {
     name = "+Colors",
     n = {
@@ -57,6 +59,7 @@ wk.register({
     },
   },
   r = "Run",
+  -- == Markdown ==
   m = {
     name = "Markdown",
     d = {
@@ -77,6 +80,7 @@ wk.register({
       },
     },
   },
+  -- == Errors ==
   x = {
     name = "+Errors",
     x = { "<cmd>TroubleToggle<CR>", "Trouble" },
@@ -103,6 +107,7 @@ wk.register({
       "Grep Last Search",
     },
   },
+  -- == Help ==
   ["h"] = {
     name = "+Help, Harpoon",
     t = { "<cmd>Telescope builtin<CR>", "Telescope" },
@@ -127,6 +132,7 @@ wk.register({
     },
   },
   u = { "<cmd>UndotreeToggle<CR>", "UndoTree" },
+  --== Buffers ==
   b = {
     name = "+Buffer",
     ["b"] = { "<cmd>e #<CR>", "Switch to Other Buffer" },
@@ -137,7 +143,7 @@ wk.register({
     ["d"] = { "<cmd>bd<CR>", "Delete Buffer" },
     ["g"] = { "<cmd>BufferLinePick<CR>", "Goto Buffer" },
   },
-
+  --== Search ==
   s = {
     name = "+Search",
     a = { "<cmd>Telescope autocommands<CR>", "Auto Commands" },
@@ -147,6 +153,10 @@ wk.register({
     o = { "<cmd>Telescope buffers<CR>", "Open Buffers" },
     e = { "<cmd>lua require'telescope.builtin'.symbols{}<CR>", "Emojis" },
     l = { "<cmd>Telescope luasnip<CR>", "Luasnip" },
+    y = {
+      "<cmd>lua require('telescope').extensions.neoclip.default()<CR>",
+      "Yanks"
+    },
     s = {
       function()
         require("telescope.builtin").lsp_workspace_symbols()
@@ -161,15 +171,36 @@ wk.register({
     },
     t = { "<cmd>TodoTelescope<CR>", "Todo Comments" },
   },
-  f = {
+  --== Files ==
+  F = {
     name = "+File",
-    f = {
-      [[<cmd>lua require'telescope.builtin'.find_files({find_command={"rg","-g", "!.git","--files","--hidden","--no-ignore"}})<CR>]],
-      "Find File",
-    },
     r = { "<cmd>Telescope oldfiles<CR>", "Open Recent File" },
     n = { "<cmd>enew<CR>", "New File" },
   },
+  --== Find ==
+  f = {
+    name = "+Find",
+    f = {
+      [[<cmd>lua require'configs.telescope'.find_files()<CR>]],
+      "File",
+    },
+    ["/"] = { "<cmd>Telescope grep_last_search<CR>", "Grep Last Search" },
+    o = { "<cmd>Telescope oldfiles<CR>", "Oldfiles" },
+    b = { "<cmd>Telescope buffers show_all_buffers=true<cr>", "Switch Buffer" },
+    N = {
+      "<cmd>lua require'configs.telescope'.search_config()<CR>",
+      "Neovim Config",
+    },
+    h = { "<cmd>lua require'configs.telescope'.help_tags()<CR>", "Help Tags" },
+    n = { "<cmd>lua require'configs.telescope'.find_notes()<CR>", "Notes" },
+    B = { "<cmd>Telescope<CR>", "Builtin" },
+    r = { "<cmd>Telescope registers<CR>", "Registers" },
+    m = { "<cmd>Telescope keymaps<CR>", "Keymaps" },
+    a = { "<cmd>Telescope autocommands<CR>", "Autocommands" },
+    O = { "<cmd>Telescope vim_options<CR>", "Vim Options" },
+    c = { "<cmd>Telescope commands<CR>", "Commands" },
+  },
+  --== Insert ==
   i = {
     name = "+Insert",
     o = { "o<ESC>k", "Empty line below" },
@@ -183,7 +214,6 @@ wk.register({
     "<cmd>lua require('configs.telescope').file_browser()<CR>",
     "Browse Files",
   },
-  [","] = { "<cmd>Telescope buffers show_all_buffers=true<cr>", "Switch Buffer" },
   ["/"] = {
     "<cmd>lua require('configs.telescope').find_string()<cr>",
     "Live Grep",
@@ -194,11 +224,12 @@ wk.register({
     n = { "<cmd>cnext<CR>", "Next Entry" },
     p = { "<cmd>cprevious<CR>", "Previous Entry" },
   },
-  -- j = { ":m .+1<CR>==", "Move Current line down" },
-  -- k = { ":m .-2<CR>==", "Move Current line up" },
+  j = { ":m .+1<CR>==", "Move Current line down" },
+  k = { ":m .-2<CR>==", "Move Current line up" },
   y = { '"+y', "Yank to clipboard" },
   p = { '"0p', "Paste last yanked text" },
   P = { '"0P', "Paste last yanked text" },
+  --== Window ==
   w = {
     name = "+Window",
     ["w"] = { "<C-W>p", "other-window" },
@@ -260,32 +291,28 @@ map("n", "<C-s>", ":lua require('configs.telescope').curbuf()<CR>", nore_silent)
 
 -- Simple Commands (Improvements of commands)
 -- ==========================================
+
 -- highlight search result and center cursor
 map("n", "n", "nzzzv", nore_silent)
 map("n", "N", "Nzzzv", nore_silent)
+
 -- reselect selection after shifting
 map("x", "<", "<gv", nore)
 map("x", ">", ">gv", nore)
 
--- alt u,n,f,ö
--- above and left for smaller, below and right for bigger
--- use `sed -n l` to get chars with alt
--- resize windows
-map("n", "~", ":resize +5<CR>", nore_silent)
-map("n", "ƒ", ":vert resize -5<CR>", nore_silent)
-map("n", "°", ":resize -5<CR>", nore_silent)
-map("n", "¢", ":vert resize +5<CR>", nore_silent)
--- move lines up and down in visual and normal mode
--- map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
--- map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
-map("i", "<c-l>", "<right>", nore_silent)
-map("i", "<c-h>", "<left>", nore_silent)
+-- move lines up and down in insert mode
+map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
+map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
+
 -- remove highlighting from search
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
+map("n", "<ESC>", "<cmd>nohl<CR>", nore_silent)
 -- easier escape
 map("v", "jk", "<ESC>", nore)
+
 -- paste over selected text without overwriting yank register
-map("v", "<leader>p", "_dP", nore)
+map("v", "<leader>p", '"_dP', nore)
+
 -- execute macro q
 map("n", "Q", "@q", nore)
 
@@ -300,6 +327,7 @@ map(
 -- move visual blocks up and down
 map("v", "J", ":m '>+1<CR>gv=gv", nore_silent)
 map("v", "K", ": m'<-2<CR>gv=gv", nore_silent)
+
 -- don't move cursor down when joining lines
 map("n", "J", "mzJ`z", nore)
 map("x", "<BS>", "x", nore)
@@ -312,6 +340,7 @@ map("v", "<leader>s", ":s///g<LEFT><LEFT><LEFT>", nore)
 
 -- move right in insert mode
 map("i", "  ", "<RIGHT>", nore)
+
 -- better undo
 map("i", ",", ",<c-g>u", nore)
 map("i", "!", "!<c-g>u", nore)
@@ -320,15 +349,17 @@ map("i", " ", " <c-g>u", nore)
 map("i", "?", "?<c-g>u", nore)
 map("i", "_", "_<c-g>u", nore)
 map("i", "<CR>", "<CR><c-g>u", nore)
+
+-- Close toggleterm
 map("t", "<c-t>", "<cmd>ToggleTerm<CR>", nore_silent)
+map("t", "<c-g>", "<cmd>ToggleTerm<CR>", nore_silent)
+
 -- lsp
 map("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", nore_silent)
+
 -- help from ts with textobjects
 map("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
 map("v", "m", ":<C-U>lua require('tsht').nodes()<CR>", nore_silent)
-
--- map("n", "<c-n>", "<cmd>bnext<CR>", nore_silent)
--- map("n", "<c-p>", "<cmd>bprev<CR>", nore_silent)
 
 -- open helpfile of word under cursor
 map(
@@ -341,17 +372,17 @@ map(
 -- jump to mark m
 map("n", "M", "`m", nore_silent)
 
+-- append comma and semicolon
 map("n", ",,", "<cmd>lua require'utils'.append_comma()<CR>", nore_silent)
 map("n", ";;", "<cmd>lua require'utils'.append_semicolon()<CR>", nore_silent)
-map("n", "<ESC>", "<cmd>nohl<CR>", nore_silent)
 
 -- change case of cword
 map("n", "<C-U>", "b~", nore_silent)
 map("i", "<C-U>", "<ESC>b~A", nore_silent)
--- map("n", "<C-U>", "<cmd>lua require'utils'.change_case()<CR>", nore_silent)
 
 map("v", "<leader>n", ":norm ", nore_silent)
 
+-- luasnip
 map(
   "i",
   "<leader><tab>",
@@ -365,11 +396,6 @@ map(
   [[(v:count > 1 ? "m'" . v:count : '') . 'j']],
   { noremap = true, expr = true }
 )
-
-map("c", "<c-j>", "<down>", nore_silent)
-
-map("c", "<c-k>", "<up>", nore_silent)
-
 map(
   "n",
   "k",
@@ -431,6 +457,7 @@ map(
   [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
   opts
 )
+
 map(
   "v",
   "<Leader>Ri",

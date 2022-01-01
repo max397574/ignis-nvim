@@ -117,6 +117,28 @@ cmp.setup({
     { name = "neorg", priority = 6 },
     { name = "nvim_lsp_signature_help", priority = 10 },
   },
+  enabled = function()
+    -- if require"cmp.config.context".in_treesitter_capture("comment")==true or require"cmp.config.context".in_syntax_group("Comment") then
+    --   return false
+    -- else
+    --   return true
+    -- end
+    if vim.bo.ft == "TelescopePrompt" then
+      return false
+    end
+    local lnum, col =
+      vim.fn.line("."), math.min(vim.fn.col("."), #vim.fn.getline("."))
+    for _, syn_id in ipairs(vim.fn.synstack(lnum, col)) do
+      syn_id = vim.fn.synIDtrans(syn_id) -- Resolve :highlight links
+      if vim.fn.synIDattr(syn_id, "name") == "Comment" then
+        return false
+      end
+    end
+    if vim.tbl_contains(Get_treesitter_hl(), "TSComment") then
+      return false
+    end
+    return true
+  end,
   formatting = {
     fields = {
       cmp.ItemField.Kind,
@@ -180,17 +202,41 @@ cmp.setup({
     native_menu = false,
   },
 })
--- cmp.setup.cmdline(":", {
---   sources = cmp.config.sources({
---     { name = "path" },
---   }, {
---     { name = "cmdline" },
---   }),
--- })
---
--- cmp.setup.cmdline("/", {
---   sources = {
---     { name = "buffer", keyword_length = 1 },
---   },
--- })
+
+cmp.setup.cmdline(":", {
+  completion = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    scrollbar = "║",
+  },
+  documentation = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    scrollbar = "║",
+  },
+  sources = cmp.config.sources({
+    { name = "path" },
+  }, {
+    { name = "cmdline" },
+  }),
+  enabled = function()
+    return true
+  end,
+})
+
+cmp.setup.cmdline("/", {
+  sources = {
+    { name = "buffer", keyword_length = 1 },
+  },
+  enabled = function()
+    return true
+  end,
+  completion = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    scrollbar = "║",
+  },
+  documentation = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    scrollbar = "║",
+  },
+})
+
 vim.cmd([[hi NormalFloat guibg=none]])
