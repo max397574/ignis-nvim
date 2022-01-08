@@ -14,7 +14,9 @@ vim.opt.shadafile = "NONE"
 -- vim.g.loaded_matchit = 1 -- toggle comment for MIN STARTUP
 -- vim.g.loaded_matchparen = 1 -- toggle comment for MIN STARTUP
 
-vim.g.did_load_filetypes = 1
+vim.g.do_filetype_lua = 0
+vim.g.did_load_filetypes = 0
+vim.g.did_load_ftdetect = 1
 
 -- set this early because the other mappings are created with this
 vim.g.mapleader = " "
@@ -27,7 +29,9 @@ require("options")
 require("autocommands")
 require("utils")
 vim.cmd([[ PackerLoad bufferline.nvim]])
+vim.cmd([[PackerLoad filetype.nvim]])
 vim.opt.shadafile = ""
+vim.cmd("autocmd BufRead,BufNewFile *.norg setlocal filetype=norg")
 vim.cmd([[
 PackerLoad startup.nvim
 rshada!
