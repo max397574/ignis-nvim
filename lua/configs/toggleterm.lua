@@ -15,7 +15,7 @@ require("toggleterm").setup({
   float_opts = {
     -- border = require("utils").border_thin_rounded,
     border = "shadow",
-    winblend = 0,
+    winblend = 30,
     highlights = {
       border = "FloatBorder",
       background = "NormalFloat",
@@ -63,7 +63,9 @@ local file_extenstions = {
 function Run_file()
   local command = files[vim.bo.filetype]
   if command ~= nil then
-    require("toggleterm.terminal").Terminal:new({ cmd = command, close_on_exit = false }):toggle()
+    require("toggleterm.terminal").Terminal
+      :new({ cmd = command, close_on_exit = false })
+      :toggle()
     print("Running: " .. command)
   end
 end
@@ -76,12 +78,9 @@ vim.api.nvim_buf_set_keymap(
 )
 
 local function toggle_lazygit()
-require("toggleterm.terminal").Terminal:new{cmd="lazygit", close_on_exit=true}:toggle()
+  require("toggleterm.terminal").Terminal
+    :new({ cmd = "lazygit", close_on_exit = true })
+    :toggle()
 end
 
-vim.keymap.set(
-  "n",
-  "<c-g>",
-  toggle_lazygit,
-  nore_silent
-)
+vim.keymap.set("n", "<c-g>", toggle_lazygit, nore_silent)

@@ -77,9 +77,9 @@ cmp.setup({
         fallback()
       end
     end, {
-        "i",
-        "s",
-      }),
+      "i",
+      "s",
+    }),
     ["<C-h>"] = cmp.mapping(function(fallback)
       if luasnip.jumpable(-1) then
         vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
@@ -89,9 +89,9 @@ cmp.setup({
         fallback()
       end
     end, {
-        "i",
-        "s",
-      }),
+      "i",
+      "s",
+    }),
     -- ["<Tab>"] = cmp.mapping(function(fallback)
     --   if cmp.visible() then
     --     -- cmp.select_next_item {}
@@ -184,7 +184,7 @@ cmp.setup({
 
         if
           entry.completion_item.insertTextFormat
-          == types.lsp.InsertTextFormat.Snippet
+            == types.lsp.InsertTextFormat.Snippet
           and string.sub(vim_item.abbr, -1, -1) == "~"
         then
           word = word .. "~"
@@ -231,8 +231,8 @@ cmp.setup.cmdline(":", {
   sources = cmp.config.sources({
     { name = "path" },
   }, {
-      { name = "cmdline" },
-    }),
+    { name = "cmdline" },
+  }),
   enabled = function()
     return true
   end,

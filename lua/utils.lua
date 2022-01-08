@@ -92,13 +92,18 @@ local utils = {}
 
 utils.get_themes = function()
   local themes = {}
-  local theme_dir = vim.fn.expand("~") .. "/nvim-base16.lua/lua/hl_themes"
+  local theme_dir = vim.fn.expand("~")
+    .. "/neovim_plugins/nvim-base16.lua/lua/hl_themes"
   local theme_files = require("plenary.scandir").scan_dir(theme_dir, {})
   for _, theme in ipairs(theme_files) do
     table.insert(
       themes,
       (theme
-        :gsub(vim.fn.expand("~") .. "/nvim%-base16%.lua/lua/hl%_themes/", "")
+        :gsub(
+          vim.fn.expand("~")
+            .. "/neovim%_plugins/nvim%-base16%.lua/lua/hl%_themes/",
+          ""
+        )
         :gsub(".lua", ""))
     )
   end

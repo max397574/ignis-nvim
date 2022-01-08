@@ -15,7 +15,7 @@ local previewers = require("telescope.previewers")
 ---@type nvim_config.utils
 local utils = require("utils")
 
-local set_options = require"telescope_utils".set_options
+local set_options = require("telescope_utils").set_options
 
 function ts.reloader()
   RELOAD("plenary")
@@ -158,14 +158,13 @@ require("telescope").setup({
   }),
 })
 
-function ts.entry_preview(contents,opts)
-  require"telescope_utils".entry_preview(contents,opts)
+function ts.entry_preview(contents, opts)
+  require("telescope_utils").entry_preview(contents, opts)
 end
 
 require("telescope").load_extension("fzf")
 
-function ts.cheatsheets()
-end
+function ts.cheatsheets() end
 
 function ts.entry_preview_test()
   ts.entry_preview({
@@ -175,7 +174,7 @@ function ts.entry_preview_test()
         "Name: Test Entry",
         "Length: 120",
       },
-      results_name = {"Entry 1"},
+      results_name = { "Entry 1" },
     },
     {
       contents = {
@@ -183,7 +182,7 @@ function ts.entry_preview_test()
         "Name: Another Entry",
         "Length: 60",
       },
-      results_name = {"Entry 2"},
+      results_name = { "Entry 2" },
     },
   })
 end
@@ -408,7 +407,7 @@ local function base_16_finder(opts)
 
   pickers.new(opts, {
     prompt_title = "~ Base 16 Colorschemes ~",
-    layout_strategy = "flex",
+    layout_strategy = "custom_bottom",
     finder = finders.new_table(opts.data),
     sorter = conf.generic_sorter(opts),
     previewer = previewer,
@@ -434,9 +433,16 @@ end
 
 function ts.colorschemes()
   reloader()
-  local opts = {
+  local opts = themes.get_ivy({
     data = utils.get_themes(),
-  }
+    layout_config = {
+      width = 0.99,
+      height = 0.5,
+      -- anchor = "S",
+      preview_cutoff = 20,
+      prompt_position = "top",
+    },
+  })
   base_16_finder(opts)
 end
 

@@ -13,7 +13,6 @@ local lua_cmd = {
 
 local lsp_conf = {}
 
-
 function lsp_conf.preview_location(location, context, before_context)
   -- location may be LocationLink or Location (more useful for the former)
   context = context or 15
@@ -153,7 +152,7 @@ local border = {
 --   {  "▄","FloatBorder"},
 --   {  "▙","FloatBorder"},
 --   {  "▌","FloatBorder"},
--- } 
+-- }
 
 -- local border = {
 --   { "╭", "FloatBorder" },
@@ -248,15 +247,15 @@ local sumneko_lua_server = {
       runtime = {
         -- version = "LuaJIT",
         -- path = vim.split(package.path, ";"),
-        vim.fn.expand("~").."/.config/nvim_config/lua/?.lua"
+        vim.fn.expand("~") .. "/.config/nvim_config/lua/?.lua",
       },
       diagnostics = {
         globals = { "vim", "dump", "hs", "lvim" },
       },
       workspace = {
         library = {
-          [table.concat({vim.fn.stdpath("data"), "lua"},"/")] = false,
-          [vim.fn.expand("~").."/.config/nvim_config/lua"] = false,
+          [table.concat({ vim.fn.stdpath("data"), "lua" }, "/")] = false,
+          [vim.fn.expand("~") .. "/.config/nvim_config/lua"] = false,
           [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = false,
           [vim.fn.expand("$VIMRUNTIME/lua")] = false,
         },
@@ -269,12 +268,12 @@ local sumneko_lua_server = {
 
 local enable_lua_dev = true
 local lua_dev_plugins = false
-local runtime_path_completion = false
+local runtime_path_completion = true
 if not runtime_path_completion then
   sumneko_lua_server.settings.Lua.runtime = {
     version = "LuaJIT",
     path = vim.split(package.path, ";"),
-    vim.fn.expand("~").."/.config/nvim_config/lua/?.lua"
+    vim.fn.expand("~") .. "/.config/nvim_config/lua/?.lua",
   }
 end
 
@@ -316,7 +315,7 @@ local codes = {
   },
   empty_block = {
     message = " That shouldn't be empty here",
-    "empty-block"
+    "empty-block",
   },
   missing_symbol = {
     message = " Here should be a symbol",
@@ -339,9 +338,9 @@ local codes = {
     "reportUndefinedVariable",
   },
   trailing_whitespace = {
-    message =  " Remove trailing whitespace",
+    message = " Remove trailing whitespace",
     "trailing-whitespace",
-    "trailing-space"
+    "trailing-space",
   },
   unused_variable = {
     message = " Don't define variables you don't use",
@@ -380,26 +379,31 @@ vim.diagnostic.config({
       print("diagnostic:")
       dump(diagnostic)
       for _, table in pairs(codes) do
-        if vim.tbl_contains(table,code) then
+        if vim.tbl_contains(table, code) then
           return table.message
         end
       end
       return diagnostic.message
     end,
-    header = {"Cursor Diagnostics:","DiagnosticHeader"},
+    header = { "Cursor Diagnostics:", "DiagnosticHeader" },
     pos = 1,
-    prefix = function(diagnostic,i,total)
+    prefix = function(diagnostic, i, total)
       local icon, highlight
       if diagnostic.severity == 1 then
-        icon = ""; highlight ="DiagnosticError"
+        icon = ""
+        highlight = "DiagnosticError"
       elseif diagnostic.severity == 2 then
-        icon = ""; highlight ="DiagnosticWarn"
+        icon = ""
+        highlight = "DiagnosticWarn"
       elseif diagnostic.severity == 3 then
-        icon = ""; highlight ="DiagnosticInfo"
+        icon = ""
+        highlight = "DiagnosticInfo"
       elseif diagnostic.severity == 4 then
-        icon = ""; highlight ="DiagnosticHint"
+        icon = ""
+        highlight = "DiagnosticHint"
       end
-      return i.."/"..total.." "..icon.."  ",highlight end
+      return i .. "/" .. total .. " " .. icon .. "  ", highlight
+    end,
   },
   signs = true,
   underline = true,

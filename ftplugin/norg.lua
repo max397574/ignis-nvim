@@ -36,7 +36,7 @@ wk.register({
     name = "+New Note",
     n = "New Note",
   },
-  l = {"<cmd>Telescope neorg insert_link<CR>", "Insert Link"}
+  l = { "<cmd>Telescope neorg insert_link<CR>", "Insert Link" },
 }, {
   prefix = "<leader>o",
   mode = "n",

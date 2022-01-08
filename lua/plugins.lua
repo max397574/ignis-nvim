@@ -261,7 +261,10 @@ require("packer").startup({
 
     use({ "~/float_help.nvim/", keys = { "<leader>hp" } })
 
-    use({ "~/neovim_plugins/colorscheme_switcher/", module = { "colorscheme_switcher" } })
+    use({
+      "~/neovim_plugins/colorscheme_switcher/",
+      module = { "colorscheme_switcher" },
+    })
 
     use({
       "bfredl/nvim-luadev",
@@ -303,7 +306,6 @@ require("packer").startup({
         vim.g.rose_pine_disable_float_background = true
       end,
     })
-
 
     use({
       "folke/zen-mode.nvim",
@@ -430,14 +432,17 @@ require("packer").startup({
       cmd = "Telescope",
       module = { "telescope", "configs.telescope" },
       keys = { "<leader>Cs" },
-      requires = {
-      },
+      requires = {},
       config = [[ require("configs.telescope") ]],
     })
-    use{ "nvim-lua/popup.nvim",after ="telescope.nvim" }
-    use{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" ,after ="telescope.nvim"}
-    use{ "nvim-telescope/telescope-symbols.nvim" ,after ="telescope.nvim"}
-    use{ "nvim-telescope/telescope-file-browser.nvim" ,after ="telescope.nvim"}
+    use({ "nvim-lua/popup.nvim", after = "telescope.nvim" })
+    use({
+      "nvim-telescope/telescope-fzf-native.nvim",
+      run = "make",
+      after = "telescope.nvim",
+    })
+    use({ "nvim-telescope/telescope-symbols.nvim", after = "telescope.nvim" })
+    use({ "nvim-telescope/telescope-file-browser.nvim", after = "telescope.nvim" })
 
     use({
       "AckslD/nvim-neoclip.lua",
@@ -466,9 +471,9 @@ require("packer").startup({
         require("colorizer").setup({
           "*",
         }, {
-            mode = "foreground",
-            hsl_fn = true,
-          })
+          mode = "foreground",
+          hsl_fn = true,
+        })
         vim.cmd([[ColorizerAttachToBuffer]])
       end,
     })

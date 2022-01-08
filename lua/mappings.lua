@@ -6,8 +6,18 @@ local wk = require("which-key")
 wk.register({
   e = {
     name = "+Explore",
-    f = { function() require'lir.float'.init() end, "Float" },
-    l = { function() require'lir'.init() end, "Lir" },
+    f = {
+      function()
+        require("lir.float").init()
+      end,
+      "Float",
+    },
+    l = {
+      function()
+        require("lir").init()
+      end,
+      "Lir",
+    },
     s = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" },
   },
   -- == Git ==
@@ -15,7 +25,12 @@ wk.register({
     name = "+Git",
     s = { "<cmd>G<CR>", "Status" },
     p = { "<cmd>Git push<CR>", "Push" },
-    d = { function() require('configs.telescope').git_diff() end, "Diff" },
+    d = {
+      function()
+        require("configs.telescope").git_diff()
+      end,
+      "Diff",
+    },
     l = { "<cmd>Telescope git_commits<CR>", "Log" },
     c = { "<cmd>Git commit<CR>", "Commit" },
     a = { "<cmd>Git add %<CR>", "Add" },
@@ -37,7 +52,9 @@ wk.register({
   c = {
     name = "+Comment, Clipboard, Colors",
     b = {
-      function() require('telescope').extensions.neoclip.default() end,
+      function()
+        require("telescope").extensions.neoclip.default()
+      end,
       "Clipboard",
     },
     c = { "Toggle comment line" },
@@ -46,7 +63,9 @@ wk.register({
   C = {
     name = "+Colors",
     n = {
-      function() require'configs.telescope'.colorschemes() end,
+      function()
+        require("configs.telescope").colorschemes()
+      end,
       "NvChad Base 16 Picker",
     },
     s = {
@@ -57,7 +76,7 @@ wk.register({
   r = "Run",
   -- == Markdown ==
   m = {
-    name = "Markdown",
+    name = "Markdown, Messages",
     d = {
       name = "Markdown",
       h = {
@@ -100,7 +119,9 @@ wk.register({
     name = "+Last, Load",
     f = { "<cmd>so<CR>", "Load File" },
     s = {
-      function() require('configs.telescope').grep_last_search() end,
+      function()
+        require("configs.telescope").grep_last_search()
+      end,
       "Grep Last Search",
     },
   },
@@ -109,7 +130,12 @@ wk.register({
     name = "+Help, Harpoon",
     t = { "<cmd>Telescope builtin<CR>", "Telescope" },
     c = { "<cmd>Telescope commands<CR>", "Commands" },
-    h = { function() require'configs.telescope'.help_tags() end, "Help Pages" },
+    h = {
+      function()
+        require("configs.telescope").help_tags()
+      end,
+      "Help Pages",
+    },
     m = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
     k = { "<cmd>Telescope keymaps<CR>", "Key Maps" },
     -- s = { "<cmd>Telescope highlights<CR>", "Search Highlight Groups" },
@@ -118,13 +144,38 @@ wk.register({
       "Highlight Groups at cursor",
     },
     o = { "<cmd>Telescope vim_options<CR>", "Options" },
-    f = { function() require'float_help'.float_help() end, "Help Files" },
+    f = {
+      function()
+        require("float_help").float_help()
+      end,
+      "Help Files",
+    },
     p = {
       name = "+Harpoon",
-      a = { function() require('harpoon.mark').add_file() end, "Add File" },
-      m = { function() require('harpoon.ui').toggle_quick_menu() end, "Menu" },
-      n = { function() require('harpoon.ui').nav_next() end, "Next File" },
-      p = { function() require('harpoon.ui').nav_prev() end, "Previous File" },
+      a = {
+        function()
+          require("harpoon.mark").add_file()
+        end,
+        "Add File",
+      },
+      m = {
+        function()
+          require("harpoon.ui").toggle_quick_menu()
+        end,
+        "Menu",
+      },
+      n = {
+        function()
+          require("harpoon.ui").nav_next()
+        end,
+        "Next File",
+      },
+      p = {
+        function()
+          require("harpoon.ui").nav_prev()
+        end,
+        "Previous File",
+      },
       t = { "<cmd>Telescope harpoon marks<CR>", "Telescope" },
     },
   },
@@ -144,15 +195,32 @@ wk.register({
   s = {
     name = "+Search",
     a = { "<cmd>Telescope autocommands<CR>", "Auto Commands" },
-    g = { function() require('configs.telescope').find_string() end, "Grep" },
-    b = { function() require('configs.telescope').curbuf() end, "Buffer" },
+    g = {
+      function()
+        require("configs.telescope").find_string()
+      end,
+      "Grep",
+    },
+    b = {
+      function()
+        require("configs.telescope").curbuf()
+      end,
+      "Buffer",
+    },
     d = { "<cmd>Telescope lsp_document_diagnostics<CR>", "Diagnostics" },
     o = { "<cmd>Telescope buffers<CR>", "Open Buffers" },
-    e = { function() require'telescope.builtin'.symbols{} end, "Emojis" },
+    e = {
+      function()
+        require("telescope.builtin").symbols({})
+      end,
+      "Emojis",
+    },
     l = { "<cmd>Telescope luasnip<CR>", "Luasnip" },
     y = {
-      function() require('telescope').extensions.neoclip.default() end,
-      "Yanks"
+      function()
+        require("telescope").extensions.neoclip.default()
+      end,
+      "Yanks",
     },
     s = {
       function()
@@ -163,7 +231,9 @@ wk.register({
     h = { "<cmd>Telescope command_history<CR>", "Command History" },
     m = { "<cmd>Telescope marks<CR>", "Jump to Mark" },
     c = {
-      function() require'configs.telescope'.code_actions() end,
+      function()
+        require("configs.telescope").code_actions()
+      end,
       "Code Actions",
     },
     t = { "<cmd>TodoTelescope<CR>", "Todo Comments" },
@@ -178,18 +248,32 @@ wk.register({
   f = {
     name = "+Find",
     f = {
-      function() require'configs.telescope'.find_files() end,
+      function()
+        require("configs.telescope").find_files()
+      end,
       "File",
     },
     ["/"] = { "<cmd>Telescope grep_last_search<CR>", "Grep Last Search" },
     o = { "<cmd>Telescope oldfiles<CR>", "Oldfiles" },
     b = { "<cmd>Telescope buffers show_all_buffers=true<cr>", "Switch Buffer" },
     N = {
-      function() require'configs.telescope'.search_config() end,
+      function()
+        require("configs.telescope").search_config()
+      end,
       "Neovim Config",
     },
-    h = { function() require'configs.telescope'.help_tags() end, "Help Tags" },
-    n = { function() require'configs.telescope'.find_notes() end, "Notes" },
+    h = {
+      function()
+        require("configs.telescope").help_tags()
+      end,
+      "Help Tags",
+    },
+    n = {
+      function()
+        require("configs.telescope").find_notes()
+      end,
+      "Notes",
+    },
     B = { "<cmd>Telescope<CR>", "Builtin" },
     r = { "<cmd>Telescope registers<CR>", "Registers" },
     m = { "<cmd>Telescope keymaps<CR>", "Keymaps" },
@@ -206,16 +290,25 @@ wk.register({
     a = { "a <ESC>h", "Space after" },
     ["<CR>"] = { "i<CR><ESC>", "Linebreak at Cursor" },
   },
-  a = { function() require('neogen').generate() end, "Generate Annotations" },
+  a = {
+    function()
+      require("neogen").generate()
+    end,
+    "Generate Annotations",
+  },
   ["."] = {
-    function() require('configs.telescope').file_browser() end,
+    function()
+      require("configs.telescope").file_browser()
+    end,
     "Browse Files",
   },
   ["/"] = {
-    function() require('configs.telescope').find_string() end,
+    function()
+      require("configs.telescope").find_string()
+    end,
     "Live Grep",
   },
-  [":"] = { "<cmd>Telescope command_history<cr>", "Command History" },
+  [":"] = { "<cmd>Telescope commands<cr>", "Commands" },
   q = {
     name = "+Quickfix",
     n = { "<cmd>cnext<CR>", "Next Entry" },
@@ -248,8 +341,18 @@ wk.register({
   },
   v = {
     name = "+View",
-    l = { function() require'utils'.LatexPreview() end, "Latex" },
-    m = { function() require'utils'.MarkdownPreview() end, "Markdown" },
+    l = {
+      function()
+        require("utils").LatexPreview()
+      end,
+      "Latex",
+    },
+    m = {
+      function()
+        require("utils").MarkdownPreview()
+      end,
+      "Markdown",
+    },
     -- c = {"<cmd>ColorizerAttachToBuffer<CR>", "Colorizer"},
     c = { "<cmd>PackerLoad nvim-colorizer.lua<CR>", "Colorizer" },
   },
@@ -284,7 +387,9 @@ map("n", "°", ":normal! zO<CR>", nore_silent)
 
 -- Telescope
 -- =========
-map("n", "<C-s>", function() require('configs.telescope').curbuf() end, nore_silent)
+map("n", "<C-s>", function()
+  require("configs.telescope").curbuf()
+end, nore_silent)
 
 -- Simple Commands (Improvements of commands)
 -- ==========================================
@@ -311,12 +416,9 @@ map("v", "jk", "<ESC>", nore)
 map("v", "<leader>p", '"_dP', nore)
 
 -- see registers
-vim.keymap.set(
-  "n",
-  "®",
-  function() require('which-key').show('@', {mode='n',auto=true}) end,
-  nore_silent
-)
+vim.keymap.set("n", "®", function()
+  require("which-key").show("@", { mode = "n", auto = true })
+end, nore_silent)
 
 -- move visual blocks up and down
 map("v", "J", ":m '>+1<CR>gv=gv", nore_silent)
@@ -367,8 +469,12 @@ map(
 map("n", "M", "`m", nore_silent)
 
 -- append comma and semicolon
-map("n", ",,", function() require'utils'.append_comma() end, nore_silent)
-map("n", ";;", function() require'utils'.append_semicolon() end, nore_silent)
+map("n", ",,", function()
+  require("utils").append_comma()
+end, nore_silent)
+map("n", ";;", function()
+  require("utils").append_semicolon()
+end, nore_silent)
 
 -- change case of cword
 map("n", "<C-U>", "b~", nore_silent)
@@ -377,12 +483,9 @@ map("i", "<C-U>", "<ESC>b~A", nore_silent)
 map("v", "<leader>n", ":norm ", nore_silent)
 
 -- luasnip
-map(
-  "i",
-  "<leader><tab>",
-  function() require('luasnip').expand_or_jump() end,
-  nore_silent
-)
+map("i", "<leader><tab>", function()
+  require("luasnip").expand_or_jump()
+end, nore_silent)
 -- add j and k with count to jumplist
 map(
   "n",
@@ -419,12 +522,11 @@ map(
 )
 
 -- Cleanup function: this remap should be made in normal mode
-vim.keymap.set(
-  "n",
-  "<leader>Rc",
-  function() require('refactoring').debug.cleanup({}) end,
-  { noremap = true }
-)
+vim.keymap.set("n", "<leader>Rc", function()
+  require("refactoring").debug.cleanup({})
+end, {
+  noremap = true,
+})
 
 -- Remap to open the Telescope refactoring menu in visual mode
 map(

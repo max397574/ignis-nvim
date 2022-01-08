@@ -24,7 +24,6 @@ local get_border_size = function(opts)
   return 1
 end
 
-
 local calc_size_and_spacing =
   function(cur_size, max_size, bs, w_num, b_num, s_num)
     local spacing = s_num * (1 - bs) + b_num * bs
@@ -181,9 +180,9 @@ function tc_utils.set_options()
       else
         error(
           "Unknown prompt_position: "
-          .. tostring(self.window.prompt_position)
-          .. "\n"
-          .. vim.inspect(layout_config)
+            .. tostring(self.window.prompt_position)
+            .. "\n"
+            .. vim.inspect(layout_config)
         )
       end
       local width_padding = math.floor((max_columns - width) / 2)
@@ -213,10 +212,12 @@ function tc_utils.set_options()
       prompt.col = 1
       preview.height = prompt.height + results.height
       preview.title = "~ Preview ~"
-      results.title = { {
-        pos = "S",
-        text = "~ Results ~",
-      } }
+      results.title = {
+        {
+          pos = "S",
+          text = "~ Results ~",
+        },
+      }
       results.col = 2
 
       return {
@@ -257,52 +258,52 @@ reloader()
 --
 --Where results_name will be used as entry in `results` and `contents` will be the lines in the preview
 ---@param opts table Options for telescope picker
-  function tc_utils.entry_preview(contents, opts)
-    opts = opts or nil
-    reloader()
-    local config = require("telescope.config").values
-    local entry_display = require "telescope.pickers.entry_display"
-    local displayer = entry_display.create {
-      separator = " ",
-      items = {
-        { width = 60 },
-        { remaining = true },
-      },
-    }
-    local function make_display(entry)
-      local to_display = entry.results_name
-      -- local to_display = entry.name
-      return displayer(to_display)
-    end
-    local function entry_maker(entry)
-      return {
-        display = make_display,
-        results_name = entry.results_name,
-        contents = entry.contents,
-        filetype = "markdown",
-        ordinal = table.concat(entry.contents, '\n'),
-        -- TODO seem to be needed
-        name = 'name',
-        value = 'value', -- TODO what to put value to, affects sorting?
-      }
-    end
-
-    local previewer = previewers.new_buffer_previewer({
-      define_preview = function(self, entry, status)
-        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, true, entry.contents)
-        vim.bo[self.state.bufnr].filetype = entry.filetype
-      end,
-    })
-
-    pickers.new(opts, {
-      prompt_title = "My Test Prompt",
-      finder = finders.new_table({
-        results = contents,
-        entry_maker = entry_maker,
-      }),
-      previewer = previewer,
-      sorter = config.generic_sorter(opts),
-    }):find()
+function tc_utils.entry_preview(contents, opts)
+  opts = opts or nil
+  reloader()
+  local config = require("telescope.config").values
+  local entry_display = require("telescope.pickers.entry_display")
+  local displayer = entry_display.create({
+    separator = " ",
+    items = {
+      { width = 60 },
+      { remaining = true },
+    },
+  })
+  local function make_display(entry)
+    local to_display = entry.results_name
+    -- local to_display = entry.name
+    return displayer(to_display)
   end
+  local function entry_maker(entry)
+    return {
+      display = make_display,
+      results_name = entry.results_name,
+      contents = entry.contents,
+      filetype = "markdown",
+      ordinal = table.concat(entry.contents, "\n"),
+      -- TODO seem to be needed
+      name = "name",
+      value = "value", -- TODO what to put value to, affects sorting?
+    }
+  end
+
+  local previewer = previewers.new_buffer_previewer({
+    define_preview = function(self, entry, status)
+      vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, true, entry.contents)
+      vim.bo[self.state.bufnr].filetype = entry.filetype
+    end,
+  })
+
+  pickers.new(opts, {
+    prompt_title = "My Test Prompt",
+    finder = finders.new_table({
+      results = contents,
+      entry_maker = entry_maker,
+    }),
+    previewer = previewer,
+    sorter = config.generic_sorter(opts),
+  }):find()
+end
 
 return tc_utils
