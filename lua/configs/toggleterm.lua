@@ -1,9 +1,6 @@
-local map = vim.api.nvim_set_keymap
 local exp = vim.fn.expand
 local this = vim.api.nvim_get_current_buf
 local nore_silent = { noremap = true, silent = true }
-
-Open_term = require("toggleterm.terminal").Terminal
 
 require("toggleterm").setup({
   hide_numbers = true,
@@ -66,7 +63,7 @@ local file_extenstions = {
 function Run_file()
   local command = files[vim.bo.filetype]
   if command ~= nil then
-    Open_term:new({ cmd = command, close_on_exit = false }):toggle()
+    require("toggleterm.terminal").Terminal:new({ cmd = command, close_on_exit = false }):toggle()
     print("Running: " .. command)
   end
 end
@@ -77,9 +74,14 @@ vim.api.nvim_buf_set_keymap(
   [[:w<CR>:lua Run_file()<CR>]],
   nore_silent
 )
-vim.api.nvim_set_keymap(
+
+local function toggle_lazygit()
+require("toggleterm.terminal").Terminal:new{cmd="lazygit", close_on_exit=true}:toggle()
+end
+
+vim.keymap.set(
   "n",
   "<c-g>",
-  ':lua Open_term:new{cmd="lazygit", close_on_exit=true}:toggle()<CR>',
+  toggle_lazygit,
   nore_silent
 )

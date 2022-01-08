@@ -1,4 +1,4 @@
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local nore_silent = { noremap = true, silent = true }
 local nore = { noremap = true }
 local wk = require("which-key")
@@ -6,8 +6,8 @@ local wk = require("which-key")
 wk.register({
   e = {
     name = "+Explore",
-    f = { "<cmd>lua require'lir.float'.init()<CR>", "Float" },
-    l = { "<cmd>PackerLoad lir.nvim<CR><cmd>lua require'lir'.init()<CR>", "Lir" },
+    f = { function() require'lir.float'.init() end, "Float" },
+    l = { function() require'lir'.init() end, "Lir" },
     s = { "<cmd>SymbolsOutline<CR>", "Symbols Outline" },
   },
   -- == Git ==
@@ -15,7 +15,7 @@ wk.register({
     name = "+Git",
     s = { "<cmd>G<CR>", "Status" },
     p = { "<cmd>Git push<CR>", "Push" },
-    d = { "<cmd>lua require('configs.telescope').git_diff()<CR>", "Diff" },
+    d = { function() require('configs.telescope').git_diff() end, "Diff" },
     l = { "<cmd>Telescope git_commits<CR>", "Log" },
     c = { "<cmd>Git commit<CR>", "Commit" },
     a = { "<cmd>Git add %<CR>", "Add" },
@@ -29,10 +29,6 @@ wk.register({
       b = "Blame line",
     },
   },
-  -- d = {
-  --   name = "+Definition",
-  --   p = { "<cmd>lua require'configs.lsp'.PeekDefinition()<CR>", "Peek" },
-  -- },
   n = {
     name = "+Nvim-Tree",
     t = { "<cmd>NvimTreeToggle<CR>", "Toggle" },
@@ -41,7 +37,7 @@ wk.register({
   c = {
     name = "+Comment, Clipboard, Colors",
     b = {
-      "<cmd>lua require('telescope').extensions.neoclip.default()<CR>",
+      function() require('telescope').extensions.neoclip.default() end,
       "Clipboard",
     },
     c = { "Toggle comment line" },
@@ -50,7 +46,7 @@ wk.register({
   C = {
     name = "+Colors",
     n = {
-      "<cmd>lua require'configs.telescope'.colorschemes()<CR>",
+      function() require'configs.telescope'.colorschemes() end,
       "NvChad Base 16 Picker",
     },
     s = {
@@ -91,6 +87,7 @@ wk.register({
     l = { "<cmd>lopen<CR>", "Open Location List" },
     q = { "<cmd>copen<CR>", "Open Quickfix List" },
   },
+  Q = { ":let @q='<c-r><c-r>q", "Edit Macro Q" },
   t = {
     name = "+Table, Tasks",
     m = { "<cmd>TableModeToggle<CR>", "Toggle Table Mode" },
@@ -103,7 +100,7 @@ wk.register({
     name = "+Last, Load",
     f = { "<cmd>so<CR>", "Load File" },
     s = {
-      "<cmd>lua require('configs.telescope').grep_last_search()<CR>",
+      function() require('configs.telescope').grep_last_search() end,
       "Grep Last Search",
     },
   },
@@ -112,7 +109,7 @@ wk.register({
     name = "+Help, Harpoon",
     t = { "<cmd>Telescope builtin<CR>", "Telescope" },
     c = { "<cmd>Telescope commands<CR>", "Commands" },
-    h = { "<cmd>lua require'configs.telescope'.help_tags()<CR>", "Help Pages" },
+    h = { function() require'configs.telescope'.help_tags() end, "Help Pages" },
     m = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
     k = { "<cmd>Telescope keymaps<CR>", "Key Maps" },
     -- s = { "<cmd>Telescope highlights<CR>", "Search Highlight Groups" },
@@ -121,13 +118,13 @@ wk.register({
       "Highlight Groups at cursor",
     },
     o = { "<cmd>Telescope vim_options<CR>", "Options" },
-    f = { "<cmd>lua require'float_help'.float_help()<CR>", "Help Files" },
+    f = { function() require'float_help'.float_help() end, "Help Files" },
     p = {
       name = "+Harpoon",
-      a = { "<cmd>lua require('harpoon.mark').add_file()<CR>", "Add File" },
-      m = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Menu" },
-      n = { "<cmd>lua require('harpoon.ui').nav_next()<CR>", "Next File" },
-      p = { "<cmd>lua require('harpoon.ui').nav_prev()<CR>", "Previous File" },
+      a = { function() require('harpoon.mark').add_file() end, "Add File" },
+      m = { function() require('harpoon.ui').toggle_quick_menu() end, "Menu" },
+      n = { function() require('harpoon.ui').nav_next() end, "Next File" },
+      p = { function() require('harpoon.ui').nav_prev() end, "Previous File" },
       t = { "<cmd>Telescope harpoon marks<CR>", "Telescope" },
     },
   },
@@ -147,14 +144,14 @@ wk.register({
   s = {
     name = "+Search",
     a = { "<cmd>Telescope autocommands<CR>", "Auto Commands" },
-    g = { "<cmd>lua require('configs.telescope').find_string()<CR>", "Grep" },
-    b = { "<cmd>lua require('configs.telescope').curbuf()<CR>", "Buffer" },
+    g = { function() require('configs.telescope').find_string() end, "Grep" },
+    b = { function() require('configs.telescope').curbuf() end, "Buffer" },
     d = { "<cmd>Telescope lsp_document_diagnostics<CR>", "Diagnostics" },
     o = { "<cmd>Telescope buffers<CR>", "Open Buffers" },
-    e = { "<cmd>lua require'telescope.builtin'.symbols{}<CR>", "Emojis" },
+    e = { function() require'telescope.builtin'.symbols{} end, "Emojis" },
     l = { "<cmd>Telescope luasnip<CR>", "Luasnip" },
     y = {
-      "<cmd>lua require('telescope').extensions.neoclip.default()<CR>",
+      function() require('telescope').extensions.neoclip.default() end,
       "Yanks"
     },
     s = {
@@ -166,7 +163,7 @@ wk.register({
     h = { "<cmd>Telescope command_history<CR>", "Command History" },
     m = { "<cmd>Telescope marks<CR>", "Jump to Mark" },
     c = {
-      "<cmd>lua require'configs.telescope'.code_actions()<CR>",
+      function() require'configs.telescope'.code_actions() end,
       "Code Actions",
     },
     t = { "<cmd>TodoTelescope<CR>", "Todo Comments" },
@@ -181,18 +178,18 @@ wk.register({
   f = {
     name = "+Find",
     f = {
-      [[<cmd>lua require'configs.telescope'.find_files()<CR>]],
+      function() require'configs.telescope'.find_files() end,
       "File",
     },
     ["/"] = { "<cmd>Telescope grep_last_search<CR>", "Grep Last Search" },
     o = { "<cmd>Telescope oldfiles<CR>", "Oldfiles" },
     b = { "<cmd>Telescope buffers show_all_buffers=true<cr>", "Switch Buffer" },
     N = {
-      "<cmd>lua require'configs.telescope'.search_config()<CR>",
+      function() require'configs.telescope'.search_config() end,
       "Neovim Config",
     },
-    h = { "<cmd>lua require'configs.telescope'.help_tags()<CR>", "Help Tags" },
-    n = { "<cmd>lua require'configs.telescope'.find_notes()<CR>", "Notes" },
+    h = { function() require'configs.telescope'.help_tags() end, "Help Tags" },
+    n = { function() require'configs.telescope'.find_notes() end, "Notes" },
     B = { "<cmd>Telescope<CR>", "Builtin" },
     r = { "<cmd>Telescope registers<CR>", "Registers" },
     m = { "<cmd>Telescope keymaps<CR>", "Keymaps" },
@@ -209,13 +206,13 @@ wk.register({
     a = { "a <ESC>h", "Space after" },
     ["<CR>"] = { "i<CR><ESC>", "Linebreak at Cursor" },
   },
-  a = { "<cmd>lua require('neogen').generate()<CR>", "Generate Annotations" },
+  a = { function() require('neogen').generate() end, "Generate Annotations" },
   ["."] = {
-    "<cmd>lua require('configs.telescope').file_browser()<CR>",
+    function() require('configs.telescope').file_browser() end,
     "Browse Files",
   },
   ["/"] = {
-    "<cmd>lua require('configs.telescope').find_string()<cr>",
+    function() require('configs.telescope').find_string() end,
     "Live Grep",
   },
   [":"] = { "<cmd>Telescope command_history<cr>", "Command History" },
@@ -251,8 +248,8 @@ wk.register({
   },
   v = {
     name = "+View",
-    l = { "<cmd>lua require'utils'.LatexPreview()<CR>", "Latex" },
-    m = { "<cmd>lua require'utils'.MarkdownPreview()<CR>", "Markdown" },
+    l = { function() require'utils'.LatexPreview() end, "Latex" },
+    m = { function() require'utils'.MarkdownPreview() end, "Markdown" },
     -- c = {"<cmd>ColorizerAttachToBuffer<CR>", "Colorizer"},
     c = { "<cmd>PackerLoad nvim-colorizer.lua<CR>", "Colorizer" },
   },
@@ -287,7 +284,7 @@ map("n", "°", ":normal! zO<CR>", nore_silent)
 
 -- Telescope
 -- =========
-map("n", "<C-s>", ":lua require('configs.telescope').curbuf()<CR>", nore_silent)
+map("n", "<C-s>", function() require('configs.telescope').curbuf() end, nore_silent)
 
 -- Simple Commands (Improvements of commands)
 -- ==========================================
@@ -313,14 +310,11 @@ map("v", "jk", "<ESC>", nore)
 -- paste over selected text without overwriting yank register
 map("v", "<leader>p", '"_dP', nore)
 
--- execute macro q
-map("n", "Q", "@q", nore)
-
--- alt-r to see registers
-map(
+-- see registers
+vim.keymap.set(
   "n",
   "®",
-  "<cmd>lua require('which-key').show('@', {mode='n',auto=true})<CR>",
+  function() require('which-key').show('@', {mode='n',auto=true}) end,
   nore_silent
 )
 
@@ -373,8 +367,8 @@ map(
 map("n", "M", "`m", nore_silent)
 
 -- append comma and semicolon
-map("n", ",,", "<cmd>lua require'utils'.append_comma()<CR>", nore_silent)
-map("n", ";;", "<cmd>lua require'utils'.append_semicolon()<CR>", nore_silent)
+map("n", ",,", function() require'utils'.append_comma() end, nore_silent)
+map("n", ";;", function() require'utils'.append_semicolon() end, nore_silent)
 
 -- change case of cword
 map("n", "<C-U>", "b~", nore_silent)
@@ -386,7 +380,7 @@ map("v", "<leader>n", ":norm ", nore_silent)
 map(
   "i",
   "<leader><tab>",
-  "<cmd>lua require('luasnip').expand_or_jump()<CR>",
+  function() require('luasnip').expand_or_jump() end,
   nore_silent
 )
 -- add j and k with count to jumplist
@@ -425,10 +419,10 @@ map(
 )
 
 -- Cleanup function: this remap should be made in normal mode
-map(
+vim.keymap.set(
   "n",
   "<leader>Rc",
-  ":lua require('refactoring').debug.cleanup({})<CR>",
+  function() require('refactoring').debug.cleanup({}) end,
   { noremap = true }
 )
 
