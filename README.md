@@ -18,6 +18,7 @@
         * [Lazygit](#lazygit)
         * [Run Code](#run-code)
       - [Neorg](#neorg)
+    + [Credits](#credits)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -88,3 +89,10 @@ Diagnostic count in statusline.
 ![neorg_cur_buf](https://user-images.githubusercontent.com/81827001/148637762-477a1936-3988-4c50-8f96-ad9002cf7e0a.png)
 
 ![neorg_insert_link](https://user-images.githubusercontent.com/81827001/148637782-5824b524-fe22-44e2-9a78-67e71ebe37c5.png)
+
+### Credits
+I took inspiration (and code snippets 😄)from a lot of configs.
+The most important ones where:
+- [tjdevries](https://github.com/tjdevries/config_manager/tree/master/xdg_config/nvim)
+- [abzcoding](https://github.com/abzcoding/nvim)
+- [tamton-aquib](https://github.com/tamton-aquib/nvim)
