@@ -42,3 +42,29 @@ Diagnostic count in statusline.
 #### Peek Definitions
 ![peek_definition](https://user-images.githubusercontent.com/81827001/148637041-87214f3c-4c7c-4653-a06c-dc89dc9687f3.png)
 
+### Mappings with which-key.nvim
+![which-key](https://user-images.githubusercontent.com/81827001/148637523-fcb4540f-9b60-4570-ae26-b157a934f610.png)
+
+### Startup.nvim
+
+![startup](https://user-images.githubusercontent.com/81827001/148637556-658c7282-bd03-4a9d-a083-6bcae28157e1.png)
+
+### Toggleterm
+
+#### Lazygit
+
+![lazygit](https://user-images.githubusercontent.com/81827001/148637630-292d5a33-c764-40fd-b467-2a422b9c5bb6.png)
+
+#### Run Code
+
+![run_code](https://user-images.githubusercontent.com/81827001/148637617-76dba56c-7ea5-439d-85d6-cffa047986ba.png)
+
+### Neorg
+
+![neorg_gtd](https://user-images.githubusercontent.com/81827001/148637690-43d802f2-dace-40cf-a622-7ea2f2fc296c.png)
+
+![neorg_cpp_notes](https://user-images.githubusercontent.com/81827001/148637720-4678b437-e7d5-42eb-901a-8f2411db0715.png)
+
+![neorg_cur_buf](https://user-images.githubusercontent.com/81827001/148637762-477a1936-3988-4c50-8f96-ad9002cf7e0a.png)
+
+![neorg_insert_link](https://user-images.githubusercontent.com/81827001/148637782-5824b524-fe22-44e2-9a78-67e71ebe37c5.png)
