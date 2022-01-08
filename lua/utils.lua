@@ -19,8 +19,12 @@ function Get_treesitter_hl()
   local highlighter = require("vim.treesitter.highlighter")
   local ts_utils = require("nvim-treesitter.ts_utils")
   local buf = vim.api.nvim_get_current_buf()
+  -- get row and column of cursor position
   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+  -- 1-based -> 0-based indexing
   row = row - 1
+  -- column is different if in insert mode
+  -- it's the column right of the cursor (if line) we don't want that
   if vim.api.nvim_get_mode().mode == "i" then
     col = col - 1
   end
@@ -37,9 +41,11 @@ function Get_treesitter_hl()
       return
     end
 
+    -- get root of the ast (abstract syntax tree) note that all the nodes are subnodes of the root so this isn't the top of the file
     local root = tstree:root()
     local root_start_row, _, root_end_row, _ = root:range()
 
+    -- check if cursor_pos is inside of root
     if root_start_row > row or root_end_row < row then
       return
     end
@@ -52,12 +58,16 @@ function Get_treesitter_hl()
 
     local iter = query:query():iter_captures(root, self.bufnr, row, row + 1)
 
+    -- go through all the captures inside root
     for capture, node, _ in iter do
+      -- get highlight of capture
       local hl = query.hl_cache[capture]
 
+      -- check if the node is at the cursor position
       if hl and ts_utils.is_in_node_range(node, row, col) then
         local c = query._query.captures[capture] -- name of the capture in the query
         if c ~= nil then
+          -- get the highlight group and insert it into the table
           local general_hl = query:_get_hl_from_capture(capture)
           table.insert(matches, general_hl)
         end
@@ -90,12 +100,18 @@ end
 ---@class nvim_config.utils
 local utils = {}
 
+---Get the available nvim-base16 themes
+---@return table themes All the themes found
 utils.get_themes = function()
   local themes = {}
+  -- the local plugin dir
   local theme_dir = vim.fn.expand("~")
     .. "/neovim_plugins/nvim-base16.lua/lua/hl_themes"
+  -- get all the files inside the folder
   local theme_files = require("plenary.scandir").scan_dir(theme_dir, {})
+  -- go through all the files
   for _, theme in ipairs(theme_files) do
+    -- insert the filename without the extenstion and the path before it into the themes table
     table.insert(
       themes,
       (theme
@@ -107,6 +123,7 @@ utils.get_themes = function()
         :gsub(".lua", ""))
     )
   end
+  -- also go through all the themes in the config folder
   theme_dir = vim.fn.expand("~") .. "/.config/nvim_config/lua/hl_themes"
   theme_files = require("plenary.scandir").scan_dir(theme_dir, {})
   for _, theme in ipairs(theme_files) do
@@ -123,42 +140,66 @@ utils.get_themes = function()
   return themes
 end
 
+---Appends a `,` to the current line
 function utils.append_comma()
+  -- save cursor position
   local cursor = vim.api.nvim_win_get_cursor(0)
+  -- append ,
   vim.cmd([[normal A,]])
+  -- restore cursor position
   vim.api.nvim_win_set_cursor(0, cursor)
 end
 
+---Appends a `;` to the current line
 function utils.append_semicolon()
+  -- save cursor position
   local cursor = vim.api.nvim_win_get_cursor(0)
+  -- append ;
   vim.cmd([[normal A;]])
+  -- restore cursor position
   vim.api.nvim_win_set_cursor(0, cursor)
 end
 
+---Changes the case of the current *word*
 function utils.change_case()
+  -- save cursor position
   local cursor = vim.api.nvim_win_get_cursor(0)
+  -- go to the beginning of word and change case of letter under cursor
   cmd([[normal b~]])
+  -- restore cursor position
   vim.api.nvim_win_set_cursor(0, cursor)
 end
 
+---Go to the last cursor position in the buffer
 function utils.last_place()
   if
     vim.tbl_contains(vim.api.nvim_list_bufs(), vim.api.nvim_get_current_buf())
   then
-    if not vim.tbl_contains({ "help", "packer", "toggleterm" }, vim.bo.ft) then
+    -- check if filetype isn't one of the listed
+    if
+      not vim.tbl_contains(
+        { "gitcommit", "help", "packer", "toggleterm" },
+        vim.bo.ft
+      )
+    then
+      -- check if mark `"` is inside the current file (can be false if at end of file and stuff got deleted outside neovim)
+      -- if it is go to it
       vim.cmd(
         [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]]
       )
+      -- get cursor position
       local cursor = vim.api.nvim_win_get_cursor(0)
+      -- if there are folds under the cursor open them
       if vim.fn.foldclosed(cursor[1]) ~= -1 then
         vim.cmd([[silent normal! zO]])
       end
+      -- center cursor
       vim.cmd([[silent normal! zz]])
     end
   end
 end
 
--- write latex file, create pdf and open in preview
+---Write latex file, create pdf and open in preview
 function utils.LatexPreview()
   vim.cmd([[
   write
@@ -166,7 +207,7 @@ function utils.LatexPreview()
   ]])
 end
 
--- convert markdown file to html and open
+---Convert markdown file to html and open
 function utils.MarkdownPreview()
   vim.cmd([[
   write
@@ -175,7 +216,7 @@ function utils.MarkdownPreview()
   ]])
 end
 
--- highlight group of text under cursor
+---Highlight group of text under cursor
 function utils.SynGroup()
   vim.cmd([[
   let l:s = synID(line('.'), col('.'), 1)
@@ -183,6 +224,9 @@ function utils.SynGroup()
   ]])
 end
 
+---Create an augroup
+---@param autocmds table Autocommands to put into the group (like `BufWritePost * lua print(*yes)`)
+---@param name string Name of the augroup
 function utils.create_augroup(autocmds, name)
   vim.cmd("augroup " .. name)
   vim.cmd("autocmd!")
@@ -190,57 +234,6 @@ function utils.create_augroup(autocmds, name)
     vim.cmd("autocmd " .. autocmd)
   end
   vim.cmd("augroup END")
-end
-
-utils.border_thin_rounded = {
-  "╭",
-  "─",
-  "╮",
-  "│",
-  "╯",
-  "─",
-  "╰",
-  "│",
-}
-utils.border_wide_angular = {
-  "▛",
-
-  "▀",
-
-  "▜",
-
-  "▐",
-
-  "▟",
-
-  "▄",
-
-  "▙",
-
-  "▌",
-}
-
--- selene: allow(global_usage)
-_G.profile = function(command, times)
-  times = times or 100
-  local args = {}
-  if type(command) == "string" then
-    args = { command }
-    command = cmd
-  end
-  local start = vim.loop.hrtime()
-  for _ = 1, times, 1 do
-    local ok = pcall(command, unpack(args))
-    if not ok then
-      error(
-        "Command failed: "
-          .. tostring(ok)
-          .. " "
-          .. vim.inspect({ command = command, args = args })
-      )
-    end
-  end
-  print(((vim.loop.hrtime() - start) / 1000000 / times) .. "ms")
 end
 
 utils.functions = {}
@@ -290,41 +283,7 @@ function utils.toggle(option, silent)
   end
 end
 
-function utils.float_terminal(command)
-  local buf = vim.api.nvim_create_buf(false, true)
-  local vpad = 4
-  local hpad = 10
-  local win = vim.api.nvim_open_win(buf, true, {
-    relative = "editor",
-    width = vim.o.columns - hpad * 2,
-    height = vim.o.lines - vpad * 2,
-    row = vpad,
-    col = hpad,
-    style = "minimal",
-    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-  })
-  vim.fn.termopen(command)
-  local autocommand = {
-    "autocommand! TermClose <buffer> lua",
-    string.format("vim.api.nvim_win_close(%d, {force = true});", win),
-    string.format("vim.api.nvim_buf_delete(%d, {force = true});", buf),
-  }
-  cmd(table.concat(autocommand, " "))
-  cmd([[startinsert]])
-end
-
-function utils.docs()
-  local name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-  local docgen = require("babelfish")
-  vim.fn.mkdir("./doc", "p")
-  local metadata = {
-    input_file = "./README.md",
-    output_file = "doc/" .. name .. ".txt",
-    project_name = name,
-  }
-  docgen.generate_readme(metadata)
-end
-
+---Prints out the configurations for the servers attached to the current buffer
 function utils.lsp_config()
   local ret = {}
   for _, client in pairs(vim.lsp.get_active_clients()) do
@@ -336,6 +295,8 @@ function utils.lsp_config()
   dump(ret)
 end
 
+---Opens contents of specified file in a float
+---@param filepath string Path to the file to open
 function utils.float_file(filepath)
   local lines_cat = vim.api.nvim_exec("!cat " .. filepath, true)
   local lines_lua = {}
@@ -359,6 +320,19 @@ function utils.float_file(filepath)
   })
   vim.api.nvim_win_set_option(win, "winblend", 20)
   vim.api.nvim_buf_set_option(buf, "modifiable", false)
+end
+
+---Set format options
+function utils.formatoptions()
+  vim.opt.formatoptions = vim.opt.formatoptions
+    + "r" -- continue comments after return
+    + "c" -- wrap comments using textwidth
+    + "q" -- allow to format comments w/ gq
+    + "j" -- remove comment leader when joining lines when possible
+    - "t" -- don't autoformat
+    - "a" -- no autoformatting
+    - "o" -- don't continue comments after o/O
+    - "2" -- don't use indent of second line for rest of paragraph
 end
 
 return utils
