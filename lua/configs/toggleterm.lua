@@ -15,7 +15,7 @@ require("toggleterm").setup({
   float_opts = {
     -- border = require("utils").border_thin_rounded,
     border = "shadow",
-    winblend = 30,
+    winblend = 0,
     highlights = {
       border = "FloatBorder",
       background = "NormalFloat",
