@@ -71,7 +71,7 @@ fg("cursorlinenr", white)
 fg("EndOfBuffer", black)
 
 -- For floating windows
-bg("NormalFloat", one_bg)
+bg("NormalFloat", black)
 
 -- Pmenu
 -- bg("Pmenu", one_bg)
