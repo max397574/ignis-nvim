@@ -1,9 +1,6 @@
 vim.cmd([[PackerLoad lua-dev.nvim]])
 vim.cmd([[hi DiagnosticHeader gui=bold,italic guifg=#56b6c2]])
-vim.cmd(
-  [[au CursorHold  * lua vim.diagnostic.open_float(0, { focusable = false,scope = "cursor",source = true,format = function(diagnostic) return require'configs.lsp'.parse_diagnostic(diagnostic) end, header = {"Cursor Diagnostics:","DiagnosticHeader"}, prefix = function(diagnostic,i,total) local icon, highlight if diagnostic.severity == 1 then icon = ""; highlight ="DiagnosticError" elseif diagnostic.severity == 2 then icon = ""; highlight ="DiagnosticWarn" elseif diagnostic.severity == 3 then icon = ""; highlight ="DiagnosticInfo" elseif diagnostic.severity == 4 then icon = ""; highlight ="DiagnosticHint" end return i.."/"..total.." "..icon.."  ",highlight end})]]
-)
--- vim.cmd([[au CursorHold  * lua vim.diagnostic.open_float(0,{scope = "cursor"})]])
+vim.cmd([[au CursorHold  * lua vim.diagnostic.open_float()]])
 
 ---@type nvim_config.utils
 local util = require("utils")
@@ -16,9 +13,6 @@ local lua_cmd = {
 
 local lsp_conf = {}
 
-function lsp_conf.parse_diagnostic(diagnostic)
-  return diagnostic.message
-end
 
 function lsp_conf.preview_location(location, context, before_context)
   -- location may be LocationLink or Location (more useful for the former)
@@ -117,17 +111,61 @@ for sign, icon in pairs(signs) do
     numhl = "Diagnostic" .. sign,
   })
 end
+-- local border = {
+--   { "┏", "FloatBorder" },
+--   { "━", "FloatBorder" },
+--   { "┓", "FloatBorder" },
+--   { "┃", "FloatBorder" },
+--   { "┛", "FloatBorder" },
+--   { "━", "FloatBorder" },
+--   { "┗", "FloatBorder" },
+--   { "┃", "FloatBorder" },
+-- }
+
 local border = {
-  { "╭", "FloatBorder" },
-  { "─", "FloatBorder" },
-  { "╮", "FloatBorder" },
-  { "│", "FloatBorder" },
-  { "╯", "FloatBorder" },
-  { "─", "FloatBorder" },
-  { "╰", "FloatBorder" },
-  { "│", "FloatBorder" },
+  { "╔", "FloatBorder" },
+  { "═", "FloatBorder" },
+  { "╗", "FloatBorder" },
+  { "║", "FloatBorder" },
+  { "╝", "FloatBorder" },
+  { "═", "FloatBorder" },
+  { "╚", "FloatBorder" },
+  { "║", "FloatBorder" },
 }
 
+-- local border = {
+--   { "🭽","FloatBorder"},
+--   { "▔","FloatBorder"},
+--   { "🭾","FloatBorder"},
+--   { "▕","FloatBorder"},
+--   { "🭿","FloatBorder"},
+--   { "▁","FloatBorder"},
+--   { "🭼","FloatBorder"},
+--   { "▏","FloatBorder"},
+-- }
+
+-- local border = {
+--   {  "▛","FloatBorder"},
+--   {  "▀","FloatBorder"},
+--   {  "▜","FloatBorder"},
+--   {  "▐","FloatBorder"},
+--   {  "▟","FloatBorder"},
+--   {  "▄","FloatBorder"},
+--   {  "▙","FloatBorder"},
+--   {  "▌","FloatBorder"},
+-- } 
+
+-- local border = {
+--   { "╭", "FloatBorder" },
+--   { "─", "FloatBorder" },
+--   { "╮", "FloatBorder" },
+--   { "│", "FloatBorder" },
+--   { "╯", "FloatBorder" },
+--   { "─", "FloatBorder" },
+--   { "╰", "FloatBorder" },
+--   { "│", "FloatBorder" },
+-- }
+--
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover,
   { border = border }
@@ -208,17 +246,19 @@ local sumneko_lua_server = {
   settings = {
     Lua = {
       runtime = {
-        version = "LuaJIT",
-        path = vim.split(package.path, ";"),
+        -- version = "LuaJIT",
+        -- path = vim.split(package.path, ";"),
+        vim.fn.expand("~").."/.config/nvim_config/lua/?.lua"
       },
       diagnostics = {
         globals = { "vim", "dump", "hs", "lvim" },
       },
       workspace = {
         library = {
-          [vim.fn.expand("~/.config/nvim_config/lua")] = true,
-          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+          [table.concat({vim.fn.stdpath("data"), "lua"},"/")] = false,
+          [vim.fn.expand("~").."/.config/nvim_config/lua"] = false,
+          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = false,
+          [vim.fn.expand("$VIMRUNTIME/lua")] = false,
         },
         maxPreload = 100000,
         preloadFileSize = 1000,
@@ -227,15 +267,32 @@ local sumneko_lua_server = {
   },
 }
 
-local luadev = require("lua-dev").setup({
-  library = {
-    vimruntime = true,
-    types = true,
-    plugins = false,
-  },
-  lspconfig = sumneko_lua_server,
-})
-lspconfig.sumneko_lua.setup(luadev)
+local enable_lua_dev = true
+local lua_dev_plugins = false
+local runtime_path_completion = false
+if not runtime_path_completion then
+  sumneko_lua_server.settings.Lua.runtime = {
+    version = "LuaJIT",
+    path = vim.split(package.path, ";"),
+    vim.fn.expand("~").."/.config/nvim_config/lua/?.lua"
+  }
+end
+
+if enable_lua_dev then
+  local luadev = require("lua-dev").setup({
+    library = {
+      vimruntime = false,
+      types = true,
+      plugins = lua_dev_plugins, -- toggle this to get completion for require of all plugins
+    },
+    runtime_path = runtime_path_completion,
+    lspconfig = sumneko_lua_server,
+  })
+
+  lspconfig.sumneko_lua.setup(luadev)
+else
+  lspconfig.sumneko_lua.setup(sumneko_lua_server)
+end
 
 for server, config in pairs(servers) do
   lspconfig[server].setup(vim.tbl_deep_extend("force", {
@@ -251,16 +308,105 @@ for server, config in pairs(servers) do
   end
 end
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-    virtual_text = false,
-    severity_sort = true,
-  }
-)
+local codes = {
+  no_matching_function = {
+    message = " Can't find a matching function",
+    "redundant-parameter",
+    "ovl_no_viable_function_in_call",
+  },
+  empty_block = {
+    message = " That shouldn't be empty here",
+    "empty-block"
+  },
+  missing_symbol = {
+    message = " Here should be a symbol",
+    "miss-symbol",
+  },
+  expected_semi_colon = {
+    message = " Remember the `;` or `,`",
+    "expected_semi_declaration",
+    "miss-sep-in-table",
+    "invalid_token_after_toplevel_declarator",
+  },
+  redefinition = {
+    message = " That variable was defined before",
+    "redefinition",
+    "redefined-local",
+  },
+  no_matching_variable = {
+    message = " Can't find that variable",
+    "undefined-global",
+    "reportUndefinedVariable",
+  },
+  trailing_whitespace = {
+    message =  " Remove trailing whitespace",
+    "trailing-whitespace",
+    "trailing-space"
+  },
+  unused_variable = {
+    message = " Don't define variables you don't use",
+    "unused-local",
+  },
+  unused_function = {
+    message = " Don't define functions you don't use",
+    "unused-function",
+  },
+  useless_symbols = {
+    message = " Remove that useless symbols",
+    "unknown-symbol",
+  },
+  wrong_type = {
+    message = " Try to use the correct types",
+    "init_conversion_failed",
+  },
+  undeclared_variable = {
+    message = " Have you delcared that variable somewhere?",
+    "undeclared_var_use",
+  },
+  lowercase_global = {
+    message = " Should that be a global? (if so make it uppercase)",
+    "lowercase-global",
+  },
+}
+
+vim.diagnostic.config({
+  float = {
+    focusable = false,
+    border = border,
+    scope = "cursor",
+    -- source = true,
+    format = function(diagnostic)
+      local code = diagnostic.user_data.lsp.code
+      print("diagnostic:")
+      dump(diagnostic)
+      for _, table in pairs(codes) do
+        if vim.tbl_contains(table,code) then
+          return table.message
+        end
+      end
+      return diagnostic.message
+    end,
+    header = {"Cursor Diagnostics:","DiagnosticHeader"},
+    pos = 1,
+    prefix = function(diagnostic,i,total)
+      local icon, highlight
+      if diagnostic.severity == 1 then
+        icon = ""; highlight ="DiagnosticError"
+      elseif diagnostic.severity == 2 then
+        icon = ""; highlight ="DiagnosticWarn"
+      elseif diagnostic.severity == 3 then
+        icon = ""; highlight ="DiagnosticInfo"
+      elseif diagnostic.severity == 4 then
+        icon = ""; highlight ="DiagnosticHint"
+      end
+      return i.."/"..total.." "..icon.."  ",highlight end
+  },
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  virtual_text = false,
+  severity_sort = true,
+})
 
 configs.emmet_ls = {
   default_config = {

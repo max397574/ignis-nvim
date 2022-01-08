@@ -39,7 +39,10 @@ require("packer").startup({
     })
 
     -- faster filetype detection
-    use("~/neovim_plugins/filetype.nvim")
+    use({
+      "~/neovim_plugins/filetype.nvim",
+      opt = true,
+    })
 
     -- colorscheme
     -- use({ "sainnhe/gruvbox-material" })
@@ -110,8 +113,8 @@ require("packer").startup({
       config = function()
         require("jeskape").setup({
           mappings = {
-            ["c"] = {
-              ["c"] = "<cmd>lua require'utils'.append_comma()<CR>",
+            [","] = {
+              [","] = "<cmd>lua require'utils'.append_comma()<CR>",
             },
             j = {
               k = "<esc>",
@@ -247,7 +250,7 @@ require("packer").startup({
     -- display keybindings help
     use({
       opt = true,
-      "folke/which-key.nvim",
+      "~/neovim_plugins/which-key.nvim",
       after = "nvim-treesitter",
       config = function()
         require("which-key").setup({})
@@ -279,8 +282,8 @@ require("packer").startup({
 
     use({
       "nvim-neorg/neorg",
-      branch = "better-concealing-performance",
-      -- branch = "main",
+      -- branch = "better-concealing-performance",
+      branch = "main",
       config = [[ require("configs.neorg") ]],
 
       requires = {
@@ -396,7 +399,8 @@ require("packer").startup({
     use({
       "tamago324/lir.nvim",
       opt = true,
-      keys = { "<leader>el", "<leader>ef" },
+      module = "lir",
+      -- keys = { "<leader>el", "<leader>ef" },
       config = [[ require("configs.lir") ]],
       requires = "kyazdani42/nvim-web-devicons",
     })
@@ -420,22 +424,29 @@ require("packer").startup({
     -- a file explorer
     use({
       "nvim-telescope/telescope.nvim",
+      -- "l-kershaw/telescope.nvim",
+      -- branch = "fix/preview_default_off_toggle_on",
       -- "~/telescope.nvim/",
       cmd = "Telescope",
       module = { "telescope", "configs.telescope" },
+      keys = { "<leader>Cs" },
       requires = {
-        { "nvim-lua/popup.nvim" },
-        { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-        { "nvim-telescope/telescope-symbols.nvim" },
-        { "nvim-telescope/telescope-file-browser.nvim" },
       },
       config = [[ require("configs.telescope") ]],
     })
+    use{ "nvim-lua/popup.nvim",after ="telescope.nvim" }
+    use{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" ,after ="telescope.nvim"}
+    use{ "nvim-telescope/telescope-symbols.nvim" ,after ="telescope.nvim"}
+    use{ "nvim-telescope/telescope-file-browser.nvim" ,after ="telescope.nvim"}
 
     use({
       "AckslD/nvim-neoclip.lua",
       requires = { "tami5/sqlite.lua", module = "sqlite" },
-      config = [[ require("neoclip").setup() ]],
+      config = function()
+        require("neoclip").setup({
+          enable_persistant_history = true,
+        })
+      end,
     })
 
     use({

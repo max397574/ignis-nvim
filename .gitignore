@@ -12,3 +12,5 @@ plugin/
 virtext_test.lua
 example.norg
 test*
+startup*
+neorg.norg

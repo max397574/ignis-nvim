@@ -27,7 +27,7 @@ parser_configs.norg_meta = {
 
 require("nvim-treesitter.configs").setup({
   ensure_installed = {
-    "markdown",
+    -- "markdown",
     "lua",
     "python",
     "cpp",

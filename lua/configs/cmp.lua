@@ -18,15 +18,29 @@ luasnip.config.setup({
 local function t(string)
   return vim.api.nvim_replace_termcodes(string, true, true, true)
 end
+local border = {
+  "╔",
+  "═",
+  "╗",
+  "║",
+  "╝",
+  "═",
+  "╚",
+  "║",
+}
 
 cmp.setup({
-  completion = {
-    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    scrollbar = "║",
-  },
-  documentation = {
-    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    scrollbar = "║",
+  window = {
+    completion = {
+      border = border,
+      scrollbar = "┃",
+      -- scrollbar = "║",
+    },
+    documentation = {
+      border = border,
+      -- scrollbar = "║",
+      scrollbar = "┃",
+    },
   },
   snippet = {
     expand = function(args)
@@ -50,7 +64,7 @@ cmp.setup({
       i = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
       c = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
     }),
-    ["<CR>"] = cmp.mapping.confirm({
+    ["<a-CR>"] = cmp.mapping.confirm({
       select = true,
       behavior = cmp.ConfirmBehavior.Insert,
     }),
@@ -63,19 +77,21 @@ cmp.setup({
         fallback()
       end
     end, {
-      "i",
-      "s",
-    }),
+        "i",
+        "s",
+      }),
     ["<C-h>"] = cmp.mapping(function(fallback)
       if luasnip.jumpable(-1) then
         vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+      elseif neogen.jumpable(-1) then
+        vim.fn.feedkeys(t("<cmd>lua require('neogen').jump_prev()<CR>"), "")
       else
         fallback()
       end
     end, {
-      "i",
-      "s",
-    }),
+        "i",
+        "s",
+      }),
     -- ["<Tab>"] = cmp.mapping(function(fallback)
     --   if cmp.visible() then
     --     -- cmp.select_next_item {}
@@ -168,7 +184,7 @@ cmp.setup({
 
         if
           entry.completion_item.insertTextFormat
-            == types.lsp.InsertTextFormat.Snippet
+          == types.lsp.InsertTextFormat.Snippet
           and string.sub(vim_item.abbr, -1, -1) == "~"
         then
           word = word .. "~"
@@ -215,8 +231,8 @@ cmp.setup.cmdline(":", {
   sources = cmp.config.sources({
     { name = "path" },
   }, {
-    { name = "cmdline" },
-  }),
+      { name = "cmdline" },
+    }),
   enabled = function()
     return true
   end,
