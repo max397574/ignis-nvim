@@ -1,4 +1,5 @@
 # These are my configurations for nvim
+### Bloat but Blazing
 #### Always WIP ¯\\\_(ツ)_/¯
 
 Most likely this config won't work for you if you just clone it because there is so much local stuff.
