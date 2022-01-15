@@ -4,9 +4,9 @@ local util = require("utils")
 local luasnip = require("luasnip")
 
 luasnip.config.set_config({
-  history = true,
-  -- Update more often, :h events for more info.
-  updateevents = "TextChanged,TextChangedI",
+    history = true,
+    -- Update more often, :h events for more info.
+    updateevents = "TextChanged,TextChangedI",
 })
 
 require("luasnip/loaders/from_vscode").load()
@@ -142,41 +142,41 @@ local tex_begin = [[
 \\end{$1}]]
 
 ls.snippets = {
-  lua = {
-    parse({ trig = "high" }, high),
-    parse({ trig = "time" }, time),
-    parse({ trig = "M" }, module_snippet),
-    parse({ trig = "cmd" }, map_cmd),
-    parse({ trig = "inspect" }, inspect_snippet),
-  },
-  tex = {
-    parse({ trig = "beg" }, tex_begin),
-    parse({ trig = "item" }, tex_itemize),
-    parse({ trig = "table" }, tex_table),
-    parse({ trig = "bd" }, tex_bold),
-    parse({ trig = "it" }, tex_item),
-    parse({ trig = "sec" }, tex_section),
-    parse({ trig = "enum" }, tex_enumerate),
-    parse({ trig = "ssec" }, tex_subsection),
-    parse({ trig = "sssec" }, tex_subsubsection),
-    parse({ trig = "para" }, tex_paragraph),
-    parse({ trig = "->" }, tex_arrow),
-    parse({ trig = "template" }, tex_template),
-  },
-  java = {
-    parse({ trig = "pus" }, public_string),
-    parse({ trig = "puv" }, public_void),
-  },
-  gitcommit = {
-    parse({ trig = "docs" }, gitcommit_docs),
-    parse({ trig = "feat" }, gitcommit_feat),
-    parse({ trig = "refactor" }, gitcommit_refactor),
-    parse({ trig = "revert" }, gitcommit_revert),
-    parse({ trig = "cleanup" }, gitcommit_cleanup),
-    parse({ trig = "fix" }, gitcommit_fix),
-    parse({ trig = "stylua" }, gitcommmit_stylua),
-  },
+    lua = {
+        parse({ trig = "high" }, high),
+        parse({ trig = "time" }, time),
+        parse({ trig = "M" }, module_snippet),
+        parse({ trig = "cmd" }, map_cmd),
+        parse({ trig = "inspect" }, inspect_snippet),
+    },
+    tex = {
+        parse({ trig = "beg" }, tex_begin),
+        parse({ trig = "item" }, tex_itemize),
+        parse({ trig = "table" }, tex_table),
+        parse({ trig = "bd" }, tex_bold),
+        parse({ trig = "it" }, tex_item),
+        parse({ trig = "sec" }, tex_section),
+        parse({ trig = "enum" }, tex_enumerate),
+        parse({ trig = "ssec" }, tex_subsection),
+        parse({ trig = "sssec" }, tex_subsubsection),
+        parse({ trig = "para" }, tex_paragraph),
+        parse({ trig = "->" }, tex_arrow),
+        parse({ trig = "template" }, tex_template),
+    },
+    java = {
+        parse({ trig = "pus" }, public_string),
+        parse({ trig = "puv" }, public_void),
+    },
+    gitcommit = {
+        parse({ trig = "docs" }, gitcommit_docs),
+        parse({ trig = "feat" }, gitcommit_feat),
+        parse({ trig = "refactor" }, gitcommit_refactor),
+        parse({ trig = "revert" }, gitcommit_revert),
+        parse({ trig = "cleanup" }, gitcommit_cleanup),
+        parse({ trig = "fix" }, gitcommit_fix),
+        parse({ trig = "stylua" }, gitcommmit_stylua),
+    },
 }
 require("luasnip/loaders/from_vscode").load({
-  paths = { "~/.local/share/nvim/site/pack/packer/opt/friendly-snippets" },
+    paths = { "~/.local/share/nvim/site/pack/packer/opt/friendly-snippets" },
 })

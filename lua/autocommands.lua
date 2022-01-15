@@ -20,14 +20,14 @@ vim.cmd([[
 
 -- windows to close with "q"
 vim.cmd(
-  [[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]]
+    [[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]]
 )
 vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
 
 vim.cmd([[au FocusGained * :checktime]])
 
 u.create_augroup({
-  "TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch',timeout=200}",
+    "TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch',timeout=200}",
 }, "highlight_yank")
 
 vim.cmd([[
@@ -45,19 +45,19 @@ vim.cmd([[
 ]])
 
 u.create_augroup({
-  "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html,norg} set spell",
-  "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html,norg} set spelllang=de,en",
-  "BufNewFile,BufRead,BufWinEnter *.lua set shiftwidth=2",
-  "BufNewFile,BufRead,BufWinEnter *.lua set tabstop=2",
-  "BufNewFile,BufRead,BufWinEnter *.{java,py} set tabstop=4",
-  "BufNewFile,BufRead,BufWinEnter * set formatoptions-=o",
-  "BufNewFile,BufRead,BufWinEnter *tex set filetype=tex",
+    "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html,norg} set spell",
+    "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html,norg} set spelllang=de,en",
+    "BufNewFile,BufRead,BufWinEnter *.lua set shiftwidth=4",
+    "BufNewFile,BufRead,BufWinEnter *.lua set tabstop=2",
+    "BufNewFile,BufRead,BufWinEnter *.{java,py} set tabstop=4",
+    -- "BufNewFile,BufRead,BufWinEnter * set formatoptions-=o",
+    "BufNewFile,BufRead,BufWinEnter *tex set filetype=tex",
 }, "filetypes")
 
 u.create_augroup({
-  "TextChanged, BufChangedI, BufWinEnter * let w:m1=matchadd('Search', '\\%81v.\\%>80v', -1)",
+    "TextChanged, BufChangedI, BufWinEnter * let w:m1=matchadd('Search', '\\%81v.\\%>80v', -1)",
 }, "column_limit")
 
 vim.cmd(
-  "autocmd User TelescopeFindPre lua vim.opt.laststatus=0; vim.cmd[[autocmd BufWinLeave * ++once lua vim.opt.laststatus=2]]"
+    "autocmd User TelescopeFindPre lua vim.opt.laststatus=0; vim.cmd[[autocmd BufWinLeave * ++once lua vim.opt.laststatus=2]]"
 )

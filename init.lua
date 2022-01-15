@@ -3,6 +3,7 @@ syntax off
 filetype off
 filetype plugin indent off
 ]])
+-- disable builtin plugins for faster startuptime
 vim.g.loaded_gzip = false
 vim.g.loaded_netrwPlugin = false
 vim.g.loaded_tarPlugin = false
@@ -28,7 +29,8 @@ require("packer_compiled")
 require("options")
 require("autocommands")
 require("utils")
-vim.cmd([[ PackerLoad bufferline.nvim]])
+vim.cmd([[PackerLoad bufferline.nvim]])
+vim.cmd([[PackerLoad nvim-notify]])
 vim.cmd([[PackerLoad filetype.nvim]])
 vim.opt.shadafile = ""
 vim.cmd("autocmd BufRead,BufNewFile *.norg setlocal filetype=norg")
@@ -41,7 +43,7 @@ filetype on
 filetype plugin indent on
 ]])
 vim.defer_fn(function()
-  vim.cmd([[
+    vim.cmd([[
 PackerLoad impatient.nvim
 PackerLoad which-key.nvim
 PackerLoad nvim-lspconfig
@@ -49,7 +51,7 @@ PackerLoad nvim-lspconfig
 PackerLoad indent-blankline.nvim
 silent! bufdo e
 ]])
-  require("after")
+    require("after")
 end, 5)
 -- end, 1) -- toggle comment for MIN STARTUP
 

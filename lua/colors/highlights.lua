@@ -21,31 +21,31 @@ local white = colors.white
 local yellow = colors.yellow
 
 local ui = {
-  italic_comments = true,
-  -- theme to be used, check available themes with `<leader> + t + h`
-  theme = "onedark",
-  -- toggle between two themes, see theme_toggler mappings
-  theme_toggler = {
-    "onedark",
-    "gruvchad",
-  },
-  -- Enable this only if your terminal has the colorscheme set which nvchad uses
-  -- For Ex : if you have onedark set in nvchad, set onedark's bg color on your terminal
-  transparency = false,
+    italic_comments = true,
+    -- theme to be used, check available themes with `<leader> + t + h`
+    theme = "onedark",
+    -- toggle between two themes, see theme_toggler mappings
+    theme_toggler = {
+        "onedark",
+        "gruvchad",
+    },
+    -- Enable this only if your terminal has the colorscheme set which nvchad uses
+    -- For Ex : if you have onedark set in nvchad, set onedark's bg color on your terminal
+    transparency = false,
 }
 
 -- Define bg color
 -- @param group Group
 -- @param color Color
 local function bg(group, color)
-  cmd("hi " .. group .. " guibg=" .. color)
+    cmd("hi " .. group .. " guibg=" .. color)
 end
 
 -- Define fg color
 -- @param group Group
 -- @param color Color
 local function fg(group, color)
-  cmd("hi " .. group .. " guifg=" .. color)
+    cmd("hi " .. group .. " guifg=" .. color)
 end
 
 -- Define bg and fg color
@@ -53,14 +53,14 @@ end
 -- @param fgcol Fg Color
 -- @param bgcol Bg Color
 local function fg_bg(group, fgcol, bgcol)
-  cmd("hi " .. group .. " guifg=" .. fgcol .. " guibg=" .. bgcol)
+    cmd("hi " .. group .. " guifg=" .. fgcol .. " guibg=" .. bgcol)
 end
 
 -- Comments
 if ui.italic_comments then
-  fg("Comment", grey_fg .. " gui=italic")
+    fg("Comment", grey_fg .. " gui=italic")
 else
-  fg("Comment", grey_fg)
+    fg("Comment", grey_fg)
 end
 
 -- Disable cusror line
@@ -83,16 +83,19 @@ bg("PmenuThumb", nord_blue)
 fg("LineNr", grey)
 fg("NvimInternalError", red)
 fg("VertSplit", one_bg2)
+fg("CmpCompletionWindowBorder", one_bg2)
+fg("CmpDocumentationWindowBorder", one_bg2)
 
 if ui.transparency then
-  vim.cmd("hi clear CursorLine")
-  bg("Normal", "NONE")
-  bg("Folded", "NONE")
-  fg("Folded", "NONE")
-  fg("Comment", grey)
+    vim.cmd("hi clear CursorLine")
+    bg("Normal", "NONE")
+    bg("Folded", "NONE")
+    fg("Folded", "NONE")
+    fg("Comment", grey)
 end
 
 -- [[ Plugin Highlights
+bg("Folded", "NONE")
 
 -- Dashboard
 fg("DashboardCenter", grey_fg)
@@ -163,12 +166,12 @@ bg("TelescopePreviewLine", "#353b45")
 
 -- Disable some highlight in nvim tree if transparency enabled
 if ui.transparency then
-  bg("NvimTreeNormal", "NONE")
-  bg("NvimTreeStatusLineNC", "NONE")
-  bg("NvimTreeVertSplit", "NONE")
-  fg("NvimTreeVertSplit", grey)
-  bg("TelescopeNormal", "NONE")
-  bg("TelescopePreviewNormal", "NONE")
+    bg("NvimTreeNormal", "NONE")
+    bg("NvimTreeStatusLineNC", "NONE")
+    bg("NvimTreeVertSplit", "NONE")
+    fg("NvimTreeVertSplit", grey)
+    bg("TelescopeNormal", "NONE")
+    bg("TelescopePreviewNormal", "NONE")
 end
 
 bg("Search", yellow)

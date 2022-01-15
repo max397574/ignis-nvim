@@ -52,9 +52,9 @@ opt.lazyredraw = true -- Do not redraw screen while processing macros
 
 opt.list = true --show some hidden characters
 opt.listchars = {
-  tab = "> ",
-  nbsp = "␣",
-  -- trail = "•",
+    tab = "> ",
+    nbsp = "␣",
+    -- trail = "•",
 }
 
 opt.lazyredraw = true
@@ -70,8 +70,8 @@ opt.fillchars = { eob = " " } -- no fillchars at end of buffer
 g.table_mode_corner = "|" -- Tablemode
 
 g.symbols_outline = {
-  highlight_hovered_item = false,
-  width = 65,
+    highlight_hovered_item = false,
+    width = 65,
 }
 
 -- builtin plugins
