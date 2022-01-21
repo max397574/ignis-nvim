@@ -24,7 +24,7 @@ parser_configs.norg_meta = {
         files = { "src/parser.c" },
     },
 }
-
+--
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
         "markdown",
@@ -44,7 +44,7 @@ require("nvim-treesitter.configs").setup({
     highlight = {
         enable = true,
         custom_captures = {
-            -- ["require_call"] = "RequireCall",
+            ["require_call"] = "RequireCall",
         },
     },
     incremental_selection = {
@@ -63,26 +63,26 @@ require("nvim-treesitter.configs").setup({
             [","] = "textsubjects-smart",
         },
     },
-    refactor = {
-        highlight_definitions = { enable = true },
-        highlight_current_scope = { enable = false },
-        smart_rename = {
-            enable = true,
-            keymaps = {
-                smart_rename = "grr",
-            },
-        },
-        navigation = {
-            enable = true,
-            keymaps = {
-                goto_definition = "gnd",
-                list_definitions = "gnD",
-                list_definitions_toc = "gO",
-                goto_next_usage = "gnu",
-                goto_previous_usage = "gpu",
-            },
-        },
-    },
+    -- refactor = {
+    --     highlight_definitions = { enable = true },
+    --     highlight_current_scope = { enable = false },
+    --     smart_rename = {
+    --         enable = true,
+    --         keymaps = {
+    --             smart_rename = "grr",
+    --         },
+    --     },
+    --     navigation = {
+    --         enable = true,
+    --         keymaps = {
+    --             goto_definition = "gnd",
+    --             list_definitions = "gnD",
+    --             list_definitions_toc = "gO",
+    --             goto_next_usage = "gnu",
+    --             goto_previous_usage = "gpu",
+    --         },
+    --     },
+    -- },
     playground = { enable = true },
     query_linter = {
         enable = true,

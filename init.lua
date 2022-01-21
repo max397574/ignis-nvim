@@ -29,18 +29,17 @@ require("packer_compiled")
 require("options")
 require("autocommands")
 require("utils")
-vim.cmd([[PackerLoad bufferline.nvim]])
 vim.cmd([[PackerLoad nvim-notify]])
 vim.cmd([[PackerLoad filetype.nvim]])
 vim.opt.shadafile = ""
 vim.cmd("autocmd BufRead,BufNewFile *.norg setlocal filetype=norg")
 vim.cmd([[
-PackerLoad startup.nvim
-rshada!
-doautocmd BufRead
-syntax on
-filetype on
-filetype plugin indent on
+    PackerLoad startup.nvim
+    rshada!
+    doautocmd BufRead
+    syntax on
+    filetype on
+    filetype plugin indent on
 ]])
 vim.defer_fn(function()
     vim.cmd([[
@@ -51,8 +50,8 @@ PackerLoad nvim-lspconfig
 PackerLoad indent-blankline.nvim
 silent! bufdo e
 ]])
-    require("after")
 end, 5)
+require("after")
 -- end, 1) -- toggle comment for MIN STARTUP
 
-vim.cmd([[colorscheme onedark]])
+require("utils").set_colorscheme()

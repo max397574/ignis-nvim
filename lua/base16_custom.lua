@@ -19,6 +19,9 @@ end
 
 -- Modified from https://github.com/chriskempson/base16-vim
 local function apply_base16_theme(theme)
+    vim.g.color_base_01 = "#" .. theme.base01
+    vim.g.color_base_09 = "#" .. theme.base09
+    vim.g.color_base_0F = "#" .. theme.base0F
     highlight("LspDiagnosticsDefaultError", theme.base08, nil, nil, nil)
     highlight("LspDiagnosticsDefaultWarning", theme.base0A, nil, nil, nil)
     highlight("LspDiagnosticsDefaultWarn", theme.base0A, nil, nil, nil)
@@ -26,10 +29,10 @@ local function apply_base16_theme(theme)
     highlight("LspDiagnosticsDefaultInfo", theme.base0D, nil, nil, nil)
     highlight("LspDiagnosticsDefaultHint", theme.base0C, nil, nil, nil)
 
-    highlight("DiagnosticError", theme.base08, nil, nil, nil)
-    highlight("DiagnosticWarn", theme.base0A, nil, nil, nil)
-    highlight("DiagnosticInfo", theme.base0D, nil, nil, nil)
-    highlight("DiagnosticHint", theme.base0C, nil, nil, nil)
+    -- highlight("DiagnosticError", theme.base08, nil, nil, nil)
+    -- highlight("DiagnosticWarn", theme.base0A, nil, nil, nil)
+    -- highlight("DiagnosticInfo", theme.base0D, nil, nil, nil)
+    -- highlight("DiagnosticHint", theme.base0C, nil, nil, nil)
 
     highlight("TelescopeNormal", theme.base05, theme.base00, nil, nil)
     highlight("TelescopePreviewNormal", theme.base05, theme.base00, nil, nil)

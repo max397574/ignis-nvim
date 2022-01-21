@@ -33,6 +33,7 @@ require("toggleterm").setup({
 local files = {
     python = "python3 -i " .. exp("%:t"),
     lua = "lua " .. exp("%:t"),
+    applescript = "osascript " .. exp("%:t"),
     c = "gcc -o temp " .. exp("%:t") .. " && ./temp && rm ./temp",
     cpp = "clang++ -o temp " .. exp("%:t") .. " && ./temp && rm ./temp",
     java = "javac "

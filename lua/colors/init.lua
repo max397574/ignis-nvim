@@ -40,12 +40,15 @@ colors.init = function(theme)
     package.loaded["colors.highlights" or false] = nil
     -- then load the highlights
     require("colors.highlights")
+    RELOAD("colors.highlights")
+    vim.cmd([[PackerLoad bufferline.nvim]])
+    vim.cmd([[PackerLoad staline.nvim]])
 end
 
 -- returns a table of colors for givem or current theme
 colors.get = function(theme)
     if not theme then
-        theme = vim.g.nvchad_theme
+        theme = vim.g.colors_name
     end
 
     return require("hl_themes." .. theme)

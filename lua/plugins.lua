@@ -24,19 +24,20 @@ require("packer").startup({
         use({
             "~/neovim_plugins/nvim-base16.lua",
         })
-
-        -- better escape
-        use({
-            "~/neovim_plugins/betterEscape.nvim",
-            event = { "InsertEnter" },
-            config = function()
-                require("better_escape").setup({
-                    mapping = { "yy" },
-                    keys = "<ESC>",
-                    timeout = 200,
-                })
-            end,
-        })
+        use({ "tami5/sqlite.lua", module = "sqlite" })
+        --
+        -- -- better escape
+        -- use({
+        --     "~/neovim_plugins/betterEscape.nvim",
+        --     event = { "InsertEnter" },
+        --     config = function()
+        --         require("better_escape").setup({
+        --             mapping = { "yy" },
+        --             keys = "<ESC>",
+        --             timeout = 200,
+        --         })
+        --     end,
+        -- })
 
         -- faster filetype detection
         use({
@@ -48,8 +49,8 @@ require("packer").startup({
         -- use({ "sainnhe/gruvbox-material" })
         -- use({ "NTBBloodbath/doombox.nvim" })
         -- use({ "NTBBloodbath/doom-one.nvim" })
-        use("rebelot/kanagawa.nvim")
-        use("wuelnerdotexe/vim-enfocado")
+        -- use("rebelot/kanagawa.nvim")
+        -- use("wuelnerdotexe/vim-enfocado")
         use({ "~/neovim_plugins/colorschemes", opt = true })
         -- use { "~/onedarker.nvim" }
         -- use { "tiagovla/tokyodark.nvim" }
@@ -71,18 +72,21 @@ require("packer").startup({
                 require("configs.treesitter")
             end,
             requires = {
-                "nvim-treesitter/nvim-treesitter-refactor",
-                "nvim-treesitter/nvim-treesitter-textobjects",
-                "mfussenegger/nvim-ts-hint-textobject",
+                -- "nvim-treesitter/nvim-treesitter-refactor",
+                -- "nvim-treesitter/nvim-treesitter-textobjects",
                 {
-                    "romgrk/nvim-treesitter-context",
-                    event = "InsertEnter",
-                    config = function()
-                        require("treesitter-context.config").setup({
-                            enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-                        })
-                    end,
+                    "~/neovim_plugins/nvim-treehopper/",
+                    module = "tsht",
                 },
+                -- {
+                --     "romgrk/nvim-treesitter-context",
+                --     event = "InsertEnter",
+                --     config = function()
+                --         require("treesitter-context.config").setup({
+                --             enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+                --         })
+                --     end,
+                -- },
             },
         })
 
@@ -119,6 +123,7 @@ require("packer").startup({
                         },
                         j = {
                             k = "<esc>",
+                            [","] = "<cmd>lua require'utils'.append_comma()<CR><esc>o",
                             j = "<esc>o",
                         },
                     },
@@ -136,9 +141,16 @@ require("packer").startup({
         -- statusline
         use({
             "~/neovim_plugins/staline.nvim/",
+            opt = true,
             config = function()
-                vim.cmd([[hi StalineSeparator guifg=#181a23 guibg=none]])
-                vim.cmd([[hi StalineEmpty guibg=none guifg=#353b45]])
+                vim.cmd(
+                    [[hi StalineSeparator guifg=]]
+                        .. vim.g.color_base_01
+                        .. [[ guibg=none]]
+                )
+                vim.cmd(
+                    [[hi StalineEmpty guibg=none guifg=]] .. vim.g.color_base_01
+                )
                 require("staline").setup({
                     sections = {
                         left = {
@@ -171,7 +183,7 @@ require("packer").startup({
                     },
 
                     defaults = {
-                        bg = "#181a23",
+                        bg = vim.g.color_base_01,
                         -- bg = "none",
                         left_separator = "",
                         -- left_separator = "",
@@ -182,11 +194,11 @@ require("packer").startup({
                         -- font_active = "bold"
                     },
                     mode_colors = {
-                        n = "#98c379",
-                        i = "#56b6c2",
-                        ic = "#56b6c2",
-                        c = "#c678dd",
-                        v = "#61afef", -- etc
+                        n = vim.g.terminal_color_1,
+                        i = vim.g.terminal_color_2,
+                        ic = vim.g.terminal_color_3,
+                        c = vim.g.terminal_color_4,
+                        v = vim.g.terminal_color_5,
                     },
                 })
             end,
@@ -199,10 +211,10 @@ require("packer").startup({
             config = [[ require("configs.gitsigns") ]],
         })
 
-        -- some functions to help with markdown
-        use({ "~/neovim_plugins/lua_markdown" })
-
-        -- easily comment out code
+        -- -- some functions to help with markdown
+        -- use({ "~/neovim_plugins/lua_markdown" })
+        --
+        -- -- easily comment out code
         use({
             "numToStr/Comment.nvim",
             keys = { "<leader>c", "gb" },
@@ -228,16 +240,16 @@ require("packer").startup({
                 })
             end,
         })
-
-        -- Git from Vim
-        use({ "tpope/vim-fugitive", cmd = { "G", "GV" } })
-
-        -- see git commits
-        use({
-            "junegunn/gv.vim",
-            cmd = "GV",
-            requires = { "tpope/vim-fugitive" },
-        })
+        --
+        -- -- Git from Vim
+        -- use({ "tpope/vim-fugitive", cmd = { "G", "GV" } })
+        --
+        -- -- see git commits
+        -- use({
+        --     "junegunn/gv.vim",
+        --     cmd = "GV",
+        --     requires = { "tpope/vim-fugitive" },
+        -- })
 
         -- easier use of f/F and t/T
         use({ "rhysd/clever-f.vim", keys = "f" })
@@ -248,7 +260,7 @@ require("packer").startup({
             cmd = "TableModeToggle",
         })
 
-        -- display keybindings help
+        -- -- display keybindings help
         use({
             opt = true,
             "~/neovim_plugins/which-key.nvim",
@@ -376,9 +388,6 @@ require("packer").startup({
                     follow = 1,
                     -- disable_netrw = 0,
                 })
-                require("nvim-tree.events").on_nvim_tree_ready(function()
-                    vim.cmd("NvimTreeRefresh")
-                end)
             end,
         })
 
@@ -405,13 +414,13 @@ require("packer").startup({
             end,
         })
 
-        -- display last undos
+        -- -- display last undos
         use({ "mbbill/undotree", cmd = "UndotreeToggle" })
 
-        -- more icons
+        -- -- more icons
         use("ryanoasis/vim-devicons")
 
-        -- even more icons
+        -- -- even more icons
         use({
             "kyazdani42/nvim-web-devicons",
         })
@@ -419,16 +428,16 @@ require("packer").startup({
         use({
             "jose-elias-alvarez/null-ls.nvim",
         })
-
-        use({
-            "tamago324/lir.nvim",
-            opt = true,
-            module = "lir",
-            -- keys = { "<leader>el", "<leader>ef" },
-            config = [[ require("configs.lir") ]],
-            requires = "kyazdani42/nvim-web-devicons",
-        })
-
+        --
+        -- use({
+        --     "tamago324/lir.nvim",
+        --     opt = true,
+        --     module = "lir",
+        --     -- keys = { "<leader>el", "<leader>ef" },
+        --     config = [[ require("configs.lir") ]],
+        --     requires = "kyazdani42/nvim-web-devicons",
+        -- })
+        --
         use({
             "simrat39/symbols-outline.nvim",
             cmd = "SymbolsOutline",
@@ -448,6 +457,8 @@ require("packer").startup({
         -- a file explorer
         use({
             "nvim-telescope/telescope.nvim",
+            -- "l-kershaw/telescope.nvim",
+            -- branch = "fix/preview_update",
             -- "~/telescope.nvim/",
             cmd = "Telescope",
             module = { "telescope", "configs.telescope" },
@@ -469,10 +480,14 @@ require("packer").startup({
 
         use({
             "AckslD/nvim-neoclip.lua",
-            requires = { "tami5/sqlite.lua", module = "sqlite" },
             config = function()
                 require("neoclip").setup({
                     enable_persistant_history = true,
+                    default_register_macros = "q",
+                    enable_macro_history = true,
+                    on_replay = {
+                        set_reg = true,
+                    },
                 })
             end,
         })
@@ -502,8 +517,6 @@ require("packer").startup({
         })
 
         use({ "~/hangman.nvim/", command = "Hangman" })
-
-        use("hrsh7th/vim-searchx")
 
         -- completition
         use({

@@ -19,6 +19,7 @@ local purple = colors.purple
 local red = colors.red
 local white = colors.white
 local yellow = colors.yellow
+local orange = colors.orange
 
 local ui = {
     italic_comments = true,
@@ -71,8 +72,15 @@ fg("cursorlinenr", white)
 fg("EndOfBuffer", black)
 
 -- For floating windows
-bg("NormalFloat", black)
+-- bg("NormalFloat", black)
+bg("NormalFloat", "none")
 
+fg("DiagnosticWarn", orange)
+fg("DiagnosticError", red)
+fg("DiagnosticInfo", yellow)
+fg("DiagnosticHint", blue)
+
+bg("SpellBad", black .. "guisp=" .. red)
 -- Pmenu
 -- bg("Pmenu", one_bg)
 bg("PmenuSbar", one_bg2)

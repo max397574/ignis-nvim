@@ -140,5 +140,4 @@ settings.options.paddings = { 2, 1, 1, 1, 1, 1, 1 }
 -- require'startup'.setup(settings)
 
 settings = require("startup.themes.evil")
-
 return settings

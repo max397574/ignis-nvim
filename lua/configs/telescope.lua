@@ -1,11 +1,13 @@
 vim.cmd([[PackerLoad telescope-fzf-native.nvim]])
 vim.cmd([[PackerLoad telescope-symbols.nvim]])
+vim.cmd([[PackerLoad telescope-file-browser.nvim]])
 local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
 local ts = {}
 
 local actions = require("telescope.actions")
 local action_layout = require("telescope.actions.layout")
+local fb_actions = require("telescope._extensions.file_browser.actions")
 local actions_layout = require("telescope.actions.layout")
 local action_state = require("telescope.actions.state")
 local themes = require("telescope.themes")
@@ -143,6 +145,7 @@ require("telescope").setup({
                 mappings = {
                     ["i"] = {
                         ["<C-o>"] = actions.select_vertical,
+                        ["<C-b>"] = fb_actions.toggle_browser,
                     },
                     ["n"] = {},
                 },
@@ -276,7 +279,7 @@ function ts.highlights()
     reloader()
     local opts = {
         --   -- winblend = 10,
-        --   prompt_title = "~ Highlights ~",
+        prompt_title = "~ Highlights ~",
         --   border = false,
         --   previewer = false,
         --   shorten_path = false,
@@ -374,7 +377,7 @@ local function base_16_finder(opts)
     reloader()
     opts = opts or {}
     local conf = require("telescope.config").values
-    local custom_action = function()
+    local change_theme = function()
         local entry = action_state.get_selected_entry()
         if entry ~= nil then
             require("colors").init(entry[1])
@@ -440,8 +443,8 @@ local function base_16_finder(opts)
         sorter = conf.generic_sorter(opts),
         previewer = previewer,
         attach_mappings = function(_, map)
-            map("i", "<CR>", custom_action)
-            map("n", "<CR>", custom_action)
+            map("i", "<CR>", change_theme)
+            map("n", "<CR>", change_theme)
             return true
         end,
     }):find()
@@ -470,6 +473,7 @@ function ts.colorschemes()
     reloader()
     local opts = themes.get_ivy({
         data = utils.get_themes(),
+        layout_strategy = "custom_bottom",
         layout_config = {
             width = 0.99,
             height = 0.5,
@@ -478,6 +482,7 @@ function ts.colorschemes()
             prompt_position = "top",
         },
     })
+    reloader()
     base_16_finder(opts)
 end
 

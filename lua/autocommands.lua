@@ -61,3 +61,7 @@ u.create_augroup({
 vim.cmd(
     "autocmd User TelescopeFindPre lua vim.opt.laststatus=0; vim.cmd[[autocmd BufWinLeave * ++once lua vim.opt.laststatus=2]]"
 )
+
+vim.cmd([[
+    autocmd VimLeavePre * lua require"custom.db".set_db()
+]])

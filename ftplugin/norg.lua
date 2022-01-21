@@ -1,4 +1,4 @@
-vim.bo.shiftwidth = 4
+vim.bo.shiftwidth = 2
 vim.o.conceallevel = 2
 vim.bo.commentstring = "#%s"
 

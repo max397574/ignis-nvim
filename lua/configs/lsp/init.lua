@@ -253,7 +253,7 @@ local sumneko_lua_server = {
             --   vim.fn.expand("~") .. "/.config/nvim_config/lua/?.lua",
             -- },
             diagnostics = {
-                globals = { "vim", "dump", "hs", "lvim" },
+                globals = { "vim", "dump", "hs", "lvim", "P", "RELOAD" },
             },
             workspace = {
                 --   library = {

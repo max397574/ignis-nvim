@@ -339,4 +339,27 @@ function utils.formatoptions()
         - "2" -- don't use indent of second line for rest of paragraph
 end
 
+function utils.set_colorscheme(colorscheme)
+    if colorscheme then
+        vim.cmd("colorscheme " .. colorscheme)
+    end
+    local theme
+    local time = os.date("*t")
+    if time.hour < 7 or time.hour >= 20 then
+        theme = "kanagawa"
+    elseif time.hour < 9 or time.hour >= 18 then
+        theme = "onedark"
+    else
+        theme = "everforest"
+    end
+    require("colors").init(theme)
+    local old_scheme = require("custom.db").get_scheme()
+    if theme ~= old_scheme then
+        require("colorscheme_switcher").new_scheme()
+        vim.defer_fn(function()
+            require("colorscheme_switcher").new_scheme()
+        end, 1000)
+    end
+end
+
 return utils

@@ -41,6 +41,7 @@ function tc_utils.set_options()
             local preview = initial_options.preview
             layout_config = {
                 anchor = "S",
+                preview_width = 0.6,
                 bottom_pane = {
                     height = 0.5,
                     preview_cutoff = 20,
@@ -49,6 +50,7 @@ function tc_utils.set_options()
                 custom_bottom = {
                     height = 0.5,
                     preview_cutoff = 20,
+                    preview_width = 0.6,
                     prompt_position = "top",
                 },
                 center = {
@@ -148,7 +150,7 @@ function tc_utils.set_options()
                 )
 
                 preview.width = resolve.resolve_width(
-                    if_nil(layout_config.preview_width, 0.5)
+                    if_nil(layout_config.preview_width, 0.6)
                 )(self, width, max_lines)
                 results.width = width - preview.width - w_space
                 prompt.width = results.width
@@ -216,11 +218,11 @@ function tc_utils.set_options()
                 results.line = results.line + 1
                 preview.line = preview.line
             end
-            results.line = results.line + 2
-            results.height = results.height - 1
+            results.line = results.line + 1
             preview.col = preview.col + 1
-            preview.height = preview.height + 1
+            preview.height = preview.height - 2
             prompt.col = 2
+            results.height = results.height - 1
             preview.height = prompt.height + results.height
             preview.title = "~ Preview ~"
             results.title = {

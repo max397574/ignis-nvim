@@ -76,6 +76,12 @@ wk.register({
         },
     },
     r = "Run",
+    J = {
+        function()
+            require("tsht").jump_nodes()
+        end,
+        "Jump Around",
+    },
     -- == Markdown ==
     m = {
         name = "Markdown, Messages",
@@ -230,6 +236,12 @@ wk.register({
             end,
             "Yanks",
         },
+        q = {
+            function()
+                require("telescope").extensions.macroscope.default()
+            end,
+            "Macros",
+        },
         n = {
             function()
                 require("telescope").extensions.notify.notify()
@@ -327,6 +339,7 @@ wk.register({
         "Live Grep",
     },
     [":"] = { "<cmd>Telescope commands<cr>", "Commands" },
+    [","] = { "<cmd>Telescope buffers<cr>", "Buffers" },
     q = {
         name = "+Quickfix",
         n = { "<cmd>cnext<CR>", "Next Entry" },
