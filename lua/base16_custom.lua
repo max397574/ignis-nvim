@@ -52,6 +52,9 @@ local function apply_base16_theme(theme)
     highlight("CmpItemKindStructure", theme.base0E, nil, nil, nil)
     highlight("CmpItemKindType", theme.base0A, nil, "none", nil)
     highlight("markdownBold", theme.base0A, nil, "bold", nil)
+    highlight("FunctionDefinition", theme.base0D, nil, "italic", nil)
+    highlight("RequireCall", theme.base0E, nil, "italic", nil)
+    -- highlight("RequireCall", theme.base0D, nil, "italic", nil)
 end
 
 return setmetatable({

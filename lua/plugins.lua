@@ -22,7 +22,7 @@ require("packer").startup({
         -- use("~/selection_popup")
 
         use({
-            "~/neovim_plugins/nvim-base16.lua",
+            "nvchad/nvim-base16.lua",
         })
         use({ "tami5/sqlite.lua", module = "sqlite" })
         --
@@ -72,21 +72,21 @@ require("packer").startup({
                 require("configs.treesitter")
             end,
             requires = {
-                -- "nvim-treesitter/nvim-treesitter-refactor",
-                -- "nvim-treesitter/nvim-treesitter-textobjects",
+                "nvim-treesitter/nvim-treesitter-refactor",
+                "nvim-treesitter/nvim-treesitter-textobjects",
                 {
                     "~/neovim_plugins/nvim-treehopper/",
                     module = "tsht",
                 },
-                -- {
-                --     "romgrk/nvim-treesitter-context",
-                --     event = "InsertEnter",
-                --     config = function()
-                --         require("treesitter-context.config").setup({
-                --             enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-                --         })
-                --     end,
-                -- },
+                {
+                    "romgrk/nvim-treesitter-context",
+                    event = "InsertEnter",
+                    config = function()
+                        require("treesitter-context.config").setup({
+                            enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+                        })
+                    end,
+                },
             },
         })
 
@@ -308,7 +308,8 @@ require("packer").startup({
         })
 
         use({
-            "nvim-neorg/neorg",
+            -- "nvim-neorg/neorg",
+            "~/neovim_plugins/neorg",
             -- branch = "better-concealing-performance",
             branch = "main",
             config = [[ require("configs.neorg") ]],
@@ -459,7 +460,7 @@ require("packer").startup({
             "nvim-telescope/telescope.nvim",
             -- "l-kershaw/telescope.nvim",
             -- branch = "fix/preview_update",
-            -- "~/telescope.nvim/",
+            -- "~/neovim_plugins/telescope.nvim/",
             cmd = "Telescope",
             module = { "telescope", "configs.telescope" },
             keys = { "<leader>Cs" },

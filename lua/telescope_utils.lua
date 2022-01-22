@@ -41,7 +41,7 @@ function tc_utils.set_options()
             local preview = initial_options.preview
             layout_config = {
                 anchor = "S",
-                preview_width = 0.6,
+                -- preview_width = 0.6,
                 bottom_pane = {
                     height = 0.5,
                     preview_cutoff = 20,
@@ -50,7 +50,7 @@ function tc_utils.set_options()
                 custom_bottom = {
                     height = 0.5,
                     preview_cutoff = 20,
-                    preview_width = 0.6,
+                    -- preview_width = 0.6,
                     prompt_position = "top",
                 },
                 center = {
@@ -224,13 +224,13 @@ function tc_utils.set_options()
             prompt.col = 2
             results.height = results.height - 1
             preview.height = prompt.height + results.height
-            preview.title = "~ Preview ~"
-            results.title = {
-                {
-                    pos = "S",
-                    text = "~ Results ~",
-                },
-            }
+            -- preview.title = "~ Preview ~"
+            -- results.title = {
+            --     {
+            --         pos = "S",
+            --         text = "~ Results ~",
+            --     },
+            -- }
             results.col = 2
             -- print("preview:")
             -- dump(preview)

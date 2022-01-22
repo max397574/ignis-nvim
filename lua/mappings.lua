@@ -23,7 +23,12 @@ wk.register({
     -- == Git ==
     g = {
         name = "+Git",
-        s = { "<cmd>G<CR>", "Status" },
+        s = {
+            function()
+                require("configs.telescope").git_status()
+            end,
+            "Status",
+        },
         p = { "<cmd>Git push<CR>", "Push" },
         d = {
             function()

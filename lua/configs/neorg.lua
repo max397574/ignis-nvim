@@ -88,6 +88,10 @@ require("neorg").setup({
         ["core.gtd.base"] = {
             config = {
                 workspace = "gtd",
+                displayers = {
+                    close_after_task_select = false,
+                },
+
                 -- workspace = "example_ws",
                 -- exclude = { "" },
             },

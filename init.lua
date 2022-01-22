@@ -41,6 +41,7 @@ vim.cmd([[
     filetype on
     filetype plugin indent on
 ]])
+
 vim.defer_fn(function()
     vim.cmd([[
 PackerLoad impatient.nvim

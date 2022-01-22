@@ -2,10 +2,14 @@ vim.cmd([[PackerLoad telescope-fzf-native.nvim]])
 vim.cmd([[PackerLoad telescope-symbols.nvim]])
 vim.cmd([[PackerLoad telescope-file-browser.nvim]])
 local pickers = require("telescope.pickers")
+local make_entry = require("telescope.make_entry")
+local entry_display = require("telescope.pickers.entry_display")
+local conf = require("telescope.config").values
 local finders = require("telescope.finders")
 local ts = {}
 
 local actions = require("telescope.actions")
+local Path = require("plenary.path")
 local action_layout = require("telescope.actions.layout")
 local fb_actions = require("telescope._extensions.file_browser.actions")
 local actions_layout = require("telescope.actions.layout")
@@ -65,6 +69,7 @@ require("telescope").setup({
         -- layout_strategy = "horizontal",
         -- custom layout strategy
         layout_strategy = "custom_bottom",
+        results_title = "~ Results ~",
         -- cursor resets after new sort (changing prompt)
         selection_strategy = "reset",
         -- remove stuff from paths when possible so names are still clear
@@ -229,7 +234,7 @@ function ts.search_plugins()
     reloader()
     local opts = {
         cwd = "~/neovim_plugins/",
-        prompt_title = "~ Neovim Config ~",
+        prompt_title = "~ Neovim Plugins ~",
     }
     require("telescope.builtin").find_files(opts)
 end
@@ -268,6 +273,8 @@ function ts.code_actions()
     local opts = {
         -- winblend = 10,
         prompt_title = "~ Code Actions ~",
+        -- preview_title = "~ Diff ~ ",
+        results_title = "~ Available Actions ~",
         border = true,
         previewer = false,
         shorten_path = false,
@@ -289,11 +296,12 @@ end
 
 function ts.find_string()
     reloader()
-    -- local opts = themes.get_ivy({
     local opts = {
         border = true,
         shorten_path = false,
-        prompt_title = "~ Live Grep ~",
+        prompt_title = "~ Find String ~",
+        preview_title = "~ Location Preview ~ ",
+        results_title = "~ Occurrences ~",
         -- layout_strategy = "flex",
         layout_config = {
             width = 0.99,
@@ -349,17 +357,73 @@ function ts.curbuf()
         shorten_path = false,
         prompt_position = "top",
         prompt_title = "~ Current Buffer ~",
+        preview_title = "~ Location Preview~ ",
+        results_title = "~ Lines ~",
         layout_config = { prompt_position = "top", height = 0.4 },
     }
     require("telescope.builtin").current_buffer_fuzzy_find(opts)
 end
 
-function ts.git_diff()
+function ts.git_status()
     reloader()
     local opts = {
         -- layout_strategy = "horizontal",
+        git_icons = {
+            added = "",
+            changed = "",
+            copied = "",
+            deleted = "",
+            renamed = "",
+            unmerged = "‡",
+            untracked = "",
+        },
+        border = true,
+        prompt_title = "~ Git Status ~",
+        preview_title = "~ Diff Preview ~ ",
+        results_title = "~ Changed Files ~",
+        layout_config = {
+            width = 0.99,
+            height = 0.69,
+            preview_width = 0.7,
+            prompt_position = "top",
+        },
+        preview = {
+            hide_on_startup = true,
+        },
+    }
+    require("telescope.builtin").git_status(opts)
+end
+
+function ts.git_diff()
+    reloader()
+    local cwd = vim.fn.expand(vim.loop.cwd())
+    local function entry_maker()
+        return function(entry)
+            local mod, file = string.match(entry, "(..).*%s[->%s]?(.+)")
+            return {
+                value = file,
+                status = mod,
+                ordinal = entry,
+                display = file,
+                path = Path:new({ cwd, file }):absolute(),
+            }
+        end
+    end
+    local git_cmd = { "git", "status", "-s", "--", "." }
+    local output = require("telescope.utils").get_os_command_output(
+        git_cmd,
+        cwd
+    )
+    local opts = {
+        -- layout_strategy = "horizontal",
+        finder = finders.new_table({
+            results = output,
+            entry_maker = entry_maker(),
+        }),
         border = true,
         prompt_title = "~ Git Diff ~",
+        preview_title = "~ Diff ~ ",
+        results_title = "~ Changed Files ~",
         layout_config = {
             width = 0.99,
             height = 0.69,
@@ -437,7 +501,8 @@ local function base_16_finder(opts)
     end
 
     pickers.new(opts, {
-        prompt_title = "~ Base 16 Colorschemes ~",
+        prompt_title = "~ Colorscheme Picker ~",
+        results_title = "~ Colorschemes ~",
         layout_strategy = "custom_bottom",
         finder = finders.new_table(opts.data),
         sorter = conf.generic_sorter(opts),
@@ -450,10 +515,132 @@ local function base_16_finder(opts)
     }):find()
 end
 
+local function lsp_ref_from_qf(opts)
+    opts = opts or {}
+
+    local displayer = entry_display.create({
+        -- separator = "▏",
+        separator = " ",
+        items = {
+            { width = 8 },
+            { width = 20 },
+            { remaining = true },
+        },
+    })
+
+    local make_display = function(entry)
+        -- print("entry:")
+        -- dump(entry)
+        local filename = require("telescope.utils").transform_path(
+            opts,
+            entry.filename
+        )
+
+        local line_info = {
+            -- table.concat({ entry.lnum, entry.col }, ":"),
+            "(" .. entry.lnum .. ")",
+            "TelescopeResultsLineNr",
+        }
+        -- if #filename > 20 then
+        --     filename = filename:sub(-20, -1)
+        -- end
+
+        return displayer({
+            line_info,
+            -- entry.text:gsub(".* | ", ""),
+            -- string.rep(" ", 30 - #vim.trim(entry.text)),
+            vim.trim(entry.text),
+            filename,
+        })
+    end
+
+    return function(entry)
+        local filename = entry.filename
+            or vim.api.nvim_buf_get_name(entry.bufnr)
+
+        return {
+            valid = true,
+
+            value = entry,
+            ordinal = (not opts.ignore_filename and filename or "")
+                .. " "
+                .. entry.text,
+            display = make_display,
+
+            bufnr = entry.bufnr,
+            filename = filename,
+            lnum = entry.lnum,
+            col = entry.col,
+            text = entry.text,
+            start = entry.start,
+            finish = entry.finish,
+        }
+    end
+end
+
+function ts.lsp_references()
+    reloader()
+    local opts = themes.get_dropdown({
+        -- local opts = themes.get_ivy({
+        prompt_title = "~ LSP References ~",
+        preview_title = "~ File Preview ~ ",
+        results_title = "~ References ~",
+        layout_config = {
+            -- preview_width = 0.5,
+            height = 0.6,
+            anchor = "S",
+        },
+        preview = {
+            hide_on_startup = false,
+        },
+    })
+    local params = vim.lsp.util.make_position_params()
+    params.context = { includeDeclaration = true }
+
+    vim.lsp.buf_request(
+        0,
+        "textDocument/references",
+        params,
+        function(err, result, _ctx, _config)
+            if err then
+                vim.api.nvim_err_writeln(
+                    "Error when finding references: " .. err.message
+                )
+                return
+            end
+
+            local locations = {}
+            if result then
+                vim.list_extend(
+                    locations,
+                    vim.lsp.util.locations_to_items(result) or {}
+                )
+            end
+
+            if vim.tbl_isempty(locations) then
+                return
+            end
+            -- print("locations:")
+            -- dump(locations)
+
+            pickers.new(opts, {
+                finder = finders.new_table({
+                    results = locations,
+                    entry_maker = lsp_ref_from_qf(),
+                }),
+                previewer = conf.qflist_previewer(opts),
+                sorter = conf.generic_sorter(opts),
+            }):find()
+        end
+    )
+end
+
 function ts.find_files()
     reloader()
     local opts = {
         prompt_title = "~ Find Files ~",
+        preview_title = "~ File Preview ~",
+        results_title = "~ Files ~",
         find_command = {
             "rg",
             "-g",

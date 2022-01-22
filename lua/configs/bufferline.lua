@@ -10,7 +10,12 @@ require("bufferline").setup({
         buffer_selected = {
             guifg = colors.white,
             guibg = colors.black,
-            gui = "bold",
+            gui = "bold,italic",
+        },
+        duplicate_selected = {
+            guifg = colors.white,
+            guibg = colors.black,
+            gui = "bold,italic",
         },
         buffer_visible = {
             guifg = colors.light_grey,
@@ -81,6 +86,10 @@ require("bufferline").setup({
         tab = {
             guifg = colors.light_grey,
             guibg = colors.one_bg3,
+        },
+        duplicate = {
+            guifg = colors.light_grey,
+            guibg = colors.black2,
         },
         tab_selected = {
             guifg = colors.black2,
