@@ -13,7 +13,7 @@ local sources = {
     -- null_ls.builtins.formatting.trim_whitespace, -- disable that for cpp
     -- null_ls.builtins.formatting.uncrustify,
     -- null_ls.builtins.diagnostics.cppcheck, -- errors with offset encoding
-    null_ls.builtins.diagnostics.gitlint,
+    -- null_ls.builtins.diagnostics.gitlint,
     -- null_ls.builtins.diagnostics.luacheck,
     -- null_ls.builtins.diagnostics.selene,
 }
