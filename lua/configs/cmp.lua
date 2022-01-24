@@ -169,6 +169,9 @@ cmp.setup({
         if vim.tbl_contains(Get_treesitter_hl(), "TSComment") then
             return false
         end
+        if string.find(vim.api.nvim_buf_get_name(0), "neorg://") then
+            return false
+        end
         return true
     end,
     formatting = {
