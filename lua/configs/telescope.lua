@@ -361,6 +361,7 @@ function ts.curbuf()
         results_title = "~ Lines ~",
         layout_config = { prompt_position = "top", height = 0.4 },
     }
+    vim.cmd("normal! m'")
     require("telescope.builtin").current_buffer_fuzzy_find(opts)
 end
 
