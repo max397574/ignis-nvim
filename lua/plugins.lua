@@ -95,6 +95,8 @@ require("packer").startup({
             cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
         })
 
+        use({ "ggandor/lightspeed.nvim", opt = true })
+
         use({
             "lukas-reineke/indent-blankline.nvim",
             opt = true,
@@ -440,7 +442,8 @@ require("packer").startup({
         -- })
         --
         use({
-            "simrat39/symbols-outline.nvim",
+            "zeertzjq/symbols-outline.nvim",
+            branch = "patch-1",
             cmd = "SymbolsOutline",
             config = function()
                 vim.cmd([[highlight FocusedSymbol gui=italic guifg=#56b6c2 ]])
