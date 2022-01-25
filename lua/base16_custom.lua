@@ -54,6 +54,7 @@ local function apply_base16_theme(theme)
     highlight("markdownBold", theme.base0A, nil, "bold", nil)
     highlight("FunctionDefinition", theme.base0D, nil, "italic", nil)
     highlight("RequireCall", theme.base0E, nil, "italic", nil)
+    highlight("TSEmphasis", theme.base05, nil, "italic", nil)
     -- highlight("RequireCall", theme.base0D, nil, "italic", nil)
 end
 
