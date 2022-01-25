@@ -47,6 +47,7 @@ vim.defer_fn(function()
 PackerLoad impatient.nvim
 PackerLoad which-key.nvim
 PackerLoad nvim-lspconfig
+PackerLoad lightspeed.nvim
 " PackerLoad gitsigns.nvim
 PackerLoad indent-blankline.nvim
 silent! bufdo e
