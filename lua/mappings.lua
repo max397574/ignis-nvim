@@ -356,7 +356,7 @@ wk.register({
     },
     j = { ":m .+1<CR>==", "Move Current line down" },
     k = { ":m .-2<CR>==", "Move Current line up" },
-    y = { '"+y', "Yank to clipboard" },
+    y = { '"+y', "Yank to Clipboard" },
     p = { '"0p', "Paste last yanked text" },
     P = { '"0P', "Paste last yanked text" },
     --== Window ==
@@ -562,6 +562,8 @@ map(
     ":lua require('refactoring').debug.print_var({})<CR>",
     { noremap = true }
 )
+
+map("v", "<leader>y", '"+y', nore_silent)
 
 -- Cleanup function: this remap should be made in normal mode
 vim.keymap.set("n", "<leader>Rc", function()
