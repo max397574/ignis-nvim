@@ -259,6 +259,10 @@ wk.register({
             end,
             "Goto Symbol",
         },
+        S = {
+            "<cmd>SymbolsOutline<CR>",
+            "Symbols Outline",
+        },
         h = { "<cmd>Telescope command_history<CR>", "Command History" },
         m = { "<cmd>Telescope marks<CR>", "Marks" },
         M = { "<cmd>messages<cr>", "Messages" },
