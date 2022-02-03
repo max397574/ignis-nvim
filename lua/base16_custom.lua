@@ -1,20 +1,27 @@
 local function highlight(group, guifg, guibg, attr, guisp)
-    local parts = { group }
+    local arg = {}
     if guifg then
-        table.insert(parts, "guifg=#" .. guifg)
+        arg["fg"] = "#" .. guifg
     end
     if guibg then
-        table.insert(parts, "guibg=#" .. guibg)
+        arg["bg"] = "#" .. guibg
     end
     if attr then
-        table.insert(parts, "gui=" .. attr)
+        if type(attr) == "table" then
+            for _, at in ipairs(attr) do
+                arg[at] = true
+            end
+        else
+            arg[attr] = true
+        end
     end
     if guisp then
-        table.insert(parts, "guisp=#" .. guisp)
+        arg["guisp"] = guisp
+        table.insert(arg, "guisp=#" .. guisp)
     end
 
     -- nvim.ex.highlight(parts)
-    vim.api.nvim_command("highlight " .. table.concat(parts, " "))
+    vim.api.nvim_set_hl(0, group, arg)
 end
 
 -- Modified from https://github.com/chriskempson/base16-vim
