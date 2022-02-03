@@ -38,28 +38,44 @@ local ui = {
 -- Define bg color
 -- @param group Group
 -- @param color Color
-local function bg(group, color)
-    cmd("hi " .. group .. " guibg=" .. color)
+local function bg(group, color, args)
+    local arg = {}
+    if args then
+        vim.tbl_extend("keep", arg, args)
+    end
+    arg["bg"] = color
+    vim.api.nvim_set_hl(0, group, arg)
 end
 
 -- Define fg color
 -- @param group Group
 -- @param color Color
-local function fg(group, color)
-    cmd("hi " .. group .. " guifg=" .. color)
+local function fg(group, color, args)
+    local arg = {}
+    if args then
+        vim.tbl_extend("keep", arg, args)
+    end
+    arg["fg"] = color
+    vim.api.nvim_set_hl(0, group, arg)
 end
 
 -- Define bg and fg color
 -- @param group Group
 -- @param fgcol Fg Color
 -- @param bgcol Bg Color
-local function fg_bg(group, fgcol, bgcol)
-    cmd("hi " .. group .. " guifg=" .. fgcol .. " guibg=" .. bgcol)
+local function fg_bg(group, fgcol, bgcol, args)
+    local arg = {}
+    if args then
+        vim.tbl_extend("keep", arg, args)
+    end
+    arg["bg"] = bgcol
+    arg["fg"] = fgcol
+    vim.api.nvim_set_hl(0, group, arg)
 end
 
 -- Comments
 if ui.italic_comments then
-    fg("Comment", grey_fg .. " gui=italic")
+    fg("Comment", grey_fg, { italic = true })
 else
     fg("Comment", grey_fg)
 end
@@ -73,14 +89,15 @@ fg("EndOfBuffer", black)
 
 -- For floating windows
 -- bg("NormalFloat", black)
-bg("NormalFloat", "none")
+bg("NormalFloat")
+fg("IndentBlanklineChar")
 
 fg("DiagnosticWarn", orange)
 fg("DiagnosticError", red)
 fg("DiagnosticInfo", yellow)
 fg("DiagnosticHint", blue)
 
-bg("SpellBad", black .. "guisp=" .. red)
+bg("SpellBad", black, { guisp = red })
 -- Pmenu
 -- bg("Pmenu", one_bg)
 bg("PmenuSbar", one_bg2)
@@ -148,7 +165,7 @@ fg("NvimTreeGitDirty", red)
 fg("NvimTreeIndentMarker", one_bg2)
 bg("NvimTreeNormal", darker_black)
 fg("NvimTreeOpenedFolderName", blue)
-fg("NvimTreeRootFolder", red .. " gui=underline") -- enable underline for root folder in nvim tree
+fg("NvimTreeRootFolder", red, { underline = true }) -- enable underline for root folder in nvim tree
 fg_bg("NvimTreeStatuslineNc", darker_black, darker_black)
 fg("NvimTreeVertSplit", darker_black)
 bg("NvimTreeVertSplit", darker_black)
@@ -169,6 +186,7 @@ fg_bg("TelescopePreviewTitle", black, green)
 fg_bg("TelescopePromptTitle", black, red)
 fg_bg("TelescopeResultsTitle", black, blue)
 fg("TelescopeSelection", blue)
+fg("TelescopeSelectionCaret", blue)
 bg("TelescopeSelection", "#353b45")
 bg("TelescopePreviewLine", "#353b45")
 
