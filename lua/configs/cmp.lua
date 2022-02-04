@@ -172,6 +172,9 @@ cmp.setup({
         if string.find(vim.api.nvim_buf_get_name(0), "neorg://") then
             return false
         end
+        if string.find(vim.api.nvim_buf_get_name(0), "s_popup:/") then
+            return false
+        end
         return true
     end,
     formatting = {
