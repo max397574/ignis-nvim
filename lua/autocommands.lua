@@ -14,7 +14,9 @@ vim.cmd([[au BufReadPost * lua require"utils".last_place()]])
 
 -- show cursor line only in active window
 vim.cmd([[
+  autocmd InsertLeave,WinEnter,CmdlineLeave * set cursorline
   autocmd InsertLeave,WinEnter * set cursorline
+  autocmd InsertEnter,WinLeave,CmdlineEnter * set nocursorline
   autocmd InsertEnter,WinLeave * set nocursorline
 ]])
 
@@ -65,3 +67,5 @@ vim.cmd(
 vim.cmd([[
     autocmd VimLeavePre * lua require"custom.db".set_db()
 ]])
+
+vim.cmd([[autocmd BufEnter cfg.json set ft=jsonc]])
