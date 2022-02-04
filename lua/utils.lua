@@ -336,11 +336,14 @@ function utils.set_colorscheme(colorscheme)
     local theme
     local time = os.date("*t")
     if time.hour < 7 or time.hour >= 20 then
+        theme = "tokyodark"
+    elseif time.hour < 8 or time.hour >= 19 then
         theme = "kanagawa"
-    elseif time.hour < 9 or time.hour >= 18 then
+    elseif time.hour < 10 or time.hour >= 17 then
         theme = "onedark"
     else
         theme = "everforest"
+        -- theme = "tokyodark"
     end
     require("colors").init(theme)
     local old_scheme = require("custom.db").get_scheme()
