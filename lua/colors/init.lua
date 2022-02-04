@@ -40,7 +40,9 @@ colors.init = function(theme)
     package.loaded["colors.highlights" or false] = nil
     -- then load the highlights
     require("colors.highlights")
+    require("colors.custom")
     RELOAD("colors.highlights")
+    RELOAD("colors.custom")
     vim.cmd([[PackerLoad bufferline.nvim]])
     vim.cmd([[PackerLoad indent-blankline.nvim]])
     vim.cmd([[PackerLoad staline.nvim]])
