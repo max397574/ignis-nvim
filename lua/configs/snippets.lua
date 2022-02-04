@@ -9,6 +9,10 @@ luasnip.config.set_config({
     updateevents = "TextChanged,TextChangedI",
 })
 
+luasnip.config.setup({
+    ft_func = require("luasnip.extras.filetype_functions").from_cursor_pos,
+})
+
 require("luasnip/loaders/from_vscode").load()
 
 local parse = ls.parser.parse_snippet
