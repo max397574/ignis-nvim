@@ -28,14 +28,22 @@ function! LatexClipboardImage() abort
     echoerr "Error: Missing Image in Clipboard"
   else
     let caption = getline('.')
-    execute "normal! ddi\\begin{wrapfigure}{R}{0.3\\textwidth}\r" . 
-    \"\\centering\r" . 
-    \"\\includegraphics[width=200px]{./imgs/image" . index . ".png}\r" . 
-    \"\\caption{" . caption . "}\r" . 
-    \"\\label{fig:LABEL}\r" .
-    \"\\end{wrapfigure}\r"
-    \"\r"
-    \"\r"
-    execute "normal! 3k4w:w"
+    execute "normal!".
+    \"i"
+    \"\\includegraphics[width=200px]{./imgs/image" . index . ".png}\r"
+    execute "normal! k4w:w"
   endif
+  " else
+  "   let caption = getline('.')
+  "   execute "normal!".
+  "   \"ddi\\begin{wrapfigure}{R}{0.3\\textwidth}\r" .
+  "   \"\\centering\r" . 
+  "   \"\\includegraphics[width=200px]{./imgs/image" . index . ".png}\r" . 
+  "   \"\\caption{" . caption . "}\r" . 
+  "   \"\\label{fig:LABEL}\r" .
+  "   \"\\end{wrapfigure}\r"
+  "   \"\r"
+  "   \"\r"
+  "   execute "normal! 3k4w:w"
+  " endif
 endfunction
