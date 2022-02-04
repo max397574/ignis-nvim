@@ -15,7 +15,7 @@ blankline.setup = function()
     -- vim.g.indent_blankline_char = "│"
     vim.g.indent_blankline_char = "▏"
     vim.g.indent_blankline_show_trailing_blankline_indent = false
-    vim.g.indent_blankline_show_first_indent_level = true
+    vim.g.indent_blankline_show_first_indent_level = false
     vim.g.indent_blankline_use_treesitter = true
     vim.g.indent_blankline_show_current_context = true
     vim.g.indent_blankline_context_patterns = {
@@ -45,5 +45,9 @@ blankline.setup = function()
     -- HACK: work-around for https://github.com/lukas-reineke/indent-blankline.nvim/issues/59
     vim.wo.colorcolumn = "99999"
 end
+
+-- local colors = require("colors").get(vim.g.colors_name)
+
+-- vim.cmd("highlight IndentBlanklineChar guifg=" .. colors.black)
 
 return blankline

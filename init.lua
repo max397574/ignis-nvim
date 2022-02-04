@@ -49,7 +49,6 @@ PackerLoad which-key.nvim
 PackerLoad nvim-lspconfig
 PackerLoad lightspeed.nvim
 " PackerLoad gitsigns.nvim
-PackerLoad indent-blankline.nvim
 silent! bufdo e
 ]])
 end, 5)

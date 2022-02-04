@@ -67,8 +67,6 @@ end
 
 return setmetatable({
     themes = function(name)
-        name = "themes/" .. name .. "-base16"
-        local present, theme_array = pcall(require, name)
         local path = "lua/themes/" .. name .. "-base16.lua"
         local files = vim.api.nvim_get_runtime_file(path, true)
         local theme_array

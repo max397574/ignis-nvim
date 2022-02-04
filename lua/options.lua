@@ -10,7 +10,7 @@ g.galaxy_dynamic = false
 g.galaxy_light = false
 
 opt.shortmess:append("c")
-opt.iskeyword:remove("_")
+-- opt.iskeyword:remove("_")
 
 opt.pumblend = 0
 opt.formatoptions:remove({ "c", "r", "o" })

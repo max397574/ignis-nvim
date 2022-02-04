@@ -158,6 +158,9 @@ cmp.setup({
         if vim.bo.ft == "TelescopePrompt" then
             return false
         end
+        if vim.bo.ft == "lua" then
+            return true
+        end
         local lnum, col =
             vim.fn.line("."), math.min(vim.fn.col("."), #vim.fn.getline("."))
         for _, syn_id in ipairs(vim.fn.synstack(lnum, col)) do

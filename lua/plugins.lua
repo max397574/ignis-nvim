@@ -1,5 +1,11 @@
 -- Plugins
 -- =======
+
+-- somewhen plugins
+-- https://github.com/yamatsum/nvim-nonicons
+-- https://github.com/lervag/vimtex#configuration
+-- https://github.com/latex-lsp/texlab
+
 -- packer options: https://github.com/wbthomason/packer.nvim#specifying-plugins
 require("packer").startup({
     function(use)
@@ -8,7 +14,14 @@ require("packer").startup({
 
         use("lewis6991/impatient.nvim")
 
-        use("nvim-lua/plenary.nvim")
+        use({ "nvim-lua/plenary.nvim", module = "plenary" })
+
+        -- use({
+        --     "~/neovim_plugins/plugnplay/plugnplay.nvim/",
+        --     config = function()
+        --         require("plugnplay").startup()
+        --     end,
+        -- })
 
         -- create directories if they don't exist
         use({
@@ -19,10 +32,18 @@ require("packer").startup({
             event = "BufWritePre",
         })
 
-        -- use("~/selection_popup")
+        use({ "VonHeikemen/searchbox.nvim", opt = true })
+        use({ "mutten-lambda/virtual-modes.nvim", opt = true })
+        use({ "jbyuki/nabla.nvim", opt = true })
+        use({ "elihunter173/dirbuf.nvim", opt = true })
+        use({ "mizlan/iswap.nvim", opt = true })
+        use({ "lervag/vimtex", opt = true })
+
+        use("~/neovim_plugins/selection_popup")
 
         use({
-            "nvchad/nvim-base16.lua",
+            -- "nvchad/nvim-base16.lua",
+            "~/neovim_plugins/nvim-base16.lua/",
         })
         use({ "tami5/sqlite.lua", module = "sqlite" })
         --
@@ -82,6 +103,7 @@ require("packer").startup({
                     "romgrk/nvim-treesitter-context",
                     event = "InsertEnter",
                     config = function()
+                        vim.cmd([[hi! link TreesitterContext Visual]])
                         require("treesitter-context.config").setup({
                             enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
                         })
@@ -100,7 +122,7 @@ require("packer").startup({
         use({
             "lukas-reineke/indent-blankline.nvim",
             opt = true,
-            setup = function()
+            config = function()
                 require("configs.blankline").setup()
             end,
         })
@@ -262,7 +284,9 @@ require("packer").startup({
             cmd = "TableModeToggle",
         })
 
-        -- -- display keybindings help
+        use({ "jbyuki/venn.nvim", command = "VBox" })
+
+        -- display keybindings help
         use({
             opt = true,
             "~/neovim_plugins/which-key.nvim",
@@ -285,7 +309,7 @@ require("packer").startup({
             end,
         })
 
-        use({ "~/float_help.nvim/", keys = { "<leader>hp" } })
+        use({ "~/float_help.nvim/", module = "float_help" })
 
         use({
             "~/neovim_plugins/colorscheme_switcher/",
@@ -297,7 +321,7 @@ require("packer").startup({
             cmd = "Luadev",
         })
 
-        -- more helpfiles
+        -- More Helpfiles
         -- luv
         use("nanotee/luv-vimdocs")
         -- builtin lua functions
@@ -310,31 +334,39 @@ require("packer").startup({
         })
 
         use({
-            -- "nvim-neorg/neorg",
-            "~/neovim_plugins/neorg",
+            "nvim-neorg/neorg",
+            -- "~/neovim_plugins/neorg",
             -- branch = "better-concealing-performance",
             branch = "main",
             config = [[ require("configs.neorg") ]],
 
             requires = {
                 -- "nvim-neorg/neorg-telescope",
-                "terrortylor/neorg-telescope",
-                -- "~/neovim_plugins/neorg-telescope/",
+                -- "terrortylor/neorg-telescope",
+                "~/neovim_plugins/neorg-telescope/",
                 "~/neovim_plugins/neorg-zettelkasten/",
             },
         })
 
         use({
-            "rose-pine/neovim",
-            as = "rose-pine",
+            "ruifm/gitlinker.nvim",
+            keys = "<leader>gy",
             config = function()
-                vim.g.rose_pine_variant = "moon"
-                vim.g.rose_pine_bold_vertical_split_line = true
-                vim.g.rose_pine_disable_italics = false
-                vim.g.rose_pine_disable_background = false
-                vim.g.rose_pine_disable_float_background = true
+                require("gitlinker").setup()
             end,
         })
+
+        -- use({
+        --     "rose-pine/neovim",
+        --     as = "rose-pine",
+        --     config = function()
+        --         vim.g.rose_pine_variant = "moon"
+        --         vim.g.rose_pine_bold_vertical_split_line = true
+        --         vim.g.rose_pine_disable_italics = false
+        --         vim.g.rose_pine_disable_background = false
+        --         vim.g.rose_pine_disable_float_background = true
+        --     end,
+        -- })
 
         use({
             "folke/zen-mode.nvim",
@@ -400,6 +432,7 @@ require("packer").startup({
             config = function()
                 require("surround").setup({
                     mappings_style = "surround",
+                    map_insert_mode = false,
                     pairs = {
                         nestable = {
                             { "(", ")" },
@@ -438,7 +471,6 @@ require("packer").startup({
         --     module = "lir",
         --     -- keys = { "<leader>el", "<leader>ef" },
         --     config = [[ require("configs.lir") ]],
-        --     requires = "kyazdani42/nvim-web-devicons",
         -- })
         --
         use({
@@ -499,7 +531,9 @@ require("packer").startup({
         use({
             "~/startup.nvim",
             opt = true,
-            config = [[ require("startup").setup(require("configs.startup_nvim")) ]],
+            config = function()
+                require("startup").setup(require("configs.startup_nvim"))
+            end,
             requires = {
                 "~/startup_themes/",
             },
@@ -525,9 +559,10 @@ require("packer").startup({
         -- completition
         use({
             "iron-e/nvim-cmp",
+            branch = "feat/completion-menu-borders",
+            -- "hrsh7th/nvim-cmp",
             -- "~/nvim-cmp/",
             event = { "InsertEnter", "CmdLineEnter" },
-            branch = "feat/completion-menu-borders",
             config = [[ require("configs.cmp") ]],
             requires = {
                 {
@@ -564,21 +599,6 @@ require("packer").startup({
             config = function()
                 require("neogen").setup({
                     enabled = true,
-                    languages = {
-                        lua = {
-                            template = {
-                                emmylua = {
-                                    { nil, "-$1", { type = { "class", "func" } } }, -- add this string only on requested types
-                                    { nil, "-$1", { no_results = true } }, -- Shows only when there's no results from the granulator
-                                    { "parameters", "-@param %s $1|any" },
-                                    { "vararg", "-@vararg $1|any" },
-                                    { "return_statement", "-@return $1|any" },
-                                    { "class_name", "-@class $1|any" },
-                                    { "type", "-@type $1" },
-                                },
-                            },
-                        },
-                    },
                 })
             end,
         })
@@ -650,3 +670,24 @@ require("packer").startup({
         },
     },
 })
+
+local plugnplay_path = vim.fn.stdpath("data")
+    .. "/site/pack/plugnplay/opt/plugnplay.nvim"
+
+-- if vim.fn.empty(vim.fn.glob(plugnplay_path)) > 0 then
+--     vim.notify("Bootstrapping plugnplay.nvim, please wait ...")
+--     vim.fn.system({
+--         "git",
+--         "clone",
+--         "https://github.com/nvim-plugnplay/plugnplay.nvim",
+--         plugnplay_path,
+--     })
+-- end
+
+-- vim.loop.fs_symlink(
+--     "~/neovim_plugins/plugnplay/plugnplay.nvim/",
+--     plugnplay_path
+-- )
+--
+-- -- Load plugnplay
+vim.cmd([[ packadd plugnplay]])
