@@ -270,7 +270,11 @@ local sumneko_lua_server = {
 }
 
 local enable_lua_dev = true
-local lua_dev_plugins = false
+-- local lua_dev_plugins = false
+local lua_dev_plugins = {
+    -- "neorg",
+    "selection_popup",
+}
 local runtime_path_completion = true
 if not runtime_path_completion then
     sumneko_lua_server.settings.Lua.runtime = {
