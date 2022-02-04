@@ -254,10 +254,13 @@ cmp.setup.cmdline(":", {
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
         scrollbar = "║",
     },
+    view = {
+        entries = { name = "wildmenu", separator = " | " }, -- the user can also specify the `wildmenu` literal string.
+    },
     sources = cmp.config.sources({
-        { name = "path" },
+        { name = "path", keyword_length = 2 },
     }, {
-        { name = "cmdline" },
+        { name = "cmdline", keyword_length = 2 },
     }),
     enabled = function()
         return true
@@ -266,7 +269,7 @@ cmp.setup.cmdline(":", {
 
 cmp.setup.cmdline("/", {
     sources = {
-        { name = "buffer", keyword_length = 1 },
+        { name = "buffer", keyword_length = 2 },
     },
     enabled = function()
         return true
@@ -278,6 +281,9 @@ cmp.setup.cmdline("/", {
     documentation = {
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
         scrollbar = "║",
+    },
+    view = {
+        entries = { name = "wildmenu", separator = " | " }, -- the user can also specify the `wildmenu` literal string.
     },
 })
 
