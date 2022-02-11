@@ -173,6 +173,8 @@ end
 
 require("telescope").load_extension("fzf")
 
+require("telescope").load_extension("luasnip")
+
 function ts.cheatsheets() end
 
 function ts.entry_preview_test()
