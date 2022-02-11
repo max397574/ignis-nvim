@@ -8,7 +8,7 @@ local util = require("utils")
 local root_pattern = require("lspconfig.util").root_pattern
 
 local lua_cmd = {
-    vim.fn.expand("~") .. "/lua-language-server/bin/macOS/lua-language-server",
+    vim.fn.expand("~") .. "/lua-language-server/bin/lua-language-server",
 }
 
 local lsp_conf = {}
@@ -236,6 +236,14 @@ local servers = {
     },
     texlab = require("configs.tex").config(),
     html = { cmd = { "html-languageserver", "--stdio" } },
+    -- jdtls = {
+    --     root_dir = root_pattern(".git", {
+    --         "build.xml", -- Ant
+    --         "pom.xml", -- Maven
+    --         "settings.gradle", -- Gradle
+    --         "settings.gradle.kts", -- Gradle
+    --     }),
+    -- },
     intelephense = {},
     -- efm = require("configs.lsp.efm").config,
     vimls = {},
