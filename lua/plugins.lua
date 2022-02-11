@@ -14,6 +14,23 @@ require("packer").startup({
 
         use("lewis6991/impatient.nvim")
 
+        use({
+            "~/neovim_plugins/staline.nvim/",
+            config = function()
+                require("configs.staline")
+            end,
+        })
+
+        use({ "~/neovim_plugins/wordle.nvim" })
+
+        use({
+            "akinsho/bufferline.nvim",
+            event = "ColorScheme",
+            config = function()
+                require("configs.bufferline")
+            end,
+        })
+
         use({ "nvim-lua/plenary.nvim", module = "plenary" })
 
         -- use({
@@ -42,8 +59,8 @@ require("packer").startup({
         use("~/neovim_plugins/selection_popup")
 
         use({
-            -- "nvchad/nvim-base16.lua",
-            "~/neovim_plugins/nvim-base16.lua/",
+            "nvchad/nvim-base16.lua",
+            -- "~/neovim_plugins/nvim-base16.lua/",
         })
         use({ "tami5/sqlite.lua", module = "sqlite" })
         --
@@ -61,10 +78,10 @@ require("packer").startup({
         -- })
 
         -- faster filetype detection
-        use({
-            "~/neovim_plugins/filetype.nvim",
-            opt = true,
-        })
+        -- use({
+        --     "~/neovim_plugins/filetype.nvim",
+        --     opt = true,
+        -- })
 
         -- colorscheme
         -- use({ "sainnhe/gruvbox-material" })
@@ -112,6 +129,8 @@ require("packer").startup({
             },
         })
 
+        use({ "RRethy/nvim-treesitter-endwise", event = "InsertEnter" })
+
         use({
             "nvim-treesitter/playground",
             cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
@@ -156,77 +175,8 @@ require("packer").startup({
         })
 
         -- bufferline
-        use({
-            "akinsho/bufferline.nvim",
-            opt = true,
-            config = [[ require("configs.bufferline") ]],
-        })
 
         -- statusline
-        use({
-            "~/neovim_plugins/staline.nvim/",
-            opt = true,
-            config = function()
-                vim.cmd(
-                    [[hi StalineSeparator guifg=]]
-                        .. vim.g.color_base_01
-                        .. [[ guibg=none]]
-                )
-                vim.cmd(
-                    [[hi StalineEmpty guibg=none guifg=]] .. vim.g.color_base_01
-                )
-                require("staline").setup({
-                    sections = {
-                        left = {
-                            " ",
-                            "file_name",
-                            { "StalineSeparator", "left_sep" },
-                            -- "left_sep",
-                            { "StylineEmpty", " " },
-                            { "StalineSeparator", "right_sep" },
-                            -- "right_sep",
-                            "branch",
-                            { "StalineSeparator", "left_sep" },
-                            -- "left_sep",
-                            { "StylineEmpty", " " },
-                            "-lsp",
-                        },
-
-                        mid = {
-                            { "StalineSeparator", "right_sep" },
-                            -- "right_sep",
-                            "mode",
-                            { "StalineSeparator", "left_sep" },
-                            -- "left_sep",
-                        },
-                        right = {
-                            { "StalineSeparator", "right_sep" },
-                            -- "right_sep",
-                            "line_column",
-                        },
-                    },
-
-                    defaults = {
-                        bg = vim.g.color_base_01,
-                        -- bg = "none",
-                        left_separator = "",
-                        -- left_separator = "",
-                        right_separator = "",
-                        -- right_separator = "",
-                        true_colors = true,
-                        line_column = "[%l:%c] %p%% ",
-                        -- font_active = "bold"
-                    },
-                    mode_colors = {
-                        n = vim.g.terminal_color_1,
-                        i = vim.g.terminal_color_2,
-                        ic = vim.g.terminal_color_3,
-                        c = vim.g.terminal_color_4,
-                        v = vim.g.terminal_color_5,
-                    },
-                })
-            end,
-        })
 
         use({
             "lewis6991/gitsigns.nvim",
@@ -518,7 +468,7 @@ require("packer").startup({
             "AckslD/nvim-neoclip.lua",
             config = function()
                 require("neoclip").setup({
-                    enable_persistant_history = true,
+                    enable_persistent_history = true,
                     default_register_macros = "q",
                     enable_macro_history = true,
                     on_replay = {
@@ -530,7 +480,6 @@ require("packer").startup({
 
         use({
             "~/startup.nvim",
-            opt = true,
             config = function()
                 require("startup").setup(require("configs.startup_nvim"))
             end,
@@ -655,7 +604,7 @@ require("packer").startup({
         })
     end,
     config = {
-        compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
+        -- compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
         profile = {
             enable = true,
             threshold = 0.0001,
