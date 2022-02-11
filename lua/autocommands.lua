@@ -10,7 +10,7 @@ vim.cmd([[autocmd! BufWinEnter *.cpp set filetype=cpp]], false)
 -- ]])
 -- cmd [[autocmd! BufWritePost *.lua !stylua %]]
 
-vim.cmd([[au BufReadPost * lua require"utils".last_place()]])
+-- vim.cmd([[au BufReadPost * lua require"utils".last_place()]])
 
 -- show cursor line only in active window
 vim.cmd([[
