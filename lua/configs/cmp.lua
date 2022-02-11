@@ -77,8 +77,8 @@ cmp.setup({
             behavior = cmp.ConfirmBehavior.Insert,
         }),
         ["<C-l>"] = cmp.mapping(function(fallback)
-            if luasnip.expand_or_jumpable() then
-                vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
+            if luasnip.choice_active() then
+                require("luasnip").change_choice(1)
             elseif neogen.jumpable() then
                 vim.fn.feedkeys(
                     t("<cmd>lua require('neogen').jump_next()<CR>"),
@@ -92,8 +92,8 @@ cmp.setup({
             "s",
         }),
         ["<C-h>"] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(-1) then
-                vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+            if luasnip.choice_active() then
+                require("luasnip").change_choice(-1)
             elseif neogen.jumpable(-1) then
                 vim.fn.feedkeys(
                     t("<cmd>lua require('neogen').jump_prev()<CR>"),
@@ -106,22 +106,25 @@ cmp.setup({
             "i",
             "s",
         }),
-        -- ["<Tab>"] = cmp.mapping(function(fallback)
-        --   if cmp.visible() then
-        --     -- cmp.select_next_item {}
-        --     cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-        --   elseif luasnip.expand_or_jumpable() then
-        --     vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
-        --   elseif check_backspace() then
-        --     vim.fn.feedkeys(t("<Tab>"), "n")
-        --   else
-        --     vim.fn.feedkeys(t("<C-Space>")) -- Manual trigger
-        --   end
-        -- end, {
-        --   "i",
-        --   "s",
-        --   -- "c",
-        -- }),
+        ["<c-j>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                -- cmp.select_next_item {}
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            elseif luasnip.expand_or_jumpable() then
+                vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
+            elseif neogen.jumpable(-1) then
+                vim.fn.feedkeys(
+                    t("<cmd>lua require('neogen').jump_prev()<CR>"),
+                    ""
+                )
+            else
+                vim.fn.feedkeys(t("<C-Space>")) -- Manual trigger
+            end
+        end, {
+            "i",
+            "s",
+            -- "c",
+        }),
         -- ["<S-Tab>"] = cmp.mapping(function(fallback)
         --   if cmp.visible() then
         --     cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
