@@ -538,6 +538,10 @@ map("v", "<leader>n", ":norm ", nore_silent)
 
 -- luasnip
 map("i", "<leader><tab>", function()
+    -- if require("luasnip").choice_active() then
+    --     require("luasnip").change_choice(1)
+    --     return
+    -- end
     require("luasnip").expand_or_jump()
 end, nore_silent)
 -- add j and k with count to jumplist
@@ -665,6 +669,11 @@ local function toggle_venn()
         vim.b.venn_enabled = nil
     end
 end
+
+vim.keymap.set("c", "(", "()<left>", { noremap = true })
+vim.keymap.set("c", "'", "''<left>", { noremap = true })
+vim.keymap.set("c", "[", "[]<left>", { noremap = true })
+vim.keymap.set("c", '"', '""<left>', { noremap = true })
 
 -- toggle keymappings for venn using <leader>v
 vim.keymap.set("n", "<leader>V", toggle_venn, { noremap = true })
