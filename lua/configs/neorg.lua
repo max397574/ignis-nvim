@@ -1,37 +1,36 @@
 local neorg_callbacks = require("neorg.callbacks")
 -- neorg_callbacks.on_event("core.autocommands.events.bufenter", function(event, event_content)
--- vim.cmd([[PackerLoad nvim-cmp]])
 neorg_callbacks.on_event("core.started", function(event, event_content)
-    vim.cmd([[PackerLoad telescope.nvim]])
+    -- vim.cmd([[PackerLoad telescope.nvim]])
     vim.cmd([[PackerLoad zen-mode.nvim]])
-    vim.cmd([[PackerLoad neorg-telescope]])
-    require("telescope").setup({
-        pickers = {
-            find_files = {
-                mappings = {
-                    i = {
-                        ["<C-t>"] = require("custom.telescope").append_task,
-                        -- ["<C-t>"] = require("neorg.telescope").append_task,
-                    },
-                    n = {
-                        ["<C-t>"] = require("custom.telescope").append_task,
-                        -- ["<C-t>"] = require("neorg.telescope").append_task,
-                    },
-                },
-            },
-        },
-    })
+    -- vim.cmd([[PackerLoad neorg-telescope]])
+    -- require("telescope").setup({
+    --     pickers = {
+    --         find_files = {
+    --             mappings = {
+    --                 i = {
+    --                     ["<C-t>"] = require("custom.telescope").append_task,
+    --                     -- ["<C-t>"] = require("neorg.telescope").append_task,
+    --                 },
+    --                 n = {
+    --                     ["<C-t>"] = require("custom.telescope").append_task,
+    --                     -- ["<C-t>"] = require("neorg.telescope").append_task,
+    --                 },
+    --             },
+    --         },
+    --     },
+    -- })
 end)
 
 require("neorg").setup({
     load = {
         ["core.defaults"] = {}, -- Load all the default modules
-        ["core.integrations.telescope"] = {},
-        ["core.norg.completion"] = {
-            config = {
-                engine = "nvim-cmp",
-            },
-        },
+        -- ["core.integrations.telescope"] = {},
+        -- ["core.norg.completion"] = {
+        --     config = {
+        --         engine = "nvim-cmp",
+        --     },
+        -- },
         ["external.zettelkasten"] = {},
         ["core.norg.concealer"] = {
             config = {
@@ -113,22 +112,6 @@ require("neorg").setup({
         level = "warn",
     },
 })
-
-neorg_callbacks.on_event(
-    "core.keybinds.events.enable_keybinds",
-    function(_, content)
-        content.map_to_mode("traverse-heading", {
-            n = {
-                {
-                    "<C-s>",
-                    [[<cmd>lua require"telescope".extensions.neorg.search_headings({theme="ivy",border = true,previewer = false,shorten_path = false,prompt_prefix = " ◈  ",layout_config = {prompt_position = "top"}})<CR>]],
-                },
-            },
-        }, {
-            silent = true,
-        })
-    end
-)
 
 local neorg_leader = "<leader>o"
 neorg_callbacks.on_event(
