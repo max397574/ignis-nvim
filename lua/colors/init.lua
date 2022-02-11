@@ -29,7 +29,7 @@ colors.init = function(theme)
     vim.g.nvchad_theme = theme
     vim.g.colors_name = theme
 
-    local base16 = require("base16")
+    local base16 = require("base16_local")
     local base16_custom = require("base16_custom")
 
     -- first load the base16 theme
@@ -39,13 +39,15 @@ colors.init = function(theme)
     -- unload to force reload
     package.loaded["colors.highlights" or false] = nil
     -- then load the highlights
+    package.loaded["colors.highlights"] = nil
+    package.loaded["colors.custom"] = nil
     require("colors.highlights")
     require("colors.custom")
-    RELOAD("colors.highlights")
-    RELOAD("colors.custom")
-    vim.cmd([[PackerLoad bufferline.nvim]])
-    vim.cmd([[PackerLoad indent-blankline.nvim]])
-    vim.cmd([[PackerLoad staline.nvim]])
+    -- RELOAD("colors.highlights")
+    -- RELOAD("colors.custom")
+    -- vim.cmd([[PackerLoad bufferline.nvim]])
+    -- vim.cmd([[PackerLoad indent-blankline.nvim]])
+    -- vim.cmd([[PackerLoad staline.nvim]])
 end
 
 -- returns a table of colors for givem or current theme
