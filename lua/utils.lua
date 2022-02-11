@@ -197,7 +197,7 @@ function utils.last_place()
                 vim.cmd([[silent normal! zO]])
             end
             -- center cursor
-            vim.cmd([[silent normal! zz]])
+            -- vim.cmd([[silent normal! zz]])
         end
     end
 end
