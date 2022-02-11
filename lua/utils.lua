@@ -344,7 +344,7 @@ function utils.set_colorscheme(colorscheme)
     end
     local theme
     local time = os.date("*t")
-    if time.hour < 7 or time.hour >= 20 then
+    if time.hour < 7 or time.hour >= 21 then
         theme = "tokyodark"
     elseif time.hour < 8 or time.hour >= 19 then
         theme = "kanagawa"
@@ -357,6 +357,7 @@ function utils.set_colorscheme(colorscheme)
     require("colors").init(theme)
     local old_scheme = require("custom.db").get_scheme()
     if theme ~= old_scheme then
+        RELOAD("colorscheme_switcher")
         require("colorscheme_switcher").new_scheme()
         vim.defer_fn(function()
             require("colorscheme_switcher").new_scheme()
