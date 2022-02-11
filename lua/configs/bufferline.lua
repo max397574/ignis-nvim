@@ -1,4 +1,6 @@
-local colors = require("colors").get(vim.g.colors_name)
+local colors = require("colors").get(
+    vim.g.colors_name or require("ignis.utils").get_colorscheme()
+)
 require("bufferline").setup({
     highlights = {
         background = {
@@ -102,6 +104,7 @@ require("bufferline").setup({
     },
     options = {
         diagnostics = "nvim_diagnostic",
+        always_show_bufferline = false,
         custom_areas = {
             right = function()
                 local diagnostics = vim.diagnostic.get(0)
