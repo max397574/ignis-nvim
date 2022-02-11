@@ -140,6 +140,15 @@ utils.get_themes = function()
     end
     return themes
 end
+---Appends a `;` to the current line
+function utils.append_semicolon()
+    -- save cursor position
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    -- append ,
+    vim.cmd([[normal A,]])
+    -- restore cursor position
+    vim.api.nvim_win_set_cursor(0, cursor)
+end
 
 ---Appends a `,` to the current line
 function utils.append_comma()
