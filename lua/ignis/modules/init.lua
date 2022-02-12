@@ -51,6 +51,12 @@ packer.startup({
         })
 
         use({ "nvim-lua/plenary.nvim", module = "plenary" })
+        use({
+            "rcarriga/nvim-notify",
+            config = function()
+                vim.notify = require("notify")
+            end,
+        })
 
         -- use({
         --     "~/neovim_plugins/plugnplay/plugnplay.nvim/",
@@ -268,14 +274,6 @@ packer.startup({
             requires = {
                 "~/neovim_plugins/mappy.nvim/",
             },
-        })
-
-        use({
-            "rcarriga/nvim-notify",
-            opt = true,
-            config = function()
-                vim.notify = require("notify")
-            end,
         })
 
         use({ "~/float_help.nvim/", module = "float_help" })
