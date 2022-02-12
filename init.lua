@@ -18,7 +18,7 @@ vim.g.did_load_filetypes = 0
 vim.g.mapleader = " "
 
 -- set cursor to last position of a file
-vim.cmd([[au BufRead * lua require"utils".last_place()]])
+vim.cmd([[au BufRead * lua require"ignis.utils".last_place()]])
 require("impatient").enable_profile()
 module_loader("ignis", "core")
 
@@ -28,13 +28,10 @@ vim.defer_fn(function()
     vim.cmd("doautocmd ColorScheme")
 
     require("autocommands")
-    vim.cmd([[PackerLoad nvim-notify]])
-    vim.opt.shadafile = ""
     vim.cmd("autocmd BufRead,BufNewFile *.norg setlocal filetype=norg")
 
     vim.defer_fn(function()
         vim.cmd([[
-        PackerLoad impatient.nvim
         PackerLoad which-key.nvim
         PackerLoad nvim-lspconfig
         PackerLoad lightspeed.nvim
