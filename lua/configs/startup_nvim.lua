@@ -196,13 +196,24 @@ settings = {
         default_color = "",
         oldfiles_amount = 0,
     },
+    footer = {
+        type = "text",
+        align = "center",
+        content = {
+            "Ignis loaded in " .. vim.fn.printf(
+                "%.3f",
+                vim.fn.reltimefloat(vim.fn.reltime(vim.g.start_time))
+            ) .. " seconds.",
+        },
+        highlight = "String",
+    },
 
     options = {
         mapping_keys = true,
         cursor_column = 0.5,
         empty_lines_between_mappings = true,
         disable_statuslines = true,
-        paddings = { 0, 1 },
+        paddings = { 0, 1, 1 },
     },
     mappings = {
         execute_command = "<CR>",
@@ -215,7 +226,7 @@ settings = {
         background = "#1f2227",
         folded_section = "#56b6c2",
     },
-    parts = { "header", "body" },
+    parts = { "header", "body", "footer" },
 }
 
 return settings
