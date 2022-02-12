@@ -385,13 +385,13 @@ wk.register({
         name = "+View",
         l = {
             function()
-                require("utils").LatexPreview()
+                require("ignis.utils").LatexPreview()
             end,
             "Latex",
         },
         m = {
             function()
-                require("utils").MarkdownPreview()
+                require("ignis.utils").MarkdownPreview()
             end,
             "Markdown",
         },
@@ -524,10 +524,10 @@ map("n", "M", "`m", nore_silent)
 
 -- append comma and semicolon
 map("n", ",,", function()
-    require("utils").append_comma()
+    require("ignis.utils").append_comma()
 end, nore_silent)
 map("n", ";;", function()
-    require("utils").append_semicolon()
+    require("ignis.utils").append_semicolon()
 end, nore_silent)
 
 -- change case of cword

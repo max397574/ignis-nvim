@@ -18,8 +18,7 @@ local themes = require("telescope.themes")
 local builtin = require("telescope.builtin")
 local tele_utils = require("telescope.utils")
 local previewers = require("telescope.previewers")
----@type nvim_config.utils
-local utils = require("utils")
+local utils = require("ignis.utils")
 
 local set_options = require("telescope_utils").set_options
 
@@ -412,6 +411,7 @@ function ts.git_diff()
             }
         end
     end
+
     local git_cmd = { "git", "status", "-s", "--", "." }
     local output = require("telescope.utils").get_os_command_output(
         git_cmd,
