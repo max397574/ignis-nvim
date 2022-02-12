@@ -530,22 +530,19 @@ packer.startup({
             -- "~/nvim-cmp/",
             event = { "InsertEnter", "CmdLineEnter" },
             config = [[ require("configs.cmp") ]],
+        })
+        use({
+            "L3MON4D3/LuaSnip",
             requires = {
-                {
-                    "L3MON4D3/LuaSnip",
-                    opt = true,
-                    requires = {
-                        "rafamadriz/friendly-snippets",
-                        after = "LuaSnip",
-                        event = "InsertEnter",
-                    },
-                    event = "InsertEnter",
-                    after = "nvim-cmp",
-                    config = function()
-                        require("configs.snippets")
-                    end,
-                },
+                "rafamadriz/friendly-snippets",
+                after = "LuaSnip",
+                event = "InsertEnter",
             },
+            event = "InsertEnter",
+            after = "nvim-cmp",
+            config = function()
+                require("configs.snippets")
+            end,
         })
         use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" })
         use({ "hrsh7th/cmp-emoji", after = "nvim-cmp" })
