@@ -509,7 +509,7 @@ map("n", "g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", nore_silent)
 
 -- help from ts with textobjects
 map("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
-map("v", "m", ":<C-U>lua require('tsht').nodes()<CR>", nore_silent)
+map("x", "m", ":<C-U>lua require('tsht').nodes()<CR>", nore_silent)
 
 -- open helpfile of word under cursor
 map(
