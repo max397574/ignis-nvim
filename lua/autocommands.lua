@@ -1,8 +1,17 @@
 ---@type nvim_config.utils
-local u = require("utils")
+local u = require("ignis.utils")
 
 vim.cmd([[autocmd! BufWinEnter COMMIT_EDITMSG set filetype=gitcommit]], false)
 vim.cmd([[autocmd! BufWinEnter *.cpp set filetype=cpp]], false)
+
+vim.cmd([[
+    augroup netrw
+        autocmd!
+        au Filetype netrw lua require('ignis.core.settings.netrw').set_maps()
+        au Filetype netrw lua require('ignis.core.settings.netrw').draw_icons()
+        au TextChanged * lua require('ignis.core.settings.netrw').draw_icons()
+    augroup end
+]])
 
 -- vim.cmd([[
 --   au CmdLineEnter * set norelativenumber
