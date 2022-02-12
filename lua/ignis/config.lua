@@ -1,14 +1,12 @@
 local config = {}
 
-local utils = require("ignis.utils")
-
 config.config = { nvim = {}, ignis = {
     colorscheme = "onedark",
 } }
 
 local ok, conf = pcall(
     dofile,
-    vim.fn.stdpath("config") .. utils.system_separator() .. "ignis_config.lua"
+    vim.fn.stdpath("config") .. package.config:sub(1, 1) .. "ignis_config.lua"
 )
 if ok then
     -- config.config = conf
