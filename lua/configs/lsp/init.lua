@@ -1,8 +1,6 @@
-vim.cmd([[PackerLoad lua-dev.nvim]])
 vim.cmd([[hi DiagnosticHeader gui=bold,italic guifg=#56b6c2]])
 vim.cmd([[au CursorHold  * lua vim.diagnostic.open_float()]])
 
----@type nvim_config.utils
 local util = require("ignis.utils")
 
 local root_pattern = require("lspconfig.util").root_pattern

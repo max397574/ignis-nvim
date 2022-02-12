@@ -538,7 +538,8 @@ packer.startup({
                 after = "LuaSnip",
                 event = "InsertEnter",
             },
-            event = "InsertEnter",
+            -- event = "InsertEnter",
+            module = "luasnip",
             after = "nvim-cmp",
             config = function()
                 require("configs.snippets")
@@ -578,7 +579,7 @@ packer.startup({
             "neovim/nvim-lspconfig",
             opt = true,
             requires = {
-                { "folke/lua-dev.nvim", opt = true },
+                { "folke/lua-dev.nvim", module = "lua-dev" },
                 -- { "williamboman/nvim-lsp-installer", opt = true },
             },
             config = function()

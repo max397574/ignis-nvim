@@ -1,6 +1,3 @@
-vim.cmd([[PackerLoad LuaSnip]])
-vim.cmd([[PackerLoad neogen]])
-vim.cmd([[PackerLoad lua-dev.nvim]])
 local cmp = require("cmp")
 local types = require("cmp.types")
 local luasnip = require("luasnip")
@@ -18,6 +15,7 @@ luasnip.config.setup({
 local function t(string)
     return vim.api.nvim_replace_termcodes(string, true, true, true)
 end
+
 local border = {
     "╔",
     "═",
