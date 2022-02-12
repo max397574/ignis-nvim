@@ -2,6 +2,8 @@
 local log = require("ignis.external.log")
 log.debug("Loading core...")
 
+require("ignis.utils.globals")
+
 local loader = require("ignis.utils").load_module
 
 loader("ignis.core", { "ui", "settings", "settings.netrw" })
