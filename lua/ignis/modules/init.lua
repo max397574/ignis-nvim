@@ -34,9 +34,9 @@ packer.startup({
         use("lewis6991/impatient.nvim")
 
         use({
-            "~/neovim_plugins/staline.nvim/",
+            "rebelot/heirline.nvim",
             config = function()
-                require("configs.staline")
+                require("ignis.modules.ui.heirline")
             end,
         })
 
