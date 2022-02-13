@@ -54,7 +54,7 @@ packer.startup({
             -- can be lazyloaded because disabled when opening only one file
             event = "ColorScheme",
             config = function()
-                require("configs.bufferline")
+                require("ignis.modules.ui.bufferline")
             end,
         })
 
