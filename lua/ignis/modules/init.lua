@@ -209,16 +209,6 @@ packer.startup({
                 })
             end,
         })
-        --
-        -- -- Git from Vim
-        -- use({ "tpope/vim-fugitive", cmd = { "G", "GV" } })
-        --
-        -- -- see git commits
-        -- use({
-        --     "junegunn/gv.vim",
-        --     cmd = "GV",
-        --     requires = { "tpope/vim-fugitive" },
-        -- })
 
         -- easier use of f/F and t/T
         use({ "rhysd/clever-f.vim", keys = "f" })
@@ -246,11 +236,6 @@ packer.startup({
         use({ "~/float_help.nvim/", module = "float_help" })
 
         use({
-            "~/neovim_plugins/colorscheme_switcher/",
-            module = { "colorscheme_switcher" },
-        })
-
-        use({
             "bfredl/nvim-luadev",
             cmd = "Luadev",
         })
@@ -273,7 +258,9 @@ packer.startup({
             -- branch = "better-concealing-performance",
             disable = plugin_disabled("misc", "neorg"),
             branch = "main",
-            config = [[ require("configs.neorg") ]],
+            config = function()
+                require("ignis.modules.misc.neorg")
+            end,
 
             requires = {
                 -- "nvim-neorg/neorg-telescope",
@@ -293,7 +280,9 @@ packer.startup({
 
         use({
             "folke/zen-mode.nvim",
-            config = [[require("configs.zenmode")]],
+            config = function()
+                require("ignis.modules.ui.zen_mode")
+            end,
             cmd = "ZenMode",
             requires = {
                 opt = true,
@@ -387,15 +376,7 @@ packer.startup({
         use({
             "jose-elias-alvarez/null-ls.nvim",
         })
-        --
-        -- use({
-        --     "tamago324/lir.nvim",
-        --     opt = true,
-        --     module = "lir",
-        --     -- keys = { "<leader>el", "<leader>ef" },
-        --     config = [[ require("configs.lir") ]],
-        -- })
-        --
+
         use({
             "zeertzjq/symbols-outline.nvim",
             branch = "patch-1",
@@ -423,7 +404,9 @@ packer.startup({
             module = { "telescope", "configs.telescope" },
             keys = { "<leader>Cs" },
             requires = {},
-            config = [[ require("configs.telescope") ]],
+            config = function()
+                require("ignis.modules.files.telescope")
+            end,
         })
         use({ "nvim-lua/popup.nvim", after = "telescope.nvim" })
         use({
@@ -454,7 +437,9 @@ packer.startup({
         use({
             "~/startup.nvim",
             config = function()
-                require("startup").setup(require("configs.startup_nvim"))
+                require("startup").setup(
+                    require("ignis.modules.ui.startup_nvim")
+                )
             end,
             requires = {
                 "~/startup_themes/",
@@ -485,7 +470,9 @@ packer.startup({
             -- "hrsh7th/nvim-cmp",
             -- "~/nvim-cmp/",
             event = { "InsertEnter", "CmdLineEnter" },
-            config = [[ require("configs.cmp") ]],
+            config = function()
+                require("ignis.modules.completion.cmp")
+            end,
         })
         use({
             "L3MON4D3/LuaSnip",
@@ -498,7 +485,7 @@ packer.startup({
             module = "luasnip",
             after = "nvim-cmp",
             config = function()
-                require("configs.snippets")
+                require("ignis.modules.completion.snippets")
             end,
         })
         use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" })
