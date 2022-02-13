@@ -90,17 +90,18 @@ packer.startup({
         use({ "tami5/sqlite.lua", module = "sqlite" })
         --
         -- -- better escape
-        -- use({
-        --     "~/neovim_plugins/betterEscape.nvim",
-        --     event = { "InsertEnter" },
-        --     config = function()
-        --         require("better_escape").setup({
-        --             mapping = { "yy" },
-        --             keys = "<ESC>",
-        --             timeout = 200,
-        --         })
-        --     end,
-        -- })
+        use({
+            disable = plugin_disabled("utils", "better_escape"),
+            "max397574/betterEscape.nvim",
+            event = { "InsertEnter" },
+            config = function()
+                require("better_escape").setup({
+                    mapping = { "jk" },
+                    keys = "<ESC>",
+                    timeout = 200,
+                })
+            end,
+        })
 
         use({
             "nvim-treesitter/nvim-treesitter",
@@ -151,29 +152,6 @@ packer.startup({
         })
 
         use({
-            "Krafi2/jeskape.nvim",
-            event = "InsertEnter",
-            config = function()
-                require("jeskape").setup({
-                    mappings = {
-                        [","] = {
-                            [","] = "<cmd>lua require'ignis.utils'.append_comma()<CR>",
-                        },
-                        j = {
-                            k = "<esc>",
-                            [","] = "<cmd>lua require'ignis.utils'.append_comma()<CR><esc>o",
-                            j = "<esc>o",
-                        },
-                    },
-                })
-            end,
-        })
-
-        -- bufferline
-
-        -- statusline
-
-        use({
             "lewis6991/gitsigns.nvim",
             event = "InsertEnter",
             opt = true,
@@ -222,9 +200,10 @@ packer.startup({
         use({ "jbyuki/venn.nvim", command = "VBox" })
 
         -- display keybindings help
+        -- use my fork because of vim.keymap.set
         use({
             opt = true,
-            "~/neovim_plugins/which-key.nvim",
+            "max397574/which-key.nvim",
             after = "nvim-treesitter",
             config = function()
                 require("which-key").setup({})
@@ -232,8 +211,6 @@ packer.startup({
                 require("mappings")
             end,
         })
-
-        use({ "~/float_help.nvim/", module = "float_help" })
 
         use({
             "bfredl/nvim-luadev",
@@ -254,8 +231,6 @@ packer.startup({
 
         use({
             "nvim-neorg/neorg",
-            -- "~/neovim_plugins/neorg",
-            -- branch = "better-concealing-performance",
             disable = plugin_disabled("misc", "neorg"),
             branch = "main",
             config = function()
@@ -263,10 +238,7 @@ packer.startup({
             end,
 
             requires = {
-                -- "nvim-neorg/neorg-telescope",
-                -- "terrortylor/neorg-telescope",
-                "~/neovim_plugins/neorg-telescope/",
-                "~/neovim_plugins/neorg-zettelkasten/",
+                "nvim-neorg/neorg-telescope/",
             },
         })
 
@@ -397,12 +369,8 @@ packer.startup({
         -- a file explorer
         use({
             "nvim-telescope/telescope.nvim",
-            -- "l-kershaw/telescope.nvim",
-            -- branch = "fix/preview_update",
-            -- "~/neovim_plugins/telescope.nvim/",
             cmd = "Telescope",
-            module = { "telescope", "configs.telescope" },
-            keys = { "<leader>Cs" },
+            module = { "telescope", "ignis.modules.files.telescope" },
             requires = {},
             config = function()
                 require("ignis.modules.files.telescope")
@@ -435,15 +403,12 @@ packer.startup({
         })
 
         use({
-            "~/startup.nvim",
+            "max397574/startup.nvim",
             config = function()
                 require("startup").setup(
                     require("ignis.modules.ui.startup_nvim")
                 )
             end,
-            requires = {
-                "~/startup_themes/",
-            },
         })
 
         -- colorize color codes
@@ -461,14 +426,12 @@ packer.startup({
             end,
         })
 
-        use({ "~/hangman.nvim/", command = "Hangman" })
+        use({ "max397574/hangman.nvim/", command = "Hangman" })
 
         -- completition
         use({
             "iron-e/nvim-cmp",
             branch = "feat/completion-menu-borders",
-            -- "hrsh7th/nvim-cmp",
-            -- "~/nvim-cmp/",
             event = { "InsertEnter", "CmdLineEnter" },
             config = function()
                 require("ignis.modules.completion.cmp")
