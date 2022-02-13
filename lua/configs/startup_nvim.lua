@@ -138,14 +138,6 @@ settings.options.paddings = { 2, 1, 1, 1, 1, 1, 1 }
 -- }
 
 -- require'startup'.setup(settings)
-vim.api.nvim_set_hl(0, "FireYellow", { fg = "#E1DE24" })
-vim.api.nvim_set_hl(0, "FireOrange", { fg = "#EC9000" })
-vim.api.nvim_set_hl(0, "FireRed", { fg = "#E90000" })
-vim.api.nvim_set_hl(0, "FireDarkRed", { fg = "#780000" })
-vim.fn.matchadd("FireYellow", "[░]")
-vim.fn.matchadd("FireOrange", "[▒]")
-vim.fn.matchadd("FireRed", "[▓]")
-vim.fn.matchadd("FireDarkRed", "[█▄▀▐▌]")
 
 settings = require("startup.themes.evil")
 settings.header.content = {}
@@ -213,6 +205,16 @@ settings = {
         cursor_column = 0.5,
         empty_lines_between_mappings = true,
         disable_statuslines = true,
+        after = function()
+            vim.api.nvim_set_hl(0, "FireYellow", { fg = "#E1DE24" })
+            vim.api.nvim_set_hl(0, "FireOrange", { fg = "#EC9000" })
+            vim.api.nvim_set_hl(0, "FireRed", { fg = "#E90000" })
+            vim.api.nvim_set_hl(0, "FireDarkRed", { fg = "#780000" })
+            vim.fn.matchadd("FireYellow", "[░]")
+            vim.fn.matchadd("FireOrange", "[▒]")
+            vim.fn.matchadd("FireRed", "[▓]")
+            vim.fn.matchadd("FireDarkRed", "[█▄▀▐▌]")
+        end,
         paddings = { 0, 1, 1 },
     },
     mappings = {
