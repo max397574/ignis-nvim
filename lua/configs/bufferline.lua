@@ -19,6 +19,11 @@ require("bufferline").setup({
             guibg = colors.black,
             gui = "bold,italic",
         },
+        duplicate_visible = {
+            guifg = colors.white,
+            guibg = colors.black,
+            gui = "bold,italic",
+        },
         buffer_visible = {
             guifg = colors.light_grey,
             guibg = colors.black2,
