@@ -30,6 +30,13 @@ utils.load_module = function(folder, modules)
     end
 end
 
+utils.is_plugin_disabled = function(category, plugin)
+    if config.ignis.modules[category][plugin] == true then
+        return false
+    end
+    return true
+end
+
 utils.set_colorscheme = function(colorscheme)
     if colorscheme then
         vim.cmd("colorscheme " .. colorscheme)
