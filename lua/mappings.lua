@@ -332,7 +332,6 @@ wk.register({
     },
     a = {
         function()
-            require("neogen.utilities.helpers").switch_language()
             require("neogen").generate()
         end,
         "Generate Annotations",
