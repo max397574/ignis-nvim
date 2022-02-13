@@ -21,6 +21,11 @@ if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
     })
 end
 
+local plugin_disabled = require("ignis.utils").is_plugin_disabled
+
+local config = require("ignis.config").config
+local modules_config = config.ignis.modules
+
 -- Load packer
 vim.cmd([[ packadd packer.nvim ]])
 local packer = require("packer")
@@ -35,6 +40,7 @@ packer.startup({
 
         use({
             "rebelot/heirline.nvim",
+            disable = plugin_disabled("ui", "heirline"),
             config = function()
                 require("ignis.modules.ui.heirline")
             end,
@@ -44,6 +50,7 @@ packer.startup({
 
         use({
             "akinsho/bufferline.nvim",
+            disable = plugin_disabled("ui", "bufferline"),
             -- can be lazyloaded because disabled when opening only one file
             event = "ColorScheme",
             config = function()
@@ -95,8 +102,6 @@ packer.startup({
         --     end,
         -- })
 
-        use({ "~/neovim_plugins/colorschemes", opt = true })
-
         use({
             "nvim-treesitter/nvim-treesitter",
             run = ":TSUpdate",
@@ -106,10 +111,6 @@ packer.startup({
             requires = {
                 "nvim-treesitter/nvim-treesitter-refactor",
                 "nvim-treesitter/nvim-treesitter-textobjects",
-                {
-                    "~/neovim_plugins/nvim-treehopper/",
-                    module = "tsht",
-                },
                 {
                     "romgrk/nvim-treesitter-context",
                     event = "InsertEnter",
@@ -268,6 +269,7 @@ packer.startup({
             "nvim-neorg/neorg",
             -- "~/neovim_plugins/neorg",
             -- branch = "better-concealing-performance",
+            disable = plugin_disabled("misc", "neorg"),
             branch = "main",
             config = [[ require("configs.neorg") ]],
 
@@ -286,18 +288,6 @@ packer.startup({
                 require("gitlinker").setup()
             end,
         })
-
-        -- use({
-        --     "rose-pine/neovim",
-        --     as = "rose-pine",
-        --     config = function()
-        --         vim.g.rose_pine_variant = "moon"
-        --         vim.g.rose_pine_bold_vertical_split_line = true
-        --         vim.g.rose_pine_disable_italics = false
-        --         vim.g.rose_pine_disable_background = false
-        --         vim.g.rose_pine_disable_float_background = true
-        --     end,
-        -- })
 
         use({
             "folke/zen-mode.nvim",
@@ -581,6 +571,9 @@ packer.startup({
                 })
             end,
         })
+        for _, plugin in pairs(config.custom_plugins) do
+            use(plugin)
+        end
     end,
     config = {
         -- compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
