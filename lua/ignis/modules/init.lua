@@ -106,7 +106,7 @@ packer.startup({
             "nvim-treesitter/nvim-treesitter",
             run = ":TSUpdate",
             config = function()
-                require("configs.treesitter")
+                require("ignis.modules.misc.treesitter")
             end,
             requires = {
                 "nvim-treesitter/nvim-treesitter-refactor",
@@ -137,7 +137,7 @@ packer.startup({
             "lukas-reineke/indent-blankline.nvim",
             opt = true,
             config = function()
-                require("configs.blankline").setup()
+                require("ignis.modules.ui.blankline").setup()
             end,
         })
 
@@ -146,7 +146,7 @@ packer.startup({
             "akinsho/toggleterm.nvim",
             keys = { "<c-t>", "<leader>r", "<c-g>" },
             config = function()
-                require("configs.toggleterm")
+                require("ignis.modules.misc.toggleterm")
             end,
         })
 
@@ -177,7 +177,9 @@ packer.startup({
             "lewis6991/gitsigns.nvim",
             event = "InsertEnter",
             opt = true,
-            config = [[ require("configs.gitsigns") ]],
+            config = function()
+                require("ignis.modules.ui.gitsigns")
+            end,
         })
 
         --
