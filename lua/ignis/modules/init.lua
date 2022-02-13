@@ -40,10 +40,11 @@ packer.startup({
             end,
         })
 
-        use({ "~/neovim_plugins/wordle.nvim" })
+        use({ "shift-d/wordle.nvim", command = "Wordle", branch = "finish-win" })
 
         use({
             "akinsho/bufferline.nvim",
+            -- can be lazyloaded because disabled when opening only one file
             event = "ColorScheme",
             config = function()
                 require("configs.bufferline")
@@ -51,19 +52,13 @@ packer.startup({
         })
 
         use({ "nvim-lua/plenary.nvim", module = "plenary" })
+
         use({
             "rcarriga/nvim-notify",
             config = function()
                 vim.notify = require("notify")
             end,
         })
-
-        -- use({
-        --     "~/neovim_plugins/plugnplay/plugnplay.nvim/",
-        --     config = function()
-        --         require("plugnplay").startup()
-        --     end,
-        -- })
 
         -- create directories if they don't exist
         use({
@@ -75,17 +70,15 @@ packer.startup({
         })
 
         use({ "VonHeikemen/searchbox.nvim", opt = true })
-        use({ "mutten-lambda/virtual-modes.nvim", opt = true })
         use({ "jbyuki/nabla.nvim", opt = true })
         use({ "elihunter173/dirbuf.nvim", opt = true })
         use({ "mizlan/iswap.nvim", opt = true })
         use({ "lervag/vimtex", opt = true })
 
-        use("~/neovim_plugins/selection_popup")
+        -- use({ "max397574/selection_popup.nvim", module = "selection_popup" })
 
         use({
-            "nvchad/nvim-base16.lua",
-            -- "~/neovim_plugins/nvim-base16.lua/",
+            "nvim-ignis/nvim-base16.lua",
         })
         use({ "tami5/sqlite.lua", module = "sqlite" })
         --
@@ -102,31 +95,7 @@ packer.startup({
         --     end,
         -- })
 
-        -- faster filetype detection
-        -- use({
-        --     "~/neovim_plugins/filetype.nvim",
-        --     opt = true,
-        -- })
-
-        -- colorscheme
-        -- use({ "sainnhe/gruvbox-material" })
-        -- use({ "NTBBloodbath/doombox.nvim" })
-        -- use({ "NTBBloodbath/doom-one.nvim" })
-        -- use("rebelot/kanagawa.nvim")
-        -- use("wuelnerdotexe/vim-enfocado")
         use({ "~/neovim_plugins/colorschemes", opt = true })
-        -- use { "~/onedarker.nvim" }
-        -- use { "tiagovla/tokyodark.nvim" }
-        -- use({
-        --   "folke/tokyonight.nvim",
-        --   config = function()
-        --     require("configs.theme")
-        --     local _time = os.date("*t")
-        --     if _time.hour < 9 then
-        --       vim.g.tokyonight_style = "night"
-        --     end
-        --   end,
-        -- })
 
         use({
             "nvim-treesitter/nvim-treesitter",
@@ -187,11 +156,11 @@ packer.startup({
                 require("jeskape").setup({
                     mappings = {
                         [","] = {
-                            [","] = "<cmd>lua require'utils'.append_comma()<CR>",
+                            [","] = "<cmd>lua require'ignis.utils'.append_comma()<CR>",
                         },
                         j = {
                             k = "<esc>",
-                            [","] = "<cmd>lua require'utils'.append_comma()<CR><esc>o",
+                            [","] = "<cmd>lua require'ignis.utils'.append_comma()<CR><esc>o",
                             j = "<esc>o",
                         },
                     },
@@ -210,8 +179,6 @@ packer.startup({
             config = [[ require("configs.gitsigns") ]],
         })
 
-        -- -- some functions to help with markdown
-        -- use({ "~/neovim_plugins/lua_markdown" })
         --
         -- -- easily comment out code
         use({
@@ -271,9 +238,6 @@ packer.startup({
                 require("configs.which_key")
                 require("mappings")
             end,
-            requires = {
-                "~/neovim_plugins/mappy.nvim/",
-            },
         })
 
         use({ "~/float_help.nvim/", module = "float_help" })
@@ -547,7 +511,7 @@ packer.startup({
         })
         use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" })
         use({ "hrsh7th/cmp-emoji", after = "nvim-cmp" })
-        use({ "~/neovim_plugins/cmp-greek/", after = "nvim-cmp" })
+        use({ "max397574/cmp-greek", after = "nvim-cmp" })
         use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
         use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
         use({ "kdheepak/cmp-latex-symbols", after = "nvim-cmp" })
@@ -634,24 +598,3 @@ packer.startup({
         },
     },
 })
-
-local plugnplay_path = vim.fn.stdpath("data")
-    .. "/site/pack/plugnplay/opt/plugnplay.nvim"
-
--- if vim.fn.empty(vim.fn.glob(plugnplay_path)) > 0 then
---     vim.notify("Bootstrapping plugnplay.nvim, please wait ...")
---     vim.fn.system({
---         "git",
---         "clone",
---         "https://github.com/nvim-plugnplay/plugnplay.nvim",
---         plugnplay_path,
---     })
--- end
-
--- vim.loop.fs_symlink(
---     "~/neovim_plugins/plugnplay/plugnplay.nvim/",
---     plugnplay_path
--- )
---
--- -- Load plugnplay
-vim.cmd([[ packadd plugnplay]])
