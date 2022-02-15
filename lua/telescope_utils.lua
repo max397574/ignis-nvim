@@ -136,8 +136,7 @@ function tc_utils.set_options()
             prompt.width = max_columns - 2 * bs
             if
                 self.previewer
-                and max_columns
-                    >= layout_config.preview_cutoff
+                and max_columns >= layout_config.preview_cutoff
             then
                 -- Cap over/undersized width (with preview)
                 width, w_space = calc_size_and_spacing(
@@ -182,6 +181,7 @@ function tc_utils.set_options()
                 end
             elseif layout_config.prompt_position == "bottom" then
                 results.line = max_lines - results.height - (1 + bs) + 1
+                results.line = prompt.line + 1
                 preview.line = results.line
                 prompt.line = max_lines - bs
                 if type(prompt.title) == "string" then
@@ -214,10 +214,14 @@ function tc_utils.set_options()
             end
 
             if tbln then
-                prompt.line = prompt.line + 1
+                -- prompt.line = prompt.line + 1
                 results.line = results.line + 1
                 preview.line = preview.line
+                prompt.line = prompt.line
+            else
+                results.line = results.line + 1
             end
+            prompt.line = prompt.line + 1
             results.line = results.line + 1
             preview.col = preview.col + 1
             preview.height = preview.height - 2
@@ -294,6 +298,7 @@ function tc_utils.entry_preview(contents, opts)
         -- local to_display = entry.name
         return displayer(to_display)
     end
+
     local function entry_maker(entry)
         return {
             display = make_display,
