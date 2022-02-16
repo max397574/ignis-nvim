@@ -2,12 +2,6 @@
 ### Bloat but Blazing
 #### Always WIP ¯\\\_(ツ)_/¯
 
-## Important:
-I'm working on converting this to ignis-nvim.
-This will be a config people can use and configure (like doom-nvim or nvchad).
-So a lot of stuff will be moved and perhaps things will break.
-I'll rewrite the readme once I'm done with the code.
-
 Most likely this config won't work for you if you just clone it because there is so much local stuff.
 But feel free to use it as a reference and copy configs or code snippets you like.
 
@@ -100,6 +94,8 @@ Diagnostic count in statusline.
 ### Credits
 I took inspiration (and code snippets 😄)from a lot of configs.
 The most important ones where:
+- [doom-nvim](https://github.com/ntbbloodbath/doom-nvim)
+- [nvchad](https://github.com/nvchad/nvchad)
 - [tjdevries](https://github.com/tjdevries/config_manager/tree/master/xdg_config/nvim)
 - [abzcoding](https://github.com/abzcoding/nvim)
 - [tamton-aquib](https://github.com/tamton-aquib/nvim)
