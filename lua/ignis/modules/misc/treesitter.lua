@@ -84,7 +84,7 @@ require("nvim-treesitter.configs").setup({
             },
         },
     },
-    playground = { enable = true },
+    playground = { enable = true, updatetime = 10, persist_queries = true },
     query_linter = {
         enable = true,
         use_virtual_text = true,
