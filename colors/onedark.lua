@@ -1,1 +1,0 @@
-require("colors").init("onedark")
