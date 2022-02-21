@@ -65,6 +65,11 @@ require("neorg").setup({
         ["core.presenter"] = {
             config = {
                 zen_mode = "zen-mode",
+                slide_count = {
+                    enable = true,
+                    position = "top",
+                    count_format = "[%d/%d]",
+                },
             },
         },
         ["core.keybinds"] = {
