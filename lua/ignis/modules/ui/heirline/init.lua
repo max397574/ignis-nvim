@@ -73,6 +73,24 @@ local FileNameBlock = {
 }
 -- We can now define some children separately and add them later
 
+local HelpFileName = {
+    condition = function()
+        return vim.bo.filetype == "help"
+    end,
+    provider = function()
+        local filename = vim.api.nvim_buf_get_name(0)
+        return vim.fn.fnamemodify(filename, ":t")
+    end,
+    hl = { fg = colors.blue },
+}
+
+local FileType = {
+    provider = function()
+        return string.upper(vim.bo.filetype)
+    end,
+    hl = { fg = utils.get_highlight("Type").fg, style = "italic" },
+}
+
 local FileIcon = {
     init = function(self)
         self.mode = vim.fn.mode(1)
@@ -420,34 +438,78 @@ FileNameBlock = utilities.surround(
     colors.lightbg,
     FileNameBlock
 )
-local statusline = {
+
+local inactive_statusline = {
     condition = function()
-        if conditions.is_active then
-            return true
-        end
+        return not conditions.is_active()
     end,
     WorkDir,
     space,
     FileNameBlock,
-    space,
-    {
-        condition = conditions.is_active,
-        git,
-        -- branch,
-        -- git_diff,
-        align,
-        diagnostics,
-        space,
-        -- utilities.surround({ "", "" }, colors.lightbg, coords),
-        -- space,
-        utilities.surround({ "", "" }, colors.lightbg, mode_icon),
-        space,
-        utilities.surround({ "", "" }, colors.lightbg, progress),
-        space,
-        -- Snippets,
-        -- space,
-        utilities.surround({ "", "" }, colors.lightbg, word_count),
-    },
+    align,
 }
 
-require("heirline").setup(statusline)
+local default_statusline = {
+    condition = conditions.is_active,
+    WorkDir,
+    space,
+    FileNameBlock,
+    space,
+    git,
+    -- branch,
+    -- git_diff,
+    align,
+    diagnostics,
+    space,
+    -- utilities.surround({ "", "" }, colors.lightbg, coords),
+    -- space,
+    utilities.surround({ "", "" }, colors.lightbg, mode_icon),
+    space,
+    utilities.surround({ "", "" }, colors.lightbg, progress),
+    space,
+    -- Snippets,
+    -- space,
+    utilities.surround({ "", "" }, colors.lightbg, word_count),
+}
+
+local help_file_line = {
+    condition = function()
+        return conditions.buffer_matches({
+            buftype = { "help", "quickfix" },
+        })
+    end,
+    FileType,
+    space,
+    align,
+    HelpFileName,
+    align,
+    utilities.surround({ "", "" }, colors.lightbg, progress),
+}
+
+local startup_nvim_statusline = {
+    condition = function()
+        return conditions.buffer_matches({
+            filetype = { "startup", "TelescopePrompt" },
+        })
+    end,
+    align,
+    -- utilities.surround({ "", "" }, colors.lightbg, {
+    --     provider = function()
+    --         return "Startup"
+    --     end,
+    --     hl = { fg = colors.red },
+    -- }),
+    provider = "",
+    align,
+}
+
+local statuslines = {
+    init = utils.pick_child_on_condition,
+
+    startup_nvim_statusline,
+    help_file_line,
+    inactive_statusline,
+    default_statusline,
+}
+
+require("heirline").setup(statuslines)
