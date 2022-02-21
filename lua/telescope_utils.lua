@@ -1,3 +1,4 @@
+-- This is mostly code taken from https://github.com/nvim-telescope/telescope.nvim which was modified
 local tc_utils = {}
 
 local previewers = require("telescope.previewers")
