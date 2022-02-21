@@ -50,6 +50,22 @@ utils.set_colorscheme = function(colorscheme)
     end
 end
 
+function utils.get_colorscheme()
+    local theme
+    local time = os.date("*t")
+    if time.hour < 7 or time.hour >= 21 then
+        theme = "tokyodark"
+    elseif time.hour < 8 or time.hour >= 19 then
+        theme = "kanagawa"
+    elseif time.hour < 10 or time.hour >= 17 then
+        theme = "onedark"
+    else
+        theme = "everforest"
+        -- theme = "tokyodark"
+    end
+    return theme
+end
+
 function utils.system_separator()
     return package.config:sub(1, 1)
 end
@@ -290,6 +306,70 @@ function utils.formatoptions()
         - "a" -- no autoformatting
         - "o" -- don't continue comments after o/O
         - "2" -- don't use indent of second line for rest of paragraph
+end
+
+function utils.view_messages()
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
+    vim.keymap.set(
+        "n",
+        "<ESC>",
+        "<cmd>q<CR>",
+        { noremap = true, silent = true, nowait = true, buffer = buf }
+    )
+    vim.keymap.set(
+        "n",
+        "q",
+        "<cmd>q<CR>",
+        { noremap = true, silent = true, nowait = true, buffer = buf }
+    )
+    local width = vim.api.nvim_win_get_width(0)
+    local height = vim.api.nvim_win_get_height(0)
+    local win = vim.api.nvim_open_win(buf, true, {
+        relative = "win",
+        win = 0,
+        width = math.floor(width * 0.25),
+        height = math.floor(height * 0.9),
+        col = math.floor(width * 0.75),
+        row = math.floor(height * 0.05),
+        border = "single",
+        style = "minimal",
+    })
+    vim.api.nvim_win_set_option(win, "winblend", 20)
+    vim.cmd([[put =execute('messages')]])
+    -- vim.api.nvim_buf_set_option(buf, "modifiable", false)
+end
+
+function utils.temp_buf()
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
+    vim.keymap.set(
+        "n",
+        "<ESC>",
+        "<cmd>q<CR>",
+        { noremap = true, silent = true, nowait = true, buffer = buf }
+    )
+    vim.keymap.set(
+        "n",
+        "q",
+        "<cmd>q<CR>",
+        { noremap = true, silent = true, nowait = true, buffer = buf }
+    )
+    local width = vim.api.nvim_win_get_width(0)
+    local height = vim.api.nvim_win_get_height(0)
+    local win = vim.api.nvim_open_win(buf, true, {
+        relative = "win",
+        win = 0,
+        width = math.floor(width * 0.95),
+        height = math.floor(height * 0.95),
+        col = math.floor(width * 0.025),
+        row = math.floor(height * 0.025),
+        border = "single",
+        style = "minimal",
+    })
+    vim.api.nvim_win_set_option(win, "winblend", 20)
+    -- vim.cmd([[put =execute('messages')]])
+    -- vim.api.nvim_buf_set_option(buf, "modifiable", false)
 end
 
 return utils
