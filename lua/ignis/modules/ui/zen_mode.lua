@@ -30,6 +30,8 @@ require("zen-mode").setup({
     -- callback where you can add custom code when the Zen window opens
     on_open = function(win)
         vim.cmd([[PackerLoad twilight.nvim]])
+        vim.cmd([[set nornu]])
+        vim.cmd([[set nonu]])
     end,
     -- callback where you can add custom code when the Zen window closes
     on_close = function() end,
