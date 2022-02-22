@@ -222,6 +222,9 @@ local servers = {
     clangd = {},
     cssls = { cmd = { "css-languageserver", "--stdio" } },
     rnix = {},
+    rust_analyzer = {
+        root_dir = root_pattern("Cargo.toml", "rust-project.json", ".git"),
+    },
     hls = {
         root_dir = root_pattern(
             ".git",
