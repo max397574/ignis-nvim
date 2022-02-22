@@ -1,21 +1,57 @@
 local function highlight(group, guifg, guibg, attr, guisp)
-    local parts = { group }
+    local arg = {}
     if guifg then
-        table.insert(parts, "guifg=#" .. guifg)
+        if vim.tbl_contains({ "none", "NONE", "None" }, guifg) then
+            arg["fg"] = ""
+        else
+            arg["fg"] = "#" .. guifg
+        end
     end
     if guibg then
-        table.insert(parts, "guibg=#" .. guibg)
+        if vim.tbl_contains({ "none", "NONE", "None" }, guibg) then
+            arg["bg"] = ""
+        else
+            arg["bg"] = "#" .. guibg
+        end
     end
     if attr then
-        table.insert(parts, "gui=" .. attr)
+        if type(attr) == "table" then
+            for _, at in ipairs(attr) do
+                arg[at] = true
+            end
+        else
+            if not vim.tbl_contains({ "none", "NONE", "None" }, attr) then
+                arg[attr] = true
+            end
+        end
     end
     if guisp then
-        table.insert(parts, "guisp=#" .. guisp)
+        arg["sp"] = "#" .. guisp
+        -- table.insert(arg, "guisp=#" .. guisp)
     end
 
     -- nvim.ex.highlight(parts)
-    vim.api.nvim_command("highlight " .. table.concat(parts, " "))
+    vim.api.nvim_set_hl(0, group, arg)
 end
+
+-- local function highlight(group, guifg, guibg, attr, guisp)
+--     local parts = { group }
+--     if guifg then
+--         table.insert(parts, "guifg=#" .. guifg)
+--     end
+--     if guibg then
+--         table.insert(parts, "guibg=#" .. guibg)
+--     end
+--     if attr then
+--         table.insert(parts, "gui=" .. attr)
+--     end
+--     if guisp then
+--         table.insert(parts, "guisp=#" .. guisp)
+--     end
+--
+--     -- nvim.ex.highlight(parts)
+--     vim.api.nvim_command("highlight " .. table.concat(parts, " "))
+-- end
 
 -- Modified from https://github.com/chriskempson/base16-vim
 local function apply_base16_theme(theme)
@@ -37,13 +73,8 @@ local function apply_base16_theme(theme)
         vim.g.terminal_color_13 = "#" .. theme.base0E
         vim.g.terminal_color_14 = "#" .. theme.base0C
         vim.g.terminal_color_15 = "#" .. theme.base07
-        if vim.o.background == "light" then
-            vim.g.terminal_color_background = "#" .. theme.base05
-            vim.g.terminal_color_foreground = "#" .. theme.base0B
-        else
-            vim.g.terminal_color_background = "#" .. theme.base00
-            vim.g.terminal_color_foreground = "#" .. theme.base0E
-        end
+        vim.g.terminal_color_background = "#" .. theme.base00
+        vim.g.terminal_color_foreground = "#" .. theme.base0E
     end
 
     -- TODO
@@ -196,7 +227,7 @@ local function apply_base16_theme(theme)
     highlight("TSText", theme.base05, nil, "none", nil)
     highlight("TSStrong", nil, nil, "bold", nil)
     highlight("TSEmphasis", theme.base09, nil, "none", nil)
-    highlight("TSStrike", theme.base00, nil, "strikethrough", nil)
+    -- highlight("TSStrike", theme.base00, nil, "strikethrough", nil)
     highlight("TSLiteral", theme.base09, nil, "none", nil)
     highlight("TSURI", theme.base09, nil, "underline", nil)
     highlight("TSTypeBuiltin", theme.base0A, nil, "none", nil)
