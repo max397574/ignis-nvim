@@ -1,3 +1,4 @@
+-- code from https://github.com/NvChad/nvim-base16.lua
 local function highlight(group, guifg, guibg, attr, guisp)
     local arg = {}
     if guifg then
@@ -16,8 +17,8 @@ local function highlight(group, guifg, guibg, attr, guisp)
         end
     end
     if guisp then
-        arg["guisp"] = guisp
-        table.insert(arg, "guisp=#" .. guisp)
+        arg["sp"] = guisp
+        -- table.insert(arg, "guisp=#" .. guisp)
     end
 
     -- nvim.ex.highlight(parts)
@@ -43,21 +44,21 @@ local function apply_base16_theme(theme)
 
     highlight("TelescopeNormal", theme.base05, theme.base00, nil, nil)
     highlight("TelescopePreviewNormal", theme.base05, theme.base00, nil, nil)
-    highlight("Keyword", theme.base0E, nil, "Italic", nil)
-    highlight("PMenu", theme.base05, theme.base00, "none", nil)
+    highlight("Keyword", theme.base0E, nil, "italic", nil)
+    highlight("PMenu", theme.base05, theme.base00, nil, nil)
     -- highlight("RequireCall", theme.base0C, nil, "italic,bold", nil)
     highlight("CmpItemKindConstant", theme.base09, nil, nil, nil)
     -- highlight("FloatBorder", theme.base0D, nil, nil, nil)
     highlight("CmpItemKindFunction", theme.base0D, nil, nil, nil)
-    highlight("CmpItemKindIdentifier", theme.base08, nil, "none", nil)
-    highlight("CmpItemKindField", theme.base08, nil, "none", nil)
+    highlight("CmpItemKindIdentifier", theme.base08, nil, nil, nil)
+    highlight("CmpItemKindField", theme.base08, nil, nil, nil)
     highlight("CmpItemKindVariable", theme.base0E, nil, "italic", nil)
     highlight("CmpItemKindVariable", theme.base0E, nil, "italic", nil)
     highlight("Special", theme.base0C, nil, "italic", nil)
     highlight("CmpItemKindSnippet", theme.base0C, nil, "italic", nil)
     highlight("CmpItemKindText", theme.base0B, nil, nil, nil)
     highlight("CmpItemKindStructure", theme.base0E, nil, nil, nil)
-    highlight("CmpItemKindType", theme.base0A, nil, "none", nil)
+    highlight("CmpItemKindType", theme.base0A, nil, nil, nil)
     highlight("markdownBold", theme.base0A, nil, "bold", nil)
     highlight("FunctionDefinition", theme.base0D, nil, "italic", nil)
     highlight("RequireCall", theme.base0E, nil, "italic", nil)
