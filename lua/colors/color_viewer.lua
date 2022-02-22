@@ -35,7 +35,7 @@ function color_viewer.view_colors()
         relative = "win",
         win = 0,
         width = 25,
-        height = math.floor(height * 0.9),
+        height = 33,
         col = 5,
         row = 0,
         border = "single",
