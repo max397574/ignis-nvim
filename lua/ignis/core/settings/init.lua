@@ -8,6 +8,7 @@ opt.shortmess:append("c")
 
 opt.pumblend = 0
 opt.formatoptions:remove({ "c", "r", "o" })
+-- this executes `colorscheme` if vim.g.colors_name is set
 opt.background = "dark" -- dark background
 opt.cmdheight = 1 -- height of cmd line
 opt.virtualedit = "block" -- allow visual mode to go over end of lines
@@ -34,8 +35,8 @@ opt.linebreak = true
 opt.autowrite = true -- enable auto write
 opt.mouse = "nv" -- allow mouse in normal and visual mode
 
--- opt.foldlevel = 100
-opt.foldlevel = 1
+opt.foldlevel = 100
+-- opt.foldlevel = 1
 opt.joinspaces = false
 opt.completeopt = "menuone,noselect"
 opt.signcolumn = "yes:3" -- always signcolumn, 3 wide
