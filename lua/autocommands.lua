@@ -1,8 +1,10 @@
----@type nvim_config.utils
 local u = require("ignis.utils")
 
 vim.cmd([[autocmd! BufWinEnter COMMIT_EDITMSG set filetype=gitcommit]], false)
 vim.cmd([[autocmd! BufWinEnter *.cpp set filetype=cpp]], false)
+vim.cmd("autocmd BufRead,BufNewFile *.norg setlocal filetype=norg")
+
+vim.cmd([[au BufEnter,BufWinEnter neorg://* set foldlevel=1000]])
 
 vim.cmd([[
     augroup netrw
@@ -69,9 +71,9 @@ u.create_augroup({
     "TextChanged, BufChangedI, BufWinEnter * let w:m1=matchadd('Search', '\\%81v.\\%>80v', -1)",
 }, "column_limit")
 
-vim.cmd(
-    "autocmd User TelescopeFindPre lua vim.opt.laststatus=0; vim.cmd[[autocmd BufWinLeave * ++once lua vim.opt.laststatus=2]]"
-)
+-- vim.cmd(
+--     "autocmd User TelescopeFindPre lua vim.opt.laststatus=0; vim.cmd[[autocmd BufWinLeave * ++once lua vim.opt.laststatus=2]]"
+-- )
 
 vim.cmd([[
     autocmd VimLeavePre * lua require"custom.db".set_db()
