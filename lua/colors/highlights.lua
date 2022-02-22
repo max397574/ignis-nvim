@@ -1,6 +1,7 @@
+-- code from https://github.com/NvChad/NvChad
 local cmd = vim.cmd
 
-local colors = require("colors").get()
+local colors = require("colors").get(require("ignis.utils").get_colorscheme())
 
 local black = colors.black
 local black2 = colors.black2
@@ -11,6 +12,7 @@ local green = colors.green
 local grey = colors.grey
 local grey_fg = colors.grey_fg
 local line = colors.line
+local light_grey = colors.light_grey
 local nord_blue = colors.nord_blue
 local one_bg = colors.one_bg
 local one_bg2 = colors.one_bg2
@@ -24,12 +26,7 @@ local orange = colors.orange
 local ui = {
     italic_comments = true,
     -- theme to be used, check available themes with `<leader> + t + h`
-    theme = "onedark",
-    -- toggle between two themes, see theme_toggler mappings
-    theme_toggler = {
-        "onedark",
-        "gruvchad",
-    },
+    -- theme = "kanagawa",
     -- Enable this only if your terminal has the colorscheme set which nvchad uses
     -- For Ex : if you have onedark set in nvchad, set onedark's bg color on your terminal
     transparency = false,
@@ -53,7 +50,7 @@ end
 local function fg(group, color, args)
     local arg = {}
     if args then
-        vim.tbl_extend("keep", arg, args)
+        arg = args
     end
     arg["fg"] = color
     vim.api.nvim_set_hl(0, group, arg)
@@ -66,7 +63,7 @@ end
 local function fg_bg(group, fgcol, bgcol, args)
     local arg = {}
     if args then
-        vim.tbl_extend("keep", arg, args)
+        arg = args
     end
     arg["bg"] = bgcol
     arg["fg"] = fgcol
@@ -113,14 +110,14 @@ fg("CmpDocumentationWindowBorder", one_bg2)
 
 if ui.transparency then
     vim.cmd("hi clear CursorLine")
-    bg("Normal", "NONE")
-    bg("Folded", "NONE")
-    fg("Folded", "NONE")
+    bg("Normal", "")
+    bg("Folded", "")
+    fg("Folded", "")
     fg("Comment", grey)
 end
 
 -- [[ Plugin Highlights
-bg("Folded", "NONE")
+bg("Folded", "none")
 
 -- Dashboard
 fg("DashboardCenter", grey_fg)
@@ -171,33 +168,54 @@ fg("NvimTreeVertSplit", darker_black)
 bg("NvimTreeVertSplit", darker_black)
 fg_bg("NvimTreeWindowPicker", red, black2)
 
-fg_bg("TelescopeBorder", darker_black, darker_black)
-fg_bg("TelescopePromptBorder", black2, black2)
-fg_bg("TelescopePreviewBorder", darker_black, darker_black)
-fg_bg("TelescopeResultsBorder", darker_black, darker_black)
+if require("custom.db").get_ts_layout() == "custom_bottom_no_borders" then
+    fg_bg("TelescopeBorder", darker_black, darker_black)
+    fg_bg("TelescopePromptBorder", black2, black2)
+    fg_bg("TelescopePreviewBorder", darker_black, darker_black)
+    fg_bg("TelescopeResultsBorder", darker_black, darker_black)
 
-fg_bg("TelescopePromptNormal", white, black2)
-fg_bg("TelescopePromptPrefix", red, black2)
+    fg_bg("TelescopePromptNormal", white, black2)
+    fg_bg("TelescopePromptPrefix", red, black2)
 
-bg("TelescopeNormal", darker_black)
-bg("TelescopePreviewNormal", darker_black)
+    bg("TelescopeNormal", darker_black)
+    bg("TelescopePreviewNormal", darker_black)
 
-fg_bg("TelescopePreviewTitle", black, green)
-fg_bg("TelescopePromptTitle", black, red)
-fg_bg("TelescopeResultsTitle", black, blue)
-fg("TelescopeSelection", blue)
-fg("TelescopeSelectionCaret", blue)
-bg("TelescopeSelection", "#353b45")
-bg("TelescopePreviewLine", "#353b45")
+    fg_bg("TelescopePreviewTitle", black, green)
+    fg_bg("TelescopePromptTitle", black, red)
+    fg_bg("TelescopeResultsTitle", black, blue)
+    fg("TelescopeSelection", blue)
+    fg("TelescopeSelectionCaret", blue)
+    bg("TelescopeSelection", "#353b45")
+    bg("TelescopePreviewLine", "#353b45")
+elseif require("custom.db").get_ts_layout() == "float_all_borders" then
+    fg_bg("TelescopeBorder", light_grey, black)
+    fg_bg("TelescopePromptBorder", light_grey, black)
+    fg_bg("TelescopePreviewBorder", light_grey, black)
+    fg_bg("TelescopeResultsBorder", light_grey, black)
+
+    fg_bg("TelescopePromptNormal", white, black2)
+    fg_bg("TelescopePromptPrefix", red, black2)
+
+    bg("TelescopeNormal", black)
+    bg("TelescopePreviewNormal", black)
+
+    fg_bg("TelescopePreviewTitle", black, green)
+    fg_bg("TelescopePromptTitle", black, red)
+    fg_bg("TelescopeResultsTitle", black, blue)
+    fg("TelescopeSelection", blue)
+    fg("TelescopeSelectionCaret", blue)
+    bg("TelescopeSelection", "#353b45")
+    bg("TelescopePreviewLine", "#353b45")
+end
 
 -- Disable some highlight in nvim tree if transparency enabled
 if ui.transparency then
-    bg("NvimTreeNormal", "NONE")
-    bg("NvimTreeStatusLineNC", "NONE")
-    bg("NvimTreeVertSplit", "NONE")
+    bg("NvimTreeNormal", "")
+    bg("NvimTreeStatusLineNC", "")
+    bg("NvimTreeVertSplit", "")
     fg("NvimTreeVertSplit", grey)
-    bg("TelescopeNormal", "NONE")
-    bg("TelescopePreviewNormal", "NONE")
+    bg("TelescopeNormal", "")
+    bg("TelescopePreviewNormal", "")
 end
 
 bg("Search", yellow)
