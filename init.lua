@@ -27,16 +27,17 @@ vim.defer_fn(function()
 
     vim.cmd("doautocmd ColorScheme")
 
+    module_loader("ignis", { "core.commands" })
+
     require("autocommands")
-    vim.cmd("autocmd BufRead,BufNewFile *.norg setlocal filetype=norg")
 
     vim.defer_fn(function()
         vim.cmd([[
-        PackerLoad which-key.nvim
-        PackerLoad nvim-lspconfig
-        PackerLoad lightspeed.nvim
-        silent! bufdo e
-]])
+            PackerLoad which-key.nvim
+            PackerLoad nvim-lspconfig
+            PackerLoad lightspeed.nvim
+            silent! bufdo e
+        ]])
     end, 5)
-    require("after")
+    require("ignis.after")
 end, 1)
