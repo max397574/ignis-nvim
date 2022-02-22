@@ -46,7 +46,7 @@ packer.startup({
             end,
         })
 
-        use({ "shift-d/wordle.nvim", command = "Wordle", branch = "finish-win" })
+        use({ "shift-d/wordle.nvim", command = "Wordle" })
 
         use({
             "akinsho/bufferline.nvim",
@@ -60,12 +60,12 @@ packer.startup({
 
         use({ "nvim-lua/plenary.nvim", module = "plenary" })
 
-        use({
-            "rcarriga/nvim-notify",
-            config = function()
-                vim.notify = require("notify")
-            end,
-        })
+        -- use({
+        --     "rcarriga/nvim-notify",
+        --     config = function()
+        -- vim.notify = require("notify")
+        --     end,
+        -- })
 
         -- create directories if they don't exist
         use({
@@ -82,26 +82,36 @@ packer.startup({
         use({ "mizlan/iswap.nvim", opt = true })
         use({ "lervag/vimtex", opt = true })
 
-        -- use({ "max397574/selection_popup.nvim", module = "selection_popup" })
+        use({
+            "~/neovim_plugins/selection_popup",
+            module = "selection_popup",
+        })
 
         use({
-            "nvim-ignis/nvim-base16.lua",
+            "~/neovim_plugins/nvim-base16.lua",
         })
         use({ "tami5/sqlite.lua", module = "sqlite" })
-        --
-        -- -- better escape
+
         use({
-            disable = plugin_disabled("utils", "better_escape"),
-            "max397574/betterEscape.nvim",
-            event = { "InsertEnter" },
+            "Krafi2/jeskape.nvim",
+            event = "InsertEnter",
             config = function()
-                require("better_escape").setup({
-                    mapping = { "jk" },
-                    keys = "<ESC>",
-                    timeout = 200,
+                require("jeskape").setup({
+                    mappings = {
+                        [","] = {
+                            [","] = "<cmd>lua require'ignis.utils'.append_comma()<CR>",
+                        },
+                        j = {
+                            k = "<esc>",
+                            [","] = "<cmd>lua require'ignis.utils'.append_comma()<CR><esc>o",
+                            j = "<esc>o",
+                        },
+                    },
                 })
             end,
         })
+
+        use({ "~/float_help.nvim/", module = "float_help" })
 
         use({
             "nvim-treesitter/nvim-treesitter",
@@ -112,6 +122,7 @@ packer.startup({
             requires = {
                 "nvim-treesitter/nvim-treesitter-refactor",
                 "nvim-treesitter/nvim-treesitter-textobjects",
+                "p00f/nvim-ts-rainbow",
                 {
                     "romgrk/nvim-treesitter-context",
                     event = "InsertEnter",
@@ -119,10 +130,25 @@ packer.startup({
                         vim.cmd([[hi! link TreesitterContext Visual]])
                         require("treesitter-context.config").setup({
                             enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+                            patterns = {
+                                default = {
+                                    "class",
+                                    "function",
+                                    "method",
+                                    "for",
+                                    "field",
+                                },
+                            },
                         })
                     end,
                 },
             },
+        })
+
+        use({
+            "~/neovim_plugins/nvim-treehopper/",
+            module = "tsht",
+            after = "nvim-treesitter",
         })
 
         use({ "RRethy/nvim-treesitter-endwise", event = "InsertEnter" })
@@ -132,7 +158,7 @@ packer.startup({
             cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
         })
 
-        use({ "ggandor/lightspeed.nvim", opt = true })
+        use({ "ggandor/lightspeed.nvim", keys = { "S", "s" } })
 
         use({
             "lukas-reineke/indent-blankline.nvim",
@@ -150,6 +176,8 @@ packer.startup({
                 require("ignis.modules.misc.toggleterm")
             end,
         })
+
+        use({ "tpope/vim-repeat" })
 
         use({
             "lewis6991/gitsigns.nvim",
@@ -189,7 +217,7 @@ packer.startup({
         })
 
         -- easier use of f/F and t/T
-        use({ "rhysd/clever-f.vim", keys = "f" })
+        -- use({ "rhysd/clever-f.vim", keys = "f" })
 
         -- easily create md tables
         use({
@@ -203,7 +231,7 @@ packer.startup({
         -- use my fork because of vim.keymap.set
         use({
             opt = true,
-            "max397574/which-key.nvim",
+            "~/neovim_plugins/which-key.nvim",
             after = "nvim-treesitter",
             config = function()
                 require("which-key").setup({})
@@ -230,15 +258,16 @@ packer.startup({
         })
 
         use({
-            "nvim-neorg/neorg",
-            disable = plugin_disabled("misc", "neorg"),
-            branch = "main",
+            -- "nvim-neorg/neorg",
+            "~/neovim_plugins/neorg",
+            -- branch = "main",
             config = function()
                 require("ignis.modules.misc.neorg")
             end,
 
             requires = {
-                "nvim-neorg/neorg-telescope/",
+                "~/neovim_plugins/neorg-telescope/",
+                "~/neovim_plugins/neorg-zettelkasten/",
             },
         })
 
@@ -263,7 +292,7 @@ packer.startup({
                     require("twilight").setup({
                         dimming = {
                             alpha = 0.25,
-                            color = { "Normal", "#ffffff" },
+                            color = { "Normal", vim.g.color_base_01 },
                             inactive = false,
                         },
                         context = 10,
@@ -312,7 +341,7 @@ packer.startup({
 
         -- change,add and delete surroundings
         use({
-            "blackCauldron7/surround.nvim",
+            "~/neovim_plugins/surround.nvim",
             config = function()
                 require("surround").setup({
                     mappings_style = "surround",
@@ -350,8 +379,7 @@ packer.startup({
         })
 
         use({
-            "zeertzjq/symbols-outline.nvim",
-            branch = "patch-1",
+            "simrat39/symbols-outline.nvim",
             cmd = "SymbolsOutline",
             config = function()
                 vim.cmd([[highlight FocusedSymbol gui=italic guifg=#56b6c2 ]])
@@ -403,12 +431,22 @@ packer.startup({
         })
 
         use({
-            "max397574/startup.nvim",
+            "~/startup.nvim",
             config = function()
                 require("startup").setup(
                     require("ignis.modules.ui.startup_nvim")
                 )
             end,
+            requires = {
+                "~/startup_themes/",
+            },
+        })
+
+        use({ "~/neovim_plugins/colorschemes/" })
+
+        use({
+            "~/neovim_plugins/colorscheme_switcher/",
+            module = { "colorscheme_switcher" },
         })
 
         -- colorize color codes
@@ -426,7 +464,7 @@ packer.startup({
             end,
         })
 
-        use({ "max397574/hangman.nvim/", command = "Hangman" })
+        use({ "max397574/hangman.nvim", command = "Hangman" })
 
         -- completition
         use({
@@ -533,6 +571,7 @@ packer.startup({
             enable = true,
             threshold = 0.0001,
         },
+        max_jobs = 10,
         display = {
             title = "Packer",
             done_sym = "",
