@@ -9,7 +9,7 @@ local kind = require("configs.lsp.kind")
 
 luasnip.config.setup({
     region_check_events = "CursorMoved",
-    delete_check_events = "TextChanged",
+    delete_check_events = "TextChangedI",
 })
 
 local function t(string)
@@ -46,21 +46,66 @@ cmp.setup({
         end,
     },
     mapping = {
-        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+        ["<C-f>"] = cmp.mapping(function(fallback)
+            if luasnip.choice_active() then
+                require("luasnip").change_choice(1)
+            elseif cmp.visible() then
+                cmp.mapping.scroll_docs(4)
+            else
+                fallback()
+            end
+        end, {
+            "i",
+            "s",
+        }),
+        ["<C-d>"] = cmp.mapping(function(fallback)
+            if luasnip.choice_active() then
+                require("luasnip").change_choice(-1)
+            elseif cmp.visible() then
+                cmp.mapping.scroll_docs(-4)
+            else
+                fallback()
+            end
+        end, {
+            "i",
+            "s",
+        }),
+
+        ["<c-j>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.jumpable(1) then
+                luasnip.jump(1)
+            elseif neogen.jumpable(1) then
+                neogen.jump_next()
+            else
+                fallback()
+            end
+        end, {
+            "i",
+            "s",
+        }),
+
+        ["<c-k>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            elseif neogen.jumpable(-1) then
+                neogen.jump_prev()
+            else
+                fallback()
+            end
+        end, {
+            "i",
+            "s",
+        }),
+
         ["<c-space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
         -- ["<tab>"] = cmp.mapping(cmp.mapping.complete(), { "i" }),
         ["<C-e>"] = cmp.mapping({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
-        }),
-        ["<C-j>"] = cmp.mapping({
-            i = cmp.mapping.select_next_item({
-                behavior = cmp.SelectBehavior.Select,
-            }),
-            c = cmp.mapping.select_next_item({
-                behavior = cmp.SelectBehavior.Insert,
-            }),
         }),
         ["<C-k>"] = cmp.mapping({
             i = cmp.mapping.select_prev_item({
@@ -70,7 +115,7 @@ cmp.setup({
                 behavior = cmp.SelectBehavior.Insert,
             }),
         }),
-        ["<a-CR>"] = cmp.mapping.confirm({
+        ["<CR>"] = cmp.mapping.confirm({
             select = true,
             behavior = cmp.ConfirmBehavior.Insert,
         }),
@@ -103,25 +148,6 @@ cmp.setup({
         end, {
             "i",
             "s",
-        }),
-        ["<c-j>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                -- cmp.select_next_item {}
-                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-            elseif luasnip.expand_or_jumpable() then
-                vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
-            elseif neogen.jumpable(-1) then
-                vim.fn.feedkeys(
-                    t("<cmd>lua require('neogen').jump_prev()<CR>"),
-                    ""
-                )
-            else
-                vim.fn.feedkeys(t("<C-Space>")) -- Manual trigger
-            end
-        end, {
-            "i",
-            "s",
-            -- "c",
         }),
         -- ["<S-Tab>"] = cmp.mapping(function(fallback)
         --   if cmp.visible() then
@@ -245,7 +271,6 @@ cmp.setup({
     },
     experimental = {
         ghost_text = true,
-        native_menu = false,
     },
 })
 
