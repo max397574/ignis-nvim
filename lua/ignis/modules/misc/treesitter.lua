@@ -1,4 +1,5 @@
 local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+local colors = require("colors").get()
 
 parser_configs.norg = {
     install_info = {
@@ -96,6 +97,14 @@ require("nvim-treesitter.configs").setup({
         enable = true,
         extended_mode = true,
         max_file_lines = 1000,
+        colors = {
+            colors.blue,
+            colors.red,
+            colors.green,
+            colors.orange,
+            colors.cyan,
+            colors.pink,
+        },
     },
     textobjects = {
         select = {
