@@ -7,43 +7,44 @@ local system = require("ignis.utils.system")
 config.config = {
     nvim = {},
     ignis = {
-        colorscheme = "onedark",
+        colorscheme = function()
+            local theme
+            local time = os.date("*t")
+            if time.hour < 7 or time.hour >= 21 then
+                theme = "tokyodark"
+            elseif time.hour < 8 or time.hour >= 19 then
+                theme = "kanagawa"
+            elseif time.hour < 10 or time.hour >= 17 then
+                theme = "onedark"
+            else
+                theme = "everforest"
+                -- theme = "tokyodark"
+            end
+            require("colors").init(theme)
+            local old_scheme = require("custom.db").get_scheme()
+            if theme ~= old_scheme then
+                RELOAD("colorscheme_switcher")
+                require("colorscheme_switcher").new_scheme()
+                vim.defer_fn(function()
+                    require("colorscheme_switcher").new_scheme()
+                end, 1000)
+            end
+        end,
         modules = {
             ui = {
                 heirline = true,
                 bufferline = true,
+                startup_nvim = true,
             },
             misc = {
                 neorg = true,
+            },
+            utils = {
+                better_escape = true,
             },
         },
     },
     custom_plugins = {},
 }
-
-local ok, conf = xpcall(
-    dofile,
-    debug.traceback,
-    system.ignis_config_dir .. "/ignis_config.lua"
-)
-if ok and conf then
-    config.config = vim.tbl_deep_extend("force", config.config, conf)
-else
-    ok, conf = xpcall(
-        dofile,
-        debug.traceback,
-        vim.fn.stdpath("config") .. system.separator .. "ignis_config.lua"
-    )
-    if ok and conf then
-        config.config = vim.tbl_deep_extend("force", config.config, conf)
-    else
-        ok, conf = xpcall(require, debug.traceback, "ignis_config")
-        if ok and conf then
-            config.config = vim.tbl_deep_extend("force", config.config, conf)
-        else
-            log.error("Couldn't load custom config")
-        end
-    end
-end
 
 return config
