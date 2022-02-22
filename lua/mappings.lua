@@ -25,14 +25,14 @@ wk.register({
         name = "+Git",
         s = {
             function()
-                require("configs.telescope").git_status()
+                require("ignis.modules.files.telescope").git_status()
             end,
             "Status",
         },
         p = { "<cmd>Git push<CR>", "Push" },
         d = {
             function()
-                require("configs.telescope").git_diff()
+                require("ignis.modules.files.telescope").git_diff()
             end,
             "Diff",
         },
@@ -70,13 +70,13 @@ wk.register({
         name = "+Colors",
         n = {
             function()
-                require("configs.telescope").colorschemes()
+                require("ignis.modules.files.telescope").colorschemes()
             end,
             "NvChad Base 16 Picker",
         },
         s = {
             function()
-                require("configs.telescope").highlights()
+                require("ignis.modules.files.telescope").highlights()
             end,
             "Search",
         },
@@ -134,7 +134,7 @@ wk.register({
         f = { "<cmd>so<CR>", "Load File" },
         s = {
             function()
-                require("configs.telescope").grep_last_search()
+                require("ignis.modules.files.telescope").grep_last_search()
             end,
             "Grep Last Search",
         },
@@ -146,7 +146,7 @@ wk.register({
         c = { "<cmd>Telescope commands<CR>", "Commands" },
         h = {
             function()
-                require("configs.telescope").help_tags()
+                require("ignis.modules.files.telescope").help_tags()
             end,
             "Help Pages",
         },
@@ -211,13 +211,13 @@ wk.register({
         a = { "<cmd>Telescope autocommands<CR>", "Auto Commands" },
         g = {
             function()
-                require("configs.telescope").find_string()
+                require("ignis.modules.files.telescope").find_string()
             end,
             "Grep",
         },
         b = {
             function()
-                require("configs.telescope").curbuf()
+                require("ignis.modules.files.telescope").curbuf()
             end,
             "Buffer",
         },
@@ -232,7 +232,7 @@ wk.register({
         l = { "<cmd>Telescope luasnip<CR>", "Luasnip" },
         p = {
             function()
-                require("configs.telescope").search_plugins()
+                require("ignis.modules.files.telescope").search_plugins()
             end,
             "Plugins",
         },
@@ -247,12 +247,6 @@ wk.register({
                 require("telescope").extensions.macroscope.default()
             end,
             "Macros",
-        },
-        n = {
-            function()
-                require("telescope").extensions.notify.notify()
-            end,
-            "Notifications",
         },
         s = {
             function()
@@ -269,11 +263,32 @@ wk.register({
         M = { "<cmd>messages<cr>", "Messages" },
         c = {
             function()
-                require("configs.telescope").code_actions()
+                require("ignis.modules.files.telescope").code_actions()
             end,
             "Code Actions",
         },
         t = { "<cmd>TodoTelescope<CR>", "Todo Comments" },
+    },
+    M = {
+        name = "+Messages",
+        v = {
+            function()
+                require("ignis.utils").view_messages()
+            end,
+            "View",
+        },
+        y = {
+            function()
+                vim.cmd([[let @0 = execute('messages')]])
+            end,
+            "Copy to Clipboard",
+        },
+        c = {
+            function()
+                vim.cmd([[let @+ = execute('messages')]])
+            end,
+            "Copy to Clipboard",
+        },
     },
     --== Files ==
     F = {
@@ -286,7 +301,7 @@ wk.register({
         name = "+Find",
         f = {
             function()
-                require("configs.telescope").find_files()
+                require("ignis.modules.files.telescope").find_files()
             end,
             "File",
         },
@@ -298,19 +313,19 @@ wk.register({
         },
         N = {
             function()
-                require("configs.telescope").search_config()
+                require("ignis.modules.files.telescope").search_config()
             end,
             "Neovim Config",
         },
         h = {
             function()
-                require("configs.telescope").help_tags()
+                require("ignis.modules.files.telescope").help_tags()
             end,
             "Help Tags",
         },
         n = {
             function()
-                require("configs.telescope").find_notes()
+                require("ignis.modules.files.telescope").find_notes()
             end,
             "Notes",
         },
@@ -338,13 +353,13 @@ wk.register({
     },
     ["."] = {
         function()
-            require("configs.telescope").file_browser()
+            require("ignis.modules.files.telescope").file_browser()
         end,
         "Browse Files",
     },
     ["/"] = {
         function()
-            require("configs.telescope").find_string()
+            require("ignis.modules.files.telescope").find_string()
         end,
         "Live Grep",
     },
@@ -439,13 +454,13 @@ map("n", "°", ":normal! zO<CR>", nore_silent)
 -- Telescope
 -- =========
 map("n", "<c-s>", function()
-    require("configs.telescope").curbuf()
+    require("ignis.modules.files.telescope").curbuf()
 end, nore_silent)
 
 -- Simple Commands (Improvements of commands)
 -- ==========================================
 
-map("n", "S", "<cmd>w<CR>", nore_silent)
+map("n", "<leader>S", "<cmd>w<CR>", nore_silent)
 
 -- highlight search result and center cursor
 map("n", "n", "nzzzv", nore_silent)
@@ -456,8 +471,8 @@ map("x", "<", "<gv", nore)
 map("x", ">", ">gv", nore)
 
 -- move lines up and down in insert mode
-map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
-map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
+-- map("i", "<C-j>", "<ESC>:m .+1<CR>==i<RIGHT>", nore)
+-- map("i", "<C-k>", "<ESC>:m .-2<CR>==i<RIGHT>", nore)
 
 -- remove highlighting from search
 map("n", "nh", ":nohlsearch<CR>", nore_silent)
@@ -673,6 +688,12 @@ vim.keymap.set("c", "(", "()<left>", { noremap = true })
 vim.keymap.set("c", "'", "''<left>", { noremap = true })
 vim.keymap.set("c", "[", "[]<left>", { noremap = true })
 vim.keymap.set("c", '"', '""<left>', { noremap = true })
+
+vim.keymap.set("n", "†", function()
+    require("ignis.utils").temp_buf()
+end, {
+    noremap = true,
+})
 
 -- toggle keymappings for venn using <leader>v
 vim.keymap.set("n", "<leader>V", toggle_venn, { noremap = true })
