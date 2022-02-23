@@ -512,10 +512,17 @@ packer.startup({
         })
 
         -- autopairs
+        -- use({
+        --     "windwp/nvim-autopairs",
+        --     after = "nvim-cmp",
+        --     config = [[ require("configs.nvim_autopairs") ]],
+        -- })
         use({
-            "windwp/nvim-autopairs",
+            "ZhiyuanLck/smart-pairs",
             after = "nvim-cmp",
-            config = [[ require("configs.nvim_autopairs") ]],
+            config = function()
+                require("ignis.modules.completion.smart_pairs")
+            end,
         })
 
         -- config for lsp
