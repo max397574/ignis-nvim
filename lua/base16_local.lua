@@ -195,7 +195,7 @@ local function apply_base16_theme(theme)
     highlight("mailEmail", theme.base0D, nil, nil, nil)
 
     -- Spelling highlighting
-    highlight("SpellBad", nil, nil, "undercurl", theme.base08)
+    -- highlight("SpellBad", nil, nil, "undercurl", theme.base08)
     highlight("SpellLocal", nil, nil, "undercurl", theme.base0C)
     highlight("SpellCap", nil, nil, "undercurl", theme.base0D)
     highlight("SpellRare", nil, nil, "undercurl", theme.base0E)

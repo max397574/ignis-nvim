@@ -1,4 +1,40 @@
 -- code from https://github.com/NvChad/NvChad
+local function highlight(group, guifg, guibg, attr, guisp)
+    local arg = {}
+    if guifg then
+        if vim.tbl_contains({ "none", "NONE", "None" }, guifg) then
+            arg["fg"] = ""
+        else
+            arg["fg"] = guifg
+        end
+    end
+    if guibg then
+        if vim.tbl_contains({ "none", "NONE", "None" }, guibg) then
+            arg["bg"] = ""
+        else
+            arg["bg"] = guibg
+        end
+    end
+    if attr then
+        if type(attr) == "table" then
+            for _, at in ipairs(attr) do
+                arg[at] = true
+            end
+        else
+            if not vim.tbl_contains({ "none", "NONE", "None" }, attr) then
+                arg[attr] = true
+            end
+        end
+    end
+    if guisp then
+        arg["sp"] = guisp
+        -- table.insert(arg, "guisp=#" .. guisp)
+    end
+
+    -- nvim.ex.highlight(parts)
+    vim.api.nvim_set_hl(0, group, arg)
+end
+
 local cmd = vim.cmd
 
 local colors = require("colors").get(require("ignis.utils").get_colorscheme())
@@ -94,7 +130,8 @@ fg("DiagnosticError", red)
 fg("DiagnosticInfo", yellow)
 fg("DiagnosticHint", blue)
 
-bg("SpellBad", black, { guisp = red })
+-- bg("SpellBad", black, { guisp = red })
+highlight("SpellBad", nil, nil, "undercurl", red)
 -- Pmenu
 -- bg("Pmenu", one_bg)
 bg("PmenuSbar", one_bg2)
