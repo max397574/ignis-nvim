@@ -18,7 +18,12 @@ vim.g.did_load_filetypes = 0
 vim.g.mapleader = " "
 
 -- set cursor to last position of a file
-vim.cmd([[au BufRead * lua require"ignis.utils".last_place()]])
+vim.api.nvim_create_autocmd({ "BufRead" }, {
+    pattern = "*",
+    callback = function()
+        require("ignis.utils").last_place()
+    end,
+})
 require("impatient").enable_profile()
 module_loader("ignis", "core")
 
