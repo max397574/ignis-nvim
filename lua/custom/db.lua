@@ -1,21 +1,26 @@
 local sql = require("sqlite.db")
+local tbl = require("sqlite.tbl")
 
 local db = sql:open(vim.fn.stdpath("data") .. "/databases/colorscheme.db") -- open in memory
 
-local cs_tbl = db:tbl("colorscheme", { name = "text" })
+local ts_tbl = tbl("ts_tbl", {
+    key = { "text", primary = true, required = true, default = "none" },
+    layout = "text",
+}, db)
 
-local ts_tbl = db:tbl("confi", { layout = "bottom" })
+local cs_tbl = tbl("cs_tbl", {
+    key = { "text", primary = true, required = true, default = "none" },
+    name = "text",
+}, db)
 
 local M = {}
 
 function M.set_db()
-    cs_tbl:drop() -- clear table
-    cs_tbl:insert({ name = vim.g.colors_name })
+    cs_tbl.scheme.name = vim.g.colors_name
 end
 
 function M.change_ts_layout(layout)
-    ts_tbl:drop()
-    ts_tbl:insert({ layout = layout })
+    ts_tbl.tele.layout = layout
     RELOAD("ignis.modules.files.telescope")
     -- require("colors").init()
     RELOAD("colors.highlights")
@@ -23,13 +28,11 @@ function M.change_ts_layout(layout)
 end
 
 function M.get_scheme()
-    local tbl = cs_tbl:get()
-    return tbl[1]["name"]
+    return cs_tbl.scheme.name
 end
 
 function M.get_ts_layout()
-    local tbl = ts_tbl:get()
-    return tbl[1]["layout"]
+    return ts_tbl.tele.layout
 end
 
 return M
