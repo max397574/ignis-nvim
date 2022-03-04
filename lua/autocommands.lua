@@ -1,40 +1,74 @@
 local u = require("ignis.utils")
+local aucmd = vim.api.nvim_create_autocmd
 
-vim.cmd([[autocmd! BufWinEnter COMMIT_EDITMSG set filetype=gitcommit]], false)
-vim.cmd([[autocmd! BufWinEnter *.cpp set filetype=cpp]], false)
-vim.cmd("autocmd BufRead,BufNewFile *.norg setlocal filetype=norg")
+local ft_aucmd = function(pattern, ft)
+    aucmd({ "BufWinEnter" }, {
+        pattern = pattern,
+        command = [[set ft=]] .. ft,
+        once = false,
+    })
+end
 
-vim.cmd([[au BufEnter,BufWinEnter neorg://* set foldlevel=1000]])
+ft_aucmd("COMMIT_EDITMSG", "gitcommit")
+ft_aucmd("*.cpp", "cpp")
 
-vim.cmd([[
-    augroup netrw
-        autocmd!
-        au Filetype netrw lua require('ignis.core.settings.netrw').set_maps()
-        au Filetype netrw lua require('ignis.core.settings.netrw').draw_icons()
-        au TextChanged * lua require('ignis.core.settings.netrw').draw_icons()
-    augroup end
-]])
+aucmd({ "BufEnter", "BufWinEnter" }, {
+    pattern = "neorg://*",
+    command = [[set foldlevel=1000]],
+})
 
--- vim.cmd([[
---   au CmdLineEnter * set norelativenumber
---   au CmdLineLeave * set relativenumber
--- ]])
--- cmd [[autocmd! BufWritePost *.lua !stylua %]]
+aucmd({ "BufRead", "BufNewFile" }, {
+    pattern = "*.norg",
+    command = "setlocal filetype=norg",
+})
 
--- vim.cmd([[au BufReadPost * lua require"utils".last_place()]])
+local netrw = vim.api.nvim_create_augroup("netrw", { clear = true })
+aucmd({ "Filetype" }, {
+    pattern = "netrw",
+    callback = function()
+        require("ignis.core.settings.netrw").draw_icons()
+    end,
+    group = "netrw",
+})
+aucmd({ "TextChanged" }, {
+    pattern = "*",
+    callback = function()
+        require("ignis.core.settings.netrw").draw_icons()
+    end,
+    group = "netrw",
+})
+aucmd({ "Filetype" }, {
+    pattern = "netrw",
+    callback = function()
+        require("ignis.core.settings.netrw").set_maps()
+    end,
+    group = "netrw",
+})
 
 -- show cursor line only in active window
-vim.cmd([[
-  autocmd InsertLeave,WinEnter,CmdlineLeave * set cursorline
-  autocmd InsertLeave,WinEnter * set cursorline
-  autocmd InsertEnter,WinLeave,CmdlineEnter * set nocursorline
-  autocmd InsertEnter,WinLeave * set nocursorline
-]])
+aucmd(
+    { "InsertLeave", "WinEnter", "CmdlineLeave" },
+    { pattern = "*", command = "set cursorline" }
+)
+aucmd(
+    { "InsertEnter", "WinLeave", "CmdlineEnter" },
+    { pattern = "*", command = "set nocursorline" }
+)
 
 -- windows to close with "q"
-vim.cmd(
-    [[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]]
-)
+aucmd({ "FileType" }, {
+    pattern = { "help", "startuptime", "qf", "lspinfo" },
+    callback = function()
+        vim.keymap.set("n", "q", function()
+            vim.cmd([[close]])
+        end, {
+            noremap = true,
+            silent = true,
+            buffer = true,
+        })
+    end,
+})
+
 vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
 
 vim.cmd([[au FocusGained * :checktime]])
