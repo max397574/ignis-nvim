@@ -347,7 +347,8 @@ wk.register({
     },
     a = {
         function()
-            require("neogen").generate()
+            -- require("neogen").generate()
+            require("neogen").generate({ snippet_engine = "luasnip" })
         end,
         "Generate Annotations",
     },
@@ -697,3 +698,5 @@ end, {
 
 -- toggle keymappings for venn using <leader>v
 vim.keymap.set("n", "<leader>V", toggle_venn, { noremap = true })
+
+map("i", "<a-cr>", "<cr>", { noremap = true })
