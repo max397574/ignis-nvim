@@ -17,9 +17,11 @@ config.config = {
             elseif time.hour < 10 or time.hour >= 17 then
                 theme = "onedark"
             else
+                -- theme = "onedark"
                 theme = "everforest"
-                -- theme = "tokyodark"
             end
+            -- theme = "onedark"
+            theme = "everforest"
             require("colors").init(theme)
             local old_scheme = require("custom.db").get_scheme()
             if theme ~= old_scheme then
