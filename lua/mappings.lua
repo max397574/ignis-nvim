@@ -202,7 +202,10 @@ wk.register({
         ["["] = { "<cmd>BufferLineCyclePrev<CR>", "Previous Buffer" },
         ["n"] = { "<cmd>BufferLineCycleNext<CR>", "Next Buffer" },
         ["]"] = { "<cmd>BufferLineCycleNext<CR>", "Next Buffer" },
-        ["d"] = { "<cmd>bd<CR>", "Delete Buffer" },
+        ["d"] = {
+            "<cmd>lua require('bufferline').handle_close(vim.fn.bufnr('%'))<cr>",
+            "Delete Buffer",
+        },
         ["g"] = { "<cmd>BufferLinePick<CR>", "Goto Buffer" },
     },
     --== Search ==
@@ -546,7 +549,13 @@ map("n", ";;", function()
 end, nore_silent)
 
 -- change case of cword
-map("n", "<C-U>", "b~", nore_silent)
+map("n", "<C-U>", function()
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    vim.api.nvim_feedkeys("b~", "n", true)
+    vim.defer_fn(function()
+        vim.api.nvim_win_set_cursor(0, cursor)
+    end, 1)
+end, nore_silent)
 map("i", "<C-U>", "<ESC>b~A", nore_silent)
 
 map("v", "<leader>n", ":norm ", nore_silent)
@@ -685,10 +694,10 @@ local function toggle_venn()
     end
 end
 
-vim.keymap.set("c", "(", "()<left>", { noremap = true })
-vim.keymap.set("c", "'", "''<left>", { noremap = true })
-vim.keymap.set("c", "[", "[]<left>", { noremap = true })
-vim.keymap.set("c", '"', '""<left>', { noremap = true })
+-- vim.keymap.set("c", "(", "()<left>", { noremap = true })
+-- vim.keymap.set("c", "'", "''<left>", { noremap = true })
+-- vim.keymap.set("c", "[", "[]<left>", { noremap = true })
+-- vim.keymap.set("c", '"', '""<left>', { noremap = true })
 
 vim.keymap.set("n", "†", function()
     require("ignis.utils").temp_buf()
@@ -699,4 +708,7 @@ end, {
 -- toggle keymappings for venn using <leader>v
 vim.keymap.set("n", "<leader>V", toggle_venn, { noremap = true })
 
-map("i", "<a-cr>", "<cr>", { noremap = true })
+vim.keymap.set("n", "<left>", "<C-W>5<", nore_silent)
+vim.keymap.set("n", "<down>", ":resize +5<CR>", nore_silent)
+vim.keymap.set("n", "<right>", "<C-W>5>", nore_silent)
+vim.keymap.set("n", "<up>", ":resize -5<CR>", nore_silent)
