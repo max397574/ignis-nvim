@@ -25,7 +25,16 @@ parser_configs.norg_meta = {
         files = { "src/parser.c" },
     },
 }
---
+
+parser_configs.luap = {
+    install_info = {
+        url = "https://github.com/vhyrro/tree-sitter-luap",
+        files = { "src/parser.c" },
+        branch = "main",
+        -- branch = "attached-modifiers",
+    },
+}
+
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
         "markdown",
@@ -44,10 +53,10 @@ require("nvim-treesitter.configs").setup({
     },
     highlight = {
         enable = true,
-        custom_captures = {
-            ["require_call"] = "RequireCall",
-            ["function_definition"] = "FunctionDefinition",
-        },
+        -- custom_captures = {
+        --     ["require_call"] = "RequireCall",
+        --     ["function_definition"] = "FunctionDefinition",
+        -- },
     },
     incremental_selection = {
         enable = true,
@@ -162,4 +171,12 @@ require("nvim-treesitter.configs").setup({
             },
         },
     },
+})
+
+require("nvim-treesitter.highlight").set_custom_captures({
+    -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+    -- ["foo.bar"] = "Identifier",
+    ["require_call"] = "RequireCall",
+    ["function_definition"] = "FunctionDefinition",
+    ["quantifier"] = "Special",
 })
