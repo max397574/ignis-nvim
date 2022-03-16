@@ -260,6 +260,7 @@ if ts_layout == "custom_bottom_no_borders" then
             selection_strategy = "reset",
             -- remove stuff from paths when possible so names are still clear
             -- path_display = { "smart" },
+            -- path_display["shorten"] = 2,
             prompt_prefix = "  ",
             shorten_path = true,
             preview = {
