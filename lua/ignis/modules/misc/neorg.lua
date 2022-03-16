@@ -82,7 +82,7 @@ require("neorg").setup({
             config = {
                 workspaces = {
                     startup = "~/startup.nvim",
-                    example_ws = "~/example_workspaces/gtd/",
+                    example_ws = "~/neovim_plugins/example_workspaces/gtd/",
                     gtd = "~/gtd",
                     dany_gtd = "~/dany_gtd/",
                     notes = "~notes",
@@ -91,13 +91,14 @@ require("neorg").setup({
         },
         ["core.gtd.base"] = {
             config = {
-                workspace = "gtd",
+                -- workspace = "gtd",
+                workspace = "example_ws",
                 displayers = {
                     close_after_task_select = false,
                 },
 
                 -- workspace = "example_ws",
-                -- exclude = { "" },
+                exclude = { "notes" },
             },
         },
         ["core.norg.qol.toc"] = {
@@ -108,8 +109,9 @@ require("neorg").setup({
         },
         ["core.norg.journal"] = {
             config = {
-                journal_folder = "my_journal",
-                use_folders = false,
+                workspace = "gtd",
+                journal_folder = "notes/journal",
+                strategy = "nested",
             },
         },
     },
