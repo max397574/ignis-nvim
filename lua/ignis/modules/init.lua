@@ -81,6 +81,7 @@ packer.startup({
         use({ "elihunter173/dirbuf.nvim", opt = true })
         use({ "mizlan/iswap.nvim", opt = true })
         use({ "lervag/vimtex", opt = true })
+        use({ "jbyuki/nabla.nvim", opt = true })
 
         use({
             "~/neovim_plugins/selection_popup",
@@ -90,7 +91,11 @@ packer.startup({
         use({
             "~/neovim_plugins/nvim-base16.lua",
         })
-        use({ "tami5/sqlite.lua", module = "sqlite" })
+        use({
+            "tami5/sqlite.lua",
+            module = "sqlite",
+            branch = "new/index_access",
+        })
 
         use({
             "Krafi2/jeskape.nvim",
@@ -258,8 +263,15 @@ packer.startup({
         })
 
         use({
-            -- "nvim-neorg/neorg",
-            "~/neovim_plugins/neorg",
+            "~/neovim_plugins/pomodoro.nvim/",
+            config = function()
+                require("tomato").setup()
+            end,
+        })
+
+        use({
+            "nvim-neorg/neorg",
+            -- "~/neovim_plugins/neorg",
             -- branch = "main",
             config = function()
                 require("ignis.modules.misc.neorg")
@@ -269,6 +281,10 @@ packer.startup({
                 "~/neovim_plugins/neorg-telescope/",
                 "~/neovim_plugins/neorg-zettelkasten/",
             },
+        })
+
+        use({
+            "~/neovim_plugins/dynamic_help/",
         })
 
         use({
@@ -484,10 +500,10 @@ packer.startup({
             },
             -- event = "InsertEnter",
             module = "luasnip",
-            after = "nvim-cmp",
-            config = function()
-                require("ignis.modules.completion.snippets")
-            end,
+            -- after = "nvim-cmp",
+            -- config = function()
+            --     require("ignis.modules.completion.snippets")
+            -- end,
         })
         use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" })
         use({ "hrsh7th/cmp-emoji", after = "nvim-cmp" })
@@ -506,6 +522,7 @@ packer.startup({
             module = { "neogen" },
             config = function()
                 require("neogen").setup({
+                    snippet_engine = "luasnip",
                     enabled = true,
                 })
             end,
@@ -520,10 +537,13 @@ packer.startup({
         use({
             "ZhiyuanLck/smart-pairs",
             after = "nvim-cmp",
+            commit = "045c96b3ac7fce57a12064f98987e916594e5a1b",
             config = function()
                 require("ignis.modules.completion.smart_pairs")
             end,
         })
+
+        use({ "lewis6991/hover.nvim", opt = true })
 
         -- config for lsp
         use({
@@ -531,6 +551,7 @@ packer.startup({
             opt = true,
             requires = {
                 { "folke/lua-dev.nvim", module = "lua-dev" },
+                { "p00f/clangd_extensions.nvim", module = "clangd_extensions" },
                 -- { "williamboman/nvim-lsp-installer", opt = true },
             },
             config = function()
@@ -568,9 +589,7 @@ packer.startup({
                 })
             end,
         })
-        for _, plugin in pairs(config.custom_plugins) do
-            use(plugin)
-        end
+        use({ "~/neovim_plugins/plugnplay/plugnplay.nvim/" })
     end,
     config = {
         -- compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
