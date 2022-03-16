@@ -1,17 +1,20 @@
 local on_attach = {}
 
-local function lsp_highlight_document(client)
+local function lsp_highlight_document(client, bufnr)
     if client.resolved_capabilities.document_highlight then
-        vim.api.nvim_exec(
-            [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]],
-            false
-        )
+        vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+        vim.api.nvim_create_autocmd("CursorHold", {
+            callback = function()
+                vim.lsp.buf.document_highlight()
+            end,
+            buffer = bufnr,
+        })
+        vim.api.nvim_create_autocmd("CursorMoved", {
+            callback = function()
+                vim.lsp.buf.clear_references()
+            end,
+            buffer = bufnr,
+        })
     end
 end
 
@@ -28,6 +31,7 @@ function on_attach.setup(client, bufnr)
     vim.keymap.set("n", "<C-d>", vim.diagnostic.goto_prev, opts)
     vim.keymap.set("n", "<C-f>", vim.diagnostic.goto_next, opts)
     vim.keymap.set("n", "<Leader>fs", vim.lsp.buf.formatting_sync, opts)
-    lsp_highlight_document(client)
+    lsp_highlight_document(client, bufnr)
 end
+
 return on_attach
