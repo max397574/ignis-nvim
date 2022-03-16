@@ -219,7 +219,7 @@ local servers = {
     -- bashls = {},
     dockerls = {},
     tsserver = {},
-    clangd = {},
+    -- clangd = {},
     cssls = { cmd = { "css-languageserver", "--stdio" } },
     rnix = {},
     rust_analyzer = {
@@ -262,7 +262,7 @@ local sumneko_lua_server = {
             --   vim.fn.expand("~") .. "/.config/nvim_config/lua/?.lua",
             -- },
             diagnostics = {
-                globals = { "vim", "dump", "hs", "lvim", "P", "RELOAD" },
+                globals = { "vim", "dump", "hs", "lvim", "P", "RELOAD", "neorg" },
             },
             workspace = {
                 --   library = {
@@ -283,6 +283,7 @@ local enable_lua_dev = true
 local lua_dev_plugins = {
     -- "neorg",
     "selection_popup",
+    "sqlite.lua",
 }
 local runtime_path_completion = true
 if not runtime_path_completion then
@@ -292,6 +293,7 @@ if not runtime_path_completion then
         vim.fn.expand("~") .. "/.config/nvim_config/lua/?.lua",
     }
 end
+require("clangd_extensions").setup({})
 
 if enable_lua_dev then
     local luadev = require("lua-dev").setup({
