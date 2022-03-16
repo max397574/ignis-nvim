@@ -60,9 +60,12 @@ function utils.get_colorscheme()
     elseif time.hour < 10 or time.hour >= 17 then
         theme = "onedark"
     else
+        -- theme = "onedark"
         theme = "everforest"
         -- theme = "tokyodark"
     end
+    -- theme = "onedark"
+    theme = "everforest"
     return theme
 end
 
@@ -73,6 +76,7 @@ end
 ---Get the available nvim-base16 themes
 ---@return table themes All the themes found
 utils.get_themes = function()
+    local themes = {}
     local themes = {}
     -- the local plugin dir
     local theme_dir = vim.fn.expand("~")
@@ -115,7 +119,7 @@ function utils.append_semicolon()
     -- save cursor position
     local cursor = vim.api.nvim_win_get_cursor(0)
     -- append ,
-    vim.cmd([[normal A,]])
+    vim.cmd([[normal A;]])
     -- restore cursor position
     vim.api.nvim_win_set_cursor(0, cursor)
 end
@@ -370,6 +374,10 @@ function utils.temp_buf()
     vim.api.nvim_win_set_option(win, "winblend", 20)
     -- vim.cmd([[put =execute('messages')]])
     -- vim.api.nvim_buf_set_option(buf, "modifiable", false)
+end
+
+utils.highlight_duplicate_lines = function()
+    local lines = vim.api.nvim_buf_get_lines(0, 1, -1, false)
 end
 
 return utils
