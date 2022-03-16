@@ -108,6 +108,7 @@ require("bufferline").setup({
         },
     },
     options = {
+        mode = "buffers",
         diagnostics = "nvim_diagnostic",
         always_show_bufferline = false,
         custom_areas = {
