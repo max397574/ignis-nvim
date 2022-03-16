@@ -58,6 +58,8 @@ local red = colors.red
 local white = colors.white
 local yellow = colors.yellow
 local orange = colors.orange
+local tele_bg = colors.telescope_bg or colors.darker_black
+local tele_prompt = colors.telescope_prompt or colors.black2
 
 local ui = {
     italic_comments = true,
@@ -203,26 +205,25 @@ fg("NvimTreeRootFolder", red, { underline = true }) -- enable underline for root
 fg_bg("NvimTreeStatuslineNc", darker_black, darker_black)
 fg("NvimTreeVertSplit", darker_black)
 bg("NvimTreeVertSplit", darker_black)
-fg_bg("NvimTreeWindowPicker", red, black2)
+fg_bg("NvimTreeWindowPicker", red, tele_prompt)
 
 if require("custom.db").get_ts_layout() == "custom_bottom_no_borders" then
-    fg_bg("TelescopeBorder", darker_black, darker_black)
-    fg_bg("TelescopePromptBorder", black2, black2)
-    fg_bg("TelescopePreviewBorder", darker_black, darker_black)
-    fg_bg("TelescopeResultsBorder", darker_black, darker_black)
+    fg_bg("TelescopeBorder", tele_bg, tele_bg)
+    fg_bg("TelescopePromptBorder", tele_prompt, tele_prompt)
+    fg_bg("TelescopePreviewBorder", tele_bg, tele_bg)
+    fg_bg("TelescopeResultsBorder", tele_bg, tele_bg)
 
-    fg_bg("TelescopePromptNormal", white, black2)
-    fg_bg("TelescopePromptPrefix", red, black2)
+    fg_bg("TelescopePromptNormal", white, tele_prompt)
+    fg_bg("TelescopePromptPrefix", red, tele_prompt)
 
-    bg("TelescopeNormal", darker_black)
-    bg("TelescopePreviewNormal", darker_black)
+    bg("TelescopeNormal", tele_bg)
+    bg("TelescopePreviewNormal", tele_bg)
 
     fg_bg("TelescopePreviewTitle", black, green)
     fg_bg("TelescopePromptTitle", black, red)
     fg_bg("TelescopeResultsTitle", black, blue)
-    fg("TelescopeSelection", blue)
-    fg("TelescopeSelectionCaret", blue)
-    bg("TelescopeSelection", "#353b45")
+    fg_bg("TelescopeSelection", blue, light_grey)
+    fg_bg("TelescopeSelectionCaret", blue, light_grey)
     bg("TelescopePreviewLine", "#353b45")
 elseif require("custom.db").get_ts_layout() == "float_all_borders" then
     fg_bg("TelescopeBorder", light_grey, black)
@@ -230,8 +231,10 @@ elseif require("custom.db").get_ts_layout() == "float_all_borders" then
     fg_bg("TelescopePreviewBorder", light_grey, black)
     fg_bg("TelescopeResultsBorder", light_grey, black)
 
-    fg_bg("TelescopePromptNormal", white, black2)
-    fg_bg("TelescopePromptPrefix", red, black2)
+    -- fg_bg("TelescopePromptNormal", white, tele_prompt)
+    fg_bg("TelescopePromptNormal", white, "")
+    -- fg_bg("TelescopePromptPrefix", red, tele_prompt)
+    fg_bg("TelescopePromptPrefix", red, "")
 
     bg("TelescopeNormal", black)
     bg("TelescopePreviewNormal", black)
@@ -239,9 +242,8 @@ elseif require("custom.db").get_ts_layout() == "float_all_borders" then
     fg_bg("TelescopePreviewTitle", black, green)
     fg_bg("TelescopePromptTitle", black, red)
     fg_bg("TelescopeResultsTitle", black, blue)
-    fg("TelescopeSelection", blue)
-    fg("TelescopeSelectionCaret", blue)
-    bg("TelescopeSelection", "#353b45")
+    fg_bg("TelescopeSelection", blue, light_grey)
+    fg_bg("TelescopeSelectionCaret", blue, light_grey)
     bg("TelescopePreviewLine", "#353b45")
 end
 
