@@ -181,6 +181,22 @@ FileNameBlock = utils.insert(
     { provider = "%<" } -- this means that the statusline is cut here when there's not enough space
 )
 
+local option_value = {
+    provider = function()
+        local ok, res = pcall(
+            vim.api.nvim_get_option_value,
+            vim.fn.expand("<cword>"),
+            {}
+        )
+        if ok then
+            return tostring(res)
+        else
+            return ""
+        end
+    end,
+    hl = { fg = colors.blue },
+}
+
 local git = {
     condition = conditions.is_git_repo,
 
@@ -456,6 +472,7 @@ local default_statusline = {
     FileNameBlock,
     space,
     git,
+    option_value,
     -- branch,
     -- git_diff,
     align,
