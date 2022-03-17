@@ -77,7 +77,6 @@ packer.startup({
         })
 
         use({ "VonHeikemen/searchbox.nvim", opt = true })
-        use({ "jbyuki/nabla.nvim", opt = true })
         use({ "elihunter173/dirbuf.nvim", opt = true })
         use({ "mizlan/iswap.nvim", opt = true })
         use({ "lervag/vimtex", opt = true })
@@ -467,7 +466,7 @@ packer.startup({
 
         -- colorize color codes
         use({
-            "norcalli/nvim-colorizer.lua",
+            "xiyaowong/nvim-colorizer.lua",
             keys = { "<leader>vc" },
             config = function()
                 require("colorizer").setup({
