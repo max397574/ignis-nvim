@@ -114,3 +114,61 @@ vim.cmd([[
 ]])
 
 vim.cmd([[autocmd BufEnter cfg.json set ft=jsonc]])
+
+local called_func = false
+local timer = nil
+local space_used
+local function reset_timer(text_changed)
+    if timer and not vim.loop.is_closing(timer) then
+        vim.loop.timer_stop(timer)
+        vim.loop.close(timer)
+        timer = nil
+    end
+    if called_func then
+        return
+    end
+    if text_changed then
+        if timer then
+            vim.loop.timer_stop(timer)
+            vim.loop.close(timer)
+            timer = nil
+        end
+        return
+    end
+    if vim.v.char and vim.v.char ~= " " then
+        space_used = false
+        return
+    end
+    if vim.fn.mode() ~= "i" then
+        return
+    end
+    if space_used then
+        return
+    end
+    space_used = true
+    timer = vim.defer_fn(function()
+        called_func = true
+        local function feed(keys)
+            vim.api.nvim_feedkeys(
+                vim.api.nvim_replace_termcodes(keys, true, true, true),
+                "n",
+                false
+            )
+        end
+
+        if vim.tbl_contains({ 1, 2, 0 }, #vim.fn.expand("<cword>")) then
+            return
+        end
+
+        feed("<esc>blgulhela")
+        timer = nil
+        called_func = false
+    end, 100)
+end
+
+vim.api.nvim_create_autocmd("InsertCharPre", {
+    pattern = "*.tex",
+    callback = function()
+        reset_timer()
+    end,
+})
