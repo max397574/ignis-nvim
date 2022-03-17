@@ -21,7 +21,10 @@ config.config = {
                 theme = "everforest"
             end
             -- theme = "onedark"
-            theme = "everforest"
+            if vim.g.forced_theme then
+                theme = vim.g.forced_theme
+            end
+            -- theme = "everforest"
             require("colors").init(theme)
             local old_scheme = require("custom.db").get_scheme()
             if theme ~= old_scheme then

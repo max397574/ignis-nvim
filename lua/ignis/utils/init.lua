@@ -64,8 +64,11 @@ function utils.get_colorscheme()
         theme = "everforest"
         -- theme = "tokyodark"
     end
+    if vim.g.forced_theme then
+        theme = vim.g.forced_theme
+    end
     -- theme = "onedark"
-    theme = "everforest"
+    -- theme = "everforest"
     return theme
 end
 
