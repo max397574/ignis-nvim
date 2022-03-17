@@ -401,6 +401,79 @@ local diagnostics = {
     },
 }
 
+local lsp_progress = {
+    condition = function()
+        if #vim.lsp.get_active_clients() == 0 then
+            return false
+        end
+        return true
+    end,
+    hl = { fg = colors.blue },
+    provider = function()
+        local messages = vim.lsp.util.get_progress_messages()
+        if #messages == 0 then
+            return ""
+        end
+        local status = {}
+        for _, msg in pairs(messages) do
+            -- dump(msg)
+            table.insert(
+                status,
+                -- (msg.percentage or 0) .. "%% " .. (msg.title or "")
+                msg.percentage or 0
+            )
+        end
+        -- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
+        local spinners = {
+            ".  ",
+            ".. ",
+            "...",
+            " ..",
+            "  .",
+            "   ",
+        }
+        -- local spinners = { -- arrow3
+        --     "▹▹▹▹▹",
+        --     "▸▹▹▹▹",
+        --     "▹▸▹▹▹",
+        --     "▹▹▸▹▹",
+        --     "▹▹▹▸▹",
+        --     "▹▹▹▹▸",
+        -- }
+        -- local spinners = {
+        --     "◜",
+        --     "◠",
+        --     "◝",
+        --     "◞",
+        --     "◡",
+        --     "◟",
+        -- }
+        -- local spinners = {
+        --     "✶",
+        --     "✸",
+        --     "✹",
+        --     "✺",
+        --     "✹",
+        --     "✷",
+        -- }
+        -- local spinners = {
+        --     "⠋",
+        --     "⠙",
+        --     "⠹",
+        --     "⠸",
+        --     "⠼",
+        --     "⠴",
+        --     "⠦",
+        --     "⠧",
+        --     "⠇",
+        --     "⠏",
+        -- }
+        local ms = vim.loop.hrtime() / 1000000
+        local frame = math.floor(ms / 120) % #spinners
+        return spinners[frame + 1] .. " " .. table.concat(status, " | ")
+    end,
+}
+
 local Snippets = {
     -- check that we are in insert or select mode
     condition = function()
@@ -408,8 +481,6 @@ local Snippets = {
     end,
     provider = function()
         local luasnip = require("luasnip")
-        --   elseif luasnip.jumpable(-1) then
-        print(luasnip.jumpable(-1))
         local forward = luasnip.jumpable(1) and " " or ""
         local backward = luasnip.jumpable(-1) and " " or ""
         return backward .. forward
@@ -473,13 +544,17 @@ local default_statusline = {
     space,
     git,
     option_value,
+    space,
+    lsp_progress,
+    -- utilities.surround({ "", "" }, colors.lightbg, coords),
     -- branch,
     -- git_diff,
-    align,
     diagnostics,
     space,
-    -- utilities.surround({ "", "" }, colors.lightbg, coords),
+    align,
     -- space,
+    Snippets,
+    space,
     utilities.surround({ "", "" }, colors.lightbg, mode_icon),
     space,
     utilities.surround({ "", "" }, colors.lightbg, progress),
