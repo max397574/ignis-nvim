@@ -13,7 +13,88 @@ local ai = require("luasnip.nodes.absolute_indexer")
 local types = require("luasnip.util.types")
 local util = require("luasnip.util.util")
 
+local has_treesitter, ts = pcall(require, "vim.treesitter")
+local _, query = pcall(require, "vim.treesitter.query")
+
+local MATH_ENVIRONMENTS = {
+    displaymath = true,
+    eqnarray = true,
+    equation = true,
+    math = true,
+    array = true,
+}
+local MATH_NODES = {
+    displayed_equation = true,
+    inline_formula = true,
+}
+
+local function get_node_at_cursor()
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    local cursor_range = { cursor[1] - 1, cursor[2] }
+    local buf = vim.api.nvim_get_current_buf()
+    local ok, parser = pcall(ts.get_parser, buf, "latex")
+    if not ok or not parser then
+        return
+    end
+    local root_tree = parser:parse()[1]
+    local root = root_tree and root_tree:root()
+
+    if not root then
+        return
+    end
+
+    return root:named_descendant_for_range(
+        cursor_range[1],
+        cursor_range[2],
+        cursor_range[1],
+        cursor_range[2]
+    )
+end
+
+local function in_comment()
+    if has_treesitter then
+        local node = get_node_at_cursor()
+        while node do
+            if node:type() == "comment" then
+                return true
+            end
+            node = node:parent()
+        end
+        return false
+    end
+end
+
+local function in_mathzone()
+    if has_treesitter then
+        local buf = vim.api.nvim_get_current_buf()
+        local node = get_node_at_cursor()
+        while node do
+            if MATH_NODES[node:type()] then
+                return true
+            end
+            if node:type() == "environment" then
+                local begin = node:child(0)
+                local names = begin and begin:field("name")
+
+                if
+                    names
+                    and names[1]
+                    and MATH_ENVIRONMENTS[query.get_node_text(names[1], buf):gsub(
+                        "[%s*]",
+                        ""
+                    )]
+                then
+                    return true
+                end
+            end
+            node = node:parent()
+        end
+        return false
+    end
+end
+
 require("luasnip/loaders/from_vscode").load()
+require("configs.luasnip")
 
 local parse = ls.parser.parse_snippet
 
@@ -89,7 +170,8 @@ local tex_paragraph = [[
 
 local tex_template = [[
 \documentclass[a4paper,12pt]{article}
-  \usepackage{import}
+\usepackage[a4paper, margin=1in, total={20cm,27cm}]{geometry}
+\usepackage{import}
 \usepackage{pdfpages}
 \usepackage{transparent}
 \usepackage{xcolor}
@@ -124,8 +206,10 @@ local tex_subsubsection = [[
 local tex_table = [[
 \begin{center}
   \begin{tabular}{ c c c }
-    cell1 & cell2 & cell3 \\
-    cell4 & cell5 & cell6 \\
+    cell1 & cell2 & cell3 \\\\
+    \\hline
+    cell4 & cell5 & cell6 \\\\
+    \\hline
     cell7 & cell8 & cell9
   \end{tabular}
 \end{center}]]
@@ -134,6 +218,11 @@ local tex_enumerate = [[
 \begin{enumerate}
   \item $0
 \end{enumerate}]]
+
+local tex_description = [[
+\begin{description}
+  \item $0
+\end{description}]]
 
 local tex_item = [[
 \item ]]
@@ -335,6 +424,7 @@ local function cppdocsnip(args, _, old_state)
     snip.old_state = param_nodes
     return snip
 end
+
 ls.snippets = {
     all = {
         s(
@@ -357,6 +447,13 @@ ls.snippets = {
         parse({ trig = "inspect" }, inspect_snippet),
     },
     tex = {
+        s("ls", {
+            t({ "\\begin{itemize}", "\t\\item " }),
+            i(1),
+            d(2, rec_ls, {}),
+            t({ "", "\\end{itemize}" }),
+            i(0),
+        }),
         parse({ trig = "beg" }, tex_begin),
         parse({ trig = "item" }, tex_itemize),
         parse({ trig = "table" }, tex_table),
@@ -364,6 +461,7 @@ ls.snippets = {
         parse({ trig = "it" }, tex_item),
         parse({ trig = "sec" }, tex_section),
         parse({ trig = "enum" }, tex_enumerate),
+        parse({ trig = "desc" }, tex_description),
         parse({ trig = "ssec" }, tex_subsection),
         parse({ trig = "sssec" }, tex_subsubsection),
         parse({ trig = "para" }, tex_paragraph),
@@ -446,9 +544,132 @@ ls.snippets = {
         parse({ trig = "fix" }, gitcommit_fix),
         parse({ trig = "stylua" }, gitcommmit_stylua),
     },
+    norg = {
+        ls.parser.parse_snippet("ses", "- [ ] session $1 {$2} [$3->to]"),
+        s("programmersay", {
+            t({ "> Great programmer what can u teach me? " }),
+            t({ "", "" }),
+            t({ "@code comment" }),
+            t({ "", "" }),
+            f(function(args)
+                local quotes = require("custom.quotes")
+                math.randomseed(os.clock())
+                local index = math.random() * #quotes
+                local quote = quotes[math.floor(index) + 1]
+                table.insert(quote, "")
+                return quote
+            end),
+            t({ "" }),
+            t({
+                "      /",
+                "     /",
+                "    -",
+                "   / \\",
+                "   | |",
+                "    -",
+                "   /|\\",
+                "  / | \\",
+                "    |",
+                "    |",
+                "   / \\",
+                "  /   \\",
+                " /     \\",
+                "",
+            }),
+            t({ "@end" }),
+        }),
+        s("cowsay", {
+            t({ "> Senpai of the pool whats your wisdom ?" }),
+            t({ "", "" }),
+            t({ "@code comment" }),
+            t({ "", "" }),
+            f(function(args)
+                local cow = io.popen("fortune | cowsay -f vader")
+                local cow_text = cow:read("*a")
+                cow:close()
+                return vim.split(cow_text, "\n", true)
+            end, {}),
+            t({ "@end" }),
+        }),
+
+        s("weebsay", {
+            t({ "> Senpai of the pool whats your wisdom ?" }),
+            t({ "", "" }),
+            t({ "@code comment" }),
+            t({ "", "" }),
+            f(function(args)
+                local weeb = io.popen("weebsay")
+                local weeb_text = weeb:read("*a")
+                weeb:close()
+                return vim.split(weeb_text, "\n", true)
+            end, {}),
+            t({ "@end" }),
+        }),
+        s("randomsay", {
+            t({ "> Senpai of the pool whats your /Random/ wisdom ?" }),
+            t({ "", "" }),
+            t({ "@code comment" }),
+            t({ "", "" }),
+            f(function(args)
+                local animal_list = {
+                    "beavis.zen",
+                    "default",
+                    "head-in",
+                    "milk",
+                    "small",
+                    "turkey",
+                    "blowfish",
+                    "dragon",
+                    "hellokitty",
+                    "moofasa",
+                    "sodomized",
+                    "turtle",
+                    "bong",
+                    "dragon-and-cow",
+                    "kiss",
+                    "moose",
+                    "stegosaurus",
+                    "tux",
+                    "bud-frogs",
+                    "elephant",
+                    "kitty",
+                    "mutilated",
+                    "stimpy",
+                    "udder",
+                    "bunny",
+                    "elephant-in-snake",
+                    "koala",
+                    "ren",
+                    "surgery",
+                    "vader",
+                    "vader-koala",
+                    "cower",
+                    "flaming-sheep",
+                    "luke-koala",
+                    "sheep",
+                    "skeleton",
+                    "three-eyes",
+                    "daemon",
+                    "ghostbusters",
+                    "meow",
+                    "skeleton",
+                    "three-eyes",
+                }
+
+                local cow_command = "fortune | cowsay -f "
+                    .. animal_list[math.random(1, #animal_list)]
+                local cow = io.popen(cow_command)
+                local cow_text = cow:read("*a")
+                cow:close()
+                return vim.split(cow_text, "\n", true)
+            end, {}),
+            t({ "@end" }),
+        }),
+    },
 }
+
+require("ignis.modules.completion.snippets.tex_math")
+
 require("luasnip/loaders/from_vscode").load({
     paths = { "~/.local/share/nvim/site/pack/packer/opt/friendly-snippets" },
 })
-
-require("configs.luasnip")

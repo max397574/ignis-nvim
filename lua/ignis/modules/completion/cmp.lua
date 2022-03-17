@@ -2,15 +2,15 @@ local cmp = require("cmp")
 local types = require("cmp.types")
 local luasnip = require("luasnip")
 local neogen = require("neogen")
+local util = require("luasnip.util.util")
+
+local ls_types = require("luasnip.util.types")
 
 local str = require("cmp.utils.str")
 
 local kind = require("configs.lsp.kind")
-
-luasnip.config.setup({
-    region_check_events = "CursorMoved",
-    delete_check_events = "TextChangedI",
-})
+-- vim.cmd([[PackerLoad LuaSnip]])
+require("ignis.modules.completion.snippets")
 
 local function t(string)
     return vim.api.nvim_replace_termcodes(string, true, true, true)
@@ -26,6 +26,8 @@ local border = {
     "╚",
     "║",
 }
+
+-- local border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }
 
 cmp.setup({
     window = {
@@ -47,10 +49,11 @@ cmp.setup({
     },
     mapping = {
         ["<C-f>"] = cmp.mapping(function(fallback)
-            if luasnip.choice_active() then
-                require("luasnip").change_choice(1)
-            elseif cmp.visible() then
+            if cmp.visible() then
                 cmp.mapping.scroll_docs(4)
+            elseif luasnip.choice_active() then
+                require("luasnip").change_choice(1)
+                -- require("luasnip.extras.select_choice")()
             else
                 fallback()
             end
@@ -59,10 +62,11 @@ cmp.setup({
             "s",
         }),
         ["<C-d>"] = cmp.mapping(function(fallback)
-            if luasnip.choice_active() then
-                require("luasnip").change_choice(-1)
-            elseif cmp.visible() then
+            if cmp.visible() then
                 cmp.mapping.scroll_docs(-4)
+            elseif luasnip.choice_active() then
+                require("luasnip").change_choice(-1)
+                -- choice_popup(require("luasnip").session.event_node)
             else
                 fallback()
             end
@@ -92,7 +96,10 @@ cmp.setup({
             elseif luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             elseif neogen.jumpable(-1) then
-                neogen.jump_prev()
+                vim.fn.feedkeys(
+                    t("<cmd>lua require('neogen').jump_prev()<CR>"),
+                    ""
+                )
             else
                 fallback()
             end
@@ -107,14 +114,20 @@ cmp.setup({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
-        ["<C-k>"] = cmp.mapping({
-            i = cmp.mapping.select_prev_item({
-                behavior = cmp.SelectBehavior.Select,
-            }),
-            c = cmp.mapping.select_prev_item({
-                behavior = cmp.SelectBehavior.Insert,
-            }),
-        }),
+        -- ["<C-k>"] = cmp.mapping({
+        --     i = cmp.mapping.select_prev_item({
+        --         behavior = cmp.SelectBehavior.Select,
+        --     }),
+        --     c = cmp.mapping.select_prev_item({
+        --         behavior = cmp.SelectBehavior.Insert,
+        --     }),
+        -- }),
+        -- ["<CR>"] = cmp.mapping(function(fallback)
+        --     cmp.confirm({ select = true })
+        -- if not cmp.confirm({ select = true }) then
+        --     require("pairs.enter").type()
+        -- end
+        -- end),
         ["<CR>"] = cmp.mapping.confirm({
             select = true,
             behavior = cmp.ConfirmBehavior.Insert,
@@ -196,9 +209,9 @@ cmp.setup({
                 return false
             end
         end
-        if vim.tbl_contains(Get_treesitter_hl(), "TSComment") then
-            return false
-        end
+        -- if vim.tbl_contains(Get_treesitter_hl(), "TSComment") then
+        --     return false
+        -- end
         if string.find(vim.api.nvim_buf_get_name(0), "neorg://") then
             return false
         end
@@ -315,6 +328,18 @@ cmp.setup.cmdline("/", {
         entries = { name = "wildmenu", separator = " | " }, -- the user can also specify the `wildmenu` literal string.
     },
 })
+
+-- cmp.event:on("confirm_done", function(event)
+--     local item = event.entry:get_completion_item()
+--     local parensDisabled = item.data and item.data.funcParensDisabled or false
+--     if
+--         not parensDisabled
+--         and (item.kind == kind.Method or item.kind == kind.Function)
+--     then
+--         print("pairs are now active")
+--         require("pairs.bracket").type_left("(")
+--     end
+-- end)
 
 local neorg = require("neorg")
 

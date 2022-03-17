@@ -1,14 +1,35 @@
 local types = require("luasnip.util.types")
+local ls_types = require("luasnip.util.types")
 local luasnip = require("luasnip")
 local util = require("luasnip.util.util")
 
-luasnip.config.set_config({
-    -- Update more often, :h events for more info.
-    history = true,
-    updateevents = "TextChanged , TextChangedI",
-})
+-- require("luasnip.config").set_config({
+--     -- Update more often, :h events for more info.
+--     history = true,
+--     updateevents = "TextChanged , TextChangedI",
+-- })
 
-luasnip.config.setup({
+require("luasnip.config").setup({
+    history = true,
+    region_check_events = "CursorMoved",
+    delete_check_events = "TextChangedI",
+    updateevents = "TextChanged,TextChangedI,InsertLeave",
+    enable_autosnippets = true,
+    ext_opts = {
+        [ls_types.choiceNode] = {
+            active = {
+                -- virt_text = { { "●", "Special" } },
+                -- virt_text = { { "<-", "GitSignsDelete" } },
+                -- virt_text = { { " ", "GitSignsDelete" } },
+                virt_text = { { " ", "Keyword" } },
+            },
+        },
+        [ls_types.insertNode] = {
+            active = {
+                virt_text = { { "●", "Special" } },
+            },
+        },
+    },
     parser_nested_assembler = function(_, snippet)
         local select = function(snip, no_move)
             snip.parent:enter_node(snip.indx)
@@ -61,6 +82,7 @@ luasnip.config.setup({
                 end
             end
         end
+
         -- this is called only if the snippet is currently selected.
         function snippet:jump_from(dir, no_move)
             if dir == 1 then
@@ -70,14 +92,17 @@ luasnip.config.setup({
                 return self.prev:jump_into(dir, no_move)
             end
         end
+
         return snippet
     end,
-    ft_func = require("luasnip.extras.filetype_functions").from_cursor_pos,
+    -- ft_func = require("luasnip.extras.filetype_functions").from_cursor_pos,
 })
+
 local current_nsid = vim.api.nvim_create_namespace(
     "LuaSnipChoiceListSelections"
 )
 local current_win = nil
+local choice_popup_timer = nil
 
 local function window_for_choiceNode(choiceNode)
     local buf = vim.api.nvim_create_buf(false, true)
@@ -106,7 +131,7 @@ local function window_for_choiceNode(choiceNode)
         current_nsid,
         row_selection,
         0,
-        { hl_group = "incsearch", end_line = row_selection + row_offset }
+        { hl_group = "Incsearch", end_line = row_selection + row_offset }
     )
 
     -- shows window at a beginning of choiceNode.
@@ -123,16 +148,22 @@ local function window_for_choiceNode(choiceNode)
     return { win_id = win, extmark = extmark, buf = buf }
 end
 
+local win_is_open = false
+
 function _G.choice_popup(choiceNode)
     -- build stack for nested choiceNodes.
     if current_win then
-        vim.api.nvim_win_close(current_win.win_id, true)
+        local err, _ = pcall(vim.api.nvim_win_close, current_win.win_id, true)
+        if err then
+            return
+        end
         vim.api.nvim_buf_del_extmark(
             current_win.buf,
             current_nsid,
             current_win.extmark
         )
     end
+    win_is_open = true
     local create_win = window_for_choiceNode(choiceNode)
     current_win = {
         win_id = create_win.win_id,
@@ -141,28 +172,68 @@ function _G.choice_popup(choiceNode)
         extmark = create_win.extmark,
         buf = create_win.buf,
     }
+    choice_popup_timer = vim.defer_fn(function()
+        choice_popup_close()
+        choice_popup_timer = nil
+    end, 1000)
 end
 
 function _G.update_choice_popup(choiceNode)
-    vim.api.nvim_win_close(current_win.win_id, true)
-    vim.api.nvim_buf_del_extmark(
+    if choice_popup_timer and not vim.loop.is_closing(choice_popup_timer) then
+        choice_popup_close()
+        vim.loop.timer_stop(choice_popup_timer)
+        choice_popup_timer = nil
+    end
+    if not win_is_open then
+        choice_popup(choiceNode)
+        return
+    end
+    if not current_win then
+        return
+    end
+    -- vim.api.nvim_win_close(current_win.win_id, true)
+    local err, _ = pcall(vim.api.nvim_win_close, current_win.win_id, true)
+    if err then
+        current_win = {}
+        return
+    end
+    err, _ = pcall(
+        vim.api.nvim_buf_del_extmark,
         current_win.buf,
         current_nsid,
         current_win.extmark
     )
+    if err then
+        return
+    end
     local create_win = window_for_choiceNode(choiceNode)
     current_win.win_id = create_win.win_id
     current_win.extmark = create_win.extmark
     current_win.buf = create_win.buf
+    choice_popup_timer = vim.defer_fn(function()
+        choice_popup_close()
+        choice_popup_timer = nil
+    end, 1000)
 end
 
 function _G.choice_popup_close()
-    vim.api.nvim_win_close(current_win.win_id, true)
-    vim.api.nvim_buf_del_extmark(
+    if not current_win then
+        return
+    end
+    win_is_open = false
+    local err, _ = pcall(vim.api.nvim_win_close, current_win.win_id, true)
+    if err then
+        return
+    end
+    err, _ = pcall(
+        vim.api.nvim_buf_del_extmark,
         current_win.buf,
         current_nsid,
         current_win.extmark
     )
+    if err then
+        return
+    end
     -- now we are checking if we still have previous choice we were in after exit nested choice
     current_win = current_win.prev
     if current_win then
@@ -179,6 +250,8 @@ vim.cmd([[
     au!
     au User LuasnipChoiceNodeEnter lua choice_popup(require("luasnip").session.event_node)
     au User LuasnipChoiceNodeLeave lua choice_popup_close()
+    " au InsertLeave * lua choice_popup_close()
     au User LuasnipChangeChoice lua update_choice_popup(require("luasnip").session.event_node)
     augroup END
 ]])
+-- RELOAD("ignis.modules.completion.snippets")
