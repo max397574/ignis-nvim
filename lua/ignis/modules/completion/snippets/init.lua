@@ -13,88 +13,8 @@ local ai = require("luasnip.nodes.absolute_indexer")
 local types = require("luasnip.util.types")
 local util = require("luasnip.util.util")
 
-local has_treesitter, ts = pcall(require, "vim.treesitter")
-local _, query = pcall(require, "vim.treesitter.query")
-
-local MATH_ENVIRONMENTS = {
-    displaymath = true,
-    eqnarray = true,
-    equation = true,
-    math = true,
-    array = true,
-}
-local MATH_NODES = {
-    displayed_equation = true,
-    inline_formula = true,
-}
-
-local function get_node_at_cursor()
-    local cursor = vim.api.nvim_win_get_cursor(0)
-    local cursor_range = { cursor[1] - 1, cursor[2] }
-    local buf = vim.api.nvim_get_current_buf()
-    local ok, parser = pcall(ts.get_parser, buf, "latex")
-    if not ok or not parser then
-        return
-    end
-    local root_tree = parser:parse()[1]
-    local root = root_tree and root_tree:root()
-
-    if not root then
-        return
-    end
-
-    return root:named_descendant_for_range(
-        cursor_range[1],
-        cursor_range[2],
-        cursor_range[1],
-        cursor_range[2]
-    )
-end
-
-local function in_comment()
-    if has_treesitter then
-        local node = get_node_at_cursor()
-        while node do
-            if node:type() == "comment" then
-                return true
-            end
-            node = node:parent()
-        end
-        return false
-    end
-end
-
-local function in_mathzone()
-    if has_treesitter then
-        local buf = vim.api.nvim_get_current_buf()
-        local node = get_node_at_cursor()
-        while node do
-            if MATH_NODES[node:type()] then
-                return true
-            end
-            if node:type() == "environment" then
-                local begin = node:child(0)
-                local names = begin and begin:field("name")
-
-                if
-                    names
-                    and names[1]
-                    and MATH_ENVIRONMENTS[query.get_node_text(names[1], buf):gsub(
-                        "[%s*]",
-                        ""
-                    )]
-                then
-                    return true
-                end
-            end
-            node = node:parent()
-        end
-        return false
-    end
-end
-
 require("luasnip/loaders/from_vscode").load()
-require("configs.luasnip")
+require("ignis.modules.completion.snippets.luasnip")
 
 local parse = ls.parser.parse_snippet
 
@@ -163,94 +83,6 @@ refactor(${1:scope}): ${2:title}
 
 ${0}]]
 
-local tex_arrow = [[\$\implies\$]]
-
-local tex_paragraph = [[
-\paragraph{$1}]]
-
-local tex_template = [[
-\documentclass[a4paper,12pt]{article}
-\usepackage[a4paper, margin=1in, total={20cm,27cm}]{geometry}
-\usepackage{import}
-\usepackage{pdfpages}
-\usepackage{transparent}
-\usepackage{xcolor}
-
-\usepackage{textcomp}
-\usepackage[german]{babel}
-\usepackage{amsmath, amssymb}
-\usepackage{graphicx}
-\usepackage{tikz}
-\usepackage{wrapfig}
-
-\title{$1}
-\author{$2}
-
-\begin{document}
-\maketitle
-\tableofcontents
-
-$0
-\addcontentsline{toc}{section}{Unnumbered Section}
-\end{document}]]
-
-local tex_section = [[
-\section{$1}]]
-
-local tex_subsection = [[
-\subsection{$1}]]
-
-local tex_subsubsection = [[
-\subsubsection{$1}]]
-
-local tex_table = [[
-\begin{center}
-  \begin{tabular}{ c c c }
-    cell1 & cell2 & cell3 \\\\
-    \\hline
-    cell4 & cell5 & cell6 \\\\
-    \\hline
-    cell7 & cell8 & cell9
-  \end{tabular}
-\end{center}]]
-
-local tex_enumerate = [[
-\begin{enumerate}
-  \item $0
-\end{enumerate}]]
-
-local tex_description = [[
-\begin{description}
-  \item $0
-\end{description}]]
-
-local tex_item = [[
-\item ]]
-
-local tex_bold = [[
-\textbf{$1}]]
-
-local tex_itemize = [[
-\begin{itemize}
-	\item $0
-\end{itemize}]]
-
-local tex_begin = [[
-\\begin{$1}
-	$0
-\\end{$1}]]
-
-local rec_ls
-rec_ls = function()
-    return sn(nil, {
-        c(1, {
-            -- important!! Having the sn(...) as the first choice will cause infinite recursion.
-            t({ "" }),
-            -- The same dynamicNode as in the snippet (also note: self reference).
-            sn(nil, { t({ "", "\t\\item " }), i(1), d(2, rec_ls, {}) }),
-        }),
-    })
-end
 local function jdocsnip(args, _, old_state)
     -- !!! old_state is used to preserve user-input here. DON'T DO IT THAT WAY!
     -- Using a restoreNode instead is much easier.
@@ -446,35 +278,6 @@ ls.snippets = {
         parse({ trig = "cmd" }, map_cmd),
         parse({ trig = "inspect" }, inspect_snippet),
     },
-    tex = {
-        s("ls", {
-            t({ "\\begin{itemize}", "\t\\item " }),
-            i(1),
-            d(2, rec_ls, {}),
-            t({ "", "\\end{itemize}" }),
-            i(0),
-        }),
-        parse({ trig = "beg" }, tex_begin),
-        parse({ trig = "item" }, tex_itemize),
-        parse({ trig = "table" }, tex_table),
-        parse({ trig = "bd" }, tex_bold),
-        parse({ trig = "it" }, tex_item),
-        parse({ trig = "sec" }, tex_section),
-        parse({ trig = "enum" }, tex_enumerate),
-        parse({ trig = "desc" }, tex_description),
-        parse({ trig = "ssec" }, tex_subsection),
-        parse({ trig = "sssec" }, tex_subsubsection),
-        parse({ trig = "para" }, tex_paragraph),
-        parse({ trig = "->" }, tex_arrow),
-        parse({ trig = "template" }, tex_template),
-        s("ls", {
-            t({ "\\begin{itemize}", "\t\\item " }),
-            i(1),
-            d(2, rec_ls, {}),
-            t({ "", "\\end{itemize}" }),
-            i(0),
-        }),
-    },
     java = {
         parse({ trig = "pus" }, public_string),
         parse({ trig = "puv" }, public_void),
@@ -669,7 +472,9 @@ ls.snippets = {
 }
 
 require("ignis.modules.completion.snippets.tex_math")
+require("ignis.modules.completion.snippets.choice_popup")
 
 require("luasnip/loaders/from_vscode").load({
     paths = { "~/.local/share/nvim/site/pack/packer/opt/friendly-snippets" },
 })
+require("ignis.modules.completion.snippets.tex")
