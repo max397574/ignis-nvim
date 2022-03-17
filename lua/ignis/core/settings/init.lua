@@ -14,6 +14,8 @@ opt.cmdheight = 1 -- height of cmd line
 opt.virtualedit = "block" -- allow visual mode to go over end of lines
 opt.expandtab = true -- expand tabs to spaces
 opt.softtabstop = 4
+-- global statusline
+opt.laststatus = 3
 opt.shiftwidth = 4
 opt.splitbelow = true
 opt.splitright = true
@@ -60,7 +62,17 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.undofile = true
 opt.undodir = vim.fn.expand("~") .. "/.vim/undodir" -- directory to save undofiles
 
-opt.fillchars = { eob = " " } -- no fillchars at end of buffer
+-- no chars at eob and cool window separator
+opt.fillchars = {
+    eob = " ",
+    vert = "║",
+    horiz = "═",
+    horizup = "╩",
+    horizdown = "╦",
+    vertleft = "╣",
+    vertright = "╠",
+    verthoriz = "╬",
+}
 
 g.table_mode_corner = "|" -- Tablemode
 

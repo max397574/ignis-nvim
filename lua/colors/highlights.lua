@@ -145,6 +145,7 @@ fg("LineNr", grey)
 fg("NvimInternalError", red)
 fg("VertSplit", one_bg2)
 fg("CmpCompletionWindowBorder", one_bg2)
+fg("WinSeparator", one_bg2)
 fg("CmpDocumentationWindowBorder", one_bg2)
 
 if ui.transparency then
