@@ -8,7 +8,7 @@ local ls_types = require("luasnip.util.types")
 
 local str = require("cmp.utils.str")
 
-local kind = require("configs.lsp.kind")
+local kind = require("ignis.modules.lsp.kind")
 -- vim.cmd([[PackerLoad LuaSnip]])
 require("ignis.modules.completion.snippets")
 

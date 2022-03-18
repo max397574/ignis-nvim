@@ -210,7 +210,7 @@ capabilities.textDocument.codeAction = {
 }
 
 local function on_attach(client, bufnr)
-    require("configs.lsp.on_attach").setup(client, bufnr)
+    require("ignis.modules.lsp.on_attach").setup(client, bufnr)
 end
 
 local servers = {
@@ -435,7 +435,7 @@ configs.emmet_ls = {
     },
 }
 
-require("configs.lsp.null_ls")
+require("ignis.modules.lsp.null_ls")
 
 lspconfig.emmet_ls.setup({ capabilities = capabilities })
 
