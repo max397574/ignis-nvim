@@ -30,13 +30,15 @@ utils.load_module = function(folder, modules)
     end
 end
 
-utils.is_plugin_disabled = function(category, plugin)
-    if config.ignis.modules[category][plugin] == true then
-        return false
-    end
-    return true
+--- Loads specified ignis modules
+---@param module string The modules name (without ignis.modules)
+---@param files string|table The files in the module to load
+utils.load_ignis_module = function(module, files)
+    utils.load_module("ignis.modules." .. module, files)
 end
 
+--- Sets the colorscheme specified or uses the one from config
+---@param colorscheme string The colorscheme to use
 utils.set_colorscheme = function(colorscheme)
     if colorscheme then
         vim.cmd("colorscheme " .. colorscheme)
@@ -50,6 +52,8 @@ utils.set_colorscheme = function(colorscheme)
     end
 end
 
+--- Gets the colorscheme based on daytime
+---@return string colorscheme The colorscheme
 function utils.get_colorscheme()
     local theme
     local time = os.date("*t")
@@ -72,6 +76,8 @@ function utils.get_colorscheme()
     return theme
 end
 
+--- Gets the system separator
+---@return string system_separator
 function utils.system_separator()
     return package.config:sub(1, 1)
 end
@@ -79,7 +85,6 @@ end
 ---Get the available nvim-base16 themes
 ---@return table themes All the themes found
 utils.get_themes = function()
-    local themes = {}
     local themes = {}
     -- the local plugin dir
     local theme_dir = vim.fn.expand("~")
@@ -117,6 +122,7 @@ utils.get_themes = function()
     end
     return themes
 end
+
 ---Appends a `;` to the current line
 function utils.append_semicolon()
     -- save cursor position
@@ -142,7 +148,7 @@ function utils.change_case()
     -- save cursor position
     local cursor = vim.api.nvim_win_get_cursor(0)
     -- go to the beginning of word and change case of letter under cursor
-    cmd([[normal b~]])
+    vim.cmd([[normal b~]])
     -- restore cursor position
     vim.api.nvim_win_set_cursor(0, cursor)
 end
@@ -204,18 +210,6 @@ function utils.SynGroup()
   ]])
 end
 
----Create an augroup
----@param autocmds table Autocommands to put into the group (like `BufWritePost * lua print(*yes)`)
----@param name string Name of the augroup
-function utils.create_augroup(autocmds, name)
-    vim.cmd("augroup " .. name)
-    vim.cmd("autocmd!")
-    for _, autocmd in ipairs(autocmds) do
-        vim.cmd("autocmd " .. autocmd)
-    end
-    vim.cmd("augroup END")
-end
-
 utils.functions = {}
 
 function utils.execute(id)
@@ -234,33 +228,6 @@ function utils.log(msg, hl, name)
     name = name or "Neovim"
     hl = hl or "Todo"
     vim.api.nvim_echo({ { name .. ": ", hl }, { msg } }, true, {})
-end
-
-function utils.warn(msg, name)
-    utils.log(msg, "LspDiagnosticsDefaultWarning", name)
-end
-
-function utils.error(msg, name)
-    utils.log(msg, "LspDiagnosticsDefaultError", name)
-end
-
-function utils.info(msg, name)
-    utils.log(msg, "LspDiagnosticsDefaultInformation", name)
-end
-
-function utils.toggle(option, silent)
-    local info = vim.api.nvim_get_option_info(option)
-    local scopes = { buf = "bo", win = "wo", global = "o" }
-    local scope = scopes[info.scope]
-    local options = vim[scope]
-    options[option] = not options[option]
-    if silent ~= true then
-        if options[option] then
-            utils.info("enabled vim." .. scope .. "." .. option, "Toggle")
-        else
-            utils.warn("disabled vim." .. scope .. "." .. option, "Toggle")
-        end
-    end
 end
 
 ---Prints out the configurations for the servers attached to the current buffer
@@ -315,6 +282,7 @@ function utils.formatoptions()
         - "2" -- don't use indent of second line for rest of paragraph
 end
 
+--- View the messages in a buffer
 function utils.view_messages()
     local buf = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
@@ -347,6 +315,7 @@ function utils.view_messages()
     -- vim.api.nvim_buf_set_option(buf, "modifiable", false)
 end
 
+--- Opens a temporary buffer
 function utils.temp_buf()
     local buf = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
@@ -379,6 +348,7 @@ function utils.temp_buf()
     -- vim.api.nvim_buf_set_option(buf, "modifiable", false)
 end
 
+--- Highlights duplicate lines in the current buffer
 utils.highlight_duplicate_lines = function()
     local lines = vim.api.nvim_buf_get_lines(0, 1, -1, false)
 end
