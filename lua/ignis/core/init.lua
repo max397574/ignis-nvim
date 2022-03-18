@@ -6,7 +6,10 @@ require("ignis.utils.globals")
 
 local loader = require("ignis.utils").load_module
 
-loader("ignis.core", { "ui", "settings", "settings.netrw" })
+loader(
+    "ignis.core",
+    { "ui", "settings", "settings.netrw", "autocommands", "commands" }
+)
 
 -- vim.defer_fn(function()
 -- require("ignis.core.settings")

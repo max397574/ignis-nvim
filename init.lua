@@ -33,10 +33,6 @@ vim.defer_fn(function()
 
     vim.cmd("doautocmd ColorScheme")
 
-    module_loader("ignis", { "core.commands" })
-
-    require("autocommands")
-
     vim.defer_fn(function()
         vim.cmd([[
             PackerLoad which-key.nvim

@@ -172,3 +172,9 @@ vim.api.nvim_create_autocmd("InsertCharPre", {
         reset_timer()
     end,
 })
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {
+    callback = function()
+        require("custom.refactor").find_else()
+    end,
+})
