@@ -23,7 +23,7 @@ local orange = colors.orange
 
 local theme = vim.g.colors_name
 
-local path = "lua/custom_highlights/" .. theme .. ".lua"
+local path = "lua/colors/custom/" .. theme .. ".lua"
 local files = vim.api.nvim_get_runtime_file(path, true)
 local highlights
 if #files == 0 then
@@ -31,7 +31,7 @@ if #files == 0 then
 elseif #files == 1 then
     highlights = dofile(files[1])
 else
-    local nvim_base_pattern = "nvim-base16.lua/lua/custom_highlights"
+    local nvim_base_pattern = "nvim-base16.lua/lua/colors/custom/"
     local valid_file = false
     for _, file in ipairs(files) do
         if not file:find(nvim_base_pattern) then
