@@ -238,6 +238,46 @@ local function apply_base16_theme(theme)
 
     -- TODO
     -- nvim.command 'syntax on'
+
+    -- code from https://github.com/NvChad/nvim-base16.lua
+    -- Modified from https://github.com/chriskempson/base16-vim
+    vim.g.color_base_01 = "#" .. theme.base01
+    vim.g.color_base_09 = "#" .. theme.base09
+    vim.g.color_base_0F = "#" .. theme.base0F
+    highlight("LspDiagnosticsDefaultError", theme.base08, nil, nil, nil)
+    highlight("LspDiagnosticsDefaultWarning", theme.base0A, nil, nil, nil)
+    highlight("LspDiagnosticsDefaultWarn", theme.base0A, nil, nil, nil)
+    highlight("LspDiagnosticsDefaultInformation", theme.base0D, nil, nil, nil)
+    highlight("LspDiagnosticsDefaultInfo", theme.base0D, nil, nil, nil)
+    highlight("LspDiagnosticsDefaultHint", theme.base0C, nil, nil, nil)
+
+    -- highlight("DiagnosticError", theme.base08, nil, nil, nil)
+    -- highlight("DiagnosticWarn", theme.base0A, nil, nil, nil)
+    -- highlight("DiagnosticInfo", theme.base0D, nil, nil, nil)
+    -- highlight("DiagnosticHint", theme.base0C, nil, nil, nil)
+
+    highlight("TelescopeNormal", theme.base05, theme.base00, nil, nil)
+    highlight("TelescopePreviewNormal", theme.base05, theme.base00, nil, nil)
+    highlight("Keyword", theme.base0E, nil, "italic", nil)
+    highlight("PMenu", theme.base05, theme.base00, nil, nil)
+    -- highlight("RequireCall", theme.base0C, nil, "italic,bold", nil)
+    highlight("CmpItemKindConstant", theme.base09, nil, nil, nil)
+    -- highlight("FloatBorder", theme.base0D, nil, nil, nil)
+    highlight("CmpItemKindFunction", theme.base0D, nil, nil, nil)
+    highlight("CmpItemKindIdentifier", theme.base08, nil, nil, nil)
+    highlight("CmpItemKindField", theme.base08, nil, nil, nil)
+    highlight("CmpItemKindVariable", theme.base0E, nil, "italic", nil)
+    highlight("CmpItemKindVariable", theme.base0E, nil, "italic", nil)
+    highlight("Special", theme.base0C, nil, "italic", nil)
+    highlight("CmpItemKindSnippet", theme.base0C, nil, "italic", nil)
+    highlight("CmpItemKindText", theme.base0B, nil, nil, nil)
+    highlight("CmpItemKindStructure", theme.base0E, nil, nil, nil)
+    highlight("CmpItemKindType", theme.base0A, nil, nil, nil)
+    highlight("markdownBold", theme.base0A, nil, "bold", nil)
+    highlight("FunctionDefinition", theme.base0D, nil, "italic", nil)
+    highlight("RequireCall", theme.base0E, nil, "italic", nil)
+    highlight("TSEmphasis", theme.base05, nil, "italic", nil)
+    -- highlight("RequireCall", theme.base0D, nil, "italic", nil)
 end
 
 return setmetatable({
@@ -250,7 +290,7 @@ return setmetatable({
         elseif #files == 1 then
             theme_array = dofile(files[1])
         else
-            local nvim_base_pattern = "nvim%-base16%.lua/lua/themes"
+            local nvim_base_pattern = "nvim-base16.lua/lua/themes"
             local valid_file = false
             for _, file in ipairs(files) do
                 if not file:find(nvim_base_pattern) then
