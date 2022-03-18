@@ -64,15 +64,11 @@ function utils.get_colorscheme()
     elseif time.hour < 10 or time.hour >= 17 then
         theme = "onedark"
     else
-        -- theme = "onedark"
         theme = "everforest"
-        -- theme = "tokyodark"
     end
     if vim.g.forced_theme then
         theme = vim.g.forced_theme
     end
-    -- theme = "onedark"
-    -- theme = "everforest"
     return theme
 end
 
@@ -179,8 +175,6 @@ function utils.last_place()
             if vim.fn.foldclosed(cursor[1]) ~= -1 then
                 vim.cmd([[silent normal! zO]])
             end
-            -- center cursor
-            -- vim.cmd([[silent normal! zz]])
         end
     end
 end
@@ -312,7 +306,6 @@ function utils.view_messages()
     })
     vim.api.nvim_win_set_option(win, "winblend", 20)
     vim.cmd([[put =execute('messages')]])
-    -- vim.api.nvim_buf_set_option(buf, "modifiable", false)
 end
 
 --- Opens a temporary buffer
@@ -344,8 +337,6 @@ function utils.temp_buf()
         style = "minimal",
     })
     vim.api.nvim_win_set_option(win, "winblend", 20)
-    -- vim.cmd([[put =execute('messages')]])
-    -- vim.api.nvim_buf_set_option(buf, "modifiable", false)
 end
 
 --- Highlights duplicate lines in the current buffer

@@ -216,10 +216,8 @@ end
 local servers = {
     pyright = {},
     jedi_language_server = {},
-    -- bashls = {},
     dockerls = {},
     tsserver = {},
-    -- clangd = {},
     cssls = { cmd = { "css-languageserver", "--stdio" } },
     rnix = {},
     rust_analyzer = {
@@ -237,18 +235,8 @@ local servers = {
     },
     texlab = require("configs.tex").config(),
     html = { cmd = { "html-languageserver", "--stdio" } },
-    -- jdtls = {
-    --     root_dir = root_pattern(".git", {
-    --         "build.xml", -- Ant
-    --         "pom.xml", -- Maven
-    --         "settings.gradle", -- Gradle
-    --         "settings.gradle.kts", -- Gradle
-    --     }),
-    -- },
     intelephense = {},
-    -- efm = require("configs.lsp.efm").config,
     vimls = {},
-    -- tailwindcss = {}, -- installed but not used too much cpu
 }
 
 local sumneko_lua_server = {
@@ -256,21 +244,10 @@ local sumneko_lua_server = {
     cmd = lua_cmd,
     settings = {
         Lua = {
-            -- runtime = {
-            -- version = "LuaJIT",
-            -- path = vim.split(package.path, ";"),
-            --   vim.fn.expand("~") .. "/.config/nvim_config/lua/?.lua",
-            -- },
             diagnostics = {
                 globals = { "vim", "dump", "hs", "lvim", "P", "RELOAD", "neorg" },
             },
             workspace = {
-                --   library = {
-                -- [table.concat({ vim.fn.stdpath("data"), "lua" }, "/")] = false,
-                -- [vim.fn.expand("~") .. "/.config/nvim_config/lua"] = false,
-                -- [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = false,
-                -- [vim.fn.expand("$VIMRUNTIME/lua")] = false,
-                -- },
                 maxPreload = 100000,
                 preloadFileSize = 1000,
             },
@@ -279,9 +256,7 @@ local sumneko_lua_server = {
 }
 
 local enable_lua_dev = true
--- local lua_dev_plugins = false
 local lua_dev_plugins = {
-    -- "neorg",
     "selection_popup",
     "sqlite.lua",
 }
@@ -391,7 +366,6 @@ vim.diagnostic.config({
         focusable = false,
         border = border,
         scope = "cursor",
-        -- source = true,
         format = function(diagnostic)
             if diagnostic.user_data == nil then
                 return diagnostic.message
