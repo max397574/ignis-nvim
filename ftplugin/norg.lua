@@ -1,6 +1,8 @@
 vim.bo.shiftwidth = 2
 vim.o.conceallevel = 2
 vim.bo.commentstring = "#%s"
+vim.wo.spell = true
+vim.bo.spelllang = "de,en"
 
 local system = require("ignis.utils.system")
 

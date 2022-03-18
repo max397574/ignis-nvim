@@ -1,7 +1,4 @@
 local config = {}
-local log = require("ignis.external.log")
-
-local system = require("ignis.utils.system")
 
 -- default config
 config.config = {

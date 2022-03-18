@@ -28,21 +28,21 @@ aucmd({ "Filetype" }, {
     callback = function()
         require("ignis.core.settings.netrw").draw_icons()
     end,
-    group = "netrw",
+    group = netrw,
 })
 aucmd({ "TextChanged" }, {
     pattern = "*",
     callback = function()
         require("ignis.core.settings.netrw").draw_icons()
     end,
-    group = "netrw",
+    group = netrw,
 })
 aucmd({ "Filetype" }, {
     pattern = "netrw",
     callback = function()
         require("ignis.core.settings.netrw").set_maps()
     end,
-    group = "netrw",
+    group = netrw,
 })
 
 -- show cursor line only in active window
@@ -69,13 +69,20 @@ aucmd({ "FileType" }, {
     end,
 })
 
-vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
+aucmd(
+    { "FileType" },
+    { pattern = "man", command = "nnoremap <buffer><silent> q :quit<CR>" }
+)
 
-vim.cmd([[au FocusGained * :checktime]])
+aucmd("FocusGained", { pattern = "*", command = "checktime" })
 
-u.create_augroup({
-    "TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch',timeout=200}",
-}, "highlight_yank")
+aucmd({ "TextYankPost" }, {
+    pattern = "*",
+    callback = function()
+        vim.highlight.on_yank({ higrou = "IncSearch", timeout = 200 })
+    end,
+    group = vim.api.nvim_create_augroup("higlhight_yank", { clear = true }),
+})
 
 vim.cmd([[
   augroup nvim-luadev
@@ -91,29 +98,24 @@ vim.cmd([[
   augroup end
 ]])
 
-u.create_augroup({
-    "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html,norg} set spell",
-    "BufNewFile,BufRead,BufWinEnter *.{md,txt,tex,html,norg} set spelllang=de,en",
-    "BufNewFile,BufRead,BufWinEnter *.lua set shiftwidth=4",
-    "BufNewFile,BufRead,BufWinEnter *.lua set tabstop=2",
-    "BufNewFile,BufRead,BufWinEnter *.{java,py} set tabstop=4",
-    -- "BufNewFile,BufRead,BufWinEnter * set formatoptions-=o",
-    "BufNewFile,BufRead,BufWinEnter *tex set filetype=tex",
-}, "filetypes")
+-- TODO:
+aucmd({ "BufNewFile", "BufRead", "BufWinEnter" }, {
+    pattern = "*.tex",
+    callback = function()
+        vim.bo.filetype = "tex"
+    end,
+})
+-- u.create_augroup({
+--     "TextChanged, BufChangedI, BufWinEnter * let w:m1=matchadd('Search', '\\%81v.\\%>80v', -1)",
+-- }, "column_limit")
 
-u.create_augroup({
-    "TextChanged, BufChangedI, BufWinEnter * let w:m1=matchadd('Search', '\\%81v.\\%>80v', -1)",
-}, "column_limit")
+aucmd("VimLeavePre", {
+    callback = function()
+        require("custom.db").set_db()
+    end,
+})
 
--- vim.cmd(
---     "autocmd User TelescopeFindPre lua vim.opt.laststatus=0; vim.cmd[[autocmd BufWinLeave * ++once lua vim.opt.laststatus=2]]"
--- )
-
-vim.cmd([[
-    autocmd VimLeavePre * lua require"custom.db".set_db()
-]])
-
-vim.cmd([[autocmd BufEnter cfg.json set ft=jsonc]])
+aucmd("BufEnter", { pattern = "cfg.json", command = "set fg=jsonc" })
 
 local called_func = false
 local timer = nil
@@ -166,14 +168,14 @@ local function reset_timer(text_changed)
     end, 100)
 end
 
-vim.api.nvim_create_autocmd("InsertCharPre", {
+aucmd("InsertCharPre", {
     pattern = "*.tex",
     callback = function()
         reset_timer()
     end,
 })
 
-vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {
+aucmd({ "BufEnter", "BufReadPost" }, {
     callback = function()
         require("custom.refactor").find_else()
     end,

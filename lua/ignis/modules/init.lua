@@ -21,8 +21,6 @@ if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
     })
 end
 
-local plugin_disabled = require("ignis.utils").is_plugin_disabled
-
 local config = require("ignis.config").config
 local modules_config = config.ignis.modules
 
@@ -40,7 +38,6 @@ packer.startup({
 
         use({
             "rebelot/heirline.nvim",
-            disable = plugin_disabled("ui", "heirline"),
             config = function()
                 require("ignis.modules.ui.heirline")
             end,
@@ -50,7 +47,6 @@ packer.startup({
 
         use({
             "akinsho/bufferline.nvim",
-            disable = plugin_disabled("ui", "bufferline"),
             -- can be lazyloaded because disabled when opening only one file
             event = "ColorScheme",
             config = function()

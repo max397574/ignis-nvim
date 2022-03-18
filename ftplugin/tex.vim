@@ -1,5 +1,6 @@
 nnoremap <C-p> :call LatexClipboardImage()<CR>
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+lua print("vim")
 
 function! LatexClipboardImage() abort
   " Create `img` directory if it doesn't exist
