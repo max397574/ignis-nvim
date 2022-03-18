@@ -12,7 +12,7 @@ colors.init = function(theme)
     vim.g.nvchad_theme = theme
     vim.g.colors_name = theme
 
-    local base16 = require("base16")
+    local base16 = require("colors.base16")
 
     -- first load the base16 theme
     base16(base16.themes(theme), true)
