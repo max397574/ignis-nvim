@@ -239,8 +239,8 @@ packer.startup({
             after = "nvim-treesitter",
             config = function()
                 require("which-key").setup({})
-                require("configs.which_key")
-                require("mappings")
+                require("ignis.modules.keys.which_key")
+                require("ignis.modules.keys.mappings")
             end,
         })
 
@@ -264,7 +264,7 @@ packer.startup({
         use({
             "~/neovim_plugins/pomodoro.nvim/",
             config = function()
-                require("tomato").setup()
+                -- require("tomato").setup()
             end,
         })
 
