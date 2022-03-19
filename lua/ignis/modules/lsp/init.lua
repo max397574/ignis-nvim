@@ -268,7 +268,30 @@ if not runtime_path_completion then
         vim.fn.expand("~") .. "/.config/nvim_config/lua/?.lua",
     }
 end
-require("clangd_extensions").setup({})
+local clangd_defaults = require("lspconfig.server_configurations.clangd")
+local clangd_configs = vim.tbl_deep_extend(
+    "force",
+    clangd_defaults["default_config"],
+    {
+        on_attach = on_attach,
+        cmd = {
+            "clangd",
+            "-j=4",
+            "--background-index",
+            "--clang-tidy",
+            "--fallback-style=llvm",
+            "--all-scopes-completion",
+            "--completion-style=detailed",
+            "--header-insertion=iwyu",
+            "--header-insertion-decorators",
+            "--pch-storage=memory",
+        },
+    }
+)
+require("clangd_extensions").setup({
+    server = clangd_configs,
+})
+-- lspconfig["clangd"].setup(clangd_configs)
 
 if enable_lua_dev then
     local luadev = require("lua-dev").setup({
