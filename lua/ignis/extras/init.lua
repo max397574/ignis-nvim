@@ -139,10 +139,11 @@ extras.scratch_buf = function()
         -- "java",
         "javascript",
         "typescrip",
+        "plain",
     }
     pickers.new(opts, {
-        prompt_title = "~ Colorscheme Picker ~",
-        results_title = "~ Colorschemes ~",
+        prompt_title = "~ Scratch Picker ~",
+        results_title = "~ Scratch Filetypes ~",
         layout_strategy = "custom_bottom",
         finder = finders.new_table(opts.data),
         sorter = conf.generic_sorter(opts),
