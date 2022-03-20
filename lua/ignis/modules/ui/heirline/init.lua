@@ -183,18 +183,16 @@ FileNameBlock = utils.insert(
 
 local option_value = {
     provider = function()
-        local ok, res = pcall(
-            vim.api.nvim_get_option_value,
-            vim.fn.expand("<cword>"),
-            {}
-        )
-        if ok then
-            return tostring(res)
-        else
-            return ""
-        end
+        return require("dynamic_help.extras.statusline").value()
     end,
     hl = { fg = colors.blue },
+}
+
+local dyn_help_available = {
+    provider = function()
+        return require("dynamic_help.extras.statusline").available()
+    end,
+    hl = { fg = colors.yellow },
 }
 
 local git = {
@@ -554,6 +552,8 @@ local default_statusline = {
     align,
     -- space,
     Snippets,
+    space,
+    dyn_help_available,
     space,
     utilities.surround({ "", "" }, colors.lightbg, mode_icon),
     space,
