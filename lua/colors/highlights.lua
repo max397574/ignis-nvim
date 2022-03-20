@@ -148,6 +148,8 @@ fg("CmpCompletionWindowBorder", one_bg2)
 fg("WinSeparator", one_bg2)
 fg("CmpDocumentationWindowBorder", one_bg2)
 
+bg("NeorgCodeBlock", darker_black)
+
 if ui.transparency then
     vim.cmd("hi clear CursorLine")
     bg("Normal", "")
