@@ -11,3 +11,7 @@ end, {})
 add_cmd("BigScreen", function()
     require("colorscheme_switcher").big_screen()
 end, {})
+
+add_cmd("Tmp", function()
+    require("ignis.extras").scratch_buf()
+end, {})
