@@ -524,17 +524,11 @@ packer.startup({
         })
 
         -- autopairs
-        -- use({
-        --     "windwp/nvim-autopairs",
-        --     after = "nvim-cmp",
-        --     config = [[ require("configs.nvim_autopairs") ]],
-        -- })
         use({
-            "ZhiyuanLck/smart-pairs",
+            "windwp/nvim-autopairs",
             after = "nvim-cmp",
-            commit = "045c96b3ac7fce57a12064f98987e916594e5a1b",
             config = function()
-                require("ignis.modules.completion.smart_pairs")
+                require("ignis.modules.completion.autopairs")
             end,
         })
 
