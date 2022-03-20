@@ -14,14 +14,11 @@ config.config = {
             elseif time.hour < 10 or time.hour >= 17 then
                 theme = "onedark"
             else
-                -- theme = "onedark"
                 theme = "everforest"
             end
-            -- theme = "onedark"
             if vim.g.forced_theme then
                 theme = vim.g.forced_theme
             end
-            -- theme = "everforest"
             require("colors").init(theme)
             local old_scheme = require("custom.db").get_scheme()
             if theme ~= old_scheme then
