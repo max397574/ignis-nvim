@@ -3,6 +3,11 @@ local types = require("cmp.types")
 local luasnip = require("luasnip")
 local neogen = require("neogen")
 local util = require("luasnip.util.util")
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+cmp.event:on(
+    "confirm_done",
+    cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })
+)
 
 local ls_types = require("luasnip.util.types")
 
@@ -47,7 +52,7 @@ cmp.setup({
     },
     mapping = {
         ["<C-f>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
+            if cmp.visible() and cmp.get_selected_entry() then
                 cmp.scroll_docs(4)
             elseif luasnip.choice_active() then
                 require("luasnip").change_choice(1)
@@ -60,10 +65,10 @@ cmp.setup({
             "s",
         }),
         ["<C-d>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
+            if cmp.visible() and cmp.get_selected_entry() then
                 cmp.scroll_docs(-4)
-                -- elseif luasnip.choice_active() then
-                --     require("luasnip").change_choice(-1)
+            elseif luasnip.choice_active() then
+                require("luasnip").change_choice(-1)
                 -- choice_popup(require("luasnip").session.event_node)
             else
                 fallback()
