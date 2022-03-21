@@ -75,8 +75,9 @@ packer.startup({
         use({ "VonHeikemen/searchbox.nvim", opt = true })
         use({ "elihunter173/dirbuf.nvim", opt = true })
         use({ "mizlan/iswap.nvim", opt = true })
-        use({ "lervag/vimtex", opt = true })
-        use({ "jbyuki/nabla.nvim", opt = true })
+        use({ "lervag/vimtex", config = function() end, filetype = "tex" })
+        use({ "~/neovim_plugins/nabla.nvim", filetype = "tex" })
+        -- use({ "~/neovim_plugins/lambda.nvim", filetype = "tex" })
 
         use({
             "~/neovim_plugins/selection_popup",
@@ -137,6 +138,7 @@ packer.startup({
                                     "method",
                                     "for",
                                     "field",
+                                    "if",
                                 },
                             },
                         })
@@ -260,14 +262,14 @@ packer.startup({
         use({
             "~/neovim_plugins/pomodoro.nvim/",
             config = function()
-                -- require("tomato").setup()
+                require("tomato").setup()
             end,
         })
 
         use({
             "nvim-neorg/neorg",
             -- "~/neovim_plugins/neorg",
-            -- branch = "main",
+            -- branch = "ts-based-concealing",
             config = function()
                 require("ignis.modules.misc.neorg")
             end,
@@ -544,7 +546,7 @@ packer.startup({
                 -- { "williamboman/nvim-lsp-installer", opt = true },
             },
             config = function()
-                require("configs.lsp")
+                require("ignis.modules.lsp")
             end,
         })
 
