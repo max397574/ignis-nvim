@@ -79,7 +79,7 @@ aucmd("FocusGained", { pattern = "*", command = "checktime" })
 aucmd({ "TextYankPost" }, {
     pattern = "*",
     callback = function()
-        vim.highlight.on_yank({ higrou = "IncSearch", timeout = 200 })
+        vim.highlight.on_yank({ higrou = "IncSearch", timeout = 500 })
     end,
     group = vim.api.nvim_create_augroup("higlhight_yank", { clear = true }),
 })
@@ -178,5 +178,15 @@ aucmd("InsertCharPre", {
 aucmd({ "BufEnter", "BufReadPost" }, {
     callback = function()
         require("custom.refactor").find_else()
+    end,
+})
+local in_mathzone = require("ignis.utils").in_mathzone
+
+aucmd("CursorHold", {
+    pattern = "*.tex",
+    callback = function()
+        if in_mathzone() then
+            require("nabla").popup()
+        end
     end,
 })
