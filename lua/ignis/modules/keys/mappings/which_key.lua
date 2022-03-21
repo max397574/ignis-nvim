@@ -395,6 +395,7 @@ wk.register({
         ["s"] = { "<C-W>s", "split-window-below" },
         ["v"] = { "<C-W>v", "split-window-right" },
     },
+    R = { "<cmd>Telescope reloader<CR>", "Reloader" },
     v = {
         name = "+View",
         l = {
@@ -402,6 +403,12 @@ wk.register({
                 require("ignis.utils").LatexPreview()
             end,
             "Latex",
+        },
+        f = {
+            function()
+                require("nabla").popup()
+            end,
+            "Formulas",
         },
         m = {
             function()
@@ -411,16 +418,6 @@ wk.register({
         },
         -- c = {"<cmd>ColorizerAttachToBuffer<CR>", "Colorizer"},
         c = { "<cmd>PackerLoad nvim-colorizer.lua<CR>", "Colorizer" },
-    },
-}, {
-    prefix = "<leader>",
-    mode = "n",
-})
-
-wk.register({
-    R = {
-        name = "+Refactor",
-        t = { "" },
     },
 }, {
     prefix = "<leader>",
