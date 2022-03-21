@@ -140,6 +140,10 @@ wk.register({
         name = "+Help, Harpoon",
         t = { "<cmd>Telescope builtin<CR>", "Telescope" },
         c = { "<cmd>Telescope commands<CR>", "Commands" },
+        w = {
+            "<cmd>lua require'dynamic_help'.float_help(vim.fn.expand('<cword>'))<CR>",
+            "Word under cursor",
+        },
         h = {
             function()
                 require("ignis.modules.files.telescope").help_tags()
