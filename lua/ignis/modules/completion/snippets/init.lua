@@ -12,6 +12,7 @@ local events = require("luasnip.util.events")
 local ai = require("luasnip.nodes.absolute_indexer")
 local types = require("luasnip.util.types")
 local util = require("luasnip.util.util")
+local fmt = require("luasnip.extras.fmt").fmt
 
 require("luasnip/loaders/from_vscode").load()
 require("ignis.modules.completion.snippets.luasnip")
@@ -19,31 +20,6 @@ require("ignis.modules.completion.snippets.luasnip")
 local parse = ls.parser.parse_snippet
 
 local gitcommmit_stylua = [[chore: autoformat with stylua]]
-
-local time = [[
-local start = os.clock()
-print(os.clock()-start.."s")
-]]
-
-local high = [[
-${1:HighlightGroup} = { fg = "${2}", bg = "${3}" },${0}]]
-
-local module_snippet = [[
-local ${1:M} = {}
-${0}
-return $1]]
-
-local loc_func = [[
-local function ${1:name}(${2})
-    ${0}
-end
-]]
-
-local inspect_snippet = [[
-print("${1:variable}:")
-dump($1)]]
-
-local map_cmd = [[<cmd>${0}<CR>]]
 
 local public_string = [[
 public String ${1:function_name}(${2:parameters}) {
@@ -270,14 +246,6 @@ ls.snippets = {
             })
         ),
     },
-    lua = {
-        parse({ trig = "high" }, high),
-        parse({ trig = "time" }, time),
-        parse({ trig = "M" }, module_snippet),
-        parse({ trig = "lf" }, loc_func),
-        parse({ trig = "cmd" }, map_cmd),
-        parse({ trig = "inspect" }, inspect_snippet),
-    },
     java = {
         parse({ trig = "pus" }, public_string),
         parse({ trig = "puv" }, public_void),
@@ -478,3 +446,4 @@ require("luasnip/loaders/from_vscode").load({
     paths = { "~/.local/share/nvim/site/pack/packer/opt/friendly-snippets" },
 })
 require("ignis.modules.completion.snippets.tex")
+require("ignis.modules.completion.snippets.lua")
