@@ -54,8 +54,6 @@ opt.listchars = {
     -- trail = "•",
 }
 
-opt.lazyredraw = true
-
 opt.foldmethod = "expr" -- use treesitter for folding
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 
