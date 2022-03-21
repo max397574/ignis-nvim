@@ -6,6 +6,14 @@
  (set! "priority" 105)
  )
 
+(
+ (function_call
+   (identifier) @pairs
+   (#match? @pairs "pairs")
+   )
+ (set! "priority" 105)
+ )
+
 (function_declaration
   (identifier)@function_definition
   )
@@ -47,3 +55,22 @@
  (set! "priority" 105)
  )
 
+(
+  (function_call
+    name: (identifier) @keyword
+    (#eq? @keyword "pairs")
+  )
+  (#set! conceal "P")
+)
+
+(
+  (function_call
+    name: (identifier) @keyword
+    (#eq? @keyword "ipairs")
+  )
+  (#set! conceal "I")
+)
+
+(("return" @keyword) (#set! conceal "R"))
+(("local" @keyword) (#set! conceal "L"))
+(("function" @keyword) (#set! conceal "F"))
