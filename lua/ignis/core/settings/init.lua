@@ -43,7 +43,7 @@ opt.joinspaces = false
 opt.completeopt = "menuone,noselect"
 opt.signcolumn = "yes:3" -- always signcolumn, 3 wide
 opt.termguicolors = true
-opt.conceallevel = 0
+opt.conceallevel = 2
 
 opt.lazyredraw = true -- Do not redraw screen while processing macros
 
