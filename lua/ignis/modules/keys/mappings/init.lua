@@ -1,8 +1,9 @@
 local map = vim.keymap.set
 local nore_silent = { noremap = true, silent = true }
 local nore = { noremap = true }
+local utils = require("ignis.utils")
 
-require("ignis.modules.keys.mappings.which_key")
+utils.load_ignis_module("keys", "mappings.which_key")
 
 -- Windows
 -- =======
@@ -132,6 +133,13 @@ map("i", "<leader><tab>", function()
     -- end
     require("luasnip").expand_or_jump()
 end, nore_silent)
+map("s", "<leader><tab>", function()
+    -- if require("luasnip").choice_active() then
+    --     require("luasnip").change_choice(1)
+    --     return
+    -- end
+    require("luasnip").expand_or_jump()
+end, nore_silent)
 -- add j and k with count to jumplist
 map(
     "n",
@@ -150,64 +158,64 @@ map("n", "<Leader>?", ":TodoQuickFix<CR>", nore)
 
 -- Refactor.nvim
 
-local opts = { noremap = true, silent = true, expr = false }
-
-map(
-    "n",
-    "<leader>Rp",
-    ":lua require('refactoring').debug.printf({below = false})<CR>",
-    { noremap = true }
-)
-
--- Print var: this remap should be made in visual mode
-map(
-    "v",
-    "<leader>Rv",
-    ":lua require('refactoring').debug.print_var({})<CR>",
-    { noremap = true }
-)
-
-map("v", "<leader>y", '"+y', nore_silent)
-
--- Cleanup function: this remap should be made in normal mode
-vim.keymap.set("n", "<leader>Rc", function()
-    require("refactoring").debug.cleanup({})
-end, {
-    noremap = true,
-})
-
--- Remap to open the Telescope refactoring menu in visual mode
-map(
-    "v",
-    "<Leader>Rt",
-    [[ <Esc><Cmd>lua require"configs.refactor".refactors()<CR>]],
-    opts
-)
-map(
-    "v",
-    "<Leader>Re",
-    [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
-    opts
-)
-map(
-    "v",
-    "<Leader>Rf",
-    [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
-    opts
-)
-map(
-    "v",
-    "<Leader>Rv",
-    [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
-    opts
-)
-
-map(
-    "v",
-    "<Leader>Ri",
-    [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
-    opts
-)
+-- local opts = { noremap = true, silent = true, expr = false }
+--
+-- map(
+--     "n",
+--     "<leader>Rp",
+--     ":lua require('refactoring').debug.printf({below = false})<CR>",
+--     { noremap = true }
+-- )
+--
+-- -- Print var: this remap should be made in visual mode
+-- map(
+--     "v",
+--     "<leader>Rv",
+--     ":lua require('refactoring').debug.print_var({})<CR>",
+--     { noremap = true }
+-- )
+--
+-- map("v", "<leader>y", '"+y', nore_silent)
+--
+-- -- Cleanup function: this remap should be made in normal mode
+-- vim.keymap.set("n", "<leader>Rc", function()
+--     require("refactoring").debug.cleanup({})
+-- end, {
+--     noremap = true,
+-- })
+--
+-- -- Remap to open the Telescope refactoring menu in visual mode
+-- map(
+--     "v",
+--     "<Leader>Rt",
+--     [[ <Esc><Cmd>lua require"configs.refactor".refactors()<CR>]],
+--     opts
+-- )
+-- map(
+--     "v",
+--     "<Leader>Re",
+--     [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
+--     opts
+-- )
+-- map(
+--     "v",
+--     "<Leader>Rf",
+--     [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
+--     opts
+-- )
+-- map(
+--     "v",
+--     "<Leader>Rv",
+--     [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
+--     opts
+-- )
+--
+-- map(
+--     "v",
+--     "<Leader>Ri",
+--     [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+--     opts
+-- )
 
 local function toggle_venn()
     local venn_enabled = vim.inspect(vim.b.venn_enabled)
