@@ -25,6 +25,12 @@ end)
 require("neorg").setup({
     load = {
         ["core.defaults"] = {}, -- Load all the default modules
+        ["core.norg.esupports.metagen"] = {
+            config = {
+                type = "auto",
+            },
+        },
+
         -- ["core.integrations.telescope"] = {},
         -- ["core.norg.completion"] = {
         --     config = {
