@@ -4,7 +4,8 @@
    (#match? @require_call "require")
    )
  (set! "priority" 105)
- )
+ (#set! conceal "")
+)
 
 (
  (function_call
@@ -57,20 +58,74 @@
 
 (
   (function_call
-    name: (identifier) @keyword
-    (#eq? @keyword "pairs")
+    name: (identifier) @function
+    (#eq? @function "pairs")
   )
   (#set! conceal "P")
 )
 
 (
   (function_call
-    name: (identifier) @keyword
-    (#eq? @keyword "ipairs")
+    name: (identifier) @function
+    (#eq? @function "ipairs")
   )
   (#set! conceal "I")
 )
 
-(("return" @keyword) (#set! conceal "R"))
-(("local" @keyword) (#set! conceal "L"))
-(("function" @keyword) (#set! conceal "F"))
+(
+  (identifier) @function
+  (#eq? @function "utils")
+  (#set! conceal "")
+  ; (#set! conceal "U")
+)
+
+(
+  (dot_index_expression
+    table: (identifier) @keyword
+    (#eq? @keyword  "utils" )
+  )
+  (#set! conceal "U")
+)
+
+(
+  (dot_index_expression) @keyword
+    (#eq? @keyword  "vim.keymap.set" )
+  (#set! conceal "襁")
+)
+
+(
+  (dot_index_expression) @function
+    (#eq? @function  "vim.cmd" )
+  (#set! conceal ">")
+)
+
+; (
+;   (dot_index_expression) @keyword
+;     (#eq? @keyword  "vim.opt" )
+;   (#set! conceal "opt")
+; )
+
+; (
+;   (dot_index_expression
+;   )@keyword
+;     (#eq? @keyword  "vim.keymap.set" )
+;   (#set! conceal "")
+; )
+
+(("return" @keyword) (#set! conceal ""))
+; (("local" @keyword) (#set! conceal "L"))
+(("local" @keyword) (#set! conceal ""))
+; (("local" @keyword) (#set! conceal ""))
+; (("function" @keyword) (#set! conceal ""))
+(("function" @keyword) (#set! conceal ""))
+(("then" @keyword) (#set! conceal ""))
+(("not" @keyword) (#set! conceal ""))
+(("for" @repeat) (#set! conceal ""))
+(("while" @repeat) (#set! conceal "∞"))
+
+; for -> circle arrow
+(
+  (break_statement)@keyword
+  (#eq? @keyword  "break" )
+  (#set! conceal "")
+)
