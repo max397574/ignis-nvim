@@ -10,6 +10,7 @@ local sources = {
     null_ls.builtins.formatting.stylua.with({
         extra_args = { "--indent-type", "Spaces", "--indent-width", "4" },
     }),
+    null_ls.builtins.formatting.rustfmt,
     -- null_ls.builtins.formatting.trim_whitespace, -- disable that for cpp
     -- null_ls.builtins.formatting.uncrustify,
     -- null_ls.builtins.diagnostics.cppcheck, -- errors with offset encoding

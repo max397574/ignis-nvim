@@ -38,6 +38,7 @@ parser_configs.luap = {
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
         "markdown",
+        "rust",
         "lua",
         "python",
         "cpp",
@@ -179,4 +180,5 @@ require("nvim-treesitter.highlight").set_custom_captures({
     ["require_call"] = "RequireCall",
     ["function_definition"] = "FunctionDefinition",
     ["quantifier"] = "Special",
+    ["utils"] = "Function",
 })

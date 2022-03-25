@@ -220,9 +220,9 @@ local servers = {
     tsserver = {},
     cssls = { cmd = { "css-languageserver", "--stdio" } },
     rnix = {},
-    rust_analyzer = {
-        root_dir = root_pattern("Cargo.toml", "rust-project.json", ".git"),
-    },
+    -- rust_analyzer = {
+    --     root_dir = root_pattern("Cargo.toml", "rust-project.json", ".git"),
+    -- },
     hls = {
         root_dir = root_pattern(
             ".git",
@@ -268,6 +268,23 @@ if not runtime_path_completion then
         vim.fn.expand("~") .. "/.config/nvim_config/lua/?.lua",
     }
 end
+
+local extension_path = vim.fn.expand("~")
+    .. "/.vscode/extensions/vadimcn.vscode-lldb-1.7.0/"
+local codelldb_path = extension_path .. "adapter/codelldb"
+local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+require("rust-tools").setup({
+    dap = {
+        adapter = require("rust-tools.dap").get_codelldb_adapter(
+            codelldb_path,
+            liblldb_path
+        ),
+    },
+    server = {
+        on_attach = on_attach,
+    },
+})
+
 local clangd_defaults = require("lspconfig.server_configurations.clangd")
 local clangd_configs = vim.tbl_deep_extend(
     "force",
@@ -324,6 +341,10 @@ for server, config in pairs(servers) do
 end
 
 local codes = {
+    -- unused_assignment={
+    --     messages="x",
+    --     "unused_assignments"
+    -- },
     no_matching_function = {
         message = " Can't find a matching function",
         "redundant-parameter",
@@ -390,6 +411,7 @@ vim.diagnostic.config({
         border = border,
         scope = "cursor",
         format = function(diagnostic)
+            -- dump(diagnostic)
             if diagnostic.user_data == nil then
                 return diagnostic.message
             elseif vim.tbl_isempty(diagnostic.user_data) then

@@ -267,8 +267,8 @@ packer.startup({
         })
 
         use({
-            "nvim-neorg/neorg",
-            -- "~/neovim_plugins/neorg",
+            -- "nvim-neorg/neorg",
+            "~/neovim_plugins/neorg",
             -- branch = "ts-based-concealing",
             config = function()
                 require("ignis.modules.misc.neorg")
@@ -543,6 +543,11 @@ packer.startup({
             requires = {
                 { "folke/lua-dev.nvim", module = "lua-dev" },
                 { "p00f/clangd_extensions.nvim", module = "clangd_extensions" },
+                {
+                    "simrat39/rust-tools.nvim",
+                    module = "rust-tools",
+                    requires = { "mfussenegger/nvim-dap" },
+                },
                 -- { "williamboman/nvim-lsp-installer", opt = true },
             },
             config = function()
