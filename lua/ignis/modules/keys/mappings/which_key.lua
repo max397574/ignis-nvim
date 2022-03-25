@@ -140,9 +140,16 @@ wk.register({
         name = "+Help, Harpoon",
         t = { "<cmd>Telescope builtin<CR>", "Telescope" },
         c = { "<cmd>Telescope commands<CR>", "Commands" },
-        w = {
-            "<cmd>lua require'dynamic_help'.float_help(vim.fn.expand('<cword>'))<CR>",
-            "Word under cursor",
+        d = {
+            function()
+                if require("dynamic_help.extras.statusline").available() then
+                    require("dynamic_help").float_help(vim.fn.expand("<cword>"))
+                else
+                    local help = vim.fn.input("Help Tag> ")
+                    require("dynamic_help").float_help(help)
+                end
+            end,
+            "Dynamic Help",
         },
         h = {
             function()

@@ -13,10 +13,10 @@ map("n", "<c-h>", ":wincmd h<CR>", nore_silent)
 map("n", "<c-k>", ":wincmd k<CR>", nore_silent)
 map("n", "<c-l>", ":wincmd l<CR>", nore_silent)
 -- move windows with arrows
-map("n", "<down>", ":wincmd J<CR>", nore_silent)
-map("n", "<left>", ":wincmd H<CR>", nore_silent)
-map("n", "<up>", ":wincmd K<CR>", nore_silent)
-map("n", "<right>", ":wincmd L<CR>", nore_silent)
+-- map("n", "<down>", ":wincmd J<CR>", nore_silent)
+-- map("n", "<left>", ":wincmd H<CR>", nore_silent)
+-- map("n", "<up>", ":wincmd K<CR>", nore_silent)
+-- map("n", "<right>", ":wincmd L<CR>", nore_silent)
 
 map("n", "°", ":normal! zO<CR>", nore_silent)
 
@@ -280,7 +280,8 @@ end, {
 -- toggle keymappings for venn using <leader>v
 vim.keymap.set("n", "<leader>V", toggle_venn, { noremap = true })
 
-vim.keymap.set("n", "<left>", "<C-W>5<", nore_silent)
-vim.keymap.set("n", "<down>", ":resize +5<CR>", nore_silent)
-vim.keymap.set("n", "<right>", "<C-W>5>", nore_silent)
-vim.keymap.set("n", "<up>", ":resize -5<CR>", nore_silent)
+vim.keymap.set("n", "<left>", "<C-W>1<", nore_silent)
+vim.keymap.set("n", "<down>", ":resize +1<CR>", nore_silent)
+vim.keymap.set("n", "<right>", "<C-W>1>", nore_silent)
+vim.keymap.set("n", "<up>", ":resize -1<CR>", nore_silent)
+vim.keymap.set("i", "<m-cr>", "<cr>", nore_silent)
