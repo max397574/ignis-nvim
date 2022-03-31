@@ -83,7 +83,7 @@ local describe = function()
     })
 end
 
-ls.snippets["lua"] = {
+ls.add_snippets("lua", {
     parse({ trig = "high" }, high),
     parse({ trig = "time" }, time),
     parse({ trig = "M" }, module_snippet),
@@ -99,4 +99,4 @@ ls.snippets["lua"] = {
             }),
         }),
     }),
-}
+})

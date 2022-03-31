@@ -147,7 +147,6 @@ end
 
 -- complicated function for dynamicNode.
 local function cppdocsnip(args, _, old_state)
-    dump(args)
     -- !!! old_state is used to preserve user-input here. DON'T DO IT THAT WAY!
     -- Using a restoreNode instead is much easier.
     -- View this only as an example on how old_state functions.
@@ -233,7 +232,7 @@ local function cppdocsnip(args, _, old_state)
     return snip
 end
 
-ls.snippets = {
+ls.add_snippets(nil, {
     all = {
         s(
             "trig",
@@ -437,7 +436,7 @@ ls.snippets = {
             t({ "@end" }),
         }),
     },
-}
+})
 
 require("ignis.modules.completion.snippets.tex_math")
 require("ignis.modules.completion.snippets.choice_popup")

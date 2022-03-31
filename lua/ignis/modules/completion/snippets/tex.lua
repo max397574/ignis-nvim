@@ -95,7 +95,7 @@ rec_ls = function()
         }),
     })
 end
-ls.snippets["tex"] = {
+ls.add_snippets("tex", {
     s("ls", {
         t({ "\\begin{itemize}", "\t\\item " }),
         i(1),
@@ -123,4 +123,4 @@ ls.snippets["tex"] = {
         t({ "", "\\end{itemize}" }),
         i(0),
     }),
-}
+})
