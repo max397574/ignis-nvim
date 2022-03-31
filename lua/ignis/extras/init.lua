@@ -140,6 +140,7 @@ extras.scratch_buf = function()
         "javascript",
         "typescrip",
         "plain",
+        "norg",
     }
     pickers.new(opts, {
         prompt_title = "~ Scratch Picker ~",
