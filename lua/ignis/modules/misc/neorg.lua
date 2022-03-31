@@ -25,6 +25,19 @@ end)
 require("neorg").setup({
     load = {
         ["core.defaults"] = {}, -- Load all the default modules
+        -- ["core.norg.esupports.indent"] = {
+        -- config = {
+        --     indents = {
+        --         ["_line_break"] = {
+        --             indent = function(_, node)
+        --                 if node:parent():type() == "ranged_tag_content" then
+        --                     return 4
+        --                 end
+        --             end,
+        --         },
+        --     },
+        -- },
+        -- },
         ["core.norg.esupports.metagen"] = {
             config = {
                 type = "auto",
@@ -82,7 +95,7 @@ require("neorg").setup({
         ["core.keybinds"] = {
             config = {
                 default_keybinds = false,
-                neorg_leader = "<Leader>o",
+                neorg_leader = ",",
             },
         },
         ["core.norg.dirman"] = {
@@ -100,9 +113,6 @@ require("neorg").setup({
             config = {
                 workspace = "gtd",
                 -- workspace = "example_ws",
-                displayers = {
-                    close_after_task_select = false,
-                },
 
                 -- workspace = "example_ws",
                 exclude = { "notes" },
@@ -127,7 +137,7 @@ require("neorg").setup({
     },
 })
 
-local neorg_leader = "<leader>o"
+local neorg_leader = ","
 neorg_callbacks.on_event(
     "core.keybinds.events.enable_keybinds",
     function(_, keybinds)
@@ -255,3 +265,7 @@ neorg_callbacks.on_event(
         })
     end
 )
+
+vim.keymap.set("n", neorg_leader .. "tc", "<cmd>Neorg gtd capture<cr>")
+vim.keymap.set("n", neorg_leader .. "tv", "<cmd>Neorg gtd views<cr>")
+vim.keymap.set("n", neorg_leader .. "te", "<cmd>Neorg gtd edit<cr>")
