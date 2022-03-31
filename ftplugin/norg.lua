@@ -36,13 +36,26 @@ wk.register({
         e = "Edit",
         v = "Views",
     },
+    p = {
+        name = "+Pick",
+        a = {
+            name = "+AOF",
+            p = {
+                "<cmd>Telescope neorg find_aof_project_tasks<cr>",
+                "Project Tasks",
+            },
+            t = { "<cmd>Telescope neorg find_aof_tasks<cr>", "Tasks" },
+        },
+        c = { "<cmd>Telescope neorg find_context_tasks<cr>", "Context Tasks" },
+        p = { "<cmd>Telescope neorg find_project_tasks<cr>", "Project Tasks" },
+    },
     n = {
         name = "+New Note",
         n = "New Note",
     },
     l = { "<cmd>Telescope neorg insert_link<CR>", "Insert Link" },
 }, {
-    prefix = "<leader>o",
+    prefix = ",",
     mode = "n",
 })
 
@@ -51,3 +64,8 @@ vim.cmd(
 )
 
 vim.cmd([[hi link NeorgMarkupVerbatim Comment]])
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--     callback = function()
+--         vim.cmd([[execute "normal! mmgg=G'm"]])
+--     end,
+-- })
