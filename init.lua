@@ -24,6 +24,12 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
         require("ignis.utils").last_place()
     end,
 })
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+    pattern = "*",
+    callback = function()
+        require("ignis.modules.ui.dashboard").display()
+    end,
+})
 vim.g.forced_theme = "everforest"
 require("impatient").enable_profile()
 module_loader("ignis", "core")
