@@ -269,7 +269,7 @@ packer.startup({
         use({
             -- "nvim-neorg/neorg",
             "~/neovim_plugins/neorg",
-            -- branch = "ts-based-concealing",
+            -- branch = "indentation-v3",
             config = function()
                 require("ignis.modules.misc.neorg")
             end,
@@ -355,6 +355,7 @@ packer.startup({
         -- change,add and delete surroundings
         use({
             "~/neovim_plugins/surround.nvim",
+            module = "surround",
             config = function()
                 require("surround").setup({
                     mappings_style = "surround",
@@ -443,17 +444,17 @@ packer.startup({
             end,
         })
 
-        use({
-            "~/startup.nvim",
-            config = function()
-                require("startup").setup(
-                    require("ignis.modules.ui.startup_nvim")
-                )
-            end,
-            requires = {
-                "~/startup_themes/",
-            },
-        })
+        -- use({
+        --     "~/startup.nvim",
+        --     config = function()
+        --         require("startup").setup(
+        --             require("ignis.modules.ui.startup_nvim")
+        --         )
+        --     end,
+        --     requires = {
+        --         "~/startup_themes/",
+        --     },
+        -- })
 
         use({ "~/neovim_plugins/colorschemes/" })
 
@@ -546,9 +547,18 @@ packer.startup({
                 {
                     "simrat39/rust-tools.nvim",
                     module = "rust-tools",
-                    requires = { "mfussenegger/nvim-dap" },
+                    requires = {
+                        "mfussenegger/nvim-dap",
+                        {
+                            "rcarriga/nvim-dap-ui",
+                            config = function()
+                                require("dapui").setup({
+                                    mappings = { toggle = "<tab>" },
+                                })
+                            end,
+                        },
+                    },
                 },
-                -- { "williamboman/nvim-lsp-installer", opt = true },
             },
             config = function()
                 require("ignis.modules.lsp")
