@@ -170,6 +170,9 @@ cmp.setup({
         if vim.bo.ft == "TelescopePrompt" then
             return false
         end
+        -- if vim.bo.ft == "dashboard" then
+        --     return false
+        -- end
         if vim.bo.ft == "lua" then
             return true
         end
@@ -256,6 +259,9 @@ cmp.setup.cmdline(":", {
         { name = "cmdline", keyword_length = 2 },
     }),
     enabled = function()
+        if vim.bo.ft == "dashboard" then
+            return false
+        end
         return true
     end,
 })
