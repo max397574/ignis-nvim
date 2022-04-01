@@ -121,16 +121,16 @@ end
 --   { "┃", "FloatBorder" },
 -- }
 
-local border = {
-    { "╔", "FloatBorder" },
-    { "═", "FloatBorder" },
-    { "╗", "FloatBorder" },
-    { "║", "FloatBorder" },
-    { "╝", "FloatBorder" },
-    { "═", "FloatBorder" },
-    { "╚", "FloatBorder" },
-    { "║", "FloatBorder" },
-}
+-- local border = {
+--     { "╔", "FloatBorder" },
+--     { "═", "FloatBorder" },
+--     { "╗", "FloatBorder" },
+--     { "║", "FloatBorder" },
+--     { "╝", "FloatBorder" },
+--     { "═", "FloatBorder" },
+--     { "╚", "FloatBorder" },
+--     { "║", "FloatBorder" },
+-- }
 
 -- local border = {
 --   { "🭽","FloatBorder"},
@@ -154,17 +154,17 @@ local border = {
 --   {  "▌","FloatBorder"},
 -- }
 
--- local border = {
---   { "╭", "FloatBorder" },
---   { "─", "FloatBorder" },
---   { "╮", "FloatBorder" },
---   { "│", "FloatBorder" },
---   { "╯", "FloatBorder" },
---   { "─", "FloatBorder" },
---   { "╰", "FloatBorder" },
---   { "│", "FloatBorder" },
--- }
---
+local border = {
+    { "╭", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╮", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "╯", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╰", "FloatBorder" },
+    { "│", "FloatBorder" },
+}
+
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
     vim.lsp.handlers.hover,
     { border = border }
@@ -426,7 +426,6 @@ vim.diagnostic.config({
             return diagnostic.message
         end,
         header = { "Cursor Diagnostics:", "DiagnosticHeader" },
-        pos = 1,
         prefix = function(diagnostic, i, total)
             local icon, highlight
             if diagnostic.severity == 1 then

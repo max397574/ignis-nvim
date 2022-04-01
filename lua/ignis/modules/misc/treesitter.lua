@@ -46,6 +46,7 @@ require("nvim-treesitter.configs").setup({
         "vim",
         "latex",
         "java",
+        "help",
         "vim",
         "norg",
         "comment",

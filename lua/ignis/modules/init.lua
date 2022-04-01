@@ -42,6 +42,70 @@ packer.startup({
                 require("ignis.modules.ui.heirline")
             end,
         })
+        -- use({
+        --     "tamton-aquib/staline.nvim",
+        --     config = function()
+        --         vim.cmd(
+        --             [[hi StalineSeparator guifg=]]
+        --                 .. vim.g.color_base_01
+        --                 .. [[ guibg=none]]
+        --         )
+        --         vim.cmd(
+        --             [[hi StalineEmpty guibg=none guifg=]] .. vim.g.color_base_01
+        --         )
+        --         require("staline").setup({
+        --             sections = {
+        --                 left = {
+        --                     " ",
+        --                     "file_name",
+        --                     { "StalineSeparator", "left_sep" },
+        --                     -- "left_sep",
+        --                     { "StylineEmpty", " " },
+        --                     { "StalineSeparator", "right_sep" },
+        --                     -- "right_sep",
+        --                     "branch",
+        --                     { "StalineSeparator", "left_sep" },
+        --                     -- "left_sep",
+        --                     { "StylineEmpty", " " },
+        --                     "-lsp",
+        --                 },
+        --
+        --                 mid = {
+        --                     { "StalineSeparator", "right_sep" },
+        --                     -- "right_sep",
+        --                     "mode",
+        --                     { "StalineSeparator", "left_sep" },
+        --                     -- "left_sep",
+        --                 },
+        --                 right = {
+        --                     { "StalineSeparator", "right_sep" },
+        --                     -- "right_sep",
+        --                     "line_column",
+        --                     "word_count",
+        --                 },
+        --             },
+        --
+        --             defaults = {
+        --                 bg = vim.g.color_base_01,
+        --                 -- bg = "none",
+        --                 left_separator = "",
+        --                 -- left_separator = "",
+        --                 right_separator = "",
+        --                 -- right_separator = "",
+        --                 true_colors = true,
+        --                 line_column = "[%l:%c] %p%% ",
+        --                 -- font_active = "bold"
+        --             },
+        --             mode_colors = {
+        --                 n = vim.g.terminal_color_1,
+        --                 i = vim.g.terminal_color_2,
+        --                 ic = vim.g.terminal_color_3,
+        --                 c = vim.g.terminal_color_4,
+        --                 v = vim.g.terminal_color_5,
+        --             },
+        --         })
+        --     end,
+        -- })
 
         use({ "shift-d/wordle.nvim", command = "Wordle" })
 
@@ -482,13 +546,18 @@ packer.startup({
 
         -- completition
         use({
-            "iron-e/nvim-cmp",
-            branch = "feat/completion-menu-borders",
-            event = { "InsertEnter", "CmdLineEnter" },
+            -- "~/neovim_plugins/nvim-cmp",
+            -- "iron-e/nvim-cmp",
+            "hrsh7th/nvim-cmp",
+            -- branch = "feat/completion-menu-borders",
+            branch = "dev",
+            commit = "9b202effd71f84d8585439438ec931a5342f7941",
+            event = { "InsertEnter" },
             config = function()
                 require("ignis.modules.completion.cmp")
             end,
         })
+
         use({
             "L3MON4D3/LuaSnip",
             requires = {
@@ -514,6 +583,16 @@ packer.startup({
         use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" })
         use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
         use({ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" })
+
+        use({
+            "gelguy/wilder.nvim",
+            event = "CmdLineEnter",
+            requires = { "romgrk/fzy-lua-native", "nixprime/cpsm" },
+            run = ":UpdateRemotePlugins",
+            config = function()
+                require("ignis.modules.completion.wilder")
+            end,
+        })
 
         use({
             "danymat/neogen",

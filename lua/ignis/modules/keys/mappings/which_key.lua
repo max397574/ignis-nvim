@@ -142,7 +142,9 @@ wk.register({
         c = { "<cmd>Telescope commands<CR>", "Commands" },
         d = {
             function()
-                if require("dynamic_help.extras.statusline").available() then
+                if
+                    require("dynamic_help.extras.statusline").available() ~= ""
+                then
                     require("dynamic_help").float_help(vim.fn.expand("<cword>"))
                 else
                     local help = vim.fn.input("Help Tag> ")

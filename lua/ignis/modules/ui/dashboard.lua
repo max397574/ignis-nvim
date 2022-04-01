@@ -41,7 +41,9 @@ function dashboard.display()
     then
         return
     end
-    pcall(vim.cmd, "NeorgStart silent=true")
+    vim.defer_fn(function()
+        pcall(vim.cmd, "NeorgStart silent=true")
+    end, 200)
     -- local buf = vim.api.nvim_create_buf(false, false)
     -- vim.api.nvim_win_set_buf(0, buf)
     vim.api.nvim_buf_set_option(0, "bufhidden", "wipe")
@@ -49,7 +51,8 @@ function dashboard.display()
     vim.api.nvim_put(center(header), "l", true, true)
     vim.cmd([[1]])
     vim.cmd(
-        [[silent! setlocal nonu nornu autochdir ft=dashboard nocul laststatus=0]]
+        -- [[silent! setlocal nonu nornu autochdir ft=dashboard nocul laststatus=0 nowrap]]
+        [[silent! setlocal nonu nornu autochdir ft=dashboard nocul nowrap]]
     )
 
     vim.api.nvim_set_hl(0, "FireYellow", { fg = "#E1DE24" })

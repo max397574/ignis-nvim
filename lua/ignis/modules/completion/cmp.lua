@@ -21,28 +21,38 @@ local function t(string)
     return vim.api.nvim_replace_termcodes(string, true, true, true)
 end
 
+-- local border = {
+--     "╔",
+--     "═",
+--     "╗",
+--     "║",
+--     "╝",
+--     "═",
+--     "╚",
+--     "║",
+-- }
 local border = {
-    "╔",
-    "═",
-    "╗",
-    "║",
-    "╝",
-    "═",
-    "╚",
-    "║",
+    { "╭", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╮", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "╯", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╰", "FloatBorder" },
+    { "│", "FloatBorder" },
 }
 
 cmp.setup({
     window = {
         completion = {
             border = border,
-            scrollbar = "┃",
-            -- scrollbar = "║",
+            -- scrollbar = "┃",
+            scrollbar = "║",
         },
         documentation = {
             border = border,
-            -- scrollbar = "║",
-            scrollbar = "┃",
+            scrollbar = "║",
+            -- scrollbar = "┃",
         },
     },
     snippet = {
@@ -80,7 +90,8 @@ cmp.setup({
 
         ["<c-j>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-                cmp.select_next_item()
+                -- cmp.select_next_item()
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
             elseif luasnip.jumpable(1) then
                 luasnip.jump(1)
             elseif neogen.jumpable(1) then
@@ -95,7 +106,8 @@ cmp.setup({
 
         ["<c-k>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-                cmp.select_prev_item()
+                -- cmp.select_prev_item()
+                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
             elseif luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             elseif neogen.jumpable(-1) then
@@ -118,10 +130,38 @@ cmp.setup({
             c = cmp.mapping.close(),
         }),
 
-        ["<CR>"] = cmp.mapping.confirm({
-            select = true,
-            behavior = cmp.ConfirmBehavior.Insert,
+        ["<CR>"] = cmp.mapping({
+            i = cmp.mapping.confirm({
+                select = true,
+                behavior = cmp.ConfirmBehavior.Insert,
+            }),
+            c = cmp.mapping.confirm({
+                select = true,
+                behavior = cmp.ConfirmBehavior.Select,
+            }),
         }),
+        -- ["<cr>"] = cmp.mapping({
+        --     i = cmp.mapping.confirm({
+        --         select = true,
+        --         behavior = cmp.ConfirmBehavior.Insert,
+        --     }),
+        --     c=
+        -- }),
+        -- ["<tab>"] = cmp.mapping(function()
+        --     if cmp.visible() then
+        --         cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+        --         -- cmp.select_next_item()
+        --     end
+        -- end, {
+        --     "c",
+        -- }),
+        -- ["<s-tab>"] = cmp.mapping(function()
+        --     if cmp.visible() then
+        --         cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+        --     end
+        -- end, {
+        --     "c",
+        -- }),
         ["<C-l>"] = cmp.mapping(function(fallback)
             if luasnip.choice_active() then
                 require("luasnip").change_choice(1)
@@ -249,42 +289,42 @@ cmp.setup({
     },
 })
 
-cmp.setup.cmdline(":", {
-    view = {
-        entries = { name = "wildmenu", separator = " | " }, -- the user can also specify the `wildmenu` literal string.
-    },
-    sources = cmp.config.sources({
-        { name = "path", keyword_length = 2 },
-    }, {
-        { name = "cmdline", keyword_length = 2 },
-    }),
-    enabled = function()
-        if vim.bo.ft == "dashboard" then
-            return false
-        end
-        return true
-    end,
-})
+-- cmp.setup.cmdline(":", {
+--     view = {
+--         entries = { name = "wildmenu", separator = " | " }, -- the user can also specify the `wildmenu` literal string.
+--     },
+--     sources = cmp.config.sources({
+--         { name = "path", keyword_length = 2 },
+--     }, {
+--         { name = "cmdline", keyword_length = 2 },
+--     }),
+--     enabled = function()
+--         -- if vim.bo.ft == "dashboard" then
+--         --     return false
+--         -- end
+--         return true
+--     end,
+-- })
 
-cmp.setup.cmdline("/", {
-    sources = {
-        { name = "buffer", keyword_length = 2 },
-    },
-    enabled = function()
-        return true
-    end,
-    completion = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        scrollbar = "║",
-    },
-    documentation = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        scrollbar = "║",
-    },
-    view = {
-        entries = { name = "wildmenu", separator = " | " }, -- the user can also specify the `wildmenu` literal string.
-    },
-})
+-- cmp.setup.cmdline("/", {
+--     sources = {
+--         { name = "buffer", keyword_length = 2 },
+--     },
+--     enabled = function()
+--         return true
+--     end,
+--     completion = {
+--         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+--         scrollbar = "║",
+--     },
+--     documentation = {
+--         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+--         scrollbar = "║",
+--     },
+--     view = {
+--         entries = { name = "wildmenu", separator = " | " }, -- the user can also specify the `wildmenu` literal string.
+--     },
+-- })
 
 local neorg = require("neorg")
 
