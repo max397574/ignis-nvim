@@ -126,7 +126,8 @@ local FileName = {
         -- options, see :h filename-modifers
         local filename = vim.fn.fnamemodify(self.filename, ":t")
         if filename == "" then
-            return "[No Name]"
+            -- return "[No Name]"
+            return ""
         end
         -- now, if the filename would occupy more than 1/4th of the available
         -- space, we trim the file path to its initials
@@ -178,8 +179,31 @@ FileNameBlock = utils.insert(
     FileIcon,
     FileName,
     unpack(FileFlags), -- A small optimisation, since their parent does nothing
-    { provider = "%<" } -- this means that the statusline is cut here when there's not enough space
+    {
+        provider = "%<",
+    } -- this means that the statusline is cut here when there's not enough space
 )
+FileNameBlock = utilities.surround(
+    { "", "" },
+    colors.lightbg,
+    FileNameBlock
+)
+
+FileNameBlock[1]["condition"] = function()
+    return not conditions.buffer_matches({
+        filetype = { "dashboard" },
+    })
+end
+FileNameBlock[2]["condition"] = function()
+    return not conditions.buffer_matches({
+        filetype = { "dashboard" },
+    })
+end
+FileNameBlock[3]["condition"] = function()
+    return not conditions.buffer_matches({
+        filetype = { "dashboard" },
+    })
+end
 
 local option_value = {
     provider = function()
@@ -422,14 +446,14 @@ local lsp_progress = {
             )
         end
         -- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
-        local spinners = {
-            ".  ",
-            ".. ",
-            "...",
-            " ..",
-            "  .",
-            "   ",
-        }
+        -- local spinners = {
+        --     ".  ",
+        --     ".. ",
+        --     "...",
+        --     " ..",
+        --     "  .",
+        --     "   ",
+        -- }
         -- local spinners = { -- arrow3
         --     "▹▹▹▹▹",
         --     "▸▹▹▹▹",
@@ -454,18 +478,18 @@ local lsp_progress = {
         --     "✹",
         --     "✷",
         -- }
-        -- local spinners = {
-        --     "⠋",
-        --     "⠙",
-        --     "⠹",
-        --     "⠸",
-        --     "⠼",
-        --     "⠴",
-        --     "⠦",
-        --     "⠧",
-        --     "⠇",
-        --     "⠏",
-        -- }
+        local spinners = {
+            "⠋",
+            "⠙",
+            "⠹",
+            "⠸",
+            "⠼",
+            "⠴",
+            "⠦",
+            "⠧",
+            "⠇",
+            "⠏",
+        }
         local ms = vim.loop.hrtime() / 1000000
         local frame = math.floor(ms / 120) % #spinners
         return spinners[frame + 1] .. " " .. table.concat(status, " | ")
@@ -518,11 +542,6 @@ local word_count = {
 }
 
 WorkDir = utilities.surround({ "", "" }, colors.lightbg, WorkDir)
-FileNameBlock = utilities.surround(
-    { "", "" },
-    colors.lightbg,
-    FileNameBlock
-)
 
 local inactive_statusline = {
     condition = function()
@@ -554,6 +573,8 @@ local default_statusline = {
     Snippets,
     space,
     dyn_help_available,
+    space,
+    coords,
     space,
     utilities.surround({ "", "" }, colors.lightbg, mode_icon),
     space,
