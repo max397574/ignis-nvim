@@ -6,23 +6,20 @@
 -- https://github.com/lervag/vimtex#configuration
 -- https://github.com/latex-lsp/texlab
 
-local packer_path = vim.fn.stdpath("data")
-    .. "/site/pack/packer/opt/packer.nvim"
-
-if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
-    require("ignis.external.log").info(
-        "Bootstrapping packer.nvim, please wait ..."
-    )
-    vim.fn.system({
-        "git",
-        "clone",
-        "https://github.com/wbthomason/packer.nvim",
-        packer_path,
-    })
-end
-
-local config = require("ignis.config").config
-local modules_config = config.ignis.modules
+-- local packer_path = vim.fn.stdpath("data")
+--     .. "/site/pack/packer/opt/packer.nvim"
+--
+-- if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
+--     require("ignis.external.log").info(
+--         "Bootstrapping packer.nvim, please wait ..."
+--     )
+--     vim.fn.system({
+--         "git",
+--         "clone",
+--         "https://github.com/wbthomason/packer.nvim",
+--         packer_path,
+--     })
+-- end
 
 -- Load packer
 vim.cmd([[ packadd packer.nvim ]])
@@ -228,7 +225,7 @@ packer.startup({
 
         use({
             "lukas-reineke/indent-blankline.nvim",
-            opt = true,
+            -- opt = true,
             config = function()
                 require("ignis.modules.ui.blankline").setup()
             end,
@@ -471,13 +468,15 @@ packer.startup({
                 require("telescope").load_extension("harpoon")
             end,
         })
+        use({
+            "~/neovim_plugins/filetype.nvim",
+        })
 
         -- a file explorer
         use({
             "nvim-telescope/telescope.nvim",
             cmd = "Telescope",
             module = { "telescope", "ignis.modules.files.telescope" },
-            requires = {},
             config = function()
                 require("ignis.modules.files.telescope")
             end,
@@ -520,7 +519,7 @@ packer.startup({
         --     },
         -- })
 
-        use({ "~/neovim_plugins/colorschemes/" })
+        -- use({ "~/neovim_plugins/colorschemes/" })
 
         use({
             "~/neovim_plugins/colorscheme_switcher/",
@@ -561,9 +560,11 @@ packer.startup({
         use({
             "L3MON4D3/LuaSnip",
             requires = {
-                "rafamadriz/friendly-snippets",
-                after = "LuaSnip",
-                event = "InsertEnter",
+                {
+                    "~/neovim_plugins/friendly-snippets",
+                    after = "LuaSnip",
+                    event = "InsertEnter",
+                },
             },
             -- event = "InsertEnter",
             module = "luasnip",
@@ -587,7 +588,9 @@ packer.startup({
         use({
             "gelguy/wilder.nvim",
             event = "CmdLineEnter",
-            requires = { "romgrk/fzy-lua-native", "nixprime/cpsm" },
+            requires = {
+                { "romgrk/fzy-lua-native", opt = true, after = "wilder.nvim" },
+            },
             run = ":UpdateRemotePlugins",
             config = function()
                 require("ignis.modules.completion.wilder")
@@ -621,27 +624,33 @@ packer.startup({
             "neovim/nvim-lspconfig",
             opt = true,
             requires = {
-                { "folke/lua-dev.nvim", module = "lua-dev" },
-                { "p00f/clangd_extensions.nvim", module = "clangd_extensions" },
-                {
-                    "simrat39/rust-tools.nvim",
-                    module = "rust-tools",
-                    requires = {
-                        "mfussenegger/nvim-dap",
-                        {
-                            "rcarriga/nvim-dap-ui",
-                            config = function()
-                                require("dapui").setup({
-                                    mappings = { toggle = "<tab>" },
-                                })
-                            end,
-                        },
-                    },
-                },
+                { "folke/lua-dev.nvim", module = "lua-dev", opt = true },
             },
             config = function()
                 require("ignis.modules.lsp")
             end,
+        })
+        use({
+            "simrat39/rust-tools.nvim",
+            module = "rust-tools",
+            filetype = "rust",
+            requires = {
+                { "mfussenegger/nvim-dap", after = "rust-tools.nvim" },
+                {
+                    "rcarriga/nvim-dap-ui",
+                    config = function()
+                        require("dapui").setup({
+                            mappings = { toggle = "<tab>" },
+                        })
+                    end,
+                    after = "rust-tools.nvim",
+                },
+            },
+        })
+        use({
+            "p00f/clangd_extensions.nvim",
+            module = "clangd_extensions",
+            filetype = { "cpp", "c" },
         })
 
         -- show where lsp code action as available
