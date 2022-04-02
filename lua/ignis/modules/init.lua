@@ -156,6 +156,32 @@ packer.startup({
         })
 
         use({
+            "monaqa/dial.nvim",
+            keys = { "<C-a>", "<C-x>" },
+            opt = true,
+            config = function()
+                local dial = require("dial.map")
+                local augend = require("dial.augend")
+                require("dial.config").augends:register_group({
+                    default = {
+                        augend.integer.alias.decimal,
+                        augend.integer.alias.hex,
+                        augend.date.alias["%Y/%m/%d"],
+                        augend.constant.alias.bool,
+                        augend.semver.alias.semver,
+                    },
+                })
+                local map = vim.keymap.set
+                map("n", "<C-a>", dial.inc_normal(), { remap = false })
+                map("n", "<C-x>", dial.dec_normal(), { remap = false })
+                map("v", "<C-a>", dial.inc_visual(), { remap = false })
+                map("v", "<C-x>", dial.dec_visual(), { remap = false })
+                map("v", "g<C-a>", dial.inc_gvisual(), { remap = false })
+                map("v", "g<C-x>", dial.dec_gvisual(), { remap = false })
+            end,
+        })
+
+        use({
             "~/neovim_plugins/nvim-base16.lua",
         })
         use({
