@@ -135,8 +135,8 @@ packer.startup({
 
         use({ "VonHeikemen/searchbox.nvim", opt = true })
         use({ "elihunter173/dirbuf.nvim", opt = true })
-        use({ "lervag/vimtex", config = function() end, filetype = "tex" })
-        use({ "~/neovim_plugins/nabla.nvim", filetype = "tex" })
+        use({ "lervag/vimtex", config = function() end, ft = "tex" })
+        use({ "~/neovim_plugins/nabla.nvim", ft = { "tex", "norg" } })
         -- use({ "~/neovim_plugins/lambda.nvim", filetype = "tex" })
 
         use({
@@ -729,7 +729,7 @@ packer.startup({
         use({
             "simrat39/rust-tools.nvim",
             module = "rust-tools",
-            filetype = "rust",
+            ft = "rust",
             requires = {
                 { "mfussenegger/nvim-dap", after = "rust-tools.nvim" },
                 {
@@ -746,7 +746,7 @@ packer.startup({
         use({
             "p00f/clangd_extensions.nvim",
             module = "clangd_extensions",
-            filetype = { "cpp", "c" },
+            ft = { "cpp", "c" },
         })
 
         -- show where lsp code action as available
