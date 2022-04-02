@@ -2,7 +2,6 @@ local utils = {}
 
 local log = require("ignis.external.log")
 local fmt = string.format
-local config = require("ignis.config").config
 
 --- Loads the specified modules
 ---@param folder string The folder which contains the module files (e.g. `ignis`)
@@ -41,14 +40,18 @@ end
 ---@param colorscheme string The colorscheme to use
 utils.set_colorscheme = function(colorscheme)
     if colorscheme then
-        vim.cmd("colorscheme " .. colorscheme)
+        require("colors").init(colorscheme)
+        return
     end
-    if type(config.ignis.colorscheme) == "string" then
-        vim.cmd([[colorscheme ]] .. config.ignis.colorscheme)
-    elseif type(config.ignis.colorscheme) == "function" then
-        config.ignis.colorscheme()
-    else
-        log.error("Invalid options for ignis.colorscheme")
+    local theme = utils.get_colorscheme()
+    require("colors").init(theme)
+    local old_scheme = require("custom.db").get_scheme()
+    if theme ~= old_scheme then
+        RELOAD("colorscheme_switcher")
+        require("colorscheme_switcher").new_scheme()
+        vim.defer_fn(function()
+            require("colorscheme_switcher").new_scheme()
+        end, 1000)
     end
 end
 
