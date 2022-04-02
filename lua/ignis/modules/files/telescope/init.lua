@@ -369,7 +369,8 @@ elseif ts_layout == "float_all_borders" then
                 return ""
             end,
             layout_config = {
-                width = 0.75,
+                width = 0.85,
+                height = 0.9,
                 preview_cutoff = 20,
                 prompt_position = "bottom",
                 vertical = { mirror = false },
@@ -382,26 +383,26 @@ elseif ts_layout == "float_all_borders" then
             winblend = 0,
             scroll_strategy = "cycle",
             border = {},
-            -- borderchars = {
-            --     "─",
-            --     "│",
-            --     "─",
-            --     "│",
-            --     "╭",
-            --     "╮",
-            --     "╯",
-            --     "╰",
-            -- },
             borderchars = {
-                "═",
-                "║",
-                "═",
-                "║",
-                "╔",
-                "╗",
-                "╝",
-                "╚",
+                "─",
+                "│",
+                "─",
+                "│",
+                "╭",
+                "╮",
+                "╯",
+                "╰",
             },
+            -- borderchars = {
+            --     "═",
+            --     "║",
+            --     "═",
+            --     "║",
+            --     "╔",
+            --     "╗",
+            --     "╝",
+            --     "╚",
+            -- },
             mappings = {
                 n = {
                     ["<C-j>"] = actions.move_selection_next,
@@ -415,8 +416,10 @@ elseif ts_layout == "float_all_borders" then
                     ["<C-y>"] = set_prompt_to_entry_value,
                     ["<C-d>"] = actions.preview_scrolling_up,
                     ["<C-f>"] = actions.preview_scrolling_down,
+                    ["<C-s>"] = live_grep_selected,
                     ["<C-n>"] = require("telescope.actions").cycle_history_next,
                     ["<C-u>"] = require("telescope.actions").cycle_history_prev,
+                    ["<a-cr>"] = picker_selection_as_cwd,
                 },
                 i = {
                     ["<C-j>"] = actions.move_selection_next,
@@ -431,8 +434,10 @@ elseif ts_layout == "float_all_borders" then
                     ["<C-l>"] = actions_layout.toggle_preview,
                     ["<C-d>"] = actions.preview_scrolling_up,
                     ["<C-f>"] = actions.preview_scrolling_down,
+                    ["<C-s>"] = live_grep_selected,
                     ["<C-n>"] = require("telescope.actions").cycle_history_next,
                     ["<C-u>"] = require("telescope.actions").cycle_history_prev,
+                    ["<a-cr>"] = picker_selection_as_cwd,
                 },
             },
             extensions = {
@@ -461,35 +466,12 @@ end
 require("telescope").setup(configs)
 
 function ts.entry_preview(contents, opts)
-    require("telescope_utils").entry_preview(contents, opts)
+    require("hubble").entry_preview(contents, opts)
 end
 
 require("telescope").load_extension("fzf")
 
 require("telescope").load_extension("luasnip")
-
-function ts.cheatsheets() end
-
-function ts.entry_preview_test()
-    ts.entry_preview({
-        {
-            contents = {
-                "Title: Entry 1",
-                "Name: Test Entry",
-                "Length: 120",
-            },
-            results_name = { "Entry 1" },
-        },
-        {
-            contents = {
-                "Title: Entry 2",
-                "Name: Another Entry",
-                "Length: 60",
-            },
-            results_name = { "Entry 2" },
-        },
-    })
-end
 
 function ts.file_browser()
     reloader()
