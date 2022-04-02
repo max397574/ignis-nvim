@@ -46,8 +46,9 @@ blankline.setup = function()
     vim.wo.colorcolumn = "99999"
 end
 
--- local colors = require("colors").get(vim.g.colors_name)
+local colors = require("colors").get()
 
--- vim.cmd("highlight IndentBlanklineChar guifg=" .. colors.black)
+vim.cmd("highlight IndentBlanklineChar guifg=" .. colors.grey_fg)
+vim.cmd("highlight IndentBlanklineContextChar guifg=" .. colors.red)
 
 return blankline
