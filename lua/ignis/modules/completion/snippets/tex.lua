@@ -41,6 +41,9 @@ $0
 local tex_section = [[
 \section{$1}]]
 
+local tex_italic = [[
+\textit{$1}]]
+
 local tex_subsection = [[
 \subsection{$1}]]
 
@@ -109,6 +112,7 @@ ls.add_snippets("tex", {
     parse({ trig = "bd" }, tex_bold),
     parse({ trig = "it" }, tex_item),
     parse({ trig = "sec" }, tex_section),
+    parse({ trig = "italic" }, tex_italic),
     parse({ trig = "enum" }, tex_enumerate),
     parse({ trig = "desc" }, tex_description),
     parse({ trig = "ssec" }, tex_subsection),

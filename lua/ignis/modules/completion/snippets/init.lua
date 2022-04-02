@@ -13,6 +13,7 @@ local ai = require("luasnip.nodes.absolute_indexer")
 local types = require("luasnip.util.types")
 local util = require("luasnip.util.util")
 local fmt = require("luasnip.extras.fmt").fmt
+local conds = require("luasnip.extras.expand_conditions")
 
 require("luasnip/loaders/from_vscode").load()
 require("ignis.modules.completion.snippets.luasnip")
@@ -244,6 +245,31 @@ ls.add_snippets(nil, {
                 end, {}),
             })
         ),
+        s({ trig = "date" }, {
+            f(function()
+                return string.format(
+                    string.gsub(vim.bo.commentstring, "%%s", " %%s"),
+                    os.date()
+                )
+            end, {}),
+        }),
+        s({ trig = "Ctime" }, {
+            f(function()
+                return string.format(
+                    string.gsub(vim.bo.commentstring, "%%s", " %%s"),
+                    os.date("%H:%M")
+                )
+            end, {}),
+        }),
+        s({ trig = "td", name = "TODO" }, {
+            c(1, {
+                t("TODO: "),
+                t("FIXME: "),
+                t("HACK: "),
+                t("BUG: "),
+            }),
+            i(0),
+        }),
     },
     java = {
         parse({ trig = "pus" }, public_string),
@@ -315,6 +341,33 @@ ls.add_snippets(nil, {
         parse({ trig = "stylua" }, gitcommmit_stylua),
     },
     norg = {
+        s({
+            trig = "-([2-6])",
+            name = "Unordered lists",
+            dscr = "Add Unordered lists",
+            regTrig = true,
+            hidden = true,
+        }, {
+            f(function(_, snip)
+                return string.rep("-", tonumber(snip.captures[1])) .. " ["
+            end, {}),
+        }, {
+            condition = conds.line_begin,
+        }),
+        s({
+            trig = "~([2-6])",
+            name = "Ordered lists",
+            dscr = "Add Ordered lists",
+            regTrig = true,
+            hidden = true,
+        }, {
+            f(function(_, snip)
+                return string.rep("~", tonumber(snip.captures[1])) .. " "
+            end, {}),
+        }, {
+            condition = conds.line_begin,
+        }),
+
         ls.parser.parse_snippet("ses", "- [ ] session $1 {$2} [$3->to]"),
         s("programmersay", {
             t({ "> Great programmer what can u teach me? " }),
