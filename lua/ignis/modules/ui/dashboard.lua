@@ -52,7 +52,7 @@ function dashboard.display()
     vim.cmd([[1]])
     vim.cmd(
         -- [[silent! setlocal nonu nornu autochdir ft=dashboard nocul laststatus=0 nowrap]]
-        [[silent! setlocal nonu nornu autochdir ft=dashboard nocul nowrap]]
+        [[silent! setlocal nonu nornu ft=dashboard nocul nowrap]]
     )
 
     vim.api.nvim_set_hl(0, "FireYellow", { fg = "#E1DE24" })
