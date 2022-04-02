@@ -9,7 +9,7 @@ opt.shortmess:append("c")
 opt.pumblend = 0
 opt.formatoptions:remove({ "c", "r", "o" })
 -- this executes `colorscheme` if vim.g.colors_name is set
-opt.background = "dark" -- dark background
+-- opt.background = "dark" -- dark background
 opt.cmdheight = 1 -- height of cmd line
 opt.virtualedit = "block" -- allow visual mode to go over end of lines
 opt.expandtab = true -- expand tabs to spaces
@@ -78,27 +78,3 @@ g.symbols_outline = {
     highlight_hovered_item = false,
     width = 65,
 }
-
--- builtin plugins
-g.loaded_gzip = 1
-g.loaded_zip = 1
-g.loaded_zipPlugin = 1
-g.loaded_tar = 1
-g.loaded_tarPlugin = 1
-g.loaded_matchit = 1
-g.loaded_man = 1
-g.loaded_remote_plugins = 1
-
-g.loaded_getscript = 1
-g.loaded_getscriptPlugin = 1
-g.loaded_vimball = 1
-g.loaded_vimballPlugin = 1
-g.loaded_2html_plugin = 1
-
-g.loaded_logiPat = 1
-g.loaded_rrhelper = 1
-
--- g.loaded_netrw = 1
--- g.loaded_netrwPlugin = 1
--- g.loaded_netrwSettings = 1
--- g.loaded_netrwFileHandlers = 1
