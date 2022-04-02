@@ -1,31 +1,37 @@
 local colors = require("colors").get(
     vim.g.colors_name or require("ignis.utils").get_colorscheme()
 )
+local groups = require("bufferline.groups")
+
 require("bufferline").setup({
     highlights = {
         background = {
             guifg = colors.grey_fg,
             guibg = colors.black2,
+            -- guibg = colors.black,
         },
 
         -- buffers
         buffer_selected = {
             guifg = colors.white,
-            guibg = colors.black,
+            guibg = colors.grey_fg,
+            -- guibg = colors.black,
             gui = "bold,italic",
         },
         duplicate_selected = {
             guifg = colors.white,
-            guibg = colors.black,
+            -- guibg = colors.black,
+            guibg = colors.grey_fg,
             gui = "bold,italic",
         },
         duplicate_visible = {
             guifg = colors.white,
-            guibg = colors.black,
+            guibg = colors.black2,
             gui = "bold,italic",
         },
         buffer_visible = {
-            guifg = colors.light_grey,
+            guifg = colors.white,
+            -- guibg = colors.black2,
             guibg = colors.black2,
         },
 
@@ -50,14 +56,14 @@ require("bufferline").setup({
         },
         close_button_selected = {
             guifg = colors.red,
-            guibg = colors.black,
+            guibg = colors.grey_fg,
         },
         fill = {
             guifg = colors.grey_fg,
-            guibg = colors.black2,
+            guibg = colors.darker_black,
         },
         indicator_selected = {
-            guifg = colors.black,
+            guifg = colors.black2,
             guibg = colors.black,
         },
 
@@ -72,21 +78,25 @@ require("bufferline").setup({
         },
         modified_selected = {
             guifg = colors.green,
-            guibg = colors.black,
+            guibg = colors.grey_fg,
         },
 
         -- separators
         separator = {
-            guifg = colors.black2,
+            -- guifg = colors.green,
+            -- guifg = "",
+            guifg = colors.darker_black,
             guibg = colors.black2,
         },
         separator_visible = {
-            guifg = colors.black2,
+            -- guifg = colors.green,
+            guifg = colors.darker_black,
             guibg = colors.black2,
         },
         separator_selected = {
-            guifg = colors.black2,
-            guibg = colors.black2,
+            -- guifg = colors.green,
+            guifg = colors.darker_black,
+            guibg = colors.grey_fg,
         },
 
         -- tabs
@@ -104,10 +114,13 @@ require("bufferline").setup({
         },
         tab_close = {
             guifg = colors.red,
-            guibg = colors.black,
+            guibg = colors.darker_black,
         },
     },
     options = {
+        separator_style = "slant",
+        -- separator_style = "thick",
+        -- separator_style = { "", "" },
         mode = "buffers",
         diagnostics = "nvim_diagnostic",
         always_show_bufferline = false,
@@ -124,7 +137,7 @@ require("bufferline").setup({
                     table.insert(result, {
                         text = "  " .. count[1],
                         guifg = vim.g.terminal_color_9,
-                        guibg = colors.black,
+                        guibg = colors.darker_black,
                     })
                 end
 
@@ -132,7 +145,7 @@ require("bufferline").setup({
                     table.insert(result, {
                         text = "  " .. count[2],
                         guifg = vim.g.terminal_color_3,
-                        guibg = colors.black,
+                        guibg = colors.darker_black,
                     })
                 end
 
@@ -140,7 +153,7 @@ require("bufferline").setup({
                     table.insert(result, {
                         text = "  " .. count[4],
                         guifg = vim.g.terminal_color_4,
-                        guibg = colors.black,
+                        guibg = colors.darker_black,
                     })
                 end
 
@@ -148,7 +161,7 @@ require("bufferline").setup({
                     table.insert(result, {
                         text = "  " .. count[3],
                         guifg = vim.g.terminal_color_6,
-                        guibg = colors.black,
+                        guibg = colors.darker_black,
                     })
                 end
                 return result
@@ -156,29 +169,33 @@ require("bufferline").setup({
         },
         groups = {
             options = {
-                toggle_hidden_on_enter = true, -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
+                toggle_hidden_on_enter = true,
             },
             items = {
+                groups.builtin.ungrouped,
                 {
-                    name = "Tests", -- Mandatory
-                    highlight = { gui = "underline", guisp = "blue" }, -- Optional
-                    priority = 2, -- determines where it will appear relative to other groups (Optional)
-                    icon = "", -- Optional
-                    matcher = function(buf) -- Mandatory
-                        return buf.name:match("%_test")
-                            or buf.name:match("%_spec")
+                    highlight = { guisp = colors.pink, gui = "underline" },
+                    name = "tests",
+                    icon = "",
+                    matcher = function(buf)
+                        return buf.filename:match("_spec")
+                            or buf.filename:match("test")
                     end,
                 },
                 {
-                    name = "Docs",
-                    highlight = { gui = "undercurl", guisp = "green" },
-                    auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
+                    highlight = {
+                        guisp = colors.cyan,
+                        gui = "underline",
+                        guibg = colors.black2,
+                    },
+                    name = "docs",
                     matcher = function(buf)
-                        return buf.name:match("%.md") or buf.name:match("%.txt")
+                        for _, ext in ipairs({ "md", "txt", "org", "norg", "wiki" }) do
+                            if ext == vim.fn.fnamemodify(buf.path, ":e") then
+                                return true
+                            end
+                        end
                     end,
-                    -- separator = { -- Optional
-                    --     style = require("bufferline.groups").separator.tab,
-                    -- },
                 },
             },
         },
