@@ -18,6 +18,7 @@ require("bufferline").setup({
             -- guibg = colors.black,
             gui = "bold,italic",
         },
+
         duplicate_selected = {
             guifg = colors.white,
             -- guibg = colors.black,
@@ -30,6 +31,12 @@ require("bufferline").setup({
             gui = "bold,italic",
         },
         buffer_visible = {
+            guifg = colors.white,
+            -- guibg = colors.black2,
+            guibg = colors.black2,
+        },
+
+        buffer = {
             guifg = colors.white,
             -- guibg = colors.black2,
             guibg = colors.black2,
@@ -186,7 +193,6 @@ require("bufferline").setup({
                     highlight = {
                         guisp = colors.cyan,
                         gui = "underline",
-                        guibg = colors.black2,
                     },
                     name = "docs",
                     matcher = function(buf)
