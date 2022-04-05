@@ -253,6 +253,26 @@ function dashboard.display()
         [[silent! setlocal nonu nornu ft=dashboard nocul nowrap]]
     )
 
+    vim.keymap.set("n", "?", function()
+        local buf = vim.api.nvim_create_buf(false, true)
+        vim.api.nvim_buf_set_lines(buf, 0, -1, false, { city })
+        vim.api.nvim_buf_add_highlight(buf, ns, "Special", 0, 0, -1)
+        vim.api.nvim_open_win(buf, false, {
+            relative = "win",
+            row = 1,
+            col = 1,
+            win = 0,
+            width = #city + 1,
+            height = 1,
+            focusable = false,
+            style = "minimal",
+            border = "rounded",
+        })
+    end, {
+        noremap = true,
+        silent = true,
+        buffer = true,
+    })
     vim.api.nvim_buf_set_keymap(
         0,
         "n",
