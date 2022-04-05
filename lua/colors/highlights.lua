@@ -114,6 +114,7 @@ if ui.italic_comments then
 else
     fg("Comment", grey_fg)
 end
+bg("TS_Context", grey_fg)
 
 -- Disable cusror line
 -- Line number
@@ -146,7 +147,7 @@ fg("NvimInternalError", red)
 fg("VertSplit", one_bg2)
 -- fg("CmpBorderedWindow_FloatBorder", one_bg2)
 -- fg("CmpBorderedWindow_FloatBorder", grey_fg)
-fg("CmpBorderedWindow_FloatBorder", blue)
+fg("CmpBorder", blue)
 bg("PmenuThumb", white)
 -- fg("PmenuThumb", nord_blue)
 fg("WinSeparator", one_bg2)
