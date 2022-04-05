@@ -3,6 +3,15 @@ local utils = {}
 local log = require("ignis.external.log")
 local fmt = string.format
 
+--- Picks a random element of a table
+---@param table table
+---@return any Random-element
+function utils.random_element(table)
+    math.randomseed(os.clock())
+    local index = math.random() * #table
+    return table[math.floor(index) + 1]
+end
+
 --- Loads the specified modules
 ---@param folder string The folder which contains the module files (e.g. `ignis`)
 ---@param modules table|string The modules to load (e.g. `{ "utils", "ui" }`)
