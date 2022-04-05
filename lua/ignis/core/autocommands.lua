@@ -2,7 +2,7 @@ local u = require("ignis.utils")
 local aucmd = vim.api.nvim_create_autocmd
 
 local ft_aucmd = function(pattern, ft)
-    aucmd({ "BufWinEnter" }, {
+    aucmd({ "BufRead", "BufEnter", "BufNewFile" }, {
         pattern = pattern,
         command = [[set ft=]] .. ft,
         once = false,
