@@ -104,7 +104,7 @@ packer.startup({
         --     end,
         -- })
 
-        use({ "shift-d/wordle.nvim", command = "Wordle" })
+        use({ "shift-d/wordle.nvim", cmd = { "Wordle" } })
 
         use({
             "akinsho/bufferline.nvim",
@@ -222,12 +222,13 @@ packer.startup({
                 "nvim-treesitter/nvim-treesitter-textobjects",
                 "p00f/nvim-ts-rainbow",
                 {
-                    "romgrk/nvim-treesitter-context",
+                    -- "romgrk/nvim-treesitter-context",
+                    "~/neovim_plugins/nvim-treesitter-context/",
                     event = "InsertEnter",
                     config = function()
-                        vim.cmd([[hi! link TreesitterContext Visual]])
+                        vim.cmd([[hi! link TreesitterContext TS_Context]])
                         require("treesitter-context.config").setup({
-                            enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+                            enable = true,
                             patterns = {
                                 default = {
                                     "class",
@@ -237,11 +238,32 @@ packer.startup({
                                     "field",
                                     "if",
                                 },
+                                -- norg = {
+                                --     "heading%d",
+                                -- },
                             },
                         })
                     end,
                 },
             },
+        })
+
+        use({
+            "ray-x/sad.nvim",
+            cmd = { "Sad" },
+            requires = {
+                "ray-x/guihua.lua",
+                after = "sad.nvim",
+                opt = true,
+            },
+            opt = true,
+            config = function()
+                require("sad").setup({
+                    diff = "diff-so-fancy", -- you can use `diff`, `diff-so-fancy` or `delta`
+                    ls_file = "fd", -- also git ls_file
+                    exact = false, -- exact match
+                })
+            end,
         })
 
         use({
@@ -324,7 +346,7 @@ packer.startup({
             cmd = "TableModeToggle",
         })
 
-        use({ "jbyuki/venn.nvim", command = "VBox" })
+        use({ "jbyuki/venn.nvim", cmd = "VBox" })
 
         -- display keybindings help
         -- use my fork because of vim.keymap.set
@@ -364,8 +386,8 @@ packer.startup({
         })
 
         use({
-            -- "nvim-neorg/neorg",
-            "~/neovim_plugins/neorg",
+            "nvim-neorg/neorg",
+            -- "~/neovim_plugins/neorg",
             -- branch = "indentation-v3",
             config = function()
                 require("ignis.modules.misc.neorg")
@@ -376,6 +398,8 @@ packer.startup({
                 "~/neovim_plugins/neorg-zettelkasten/",
             },
         })
+
+        use({ "~/neovim_plugins/neorg-context/", ft = "norg" })
 
         use({
             "~/neovim_plugins/dynamic_help/",
@@ -396,8 +420,9 @@ packer.startup({
             end,
             cmd = "ZenMode",
             requires = {
-                opt = true,
                 "folke/twilight.nvim",
+                opt = true,
+                after = "zen-mode.nvim",
                 config = function()
                     require("twilight").setup({
                         dimming = {
@@ -568,6 +593,19 @@ packer.startup({
             "~/neovim_plugins/filetype.nvim",
         })
 
+        -- get link for code with `PP` (also works with range)
+        use({
+            "rktjmp/paperplanes.nvim",
+            cmd = { "PP" },
+            config = function()
+                require("paperplanes").setup({
+                    register = "+",
+                    -- provider = "paste.rs",
+                    provider = "ix.io",
+                })
+            end,
+        })
+
         -- a file explorer
         use({
             "nvim-telescope/telescope.nvim",
@@ -637,7 +675,7 @@ packer.startup({
             end,
         })
 
-        use({ "max397574/hangman.nvim", command = "Hangman" })
+        use({ "max397574/hangman.nvim", cmd = "Hangman" })
 
         -- completition
         use({
@@ -680,6 +718,37 @@ packer.startup({
         use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" })
         use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
         use({ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" })
+
+        use({
+            "zbirenbaum/copilot.lua",
+            event = "InsertEnter",
+            after = "nvim-cmp",
+            config = function()
+                vim.schedule(function()
+                    require("copilot")
+                end)
+            end,
+        })
+        use({
+            "zbirenbaum/copilot-cmp",
+            after = { "copilot.lua", "nvim-cmp" },
+        })
+        use({
+            "tzachar/cmp-tabnine",
+            run = "./install.sh",
+            after = "nvim-cmp",
+            config = function()
+                local tabnine = require("cmp_tabnine.config")
+                tabnine:setup({
+
+                    max_line = 1000,
+                    max_num_results = 20,
+                    sort = true,
+                    run_on_every_keystroke = true,
+                })
+            end,
+            opt = true,
+        })
 
         use({
             "gelguy/wilder.nvim",
