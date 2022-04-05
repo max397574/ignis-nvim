@@ -1,12 +1,11 @@
 vim.cmd([[
         syntax off
         filetype off
-        filetype plugin indent off
+        " filetype plugin indent off
 ]])
 -- require("colors").init(vim.g.forced_theme)
 vim.opt.shadafile = "NONE"
 vim.g.start_time = vim.fn.reltime()
-
 -- vim.opt.loadplugins = false -- toggle comment for max speed
 
 -- disable builtin plugins for faster startuptime
@@ -47,7 +46,6 @@ vim.g.did_indent_on = 1
 vim.g.did_load_filetypes = 0
 -- set this early because the other mappings are created with this
 vim.g.mapleader = " "
-
 -- set cursor to last position of a file
 vim.api.nvim_create_autocmd({ "BufRead" }, {
     pattern = "*",
@@ -68,7 +66,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     end,
 })
 require("impatient").enable_profile()
-vim.g.forced_theme = "everforest"
+vim.g.forced_theme = "onedark"
 local module_loader = require("ignis.utils").load_module
 module_loader("ignis", "core")
 
