@@ -239,6 +239,46 @@ local servers = {
     vimls = {},
 }
 
+local clangd_defaults = require("lspconfig.server_configurations.clangd")
+local clangd_configs = vim.tbl_deep_extend(
+    "force",
+    clangd_defaults["default_config"],
+    {
+        on_attach = on_attach,
+        cmd = {
+            "clangd",
+            "-j=4",
+            "--background-index",
+            "--clang-tidy",
+            "--fallback-style=llvm",
+            "--all-scopes-completion",
+            "--completion-style=detailed",
+            "--header-insertion=iwyu",
+            "--header-insertion-decorators",
+            "--pch-storage=memory",
+        },
+    }
+)
+require("clangd_extensions").setup({
+    server = clangd_configs,
+})
+
+local extension_path = vim.fn.expand("~")
+    .. "/.vscode/extensions/vadimcn.vscode-lldb-1.7.0/"
+local codelldb_path = extension_path .. "adapter/codelldb"
+local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+require("rust-tools").setup({
+    dap = {
+        adapter = require("rust-tools.dap").get_codelldb_adapter(
+            codelldb_path,
+            liblldb_path
+        ),
+    },
+    server = {
+        on_attach = on_attach,
+    },
+})
+
 local sumneko_lua_server = {
     on_attach = on_attach,
     cmd = lua_cmd,
