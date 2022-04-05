@@ -32,14 +32,14 @@ end
 --     "║",
 -- }
 local border = {
-    { "╭", "FloatBorder" },
-    { "─", "FloatBorder" },
-    { "╮", "FloatBorder" },
-    { "│", "FloatBorder" },
-    { "╯", "FloatBorder" },
-    { "─", "FloatBorder" },
-    { "╰", "FloatBorder" },
-    { "│", "FloatBorder" },
+    { "╭", "CmpBorder" },
+    { "─", "CmpBorder" },
+    { "╮", "CmpBorder" },
+    { "│", "CmpBorder" },
+    { "╯", "CmpBorder" },
+    { "─", "CmpBorder" },
+    { "╰", "CmpBorder" },
+    { "│", "CmpBorder" },
 }
 
 cmp.setup({
@@ -200,6 +200,8 @@ cmp.setup({
         { name = "emoji", priority = 3 },
         { name = "greek", priority = 1 },
         { name = "calc", priority = 4 },
+        -- { name = "copilot", priority = 8 },
+        -- { name = "cmp_tabnine", priority = 8 },
         { name = "nvim_lsp", priority = 9 },
         { name = "luasnip", priority = 8 },
         { name = "neorg", priority = 6 },
