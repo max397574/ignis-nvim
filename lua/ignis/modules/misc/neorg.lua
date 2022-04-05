@@ -94,8 +94,15 @@ require("neorg").setup({
         },
         ["core.keybinds"] = {
             config = {
-                default_keybinds = false,
+                default_keybinds = true,
                 neorg_leader = ",",
+                hook = function(keybinds)
+                    keybinds.map(
+                        "traverse-headings",
+                        "n",
+                        "<cmd>Telescope neorg search_headings<CR>"
+                    )
+                end,
             },
         },
         ["core.norg.dirman"] = {
