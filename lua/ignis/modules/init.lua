@@ -22,7 +22,7 @@
 -- end
 
 -- Load packer
-vim.cmd([[ packadd packer.nvim ]])
+vim.cmd([[packadd packer.nvim ]])
 local packer = require("packer")
 
 -- packer options: https://github.com/wbthomason/packer.nvim#specifying-plugins
@@ -202,7 +202,7 @@ packer.startup({
                         j = {
                             k = "<esc>",
                             [","] = "<cmd>lua require'ignis.utils'.append_comma()<CR><esc>o",
-                            j = "<esc>o",
+                            j = "<esc>A<cr>",
                         },
                     },
                 })
@@ -355,7 +355,6 @@ packer.startup({
             "~/neovim_plugins/which-key.nvim",
             after = "nvim-treesitter",
             config = function()
-                require("which-key").setup({})
                 require("ignis.modules.keys.which_key")
                 require("ignis.modules.keys.mappings")
             end,
@@ -386,8 +385,8 @@ packer.startup({
         })
 
         use({
-            "nvim-neorg/neorg",
-            -- "~/neovim_plugins/neorg",
+            -- "nvim-neorg/neorg",
+            "~/neovim_plugins/neorg",
             -- branch = "indentation-v3",
             config = function()
                 require("ignis.modules.misc.neorg")
@@ -399,7 +398,7 @@ packer.startup({
             },
         })
 
-        use({ "~/neovim_plugins/neorg-context/", ft = "norg" })
+        use({ "~/neovim_plugins/neorg-context/" })
 
         use({
             "~/neovim_plugins/dynamic_help/",
@@ -451,88 +450,64 @@ packer.startup({
             config = [[ require("todo-comments").setup({}) ]],
         })
 
-        use({
-            "kyazdani42/nvim-tree.lua",
-            cmd = { "NvimTreeToggle", "NvimTreeClose" },
-            config = function()
-                vim.g.nvim_tree_ignore = { ".git", "node_modules" }
-                vim.g.nvim_tree_gitignore = 1
-                vim.g.nvim_tree_auto_ignore_ft = {
-                    "dashboard",
-                    "startify",
-                    "startup",
-                }
-                vim.g.nvim_tree_indent_markers = 1
-                vim.g.nvim_tree_git_hl = 1
-                vim.g.nvim_tree_lsp_diagnostics = 1
-                require("nvim-tree").setup({
-                    auto_open = 1,
-                    auto_close = 1,
-                    follow = 1,
-                    update_to_buf_dir = { enable = false },
-                    -- disable_netrw = 0,
-                })
-            end,
-        })
-
-        use({
-            "hrsh7th/vim-searchx",
-            opt = true,
-            setup = function()
-                -- Overwrite / and ?.
-                vim.keymap.set({ "n", "x" }, "?", function()
-                    vim.cmd("PackerLoad vim-searchx")
-                    vim.cmd("call searchx#start({ 'dir': 0 })")
-                end)
-                vim.keymap.set({ "n", "x" }, "/", function()
-                    vim.cmd("PackerLoad vim-searchx")
-                    vim.cmd("call searchx#start({ 'dir': 1 })")
-                end)
-                -- Move to next/prev match.
-                vim.keymap.set(
-                    { "n", "x" },
-                    "N",
-                    "<Cmd>call searchx#prev_dir()<CR>"
-                )
-                vim.keymap.set(
-                    { "n", "x" },
-                    "n",
-                    "<Cmd>call searchx#next_dir()<CR>"
-                )
-
-                -- Clear highlights
-                vim.keymap.set("n", "<Esc>", "<Cmd>call searchx#clear()<CR>)")
-            end,
-            config = function()
-                vim.api.nvim_exec(
-                    [=[
-                        let g:searchx = {}
-                        " Auto jump if the recent input matches to any marker.
-                        let g:searchx.auto_accept = v:true
-                        " The scrolloff value for moving to next/prev.
-                        let g:searchx.scrolloff = &scrolloff
-                        " To enable scrolling animation.
-                        let g:searchx.scrolltime = 500
-                        " To enable auto nohlsearch after cursor is moved
-                        let g:searchx.nohlsearch = {}
-                        let g:searchx.nohlsearch.jump = v:true
-                        " Marker characters.
-                        let g:searchx.markers = split('ABCDEFGHIJKLMNOPQRSTUVWXYZ', '.\zs')
-                        " Convert search pattern.
-                        function g:searchx.convert(input) abort
-                          if a:input !~# '\k'
-                            return '\V' .. a:input
-                          endif
-                          return a:input[0] .. substitute(a:input[1:], '\\\@<! ', '.\\{-}', 'g')
-                        endfunction
-                        " Set highlight for markers
-                        highlight! link SearchxMarker DiffChange
-                        highlight! link SearchxMarkerCurrent WarningMsg
-                    ]=],
-                    false
-                )
-            end,
-        })
+        -- use({
+        --     "hrsh7th/vim-searchx",
+        --     opt = true,
+        --     setup = function()
+        --         -- Overwrite / and ?.
+        --         vim.keymap.set({ "n", "x" }, "?", function()
+        --             vim.cmd("PackerLoad vim-searchx")
+        --             vim.cmd("call searchx#start({ 'dir': 0 })")
+        --         end)
+        --         vim.keymap.set({ "n", "x" }, "/", function()
+        --             vim.cmd("PackerLoad vim-searchx")
+        --             vim.cmd("call searchx#start({ 'dir': 1 })")
+        --         end)
+        --         -- Move to next/prev match.
+        --         vim.keymap.set(
+        --             { "n", "x" },
+        --             "N",
+        --             "<Cmd>call searchx#prev_dir()<CR>"
+        --         )
+        --         vim.keymap.set(
+        --             { "n", "x" },
+        --             "n",
+        --             "<Cmd>call searchx#next_dir()<CR>"
+        --         )
+        --
+        --         -- Clear highlights
+        --         vim.keymap.set("n", "<Esc>", "<Cmd>call searchx#clear()<CR>)")
+        --     end,
+        --     config = function()
+        --         vim.api.nvim_exec(
+        --             [=[
+        --                 let g:searchx = {}
+        --                 " Auto jump if the recent input matches to any marker.
+        --                 let g:searchx.auto_accept = v:true
+        --                 " The scrolloff value for moving to next/prev.
+        --                 let g:searchx.scrolloff = &scrolloff
+        --                 " To enable scrolling animation.
+        --                 let g:searchx.scrolltime = 500
+        --                 " To enable auto nohlsearch after cursor is moved
+        --                 let g:searchx.nohlsearch = {}
+        --                 let g:searchx.nohlsearch.jump = v:true
+        --                 " Marker characters.
+        --                 let g:searchx.markers = split('ABCDEFGHIJKLMNOPQRSTUVWXYZ', '.\zs')
+        --                 " Convert search pattern.
+        --                 function g:searchx.convert(input) abort
+        --                   if a:input !~# '\k'
+        --                     return '\V' .. a:input
+        --                   endif
+        --                   return a:input[0] .. substitute(a:input[1:], '\\\@<! ', '.\\{-}', 'g')
+        --                 endfunction
+        --                 " Set highlight for markers
+        --                 highlight! link SearchxMarker DiffChange
+        --                 highlight! link SearchxMarkerCurrent WarningMsg
+        --             ]=],
+        --             false
+        --         )
+        --     end,
+        -- })
 
         -- change,add and delete surroundings
         use({
@@ -547,13 +522,17 @@ packer.startup({
                             { "(", ")" },
                             { "[", "]" },
                             { "{", "}" },
-                            { "/", "/" },
-                            {
-                                "*",
-                                "*",
-                            },
+                            -- { "`", "`" },
+                            -- { "/", "/" },
+                            -- { "*", "*" },
                         },
-                        linear = { { "'", "'" }, { "`", "`" }, { '"', '"' } },
+                        linear = {
+                            { "'", "'" },
+                            { "`", "`" },
+                            { "/", "/" },
+                            { "*", "*" },
+                            { '"', '"' },
+                        },
                     },
                 })
             end,
