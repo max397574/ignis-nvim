@@ -43,6 +43,7 @@ local file_icons = {
     haskel = " ",
     hs = " ",
     ruby = " ",
+    norg = " ",
     txt = " ",
 }
 
