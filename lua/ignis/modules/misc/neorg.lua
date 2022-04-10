@@ -51,13 +51,16 @@ require("neorg").setup({
         --     },
         -- },
         ["external.zettelkasten"] = {},
+        ["external.context"] = {},
         ["core.norg.concealer"] = {
             config = {
                 -- markup_preset = "dimmed",
                 markup_preset = "conceal",
-                icon_preset = "diamond",
+                -- icon_preset = "diamond",
+                -- icon_preset = "varied",
                 icons = {
                     marker = {
+                        enabled = true,
                         icon = " ",
                     },
                     todo = {
@@ -79,6 +82,29 @@ require("neorg").setup({
                             icon = "",
                         },
                     },
+                    heading = {
+                        enabled = true,
+                        level_1 = {
+                            icon = "◈",
+                        },
+
+                        level_2 = {
+                            icon = " ◇",
+                        },
+
+                        level_3 = {
+                            icon = "  ◆",
+                        },
+                        level_4 = {
+                            icon = "   ❖",
+                        },
+                        level_5 = {
+                            icon = "    ⟡",
+                        },
+                        level_6 = {
+                            icon = "     ⋄",
+                        },
+                    },
                 },
             },
         },
@@ -97,11 +123,7 @@ require("neorg").setup({
                 default_keybinds = true,
                 neorg_leader = ",",
                 hook = function(keybinds)
-                    keybinds.map(
-                        "traverse-headings",
-                        "n",
-                        "<cmd>Telescope neorg search_headings<CR>"
-                    )
+                    keybinds.unmap("all", "n", "<c-s>")
                 end,
             },
         },
@@ -136,6 +158,12 @@ require("neorg").setup({
                 workspace = "gtd",
                 journal_folder = "notes/journal",
                 strategy = "nested",
+            },
+        },
+        ["core.export"] = {},
+        ["core.export.markdown"] = {
+            config = {
+                extensions = "all",
             },
         },
     },
