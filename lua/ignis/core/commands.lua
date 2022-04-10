@@ -12,9 +12,11 @@ add_cmd("BigScreen", function()
     require("colorscheme_switcher").big_screen()
 end, {})
 
-add_cmd("Tmp", function()
-    require("ignis.extras").scratch_buf()
-end, {})
+add_cmd("Tmp", function(args)
+    require("ignis.extras").scratch_buf(args)
+end, {
+    nargs = "?",
+})
 
 add_cmd("CursorNodes", function()
     local node = require("nvim-treesitter.ts_utils").get_node_at_cursor()

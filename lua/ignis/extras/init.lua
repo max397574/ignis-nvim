@@ -127,8 +127,12 @@ local open_scratch = function()
     vim.fn.feedkeys(utils.t("<ESC><ESC>"), "i")
 end
 
-extras.scratch_buf = function()
+extras.scratch_buf = function(args)
     og_win = vim.api.nvim_get_current_win()
+    if args.fargs then
+        open_scratch_buffer(args.fargs[1])
+        return
+    end
     local opts = {}
     opts.data = {
         "lua",
