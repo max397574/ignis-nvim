@@ -721,7 +721,6 @@ end
 local function base_16_finder(opts)
     reloader()
     opts = opts or {}
-    local conf = require("telescope.config").values
     local change_theme = function()
         local entry = action_state.get_selected_entry()
         if entry ~= nil then
