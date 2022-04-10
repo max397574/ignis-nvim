@@ -14,6 +14,9 @@ require("which-key").setup({
         winblend = 0,
         -- winblend = 20,
     },
+    -- triggers_blacklist = {
+    --     i = { "<space>", "<leader>", " " },
+    -- },
 })
 
 wk.register({
