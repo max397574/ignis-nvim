@@ -281,8 +281,10 @@ end, {
 -- toggle keymappings for venn using <leader>v
 vim.keymap.set("n", "<leader>V", toggle_venn, { noremap = true })
 
+-- reize windows with arrows
 vim.keymap.set("n", "<left>", "<C-W>1<", nore_silent)
 vim.keymap.set("n", "<down>", ":resize +1<CR>", nore_silent)
 vim.keymap.set("n", "<right>", "<C-W>1>", nore_silent)
 vim.keymap.set("n", "<up>", ":resize -1<CR>", nore_silent)
+-- just <cr> -> if u use <cr> to confirm completion
 vim.keymap.set("i", "<m-cr>", "<cr>", nore_silent)

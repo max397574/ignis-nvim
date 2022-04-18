@@ -447,38 +447,6 @@ local lsp_progress = {
             )
         end
         -- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
-        -- local spinners = {
-        --     ".  ",
-        --     ".. ",
-        --     "...",
-        --     " ..",
-        --     "  .",
-        --     "   ",
-        -- }
-        -- local spinners = { -- arrow3
-        --     "▹▹▹▹▹",
-        --     "▸▹▹▹▹",
-        --     "▹▸▹▹▹",
-        --     "▹▹▸▹▹",
-        --     "▹▹▹▸▹",
-        --     "▹▹▹▹▸",
-        -- }
-        -- local spinners = {
-        --     "◜",
-        --     "◠",
-        --     "◝",
-        --     "◞",
-        --     "◡",
-        --     "◟",
-        -- }
-        -- local spinners = {
-        --     "✶",
-        --     "✸",
-        --     "✹",
-        --     "✺",
-        --     "✹",
-        --     "✷",
-        -- }
         local spinners = {
             "⠋",
             "⠙",

@@ -28,7 +28,6 @@ vim.g.loaded_zip = 1
 vim.g.loaded_zipPlugin = 1
 vim.g.loaded_tutor = 1
 vim.g.loaded_rplugin = 1
-vim.g.loaded_tarPlugin = 1
 vim.g.loaded_logiPat = 1
 vim.g.loaded_netrwSettings = 1
 vim.g.loaded_netrwFileHandlers = 1
@@ -75,10 +74,12 @@ vim.defer_fn(function()
 
     vim.cmd("doautocmd ColorScheme")
     vim.opt.shadafile = ""
-    vim.cmd([[
+    if not vim.opt.loadplugins then
+        vim.cmd([[
         runtime! plugin/**/*.vim
         runtime! plugin/**/*.lua
     ]])
+    end
     vim.cmd([[
         rshada!
         doautocmd BufRead

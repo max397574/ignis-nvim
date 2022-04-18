@@ -232,7 +232,7 @@ if require("custom.db").get_ts_layout() == "custom_bottom_no_borders" then
     fg_bg("TelescopeResultsTitle", black, blue)
     fg_bg("TelescopeSelection", blue, light_grey)
     fg_bg("TelescopeSelectionCaret", blue, light_grey)
-    bg("TelescopePreviewLine", "#353b45")
+    bg("TelescopePreviewLine", light_grey)
 elseif require("custom.db").get_ts_layout() == "float_all_borders" then
     fg_bg("TelescopeBorder", light_grey, black)
     fg_bg("TelescopePromptBorder", light_grey, black)
@@ -252,7 +252,7 @@ elseif require("custom.db").get_ts_layout() == "float_all_borders" then
     fg_bg("TelescopeResultsTitle", black, blue)
     fg_bg("TelescopeSelection", blue, light_grey)
     fg_bg("TelescopeSelectionCaret", blue, light_grey)
-    bg("TelescopePreviewLine", "#353b45")
+    bg("TelescopePreviewLine", light_grey)
 end
 
 -- Disable some highlight in nvim tree if transparency enabled

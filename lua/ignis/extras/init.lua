@@ -115,7 +115,7 @@ local function open_scratch_buffer(language)
         run_file()
     end, {
         noremap = true,
-        buffer = true,
+        buffer = buf,
     })
 end
 

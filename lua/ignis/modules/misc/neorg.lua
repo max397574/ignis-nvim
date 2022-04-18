@@ -52,11 +52,12 @@ require("neorg").setup({
         -- },
         ["external.zettelkasten"] = {},
         ["external.context"] = {},
+        ["core.cheatsheet"] = {},
         ["core.norg.concealer"] = {
             config = {
                 -- markup_preset = "dimmed",
                 markup_preset = "conceal",
-                -- icon_preset = "diamond",
+                icon_preset = "diamond",
                 -- icon_preset = "varied",
                 icons = {
                     marker = {

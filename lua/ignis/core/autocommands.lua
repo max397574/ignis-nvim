@@ -190,3 +190,28 @@ aucmd("CursorHold", {
         end
     end,
 })
+
+aucmd("User", {
+    pattern = "PackerCompileDone",
+    callback = function()
+        vim.api.nvim_chan_send(
+            vim.v.stderr,
+            "\027]99;i=1:d=0;Packer.nvim\027\\"
+        )
+        vim.api.nvim_chan_send(
+            vim.v.stderr,
+            "\027]99;i=1:d=1:p=body;Compile finished\027\\"
+        )
+    end,
+})
+
+aucmd("DiagnosticChanged", {
+    once = true,
+    callback = function()
+        vim.api.nvim_chan_send(vim.v.stderr, "\027]99;i=1:d=0;Lsp\027\\")
+        vim.api.nvim_chan_send(
+            vim.v.stderr,
+            "\027]99;i=1:d=1:p=body;Finished Loading\027\\"
+        )
+    end,
+})

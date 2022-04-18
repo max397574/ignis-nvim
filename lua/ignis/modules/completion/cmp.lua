@@ -136,7 +136,7 @@ cmp.setup({
                 behavior = cmp.ConfirmBehavior.Insert,
             }),
             c = cmp.mapping.confirm({
-                select = true,
+                select = false,
                 behavior = cmp.ConfirmBehavior.Select,
             }),
         }),
@@ -147,21 +147,21 @@ cmp.setup({
         --     }),
         --     c=
         -- }),
-        -- ["<tab>"] = cmp.mapping(function()
-        --     if cmp.visible() then
-        --         cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-        --         -- cmp.select_next_item()
-        --     end
-        -- end, {
-        --     "c",
-        -- }),
-        -- ["<s-tab>"] = cmp.mapping(function()
-        --     if cmp.visible() then
-        --         cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-        --     end
-        -- end, {
-        --     "c",
-        -- }),
+        ["<tab>"] = cmp.mapping(function()
+            if cmp.visible() then
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+                -- cmp.select_next_item()
+            end
+        end, {
+            "c",
+        }),
+        ["<s-tab>"] = cmp.mapping(function()
+            if cmp.visible() then
+                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+            end
+        end, {
+            "c",
+        }),
         ["<C-l>"] = cmp.mapping(function(fallback)
             if luasnip.choice_active() then
                 require("luasnip").change_choice(1)
@@ -200,6 +200,7 @@ cmp.setup({
         { name = "emoji", priority = 3 },
         { name = "greek", priority = 1 },
         { name = "calc", priority = 4 },
+        { name = "cmdline", priority = 4 },
         -- { name = "copilot", priority = 8 },
         -- { name = "cmp_tabnine", priority = 8 },
         { name = "nvim_lsp", priority = 9 },
@@ -291,42 +292,26 @@ cmp.setup({
     },
 })
 
--- cmp.setup.cmdline(":", {
---     view = {
---         entries = { name = "wildmenu", separator = " | " }, -- the user can also specify the `wildmenu` literal string.
---     },
---     sources = cmp.config.sources({
---         { name = "path", keyword_length = 2 },
---     }, {
---         { name = "cmdline", keyword_length = 2 },
---     }),
---     enabled = function()
---         -- if vim.bo.ft == "dashboard" then
---         --     return false
---         -- end
---         return true
---     end,
--- })
+cmp.setup.cmdline(":", {
+    sources = {
+        { name = "cmdline", group_index = 1 },
+        -- { name = "cmdline" },
+        { name = "cmdline_history", group_index = 2 },
+    },
+    view = {
+        entries = { name = "wildmenu", separator = " | " },
+    },
+})
 
--- cmp.setup.cmdline("/", {
---     sources = {
---         { name = "buffer", keyword_length = 2 },
---     },
---     enabled = function()
---         return true
---     end,
---     completion = {
---         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
---         scrollbar = "║",
---     },
---     documentation = {
---         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
---         scrollbar = "║",
---     },
---     view = {
---         entries = { name = "wildmenu", separator = " | " }, -- the user can also specify the `wildmenu` literal string.
---     },
--- })
+cmp.setup.cmdline("/", {
+    sources = {
+        { name = "cmdline_history" },
+        { name = "buffer" },
+    },
+    view = {
+        entries = { name = "wildmenu", separator = " | " },
+    },
+})
 
 local neorg = require("neorg")
 

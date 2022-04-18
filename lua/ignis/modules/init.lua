@@ -223,11 +223,11 @@ packer.startup({
                 "p00f/nvim-ts-rainbow",
                 {
                     -- "romgrk/nvim-treesitter-context",
-                    "~/neovim_plugins/nvim-treesitter-context/",
+                    "lewis6991/nvim-treesitter-context",
                     event = "InsertEnter",
                     config = function()
                         vim.cmd([[hi! link TreesitterContext TS_Context]])
-                        require("treesitter-context.config").setup({
+                        require("treesitter-context").setup({
                             enable = true,
                             patterns = {
                                 default = {
@@ -660,11 +660,12 @@ packer.startup({
         use({
             -- "~/neovim_plugins/nvim-cmp",
             -- "iron-e/nvim-cmp",
+            -- "max397574/nvim-cmp",
             "hrsh7th/nvim-cmp",
             -- branch = "feat/completion-menu-borders",
-            branch = "dev",
-            commit = "9b202effd71f84d8585439438ec931a5342f7941",
-            event = { "InsertEnter" },
+            -- branch = "dev",
+            -- commit = "9b202effd71f84d8585439438ec931a5342f7941",
+            event = { "InsertEnter", "CmdLineEnter" },
             config = function()
                 require("ignis.modules.completion.cmp")
             end,
@@ -696,6 +697,7 @@ packer.startup({
         use({ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" })
         use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" })
         use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
+        use({ "dmitmel/cmp-cmdline-history", after = "nvim-cmp" })
         use({ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" })
 
         use({
@@ -729,17 +731,17 @@ packer.startup({
             opt = true,
         })
 
-        use({
-            "gelguy/wilder.nvim",
-            event = "CmdLineEnter",
-            requires = {
-                { "romgrk/fzy-lua-native", opt = true, after = "wilder.nvim" },
-            },
-            run = ":UpdateRemotePlugins",
-            config = function()
-                require("ignis.modules.completion.wilder")
-            end,
-        })
+        -- use({
+        --     "gelguy/wilder.nvim",
+        --     event = "CmdLineEnter",
+        --     requires = {
+        --         { "romgrk/fzy-lua-native", opt = true, after = "wilder.nvim" },
+        --     },
+        --     run = ":UpdateRemotePlugins",
+        --     config = function()
+        --         require("ignis.modules.completion.wilder")
+        --     end,
+        -- })
 
         use({
             "danymat/neogen",
@@ -768,7 +770,11 @@ packer.startup({
             "neovim/nvim-lspconfig",
             opt = true,
             requires = {
-                { "folke/lua-dev.nvim", module = "lua-dev", opt = true },
+                {
+                    "~/neovim_plugins/lua-dev.nvim",
+                    module = "lua-dev",
+                    opt = true,
+                },
             },
             config = function()
                 require("ignis.modules.lsp")
