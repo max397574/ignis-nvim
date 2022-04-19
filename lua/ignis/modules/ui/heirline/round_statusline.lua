@@ -1,5 +1,10 @@
 -- credits for icons go to https://github.com/tamton-aquib/staline.nvim/blob/49915550f77353f3134036d566ed359587f2d71b/lua/staline/config.lua
-local heirline = require("heirline")
+-- local leftbracket = "" -- Curve.
+-- local rightbracket = "" -- Curve.
+-- local leftbracket = u 'e0b2' -- Angle filled.
+-- local rightbracket = u 'e0b0' -- Angle filled.
+-- local leftbracket = u 'e0b3' -- Angle.
+-- local rightbracket = u 'e0b1' -- Angle.
 local conditions = require("heirline.conditions")
 local utilities = require("heirline.utils")
 local utils = require("heirline.utils")
@@ -20,6 +25,7 @@ end
 
 local file_icons = {
     typescript = " ",
+    tex = "ﭨ ",
     ts = " ",
     python = " ",
     py = " ",
@@ -49,6 +55,9 @@ local file_icons = {
     txt = " ",
 }
 
+-- ""
+-- ""
+
 local mode_colors = {
     n = vim.g.terminal_color_1,
     i = vim.g.terminal_color_2,
@@ -66,13 +75,11 @@ local mode_colors = {
 }
 
 local FileNameBlock = {
-    -- let's first set up some attributes needed by this component and it's children
     init = function(self)
         self.filename = vim.api.nvim_buf_get_name(0)
         self.mode = vim.fn.mode(1)
     end,
 }
--- We can now define some children separately and add them later
 
 local HelpFileName = {
     condition = function()
@@ -109,38 +116,34 @@ local FileIcon = {
         end
     end,
     provider = function(self)
+        -- return self.icon and (" " .. self.icon .. " ")
         return self.icon and (" " .. self.icon)
     end,
     hl = function(self)
         if use_dev_icons then
             return { fg = self.icon_color }
         else
-            local mode = self.mode:sub(1, 1) -- get only the first mode character
-            return { fg = mode_colors[mode] }
+            return { fg = colors.black, bg = colors.blue }
         end
+    end,
+    condition = function()
+        return vim.tbl_contains(vim.tbl_keys(file_icons), vim.bo.ft)
     end,
 }
 
 local FileName = {
     provider = function(self)
-        -- first, trim the pattern relative to the current directory. For other
-        -- options, see :h filename-modifers
         local filename = vim.fn.fnamemodify(self.filename, ":t")
         if filename == "" then
-            -- return "[No Name]"
             return ""
         end
-        -- now, if the filename would occupy more than 1/4th of the available
-        -- space, we trim the file path to its initials
         if not conditions.width_percent_below(#filename, 0.25) then
             filename = vim.fn.pathshorten(filename)
         end
         return filename .. " "
     end,
-    -- hl = { fg = utils.get_highlight("Directory").fg },
-    hl = function(self)
-        local mode = self.mode:sub(1, 1) -- get only the first mode character
-        return { fg = mode_colors[mode] }
+    hl = function()
+        return { fg = colors.black }
     end,
 }
 
@@ -151,9 +154,8 @@ local FileFlags = {
                 return " "
             end
         end,
-        hl = function(self)
-            local mode = self.mode:sub(1, 1) -- get only the first mode character
-            return { fg = mode_colors[mode] }
+        hl = function()
+            return { fg = colors.black }
         end,
     },
     {
@@ -163,30 +165,67 @@ local FileFlags = {
             end
         end,
         hl = function(self)
-            local mode = self.mode:sub(1, 1) -- get only the first mode character
+            local mode = self.mode:sub(1, 1)
             return { fg = mode_colors[mode] }
         end,
     },
 }
 
--- Now, let's say that we want the filename color to change if the buffer is
--- modified. Of course, we could do that directly using the FileName.hl field,
--- but we'll see how easy it is to alter existing components using a "modifier"
--- component
+local FileIconSurroundF = {
+    {
+        provider = function()
+            return ""
+        end,
+        hl = function(_)
+            return { fg = colors.blue, bg = "none" }
+        end,
+        condition = function()
+            return vim.tbl_contains(vim.tbl_keys(file_icons), vim.bo.ft)
+        end,
+    },
+}
+local FileIconSurroundB = {
+    {
+        provider = function()
+            return " "
+        end,
+        hl = function(_)
+            return { bg = colors.nord_blue, fg = colors.blue }
+        end,
+        condition = function()
+            return vim.tbl_contains(vim.tbl_keys(file_icons), vim.bo.ft)
+        end,
+    },
+}
+local FileNameSurround = {
+    {
+        provider = function()
+            return ""
+        end,
+        hl = function(_)
+            return { fg = colors.nord_blue, bg = "none" }
+        end,
+        condition = function()
+            return not vim.tbl_contains(vim.tbl_keys(file_icons), vim.bo.ft)
+        end,
+    },
+}
 
--- let's add the children to our FileNameBlock component
 FileNameBlock = utils.insert(
     FileNameBlock,
+    FileIconSurroundF,
     FileIcon,
+    FileIconSurroundB,
+    FileNameSurround,
     FileName,
-    unpack(FileFlags), -- A small optimisation, since their parent does nothing
+    unpack(FileFlags),
     {
         provider = "%<",
-    } -- this means that the statusline is cut here when there's not enough space
+    }
 )
 FileNameBlock = utilities.surround(
-    { "", "" },
-    colors.lightbg,
+    { "", "" },
+    colors.nord_blue,
     FileNameBlock
 )
 
@@ -232,12 +271,11 @@ local git = {
 
     hl = { fg = colors.orange },
 
-    { -- git branch name
+    {
         provider = function(self)
             return " " .. self.status_dict.head .. " "
         end,
     },
-    -- You could handle delimiters, icons and counts similar to Diagnostics
     {
         provider = function(self)
             local count = self.status_dict.added or 0
@@ -262,87 +300,127 @@ local git = {
 }
 
 local WorkDir = {
-    provider = function()
-        local icon = "  "
-        local cwd = vim.fn.getcwd(0)
-        cwd = vim.fn.fnamemodify(cwd, ":~")
-        if not conditions.width_percent_below(#cwd, 0.25) then
-            cwd = vim.fn.pathshorten(cwd)
-        end
-        local trail = cwd:sub(-1) == "/" and "" or "/"
-        return icon .. cwd .. trail
-    end,
-    hl = { fg = colors.blue },
+    {
+        provider = function()
+            return "  "
+        end,
+        hl = function(_)
+            return { fg = colors.black, bg = colors.vibrant_green }
+        end,
+    },
+    {
+        provider = function()
+            return ""
+        end,
+        hl = { fg = colors.vibrant_green, bg = colors.green },
+    },
+    {
+        provider = function()
+            local cwd = vim.fn.getcwd(0)
+            cwd = vim.fn.fnamemodify(cwd, ":~")
+            if not conditions.width_percent_below(#cwd, 0.25) then
+                cwd = vim.fn.pathshorten(cwd)
+            end
+            local trail = cwd:sub(-1) == "/" and "" or "/"
+            return " " .. cwd .. trail
+        end,
+        hl = { bg = colors.green, fg = colors.black },
+    },
 }
 
 local mode_icon = {
-    init = function(self)
-        self.mode = vim.fn.mode(1)
-    end,
-
-    static = {
-        mode_icons = {
-            ["n"] = "  ",
-            ["i"] = "  ",
-            ["s"] = "  ",
-            ["S"] = "  ",
-            [""] = "  ",
-
-            ["v"] = "  ",
-            ["V"] = "  ",
-            [""] = "  ",
-            ["r"] = " ﯒ ",
-            ["r?"] = "  ",
-            ["c"] = "  ",
-            ["t"] = "  ",
-            ["!"] = "  ",
-            ["R"] = "  ",
-        },
-        mode_names = { -- change the strings if yow like it vvvvverbose!
-            n = "N",
-            no = "N?",
-            nov = "N?",
-            noV = "N?",
-            ["no"] = "N?",
-            niI = "Ni",
-            niR = "Nr",
-            niV = "Nv",
-            nt = "Nt",
-            v = "V",
-            vs = "Vs",
-            V = "V_",
-            Vs = "Vs",
-            [""] = "",
-            ["s"] = "",
-            s = "S",
-            S = "S_",
-            [""] = "",
-            i = "I",
-            ic = "Ic",
-            ix = "Ix",
-            R = "R",
-            Rc = "Rc",
-            Rx = "Rx",
-            Rv = "Rv",
-            Rvc = "Rv",
-            Rvx = "Rv",
-            c = "C",
-            cv = "Ex",
-            r = "...",
-            rm = "M",
-            ["r?"] = "?",
-            ["!"] = "!",
-            t = "T",
-        },
+    {
+        init = function(self)
+            self.mode = vim.fn.mode(1)
+        end,
+        provider = function()
+            return ""
+        end,
+        hl = function(self)
+            local mode = self.mode:sub(1, 1)
+            return { fg = mode_colors[mode] }
+        end,
     },
-    hl = function(self)
-        local mode = self.mode:sub(1, 1) -- get only the first mode character
-        return { fg = mode_colors[mode] }
-    end,
-    provider = function(self)
-        return "%2(" .. self.mode_icons[self.mode:sub(1, 1)] .. "%)"
-        --         .. self.mode_names[self.mode]
-    end,
+    {
+        init = function(self)
+            self.mode = vim.fn.mode(1)
+        end,
+
+        static = {
+            mode_icons = {
+                ["n"] = "  ",
+                ["i"] = "  ",
+                ["s"] = "  ",
+                ["S"] = "  ",
+                [""] = "  ",
+
+                ["v"] = "  ",
+                ["V"] = "  ",
+                [""] = "  ",
+                ["r"] = " ﯒ ",
+                ["r?"] = "  ",
+                ["c"] = "  ",
+                ["t"] = "  ",
+                ["!"] = "  ",
+                ["R"] = "  ",
+            },
+            mode_names = {
+                n = "N",
+                no = "N?",
+                nov = "N?",
+                noV = "N?",
+                ["no"] = "N?",
+                niI = "Ni",
+                niR = "Nr",
+                niV = "Nv",
+                nt = "Nt",
+                v = "V",
+                vs = "Vs",
+                V = "V_",
+                Vs = "Vs",
+                [""] = "",
+                ["s"] = "",
+                s = "S",
+                S = "S_",
+                [""] = "",
+                i = "I",
+                ic = "Ic",
+                ix = "Ix",
+                R = "R",
+                Rc = "Rc",
+                Rx = "Rx",
+                Rv = "Rv",
+                Rvc = "Rv",
+                Rvx = "Rv",
+                c = "C",
+                cv = "Ex",
+                r = "...",
+                rm = "M",
+                ["r?"] = "?",
+                ["!"] = "!",
+                t = "T",
+            },
+        },
+        hl = function(self)
+            local mode = self.mode:sub(1, 1)
+            return { bg = mode_colors[mode], fg = colors.black }
+        end,
+        provider = function(self)
+            return "%2(" .. self.mode_icons[self.mode:sub(1, 1)] .. "%)" .. " "
+        end,
+    },
+    {
+        init = function(self)
+            self.mode = vim.fn.mode(1)
+        end,
+        provider = function()
+            return ""
+        end,
+        hl = function(self)
+            local mode = self.mode:sub(1, 1)
+            return { fg = mode_colors[mode] }
+        end,
+    },
 }
 
 local function progress_bar()
@@ -354,16 +432,45 @@ local function progress_bar()
 end
 
 local progress = {
-    provider = function()
-        return "%3(%P%) " .. progress_bar() .. " "
-    end,
-    init = function(self)
-        self.mode = vim.fn.mode(1)
-    end,
-    hl = function(self)
-        local mode = self.mode:sub(1, 1) -- get only the first mode character
-        return { fg = mode_colors[mode] }
-    end,
+    {
+        provider = function()
+            return ""
+        end,
+        hl = function(_)
+            return { fg = colors.pink, bg = "none" }
+        end,
+    },
+    {
+        provider = function()
+            return "%3(%P%)"
+        end,
+        hl = { bg = colors.pink, fg = colors.black },
+    },
+    {
+        provider = function()
+            return ""
+        end,
+        hl = function(_)
+            return { fg = colors.pink, bg = colors.dark_purple }
+        end,
+    },
+    {
+        provider = function()
+            -- return "%3(%P%) " .. progress_bar() .. " "
+            return " " .. progress_bar() .. " "
+        end,
+        hl = function()
+            return { bg = colors.dark_purple, fg = colors.black }
+        end,
+    },
+    {
+        provider = function()
+            return ""
+        end,
+        hl = function(_)
+            return { fg = colors.dark_purple, bg = "none" }
+        end,
+    },
 }
 
 local diagnostics = {
@@ -398,7 +505,6 @@ local diagnostics = {
 
     {
         provider = function(self)
-            -- 0 is just another output, we can decide to print it or not!
             return self.errors > 0 and (self.error_icon .. self.errors .. " ")
         end,
         hl = { fg = utils.get_highlight("DiagnosticError").fg },
@@ -439,14 +545,8 @@ local lsp_progress = {
         end
         local status = {}
         for _, msg in pairs(messages) do
-            -- dump(msg)
-            table.insert(
-                status,
-                -- (msg.percentage or 0) .. "%% " .. (msg.title or "")
-                msg.percentage or 0
-            )
+            table.insert(status, msg.percentage or 0)
         end
-        -- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
         local spinners = {
             "⠋",
             "⠙",
@@ -466,7 +566,6 @@ local lsp_progress = {
 }
 
 local Snippets = {
-    -- check that we are in insert or select mode
     condition = function()
         return vim.tbl_contains({ "s", "i" }, vim.fn.mode())
     end,
@@ -480,37 +579,80 @@ local Snippets = {
 }
 
 local coords = {
-    -- %l = current line number
-    -- %L = number of lines in the buffer
-    -- %c = column number
-    -- %P = percentage through file of displayed window
-    provider = function()
-        -- return "%7(%l/%3L%):%2c %P " .. progress_bar() .. " "
-        return "%4(%l%):%2c"
-    end,
-    init = function(self)
-        self.mode = vim.fn.mode(1)
-    end,
-    hl = function(self)
-        local mode = self.mode:sub(1, 1) -- get only the first mode character
-        return { fg = mode_colors[mode] }
-    end,
+    {
+        provider = function()
+            return ""
+        end,
+        hl = { fg = colors.orange },
+    },
+    {
+        provider = function()
+            return "  "
+        end,
+        hl = { fg = colors.black, bg = colors.orange },
+    },
+    {
+        provider = function()
+            return ""
+        end,
+        hl = { fg = colors.orange, bg = colors.yellow },
+    },
+    {
+        provider = function()
+            return "%4(%l%):%2c"
+        end,
+        hl = function()
+            return { fg = colors.black, bg = colors.yellow }
+        end,
+    },
+    {
+        provider = function()
+            return ""
+        end,
+        hl = { fg = colors.yellow },
+    },
 }
 local word_count = {
-    init = function(self)
-        self.mode = vim.fn.mode(1)
-    end,
-    provider = function()
-        return "%5(" .. word_counter() .. "%) "
-    end,
-    hl = function(self)
-        local mode = self.mode:sub(1, 1) -- get only the first mode character
-        return { fg = mode_colors[mode] }
-    end,
-    condition = conditions.is_active(),
+    {
+        init = function(self)
+            self.mode = vim.fn.mode(1)
+        end,
+        provider = function()
+            return ""
+        end,
+        hl = function(self)
+            local mode = self.mode:sub(1, 1)
+            return { fg = mode_colors[mode] }
+        end,
+    },
+    {
+        init = function(self)
+            self.mode = vim.fn.mode(1)
+        end,
+        provider = function()
+            return "%5(" .. word_counter() .. "%) "
+        end,
+        hl = function(self)
+            local mode = self.mode:sub(1, 1)
+            return { bg = mode_colors[mode], fg = colors.black }
+        end,
+        condition = conditions.is_active(),
+    },
+    {
+        init = function(self)
+            self.mode = vim.fn.mode(1)
+        end,
+        provider = function()
+            return ""
+        end,
+        hl = function(self)
+            local mode = self.mode:sub(1, 1)
+            return { fg = mode_colors[mode] }
+        end,
+    },
 }
 
-WorkDir = utilities.surround({ "", "" }, colors.lightbg, WorkDir)
+WorkDir = utilities.surround({ "", "" }, colors.green, WorkDir)
 
 local inactive_statusline = {
     condition = function()
@@ -532,26 +674,23 @@ local default_statusline = {
     option_value,
     space,
     lsp_progress,
-    -- utilities.surround({ "", "" }, colors.lightbg, coords),
-    -- branch,
-    -- git_diff,
     diagnostics,
     space,
     align,
-    -- space,
     Snippets,
     space,
     dyn_help_available,
     space,
     coords,
     space,
-    utilities.surround({ "", "" }, colors.lightbg, mode_icon),
+    -- utilities.surround({ "", "" }, colors.lightbg, mode_icon),
+    mode_icon,
     space,
-    utilities.surround({ "", "" }, colors.lightbg, progress),
+    -- utilities.surround({ "", "" }, colors.lightbg, progress),
+    progress,
     space,
-    -- Snippets,
-    -- space,
-    utilities.surround({ "", "" }, colors.lightbg, word_count),
+    -- utilities.surround({ "", "" }, colors.lightbg, word_count),
+    word_count,
 }
 
 local help_file_line = {
@@ -575,12 +714,6 @@ local startup_nvim_statusline = {
         })
     end,
     align,
-    -- utilities.surround({ "", "" }, colors.lightbg, {
-    --     provider = function()
-    --         return "Startup"
-    --     end,
-    --     hl = { fg = colors.red },
-    -- }),
     provider = "",
     align,
 }
@@ -594,9 +727,4 @@ local statuslines = {
     default_statusline,
 }
 
-local round_statusline = require("ignis.modules.ui.heirline.round_statusline")
-if true then
-    heirline.setup(round_statusline)
-else
-    heirline.setup(statuslines)
-end
+return statuslines
