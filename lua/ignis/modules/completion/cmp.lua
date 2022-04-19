@@ -137,7 +137,7 @@ cmp.setup({
             }),
             c = cmp.mapping.confirm({
                 select = false,
-                behavior = cmp.ConfirmBehavior.Select,
+                behavior = cmp.ConfirmBehavior.Insert,
             }),
         }),
         -- ["<cr>"] = cmp.mapping({
