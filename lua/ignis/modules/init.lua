@@ -714,22 +714,22 @@ packer.startup({
             "zbirenbaum/copilot-cmp",
             after = { "copilot.lua", "nvim-cmp" },
         })
-        use({
-            "tzachar/cmp-tabnine",
-            run = "./install.sh",
-            after = "nvim-cmp",
-            config = function()
-                local tabnine = require("cmp_tabnine.config")
-                tabnine:setup({
-
-                    max_line = 1000,
-                    max_num_results = 20,
-                    sort = true,
-                    run_on_every_keystroke = true,
-                })
-            end,
-            opt = true,
-        })
+        -- use({
+        --     "tzachar/cmp-tabnine",
+        --     run = "./install.sh",
+        --     after = "nvim-cmp",
+        --     config = function()
+        --         local tabnine = require("cmp_tabnine.config")
+        --         tabnine:setup({
+        --
+        --             max_line = 1000,
+        --             max_num_results = 20,
+        --             sort = true,
+        --             run_on_every_keystroke = true,
+        --         })
+        --     end,
+        --     opt = true,
+        -- })
 
         -- use({
         --     "gelguy/wilder.nvim",
