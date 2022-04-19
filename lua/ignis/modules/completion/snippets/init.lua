@@ -492,6 +492,7 @@ ls.add_snippets(nil, {
 })
 
 require("ignis.modules.completion.snippets.tex_math")
+require("ignis.modules.completion.snippets.tex_circuits")
 require("ignis.modules.completion.snippets.choice_popup")
 
 require("luasnip/loaders/from_vscode").load({
