@@ -423,4 +423,30 @@ utils.in_mathzone = function()
     end
 end
 
+function utils.adjust_color(color, amount)
+    color = vim.trim(color)
+    color = color:gsub("#", "")
+    local first = ("0" .. string.format(
+        "%x",
+        (math.min(255, tonumber(color:sub(1, 2), 16) + amount))
+    )):sub(-2)
+    local second = ("0" .. string.format(
+        "%x",
+        (math.min(255, tonumber(color:sub(3, 4), 16) + amount))
+    )):sub(-2)
+    local third = ("0" .. string.format(
+        "%x",
+        (math.min(255, tonumber(color:sub(5, -1), 16) + amount))
+    )):sub(-2)
+    return "#" .. first .. second .. third
+end
+
+function utils.darken_color(color, amount)
+    return utils.adjust_color(color, -amount)
+end
+
+function utils.lighten_color(color, amount)
+    return utils.adjust_color(color, amount)
+end
+
 return utils
