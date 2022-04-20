@@ -497,17 +497,39 @@ local coords = {
     end,
 }
 local word_count = {
-    init = function(self)
-        self.mode = vim.fn.mode(1)
-    end,
-    provider = function()
-        return "%5(" .. word_counter() .. "%) "
-    end,
-    hl = function(self)
-        local mode = self.mode:sub(1, 1) -- get only the first mode character
-        return { fg = mode_colors[mode] }
-    end,
-    condition = conditions.is_active(),
+    {
+        provider = function()
+            return string.rep(" ", 5 - #tostring(word_counter())) .. ""
+        end,
+        hl = function()
+            return { fg = colors.lightbg }
+        end,
+    },
+    {
+        init = function(self)
+            self.mode = vim.fn.mode(1)
+        end,
+        provider = function()
+            return word_counter() .. " "
+        end,
+        hl = function(self)
+            local mode = self.mode:sub(1, 1)
+            return { fg = mode_colors[mode], bg = colors.lightbg }
+        end,
+        condition = conditions.is_active(),
+    },
+    -- {
+    --     init = function(self)
+    --         self.mode = vim.fn.mode(1)
+    --     end,
+    --     provider = function()
+    --         return ""
+    --     end,
+    --     hl = function(self)
+    --         local mode = self.mode:sub(1, 1)
+    --         return { fg = mode_colors[mode] }
+    --     end,
+    -- },
 }
 
 WorkDir = utilities.surround({ "", "" }, colors.lightbg, WorkDir)
@@ -551,7 +573,8 @@ local default_statusline = {
     space,
     -- Snippets,
     -- space,
-    utilities.surround({ "", "" }, colors.lightbg, word_count),
+    -- utilities.surround({ "", "" }, colors.lightbg, word_count),
+    word_count,
 }
 
 local help_file_line = {
@@ -595,7 +618,8 @@ local statuslines = {
 }
 
 local round_statusline = require("ignis.modules.ui.heirline.round_statusline")
-if true then
+local heirline_theme = require("custom.db").get_heirline_theme()
+if heirline_theme == "round" then
     heirline.setup(round_statusline)
 else
     heirline.setup(statuslines)

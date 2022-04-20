@@ -89,7 +89,7 @@ local HelpFileName = {
         local filename = vim.api.nvim_buf_get_name(0)
         return vim.fn.fnamemodify(filename, ":t")
     end,
-    hl = { fg = colors.blue },
+    hl = { fg = colors.dark_blue },
 }
 
 local FileType = {
@@ -123,7 +123,7 @@ local FileIcon = {
         if use_dev_icons then
             return { fg = self.icon_color }
         else
-            return { fg = colors.black, bg = colors.blue }
+            return { fg = colors.black, bg = colors.dark_blue }
         end
     end,
     condition = function()
@@ -177,7 +177,7 @@ local FileIconSurroundF = {
             return ""
         end,
         hl = function(_)
-            return { fg = colors.blue, bg = "none" }
+            return { fg = colors.dark_blue, bg = "none" }
         end,
         condition = function()
             return vim.tbl_contains(vim.tbl_keys(file_icons), vim.bo.ft)
@@ -190,7 +190,7 @@ local FileIconSurroundB = {
             return " "
         end,
         hl = function(_)
-            return { bg = colors.nord_blue, fg = colors.blue }
+            return { bg = colors.blue, fg = colors.dark_blue }
         end,
         condition = function()
             return vim.tbl_contains(vim.tbl_keys(file_icons), vim.bo.ft)
@@ -203,7 +203,7 @@ local FileNameSurround = {
             return ""
         end,
         hl = function(_)
-            return { fg = colors.nord_blue, bg = "none" }
+            return { fg = colors.blue, bg = "none" }
         end,
         condition = function()
             return not vim.tbl_contains(vim.tbl_keys(file_icons), vim.bo.ft)
@@ -223,11 +223,7 @@ FileNameBlock = utils.insert(
         provider = "%<",
     }
 )
-FileNameBlock = utilities.surround(
-    { "", "" },
-    colors.nord_blue,
-    FileNameBlock
-)
+FileNameBlock = utilities.surround({ "", "" }, colors.blue, FileNameBlock)
 
 FileNameBlock[1]["condition"] = function()
     return not conditions.buffer_matches({
@@ -305,14 +301,14 @@ local WorkDir = {
             return "  "
         end,
         hl = function(_)
-            return { fg = colors.black, bg = colors.vibrant_green }
+            return { fg = colors.black, bg = colors.dark_green }
         end,
     },
     {
         provider = function()
             return ""
         end,
-        hl = { fg = colors.vibrant_green, bg = colors.green },
+        hl = { fg = colors.dark_green, bg = colors.vibrant_green },
     },
     {
         provider = function()
@@ -324,7 +320,7 @@ local WorkDir = {
             local trail = cwd:sub(-1) == "/" and "" or "/"
             return " " .. cwd .. trail
         end,
-        hl = { bg = colors.green, fg = colors.black },
+        hl = { bg = colors.vibrant_green, fg = colors.black },
     },
 }
 
@@ -437,21 +433,21 @@ local progress = {
             return ""
         end,
         hl = function(_)
-            return { fg = colors.pink, bg = "none" }
+            return { fg = colors.dark_purple, bg = "none" }
         end,
     },
     {
         provider = function()
             return "%3(%P%)"
         end,
-        hl = { bg = colors.pink, fg = colors.black },
+        hl = { bg = colors.dark_purple, fg = colors.black },
     },
     {
         provider = function()
             return ""
         end,
         hl = function(_)
-            return { fg = colors.pink, bg = colors.dark_purple }
+            return { fg = colors.dark_purple, bg = colors.purple }
         end,
     },
     {
@@ -460,7 +456,7 @@ local progress = {
             return " " .. progress_bar() .. " "
         end,
         hl = function()
-            return { bg = colors.dark_purple, fg = colors.black }
+            return { bg = colors.purple, fg = colors.black }
         end,
     },
     {
@@ -468,7 +464,7 @@ local progress = {
             return ""
         end,
         hl = function(_)
-            return { fg = colors.dark_purple, bg = "none" }
+            return { fg = colors.purple, bg = "none" }
         end,
     },
 }
@@ -618,7 +614,7 @@ local word_count = {
             self.mode = vim.fn.mode(1)
         end,
         provider = function()
-            return ""
+            return string.rep(" ", 5 - #tostring(word_counter())) .. ""
         end,
         hl = function(self)
             local mode = self.mode:sub(1, 1)
@@ -630,7 +626,7 @@ local word_count = {
             self.mode = vim.fn.mode(1)
         end,
         provider = function()
-            return "%5(" .. word_counter() .. "%) "
+            return word_counter()
         end,
         hl = function(self)
             local mode = self.mode:sub(1, 1)
@@ -652,7 +648,7 @@ local word_count = {
     },
 }
 
-WorkDir = utilities.surround({ "", "" }, colors.green, WorkDir)
+WorkDir = utilities.surround({ "", "" }, colors.vibrant_green, WorkDir)
 
 local inactive_statusline = {
     condition = function()
@@ -666,31 +662,28 @@ local inactive_statusline = {
 
 local default_statusline = {
     condition = conditions.is_active,
-    WorkDir,
+    utils.make_flexible_component(5, WorkDir),
     space,
     FileNameBlock,
     space,
     git,
-    option_value,
+    utils.make_flexible_component(1, option_value),
     space,
     lsp_progress,
     diagnostics,
     space,
     align,
-    Snippets,
+    utils.make_flexible_component(3, Snippets),
     space,
-    dyn_help_available,
+    utils.make_flexible_component(2, dyn_help_available),
     space,
-    coords,
+    utils.make_flexible_component(4, coords),
     space,
-    -- utilities.surround({ "", "" }, colors.lightbg, mode_icon),
     mode_icon,
     space,
-    -- utilities.surround({ "", "" }, colors.lightbg, progress),
     progress,
     space,
-    -- utilities.surround({ "", "" }, colors.lightbg, word_count),
-    word_count,
+    utils.make_flexible_component(6, word_count),
 }
 
 local help_file_line = {
