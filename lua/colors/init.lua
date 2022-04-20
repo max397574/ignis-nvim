@@ -1,5 +1,44 @@
--- code from https://github.com/NvChad/NvChad
+-- some code from https://github.com/NvChad/NvChad
+local utils = require("ignis.utils")
 local colors = {}
+
+function colors.create_colorscheme()
+    local scheme = {}
+    scheme.white = vim.fn.input("White> ", "")
+    scheme.black = vim.fn.input("Background> ", "")
+    scheme.darker_black = utils.darken_color(scheme.black, 6)
+    scheme.black2 = utils.lighten_color(scheme.black, 6)
+    scheme.onebg = utils.lighten_color(scheme.black, 10)
+    scheme.onebg2 = utils.lighten_color(scheme.black, 19)
+    scheme.onebg3 = utils.lighten_color(scheme.black, 27)
+    scheme.grey = utils.lighten_color(scheme.black, 40)
+    scheme.grey_fg = utils.lighten_color(scheme.grey, 10)
+    scheme.grey_fg2 = utils.lighten_color(scheme.grey, 20)
+    scheme.light_grey = utils.lighten_color(scheme.grey, 28)
+    scheme.red = vim.fn.input("Red> ", "")
+    scheme.baby_pink = utils.lighten_color(scheme.red, 15)
+    scheme.pink = vim.fn.input("Pink> ", "")
+    scheme.purple = vim.fn.input("Purple> ", "")
+    scheme.dark_purple = utils.darken_color(scheme.purple, 25)
+    scheme.line = utils.lighten_color(scheme.black, 15)
+    scheme.green = vim.fn.input("Green> ", "")
+    scheme.dark_green = utils.darken_color(scheme.green, 25)
+    scheme.vibrant_green = vim.fn.input("Vibrant Green> ", "")
+    scheme.blue = vim.fn.input("Blue> ", "")
+    scheme.teal = vim.fn.input("Orange> ", "")
+    scheme.orange = vim.fn.input("Teal> ", "")
+    scheme.cyan = vim.fn.input("Cyan> ", "")
+    scheme.dark_blue = utils.darken_color(scheme.blue, 25)
+    scheme.nord_blue = utils.darken_color(scheme.blue, 13)
+    scheme.yellow = vim.fn.input("Yellow> ", "")
+    scheme.sun = utils.lighten_color(scheme.yellow, 8)
+    scheme.statusline_bg = utils.lighten_color(scheme.black, 4)
+    scheme.lightbg = utils.lighten_color(scheme.statusline_bg, 13)
+    scheme.lightbg2 = utils.lighten_color(scheme.statusline_bg, 7)
+    scheme.pmenu_bg = scheme.darker_black
+    scheme.folder_bg = scheme.blue
+    return scheme
+end
 
 -- if theme given, load given theme if given, otherwise nvchad_theme
 colors.init = function(theme)
@@ -9,6 +48,7 @@ colors.init = function(theme)
             theme = vim.g.colors_name
         end
     end
+    vim.g.forced_theme = theme
     vim.g.nvchad_theme = theme
     vim.g.colors_name = theme
 
