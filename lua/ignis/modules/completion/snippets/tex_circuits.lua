@@ -62,4 +62,10 @@ ls.add_snippets("tex", {
         t({ [=[\)};]=] }),
         i(0),
     }),
+    s("crossing", {
+        t([[\node at (]]),
+        i(1, "location"),
+        t(") [ocirc,fill=black] {};"),
+        i(0),
+    }),
 })
