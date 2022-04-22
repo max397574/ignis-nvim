@@ -115,65 +115,88 @@ aucmd("VimLeavePre", {
     end,
 })
 
-aucmd("BufEnter", { pattern = "cfg.json", command = "set fg=jsonc" })
+aucmd("BufEnter", { pattern = "cfg.json", command = "set ft=jsonc" })
 
-local called_func = false
+local function feed(keys)
+    vim.api.nvim_feedkeys(
+        vim.api.nvim_replace_termcodes(keys, true, true, true),
+        "n",
+        false
+    )
+end
+
 local timer = nil
-local space_used
-local function reset_timer(text_changed)
-    if timer and not vim.loop.is_closing(timer) then
-        vim.loop.timer_stop(timer)
-        vim.loop.close(timer)
+local nested_timer = nil
+local called_by_func = false
+local closing_timer = false
+local closing_nested_timer = false
+local function make_second_lowercase()
+    if timer and (not vim.loop.is_closing(timer)) and not closing_timer then
+        if closing_timer then
+            return
+        end
+        print("closing timer")
+        closing_timer = true
+        pcall(vim.loop.timer_stop, timer)
+        pcall(vim.loop.close, timer)
+        vim.defer_fn(function()
+            closing_timer = false
+        end, 0)
+        print("closed timer")
+        called_by_func = false
         timer = nil
     end
-    if called_func then
-        return
-    end
-    if text_changed then
-        if timer then
-            vim.loop.timer_stop(timer)
-            vim.loop.close(timer)
-            timer = nil
+    if
+        nested_timer
+        and not vim.loop.is_closing(nested_timer)
+        and not closing_nested_timer
+    then
+        if closing_nested_timer then
+            return
         end
-        return
+        print("closing nested timer")
+        closing_nested_timer = true
+        pcall(vim.loop.timer_stop, nested_timer)
+        pcall(vim.loop.close, nested_timer)
+        vim.defer_fn(function()
+            closing_nested_timer = false
+        end, 0)
+        print("closed nested timer")
+        called_by_func = false
+        nested_timer = nil
     end
     if vim.v.char and vim.v.char ~= " " then
-        space_used = false
+        return
+    end
+    if called_by_func then
         return
     end
     if vim.fn.mode() ~= "i" then
         return
     end
-    if space_used then
-        return
-    end
-    space_used = true
     timer = vim.defer_fn(function()
-        called_func = true
-        local function feed(keys)
-            vim.api.nvim_feedkeys(
-                vim.api.nvim_replace_termcodes(keys, true, true, true),
-                "n",
-                false
-            )
-        end
+        called_by_func = true
+        feed("<esc>bl")
+        nested_timer = vim.defer_fn(function()
+            if vim.tbl_contains({ 1, 2, 0 }, #vim.fn.expand("<cword>")) then
+                feed("hela")
+                return
+            end
+            feed("gulhela")
+            timer = nil
+            called_by_func = false
+        end, 300)
+    end, 0)
 
-        if vim.tbl_contains({ 1, 2, 0 }, #vim.fn.expand("<cword>")) then
-            return
-        end
-
-        feed("<esc>blgulhela")
-        timer = nil
-        called_func = false
-    end, 100)
+    print(vim.v.char)
 end
 
-aucmd("InsertCharPre", {
-    pattern = "*.tex",
-    callback = function()
-        reset_timer()
-    end,
-})
+-- aucmd("InsertCharPre", {
+--     pattern = { "*.tex", "*.norg" },
+--     callback = function()
+--         make_second_lowercase()
+--     end,
+-- })
 
 aucmd({ "BufEnter", "BufReadPost" }, {
     callback = function()
