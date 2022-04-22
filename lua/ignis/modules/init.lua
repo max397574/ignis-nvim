@@ -594,6 +594,7 @@ packer.startup({
                 require("ignis.modules.files.telescope")
             end,
         })
+        use({ "xiyaowong/telescope-emoji.nvim", opt = true })
         use({ "nvim-lua/popup.nvim", after = "telescope.nvim" })
         use({
             "nvim-telescope/telescope-fzf-native.nvim",
@@ -815,6 +816,16 @@ packer.startup({
                     "LightBulbSign",
                     { text = " ", texthl = "String", linehl = "", numhl = "" }
                 )
+            end,
+        })
+
+        use({
+            "declancm/cinnamon.nvim",
+            module = "cinnamon",
+            config = function()
+                require("cinnamon").setup({
+                    default_keymaps = false,
+                })
             end,
         })
 

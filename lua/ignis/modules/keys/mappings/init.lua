@@ -29,12 +29,6 @@ end, nore_silent)
 -- Simple Commands (Improvements of commands)
 -- ==========================================
 
-map("n", "<leader>S", "<cmd>w<CR>", nore_silent)
-
--- highlight search result and center cursor
-map("n", "n", "nzzzv", nore_silent)
-map("n", "N", "Nzzzv", nore_silent)
-
 -- reselect selection after shifting
 map("x", "<", "<gv", nore)
 map("x", ">", ">gv", nore)
@@ -279,7 +273,12 @@ end, {
 })
 
 -- toggle keymappings for venn using <leader>v
-vim.keymap.set("n", "<leader>V", toggle_venn, { noremap = true })
+vim.keymap.set(
+    "n",
+    "<leader>V",
+    toggle_venn,
+    { noremap = true, desc = "Toggle Venn" }
+)
 
 -- reize windows with arrows
 vim.keymap.set("n", "<left>", "<C-W>1<", nore_silent)
@@ -288,3 +287,32 @@ vim.keymap.set("n", "<right>", "<C-W>1>", nore_silent)
 vim.keymap.set("n", "<up>", ":resize -1<CR>", nore_silent)
 -- just <cr> -> if u use <cr> to confirm completion
 vim.keymap.set("i", "<m-cr>", "<cr>", nore_silent)
+
+vim.keymap.set("n", "¢", "bl~lhe", nore_silent)
+
+-- highlight search result and center cursor
+map("n", "n", "nzzzv", nore_silent)
+map("n", "N", "Nzzzv", nore_silent)
+vim.keymap.set({ "n", "x" }, "gg", function()
+    require("cinnamon").Scroll("gg", 0, 0, 3)
+end)
+vim.keymap.set({ "n", "x" }, "G", function()
+    require("cinnamon").Scroll("G", 0, 1, 3)
+end)
+
+vim.keymap.set("n", "n", function()
+    require("cinnamon").Scroll("n", 1, 0, 3)
+    vim.api.nvim_feedkeys("zzzv", "n", true)
+end)
+
+vim.keymap.set("n", "N", function()
+    require("cinnamon").Scroll("N", 1, 0, 3)
+    vim.api.nvim_feedkeys("zzzv", "n", true)
+end)
+
+-- vim.keymap.set("n", "<C-o>", function()
+--     require("cinnamon").Scroll("<C-o>", 1, 0, 3)
+-- end, nore_silent)
+-- vim.keymap.set("n", "<C-i>", function()
+--     require("cinnamon").Scroll("1<C-i>", 1, 0, 3)
+-- end, nore_silent)
