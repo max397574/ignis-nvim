@@ -6,7 +6,7 @@ parser_configs.norg = {
         url = "https://github.com/nvim-neorg/tree-sitter-norg",
         files = { "src/parser.c", "src/scanner.cc" },
         branch = "main",
-        -- branch = "attached-modifiers",
+        -- branch = "dev",
     },
 }
 
