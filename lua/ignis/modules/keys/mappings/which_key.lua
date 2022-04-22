@@ -1,7 +1,7 @@
 local wk = require("which-key")
 wk.register({
     e = {
-        name = "+Explore",
+        name = " Explore",
         f = {
             function()
                 require("lir.float").init()
@@ -18,7 +18,7 @@ wk.register({
     },
     -- == Git ==
     g = {
-        name = "+Git",
+        name = " Git",
         s = {
             function()
                 require("ignis.modules.files.telescope").git_status()
@@ -47,12 +47,12 @@ wk.register({
         },
     },
     n = {
-        name = "+Nvim-Tree",
+        name = " Nvim-Tree",
         t = { "<cmd>NvimTreeToggle<CR>", "Toggle" },
         c = { "<cmd>NvimTreeClose<CR>", "Close" },
     },
     c = {
-        name = "+Comment, Clipboard, Colors",
+        name = " Comment,  Clipboard",
         b = {
             function()
                 require("telescope").extensions.neoclip.default()
@@ -63,7 +63,7 @@ wk.register({
     },
     -- == Colors ==
     C = {
-        name = "+Colors",
+        name = " Colors",
         n = {
             function()
                 require("ignis.modules.files.telescope").colorschemes()
@@ -77,7 +77,7 @@ wk.register({
             "Search",
         },
     },
-    r = "Run",
+    r = "省Run",
     J = {
         function()
             require("tsht").jump_nodes()
@@ -86,9 +86,9 @@ wk.register({
     },
     -- == Markdown ==
     m = {
-        name = "Markdown, Messages",
+        name = " Markdown",
         d = {
-            name = "Markdown",
+            name = " Markdown",
             h = {
                 name = "Heading, HR",
                 ["1"] = { "<cmd>MdHeading1<CR>", "Heading 1" },
@@ -107,7 +107,7 @@ wk.register({
     },
     -- == Errors ==
     x = {
-        name = "+Errors",
+        name = " Errors",
         x = { "<cmd>TroubleToggle<CR>", "Trouble" },
         w = { "<cmd>Trouble lsp_workspace_diagnostics<CR>", "Workspace Trouble" },
         d = { "<cmd>Trouble lsp_document_diagnostics<CR>", "Document Trouble" },
@@ -118,7 +118,7 @@ wk.register({
     },
     Q = { ":let @q='<c-r><c-r>q", "Edit Macro Q" },
     t = {
-        name = "+Table, Tasks",
+        name = "璘Table, Tasks",
         m = { "<cmd>TableModeToggle<CR>", "Toggle Table Mode" },
         t = { "Tabelize" },
         v = { "<cmd>Neorg gtd views<CR>", "View Tasks" },
@@ -126,7 +126,7 @@ wk.register({
         e = { "<cmd>Neorg gtd edit<CR>", "Edit Task" },
     },
     l = {
-        name = "+Last, Load",
+        name = " Last, Load",
         f = { "<cmd>so<CR>", "Load File" },
         s = {
             function()
@@ -137,7 +137,7 @@ wk.register({
     },
     -- == Help ==
     ["h"] = {
-        name = "+Help, Harpoon",
+        name = " Help,  Harpoon",
         t = { "<cmd>Telescope builtin<CR>", "Telescope" },
         c = { "<cmd>Telescope commands<CR>", "Commands" },
         d = {
@@ -174,7 +174,7 @@ wk.register({
             "Help Files",
         },
         p = {
-            name = "+Harpoon",
+            name = " Harpoon",
             a = {
                 function()
                     require("harpoon.mark").add_file()
@@ -202,10 +202,10 @@ wk.register({
             t = { "<cmd>Telescope harpoon marks<CR>", "Telescope" },
         },
     },
-    u = { "<cmd>UndotreeToggle<CR>", "UndoTree" },
+    u = { "<cmd>UndotreeToggle<CR>", " UndoTree" },
     --== Buffers ==
     b = {
-        name = "+Buffer",
+        name = "﩯Buffer",
         ["b"] = { "<cmd>e #<CR>", "Switch to Other Buffer" },
         ["p"] = { "<cmd>BufferLineCyclePrev<CR>", "Previous Buffer" },
         ["["] = { "<cmd>BufferLineCyclePrev<CR>", "Previous Buffer" },
@@ -219,7 +219,7 @@ wk.register({
     },
     --== Search ==
     s = {
-        name = "+Search",
+        name = " Search",
         a = { "<cmd>Telescope autocommands<CR>", "Auto Commands" },
         g = {
             function()
@@ -282,7 +282,7 @@ wk.register({
         t = { "<cmd>TodoTelescope<CR>", "Todo Comments" },
     },
     M = {
-        name = "+Messages",
+        name = " Messages",
         v = {
             function()
                 require("ignis.utils").view_messages()
@@ -304,13 +304,13 @@ wk.register({
     },
     --== Files ==
     F = {
-        name = "+File",
+        name = " File",
         r = { "<cmd>Telescope oldfiles<CR>", "Open Recent File" },
         n = { "<cmd>enew<CR>", "New File" },
     },
     --== Find ==
     f = {
-        name = "+Find",
+        name = " Find",
         f = {
             function()
                 require("ignis.modules.files.telescope").find_files()
@@ -350,11 +350,12 @@ wk.register({
     },
     --== Insert ==
     i = {
-        name = "+Insert",
+        name = " Insert",
         o = { "o<ESC>k", "Empty line below" },
         O = { "O<ESC>j", "Empty line above" },
         i = { "i <ESC>l", "Space before" },
         a = { "a <ESC>h", "Space after" },
+        e = { "<cmd>Telescope emoji<cr>", "Emoji" },
         ["<CR>"] = { "i<CR><ESC>", "Linebreak at Cursor" },
     },
     a = {
@@ -374,23 +375,24 @@ wk.register({
         function()
             require("ignis.modules.files.telescope").find_string()
         end,
-        "Live Grep",
+        " Live Grep",
     },
     [":"] = { "<cmd>Telescope commands<cr>", "Commands" },
-    [","] = { "<cmd>Telescope buffers<cr>", "Buffers" },
+    -- [","] = { "<cmd>Telescope buffers<cr>", "﩯 Buffers" },
+    [","] = { "<cmd>Telescope buffers<cr>", "﩯Buffers" },
     q = {
-        name = "+Quickfix",
+        name = " Quickfix",
         n = { "<cmd>cnext<CR>", "Next Entry" },
         p = { "<cmd>cprevious<CR>", "Previous Entry" },
     },
-    j = { ":m .+1<CR>==", "Move Current line down" },
-    k = { ":m .-2<CR>==", "Move Current line up" },
-    y = { '"+y', "Yank to Clipboard" },
-    p = { '"0p', "Paste last yanked text" },
-    P = { '"0P', "Paste last yanked text" },
+    j = { ":m .+1<CR>==", " Move Current Line Down" },
+    k = { ":m .-2<CR>==", " Move Current Line Up" },
+    y = { '"+y', " Yank to Clipboard" },
+    p = { '"0p', "Paste Last Yank" },
+    P = { '"0P', "Paste Last Yank" },
     --== Window ==
     w = {
-        name = "+Window",
+        name = " Window",
         ["w"] = { "<C-W>p", "other-window" },
         ["d"] = { "<C-W>c", "delete-window" },
         ["-"] = { "<C-W>s", "split-window-below" },
@@ -408,9 +410,9 @@ wk.register({
         ["s"] = { "<C-W>s", "split-window-below" },
         ["v"] = { "<C-W>v", "split-window-right" },
     },
-    R = { "<cmd>Telescope reloader<CR>", "Reloader" },
+    R = { "<cmd>Telescope reloader<CR>", "勒Reloader" },
     v = {
-        name = "+View",
+        name = " View",
         l = {
             function()
                 require("ignis.utils").LatexPreview()
@@ -431,6 +433,10 @@ wk.register({
         },
         -- c = {"<cmd>ColorizerAttachToBuffer<CR>", "Colorizer"},
         c = { "<cmd>PackerLoad nvim-colorizer.lua<CR>", "Colorizer" },
+    },
+    S = {
+        "<cmd>w<CR>",
+        " Save",
     },
 }, {
     prefix = "<leader>",
