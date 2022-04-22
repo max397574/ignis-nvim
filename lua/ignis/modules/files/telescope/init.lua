@@ -1,6 +1,8 @@
 -- This is just code taken from https://github.com/nvim-telescope/telescope.nvim which was modified
 vim.cmd([[PackerLoad telescope-fzf-native.nvim]])
 vim.cmd([[PackerLoad telescope-symbols.nvim]])
+vim.cmd([[PackerLoad telescope-emoji.nvim]])
+
 vim.cmd([[PackerLoad telescope-file-browser.nvim]])
 local pickers = require("telescope.pickers")
 local make_entry = require("telescope.make_entry")
@@ -472,6 +474,7 @@ end
 require("telescope").load_extension("fzf")
 
 require("telescope").load_extension("luasnip")
+require("telescope").load_extension("emoji")
 
 function ts.file_browser()
     reloader()
