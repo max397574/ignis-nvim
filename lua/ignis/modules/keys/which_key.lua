@@ -1,4 +1,14 @@
 local wk = require("which-key")
+local border = {
+    { "╭", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╮", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "╯", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╰", "FloatBorder" },
+    { "│", "FloatBorder" },
+}
 
 require("which-key").setup({
     show_help = false,
@@ -7,12 +17,17 @@ require("which-key").setup({
         spacing = 5, -- spacing between columns
     },
     window = {
-        border = { "╔", "═", "╗", "║", "╝", "═", "╚", "║" },
+        -- border = { "╔", "═", "╗", "║", "╝", "═", "╚", "║" },
+        border = border,
         margin = { 1, 0, 1, 0 }, -- top right bottom left
         -- padding = { 1, 2, 1, 3 }, -- top right bottom left
         padding = { 0, 2, 0, 0 }, -- top right bottom left
         winblend = 0,
         -- winblend = 20,
+    },
+    icons = {
+        group = " ",
+        label = " ",
     },
     -- triggers_blacklist = {
     --     i = { "<space>", "<leader>", " " },
@@ -67,3 +82,6 @@ wk.register({
     prefix = "g",
     mode = "n",
 })
+
+vim.api.nvim_set_hl(0, "WhichKeyFloat", { link = "Special" })
+vim.api.nvim_set_hl(0, "WhichKey", { link = "Special" })
