@@ -134,8 +134,6 @@ require("neorg").setup({
                     startup = "~/startup.nvim",
                     example_ws = "~/neovim_plugins/example_workspaces/gtd/",
                     gtd = "~/gtd",
-                    dany_gtd = "~/dany_gtd/",
-                    notes = "~notes",
                 },
             },
         },
