@@ -476,7 +476,7 @@ local Snippets = {
         local backward = luasnip.jumpable(-1) and " " or ""
         return backward .. forward
     end,
-    hl = { fg = colors.red, syle = "bold" },
+    hl = { fg = colors.red, style = "bold" },
 }
 
 local coords = {
