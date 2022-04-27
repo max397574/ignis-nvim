@@ -32,8 +32,9 @@ end
 function refact.find_big_files()
     require("toggleterm.terminal").Terminal
         :new({
-            cmd = "find . -name '*.lua' | xargs wc -l | sort -n -r",
-            close_on_exit = true,
+            cmd = "find . -name '*.lua' | xargs wc -l | sort -n -r | head -n 10",
+            close_on_exit = false,
+            direction = "float",
         })
         :toggle()
 end
