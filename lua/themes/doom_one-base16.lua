@@ -12,8 +12,8 @@ return {
     base0A = "ECBE7B",
     base0B = "98be65",
     base0C = "a9a1e1",
-    -- base0D = "bbc2cf",
-    base0D = "51afef",
+    base0D = "bbc2cf",
+    -- base0D = "51afef",
     base0E = "51afef",
     base0F = "ff6c6b",
 }
