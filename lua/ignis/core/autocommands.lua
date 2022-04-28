@@ -28,6 +28,7 @@ aucmd({ "Filetype" }, {
     callback = function()
         require("ignis.core.settings.netrw").draw_icons()
     end,
+    desc = "Draw netrw icons",
     group = netrw,
 })
 aucmd({ "TextChanged" }, {
@@ -35,6 +36,7 @@ aucmd({ "TextChanged" }, {
     callback = function()
         require("ignis.core.settings.netrw").draw_icons()
     end,
+    desc = "Draw netrw icons",
     group = netrw,
 })
 aucmd({ "Filetype" }, {
@@ -42,6 +44,7 @@ aucmd({ "Filetype" }, {
     callback = function()
         require("ignis.core.settings.netrw").set_maps()
     end,
+    desc = "Define netrw mappings",
     group = netrw,
 })
 
@@ -67,6 +70,7 @@ aucmd({ "FileType" }, {
             buffer = true,
         })
     end,
+    desc = "Map q to close buffer",
 })
 
 aucmd(
@@ -81,7 +85,8 @@ aucmd({ "TextYankPost" }, {
     callback = function()
         vim.highlight.on_yank({ higrou = "IncSearch", timeout = 500 })
     end,
-    group = vim.api.nvim_create_augroup("higlhight_yank", { clear = true }),
+    desc = "Highlight yanked text",
+    group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
 })
 
 vim.cmd([[
@@ -104,6 +109,7 @@ aucmd({ "BufNewFile", "BufRead", "BufWinEnter" }, {
     callback = function()
         vim.bo.filetype = "tex"
     end,
+    desc = "Set filetype to tex",
 })
 -- u.create_augroup({
 --     "TextChanged, BufChangedI, BufWinEnter * let w:m1=matchadd('Search', '\\%81v.\\%>80v', -1)",
@@ -113,6 +119,7 @@ aucmd("VimLeavePre", {
     callback = function()
         require("custom.db").set_db()
     end,
+    desc = "Set colorscheme in db",
 })
 
 aucmd("BufEnter", { pattern = "cfg.json", command = "set ft=jsonc" })
@@ -202,6 +209,7 @@ aucmd({ "BufEnter", "BufReadPost" }, {
     callback = function()
         require("custom.refactor").find_else()
     end,
+    desc = "Set sign on lines with else",
 })
 local in_mathzone = require("ignis.utils").in_mathzone
 
@@ -212,6 +220,7 @@ aucmd("CursorHold", {
             require("nabla").popup()
         end
     end,
+    desc = "Open nabla",
 })
 
 aucmd("User", {
@@ -226,6 +235,7 @@ aucmd("User", {
             "\027]99;i=1:d=1:p=body;Compile finished\027\\"
         )
     end,
+    desc = "Send desktop notification",
 })
 
 aucmd("DiagnosticChanged", {
@@ -237,4 +247,5 @@ aucmd("DiagnosticChanged", {
             "\027]99;i=1:d=1:p=body;Finished Loading\027\\"
         )
     end,
+    desc = "Send desktop notification",
 })

@@ -2,15 +2,21 @@ local add_cmd = vim.api.nvim_create_user_command
 
 add_cmd("ViewColors", function()
     require("colors.color_viewer").view_colors()
-end, {})
+end, {
+    desc = "View colors from `hl_themes`",
+})
 
 add_cmd("ReloadColors", function()
     require("colorscheme_switcher").new_scheme()
-end, {})
+end, {
+    desc = "Reload colors",
+})
 
 add_cmd("BigScreen", function()
     require("colorscheme_switcher").big_screen()
-end, {})
+end, {
+    desc = "Switch to bigger screen",
+})
 
 local function filetypes()
     return {
