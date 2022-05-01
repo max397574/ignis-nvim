@@ -117,12 +117,12 @@ packer.startup({
 
         use({ "nvim-lua/plenary.nvim", module = "plenary" })
 
-        -- use({
-        --     "rcarriga/nvim-notify",
-        --     config = function()
-        -- vim.notify = require("notify")
-        --     end,
-        -- })
+        use({
+            "rcarriga/nvim-notify",
+            config = function()
+                vim.notify = require("notify")
+            end,
+        })
 
         -- create directories if they don't exist
         use({
@@ -280,6 +280,13 @@ packer.startup({
         })
 
         use({ "ggandor/lightspeed.nvim", keys = { "S", "s" } })
+        -- use({
+        --     "ggandor/leap.nvim",
+        --     keys = { "S", "s" },
+        --     config = function()
+        --         require("leap").set_default_keymaps()
+        --     end,
+        -- })
 
         use({
             "lukas-reineke/indent-blankline.nvim",
@@ -394,11 +401,26 @@ packer.startup({
 
             requires = {
                 "~/neovim_plugins/neorg-telescope/",
+                "~/neovim_plugins/neorg-context/",
+                "~/neovim_plugins/neorg-kanban/",
                 "~/neovim_plugins/neorg-zettelkasten/",
             },
         })
 
-        use({ "~/neovim_plugins/neorg-context/" })
+        use({
+            "~/neovim_plugins/conmenu",
+            config = function()
+                require("ignis.modules.ui.conmenu")
+            end,
+            cmd = "ConMenu",
+        })
+
+        use({
+            "~/neovim_plugins/popup_menu.nvim/",
+            config = function()
+                require("ignis.modules.ui.popup_menu")
+            end,
+        })
 
         use({
             "~/neovim_plugins/dynamic_help/",
