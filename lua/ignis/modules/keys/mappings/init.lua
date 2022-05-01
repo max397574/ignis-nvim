@@ -8,23 +8,43 @@ utils.load_ignis_module("keys", "mappings.which_key")
 -- Windows
 -- =======
 -- easy split navigation
-map("n", "<c-j>", ":wincmd j<CR>", nore_silent)
-map("n", "<c-h>", ":wincmd h<CR>", nore_silent)
-map("n", "<c-k>", ":wincmd k<CR>", nore_silent)
-map("n", "<c-l>", ":wincmd l<CR>", nore_silent)
+map(
+    "n",
+    "<c-j>",
+    ":wincmd j<CR>",
+    { noremap = true, silent = true, desc = "Move to split above" }
+)
+map(
+    "n",
+    "<c-h>",
+    ":wincmd h<CR>",
+    { noremap = true, silent = true, desc = "Move to split on left side" }
+)
+map(
+    "n",
+    "<c-k>",
+    ":wincmd k<CR>",
+    { noremap = true, silent = true, desc = "Move to split below" }
+)
+map(
+    "n",
+    "<c-l>",
+    ":wincmd l<CR>",
+    { noremap = true, silent = true, desc = "Move to split on right side" }
+)
 -- move windows with arrows
 -- map("n", "<down>", ":wincmd J<CR>", nore_silent)
 -- map("n", "<left>", ":wincmd H<CR>", nore_silent)
 -- map("n", "<up>", ":wincmd K<CR>", nore_silent)
 -- map("n", "<right>", ":wincmd L<CR>", nore_silent)
 
-map("n", "°", ":normal! zO<CR>", nore_silent)
-
 -- Telescope
 -- =========
 map("n", "<c-s>", function()
     require("ignis.modules.files.telescope").curbuf()
-end, nore_silent)
+end, {
+    desc = "Grep in current buffer",
+})
 
 -- Simple Commands (Improvements of commands)
 -- ==========================================
@@ -44,16 +64,33 @@ map("n", "<ESC>", "<cmd>nohl<CR>", nore_silent)
 map("v", "jk", "<ESC>", nore)
 
 -- paste over selected text without overwriting yank register
-map("v", "<leader>p", '"_dP', nore)
+map(
+    "v",
+    "<leader>p",
+    '"_dP',
+    { noremap = true, desc = "Paste without overwriting yank register" }
+)
 
 -- see registers
 vim.keymap.set("n", "®", function()
     require("which-key").show("@", { mode = "n", auto = true })
-end, nore_silent)
+end, {
+    desc = "Show registers",
+})
 
 -- move visual blocks up and down
-map("v", "J", ":m '>+1<CR>gv=gv", nore_silent)
-map("v", "K", ": m'<-2<CR>gv=gv", nore_silent)
+map(
+    "v",
+    "J",
+    ":m '>+1<CR>gv=gv",
+    { noremap = true, silent = true, desc = "Move visual block down" }
+)
+map(
+    "v",
+    "K",
+    ": m'<-2<CR>gv=gv",
+    { noremap = true, silent = true, desc = "Move visual block up" }
+)
 
 -- don't move cursor down when joining lines
 map("n", "J", "mzJ`z", nore)
