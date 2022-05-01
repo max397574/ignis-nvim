@@ -56,6 +56,7 @@ local function Run_file()
         print("Running: " .. command)
     end
 end
+
 vim.keymap.set("n", "<leader>r", Run_file, nore_silent)
 
 local function toggle_lazygit()

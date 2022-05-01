@@ -23,7 +23,7 @@ require("which-key").setup({
         -- padding = { 1, 2, 1, 3 }, -- top right bottom left
         padding = { 0, 2, 0, 0 }, -- top right bottom left
         winblend = 0,
-        -- winblend = 20,
+        -- winblend = 10,
     },
     icons = {
         group = " ",

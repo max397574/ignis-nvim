@@ -96,7 +96,7 @@ local FileType = {
     provider = function()
         return string.upper(vim.bo.filetype)
     end,
-    hl = { fg = utils.get_highlight("Type").fg, style = "italic" },
+    hl = { fg = utils.get_highlight("Type").fg, italic = true },
 }
 
 local FileIcon = {
@@ -571,7 +571,7 @@ local Snippets = {
         local backward = luasnip.jumpable(-1) and " " or ""
         return backward .. forward
     end,
-    hl = { fg = colors.red, style = "bold" },
+    hl = { fg = colors.red, bold = true },
 }
 
 local coords = {

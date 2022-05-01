@@ -65,7 +65,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     end,
 })
 require("impatient").enable_profile()
-vim.g.forced_theme = "onedark"
+vim.g.forced_theme = "doom_one"
 local module_loader = require("ignis.utils").load_module
 module_loader("ignis", "core")
 
