@@ -1,7 +1,7 @@
 local on_attach = {}
 
 local function lsp_highlight_document(client, bufnr)
-    if client.resolved_capabilities.document_highlight then
+    if client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
         vim.api.nvim_create_autocmd("CursorHold", {
             callback = function()
@@ -32,6 +32,14 @@ function on_attach.setup(client, bufnr)
     vim.keymap.set("n", "<C-f>", vim.diagnostic.goto_next, opts)
     vim.keymap.set("n", "<Leader>fs", vim.lsp.buf.formatting_sync, opts)
     lsp_highlight_document(client, bufnr)
+    if client.server_capabilities.documentFormattingProvider then
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.buf.format()
+            end,
+        })
+    end
 end
 
 return on_attach

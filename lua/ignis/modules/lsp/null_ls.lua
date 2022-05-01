@@ -38,12 +38,8 @@ local cfg = {
         ".git"
     ),
 
-    on_attach = function(client)
-        if client.resolved_capabilities.document_formatting then
-            vim.cmd(
-                "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()"
-            )
-        end
+    on_attach = function(client, bufnr)
+        require("ignis.modules.lsp.on_attach").setup(client, bufnr)
     end,
 }
 
