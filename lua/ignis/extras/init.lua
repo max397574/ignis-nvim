@@ -116,6 +116,7 @@ local function open_scratch_buffer(language)
     end, {
         noremap = true,
         buffer = buf,
+        desc = false,
     })
 end
 
@@ -129,7 +130,7 @@ end
 
 extras.scratch_buf = function(args)
     og_win = vim.api.nvim_get_current_win()
-    if args.fargs then
+    if args.fargs and args.fargs[1] ~= "" then
         open_scratch_buffer(args.fargs[1])
         return
     end
