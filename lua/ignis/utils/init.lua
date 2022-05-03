@@ -2,6 +2,7 @@ local utils = {}
 
 local log = require("ignis.external.log")
 local fmt = string.format
+local Path = require("plenary.path")
 
 --- Picks a random element of a table
 ---@param table table
@@ -104,28 +105,17 @@ utils.get_themes = function()
         -- insert the filename without the extenstion and the path before it into the themes table
         table.insert(
             themes,
-            (theme
-                :gsub(
-                    vim.fn.expand("~")
-                        .. "/neovim%_plugins/nvim%-base16%.lua/lua/hl%_themes/",
-                    ""
-                )
-                :gsub(".lua", ""))
+            (Path:new(theme):make_relative(theme_dir):gsub(".lua", ""))
         )
     end
     -- also go through all the themes in the config folder
     theme_dir = vim.fn.expand("~") .. "/.config/nvim_config/lua/hl_themes"
     theme_files = require("plenary.scandir").scan_dir(theme_dir, {})
     for _, theme in ipairs(theme_files) do
+        -- insert the filename without the extenstion and the path before it into the themes table
         table.insert(
             themes,
-            (theme
-                :gsub(
-                    vim.fn.expand("~")
-                        .. "/%.config/nvim%_config/lua/hl%_themes/",
-                    ""
-                )
-                :gsub(".lua", ""))
+            (Path:new(theme):make_relative(theme_dir):gsub(".lua", ""))
         )
     end
     return themes
