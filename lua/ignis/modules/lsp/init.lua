@@ -299,6 +299,7 @@ local enable_lua_dev = true
 local lua_dev_plugins = {
     "selection_popup",
     "sqlite.lua",
+    "plenary.nvim",
 }
 local runtime_path_completion = true
 if not runtime_path_completion then
@@ -478,7 +479,7 @@ configs.emmet_ls = {
     },
 }
 
-require("ignis.modules.lsp.null_ls")
+-- require("ignis.modules.lsp.null_ls")
 
 lspconfig.emmet_ls.setup({ capabilities = capabilities })
 

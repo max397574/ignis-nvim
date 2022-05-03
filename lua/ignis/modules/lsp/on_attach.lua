@@ -33,12 +33,15 @@ function on_attach.setup(client, bufnr)
     vim.keymap.set("n", "<Leader>fs", vim.lsp.buf.formatting_sync, opts)
     lsp_highlight_document(client, bufnr)
     if client.server_capabilities.documentFormattingProvider then
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.buf.format()
-            end,
-        })
+        -- vim.api.nvim_create_autocmd("BufWritePre", {
+        --     buffer = bufnr,
+        --     callback = function()
+        --         if not vim.bo.ft == "lua" then
+        --             print("formatting")
+        --             vim.lsp.buf.format()
+        --         end
+        --     end,
+        -- })
     end
 end
 

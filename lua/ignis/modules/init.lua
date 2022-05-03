@@ -571,8 +571,15 @@ packer.startup({
             "kyazdani42/nvim-web-devicons",
         })
 
+        -- use({
+        -- "jose-elias-alvarez/null-ls.nvim",
+        -- })
         use({
-            "jose-elias-alvarez/null-ls.nvim",
+            "mhartington/formatter.nvim",
+            ft = { "lua" },
+            config = function()
+                require("ignis.modules.misc.formatter")
+            end,
         })
 
         use({
