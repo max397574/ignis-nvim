@@ -238,7 +238,7 @@ function dashboard.display()
     end
     vim.defer_fn(function()
         pcall(vim.cmd, "NeorgStart silent=true")
-    end, 200)
+    end, 20)
     -- local buf = vim.api.nvim_create_buf(false, false)
     -- vim.api.nvim_win_set_buf(0, buf)
     vim.api.nvim_buf_set_option(0, "bufhidden", "wipe")

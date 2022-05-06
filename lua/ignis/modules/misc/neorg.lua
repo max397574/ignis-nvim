@@ -53,7 +53,7 @@ require("neorg").setup({
         ["external.zettelkasten"] = {},
         ["external.context"] = {},
         ["external.kanban"] = {},
-        -- ["core.cheatsheet"] = {},
+        ["core.cheatsheet"] = {},
         ["core.norg.concealer"] = {
             config = {
                 -- markup_preset = "dimmed",

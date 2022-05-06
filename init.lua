@@ -58,6 +58,7 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
         require("ignis.modules.ui.dashboard").display()
     end,
 })
+
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     pattern = "*",
     callback = function()
@@ -65,6 +66,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     end,
 })
 require("impatient").enable_profile()
+vim.g.light_theme = "everforest"
 vim.g.forced_theme = "doom_one"
 local module_loader = require("ignis.utils").load_module
 module_loader("ignis", "core")
