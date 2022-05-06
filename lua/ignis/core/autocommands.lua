@@ -124,53 +124,14 @@ aucmd("VimLeavePre", {
 
 aucmd("BufEnter", { pattern = "cfg.json", command = "set ft=jsonc" })
 
-local function feed(keys)
-    vim.api.nvim_feedkeys(
-        vim.api.nvim_replace_termcodes(keys, true, true, true),
-        "n",
-        false
-    )
-end
-
 local timer = nil
-local nested_timer = nil
 local called_by_func = false
-local closing_timer = false
-local closing_nested_timer = false
 local function make_second_lowercase()
-    if timer and (not vim.loop.is_closing(timer)) and not closing_timer then
-        if closing_timer then
-            return
-        end
-        print("closing timer")
-        closing_timer = true
+    if timer and (not vim.loop.is_closing(timer)) then
         pcall(vim.loop.timer_stop, timer)
         pcall(vim.loop.close, timer)
-        vim.defer_fn(function()
-            closing_timer = false
-        end, 0)
-        print("closed timer")
         called_by_func = false
         timer = nil
-    end
-    if
-        nested_timer
-        and not vim.loop.is_closing(nested_timer)
-        and not closing_nested_timer
-    then
-        if closing_nested_timer then
-            return
-        end
-        print("closing nested timer")
-        closing_nested_timer = true
-        pcall(vim.loop.timer_stop, nested_timer)
-        pcall(vim.loop.close, nested_timer)
-        vim.defer_fn(function()
-            closing_nested_timer = false
-        end, 0)
-        print("closed nested timer")
-        called_by_func = false
-        nested_timer = nil
     end
     if vim.v.char and vim.v.char ~= " " then
         return
@@ -183,17 +144,17 @@ local function make_second_lowercase()
     end
     timer = vim.defer_fn(function()
         called_by_func = true
-        feed("<esc>bl")
-        nested_timer = vim.defer_fn(function()
+        vim.api.nvim_input("<esc>bl")
+        vim.defer_fn(function()
             if vim.tbl_contains({ 1, 2, 0 }, #vim.fn.expand("<cword>")) then
-                feed("hela")
+                vim.api.nvim_input("hela")
                 return
             end
-            feed("gulhela")
+            vim.api.nvim_input("gulhela")
             timer = nil
             called_by_func = false
-        end, 300)
-    end, 0)
+        end, 1)
+    end, 200)
 
     print(vim.v.char)
 end
