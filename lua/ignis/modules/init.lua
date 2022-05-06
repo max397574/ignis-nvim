@@ -730,20 +730,20 @@ packer.startup({
         use({ "dmitmel/cmp-cmdline-history", after = "nvim-cmp" })
         use({ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" })
 
-        use({
-            "zbirenbaum/copilot.lua",
-            event = "InsertEnter",
-            after = "nvim-cmp",
-            config = function()
-                vim.schedule(function()
-                    require("copilot")
-                end)
-            end,
-        })
-        use({
-            "zbirenbaum/copilot-cmp",
-            after = { "copilot.lua", "nvim-cmp" },
-        })
+        -- use({
+        --     "zbirenbaum/copilot.lua",
+        --     event = "InsertEnter",
+        --     after = "nvim-cmp",
+        --     config = function()
+        --         vim.schedule(function()
+        --             require("copilot")
+        --         end)
+        --     end,
+        -- })
+        -- use({
+        --     "zbirenbaum/copilot-cmp",
+        --     after = { "copilot.lua", "nvim-cmp" },
+        -- })
         -- use({
         --     "tzachar/cmp-tabnine",
         --     run = "./install.sh",
