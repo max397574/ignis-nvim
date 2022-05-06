@@ -13,16 +13,7 @@ require("toggleterm").setup({
     direction = "float",
     float_opts = {
         -- border = "shadow",
-        border = {
-            "╔",
-            "═",
-            "╗",
-            "║",
-            "╝",
-            "═",
-            "╚",
-            "║",
-        },
+        border = require"ignis.utils".border(),
         winblend = 0,
         highlights = {
             border = "FloatBorder",

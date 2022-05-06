@@ -13,6 +13,19 @@ function utils.random_element(table)
     return table[math.floor(index) + 1]
 end
 
+function utils.border()
+    return {
+        { "╭", "FloatBorder" },
+        { "─", "FloatBorder" },
+        { "╮", "FloatBorder" },
+        { "│", "FloatBorder" },
+        { "╯", "FloatBorder" },
+        { "─", "FloatBorder" },
+        { "╰", "FloatBorder" },
+        { "│", "FloatBorder" },
+    }
+end
+
 --- Loads the specified modules
 ---@param folder string The folder which contains the module files (e.g. `ignis`)
 ---@param modules table|string The modules to load (e.g. `{ "utils", "ui" }`)
