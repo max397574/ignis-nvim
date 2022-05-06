@@ -1,5 +1,9 @@
-vim.cmd([[hi DiagnosticHeader gui=bold,italic guifg=#56b6c2]])
-vim.cmd([[au CursorHold  * lua vim.diagnostic.open_float()]])
+vim.api.nvim_set_hl(0, "DiagnosticHeader", { link = "Special" })
+vim.api.nvim_create_autocmd("CursorHOld", {
+    callback = function()
+        vim.diagnostic.open_float()
+    end,
+})
 
 local util = require("ignis.utils")
 
