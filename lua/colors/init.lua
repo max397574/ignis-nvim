@@ -44,7 +44,9 @@ end
 colors.init = function(theme)
     -- set the global theme, used at various places like theme switcher, highlights
     if not theme then
-        if vim.g.colors_name then
+        if vim.g.forced_theme then
+            theme = vim.g.forced_theme
+        elseif vim.g.colors_name then
             theme = vim.g.colors_name
         end
     end
@@ -63,13 +65,36 @@ colors.init = function(theme)
     -- then load the highlights
     package.loaded["colors.highlights"] = nil
     package.loaded["colors.custom"] = nil
+    local highlights_raw = vim.split(
+        vim.api.nvim_exec("filter BufferLine hi", true),
+        "\n"
+    )
+    local highlight_groups = {}
+    for _, raw_hi in ipairs(highlights_raw) do
+        table.insert(highlight_groups, string.match(raw_hi, "BufferLine%a+"))
+    end
+    for _, highlight in ipairs(highlight_groups) do
+        vim.cmd([[hi clear ]] .. highlight)
+    end
     require("colors.highlights")
     require("colors.custom")
-    -- RELOAD("colors.highlights")
-    -- RELOAD("colors.custom")
-    -- vim.cmd([[PackerLoad bufferline.nvim]])
-    -- vim.cmd([[PackerLoad indent-blankline.nvim]])
-    -- vim.cmd([[PackerLoad staline.nvim]])
+    require("plenary.reload").reload_module("ignis.modules.ui.bufferline")
+    require("plenary.reload").reload_module("bufferline")
+    require("ignis.modules.ui.bufferline")
+    require"colorscheme_switcher".new_scheme()
+end
+
+local old_theme = nil
+
+function colors.toggle_light()
+    if vim.g.colors_name ~= vim.g.light_theme then
+        old_theme = vim.g.colors_name
+        colors.init(vim.g.light_theme)
+        vim.g.toggle_icon = " "
+    else
+        colors.init(old_theme)
+        vim.g.toggle_icon = " "
+    end
 end
 
 -- returns a table of colors for givem or current theme

@@ -273,3 +273,7 @@ fg("TelescopeBorder", folder_bg)
 -- fg("TelescopePreviewBorder", folder_bg)
 -- fg("TelescopePromptBorder", folder_bg)
 -- fg("TelescopeResultsBorder", folder_bg)
+
+fg_bg("BufferLineRightCustomAreaText1",colors.white,colors.light_grey)
+fg_bg("BufferLineRightCustomAreaText2",colors.dark_blue,colors.light_grey)
+fg("BufferLineRightCustomAreaText3",colors.red)
