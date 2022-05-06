@@ -3,6 +3,22 @@ local colors = require("colors").get(
 )
 local groups = require("bufferline.groups")
 
+if not vim.g.defined_buf_line_functions then
+    vim.g.toggle_icon=" "
+    vim.g.defined_buf_line_functions = true
+    vim.cmd([=[
+        function! Switch_theme(a,b,c,d)
+            lua require"ignis.modules.files.telescope".colorschemes()
+        endfunction
+        function! Close_buf(a,b,c,d)
+            lua vim.cmd([[wq]])
+        endfunction
+        function! Toggle_light(a,b,c,d)
+            lua require"colors".toggle_light()
+        endfunction
+    ]=])
+end
+
 require("bufferline").setup({
     highlights = {
         background = {
@@ -125,6 +141,8 @@ require("bufferline").setup({
         },
     },
     options = {
+        close_icon = "",
+        show_close_icon=false,
         separator_style = "slant",
         -- separator_style = "thick",
         -- separator_style = { "", "" },
@@ -133,44 +151,57 @@ require("bufferline").setup({
         always_show_bufferline = false,
         custom_areas = {
             right = function()
-                local diagnostics = vim.diagnostic.get(0)
-                local count = { 0, 0, 0, 0 }
-                for _, diagnostic in ipairs(diagnostics) do
-                    count[diagnostic.severity] = count[diagnostic.severity] + 1
-                end
                 local result = {}
+                -- local diagnostics = vim.diagnostic.get(0)
+                -- local count = { 0, 0, 0, 0 }
+                -- for _, diagnostic in ipairs(diagnostics) do
+                --     count[diagnostic.severity] = count[diagnostic.severity] + 1
+                -- end
+                --
+                -- if count[1] ~= 0 then
+                --     print(colors.red)
+                --     table.insert(result, {
+                --         text = "  " .. count[1],
+                --         guifg = colors.red,
+                --         guibg = colors.darker_black,
+                --     })
+                -- end
+                --
+                -- if count[2] ~= 0 then
+                --     table.insert(result, {
+                --         text = "  " .. count[2],
+                --         guifg = colors.orange,
+                --         guibg = colors.darker_black,
+                --     })
+                -- end
+                --
+                -- if count[4] ~= 0 then
+                --     table.insert(result, {
+                --         text = "  " .. count[4],
+                --         guifg = colors.blue,
+                --         guibg = colors.darker_black,
+                --     })
+                -- end
+                --
+                -- if count[3] ~= 0 then
+                --     table.insert(result, {
+                --         text = "  " .. count[3],
+                --         guifg = colors.yellow,
+                --         guibg = colors.darker_black,
+                --     })
+                -- end
+                table.insert(result, {
+                    text = "%@Toggle_light@ " .. vim.g.toggle_icon .. " %X ",
+                })
 
-                if count[1] ~= 0 then
-                    table.insert(result, {
-                        text = "  " .. count[1],
-                        guifg = vim.g.terminal_color_9,
-                        guibg = colors.darker_black,
-                    })
-                end
+                table.insert(result, {
+                    text = "%@Switch_theme@  %X ",
+                })
 
-                if count[2] ~= 0 then
-                    table.insert(result, {
-                        text = "  " .. count[2],
-                        guifg = vim.g.terminal_color_3,
-                        guibg = colors.darker_black,
-                    })
-                end
+                table.insert(result, {
+                    text = "%@Close_buf@  %X",
+                })
 
-                if count[4] ~= 0 then
-                    table.insert(result, {
-                        text = "  " .. count[4],
-                        guifg = vim.g.terminal_color_4,
-                        guibg = colors.darker_black,
-                    })
-                end
-
-                if count[3] ~= 0 then
-                    table.insert(result, {
-                        text = "  " .. count[3],
-                        guifg = vim.g.terminal_color_6,
-                        guibg = colors.darker_black,
-                    })
-                end
                 return result
             end,
         },
